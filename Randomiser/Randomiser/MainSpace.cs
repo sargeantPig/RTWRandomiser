@@ -123,6 +123,109 @@ namespace Randomiser
         
         }
 
+        public string AttributesToString(Attributes attr)
+        {
+            string str = "";
+
+            switch (attr)
+            {
+                case Attributes.sea_faring:
+                    str = "sea_faring";
+                    break;
+
+                case Attributes.hide_forest:
+                    str = "hide_forest";
+                    break;
+
+                case Attributes.hide_improved_forest:
+                    str = "hide_improved_forest";
+                    break;
+
+                case Attributes.hide_long_grass:
+                    str = "hide_long_grass";
+                    break;
+                case Attributes.hide_anywhere:
+                    str = "hide_anywhere";
+                    break;
+                case Attributes.can_sap:
+                    str = "can_sap";
+                    break;
+                case Attributes.frighten_foot:
+                    str = "frighten_foot";
+                    break;
+                case Attributes.frighten_mounted:
+                    str = "frighten_mounted";
+                    break;
+                case Attributes.can_run_amok:
+                    str = "can_run_amok";
+                    break;
+                case Attributes.general_unit:
+                    str = "general_unit";
+                    break;
+                case Attributes.general_unit_upgrade:
+                    str = "general_unit_upgrade";
+                    break;
+                case Attributes.cantabrian_circle:
+                    str = "cantabrian_circle";
+                    break;
+                case Attributes.no_custom:
+                    str = "no_custom";
+                    break;
+                case Attributes.command:
+                    str = "command";
+                    break;
+                case Attributes.mercenary_unit:
+                    str = "mercenary_unit";
+                    break;
+                case Attributes.druid:
+                    str = "druid";
+                    break;
+                case Attributes.warcry:
+                    str = "warcry";
+                    break;
+
+            }
+
+            return str;
+
+
+
+        }
+
+        public string FormationTostring(FormationTypes formation)
+        {
+            string str = "";
+
+            switch(formation)
+            {
+                case FormationTypes.Formation_Phalanx:
+                    str = "phalanx";
+                    break;
+
+                case FormationTypes.Formation_Testudo:
+                    str = "testudo";
+                    break;
+
+                case FormationTypes.Formation_Schiltrom:
+                    str = "schiltrom";
+                    break;
+
+                case FormationTypes.Formation_Horde:
+                    str = "horde";
+                    break;
+
+                case FormationTypes.Formation_Square:
+                    str = "square";
+                    break;
+
+                case FormationTypes.Formation_Wedge:
+                    str = "wedge";
+                    break;
+            
+            }
+        
+        }
+
         public static class Data
         {
             public static Random rnd = new Random();
@@ -975,9 +1078,82 @@ namespace Randomiser
 
 
         public void SaveEDU()
-        { 
-        
-        
+        {
+            File.Create(Data.EDUFILEPATH);
+            StreamWriter edu = new StreamWriter(Data.EDUFILEPATH);
+
+            edu.WriteLine(";RANDOMISED\r\n\n");
+
+            foreach (Unit unit in Data.units)
+            {
+                edu.WriteLine(
+                    "type\t\t\t" + unit.type + "\n" +
+                    "dictionary\t\t\t" + unit.dictionary + "\n" +
+                    "category\t\t\t" + unit.category + "\n" +
+                    "class\t\t\t" + unit.unitClass + "\n" +
+                    "voice_type\t\t\t" + unit.voiceType + "\n" +
+                    "soldier\t\t\t" + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString() + "\n");
+                edu.WriteLine("attributes\t\t\t");
+                if (unit.attributes.HasFlag(Attributes.sea_faring))
+                    edu.Write(AttributesToString(Attributes.sea_faring) + ", ");
+                if (unit.attributes.HasFlag(Attributes.can_run_amok))
+                    edu.Write(AttributesToString(Attributes.can_run_amok) + ", ");
+                if (unit.attributes.HasFlag(Attributes.can_sap))
+                    edu.Write(AttributesToString(Attributes.can_sap) + ", ");
+                if (unit.attributes.HasFlag(Attributes.cantabrian_circle))
+                    edu.Write(AttributesToString(Attributes.cantabrian_circle) + ", ");
+                if (unit.attributes.HasFlag(Attributes.command))
+                    edu.Write(AttributesToString(Attributes.command) + ", ");
+                if (unit.attributes.HasFlag(Attributes.druid))
+                    edu.Write(AttributesToString(Attributes.druid) + ", ");
+                if (unit.attributes.HasFlag(Attributes.frighten_foot))
+                    edu.Write(AttributesToString(Attributes.frighten_foot) + ", ");
+                if (unit.attributes.HasFlag(Attributes.frighten_mounted))
+                    edu.Write(AttributesToString(Attributes.frighten_mounted) + ", ");
+                if (unit.attributes.HasFlag(Attributes.general_unit))
+                    edu.Write(AttributesToString(Attributes.general_unit) + ", ");
+                if (unit.attributes.HasFlag(Attributes.general_unit_upgrade))
+                    edu.Write(AttributesToString(Attributes.general_unit_upgrade) + ", ");
+                if (unit.attributes.HasFlag(Attributes.hide_anywhere))
+                    edu.Write(AttributesToString(Attributes.hide_anywhere) + ", ");
+                if (unit.attributes.HasFlag(Attributes.hide_forest))
+                    edu.Write(AttributesToString(Attributes.hide_forest) + ", ");
+                if (unit.attributes.HasFlag(Attributes.hide_improved_forest))
+                    edu.Write(AttributesToString(Attributes.hide_improved_forest) + ", ");
+                if (unit.attributes.HasFlag(Attributes.hide_long_grass))
+                    edu.Write(AttributesToString(Attributes.hide_long_grass) + ", ");
+                if (unit.attributes.HasFlag(Attributes.mercenary_unit))
+                    edu.Write(AttributesToString(Attributes.mercenary_unit) + ", ");
+                if (unit.attributes.HasFlag(Attributes.no_custom))
+                    edu.Write(AttributesToString(Attributes.no_custom) + ", ");
+                if (unit.attributes.HasFlag(Attributes.warcry))
+                    edu.Write(AttributesToString(Attributes.warcry) + ", ");
+
+                edu.WriteLine("formation\t\t\t");
+                foreach (float num in unit.formation.FormationTight)
+                    edu.Write(num.ToString() + ", ");
+                foreach (float num in unit.formation.FormationSparse)
+                    edu.Write(num.ToString() + ", ");
+                edu.Write(unit.formation.FormationRanks + ", ");
+
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Phalanx))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Phalanx) + ", ");
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Testudo))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Testudo) + ", ");
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Schiltrom))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Schiltrom) + ", ");
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Horde))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Horde) + ", ");
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Square))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Square) + ", ");
+                if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Wedge))
+                    edu.Write(FormationTostring(FormationTypes.Formation_Wedge) + ", ");
+
+
+
+            }
+            
+            
         }
 
         public void SaveEDB()
