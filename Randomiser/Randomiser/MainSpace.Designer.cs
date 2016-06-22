@@ -33,34 +33,36 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt_Output = new System.Windows.Forms.TextBox();
+            this.txt_LoadConfirm = new System.Windows.Forms.TextBox();
+            this.butt_LoadData = new System.Windows.Forms.Button();
             this.txt_FolderPath = new System.Windows.Forms.TextBox();
             this.butt_FolderSelect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.butt_LoadData = new System.Windows.Forms.Button();
-            this.txt_LoadConfirm = new System.Windows.Forms.TextBox();
-            this.txt_Output = new System.Windows.Forms.TextBox();
-            this.cbox_factions = new System.Windows.Forms.ComboBox();
-            this.txt_outputview = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbx_ownershipPerUnit = new System.Windows.Forms.ComboBox();
-            this.chk_rndStats = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.chk_statsWithReason = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.chk_UnitSizes = new System.Windows.Forms.CheckBox();
-            this.but_randomize = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.chk_costs = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbx_UnitsPerFaction = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txt_randomiserOutput = new System.Windows.Forms.TextBox();
-            this.chk_rndSounds = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.chk_rndSounds = new System.Windows.Forms.CheckBox();
+            this.txt_randomiserOutput = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbx_UnitsPerFaction = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chk_costs = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.but_randomize = new System.Windows.Forms.Button();
+            this.chk_UnitSizes = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chk_statsWithReason = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.chk_rndStats = new System.Windows.Forms.CheckBox();
+            this.cbx_ownershipPerUnit = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txt_outputview = new System.Windows.Forms.TextBox();
+            this.cbox_factions = new System.Windows.Forms.ComboBox();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.btn_selModFolder = new System.Windows.Forms.Button();
+            this.txt_modFolderLoc = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -104,6 +106,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txt_modFolderLoc);
+            this.tabPage1.Controls.Add(this.btn_selModFolder);
             this.tabPage1.Controls.Add(this.txt_Output);
             this.tabPage1.Controls.Add(this.txt_LoadConfirm);
             this.tabPage1.Controls.Add(this.butt_LoadData);
@@ -116,6 +120,34 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Load";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txt_Output
+            // 
+            this.txt_Output.Location = new System.Drawing.Point(128, 6);
+            this.txt_Output.Multiline = true;
+            this.txt_Output.Name = "txt_Output";
+            this.txt_Output.ReadOnly = true;
+            this.txt_Output.Size = new System.Drawing.Size(306, 268);
+            this.txt_Output.TabIndex = 4;
+            // 
+            // txt_LoadConfirm
+            // 
+            this.txt_LoadConfirm.Location = new System.Drawing.Point(6, 228);
+            this.txt_LoadConfirm.Name = "txt_LoadConfirm";
+            this.txt_LoadConfirm.ReadOnly = true;
+            this.txt_LoadConfirm.Size = new System.Drawing.Size(111, 20);
+            this.txt_LoadConfirm.TabIndex = 3;
+            this.txt_LoadConfirm.Text = "Unloaded";
+            // 
+            // butt_LoadData
+            // 
+            this.butt_LoadData.Location = new System.Drawing.Point(7, 199);
+            this.butt_LoadData.Name = "butt_LoadData";
+            this.butt_LoadData.Size = new System.Drawing.Size(111, 23);
+            this.butt_LoadData.TabIndex = 2;
+            this.butt_LoadData.Text = "Load Data";
+            this.butt_LoadData.UseVisualStyleBackColor = true;
+            this.butt_LoadData.Click += new System.EventHandler(this.butt_LoadData_Click);
             // 
             // txt_FolderPath
             // 
@@ -163,217 +195,42 @@
             this.tabPage2.Text = "Randomise";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // label9
             // 
-            this.tabPage3.Controls.Add(this.label1);
-            this.tabPage3.Controls.Add(this.txt_outputview);
-            this.tabPage3.Controls.Add(this.cbox_factions);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(440, 280);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "View";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(286, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(114, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Random Unit Sounds?";
             // 
-            // butt_LoadData
+            // chk_rndSounds
             // 
-            this.butt_LoadData.Location = new System.Drawing.Point(7, 61);
-            this.butt_LoadData.Name = "butt_LoadData";
-            this.butt_LoadData.Size = new System.Drawing.Size(111, 23);
-            this.butt_LoadData.TabIndex = 2;
-            this.butt_LoadData.Text = "Load Data";
-            this.butt_LoadData.UseVisualStyleBackColor = true;
-            this.butt_LoadData.Click += new System.EventHandler(this.butt_LoadData_Click);
+            this.chk_rndSounds.AutoSize = true;
+            this.chk_rndSounds.Location = new System.Drawing.Point(401, 54);
+            this.chk_rndSounds.Name = "chk_rndSounds";
+            this.chk_rndSounds.Size = new System.Drawing.Size(15, 14);
+            this.chk_rndSounds.TabIndex = 15;
+            this.chk_rndSounds.UseVisualStyleBackColor = true;
             // 
-            // txt_LoadConfirm
+            // txt_randomiserOutput
             // 
-            this.txt_LoadConfirm.Location = new System.Drawing.Point(7, 90);
-            this.txt_LoadConfirm.Name = "txt_LoadConfirm";
-            this.txt_LoadConfirm.ReadOnly = true;
-            this.txt_LoadConfirm.Size = new System.Drawing.Size(111, 20);
-            this.txt_LoadConfirm.TabIndex = 3;
-            this.txt_LoadConfirm.Text = "Unloaded";
+            this.txt_randomiserOutput.Location = new System.Drawing.Point(139, 159);
+            this.txt_randomiserOutput.Multiline = true;
+            this.txt_randomiserOutput.Name = "txt_randomiserOutput";
+            this.txt_randomiserOutput.ReadOnly = true;
+            this.txt_randomiserOutput.Size = new System.Drawing.Size(295, 115);
+            this.txt_randomiserOutput.TabIndex = 14;
             // 
-            // txt_Output
+            // label8
             // 
-            this.txt_Output.Location = new System.Drawing.Point(128, 6);
-            this.txt_Output.Multiline = true;
-            this.txt_Output.Name = "txt_Output";
-            this.txt_Output.ReadOnly = true;
-            this.txt_Output.Size = new System.Drawing.Size(306, 268);
-            this.txt_Output.TabIndex = 4;
-            // 
-            // cbox_factions
-            // 
-            this.cbox_factions.FormattingEnabled = true;
-            this.cbox_factions.Items.AddRange(new object[] {
-            "armenia",
-            "britons",
-            "carthage",
-            "dacia",
-            "egypt",
-            "gauls",
-            "germans",
-            "greek_cities",
-            "macedon",
-            "numidia",
-            "parthia",
-            "pontus",
-            "roman",
-            "scythia",
-            "seleucid",
-            "slave",
-            "spain",
-            "thrace"});
-            this.cbox_factions.Location = new System.Drawing.Point(4, 27);
-            this.cbox_factions.Name = "cbox_factions";
-            this.cbox_factions.Size = new System.Drawing.Size(109, 21);
-            this.cbox_factions.Sorted = true;
-            this.cbox_factions.TabIndex = 0;
-            this.cbox_factions.SelectedIndexChanged += new System.EventHandler(this.cbox_factions_SelectedIndexChanged);
-            // 
-            // txt_outputview
-            // 
-            this.txt_outputview.Location = new System.Drawing.Point(119, 3);
-            this.txt_outputview.Multiline = true;
-            this.txt_outputview.Name = "txt_outputview";
-            this.txt_outputview.ReadOnly = true;
-            this.txt_outputview.Size = new System.Drawing.Size(318, 274);
-            this.txt_outputview.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Faction";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Ownership per unit";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(286, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Random Stats?";
-            // 
-            // cbx_ownershipPerUnit
-            // 
-            this.cbx_ownershipPerUnit.FormattingEnabled = true;
-            this.cbx_ownershipPerUnit.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "RANDOM"});
-            this.cbx_ownershipPerUnit.Location = new System.Drawing.Point(10, 24);
-            this.cbx_ownershipPerUnit.Name = "cbx_ownershipPerUnit";
-            this.cbx_ownershipPerUnit.Size = new System.Drawing.Size(92, 21);
-            this.cbx_ownershipPerUnit.TabIndex = 2;
-            // 
-            // chk_rndStats
-            // 
-            this.chk_rndStats.AutoSize = true;
-            this.chk_rndStats.Location = new System.Drawing.Point(401, 7);
-            this.chk_rndStats.Name = "chk_rndStats";
-            this.chk_rndStats.Size = new System.Drawing.Size(15, 14);
-            this.chk_rndStats.TabIndex = 3;
-            this.chk_rndStats.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(286, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Stats within reason?";
-            // 
-            // chk_statsWithReason
-            // 
-            this.chk_statsWithReason.AutoSize = true;
-            this.chk_statsWithReason.Location = new System.Drawing.Point(401, 33);
-            this.chk_statsWithReason.Name = "chk_statsWithReason";
-            this.chk_statsWithReason.Size = new System.Drawing.Size(15, 14);
-            this.chk_statsWithReason.TabIndex = 5;
-            this.chk_statsWithReason.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(118, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Random Unit Sizes?";
-            // 
-            // chk_UnitSizes
-            // 
-            this.chk_UnitSizes.AutoSize = true;
-            this.chk_UnitSizes.Location = new System.Drawing.Point(227, 8);
-            this.chk_UnitSizes.Name = "chk_UnitSizes";
-            this.chk_UnitSizes.Size = new System.Drawing.Size(15, 14);
-            this.chk_UnitSizes.TabIndex = 7;
-            this.chk_UnitSizes.UseVisualStyleBackColor = true;
-            // 
-            // but_randomize
-            // 
-            this.but_randomize.Location = new System.Drawing.Point(7, 223);
-            this.but_randomize.Name = "but_randomize";
-            this.but_randomize.Size = new System.Drawing.Size(126, 51);
-            this.but_randomize.TabIndex = 8;
-            this.but_randomize.Text = "Randomize";
-            this.but_randomize.UseVisualStyleBackColor = true;
-            this.but_randomize.Click += new System.EventHandler(this.but_randomize_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(118, 32);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Random Costs?";
-            // 
-            // chk_costs
-            // 
-            this.chk_costs.AutoSize = true;
-            this.chk_costs.Location = new System.Drawing.Point(227, 32);
-            this.chk_costs.Name = "chk_costs";
-            this.chk_costs.Size = new System.Drawing.Size(15, 14);
-            this.chk_costs.TabIndex = 10;
-            this.chk_costs.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Units per faction";
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.DarkRed;
+            this.label8.Location = new System.Drawing.Point(140, 95);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(90, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "EXPERIMENTAL";
             // 
             // cbx_UnitsPerFaction
             // 
@@ -415,42 +272,207 @@
             this.cbx_UnitsPerFaction.Size = new System.Drawing.Size(121, 21);
             this.cbx_UnitsPerFaction.TabIndex = 12;
             // 
-            // label8
+            // label7
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.DarkRed;
-            this.label8.Location = new System.Drawing.Point(140, 95);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "EXPERIMENTAL";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(10, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Units per faction";
             // 
-            // txt_randomiserOutput
+            // chk_costs
             // 
-            this.txt_randomiserOutput.Location = new System.Drawing.Point(139, 159);
-            this.txt_randomiserOutput.Multiline = true;
-            this.txt_randomiserOutput.Name = "txt_randomiserOutput";
-            this.txt_randomiserOutput.ReadOnly = true;
-            this.txt_randomiserOutput.Size = new System.Drawing.Size(295, 115);
-            this.txt_randomiserOutput.TabIndex = 14;
+            this.chk_costs.AutoSize = true;
+            this.chk_costs.Location = new System.Drawing.Point(227, 32);
+            this.chk_costs.Name = "chk_costs";
+            this.chk_costs.Size = new System.Drawing.Size(15, 14);
+            this.chk_costs.TabIndex = 10;
+            this.chk_costs.UseVisualStyleBackColor = true;
             // 
-            // chk_rndSounds
+            // label6
             // 
-            this.chk_rndSounds.AutoSize = true;
-            this.chk_rndSounds.Location = new System.Drawing.Point(401, 54);
-            this.chk_rndSounds.Name = "chk_rndSounds";
-            this.chk_rndSounds.Size = new System.Drawing.Size(15, 14);
-            this.chk_rndSounds.TabIndex = 15;
-            this.chk_rndSounds.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(118, 32);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(82, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Random Costs?";
             // 
-            // label9
+            // but_randomize
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(286, 55);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(114, 13);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Random Unit Sounds?";
+            this.but_randomize.Location = new System.Drawing.Point(7, 223);
+            this.but_randomize.Name = "but_randomize";
+            this.but_randomize.Size = new System.Drawing.Size(126, 51);
+            this.but_randomize.TabIndex = 8;
+            this.but_randomize.Text = "Randomize";
+            this.but_randomize.UseVisualStyleBackColor = true;
+            this.but_randomize.Click += new System.EventHandler(this.but_randomize_Click);
+            // 
+            // chk_UnitSizes
+            // 
+            this.chk_UnitSizes.AutoSize = true;
+            this.chk_UnitSizes.Location = new System.Drawing.Point(227, 8);
+            this.chk_UnitSizes.Name = "chk_UnitSizes";
+            this.chk_UnitSizes.Size = new System.Drawing.Size(15, 14);
+            this.chk_UnitSizes.TabIndex = 7;
+            this.chk_UnitSizes.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(118, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Random Unit Sizes?";
+            // 
+            // chk_statsWithReason
+            // 
+            this.chk_statsWithReason.AutoSize = true;
+            this.chk_statsWithReason.Location = new System.Drawing.Point(401, 33);
+            this.chk_statsWithReason.Name = "chk_statsWithReason";
+            this.chk_statsWithReason.Size = new System.Drawing.Size(15, 14);
+            this.chk_statsWithReason.TabIndex = 5;
+            this.chk_statsWithReason.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(286, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Stats within reason?";
+            // 
+            // chk_rndStats
+            // 
+            this.chk_rndStats.AutoSize = true;
+            this.chk_rndStats.Location = new System.Drawing.Point(401, 7);
+            this.chk_rndStats.Name = "chk_rndStats";
+            this.chk_rndStats.Size = new System.Drawing.Size(15, 14);
+            this.chk_rndStats.TabIndex = 3;
+            this.chk_rndStats.UseVisualStyleBackColor = true;
+            // 
+            // cbx_ownershipPerUnit
+            // 
+            this.cbx_ownershipPerUnit.FormattingEnabled = true;
+            this.cbx_ownershipPerUnit.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "RANDOM"});
+            this.cbx_ownershipPerUnit.Location = new System.Drawing.Point(10, 24);
+            this.cbx_ownershipPerUnit.Name = "cbx_ownershipPerUnit";
+            this.cbx_ownershipPerUnit.Size = new System.Drawing.Size(92, 21);
+            this.cbx_ownershipPerUnit.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(286, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Random Stats?";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Ownership per unit";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label1);
+            this.tabPage3.Controls.Add(this.txt_outputview);
+            this.tabPage3.Controls.Add(this.cbox_factions);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(440, 280);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "View";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Faction";
+            // 
+            // txt_outputview
+            // 
+            this.txt_outputview.Location = new System.Drawing.Point(119, 3);
+            this.txt_outputview.Multiline = true;
+            this.txt_outputview.Name = "txt_outputview";
+            this.txt_outputview.ReadOnly = true;
+            this.txt_outputview.Size = new System.Drawing.Size(318, 274);
+            this.txt_outputview.TabIndex = 1;
+            // 
+            // cbox_factions
+            // 
+            this.cbox_factions.FormattingEnabled = true;
+            this.cbox_factions.Items.AddRange(new object[] {
+            "armenia",
+            "britons",
+            "carthage",
+            "dacia",
+            "egypt",
+            "gauls",
+            "germans",
+            "greek_cities",
+            "macedon",
+            "numidia",
+            "parthia",
+            "pontus",
+            "roman",
+            "scythia",
+            "seleucid",
+            "slave",
+            "spain",
+            "thrace"});
+            this.cbox_factions.Location = new System.Drawing.Point(4, 27);
+            this.cbox_factions.Name = "cbox_factions";
+            this.cbox_factions.Size = new System.Drawing.Size(109, 21);
+            this.cbox_factions.Sorted = true;
+            this.cbox_factions.TabIndex = 0;
+            this.cbox_factions.SelectedIndexChanged += new System.EventHandler(this.cbox_factions_SelectedIndexChanged);
+            // 
+            // btn_selModFolder
+            // 
+            this.btn_selModFolder.Location = new System.Drawing.Point(7, 61);
+            this.btn_selModFolder.Name = "btn_selModFolder";
+            this.btn_selModFolder.Size = new System.Drawing.Size(111, 23);
+            this.btn_selModFolder.TabIndex = 5;
+            this.btn_selModFolder.Text = "Select Mod Folder";
+            this.btn_selModFolder.UseVisualStyleBackColor = true;
+            this.btn_selModFolder.Click += new System.EventHandler(this.btn_selModFolder_Click);
+            // 
+            // txt_modFolderLoc
+            // 
+            this.txt_modFolderLoc.Location = new System.Drawing.Point(7, 91);
+            this.txt_modFolderLoc.Name = "txt_modFolderLoc";
+            this.txt_modFolderLoc.ReadOnly = true;
+            this.txt_modFolderLoc.Size = new System.Drawing.Size(111, 20);
+            this.txt_modFolderLoc.TabIndex = 6;
             // 
             // MainForm1
             // 
@@ -511,6 +533,8 @@
         private System.Windows.Forms.TextBox txt_randomiserOutput;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chk_rndSounds;
+        private System.Windows.Forms.TextBox txt_modFolderLoc;
+        private System.Windows.Forms.Button btn_selModFolder;
     }
 }
 

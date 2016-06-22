@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses.cs" />
-    <Compile Include="MainSpace.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EDUParser.cs" />
+    <Compile Include="enumsToStrings.cs" />
+    <Compile Include="MainSpace.cs" />
     <Compile Include="MainSpace.Designer.cs">
       <DependentUpon>MainSpace.cs</DependentUpon>
     </Compile>

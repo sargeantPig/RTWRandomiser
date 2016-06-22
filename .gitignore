@@ -5,3 +5,11 @@ Randomiser/Randomiser/bin/Debug/Randomiser.exe
 *.cache
 *.cache
 *.pdb
+*.Cache
+*.pdb
+*.pdb
+Randomiser/Randomiser/obj/Debug/Randomiser.Data.resources
+*.pdb
+Randomiser/Randomiser/obj/Debug/Randomiser.pdb
+Randomiser/Randomiser/bin/Debug/Randomiser.vshost.exe
+*.exe

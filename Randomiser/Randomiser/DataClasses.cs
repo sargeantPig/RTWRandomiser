@@ -105,7 +105,8 @@ namespace Randomiser
         normal = 1 << 0,
         low = 1 << 1,
         disciplined = 1 << 2,
-        impetuous = 1 << 3
+        impetuous = 1 << 3,
+        berserker = 1 << 4
     };
 
     public enum statmental_training
