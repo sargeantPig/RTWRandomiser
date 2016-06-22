@@ -1,1 +1,7 @@
 *.suo
+Randomiser/Randomiser/bin/Debug/Randomiser.vshost.exe
+*.exe
+Randomiser/Randomiser/bin/Debug/Randomiser.exe
+*.cache
+*.cache
+*.pdb
