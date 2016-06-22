@@ -35,7 +35,6 @@ namespace Randomiser
                 i++;
             }
 
-
             return newString; 
         }
 
@@ -121,6 +120,91 @@ namespace Randomiser
 
             return faction;
         
+        }
+
+        public string FactionToString(FactionOwnership faction)
+        {
+
+            string str = "";
+
+            switch (faction)
+            {
+                case FactionOwnership.roman:
+                    str = "roman";
+                    break;
+
+                case FactionOwnership.romans_julii:
+                    str = "roman_julii";
+                    break;
+
+                case FactionOwnership.romans_brutii:
+                    str = "romans_brutii";
+                    break;
+
+                case FactionOwnership.romans_scipii:
+                    str = "romans_scipii";
+                    break;
+                case FactionOwnership.egypt:
+                    str = "egypt";
+                    break;
+                case FactionOwnership.seleucid:
+                    str = "seleucid" ;
+                    break;
+                case FactionOwnership.carthage:
+                    str = "carthage";
+                    break;
+                case FactionOwnership.parthia:
+                    str = "parthia";
+                    break;
+                case FactionOwnership.gauls:
+                    str = "gauls";
+                    break;
+                case FactionOwnership.germans:
+                    str = "germans";
+                    break;
+                case FactionOwnership.britons:
+                    str = "britons";
+                    break;
+                case FactionOwnership.greek_cities:
+                    str = "greek_cities";
+                    break;
+                case FactionOwnership.romans_senate:
+                    str = "romans_senate";
+                    break;
+                case FactionOwnership.macedon:
+                    str ="macedon";
+                    break;
+                case FactionOwnership.pontus:
+                    str = "pontus";
+                    break;
+                case FactionOwnership.armenia:
+                    str = "armenia";
+                    break;
+                case FactionOwnership.dacia:
+                    str = "dacia";
+                    break;
+                case FactionOwnership.eastern:
+                    str = "numidia";
+                    break;
+                case FactionOwnership.scythia:
+                    str = "scythia";
+                    break;
+                case FactionOwnership.spain:
+                    str = "spain";
+                    break;
+                case FactionOwnership.thrace:
+                    str = "thrace";
+                    break;
+                case FactionOwnership.slave:
+                    str = "slave";
+                    break;
+
+            }
+
+
+
+            return str;
+
         }
 
         public string AttributesToString(Attributes attr)
@@ -223,7 +307,295 @@ namespace Randomiser
                     break;
             
             }
+
+            return str;
         
+        }
+
+        public string MissleTypeToString(MissleType missle)
+        {
+            string str = "";
+
+            switch (missle)
+            {
+                case MissleType.javelin:
+                    str = "javelin";
+                    break;
+
+                case MissleType.stone:
+                    str = "stone";
+                    break;
+
+                case MissleType.pilum:
+                    str = "pilum";
+                    break;
+
+                case MissleType.arrow:
+                    str = "arrow";
+                    break;
+
+                case MissleType.MT_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+
+        }
+
+        public string WeaponTypeToString(WeaponType weapon)
+        {
+            string str = "";
+
+            switch (weapon)
+            {
+                case WeaponType.melee:
+                    str = "melee";
+                    break;
+
+                case WeaponType.thrown:
+                    str = "thrown";
+                    break;
+
+                case WeaponType.missle:
+                    str = "missle";
+                    break;
+
+                case WeaponType.siege_missle:
+                    str = "siege_missle";
+                    break;
+
+                case WeaponType.WT_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+        }
+
+        public string TechTypeToString(techType tech)
+        {
+            string str = "";
+
+            switch (tech)
+            {
+                case techType.simple:
+                    str = "simple";
+                    break;
+
+                case techType.other:
+                    str = "other";
+                    break;
+
+                case techType.blade:
+                    str = "blade";
+                    break;
+
+                case techType.archery:
+                    str = "archery";
+                    break;
+
+                case techType.siege:
+                    str = "siege";
+                    break;
+
+                case techType.TT_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+        }
+
+        public string DamageTypeToString(DamageType dmg)
+        {
+            string str = "";
+
+            switch (dmg)
+            {
+                case DamageType.piercing:
+                    str = "piercing";
+                    break;
+
+                case DamageType.blunt:
+                    str = "blunt";
+                    break;
+
+                case DamageType.slashing:
+                    str = "slashing";
+                    break;
+
+                case DamageType.fire:
+                    str = "fire";
+                    break;
+
+                case DamageType.DM_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+        }
+
+        public string SoundTypeToString(SoundType snd)
+        {
+            string str = "";
+
+            switch (snd)
+            {
+                case SoundType.knife:
+                    str = "knife";
+                    break;
+
+                case SoundType.mace:
+                    str = "mace";
+                    break;
+
+                case SoundType.axe:
+                    str = "axe";
+                    break;
+
+                case SoundType.sword:
+                    str = "sword";
+                    break;
+
+                case SoundType.spear:
+                    str = "spear";
+                    break;
+
+                case SoundType.ST_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+        }
+
+        public string ArmourSndToString(ArmourSound snd)
+        {
+            string str = "";
+
+            switch (snd)
+            {
+                case ArmourSound.flesh:
+                    str = "flesh";
+                    break;
+
+                case ArmourSound.leather:
+                    str = "leather";
+                    break;
+
+                case ArmourSound.metal:
+                    str = "metal";
+                    break;
+            }
+
+            return str;
+        }
+
+        public string PriAttrToString(stat_pri_attr pri)
+        {
+            string str = "";
+
+            switch (pri)
+            {
+                case stat_pri_attr.ap:
+                    str = "ap";
+                    break;
+
+                case stat_pri_attr.bp:
+                    str = "bp";
+                    break;
+
+                case stat_pri_attr.pa_spear:
+                    str = "pa_spear";
+                    break;
+
+                case stat_pri_attr.long_pike:
+                    str = "long_pike";
+                    break;
+
+                case stat_pri_attr.short_pike:
+                    str = "short_pike";
+                    break;
+
+                case stat_pri_attr.prec:
+                    str = "prec";
+                    break;
+
+                case stat_pri_attr.pa_thrown:
+                    str = "pa_thrown";
+                    break;
+
+                case stat_pri_attr.launching:
+                    str = "launching";
+                    break;
+
+                case stat_pri_attr.area:
+                    str = "area";
+                    break;
+
+                case stat_pri_attr.PA_no:
+                    str = "no";
+                    break;
+            }
+
+            return str;
+
+
+        }
+
+        public string DisciplineToString(statmental_discipline dis)
+        {
+            string str = "";
+
+            switch (dis)
+            {
+                case statmental_discipline.normal:
+                    str = "normal";
+                    break;
+
+                case statmental_discipline.low:
+                    str = "low";
+                    break;
+
+                case statmental_discipline.disciplined:
+                    str = "disciplined";
+                    break;
+
+                case statmental_discipline.impetuous:
+                    str = "impetuous";
+                    break;
+            }
+
+            return str;
+
+
+        }
+
+        public string TrainingToString(statmental_training train)
+        {
+            string str = "";
+
+            switch (train)
+            {
+                case statmental_training.untrained:
+                    str = "untrained";
+                    break;
+
+                case statmental_training.trained:
+                    str = "trained";
+                    break;
+
+                case statmental_training.highly_trained:
+                    str = "highly_trained";
+                    break;
+
+            }
+
+            return str;
+
+
         }
 
         public static class Data
@@ -234,6 +606,7 @@ namespace Randomiser
 
             public static string RtwFolderPath = "";
             public static  string EDUFILEPATH = @"\data\export_descr_unit.txt";
+            public static string EDUFILEPATHTEST = @"\data\export_descr_unit_test.txt";
             public static  string EDBFILEPATH = @"\data\export_desc_buildings.txt";
         }
 
@@ -268,7 +641,7 @@ namespace Randomiser
 
             else txt_Output.AppendText("File cannot be found!\r\n");
 
-            
+            Data.EDUFILEPATHTEST = Data.RtwFolderPath + Data.EDUFILEPATHTEST;
 
         }
 
@@ -841,7 +1214,7 @@ namespace Randomiser
 
                 }
 
-                else if (line.StartsWith("mental"))
+                else if (line.StartsWith("stat_mental"))
                 {
                     string trimmed = RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
@@ -852,20 +1225,20 @@ namespace Randomiser
 
                     Data.units[counter].mental.morale = Convert.ToInt16(splitted[0]);
 
-                    if (splitted[1] == "normal")
+                    if (splitted[1].Trim() == "normal")
                         Data.units[counter].mental.discipline = statmental_discipline.normal;
-                    else if (splitted[1] == "low")
+                    else if (splitted[1].Trim() == "low")
                         Data.units[counter].mental.discipline = statmental_discipline.low;
-                    else if (splitted[1] == "disciplined")
+                    else if (splitted[1].Trim() == "disciplined")
                         Data.units[counter].mental.discipline = statmental_discipline.disciplined;
-                    else if (splitted[1] == "impetuous")
+                    else if (splitted[1].Trim() == "impetuous")
                         Data.units[counter].mental.discipline = statmental_discipline.impetuous;
 
-                    if (splitted[2] == "untrained")
+                    if (splitted[2].Trim() == "untrained")
                         Data.units[counter].mental.training = statmental_training.untrained;
-                    else if (splitted[2] == "trained")
+                    else if (splitted[2].Trim() == "trained")
                         Data.units[counter].mental.training = statmental_training.trained;
-                    else if (splitted[2] == "highly_trained")
+                    else if (splitted[2].Trim() == "highly_trained")
                         Data.units[counter].mental.training = statmental_training.highly_trained;
                 }
 
@@ -1023,9 +1396,9 @@ namespace Randomiser
             int OwnershipPerUnit;
             bool unitSizes, stats, reasonableStats, rndCost, rndSounds;
 
-            if (cbx_ownershipPerUnit.SelectedItem.ToString() != "RANDOM")
-                OwnershipPerUnit = Convert.ToInt16(cbx_ownershipPerUnit.SelectedItem.ToString());
-            else OwnershipPerUnit = Data.rnd.Next(1, 10);
+            //if (cbx_ownershipPerUnit.SelectedItem.ToString() != "RANDOM")
+              //  OwnershipPerUnit = Convert.ToInt16(cbx_ownershipPerUnit.SelectedItem.ToString());
+            //else OwnershipPerUnit = Data.rnd.Next(1, 10);
 
             if (chk_UnitSizes.Checked)
                 unitSizes = true;
@@ -1047,6 +1420,7 @@ namespace Randomiser
                 rndSounds = true;
             else rndSounds = false;
 
+            SaveEDU();
             foreach (Unit unit in Data.units)
             {
                 if (unitSizes)
@@ -1079,8 +1453,7 @@ namespace Randomiser
 
         public void SaveEDU()
         {
-            File.Create(Data.EDUFILEPATH);
-            StreamWriter edu = new StreamWriter(Data.EDUFILEPATH);
+            StreamWriter edu = new StreamWriter(Data.EDUFILEPATHTEST);
 
             edu.WriteLine(";RANDOMISED\r\n\n");
 
@@ -1092,8 +1465,9 @@ namespace Randomiser
                     "category\t\t\t" + unit.category + "\n" +
                     "class\t\t\t" + unit.unitClass + "\n" +
                     "voice_type\t\t\t" + unit.voiceType + "\n" +
-                    "soldier\t\t\t" + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString() + "\n");
-                edu.WriteLine("attributes\t\t\t");
+                    "soldier\t\t\t" + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString());
+
+                edu.Write("attributes\t\t\t"); // write attributes
                 if (unit.attributes.HasFlag(Attributes.sea_faring))
                     edu.Write(AttributesToString(Attributes.sea_faring) + ", ");
                 if (unit.attributes.HasFlag(Attributes.can_run_amok))
@@ -1129,7 +1503,9 @@ namespace Randomiser
                 if (unit.attributes.HasFlag(Attributes.warcry))
                     edu.Write(AttributesToString(Attributes.warcry) + ", ");
 
-                edu.WriteLine("formation\t\t\t");
+                edu.Write("\n");
+
+                edu.Write("formation\t\t\t"); // write formation
                 foreach (float num in unit.formation.FormationTight)
                     edu.Write(num.ToString() + ", ");
                 foreach (float num in unit.formation.FormationSparse)
@@ -1149,8 +1525,216 @@ namespace Randomiser
                 if (unit.formation.FormationFlags.HasFlag(FormationTypes.Formation_Wedge))
                     edu.Write(FormationTostring(FormationTypes.Formation_Wedge) + ", ");
 
+                edu.Write("\n");
 
+                edu.Write("stat_health\t\t\t"); //write health
+                foreach (int health in unit.heatlh)
+                    edu.Write(health + ", ");
 
+                edu.Write("\n");
+
+                edu.Write("stat_pri\t\t\t"); // write primary weapon
+                foreach (int atk in unit.primaryWeapon.attack)
+                    edu.Write(atk + ", ");
+                edu.Write(MissleTypeToString(unit.primaryWeapon.missletypeFlags) + ", ");
+                foreach (int miss in unit.primaryWeapon.Missleattri)
+                    edu.Write(miss + ", ");
+                edu.Write(
+                    WeaponTypeToString(unit.primaryWeapon.WeaponFlags) + ", " +
+                    TechTypeToString(unit.primaryWeapon.TechFlags) + ", " +
+                    DamageTypeToString(unit.primaryWeapon.DamageFlags) + ", " +
+                    SoundTypeToString(unit.primaryWeapon.SoundFlags) + ", ");
+                foreach (float atkd in unit.primaryWeapon.attackdelay)
+                    edu.Write(atkd + ", ");
+
+                edu.Write("\n");
+
+                edu.Write("stat_pri_attr\t\t\t"); //attributes
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.ap))
+                    edu.Write(PriAttrToString(stat_pri_attr.ap) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.bp))
+                    edu.Write(PriAttrToString(stat_pri_attr.bp) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.pa_spear))
+                    edu.Write(PriAttrToString(stat_pri_attr.pa_spear) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.long_pike))
+                    edu.Write(PriAttrToString(stat_pri_attr.long_pike) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.short_pike))
+                    edu.Write(PriAttrToString(stat_pri_attr.short_pike) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.prec))
+                    edu.Write(PriAttrToString(stat_pri_attr.prec) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.pa_thrown))
+                    edu.Write(PriAttrToString(stat_pri_attr.pa_thrown) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.launching))
+                    edu.Write(PriAttrToString(stat_pri_attr.launching) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.area))
+                    edu.Write(PriAttrToString(stat_pri_attr.area) + ", ");
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.PA_no))
+                    edu.Write(PriAttrToString(stat_pri_attr.PA_no));
+
+                edu.Write("\n");
+
+                edu.Write("stat_sec\t\t\t"); // secondary weapon
+                foreach (int atk in unit.secondaryWeapon.attack)
+                    edu.Write(atk + ", ");
+                edu.Write(MissleTypeToString(unit.secondaryWeapon.missletypeFlags) + ", ");
+                foreach (int miss in unit.secondaryWeapon.Missleattri)
+                    edu.Write(miss + ", ");
+                edu.Write(
+                    WeaponTypeToString(unit.secondaryWeapon.WeaponFlags) + ", " +
+                    TechTypeToString(unit.secondaryWeapon.TechFlags) + ", " +
+                    DamageTypeToString(unit.secondaryWeapon.DamageFlags) + ", " +
+                    SoundTypeToString(unit.secondaryWeapon.SoundFlags) + ", ");
+                foreach (float atkd in unit.secondaryWeapon.attackdelay)
+                    edu.Write(atkd + ", ");
+
+                edu.Write("\n");
+
+                edu.Write("stat_sec_attr\t\t\t");
+                if (unit.secAttri.HasFlag(stat_pri_attr.ap))
+                    edu.Write(PriAttrToString(stat_pri_attr.ap) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.bp))
+                    edu.Write(PriAttrToString(stat_pri_attr.bp) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.pa_spear))
+                    edu.Write(PriAttrToString(stat_pri_attr.pa_spear) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.long_pike))
+                    edu.Write(PriAttrToString(stat_pri_attr.long_pike) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.short_pike))
+                    edu.Write(PriAttrToString(stat_pri_attr.short_pike) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.prec))
+                    edu.Write(PriAttrToString(stat_pri_attr.prec) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.pa_thrown))
+                    edu.Write(PriAttrToString(stat_pri_attr.pa_thrown) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.launching))
+                    edu.Write(PriAttrToString(stat_pri_attr.launching) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.area))
+                    edu.Write(PriAttrToString(stat_pri_attr.area) + ", ");
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.PA_no))
+                    edu.Write(PriAttrToString(stat_pri_attr.PA_no));
+
+                edu.Write("\n");
+
+                edu.Write("stat_pri_armour\t\t\t");
+                foreach (int numb in unit.primaryArmour.stat_pri_armour)
+                    edu.Write(numb + ", ");
+                edu.Write(ArmourSndToString(unit.primaryArmour.armour_sound));
+
+                edu.Write("\n");
+
+                edu.Write("stat_sec_armour\t\t\t");
+                foreach (int numb in unit.secondaryArmour.stat_sec_armour)
+                    edu.Write(numb + ", ");
+                edu.Write(ArmourSndToString(unit.secondaryArmour.sec_armour_sound));
+
+                edu.Write("\n");
+
+                edu.Write("stat_heat\t\t\t" + unit.heat);
+
+                edu.Write("\n");
+
+                edu.Write("stat_ground\t\t\t");
+                foreach (int numb in unit.ground)
+                    edu.Write(numb + ", ");
+
+                edu.Write("\n");
+
+                edu.Write("stat_mental\t\t\t" + unit.mental.morale + ", ");
+                edu.Write(DisciplineToString(unit.mental.discipline) + ", " + TrainingToString(unit.mental.training));
+
+                edu.Write("\n");
+
+                edu.Write("stat_charge_dist\t\t\t" + unit.chargeDistance);
+
+                edu.Write("\n");
+
+                edu.Write("stat_fire_delay\t\t\t" + unit.fireDelay);
+
+                edu.Write("\n");
+
+                edu.Write("stat_cost\t\t\t");
+                foreach (int cost in unit.cost)
+                    edu.Write(cost + ", ");
+
+                edu.Write("\n");
+
+                edu.Write("stat_ownership\t\t\t");
+
+                if (unit.ownership.HasFlag(FactionOwnership.armenia))
+                    edu.Write(FactionToString(FactionOwnership.armenia) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.britons))
+                    edu.Write(FactionToString(FactionOwnership.britons) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.carthage))
+                    edu.Write(FactionToString(FactionOwnership.carthage) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.carthaginian))
+                    edu.Write(FactionToString(FactionOwnership.carthaginian) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.dacia))
+                    edu.Write(FactionToString(FactionOwnership.dacia) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.eastern))
+                    edu.Write(FactionToString(FactionOwnership.eastern) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.egypt))
+                    edu.Write(FactionToString(FactionOwnership.egypt) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.egyptian))
+                    edu.Write(FactionToString(FactionOwnership.egyptian) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.gauls))
+                    edu.Write(FactionToString(FactionOwnership.gauls) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.germans))
+                    edu.Write(FactionToString(FactionOwnership.germans) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.greek))
+                    edu.Write(FactionToString(FactionOwnership.greek) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.greek_cities))
+                    edu.Write(FactionToString(FactionOwnership.greek_cities) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.macedon))
+                    edu.Write(FactionToString(FactionOwnership.macedon) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.none))
+                    edu.Write(FactionToString(FactionOwnership.none) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.numidia))
+                    edu.Write(FactionToString(FactionOwnership.numidia) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.parthia))
+                    edu.Write(FactionToString(FactionOwnership.parthia) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.parthian))
+                    edu.Write(FactionToString(FactionOwnership.parthian) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.pontus))
+                    edu.Write(FactionToString(FactionOwnership.pontus) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.roman))
+                    edu.Write(FactionToString(FactionOwnership.roman) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.romans_brutii))
+                    edu.Write(FactionToString(FactionOwnership.romans_brutii) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.romans_julii))
+                    edu.Write(FactionToString(FactionOwnership.romans_julii) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.romans_scipii))
+                    edu.Write(FactionToString(FactionOwnership.romans_scipii) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.romans_senate))
+                    edu.Write(FactionToString(FactionOwnership.romans_senate) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.scythia))
+                    edu.Write(FactionToString(FactionOwnership.scythia) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.seleucid))
+                    edu.Write(FactionToString(FactionOwnership.seleucid) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.slave))
+                    edu.Write(FactionToString(FactionOwnership.slave) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.spain))
+                    edu.Write(FactionToString(FactionOwnership.spain) + ", ");
+                if (unit.ownership.HasFlag(FactionOwnership.thrace))
+                    edu.Write(FactionToString(FactionOwnership.thrace) + ", ");
+
+                edu.Write("\n\n\n");
             }
             
             

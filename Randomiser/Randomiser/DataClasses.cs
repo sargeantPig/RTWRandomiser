@@ -119,7 +119,6 @@ namespace Randomiser
     [Flags]
     public enum stat_pri_attr
     {
-
         ap = 1 << 0,
         bp = 1 << 1,
         pa_spear = 1 << 2,
@@ -141,8 +140,6 @@ namespace Randomiser
         egyptian,
         greek,
         roman
-    
-    
     }
 
     [Flags]
@@ -206,7 +203,7 @@ namespace Randomiser
         public float[] FormationTight;
 	    public float[] FormationSparse;
 	    public int FormationRanks;
-        public FormationTypes FormationFlags; // bitflags again FormationSquare, FormationPhalanx etc...
+        public FormationTypes FormationFlags;
 
         public Formation()
         {
