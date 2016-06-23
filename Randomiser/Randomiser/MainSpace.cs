@@ -54,12 +54,6 @@ namespace Randomiser
 
         }
 
-        
-
-       
-
-        
-
         private void butt_FolderSelect_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderDialog;
@@ -129,7 +123,6 @@ namespace Randomiser
             txt_outputview.AppendText(" Units: " + amount);
         }
 
-
         private void but_randomize_Click(object sender, EventArgs e)
         {
             int OwnershipPerUnit;
@@ -189,8 +182,6 @@ namespace Randomiser
 
         }
 
-  
-
         public void SaveEDU()
         {
             StreamWriter edu = new StreamWriter(Data.EDUFILEPATHMOD);
@@ -199,15 +190,52 @@ namespace Randomiser
 
             foreach (Unit unit in Data.units)
             {
-                edu.WriteLine(
-                    "type\t\t\t" + unit.type + "\n" +
-                    "dictionary\t\t\t" + unit.dictionary + "\n" +
-                    "category\t\t\t" + unit.category + "\n" +
-                    "class\t\t\t" + unit.unitClass + "\n" +
-                    "voice_type\t\t\t" + unit.voiceType + "\n" +
-                    "soldier\t\t\t" + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString());
+                edu.Write(
+                    "type\t\t\t " + unit.type + "\r\n" +
+                    "dictionary\t\t\t " + unit.dictionary + "\r\n" +
+                    "category\t\t\t " + unit.category + "\r\n" +
+                    "class\t\t\t " + unit.unitClass + "\r\n" +
+                    "voice_type\t\t\t " + unit.voiceType + "\r\n" +
+                    "soldier\t\t\t " + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString());
 
-                edu.Write("attributes\t\t\t "); // write attributes
+                //edu.Write("\r\n");
+
+                if (unit.engine != null)
+                    edu.Write("\r\nengine\t\t\t " + unit.engine);
+
+                if (unit.animal != null)
+                    edu.Write("\r\nanimal\t\t\t " + unit.animal);
+
+                if (unit.mount != null)
+                    edu.Write("\r\nmount\t\t\t " + unit.mount);
+
+                bool firstOfficer = false;
+
+                if (unit.officer.Count > 0)
+                {
+                    if (unit.officer[0] != null)
+                    {
+                        edu.Write("\r\nofficer\t\t\t " + unit.officer[0]);
+                    }
+                }
+
+                if (unit.officer.Count > 1)
+                {
+                    if (unit.officer[1] != null)
+                    {
+                        edu.Write("\r\nofficer\t\t\t " + unit.officer[1]);
+                    }
+                }
+
+                if (unit.officer.Count > 2)
+                {
+                    if (unit.officer[2] != null)
+                    {
+                        edu.Write("\r\nofficer\t\t\t " + unit.officer[2]);
+                    }
+                }
+
+                edu.Write("\r\nattributes\t\t\t "); // write attributes
 
                 bool firstAttr = false;
                 if (unit.attributes.HasFlag(Attributes.sea_faring))
@@ -655,6 +683,20 @@ namespace Randomiser
 
                     edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.PA_no));
                 }
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.fire))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else edu.Write(", ");
+
+
+                    edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.fire));
+                }
+
                 edu.Write("\r\n");
 
                 edu.Write("stat_sec\t\t\t "); // secondary weapon
@@ -798,6 +840,20 @@ namespace Randomiser
 
                     edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.PA_no));
                 }
+
+                if (unit.secAttri.HasFlag(stat_pri_attr.fire))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else edu.Write(", ");
+
+
+                    edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.fire));
+                }
+
                 edu.Write("\r\n");
 
                 edu.Write("stat_pri_armour\t\t\t ");
@@ -1156,8 +1212,29 @@ namespace Randomiser
                     else edu.Write(", ");
                     edu.Write(enumsToStrings.FactionToString(FactionOwnership.thrace));
                 }
+                if (unit.ownership.HasFlag(FactionOwnership.numidian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
 
-                edu.Write("\n\n");
+                    else edu.Write(", ");
+                    edu.Write(enumsToStrings.FactionToString(FactionOwnership.numidian));
+                }
+                if (unit.ownership.HasFlag(FactionOwnership.barbarian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else edu.Write(", ");
+                    edu.Write(enumsToStrings.FactionToString(FactionOwnership.barbarian));
+                }
+
+
+                edu.Write("\r\n\n");
             }
 
             edu.Close();

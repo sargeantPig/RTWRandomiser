@@ -47,6 +47,12 @@ namespace Randomiser
         stone,
         pilum,
         arrow,
+        ballista,
+        onager,
+        heavy_onager,
+        scorpion,
+        repeating_ballista,
+        bullet,
         MT_no
     };
 
@@ -129,7 +135,8 @@ namespace Randomiser
         pa_thrown = 1 << 6,
         launching = 1 << 7,
         area = 1 << 8,
-        PA_no = 1 << 9
+        fire = 1 << 9,
+        PA_no = 1 << 10
     };
 
     public enum Cultures
@@ -140,7 +147,9 @@ namespace Randomiser
         parthian,
         egyptian,
         greek,
-        roman
+        roman,
+        barbarian,
+        numidian
     }
 
     [Flags]
@@ -173,7 +182,9 @@ namespace Randomiser
         egyptian = 1 << 24,
         eastern = 1 << 25,
         parthian = 1 << 26,
-        none = 1 << 27
+        barbarian = 1 << 27,
+        numidian = 1 << 28,
+        none = 1 << 29
     }
 
     public class Soldier 

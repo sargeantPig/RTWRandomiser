@@ -188,39 +188,39 @@ namespace Randomiser
 
                     foreach (string STRING in splitted)
                     {
-                        if (STRING == "sea_faring")
+                        if (STRING.Trim() == "sea_faring")
                             Data.units[counter].attributes |= Attributes.sea_faring;
-                        else if (STRING == "hide_forest")
+                        else if (STRING.Trim() == "hide_forest")
                             Data.units[counter].attributes |= Attributes.hide_forest;
-                        else if (STRING == "hide_improved_forest")
+                        else if (STRING.Trim() == "hide_improved_forest")
                             Data.units[counter].attributes |= Attributes.hide_improved_forest;
-                        else if (STRING == "hide_long_grass")
+                        else if (STRING.Trim() == "hide_long_grass")
                             Data.units[counter].attributes |= Attributes.hide_long_grass;
-                        else if (STRING == "hide_anywhere")
+                        else if (STRING.Trim() == "hide_anywhere")
                             Data.units[counter].attributes |= Attributes.hide_anywhere;
-                        else if (STRING == "can_sap")
+                        else if (STRING.Trim() == "can_sap")
                             Data.units[counter].attributes |= Attributes.can_sap;
-                        else if (STRING == "frighten_foot")
+                        else if (STRING.Trim() == "frighten_foot")
                             Data.units[counter].attributes |= Attributes.frighten_foot;
-                        else if (STRING == "frighten_mounted")
+                        else if (STRING.Trim() == "frighten_mounted")
                             Data.units[counter].attributes |= Attributes.frighten_mounted;
-                        else if (STRING == "can_run_amok")
+                        else if (STRING.Trim() == "can_run_amok")
                             Data.units[counter].attributes |= Attributes.can_run_amok;
-                        else if (STRING == "general_unit")
+                        else if (STRING.Trim() == "general_unit")
                             Data.units[counter].attributes |= Attributes.general_unit;
-                        else if (STRING == "general_unit_upgrade")
+                        else if (STRING.Trim() == "general_unit_upgrade")
                             Data.units[counter].attributes |= Attributes.general_unit_upgrade;
-                        else if (STRING == "cantabrian_circle")
+                        else if (STRING.Trim() == "cantabrian_circle")
                             Data.units[counter].attributes |= Attributes.cantabrian_circle;
-                        else if (STRING == "no_custom")
+                        else if (STRING.Trim() == "no_custom")
                             Data.units[counter].attributes |= Attributes.no_custom;
-                        else if (STRING == "command")
+                        else if (STRING.Trim() == "command")
                             Data.units[counter].attributes |= Attributes.command;
-                        else if (STRING == "mercenary_unit")
+                        else if (STRING.Trim() == "mercenary_unit")
                             Data.units[counter].attributes |= Attributes.mercenary_unit;
-                        else if (STRING == "druid")
+                        else if (STRING.Trim() == "druid")
                             Data.units[counter].attributes |= Attributes.druid;
-                        else if (STRING == "warcry")
+                        else if (STRING.Trim() == "warcry")
                             Data.units[counter].attributes |= Attributes.warcry;
 
                     }
@@ -292,25 +292,25 @@ namespace Randomiser
 
                     foreach (string STRING in splitted)
                     {
-                        if (STRING == "ap")
+                        if (STRING.Trim() == "ap")
                             Data.units[counter].priAttri |= stat_pri_attr.ap;
-                        else if (STRING == "bp")
+                        else if (STRING.Trim() == "bp")
                             Data.units[counter].priAttri |= stat_pri_attr.bp;
-                        else if (STRING == "pa_spear")
+                        else if (STRING.Trim() == "pa_spear")
                             Data.units[counter].priAttri |= stat_pri_attr.pa_spear;
-                        else if (STRING == "long_pike")
+                        else if (STRING.Trim() == "long_pike")
                             Data.units[counter].priAttri |= stat_pri_attr.long_pike;
-                        else if (STRING == "short_pike")
+                        else if (STRING.Trim() == "short_pike")
                             Data.units[counter].priAttri |= stat_pri_attr.short_pike;
-                        else if (STRING == "prec")
+                        else if (STRING.Trim() == "prec")
                             Data.units[counter].priAttri |= stat_pri_attr.prec;
-                        else if (STRING == "pa_thrown")
+                        else if (STRING.Trim() == "pa_thrown")
                             Data.units[counter].priAttri |= stat_pri_attr.pa_thrown;
-                        else if (STRING == "launching")
+                        else if (STRING.Trim() == "launching")
                             Data.units[counter].priAttri |= stat_pri_attr.launching;
-                        else if (STRING == "area")
+                        else if (STRING.Trim() == "area")
                             Data.units[counter].priAttri |= stat_pri_attr.area;
-                        else if (STRING == "no")
+                        else if (STRING.Trim() == "no")
                             Data.units[counter].priAttri |= stat_pri_attr.PA_no;
                     }
 
@@ -366,6 +366,18 @@ namespace Randomiser
                         Data.units[counter].primaryWeapon.missletypeFlags = MissleType.arrow;
                     else if (splitted[2].Trim() == "no")
                         Data.units[counter].primaryWeapon.missletypeFlags = MissleType.MT_no;
+                    else if (splitted[2].Trim() == "ballista")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.ballista;
+                    else if (splitted[2].Trim() == "boulder")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.onager;
+                    else if (splitted[2].Trim() == "big_boulder")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.heavy_onager;
+                    else if (splitted[2].Trim() == "scorpion")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.scorpion;
+                    else if (splitted[2].Trim() == "repeating_ballista")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.repeating_ballista;
+                    else if (splitted[2].Trim() == "bullet")
+                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.bullet;
 
                     if (splitted[5].Trim() == "melee")
                         Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.melee;
@@ -373,7 +385,7 @@ namespace Randomiser
                         Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.thrown;
                     else if (splitted[5].Trim() == "missle")
                         Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.missle;
-                    else if (splitted[5].Trim() == "siege_missle")
+                    else if (splitted[5].Trim() == "siege_missile")
                         Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.siege_missle;
                     else if (splitted[5].Trim() == "no")
                         Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.WT_no;
@@ -402,7 +414,7 @@ namespace Randomiser
                     else if (splitted[7].Trim() == "no")
                         Data.units[counter].primaryWeapon.DamageFlags = DamageType.DM_no;
 
-                    if (splitted[8].Trim() == "no")
+                    if (splitted[8].Trim() == "none")
                         Data.units[counter].primaryWeapon.SoundFlags = SoundType.ST_no;
                     else if (splitted[8].Trim() == "knife")
                         Data.units[counter].primaryWeapon.SoundFlags = SoundType.knife;
@@ -426,25 +438,27 @@ namespace Randomiser
 
                     foreach (string STRING in splitted)
                     {
-                        if (STRING == "ap")
+                        if (STRING.Trim() == "ap")
                             Data.units[counter].secAttri |= stat_pri_attr.ap;
-                        else if (STRING == "bp")
+                        else if (STRING.Trim() == "bp")
                             Data.units[counter].secAttri |= stat_pri_attr.bp;
-                        else if (STRING == "pa_spear")
+                        else if (STRING.Trim() == "pa_spear")
                             Data.units[counter].secAttri |= stat_pri_attr.pa_spear;
-                        else if (STRING == "long_pike")
+                        else if (STRING.Trim() == "long_pike")
                             Data.units[counter].secAttri |= stat_pri_attr.long_pike;
-                        else if (STRING == "short_pike")
+                        else if (STRING.Trim() == "short_pike")
                             Data.units[counter].secAttri |= stat_pri_attr.short_pike;
-                        else if (STRING == "prec")
+                        else if (STRING.Trim() == "prec")
                             Data.units[counter].secAttri |= stat_pri_attr.prec;
-                        else if (STRING == "pa_thrown")
+                        else if (STRING.Trim() == "pa_thrown")
                             Data.units[counter].secAttri |= stat_pri_attr.pa_thrown;
-                        else if (STRING == "launching")
+                        else if (STRING.Trim() == "launching")
                             Data.units[counter].secAttri |= stat_pri_attr.launching;
-                        else if (STRING == "area")
+                        else if (STRING.Trim() == "area")
                             Data.units[counter].secAttri |= stat_pri_attr.area;
-                        else if (STRING == "no")
+                        else if (STRING.Trim() == "fire")
+                            Data.units[counter].secAttri |= stat_pri_attr.fire;
+                        else if (STRING.Trim() == "no")
                             Data.units[counter].secAttri |= stat_pri_attr.PA_no;
                     }
 
@@ -499,6 +513,18 @@ namespace Randomiser
                         Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.arrow;
                     else if (splitted[2].Trim() == "no")
                         Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.MT_no;
+                    else if (splitted[2].Trim() == "ballista")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.ballista;
+                    else if (splitted[2].Trim() == "boulder")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.onager;
+                    else if (splitted[2].Trim() == "big_boulder")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.heavy_onager;
+                    else if (splitted[2].Trim() == "scorpion")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.scorpion;
+                    else if (splitted[2].Trim() == "repeating_ballista")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.repeating_ballista;
+                    else if (splitted[2].Trim() == "bullet")
+                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.bullet;
 
                     if (splitted[5].Trim() == "melee")
                         Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.melee;
@@ -506,7 +532,7 @@ namespace Randomiser
                         Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.thrown;
                     else if (splitted[5].Trim() == "missle")
                         Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.missle;
-                    else if (splitted[5].Trim() == "siege_missle")
+                    else if (splitted[5].Trim() == "siege_missile")
                         Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.siege_missle;
                     else if (splitted[5].Trim() == "no")
                         Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.WT_no;
@@ -535,7 +561,7 @@ namespace Randomiser
                     else if (splitted[7].Trim() == "no")
                         Data.units[counter].secondaryWeapon.DamageFlags = DamageType.DM_no;
 
-                    if (splitted[8].Trim() == "no")
+                    if (splitted[8].Trim() == "none")
                         Data.units[counter].secondaryWeapon.SoundFlags = SoundType.ST_no;
                     else if (splitted[8].Trim() == "knife")
                         Data.units[counter].secondaryWeapon.SoundFlags = SoundType.knife;
@@ -550,7 +576,7 @@ namespace Randomiser
 
                 }
 
-                else if (line.StartsWith("heat"))
+                else if (line.StartsWith("stat_heat"))
                 {
                     string trimmed = Functions.RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
@@ -563,7 +589,7 @@ namespace Randomiser
 
                 }
 
-                else if (line.StartsWith("ground"))
+                else if (line.StartsWith("stat_ground"))
                 {
                     string trimmed = Functions.RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
@@ -598,6 +624,8 @@ namespace Randomiser
                         Data.units[counter].mental.discipline = statmental_discipline.disciplined;
                     else if (splitted[1].Trim() == "impetuous")
                         Data.units[counter].mental.discipline = statmental_discipline.impetuous;
+                    else if (splitted[1].Trim() == "berserker")
+                        Data.units[counter].mental.discipline = statmental_discipline.berserker;
 
                     if (splitted[2].Trim() == "untrained")
                         Data.units[counter].mental.training = statmental_training.untrained;
@@ -727,6 +755,10 @@ namespace Randomiser
                             Data.units[counter].ownership |= FactionOwnership.thrace;
                         else if (STRING.Trim() == "slave")
                             Data.units[counter].ownership |= FactionOwnership.slave;
+                        else if (STRING.Trim() == "numidian")
+                            Data.units[counter].ownership |= FactionOwnership.numidian;
+                        else if (STRING.Trim() == "barbarian")
+                            Data.units[counter].ownership |= FactionOwnership.barbarian;
 
                     }
                 }

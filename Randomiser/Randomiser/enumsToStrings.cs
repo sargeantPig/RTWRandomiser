@@ -83,6 +83,29 @@ namespace Randomiser
                 case "slave":
                     faction = FactionOwnership.slave;
                     break;
+                case "carthaginian":
+                    faction = FactionOwnership.carthaginian;
+                    break;
+                case "numidian":
+                    faction = FactionOwnership.numidian;
+                    break;
+                case "barbarian":
+                    faction = FactionOwnership.barbarian;
+                    break;
+                case "egyptian":
+                    faction = FactionOwnership.egyptian;
+                    break;
+                case "greek":
+                    faction = FactionOwnership.greek;
+                    break;
+                case "parthian":
+                    faction = FactionOwnership.parthian;
+                    break;
+                case "eastern":
+                    faction = FactionOwnership.eastern;
+                    break;
+
+
 
             }
 
@@ -154,7 +177,7 @@ namespace Randomiser
                     str = "dacia";
                     break;
                 case FactionOwnership.eastern:
-                    str = "numidia";
+                    str = "eastern";
                     break;
                 case FactionOwnership.scythia:
                     str = "scythia";
@@ -180,6 +203,16 @@ namespace Randomiser
                 case FactionOwnership.parthian:
                     str = "parthian";
                     break;
+                case FactionOwnership.barbarian:
+                    str = "barbarian";
+                    break;
+                case FactionOwnership.numidian:
+                    str = "numidian";
+                    break;
+                case FactionOwnership.numidia:
+                    str = "numidia";
+                    break;
+
 
             }
 
@@ -319,6 +352,30 @@ namespace Randomiser
                 case MissleType.MT_no:
                     str = "no";
                     break;
+
+                case MissleType.ballista:
+                    str = "ballista";
+                    break;
+
+                case MissleType.onager:
+                    str = "boulder";
+                    break;
+
+                case MissleType.heavy_onager:
+                    str = "big_boulder";
+                    break;
+
+                case MissleType.scorpion:
+                    str = "scorpion";
+                    break;
+
+                case MissleType.repeating_ballista:
+                    str = "repeating_ballista";
+                    break;
+
+                case MissleType.bullet:
+                    str = "bullet";
+                    break;
             }
 
             return str;
@@ -344,7 +401,7 @@ namespace Randomiser
                     break;
 
                 case WeaponType.siege_missle:
-                    str = "siege_missle";
+                    str = "siege_missile";
                     break;
 
                 case WeaponType.WT_no:
@@ -446,7 +503,7 @@ namespace Randomiser
                     break;
 
                 case SoundType.ST_no:
-                    str = "no";
+                    str = "none";
                     break;
             }
 
@@ -519,6 +576,10 @@ namespace Randomiser
 
                 case stat_pri_attr.PA_no:
                     str = "no";
+                    break;
+
+                case stat_pri_attr.fire:
+                    str = "fire";
                     break;
             }
 
