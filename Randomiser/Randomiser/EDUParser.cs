@@ -179,6 +179,19 @@ namespace Randomiser
                     Data.units[counter].mount = trimmed;
                 }
 
+                else if (line.StartsWith("ship"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.units[counter].naval = trimmed;
+                }
+
+
                 else if (line.StartsWith("attributes"))
                 {
                     string trimmed = Functions.RemoveFirstWord(line);
@@ -702,7 +715,6 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    int i = 0;
                     foreach (string STRING in splitted)
                     {
                         if (STRING.Trim() == "romans_julii")

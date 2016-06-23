@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataClasses.cs" />
+    <Compile Include="DataFunc.cs" />
     <Compile Include="EDUParser.cs" />
     <Compile Include="enumsToStrings.cs" />
     <Compile Include="MainSpace.cs" />

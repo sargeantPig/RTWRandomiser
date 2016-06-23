@@ -288,6 +288,7 @@ namespace Randomiser
         public string engine; //type of siege used ( ballista, scorpion, onager, heavy_onager, repeating_ballista)
         public string animal; // The type of non-ridden on animals used by the unit. wardogs, pigs
         public string mount; // mount used by the unit
+        public string naval;
         public MountEffect mountEffect; //modifiers vs different mounts
         public Attributes attributes; //abilities of unit
         public Formation formation; // formation values

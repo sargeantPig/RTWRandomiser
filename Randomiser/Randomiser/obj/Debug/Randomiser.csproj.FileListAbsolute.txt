@@ -15,4 +15,4 @@ C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\bin\De
 C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\obj\Debug\Randomiser.csprojResolveAssemblyReference.cache
 C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\obj\Debug\Randomiser.Properties.Resources.resources
 C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\obj\Debug\Randomiser.csproj.GenerateResource.Cache
-C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\obj\Debug\Randomiser.Data.resources
+C:\Users\Aaron Tighe\Documents\GitHub\RTWRandomiser\Randomiser\Randomiser\obj\Debug\Randomiser.MainForm1.resources

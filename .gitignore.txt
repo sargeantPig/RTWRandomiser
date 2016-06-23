@@ -83,6 +83,8 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
+*.cache
+*.Cache
 
 # Visual Studio profiler
 *.psess
