@@ -366,6 +366,8 @@ namespace Randomiser
     {
         public string name ="";
         public int r=0, g=0, b=0;
+        public int x=0, y =0;
+
         public Region(string n, int red, int green, int blue)
         {
             name = n;

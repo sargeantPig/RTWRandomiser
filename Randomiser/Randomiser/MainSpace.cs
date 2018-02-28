@@ -60,8 +60,6 @@ namespace Randomiser
             string completeEduPath = Data.ModFolderPath + Data.EDUFILEPATH;
             string completedEdbPath = Data.ModFolderPath + Data.EDBFILEPATH;
             string completedStratPath = Data.RtwFolderPath + Data.DESCSTRAT;
-
-
       
             txt_Output.AppendText("Loading files...\r\n");
             
@@ -1268,25 +1266,88 @@ namespace Randomiser
             strat.WriteLine(";RANDOMISED\r\n\n");
 
             int factionNo = 0;
-
+            List<string> tempsettles = new List<string>();
             foreach (string s in Data.desc_StratData)
             {
-                strat.WriteLine(s);
-
-                
-
                 if (s.StartsWith("denari"))
                 {
+                    strat.WriteLine(s);
+                    tempsettles.Clear();
                     factionNo++;
-                    for (int i = 0; i < Data.rnd.Next(1, 10); i++)
+                    int rndNum = Data.rnd.Next(0, Data.settlements.Count - 1);
+                    for (int i = 0; i < Data.rnd.Next(1, 5); i++)
                     {
-                        int rndNum = Data.rnd.Next(0, Data.settlements.Count - 1);
-                        strat.WriteLine(Data.settlements[rndNum].outputSettlement());
-                        Data.settlements.RemoveAt(rndNum);
+                        
+                        if (rndNum - i < 0)
+                        {
+                            strat.WriteLine(Data.settlements[rndNum + i].outputSettlement());
+                            tempsettles.Add(Data.settlements[rndNum + i].region);
+                            Data.settlements.RemoveAt(rndNum + i);
+                        }
+
+                        else if (rndNum + i >= Data.settlements.Count())
+                        {
+                            strat.WriteLine(Data.settlements[rndNum - i].outputSettlement());
+                            tempsettles.Add(Data.settlements[rndNum - i].region);
+                            Data.settlements.RemoveAt(rndNum - i);
+                        }
+
+                        else
+                        {
+                            strat.WriteLine(Data.settlements[rndNum + i].outputSettlement());
+                            tempsettles.Add(Data.settlements[rndNum + i].region);
+                            Data.settlements.RemoveAt(rndNum + i);
+                        }
+
+                       
                     }
                 }
 
+                else if (s.StartsWith("character") && !s.StartsWith("character_record"))
+                {
+                    string[] splitted = s.Split(',');
 
+                    foreach (string s2 in splitted)
+                    {
+
+                        if (s2.Trim().StartsWith("admiral"))
+                        {
+                            break;
+                        }
+
+                        int rnd2 = Data.rnd.Next(0, tempsettles.Count() - 1);
+                        int rnd3 = Data.rnd.Next(0, 0);
+
+                        if (s2.Trim().StartsWith("x"))
+                        {
+                            string[] splitAgain = s2.Split(' ');
+
+                            int index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[0]);
+                            splitAgain[1] = Convert.ToString(Data.rgbRegions[index].x);
+
+                            splitted[splitted.Count() - 2] = "x" + " " + splitAgain[1];
+                        }
+
+                        if (s2.Trim().StartsWith("y"))
+                        {
+                            string[] splitAgain = s2.Split(' ');
+
+                            int index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[0]);
+                            splitAgain[1] = Convert.ToString(Data.rgbRegions[index].y);
+
+                            splitted[splitted.Count() - 1] = "y" + " " + splitAgain[1];
+                        }
+
+                    }
+                        foreach (string s3 in splitted)
+                        {
+                            if (!s3.Trim().StartsWith("y"))
+                                strat.Write(s3 + ", ");
+                            else strat.Write(s3 + "\r\n");
+                        }
+                }
+
+                else strat.WriteLine(s);
             }
 
             strat.Close();

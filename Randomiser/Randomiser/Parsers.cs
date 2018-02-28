@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
-using CSharpImageLibrary;
+using System.Drawing;
 
 namespace Randomiser
 {
@@ -831,6 +831,31 @@ namespace Randomiser
             }
 
             reg.Close();
+
+            Bitmap img = new Bitmap(Data.RtwFolderPath + Data.MAPREGIONSPATH);
+
+            img.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            for (int x = 0; x < img.Width; x++)
+                for(int y =0; y < img.Height; y++)
+                {
+                    if (img.GetPixel(x, y).R == 0 && img.GetPixel(x, y).G == 0 && img.GetPixel(x,y).B == 0)
+                    {
+                        int tr, tg, tb;
+                        tr = img.GetPixel(x, y + 1).R;
+                        tg = img.GetPixel(x, y + 1).G;
+                        tb = img.GetPixel(x, y + 1).B;
+
+                        int index = Data.rgbRegions.FindIndex(z => z.r == tr && z.g == tg && z.b == tb);
+
+                        Data.rgbRegions[index].x = x;
+                        Data.rgbRegions[index].y = y;
+                    }
+                       
+
+
+                }
+            
+
         }
 
         public static void ParseDscrStrat(string filepath, ref TextBox txt_Output)
