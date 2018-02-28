@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using CSharpImageLibrary;
 
 namespace Randomiser
 {
@@ -35,7 +36,7 @@ namespace Randomiser
 
                     Data.units[counter].type = trimmed;
 
-                   txt_Output.AppendText(trimmed + "\n");
+                    txt_Output.AppendText(trimmed + "\n");
 
                 }
 
@@ -201,39 +202,41 @@ namespace Randomiser
 
                     foreach (string STRING in splitted)
                     {
-                        if (STRING.Trim() == "sea_faring")
+                        trimmed = STRING.Trim();
+
+                        if (trimmed == "sea_faring")
                             Data.units[counter].attributes |= Attributes.sea_faring;
-                        else if (STRING.Trim() == "hide_forest")
+                        else if (trimmed == "hide_forest")
                             Data.units[counter].attributes |= Attributes.hide_forest;
-                        else if (STRING.Trim() == "hide_improved_forest")
+                        else if (trimmed == "hide_improved_forest")
                             Data.units[counter].attributes |= Attributes.hide_improved_forest;
-                        else if (STRING.Trim() == "hide_long_grass")
+                        else if (trimmed == "hide_long_grass")
                             Data.units[counter].attributes |= Attributes.hide_long_grass;
-                        else if (STRING.Trim() == "hide_anywhere")
+                        else if (trimmed == "hide_anywhere")
                             Data.units[counter].attributes |= Attributes.hide_anywhere;
-                        else if (STRING.Trim() == "can_sap")
+                        else if (trimmed == "can_sap")
                             Data.units[counter].attributes |= Attributes.can_sap;
-                        else if (STRING.Trim() == "frighten_foot")
+                        else if (trimmed == "frighten_foot")
                             Data.units[counter].attributes |= Attributes.frighten_foot;
-                        else if (STRING.Trim() == "frighten_mounted")
+                        else if (trimmed == "frighten_mounted")
                             Data.units[counter].attributes |= Attributes.frighten_mounted;
-                        else if (STRING.Trim() == "can_run_amok")
+                        else if (trimmed == "can_run_amok")
                             Data.units[counter].attributes |= Attributes.can_run_amok;
-                        else if (STRING.Trim() == "general_unit")
+                        else if (trimmed == "general_unit")
                             Data.units[counter].attributes |= Attributes.general_unit;
-                        else if (STRING.Trim() == "general_unit_upgrade")
+                        else if (trimmed == "general_unit_upgrade")
                             Data.units[counter].attributes |= Attributes.general_unit_upgrade;
-                        else if (STRING.Trim() == "cantabrian_circle")
+                        else if (trimmed == "cantabrian_circle")
                             Data.units[counter].attributes |= Attributes.cantabrian_circle;
-                        else if (STRING.Trim() == "no_custom")
+                        else if (trimmed == "no_custom")
                             Data.units[counter].attributes |= Attributes.no_custom;
-                        else if (STRING.Trim() == "command")
+                        else if (trimmed == "command")
                             Data.units[counter].attributes |= Attributes.command;
-                        else if (STRING.Trim() == "mercenary_unit")
+                        else if (trimmed == "mercenary_unit")
                             Data.units[counter].attributes |= Attributes.mercenary_unit;
-                        else if (STRING.Trim() == "druid")
+                        else if (trimmed == "druid")
                             Data.units[counter].attributes |= Attributes.druid;
-                        else if (STRING.Trim() == "warcry")
+                        else if (trimmed == "warcry")
                             Data.units[counter].attributes |= Attributes.warcry;
 
                     }
@@ -778,7 +781,342 @@ namespace Randomiser
 
             txt_Output.AppendText("\n" + Data.units.Count + "Units loaded from EDU");
 
+            edu.Close();
+        }
+
+        public static void ParseEdb(string filepath, ref TextBox txt_Output)
+        {
+
+
+
+        }
+
+        public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
+        {
+            string line;
+
+            StreamReader reg = new StreamReader(filePath);
+
+
+            int counter = -1;
+
+
+            while ((line = reg.ReadLine()) != null)
+            {
+                if (!line.Contains("\t") && !line.Contains(";") && !line.Contains(" ") && line != "")
+                {
+                    counter++;
+                    Data.rgbRegions.Add(new Region());
+                    Data.rgbRegions[counter].name = line.Trim();
+
+
+                }
+
+                else if(line.Split(' ').Count() == 3)
+                {
+                    decimal num;
+
+                    string[] split = line.Split(' ');
+
+                    var result = Decimal.TryParse(split[0].Trim(), out num);
+                    if (result)
+                    {
+                        Data.rgbRegions[counter].r = Convert.ToInt32(split[0].Trim());
+                        Data.rgbRegions[counter].g = Convert.ToInt32(split[1].Trim());
+                        Data.rgbRegions[counter].b = Convert.ToInt32(split[2].Trim());
+                    }
+
+
+                }
+            }
+
+            reg.Close();
+        }
+
+        public static void ParseDscrStrat(string filepath, ref TextBox txt_Output)
+        {
+            string PATH = filepath;
+
+            string line;
+            string notrim;
+
+            StreamReader strat = new StreamReader(PATH);
+
+            //get factions
+            while ((line = strat.ReadLine()) != null)
+            {
+                if (line.StartsWith("settlement"))
+                {
+                    Settlement tempSettlement;
+                    List<string> b_types = new List<string>();
+
+                    string s_level = "", region = "", faction_creator = "";
+
+                    int yearFounded = 0, population = 100;
+
+                    while ((line = strat.ReadLine().TrimEnd()) != "}")
+                    {
+                        if (line.Trim().StartsWith("level"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            s_level = trimmed;
+
+                        }
+
+                        else if (line.Trim().StartsWith("region"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            region = trimmed;
+
+                        }
+
+                        else if (line.Trim().StartsWith("year_founded"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            yearFounded = Convert.ToInt32(trimmed);
+
+                        }
+
+                        else if (line.Trim().StartsWith("population"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            population = Convert.ToInt32(trimmed);
+
+                        }
+
+                        else if (line.Trim().StartsWith("faction_creator"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            faction_creator = trimmed;
+
+                        }
+
+                        else if (line.Trim().StartsWith("type"))
+                        {
+                            string trimmed = Functions.RemoveFirstWord(line);
+                            trimmed = trimmed.Trim();
+
+                            b_types.Add(trimmed);
+
+                        }
+                    }
+
+                    txt_Output.AppendText("\n" + "Added: " + region + "\n");
+                    tempSettlement = new Settlement(s_level, region, faction_creator, b_types, yearFounded, population);
+                    Data.settlements.Add(tempSettlement);
+
+
+                }
+
+                else Data.desc_StratData.Add(line);
+
+
+                /* if (line.StartsWith("region"))
+                 {
+                     string[] split = line.Split(' ', '\t');
+
+                     split[1].Trim();
+                     int rndRegion = Data.rnd.Next(Data.VAN_REGIONS.Count());
+                     split[1] = Data.regions[rndRegion];
+
+                     Data.regions.RemoveAt(rndRegion);
+
+                     line = split[0] + "\t" + split[1];
+                 }
+
+                 else Data.strLine.Add(line.Trim());*/
+
+
+
+
+            }
+
+            strat.Close();
+
+        }
+
+        //coord changes
+        public static void DsCoordGet(string filepath, ref TextBox txt_Output)
+        {
+            string PATH = Data.ModFolderPath + Data.DESCSTRAT;
+
+            string line;
+            string notrim;
+
+            StreamReader strat = new StreamReader(PATH);
+
+            int counter = 0;
+
+            while ((line = strat.ReadLine()) != null)
+            {
+                notrim = line;
+
+                line = line.Trim();
+
+                if (line.StartsWith("landmark"))
+                {
+                    string[] splitLand = line.Split(',', ';');
+
+                    double x = Convert.ToInt32(splitLand[0]);
+                    double y = Convert.ToInt32(splitLand[1]);
+
+                    x = x * 1.328125;
+                    y = y * 1.3290598290598290598290598290598;
+
+                    x = Math.Round(x);
+                    y = Math.Round(y);
+
+                    splitLand[0] = x.ToString();
+                    splitLand[1] = y.ToString();
+
+                    notrim = "";
+
+                    int i = 0;
+
+                    foreach (string str in splitLand)
+                    {
+                        if(i != 2)
+                            notrim += str + ", ";
+
+                        else notrim += str + ";";
+
+                        i++;
+                    }
+                }
+
+                else if (line.StartsWith("resource"))
+                {
+                    string[] splitLand = line.Split(',', ';');
+
+                    double x = Convert.ToInt32(splitLand[1]);
+                    double y = Convert.ToInt32(splitLand[2]);
+
+                    x = x * 1.328125;
+                    y = y * 1.3290598290598290598290598290598;
+
+                    x = Math.Round(x);
+                    y = Math.Round(y);
+
+                    splitLand[1] = x.ToString();
+                    splitLand[2] = y.ToString();
+
+                    notrim = "";
+
+                    int i = 0;
+
+                    foreach (string str in splitLand)
+                    {
+                        if (i != 2)
+                            notrim += str + ", ";
+
+                        else notrim += str + ";";
+
+                        i++;
+                    }
+                }
+
+                else if (line.StartsWith("character"))
+                {
+                    Data.chars.Add(new Character(line));
+
+                    string[] splitted = line.Split(',');
+
+                    string newline = "";
+
+                    foreach (string split in splitted)
+                    {
+                        string part = split.Trim();
+
+                        if (part.StartsWith("x"))
+                        {
+                            string[] NewSplit = part.Split(' ');
+
+                            double x = Convert.ToInt32(NewSplit[1].Trim());
+
+                            txt_Output.AppendText(x.ToString());
+
+                            x = x * 1.328125;
+
+                            x = Math.Round(x);
+
+                            Data.chars[counter].x = (int)x;
+
+                            txt_Output.AppendText(" ->>" + x + "\n");
+
+                            NewSplit[1] = x.ToString();
+
+                            newline += "x " + NewSplit[1] + ",";
+                        }
+
+                        else if (part.StartsWith("y"))
+                        {
+                            string[] NewSplit = part.Split(' ');
+
+                            double y = Convert.ToInt32(NewSplit[1].Trim());
+
+                            txt_Output.AppendText(y.ToString());
+
+                            y = y * 1.3290598290598290598290598290598;
+
+                            y = Math.Round(y);
+
+                            Data.chars[counter].y = (int)y;
+
+                            txt_Output.AppendText(" ->>" + y + "\n");
+
+                            NewSplit[1] = y.ToString();
+
+                            newline += "y " + NewSplit[1];
+                        }
+
+                        else newline += split + ",";
+                    }
+
+                    notrim = newline;
+
+                    counter++;
+                }
+
+                Data.strLine.Add(notrim);
+            }
+
+            strat.Close();
+
+            StreamWriter file = new StreamWriter(File.Open("coords.txt", FileMode.Append))
+            {
+                
+            };
+
+            foreach (Character chr in Data.chars)
+            {
+                file.Write(chr.info + chr.spacer + "x " + chr.x + ", " + "y " + chr.y + "\n"); 
+            }
+
+            file.Close();
+
+            StreamWriter file2 = new StreamWriter(File.Open("testy.txt", FileMode.Append))
+            {
+
+            };
+
+            foreach (string stam in Data.strLine)
+            {
+                file2.Write(stam + "\r\n");
+            }
+
+            file2.Close();
 
         }
     }
+
 }

@@ -266,13 +266,13 @@ namespace Randomiser
 
     }
 
-    public class Mentalality
+    public class Mentality
     {
         public int morale;
         public statmental_discipline discipline;
         public statmental_training training;
 
-        public Mentalality()
+        public Mentality()
         { }
     }
 
@@ -301,7 +301,7 @@ namespace Randomiser
         public StatSecArmour secondaryArmour;
         public int heat; //fatigue suffered by units in hot climate
         public int[] ground; //
-        public Mentalality mental;
+        public Mentality mental;
         public int chargeDistance;
         public int fireDelay;
         public int[] food;
@@ -317,7 +317,7 @@ namespace Randomiser
             secondaryWeapon = new StatWeapons();
             primaryArmour = new StatPriArmour();
             secondaryArmour = new StatSecArmour();
-            mental = new Mentalality();
+            mental = new Mentality();
             officer = new List<string>();
           
             heatlh = new int[2];
@@ -328,4 +328,112 @@ namespace Randomiser
         }
 
     }
+
+
+
+    public class Capability
+    {
+        List<string> recruit;
+        int value;
+        List<string> FactionRecruit;
+
+    }
+
+    public class Building
+    {
+        string buildingName;
+        List<string> levels;
+        List<string> factionsRequired;
+
+
+    }
+
+    public class Character
+    {
+        public string info;
+        public string spacer = "  ->>>>  ";
+        public int x;
+        public int y;
+
+        public Character(string line)
+        {
+            info = line;
+        }
+
+    }
+
+    public class Region
+    {
+        public string name ="";
+        public int r=0, g=0, b=0;
+        public Region(string n, int red, int green, int blue)
+        {
+            name = n;
+            r = red;
+            g = green;
+            b = blue;
+
+        }
+
+        public Region()
+        { }
+
+    }
+
+    public class Settlement
+    {
+        public List<string> b_types = new List<string>();
+
+        string plan_set = "default_set";
+        public string s_level, region, faction_creator;
+
+        int yearFounded, population;
+
+        public Settlement(string level, string reg, string creator, List<string> buildings, int yrFounded, int pop)
+        {
+            s_level = level;
+            region = reg;
+            faction_creator = creator;
+            yearFounded = yrFounded;
+            population = pop;
+            b_types = buildings;
+
+
+        }
+
+        public string outputSettlement()
+        {
+
+            string settlement =
+                "\r\nsettlement" +
+                "\r\n{" +
+                "\r\n\t" + "level " + s_level +
+                "\r\n\t" + "region " + region +
+                "\r\n\t" + "year_founded " + Convert.ToString(yearFounded) +
+                "\r\n\t" + "population " + Convert.ToString(population) +
+                "\r\n\t" + "plan_set " + plan_set +
+                "\r\n\t" + "faction_creator " + faction_creator;
+
+            foreach (string b in b_types)
+            {
+                settlement +=
+                    "\r\n\t" + "building" +
+                    "\r\n\t" + "{" +
+                    "\r\n\t\t" + "type " + b +
+                    "\r\n\t" + "}" +
+                    "\r\n"; 
+            }
+
+            settlement += "\r\n}";
+
+            return settlement;
+
+        }
+
+
+
+    }
+
+    
+
 }

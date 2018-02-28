@@ -33,12 +33,16 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txt_modFolderLoc = new System.Windows.Forms.TextBox();
+            this.btn_selModFolder = new System.Windows.Forms.Button();
             this.txt_Output = new System.Windows.Forms.TextBox();
             this.txt_LoadConfirm = new System.Windows.Forms.TextBox();
             this.butt_LoadData = new System.Windows.Forms.Button();
             this.txt_FolderPath = new System.Windows.Forms.TextBox();
             this.butt_FolderSelect = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txt_Seed = new System.Windows.Forms.TextBox();
+            this.chx_useSeed = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.chk_rndSounds = new System.Windows.Forms.CheckBox();
             this.txt_randomiserOutput = new System.Windows.Forms.TextBox();
@@ -57,17 +61,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cbox_regions = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_outputview = new System.Windows.Forms.TextBox();
             this.cbox_factions = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.txt_toolsOutput = new System.Windows.Forms.TextBox();
+            this.txt_DSmodifVal = new System.Windows.Forms.TextBox();
+            this.butt_coordOutput = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.btn_selModFolder = new System.Windows.Forms.Button();
-            this.txt_modFolderLoc = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -98,6 +107,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -120,6 +130,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Load";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txt_modFolderLoc
+            // 
+            this.txt_modFolderLoc.Location = new System.Drawing.Point(7, 91);
+            this.txt_modFolderLoc.Name = "txt_modFolderLoc";
+            this.txt_modFolderLoc.ReadOnly = true;
+            this.txt_modFolderLoc.Size = new System.Drawing.Size(111, 20);
+            this.txt_modFolderLoc.TabIndex = 6;
+            // 
+            // btn_selModFolder
+            // 
+            this.btn_selModFolder.Location = new System.Drawing.Point(7, 61);
+            this.btn_selModFolder.Name = "btn_selModFolder";
+            this.btn_selModFolder.Size = new System.Drawing.Size(111, 23);
+            this.btn_selModFolder.TabIndex = 5;
+            this.btn_selModFolder.Text = "Select Mod Folder";
+            this.btn_selModFolder.UseVisualStyleBackColor = true;
+            this.btn_selModFolder.Click += new System.EventHandler(this.btn_selModFolder_Click);
             // 
             // txt_Output
             // 
@@ -170,6 +198,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.txt_Seed);
+            this.tabPage2.Controls.Add(this.chx_useSeed);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.chk_rndSounds);
             this.tabPage2.Controls.Add(this.txt_randomiserOutput);
@@ -194,6 +224,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Randomise";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txt_Seed
+            // 
+            this.txt_Seed.Location = new System.Drawing.Point(334, 110);
+            this.txt_Seed.MaxLength = 20;
+            this.txt_Seed.Name = "txt_Seed";
+            this.txt_Seed.ShortcutsEnabled = false;
+            this.txt_Seed.Size = new System.Drawing.Size(100, 20);
+            this.txt_Seed.TabIndex = 18;
+            this.txt_Seed.WordWrap = false;
+            // 
+            // chx_useSeed
+            // 
+            this.chx_useSeed.AutoSize = true;
+            this.chx_useSeed.Location = new System.Drawing.Point(357, 136);
+            this.chx_useSeed.Name = "chx_useSeed";
+            this.chx_useSeed.Size = new System.Drawing.Size(77, 17);
+            this.chx_useSeed.TabIndex = 17;
+            this.chx_useSeed.Text = "Use seed?";
+            this.chx_useSeed.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -399,6 +449,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.cbox_regions);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.txt_outputview);
             this.tabPage3.Controls.Add(this.cbox_factions);
@@ -408,6 +460,44 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "View";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(4, 61);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "Regions";
+            // 
+            // cbox_regions
+            // 
+            this.cbox_regions.FormattingEnabled = true;
+            this.cbox_regions.Items.AddRange(new object[] {
+            "armenia",
+            "britons",
+            "carthage",
+            "dacia",
+            "egypt",
+            "gauls",
+            "germans",
+            "greek_cities",
+            "macedon",
+            "numidia",
+            "parthia",
+            "pontus",
+            "roman",
+            "scythia",
+            "seleucid",
+            "slave",
+            "spain",
+            "thrace"});
+            this.cbox_regions.Location = new System.Drawing.Point(4, 80);
+            this.cbox_regions.Name = "cbox_regions";
+            this.cbox_regions.Size = new System.Drawing.Size(109, 21);
+            this.cbox_regions.Sorted = true;
+            this.cbox_regions.TabIndex = 3;
+            this.cbox_regions.SelectedIndexChanged += new System.EventHandler(this.cbox_regions_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -456,23 +546,44 @@
             this.cbox_factions.TabIndex = 0;
             this.cbox_factions.SelectedIndexChanged += new System.EventHandler(this.cbox_factions_SelectedIndexChanged);
             // 
-            // btn_selModFolder
+            // tabPage4
             // 
-            this.btn_selModFolder.Location = new System.Drawing.Point(7, 61);
-            this.btn_selModFolder.Name = "btn_selModFolder";
-            this.btn_selModFolder.Size = new System.Drawing.Size(111, 23);
-            this.btn_selModFolder.TabIndex = 5;
-            this.btn_selModFolder.Text = "Select Mod Folder";
-            this.btn_selModFolder.UseVisualStyleBackColor = true;
-            this.btn_selModFolder.Click += new System.EventHandler(this.btn_selModFolder_Click);
+            this.tabPage4.Controls.Add(this.txt_toolsOutput);
+            this.tabPage4.Controls.Add(this.txt_DSmodifVal);
+            this.tabPage4.Controls.Add(this.butt_coordOutput);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(440, 280);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Tools";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // txt_modFolderLoc
+            // txt_toolsOutput
             // 
-            this.txt_modFolderLoc.Location = new System.Drawing.Point(7, 91);
-            this.txt_modFolderLoc.Name = "txt_modFolderLoc";
-            this.txt_modFolderLoc.ReadOnly = true;
-            this.txt_modFolderLoc.Size = new System.Drawing.Size(111, 20);
-            this.txt_modFolderLoc.TabIndex = 6;
+            this.txt_toolsOutput.Location = new System.Drawing.Point(277, 196);
+            this.txt_toolsOutput.Multiline = true;
+            this.txt_toolsOutput.Name = "txt_toolsOutput";
+            this.txt_toolsOutput.ReadOnly = true;
+            this.txt_toolsOutput.Size = new System.Drawing.Size(157, 78);
+            this.txt_toolsOutput.TabIndex = 2;
+            // 
+            // txt_DSmodifVal
+            // 
+            this.txt_DSmodifVal.Location = new System.Drawing.Point(108, 17);
+            this.txt_DSmodifVal.Name = "txt_DSmodifVal";
+            this.txt_DSmodifVal.Size = new System.Drawing.Size(100, 20);
+            this.txt_DSmodifVal.TabIndex = 1;
+            // 
+            // butt_coordOutput
+            // 
+            this.butt_coordOutput.Location = new System.Drawing.Point(4, 4);
+            this.butt_coordOutput.Name = "butt_coordOutput";
+            this.butt_coordOutput.Size = new System.Drawing.Size(97, 34);
+            this.butt_coordOutput.TabIndex = 0;
+            this.butt_coordOutput.Text = "Descr_strat coord output";
+            this.butt_coordOutput.UseVisualStyleBackColor = true;
+            this.butt_coordOutput.Click += new System.EventHandler(this.butt_coordOutput_Click);
             // 
             // MainForm1
             // 
@@ -493,6 +604,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -535,6 +648,14 @@
         private System.Windows.Forms.CheckBox chk_rndSounds;
         private System.Windows.Forms.TextBox txt_modFolderLoc;
         private System.Windows.Forms.Button btn_selModFolder;
+        private System.Windows.Forms.TextBox txt_Seed;
+        private System.Windows.Forms.CheckBox chx_useSeed;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TextBox txt_DSmodifVal;
+        private System.Windows.Forms.Button butt_coordOutput;
+        private System.Windows.Forms.TextBox txt_toolsOutput;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbox_regions;
     }
 }
 

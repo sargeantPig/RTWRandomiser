@@ -17,6 +17,7 @@ namespace Randomiser
         {
             InitializeComponent();
 
+
         }
 
         private void butt_FolderSelect_Click(object sender, EventArgs e)
@@ -49,26 +50,86 @@ namespace Randomiser
 
         private void butt_LoadData_Click(object sender, EventArgs e)
         {
-            string completeEduPath = Data.RtwFolderPath + Data.EDUFILEPATH;
-            string completedEdbPath = Data.RtwFolderPath + Data.EDBFILEPATH;
 
+#if DEBUG
+           Data.ModFolderPath = @"G:\Games\Rome Total war testing\RANDOMTESTING";
+            Data.RtwFolderPath = @"G:\Games\Rome Total war testing";
+
+#endif
+
+            string completeEduPath = Data.ModFolderPath + Data.EDUFILEPATH;
+            string completedEdbPath = Data.ModFolderPath + Data.EDBFILEPATH;
+            string completedStratPath = Data.RtwFolderPath + Data.DESCSTRAT;
+
+
+      
             txt_Output.AppendText("Loading files...\r\n");
             
             txt_Output.AppendText("Loading " + completeEduPath + "\r\n");
 
-
             if (File.Exists(completeEduPath))
             {
                 Parsers.ParseEdu(completeEduPath, ref txt_Output);
+            }
 
+            else txt_Output.AppendText("File cannot be found!\r\n");
+
+            if (File.Exists(completedStratPath))
+            {
+                Parsers.ParseDscrStrat(completedStratPath, ref txt_Output);
             }
 
             else txt_Output.AppendText("File cannot be found!\r\n");
 
             Data.EDUFILEPATHMOD = Data.ModFolderPath + Data.EDUFILEPATHMOD;
 
+            // needs changing to work like above
+          
+            //Parsers.ParseDscrStrat(ref txt_Output);
+
+            if (File.Exists(Data.RtwFolderPath + Data.REGIONSFILEPATH))
+            {
+                Parsers.ParseVanRegions(Data.RtwFolderPath + Data.REGIONSFILEPATH, ref txt_Output);
+            }
+
+            List<string> tempRegions = new List<string>();
+
+            foreach(Settlement s in Data.settlements)
+            {
+                tempRegions.Add(s.region);
+            }
+
+            cbox_regions.DataSource = tempRegions;
+            cbox_regions.Refresh();
+
         }
 
+        private void cbox_regions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected = cbox_regions.SelectedItem.ToString();
+
+            txt_outputview.Clear();
+
+            foreach(Settlement s in Data.settlements)
+            {
+                if(s.region == selected)
+                {
+                    txt_outputview.AppendText(
+                       "\n" + "Region: " + s.region + "\r\n" +
+                       "\n" + "Level: " + s.s_level + "\r\n" +
+                       "\n" + "Buildings: " + "\r\n");
+
+                    foreach(string b in s.b_types)
+                    {
+                        txt_outputview.AppendText(
+                            "\n____" + b + "\r\n");
+                    }
+                }
+            }
+
+
+
+        }
         private void cbox_factions_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selected = cbox_factions.SelectedItem.ToString();
@@ -90,78 +151,69 @@ namespace Randomiser
 
         private void but_randomize_Click(object sender, EventArgs e)
         {
-            int OwnershipPerUnit;
-            bool unitSizes, stats, reasonableStats, rndCost, rndSounds;
-
             //if (cbx_ownershipPerUnit.SelectedItem.ToString() != "RANDOM")
             //  OwnershipPerUnit = Convert.ToInt16(cbx_ownershipPerUnit.SelectedItem.ToString());
             //else OwnershipPerUnit = Data.rnd.Next(1, 10);
 
             if (chk_UnitSizes.Checked)
-                unitSizes = true;
-            else unitSizes = false;
+               RandomiseData.unitSizes = true;
+            else RandomiseData.unitSizes = false;
 
             if (chk_rndStats.Checked)
-                stats = true;
-            else stats = false;
+                RandomiseData.stats = true;
+            else RandomiseData.stats = false;
 
             if (chk_costs.Checked)
-                rndCost = true;
-            else rndCost = false;
+                RandomiseData.rndCost = true;
+            else RandomiseData.rndCost = false;
 
             if (chk_statsWithReason.Checked)
-                reasonableStats = true;
-            else reasonableStats = false;
+                RandomiseData.reasonableStats = true;
+            else RandomiseData.reasonableStats = false;
 
             if (chk_rndSounds.Checked)
-                rndSounds = true;
-            else rndSounds = false;
+                RandomiseData.rndSounds = true;
+            else RandomiseData.rndSounds = false;
 
-            SaveEDU();
-            foreach (Unit unit in Data.units)
+            if (chx_useSeed.Checked)
             {
-                if (unitSizes)
-                { //unit size stuff here
-                }
-
-                if (stats)
-                { //stats stuff here (weapon/armour) 
-                }
-
-                if (reasonableStats)
-                {//stats here
-                }
-
-                if (rndSounds)
-                { //sounds here
-
-                }
-
-                if (rndCost)
-                { //costs here 
-
-                }
-
+                Data.Seed = txt_Seed.Text.GetHashCode();
+                Data.rnd = new Random(Data.Seed);
             }
 
 
+            txt_randomiserOutput.AppendText(Data.Seed.ToString() + "\n");
+
+
+            Randomise.RandomiseEdu();
+
+
+
+
+            SaveEDU();
+            SaveDStrat();
+        }
+
+        private void butt_coordOutput_Click(object sender, EventArgs e)
+        {
+            Parsers.DsCoordGet("", ref txt_toolsOutput);
         }
 
         public void SaveEDU()
         {
-            StreamWriter edu = new StreamWriter(Data.EDUFILEPATHMOD);
+            StreamWriter edu = new StreamWriter( Data.ModFolderPath + Data.EDUFILEPATH);
 
             edu.WriteLine(";RANDOMISED\r\n\n");
 
             foreach (Unit unit in Data.units)
             {
                 edu.Write(
-                    "type\t\t\t " + unit.type + "\r\n" +
+                    "type\t\t\t\t " + unit.type + "\r\n" +
                     "dictionary\t\t\t " + unit.dictionary + "\r\n" +
                     "category\t\t\t " + unit.category + "\r\n" +
-                    "class\t\t\t " + unit.unitClass + "\r\n" +
+                    "class\t\t\t\t " + unit.unitClass + "\r\n" +
                     "voice_type\t\t\t " + unit.voiceType + "\r\n" +
-                    "soldier\t\t\t " + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString());
+                    "soldier\t\t\t\t " + unit.soldier.name + ", " + unit.soldier.number.ToString() + ", " + unit.soldier.extras.ToString() + ", " + unit.soldier.collisionMass.ToString());
 
                 //edu.Write("\r\n");
 
@@ -199,7 +251,7 @@ namespace Randomiser
                 }
 
                 if (unit.naval != null)
-                    edu.Write("\r\nship\t\t\t " + unit.naval);
+                    edu.Write("\r\nship\t\t\t\t " + unit.naval);
 
                 edu.Write("\r\nattributes\t\t\t "); // write attributes
 
@@ -524,7 +576,7 @@ namespace Randomiser
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_pri_attr\t\t\t "); //attributes
+                edu.Write("stat_pri_attr\t\t "); //attributes
 
                 bool attrFirst = false;
 
@@ -695,7 +747,7 @@ namespace Randomiser
                 edu.Write("\r\n");
 
                 bool firstsecAttr = false;
-                edu.Write("stat_sec_attr\t\t\t ");
+                edu.Write("stat_sec_attr\t\t ");
                 if (unit.secAttri.HasFlag(stat_pri_attr.ap))
                 {
                     if (!firstsecAttr)
@@ -822,14 +874,14 @@ namespace Randomiser
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_pri_armour\t\t\t ");
+                edu.Write("stat_pri_armour\t\t ");
                 foreach (int numb in unit.primaryArmour.stat_pri_armour)
                     edu.Write(numb + ", ");
                 edu.Write(enumsToStrings.ArmourSndToString(unit.primaryArmour.armour_sound));
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_sec_armour\t\t\t ");
+                edu.Write("stat_sec_armour\t\t ");
                 foreach (int numb in unit.secondaryArmour.stat_sec_armour)
                     edu.Write(numb + ", ");
                 edu.Write(enumsToStrings.ArmourSndToString(unit.secondaryArmour.sec_armour_sound));
@@ -856,16 +908,16 @@ namespace Randomiser
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_mental\t\t\t" + unit.mental.morale + ", ");
+                edu.Write("stat_mental\t\t\t " + unit.mental.morale + ", ");
                 edu.Write(enumsToStrings.DisciplineToString(unit.mental.discipline) + ", " + enumsToStrings.TrainingToString(unit.mental.training));
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_charge_dist\t\t\t " + unit.chargeDistance);
+                edu.Write("stat_charge_dist\t " + unit.chargeDistance);
 
                 edu.Write("\r\n");
 
-                edu.Write("stat_fire_delay\t\t\t " + unit.fireDelay);
+                edu.Write("stat_fire_delay\t\t " + unit.fireDelay);
 
                 edu.Write("\r\n");
 
@@ -1208,11 +1260,42 @@ namespace Randomiser
             
         }
 
+        public void SaveDStrat()
+        {
+
+            StreamWriter strat = new StreamWriter(Data.ModFolderPath + Data.DESCSTRAT);
+
+            strat.WriteLine(";RANDOMISED\r\n\n");
+
+            int factionNo = 0;
+
+            foreach (string s in Data.desc_StratData)
+            {
+                strat.WriteLine(s);
+
+                
+
+                if (s.StartsWith("denari"))
+                {
+                    factionNo++;
+                    for (int i = 0; i < Data.rnd.Next(1, 10); i++)
+                    {
+                        int rndNum = Data.rnd.Next(0, Data.settlements.Count - 1);
+                        strat.WriteLine(Data.settlements[rndNum].outputSettlement());
+                        Data.settlements.RemoveAt(rndNum);
+                    }
+                }
+
+
+            }
+
+            strat.Close();
+        }
+
         public void SaveEDB()
         { 
         
         }
 
-        
     }
 }
