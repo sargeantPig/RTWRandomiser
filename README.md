@@ -1,7 +1,7 @@
 # RTWRandomiser (Rome Total War Randomiser)
 RTWRandomiser aims to randomise all feasible things within the game.
 
-Randomiser Features so far:
+# Randomiser Features so far:
 
   Random start locations for all factions
 
@@ -11,8 +11,10 @@ Randomiser Features so far:
 
   Random amount of men in each unit
 
-Other features:
+# Other features:
+
   view units by faction
+  
   view region and corresponding settlement
 
 
