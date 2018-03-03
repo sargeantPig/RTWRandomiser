@@ -272,4 +272,6 @@ paket-files/
 .idea/
 *.sln.iml
 
-*.vs/
+.vs/
+
+Randomiser/.vs/
