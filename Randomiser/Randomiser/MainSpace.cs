@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Numerics;
 
 namespace Randomiser
 {
@@ -138,7 +139,9 @@ namespace Randomiser
 
             foreach (Unit unit in Data.units)
             {
-                if ((unit.ownership & enumsToStrings.StringToFaction(selected)) == enumsToStrings.StringToFaction(selected))
+                FactionOwnership f = enumsToStrings.StringToFaction(selected);
+
+                if ((unit.ownership & f) !=0)
                 {
                     txt_outputview.AppendText(unit.type + " (" + unit.dictionary + ")\n");
                     amount++;
@@ -153,25 +156,11 @@ namespace Randomiser
             //  OwnershipPerUnit = Convert.ToInt16(cbx_ownershipPerUnit.SelectedItem.ToString());
             //else OwnershipPerUnit = Data.rnd.Next(1, 10);
 
-            if (chk_UnitSizes.Checked)
-               RandomiseData.unitSizes = true;
-            else RandomiseData.unitSizes = false;
-
-            if (chk_rndStats.Checked)
-                RandomiseData.stats = true;
-            else RandomiseData.stats = false;
-
-            if (chk_costs.Checked)
-                RandomiseData.rndCost = true;
-            else RandomiseData.rndCost = false;
-
-            if (chk_statsWithReason.Checked)
-                RandomiseData.reasonableStats = true;
-            else RandomiseData.reasonableStats = false;
-
-            if (chk_rndSounds.Checked)
-                RandomiseData.rndSounds = true;
-            else RandomiseData.rndSounds = false;
+            RandomiseData.unitSizes = chk_UnitSizes.Checked;
+            RandomiseData.stats = chk_rndStats.Checked;
+            RandomiseData.rndCost = chk_costs.Checked;
+            RandomiseData.reasonableStats = chk_statsWithReason.Checked;
+            RandomiseData.rndSounds = chk_rndSounds.Checked;
 
             if (chx_useSeed.Checked)
             {
@@ -184,10 +173,7 @@ namespace Randomiser
 
 
             Randomise.RandomiseEdu();
-
-
-
-
+            //SAVE EDU and then randomise and save DS
             SaveEDU();
             SaveDStrat();
         }
@@ -1260,6 +1246,15 @@ namespace Randomiser
 
         public void SaveDStrat()
         {
+            List<Settlement> tempSettlements = new List<Settlement>(Data.settlements);
+            List<Region> templist = new List<Region>(Data.rgbRegions);
+
+            int charnum = -1;
+            int modifierx = 0;
+            int modifiery = 0;
+            bool useModifier = false;
+            bool isAdmiral = false;
+            bool isDiploOrSpy = false;
 
             StreamWriter strat = new StreamWriter(Data.ModFolderPath + Data.DESCSTRAT);
 
@@ -1267,84 +1262,248 @@ namespace Randomiser
 
             int factionNo = 0;
             List<string> tempsettles = new List<string>();
+            Vector2 capitalCoords = new Vector2();
+            string faction = "";
+
+            List<Vector2> usedCoords = new List<Vector2>();
+
             foreach (string s in Data.desc_StratData)
             {
-                if (s.StartsWith("denari"))
+                if(s.StartsWith("faction"))
                 {
                     strat.WriteLine(s);
+
+                    string[] split = s.Split(',');
+
+                    string[] splitAgain = split[0].Split('\t');
+
+                    faction = splitAgain[1].Trim();
+
+                }
+
+
+                else if (s.StartsWith("denari")) 
+                {
+                    //implement distance based check for closest city
+
+                    strat.WriteLine(s);
                     tempsettles.Clear();
+
                     factionNo++;
-                    int rndNum = Data.rnd.Next(0, Data.settlements.Count - 1);
-                    for (int i = 0; i < Data.rnd.Next(1, 5); i++)
+
+                    Vector2 cityLocation;
+                    List<Settlement> settlementsToAdd = new List<Settlement>();
+                  
+                    int rndNum = Data.rnd.Next(0, tempSettlements.Count - 1);
+
+
+                    //capital get location etc
+                    string region = tempSettlements[rndNum].region;
+                    strat.WriteLine(tempSettlements[rndNum].outputSettlement()); //writeline
+                    int index = templist.FindIndex(x => x.name == region); //get city coords
+                    cityLocation = new Vector2(templist[index].x, templist[index].y);
+                    tempsettles.Add(tempSettlements[rndNum].region);
+
+                    capitalCoords.X = cityLocation.X;
+                    capitalCoords.Y = cityLocation.Y;
+
+                    templist.RemoveAt(index);
+                    tempSettlements.Remove(tempSettlements[rndNum]);
+                    //get other locations which are closest to the capital
+                    int rndAmount = Data.rnd.Next(1, 5);
+                    for (int i = 0; i < rndAmount; i++)
                     {
-                        
-                        if (rndNum - i < 0)
-                        {
-                            strat.WriteLine(Data.settlements[rndNum + i].outputSettlement());
-                            tempsettles.Add(Data.settlements[rndNum + i].region);
-                            Data.settlements.RemoveAt(rndNum + i);
-                        }
-
-                        else if (rndNum + i >= Data.settlements.Count())
-                        {
-                            strat.WriteLine(Data.settlements[rndNum - i].outputSettlement());
-                            tempsettles.Add(Data.settlements[rndNum - i].region);
-                            Data.settlements.RemoveAt(rndNum - i);
-                        }
-
-                        else
-                        {
-                            strat.WriteLine(Data.settlements[rndNum + i].outputSettlement());
-                            tempsettles.Add(Data.settlements[rndNum + i].region);
-                            Data.settlements.RemoveAt(rndNum + i);
-                        }
-
+                        double tempDistance = 10000;
+                        string tempRegion = "";
                        
+                        Region toRemove = new Region();
+
+                        foreach (Settlement city in tempSettlements)
+                        {
+
+                            int rindex = templist.FindIndex(x => x.name == city.region);
+                            Region r = templist[rindex];
+                            
+
+                            double dis = Math.Sqrt(Math.Pow((cityLocation.X - r.x), 2) + Math.Pow((cityLocation.Y - r.y), 2));
+
+                            if (dis < tempDistance && dis > 0)
+                            {
+                                tempDistance = dis;
+                                tempRegion = r.name;
+                                toRemove = r;
+                            }
+                        }
+
+                        int setIndex = tempSettlements.FindIndex(x => tempRegion == x.region);
+                        settlementsToAdd.Add(tempSettlements[setIndex]);
+                        tempSettlements.Remove(tempSettlements[setIndex]);
+                        templist.Remove(toRemove);
+                        tempDistance = 1000000;
                     }
+
+                    //writeout the settlements
+                    foreach (Settlement city in settlementsToAdd)
+                    {
+                        strat.WriteLine(city.outputSettlement());
+                        tempsettles.Add(city.region);
+                    }
+                    
                 }
 
                 else if (s.StartsWith("character") && !s.StartsWith("character_record"))
                 {
                     string[] splitted = s.Split(',');
 
+                    if (splitted[1].Trim().StartsWith("diplomat") || splitted[1].Trim().StartsWith("spy"))
+                    {
+                        isDiploOrSpy = true;
+                        useModifier = true;
+                        isAdmiral = false;
+                    }
+
+                    else if (splitted[1].Trim().StartsWith("admiral"))
+                    {
+                        isAdmiral = true;
+                        useModifier = true;
+                        isDiploOrSpy = false;
+                        
+                    }
+
+                    else
+                    {
+                        isAdmiral = false;
+                        isDiploOrSpy = false;
+                        useModifier = false;
+                        charnum++;
+                    }
+
+
                     foreach (string s2 in splitted)
                     {
-
-                        if (s2.Trim().StartsWith("admiral"))
+                        if (charnum > tempsettles.Count() - 1)
                         {
-                            break;
+                            charnum = 0;    
                         }
-
-                        int rnd2 = Data.rnd.Next(0, tempsettles.Count() - 1);
-                        int rnd3 = Data.rnd.Next(0, 0);
 
                         if (s2.Trim().StartsWith("x"))
                         {
                             string[] splitAgain = s2.Split(' ');
-
-                            int index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[0]);
-                            splitAgain[1] = Convert.ToString(Data.rgbRegions[index].x);
+                            int index = 0;
+                            if (charnum < tempsettles.Count())
+                               index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[charnum]);
+                            if (!useModifier)
+                                splitAgain[1] = Convert.ToString(Data.rgbRegions[index].x);
+                            else splitAgain[1] = Convert.ToString(modifierx);
 
                             splitted[splitted.Count() - 2] = "x" + " " + splitAgain[1];
+
+
                         }
 
                         if (s2.Trim().StartsWith("y"))
                         {
                             string[] splitAgain = s2.Split(' ');
-
-                            int index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[0]);
-                            splitAgain[1] = Convert.ToString(Data.rgbRegions[index].y);
+                            int index = 0;
+                            if (charnum < tempsettles.Count())
+                               index = Data.rgbRegions.FindIndex(x => x.name == tempsettles[charnum]);
+                            if (!useModifier)
+                                splitAgain[1] = Convert.ToString(Data.rgbRegions[index].y);
+                            else splitAgain[1] = Convert.ToString(modifiery);
 
                             splitted[splitted.Count() - 1] = "y" + " " + splitAgain[1];
                         }
 
                     }
-                        foreach (string s3 in splitted)
+
+                    Vector2 a = new Vector2();
+                    double waterDis = 0;
+                    double disMax = 100000;
+
+                    if (isAdmiral)
+                    {
+                        for (int x = 0; x < 255; x++)
+                            for (int y = 0; y < 156; y++)
+                            {
+                                if (Data.regionWater[x, y])
+                                {
+                                    Vector2 coords = Functions.getCoordsFromRegion(tempsettles, 0);
+
+                                    waterDis = Functions.DistanceTo(coords, new Vector2(x, y));
+                                    
+                                    if (waterDis < disMax && waterDis > 3)
+                                    {
+                                        disMax = waterDis;
+                                        a = new Vector2(x, y) ;
+
+                                    }
+                                }
+                            }
+                    }
+
+                    foreach (string s3 in splitted)
+                     {
+
+                        if (isAdmiral)
                         {
-                            if (!s3.Trim().StartsWith("y"))
-                                strat.Write(s3 + ", ");
-                            else strat.Write(s3 + "\r\n");
+                            if (s3.Trim().StartsWith("x"))
+                            {
+                                string[] split = s3.Split(' ');
+                                
+                                split[1] = Convert.ToString(a.X);
+
+                                string newStr = split[0] + " " + split[1];
+                                strat.Write(newStr + ", ");
+                            }
+
+                            else if (s3.Trim().StartsWith("y"))
+                            {
+                                string[] split = s3.Split(' ');
+                                split[1] = Convert.ToString(a.Y);
+                                string newStr = split[0] + " " + split[1];
+                                strat.Write(newStr + "\r\n");
+                            }
+
+                            else strat.Write(s3 + ", ");
                         }
+
+                        else if (isDiploOrSpy)
+                        {
+                            if (s3.Trim().StartsWith("x"))
+                            {
+                                string[] split = s3.Split(' ');
+
+                                a = Functions.getCoordsFromRegion(tempsettles, 0);
+                                split[1] = Convert.ToString(a.X);
+
+                                string newStr = split[0] + " " + split[1];
+                                strat.Write(newStr + ", ");
+                            }
+
+                            else if (s3.Trim().StartsWith("y"))
+                            {
+                                string[] split = s3.Split(' ');
+                                split[1] = Convert.ToString(a.Y);
+                                string newStr = split[0] + " " + split[1];
+                                strat.Write(newStr + "\r\n");
+                            }
+
+                            else strat.Write(s3 + ", ");
+                        }
+
+                        else if (!s3.Trim().StartsWith("y"))
+                            strat.Write(s3 + ", ");
+                        else strat.Write(s3 + "\r\n");
+                    }
+
+                    usedCoords.Add(new Vector2(a.X, a.Y));
+                }
+
+                else if (s.StartsWith("relative"))
+                {
+                    charnum = -1;
+                    useModifier = false;
+                    strat.WriteLine(s);
                 }
 
                 else strat.WriteLine(s);

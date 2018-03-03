@@ -793,6 +793,9 @@ namespace Randomiser
 
         public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
         {
+
+            //add an output for this in the tool section
+
             string line;
 
             StreamReader reg = new StreamReader(filePath);
@@ -838,7 +841,7 @@ namespace Randomiser
             for (int x = 0; x < img.Width; x++)
                 for(int y =0; y < img.Height; y++)
                 {
-                    if (img.GetPixel(x, y).R == 0 && img.GetPixel(x, y).G == 0 && img.GetPixel(x,y).B == 0)
+                    if (img.GetPixel(x, y).R == 0 && img.GetPixel(x, y).G == 0 && img.GetPixel(x, y).B == 0)
                     {
                         int tr, tg, tb;
                         tr = img.GetPixel(x, y + 1).R;
@@ -849,9 +852,16 @@ namespace Randomiser
 
                         Data.rgbRegions[index].x = x;
                         Data.rgbRegions[index].y = y;
-                    }
-                       
 
+                        Data.regionWater[x, y] = false;
+                    }
+
+                    else if (img.GetPixel(x, y).R == 41 && img.GetPixel(x, y).G == 140 && img.GetPixel(x, y).B == 233)
+                    {
+                        Data.regionWater[x, y] = true;
+                    }
+
+                    else Data.regionWater[x, y] = false;
 
                 }
             

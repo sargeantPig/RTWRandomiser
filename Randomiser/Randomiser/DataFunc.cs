@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Randomiser
 {
@@ -20,6 +21,7 @@ namespace Randomiser
         public static List<string> regions = new List<string>();
         public static List<Settlement> settlements = new List<Settlement>();
         public static List<Region> rgbRegions = new List<Region>();
+        public static bool[,] regionWater = new bool[255, 156];
 
         public static string RtwFolderPath = "";
         public static string ModFolderPath = "";
@@ -30,6 +32,7 @@ namespace Randomiser
         public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
         public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
         public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.bmp";
+        public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
 
     }
 
@@ -59,6 +62,22 @@ namespace Randomiser
             }
 
             return newString;
+        }
+
+        public static double DistanceTo(Vector2 a, Vector2 b)
+        {
+            double dis = Math.Sqrt(Math.Pow((a.X - b.X), 2) + Math.Pow((a.Y - b.Y), 2));
+
+            return dis;
+        }
+
+        public static Vector2 getCoordsFromRegion(List<string> regions, int i)
+        {
+            string region = regions[i];
+            int index = Data.rgbRegions.FindIndex(x => x.name == region); //get city coords
+            Vector2 coords = new Vector2(Data.rgbRegions[index].x, Data.rgbRegions[index].y);
+
+            return coords;
         }
     }
 }

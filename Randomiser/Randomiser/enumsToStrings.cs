@@ -15,98 +15,95 @@ namespace Randomiser
             switch (str)
             {
                 case "roman":
-                    faction = FactionOwnership.roman;
+                    faction = FactionOwnership.roman | FactionOwnership.romans_brutii | FactionOwnership.romans_julii | FactionOwnership.romans_scipii | FactionOwnership.romans_senate;
                     break;
 
                 case "romans_julii":
-                    faction = FactionOwnership.romans_julii;
+                    faction = FactionOwnership.romans_julii | FactionOwnership.roman;
                     break;
 
                 case "romans_brutii":
-                    faction = FactionOwnership.romans_brutii;
+                    faction = FactionOwnership.romans_brutii | FactionOwnership.roman;
                     break;
 
                 case "romans_scipii":
-                    faction = FactionOwnership.romans_scipii;
+                    faction = FactionOwnership.romans_scipii | FactionOwnership.roman;
                     break;
                 case "egypt":
-                    faction = FactionOwnership.egypt;
+                    faction = FactionOwnership.egypt | FactionOwnership.egyptian;
                     break;
                 case "seleucid":
-                    faction = FactionOwnership.seleucid;
+                    faction = FactionOwnership.seleucid | FactionOwnership.greek;
                     break;
                 case "carthage":
-                    faction = FactionOwnership.carthage;
+                    faction = FactionOwnership.carthage | FactionOwnership.carthaginian;
                     break;
                 case "parthia":
-                    faction = FactionOwnership.parthia;
+                    faction = FactionOwnership.parthia | FactionOwnership.eastern;
                     break;
                 case "gauls":
-                    faction = FactionOwnership.gauls;
+                    faction = FactionOwnership.gauls | FactionOwnership.barbarian;
                     break;
                 case "germans":
-                    faction = FactionOwnership.germans;
+                    faction = FactionOwnership.germans | FactionOwnership.barbarian;
                     break;
                 case "britons":
-                    faction = FactionOwnership.britons;
+                    faction = FactionOwnership.britons | FactionOwnership.barbarian;
                     break;
                 case "greek_cities":
-                    faction = FactionOwnership.greek_cities;
+                    faction = FactionOwnership.greek_cities | FactionOwnership.greek;
                     break;
                 case "romans_senate":
-                    faction = FactionOwnership.romans_senate;
+                    faction = FactionOwnership.romans_senate | FactionOwnership.roman;
                     break;
                 case "macedon":
-                    faction = FactionOwnership.macedon;
+                    faction = FactionOwnership.macedon | FactionOwnership.greek;
                     break;
                 case "pontus":
-                    faction = FactionOwnership.pontus;
+                    faction = FactionOwnership.pontus | FactionOwnership.eastern;
                     break;
                 case "armenia":
-                    faction = FactionOwnership.armenia;
+                    faction = FactionOwnership.armenia | FactionOwnership.eastern;
                     break;
                 case "dacia":
-                    faction = FactionOwnership.dacia;
+                    faction = FactionOwnership.dacia | FactionOwnership.barbarian;
                     break;
                 case "numidia":
-                    faction = FactionOwnership.numidia;
+                    faction = FactionOwnership.numidia | FactionOwnership.carthaginian;
                     break;
                 case "scythia":
-                    faction = FactionOwnership.scythia;
+                    faction = FactionOwnership.scythia | FactionOwnership.barbarian;
                     break;
                 case "spain":
-                    faction = FactionOwnership.spain;
+                    faction = FactionOwnership.spain | FactionOwnership.barbarian;
                     break;
                 case "thrace":
-                    faction = FactionOwnership.thrace;
+                    faction = FactionOwnership.thrace | FactionOwnership.greek;
                     break;
                 case "slave":
-                    faction = FactionOwnership.slave;
+                    faction = FactionOwnership.slave | FactionOwnership.roman;
                     break;
                 case "carthaginian":
-                    faction = FactionOwnership.carthaginian;
+                    faction = FactionOwnership.carthaginian | FactionOwnership.carthage | FactionOwnership.numidia;
                     break;
                 case "numidian":
-                    faction = FactionOwnership.numidian;
+                    faction = FactionOwnership.numidian | FactionOwnership.carthaginian;
                     break;
                 case "barbarian":
-                    faction = FactionOwnership.barbarian;
+                    faction = FactionOwnership.barbarian | FactionOwnership.britons | FactionOwnership.dacia | FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.scythia | FactionOwnership.spain;
                     break;
                 case "egyptian":
-                    faction = FactionOwnership.egyptian;
+                    faction = FactionOwnership.egyptian | FactionOwnership.egypt;
                     break;
                 case "greek":
-                    faction = FactionOwnership.greek;
+                    faction = FactionOwnership.greek | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.seleucid | FactionOwnership.thrace;
                     break;
                 case "parthian":
                     faction = FactionOwnership.parthian;
                     break;
                 case "eastern":
-                    faction = FactionOwnership.eastern;
+                    faction = FactionOwnership.eastern | FactionOwnership.armenia | FactionOwnership.parthia | FactionOwnership.pontus;
                     break;
-
-
-
             }
 
 

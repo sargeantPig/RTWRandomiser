@@ -46,9 +46,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.chk_rndSounds = new System.Windows.Forms.CheckBox();
             this.txt_randomiserOutput = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbx_UnitsPerFaction = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.chk_costs = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.but_randomize = new System.Windows.Forms.Button();
@@ -57,9 +54,7 @@
             this.chk_statsWithReason = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.chk_rndStats = new System.Windows.Forms.CheckBox();
-            this.cbx_ownershipPerUnit = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.cbox_regions = new System.Windows.Forms.ComboBox();
@@ -203,9 +198,6 @@
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.chk_rndSounds);
             this.tabPage2.Controls.Add(this.txt_randomiserOutput);
-            this.tabPage2.Controls.Add(this.label8);
-            this.tabPage2.Controls.Add(this.cbx_UnitsPerFaction);
-            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.chk_costs);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.but_randomize);
@@ -214,9 +206,7 @@
             this.tabPage2.Controls.Add(this.chk_statsWithReason);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.chk_rndStats);
-            this.tabPage2.Controls.Add(this.cbx_ownershipPerUnit);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -271,65 +261,6 @@
             this.txt_randomiserOutput.ReadOnly = true;
             this.txt_randomiserOutput.Size = new System.Drawing.Size(295, 115);
             this.txt_randomiserOutput.TabIndex = 14;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.DarkRed;
-            this.label8.Location = new System.Drawing.Point(140, 95);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "EXPERIMENTAL";
-            // 
-            // cbx_UnitsPerFaction
-            // 
-            this.cbx_UnitsPerFaction.FormattingEnabled = true;
-            this.cbx_UnitsPerFaction.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "RANDOM"});
-            this.cbx_UnitsPerFaction.Location = new System.Drawing.Point(13, 92);
-            this.cbx_UnitsPerFaction.Name = "cbx_UnitsPerFaction";
-            this.cbx_UnitsPerFaction.Size = new System.Drawing.Size(121, 21);
-            this.cbx_UnitsPerFaction.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Units per faction";
             // 
             // chk_costs
             // 
@@ -404,31 +335,6 @@
             this.chk_rndStats.TabIndex = 3;
             this.chk_rndStats.UseVisualStyleBackColor = true;
             // 
-            // cbx_ownershipPerUnit
-            // 
-            this.cbx_ownershipPerUnit.FormattingEnabled = true;
-            this.cbx_ownershipPerUnit.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "RANDOM"});
-            this.cbx_ownershipPerUnit.Location = new System.Drawing.Point(10, 24);
-            this.cbx_ownershipPerUnit.Name = "cbx_ownershipPerUnit";
-            this.cbx_ownershipPerUnit.Size = new System.Drawing.Size(92, 21);
-            this.cbx_ownershipPerUnit.TabIndex = 2;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -437,15 +343,6 @@
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Random Stats?";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Ownership per unit";
             // 
             // tabPage3
             // 
@@ -628,9 +525,6 @@
         private System.Windows.Forms.TextBox txt_Output;
         private System.Windows.Forms.TextBox txt_outputview;
         private System.Windows.Forms.ComboBox cbox_factions;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbx_UnitsPerFaction;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chk_costs;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button but_randomize;
@@ -639,9 +533,7 @@
         private System.Windows.Forms.CheckBox chk_statsWithReason;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chk_rndStats;
-        private System.Windows.Forms.ComboBox cbx_ownershipPerUnit;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_randomiserOutput;
         private System.Windows.Forms.Label label9;
