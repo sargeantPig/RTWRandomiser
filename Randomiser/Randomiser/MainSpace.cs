@@ -105,6 +105,9 @@ namespace Randomiser
 
         private void cbox_regions_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ViewTabData.viewVan = !chk_viewRandomised.Checked;
+            ViewTabData.viewModded = !chk_viewVanilla.Checked;
+
             string selected = cbox_regions.SelectedItem.ToString();
 
             txt_outputview.Clear();
@@ -131,6 +134,10 @@ namespace Randomiser
         }
         private void cbox_factions_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            ViewTabData.viewVan = !chk_viewRandomised.Checked;
+            ViewTabData.viewModded = !chk_viewVanilla.Checked;
+
             string selected = cbox_factions.SelectedItem.ToString();
 
             txt_outputview.Clear();

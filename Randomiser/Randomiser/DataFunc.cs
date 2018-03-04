@@ -43,6 +43,12 @@ namespace Randomiser
 
     }
 
+    public static class ViewTabData
+    {
+        public static bool viewVan;
+        public static bool viewModded;
+    }
+
     public static class Functions
     {
         public static string RemoveFirstWord(string String)

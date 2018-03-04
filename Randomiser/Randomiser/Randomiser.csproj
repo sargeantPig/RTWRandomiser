@@ -71,6 +71,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Randomise.cs" />
+    <Compile Include="ViewTab.cs" />
     <EmbeddedResource Include="MainSpace.resx">
       <DependentUpon>MainSpace.cs</DependentUpon>
     </EmbeddedResource>
