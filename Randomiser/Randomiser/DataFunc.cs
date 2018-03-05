@@ -38,8 +38,13 @@ namespace Randomiser
 
     public static class RandomiseData
     {
-       public static int OwnershipPerUnit;
-       public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds;
+        public static int OwnershipPerUnit, maxCities;
+        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury;
+        public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
+        public static string[] AIEconomy = {"comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
+
+
+
 
     }
 

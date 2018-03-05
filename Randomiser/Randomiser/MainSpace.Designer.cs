@@ -36,7 +36,6 @@
             this.txt_modFolderLoc = new System.Windows.Forms.TextBox();
             this.btn_selModFolder = new System.Windows.Forms.Button();
             this.txt_Output = new System.Windows.Forms.TextBox();
-            this.txt_LoadConfirm = new System.Windows.Forms.TextBox();
             this.butt_LoadData = new System.Windows.Forms.Button();
             this.txt_FolderPath = new System.Windows.Forms.TextBox();
             this.butt_FolderSelect = new System.Windows.Forms.Button();
@@ -51,11 +50,11 @@
             this.but_randomize = new System.Windows.Forms.Button();
             this.chk_UnitSizes = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.chk_statsWithReason = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.chk_rndStats = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.chk_viewRandomised = new System.Windows.Forms.CheckBox();
+            this.chk_viewVanilla = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.cbox_regions = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -64,14 +63,23 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.txt_toolsOutput = new System.Windows.Forms.TextBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.chk_viewVanilla = new System.Windows.Forms.CheckBox();
-            this.chk_viewRandomised = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.chk_treasury = new System.Windows.Forms.CheckBox();
+            this.chk_ai = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numupdown_nocities = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_nocities)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -114,7 +122,6 @@
             this.tabPage1.Controls.Add(this.txt_modFolderLoc);
             this.tabPage1.Controls.Add(this.btn_selModFolder);
             this.tabPage1.Controls.Add(this.txt_Output);
-            this.tabPage1.Controls.Add(this.txt_LoadConfirm);
             this.tabPage1.Controls.Add(this.butt_LoadData);
             this.tabPage1.Controls.Add(this.txt_FolderPath);
             this.tabPage1.Controls.Add(this.butt_FolderSelect);
@@ -153,18 +160,9 @@
             this.txt_Output.Size = new System.Drawing.Size(306, 268);
             this.txt_Output.TabIndex = 4;
             // 
-            // txt_LoadConfirm
-            // 
-            this.txt_LoadConfirm.Location = new System.Drawing.Point(6, 228);
-            this.txt_LoadConfirm.Name = "txt_LoadConfirm";
-            this.txt_LoadConfirm.ReadOnly = true;
-            this.txt_LoadConfirm.Size = new System.Drawing.Size(111, 20);
-            this.txt_LoadConfirm.TabIndex = 3;
-            this.txt_LoadConfirm.Text = "Unloaded";
-            // 
             // butt_LoadData
             // 
-            this.butt_LoadData.Location = new System.Drawing.Point(7, 199);
+            this.butt_LoadData.Location = new System.Drawing.Point(7, 251);
             this.butt_LoadData.Name = "butt_LoadData";
             this.butt_LoadData.Size = new System.Drawing.Size(111, 23);
             this.butt_LoadData.TabIndex = 2;
@@ -193,20 +191,12 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.txt_Seed);
             this.tabPage2.Controls.Add(this.chx_useSeed);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.chk_rndSounds);
             this.tabPage2.Controls.Add(this.txt_randomiserOutput);
-            this.tabPage2.Controls.Add(this.chk_costs);
-            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.but_randomize);
-            this.tabPage2.Controls.Add(this.chk_UnitSizes);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.chk_statsWithReason);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.chk_rndStats);
-            this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -217,18 +207,19 @@
             // 
             // txt_Seed
             // 
-            this.txt_Seed.Location = new System.Drawing.Point(334, 110);
+            this.txt_Seed.Location = new System.Drawing.Point(7, 197);
             this.txt_Seed.MaxLength = 20;
             this.txt_Seed.Name = "txt_Seed";
             this.txt_Seed.ShortcutsEnabled = false;
-            this.txt_Seed.Size = new System.Drawing.Size(100, 20);
+            this.txt_Seed.Size = new System.Drawing.Size(140, 20);
             this.txt_Seed.TabIndex = 18;
+            this.txt_Seed.Text = "Enter Seed";
             this.txt_Seed.WordWrap = false;
             // 
             // chx_useSeed
             // 
             this.chx_useSeed.AutoSize = true;
-            this.chx_useSeed.Location = new System.Drawing.Point(357, 136);
+            this.chx_useSeed.Location = new System.Drawing.Point(7, 174);
             this.chx_useSeed.Name = "chx_useSeed";
             this.chx_useSeed.Size = new System.Drawing.Size(77, 17);
             this.chx_useSeed.TabIndex = 17;
@@ -238,7 +229,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(286, 55);
+            this.label9.Location = new System.Drawing.Point(6, 93);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(114, 13);
             this.label9.TabIndex = 16;
@@ -247,7 +238,7 @@
             // chk_rndSounds
             // 
             this.chk_rndSounds.AutoSize = true;
-            this.chk_rndSounds.Location = new System.Drawing.Point(401, 54);
+            this.chk_rndSounds.Location = new System.Drawing.Point(125, 92);
             this.chk_rndSounds.Name = "chk_rndSounds";
             this.chk_rndSounds.Size = new System.Drawing.Size(15, 14);
             this.chk_rndSounds.TabIndex = 15;
@@ -255,17 +246,17 @@
             // 
             // txt_randomiserOutput
             // 
-            this.txt_randomiserOutput.Location = new System.Drawing.Point(139, 159);
+            this.txt_randomiserOutput.Location = new System.Drawing.Point(162, 159);
             this.txt_randomiserOutput.Multiline = true;
             this.txt_randomiserOutput.Name = "txt_randomiserOutput";
             this.txt_randomiserOutput.ReadOnly = true;
-            this.txt_randomiserOutput.Size = new System.Drawing.Size(295, 115);
+            this.txt_randomiserOutput.Size = new System.Drawing.Size(272, 115);
             this.txt_randomiserOutput.TabIndex = 14;
             // 
             // chk_costs
             // 
             this.chk_costs.AutoSize = true;
-            this.chk_costs.Location = new System.Drawing.Point(227, 32);
+            this.chk_costs.Location = new System.Drawing.Point(125, 46);
             this.chk_costs.Name = "chk_costs";
             this.chk_costs.Size = new System.Drawing.Size(15, 14);
             this.chk_costs.TabIndex = 10;
@@ -274,7 +265,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(118, 32);
+            this.label6.Location = new System.Drawing.Point(6, 46);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(82, 13);
             this.label6.TabIndex = 9;
@@ -284,7 +275,7 @@
             // 
             this.but_randomize.Location = new System.Drawing.Point(7, 223);
             this.but_randomize.Name = "but_randomize";
-            this.but_randomize.Size = new System.Drawing.Size(126, 51);
+            this.but_randomize.Size = new System.Drawing.Size(140, 51);
             this.but_randomize.TabIndex = 8;
             this.but_randomize.Text = "Randomize";
             this.but_randomize.UseVisualStyleBackColor = true;
@@ -293,7 +284,7 @@
             // chk_UnitSizes
             // 
             this.chk_UnitSizes.AutoSize = true;
-            this.chk_UnitSizes.Location = new System.Drawing.Point(227, 8);
+            this.chk_UnitSizes.Location = new System.Drawing.Point(125, 23);
             this.chk_UnitSizes.Name = "chk_UnitSizes";
             this.chk_UnitSizes.Size = new System.Drawing.Size(15, 14);
             this.chk_UnitSizes.TabIndex = 7;
@@ -302,34 +293,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(118, 8);
+            this.label5.Location = new System.Drawing.Point(6, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Random Unit Sizes?";
             // 
-            // chk_statsWithReason
-            // 
-            this.chk_statsWithReason.AutoSize = true;
-            this.chk_statsWithReason.Location = new System.Drawing.Point(401, 33);
-            this.chk_statsWithReason.Name = "chk_statsWithReason";
-            this.chk_statsWithReason.Size = new System.Drawing.Size(15, 14);
-            this.chk_statsWithReason.TabIndex = 5;
-            this.chk_statsWithReason.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(286, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Stats within reason?";
-            // 
             // chk_rndStats
             // 
             this.chk_rndStats.AutoSize = true;
-            this.chk_rndStats.Location = new System.Drawing.Point(401, 7);
+            this.chk_rndStats.Location = new System.Drawing.Point(125, 70);
             this.chk_rndStats.Name = "chk_rndStats";
             this.chk_rndStats.Size = new System.Drawing.Size(15, 14);
             this.chk_rndStats.TabIndex = 3;
@@ -338,7 +311,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(286, 9);
+            this.label3.Location = new System.Drawing.Point(6, 70);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 1;
@@ -359,6 +332,26 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "View";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // chk_viewRandomised
+            // 
+            this.chk_viewRandomised.AutoSize = true;
+            this.chk_viewRandomised.Location = new System.Drawing.Point(7, 236);
+            this.chk_viewRandomised.Name = "chk_viewRandomised";
+            this.chk_viewRandomised.Size = new System.Drawing.Size(85, 17);
+            this.chk_viewRandomised.TabIndex = 6;
+            this.chk_viewRandomised.Text = "Randomised";
+            this.chk_viewRandomised.UseVisualStyleBackColor = true;
+            // 
+            // chk_viewVanilla
+            // 
+            this.chk_viewVanilla.AutoSize = true;
+            this.chk_viewVanilla.Location = new System.Drawing.Point(7, 259);
+            this.chk_viewVanilla.Name = "chk_viewVanilla";
+            this.chk_viewVanilla.Size = new System.Drawing.Size(57, 17);
+            this.chk_viewVanilla.TabIndex = 5;
+            this.chk_viewVanilla.Text = "Vanilla";
+            this.chk_viewVanilla.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -465,25 +458,104 @@
             this.txt_toolsOutput.Size = new System.Drawing.Size(157, 78);
             this.txt_toolsOutput.TabIndex = 2;
             // 
-            // chk_viewVanilla
+            // groupBox1
             // 
-            this.chk_viewVanilla.AutoSize = true;
-            this.chk_viewVanilla.Location = new System.Drawing.Point(7, 259);
-            this.chk_viewVanilla.Name = "chk_viewVanilla";
-            this.chk_viewVanilla.Size = new System.Drawing.Size(57, 17);
-            this.chk_viewVanilla.TabIndex = 5;
-            this.chk_viewVanilla.Text = "Vanilla";
-            this.chk_viewVanilla.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.chk_UnitSizes);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.chk_rndSounds);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.chk_rndStats);
+            this.groupBox1.Controls.Add(this.chk_costs);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(7, 9);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(149, 144);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Units";
             // 
-            // chk_viewRandomised
+            // groupBox2
             // 
-            this.chk_viewRandomised.AutoSize = true;
-            this.chk_viewRandomised.Location = new System.Drawing.Point(7, 236);
-            this.chk_viewRandomised.Name = "chk_viewRandomised";
-            this.chk_viewRandomised.Size = new System.Drawing.Size(85, 17);
-            this.chk_viewRandomised.TabIndex = 6;
-            this.chk_viewRandomised.Text = "Randomised";
-            this.chk_viewRandomised.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.numupdown_nocities);
+            this.groupBox2.Controls.Add(this.chk_ai);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.chk_treasury);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(163, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(271, 144);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Factions";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Random Start Treasury?";
+            // 
+            // chk_treasury
+            // 
+            this.chk_treasury.AutoSize = true;
+            this.chk_treasury.Location = new System.Drawing.Point(136, 23);
+            this.chk_treasury.Name = "chk_treasury";
+            this.chk_treasury.Size = new System.Drawing.Size(15, 14);
+            this.chk_treasury.TabIndex = 1;
+            this.chk_treasury.UseVisualStyleBackColor = true;
+            // 
+            // chk_ai
+            // 
+            this.chk_ai.AutoSize = true;
+            this.chk_ai.Location = new System.Drawing.Point(135, 46);
+            this.chk_ai.Name = "chk_ai";
+            this.chk_ai.Size = new System.Drawing.Size(15, 14);
+            this.chk_ai.TabIndex = 3;
+            this.chk_ai.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 46);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Random AI?";
+            // 
+            // numupdown_nocities
+            // 
+            this.numupdown_nocities.Location = new System.Drawing.Point(9, 118);
+            this.numupdown_nocities.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numupdown_nocities.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numupdown_nocities.Name = "numupdown_nocities";
+            this.numupdown_nocities.Size = new System.Drawing.Size(120, 20);
+            this.numupdown_nocities.TabIndex = 5;
+            this.numupdown_nocities.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 102);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Max No. Cities per faction";
             // 
             // MainForm1
             // 
@@ -506,6 +578,11 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_nocities)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,7 +600,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.TextBox txt_LoadConfirm;
         private System.Windows.Forms.Button butt_LoadData;
         private System.Windows.Forms.TextBox txt_Output;
         private System.Windows.Forms.TextBox txt_outputview;
@@ -533,8 +609,6 @@
         private System.Windows.Forms.Button but_randomize;
         private System.Windows.Forms.CheckBox chk_UnitSizes;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox chk_statsWithReason;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox chk_rndStats;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
@@ -551,6 +625,14 @@
         private System.Windows.Forms.ComboBox cbox_regions;
         private System.Windows.Forms.CheckBox chk_viewRandomised;
         private System.Windows.Forms.CheckBox chk_viewVanilla;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numupdown_nocities;
+        private System.Windows.Forms.CheckBox chk_ai;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox chk_treasury;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

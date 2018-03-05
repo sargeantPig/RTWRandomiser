@@ -58,7 +58,7 @@ namespace Randomiser
 
 #endif
 
-            string completeEduPath = Data.ModFolderPath + Data.EDUFILEPATH;
+            string completeEduPath = Data.RtwFolderPath + Data.EDUFILEPATH;
             string completedEdbPath = Data.ModFolderPath + Data.EDBFILEPATH;
             string completedStratPath = Data.RtwFolderPath + Data.DESCSTRAT;
       
@@ -159,15 +159,14 @@ namespace Randomiser
 
         private void but_randomize_Click(object sender, EventArgs e)
         {
-            //if (cbx_ownershipPerUnit.SelectedItem.ToString() != "RANDOM")
-            //  OwnershipPerUnit = Convert.ToInt16(cbx_ownershipPerUnit.SelectedItem.ToString());
-            //else OwnershipPerUnit = Data.rnd.Next(1, 10);
 
             RandomiseData.unitSizes = chk_UnitSizes.Checked;
             RandomiseData.stats = chk_rndStats.Checked;
             RandomiseData.rndCost = chk_costs.Checked;
-            RandomiseData.reasonableStats = chk_statsWithReason.Checked;
             RandomiseData.rndSounds = chk_rndSounds.Checked;
+            RandomiseData.maxCities = (int)numupdown_nocities.Value;
+            RandomiseData.rndAI = chk_ai.Checked;
+            RandomiseData.rndTreasury = chk_treasury.Checked;
 
             if (chx_useSeed.Checked)
             {
@@ -175,9 +174,7 @@ namespace Randomiser
                 Data.rnd = new Random(Data.Seed);
             }
 
-
             txt_randomiserOutput.AppendText(Data.Seed.ToString() + "\n");
-
 
             Randomise.RandomiseEdu();
             //SAVE EDU and then randomise and save DS
@@ -194,7 +191,7 @@ namespace Randomiser
         {
             StreamWriter edu = new StreamWriter( Data.ModFolderPath + Data.EDUFILEPATH);
 
-            edu.WriteLine(";RANDOMISED\r\n\n");
+            edu.WriteLine(";RANDOMISED SEED: " + Convert.ToString(Data.Seed) + "\r\n\n");
 
             foreach (Unit unit in Data.units)
             {
@@ -1255,7 +1252,12 @@ namespace Randomiser
         {
             List<Settlement> tempSettlements = new List<Settlement>(Data.settlements);
             List<Region> templist = new List<Region>(Data.rgbRegions);
+            List<string> tempsettles = new List<string>();
+            Vector2 capitalCoords = new Vector2();
+            
 
+            string faction = "";
+            int factionNo = 0;
             int charnum = -1;
             int modifierx = 0;
             int modifiery = 0;
@@ -1265,35 +1267,50 @@ namespace Randomiser
 
             StreamWriter strat = new StreamWriter(Data.ModFolderPath + Data.DESCSTRAT);
 
-            strat.WriteLine(";RANDOMISED\r\n\n");
-
-            int factionNo = 0;
-            List<string> tempsettles = new List<string>();
-            Vector2 capitalCoords = new Vector2();
-            string faction = "";
-
-            List<Vector2> usedCoords = new List<Vector2>();
+            strat.WriteLine(";RANDOMISED SEED: " + Convert.ToString(Data.Seed) + "\r\n\n");
 
             foreach (string s in Data.desc_StratData)
             {
-                if(s.StartsWith("faction"))
+                if(s.StartsWith("faction") && !s.StartsWith("faction_relationships"))
                 {
-                    strat.WriteLine(s);
-
+                    //strat.WriteLine(s);
                     string[] split = s.Split(',');
-
                     string[] splitAgain = split[0].Split('\t');
+                    string[] aiSplit = split[1].Split(' ');
 
-                    faction = splitAgain[1].Trim();
+                    if (RandomiseData.rndAI)
+                    {
+                        int rnds = Data.rnd.Next(0, RandomiseData.AIEconomy.Count() - 1);
+                        int rnd2 = Data.rnd.Next(0, RandomiseData.AIMilitary.Count() - 1);
+                        aiSplit[0] = RandomiseData.AIEconomy[rnds];
+                        aiSplit[1] = RandomiseData.AIMilitary[rnd2];
 
+                        faction = splitAgain[1].Trim();
+
+                        string final = split[0] + ", " + aiSplit[0] + "\t" + aiSplit[1] + "\r\n";
+
+                        strat.WriteLine(final);
+                    }
+                    else strat.WriteLine(s);
+
+
+                    txt_randomiserOutput.AppendText("Randomising " + faction + "\r\n");
                 }
 
 
                 else if (s.StartsWith("denari")) 
                 {
-                    //implement distance based check for closest city
+                    string[] split = s.Split('\t');
 
-                    strat.WriteLine(s);
+                    if (RandomiseData.rndCost) {
+
+                        split[1] = Convert.ToString(Data.rnd.Next(0, 6000));
+
+                        strat.WriteLine(split[0] + "\t" + split[1] + "\r\n");
+                    }
+
+                    else strat.WriteLine(s);
+
                     tempsettles.Clear();
 
                     factionNo++;
@@ -1317,7 +1334,7 @@ namespace Randomiser
                     templist.RemoveAt(index);
                     tempSettlements.Remove(tempSettlements[rndNum]);
                     //get other locations which are closest to the capital
-                    int rndAmount = Data.rnd.Next(1, 5);
+                    int rndAmount = Data.rnd.Next(1, RandomiseData.maxCities);
                     for (int i = 0; i < rndAmount; i++)
                     {
                         double tempDistance = 10000;
@@ -1355,7 +1372,6 @@ namespace Randomiser
                         strat.WriteLine(city.outputSettlement());
                         tempsettles.Add(city.region);
                     }
-                    
                 }
 
                 else if (s.StartsWith("character") && !s.StartsWith("character_record"))
@@ -1404,8 +1420,6 @@ namespace Randomiser
                             else splitAgain[1] = Convert.ToString(modifierx);
 
                             splitted[splitted.Count() - 2] = "x" + " " + splitAgain[1];
-
-
                         }
 
                         if (s2.Trim().StartsWith("y"))
@@ -1442,10 +1456,11 @@ namespace Randomiser
                                     {
                                         disMax = waterDis;
                                         a = new Vector2(x, y) ;
-
                                     }
                                 }
                             }
+
+                        Data.regionWater[(int)a.X, (int)a.Y] = false;
                     }
 
                     foreach (string s3 in splitted)
@@ -1502,8 +1517,6 @@ namespace Randomiser
                             strat.Write(s3 + ", ");
                         else strat.Write(s3 + "\r\n");
                     }
-
-                    usedCoords.Add(new Vector2(a.X, a.Y));
                 }
 
                 else if (s.StartsWith("relative"))

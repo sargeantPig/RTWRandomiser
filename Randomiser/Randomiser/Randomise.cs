@@ -57,16 +57,20 @@ namespace Randomiser
         {
             foreach (Unit unit in Data.units)
             {
-                /*if(unit.primaryWeapon.missletypeFlags != MissleType.MT_no)
-                {
-                    Array values = Enum.GetValues(typeof(MissleType));
-                    unit.primaryWeapon.missletypeFlags = (MissleType)values.GetValue(Data.rnd.Next(values.Length));
-                }*/
 
-                unit.primaryWeapon.attack[0] = Data.rnd.Next(1, 20); // attack factor
-                unit.primaryWeapon.attack[1] = Data.rnd.Next(1, 20); // attack charging
-                unit.secondaryWeapon.attack[0] = Data.rnd.Next(1, 20); // attack factor
-                unit.secondaryWeapon.attack[1] = Data.rnd.Next(1, 20); // attack charging
+               
+
+                if (unit.primaryWeapon.WeaponFlags != WeaponType.WT_no)
+                {
+                    unit.primaryWeapon.attack[0] = Data.rnd.Next(1, 20); // attack factor
+                    unit.primaryWeapon.attack[1] = Data.rnd.Next(1, 20); // attack charging
+                }
+
+                if (unit.secondaryWeapon.WeaponFlags != WeaponType.WT_no)
+                {
+                    unit.secondaryWeapon.attack[0] = Data.rnd.Next(1, 20); // attack factor
+                    unit.secondaryWeapon.attack[1] = Data.rnd.Next(1, 20); // attack charging
+                }
 
                 Array disciplineVals = Enum.GetValues(typeof(statmental_discipline));
                 unit.mental.discipline = (statmental_discipline)disciplineVals.GetValue(Data.rnd.Next(disciplineVals.Length));
