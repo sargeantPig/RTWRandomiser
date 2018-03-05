@@ -10,6 +10,10 @@ RTWRandomiser aims to randomise all feasible things within the game.
   Random stats for each unit (attack, defence)
 
   Random amount of men in each unit
+  
+  Random Treasury
+  
+  Random faction ai
 
 # Other features:
 
