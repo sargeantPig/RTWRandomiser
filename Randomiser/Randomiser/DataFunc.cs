@@ -31,7 +31,7 @@ namespace Randomiser
         public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
         public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
         public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
-        public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.bmp";
+        public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
         public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
 
     }

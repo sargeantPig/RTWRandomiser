@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
-
+using TargaImage;
 namespace Randomiser
 {
     public static class Parsers
@@ -793,13 +793,13 @@ namespace Randomiser
 
         public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
         {
-
+            
             //add an output for this in the tool section
 
             string line;
 
             StreamReader reg = new StreamReader(filePath);
-
+           
 
             int counter = -1;
 
@@ -835,7 +835,7 @@ namespace Randomiser
 
             reg.Close();
 
-            Bitmap img = new Bitmap(Data.RtwFolderPath + Data.MAPREGIONSPATH);
+            Bitmap img = Paloma.TargaImage.LoadTargaImage(Data.RtwFolderPath + Data.MAPREGIONSPATH);
 
             img.RotateFlip(RotateFlipType.RotateNoneFlipY);
             for (int x = 0; x < img.Width; x++)
