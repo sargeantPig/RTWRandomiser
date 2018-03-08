@@ -38,14 +38,11 @@ namespace Randomiser
 
     public static class RandomiseData
     {
-        public static int OwnershipPerUnit, maxCities;
-        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury;
+        public static int OwnershipPerUnit, maxCities, maxAttri;
+        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri;
         public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
         public static string[] AIEconomy = {"comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
-
-
-
-
+        public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
     }
 
     public static class ViewTabData
@@ -56,6 +53,22 @@ namespace Randomiser
 
     public static class Functions
     {
+        public static T RandomFlag<T>(int min, int max)
+        {
+            Array flags = Enum.GetValues(typeof(T));
+            var a  = (T)flags.GetValue(Data.rnd.Next(min, max));
+
+            return a;
+        }
+
+        public static T RandomFlag<T>()
+        {
+            Array flags = Enum.GetValues(typeof(T));
+            var a = (T)flags.GetValue(Data.rnd.Next(flags.Length));
+
+            return a;
+        }
+
         public static string RemoveFirstWord(string String)
         {
             string newString = "";

@@ -53,7 +53,7 @@ namespace Randomiser
         {
 
 #if DEBUG
-           Data.ModFolderPath = @"G:\Games\Rome Total war testing\RANDOMTESTING";
+           Data.ModFolderPath = @"G:\Games\Rome Total war testing\randomiser";
             Data.RtwFolderPath = @"G:\Games\Rome Total war testing";
 
 #endif
@@ -165,8 +165,12 @@ namespace Randomiser
             RandomiseData.rndCost = chk_costs.Checked;
             RandomiseData.rndSounds = chk_rndSounds.Checked;
             RandomiseData.maxCities = (int)numupdown_nocities.Value;
+            RandomiseData.maxAttri = (int)numUpDown_maxAtrri.Value;
             RandomiseData.rndAI = chk_ai.Checked;
             RandomiseData.rndTreasury = chk_treasury.Checked;
+            RandomiseData.rndTraining = chk_rndTraining.Checked;
+            RandomiseData.rndAttri = chk_rndAttri.Checked;
+
 
             if (chx_useSeed.Checked)
             {
@@ -677,6 +681,7 @@ namespace Randomiser
 
                     edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.area));
                 }
+
                 if (unit.priAttri.HasFlag(stat_pri_attr.PA_no))
                 {
                     if (!attrFirst)
@@ -688,6 +693,45 @@ namespace Randomiser
 
 
                     edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.PA_no));
+                }
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.spear_bonus_4))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else edu.Write(", ");
+
+
+                    edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.spear_bonus_4));
+                }
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.spear_bonus_8))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else edu.Write(", ");
+
+
+                    edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.spear_bonus_8));
+                }
+
+                if (unit.priAttri.HasFlag(stat_pri_attr.thrown_ap))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else edu.Write(", ");
+
+
+                    edu.Write(enumsToStrings.PriAttrToString(stat_pri_attr.thrown_ap));
                 }
 
                 if (unit.priAttri.HasFlag(stat_pri_attr.fire))

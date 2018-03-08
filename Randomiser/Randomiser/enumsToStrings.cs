@@ -544,7 +544,7 @@ namespace Randomiser
                     break;
 
                 case stat_pri_attr.pa_spear:
-                    str = "pa_spear";
+                    str = "spear";
                     break;
 
                 case stat_pri_attr.long_pike:
@@ -560,7 +560,7 @@ namespace Randomiser
                     break;
 
                 case stat_pri_attr.pa_thrown:
-                    str = "pa_thrown";
+                    str = "thrown";
                     break;
 
                 case stat_pri_attr.launching:
@@ -577,6 +577,18 @@ namespace Randomiser
 
                 case stat_pri_attr.fire:
                     str = "fire";
+                    break;
+
+                case stat_pri_attr.spear_bonus_4:
+                    str = "spear_bonus_4";
+                    break;
+
+                case stat_pri_attr.spear_bonus_8:
+                    str = "spear_bonus_8";
+                    break;
+
+                case stat_pri_attr.thrown_ap:
+                    str = "thrown ap";
                     break;
             }
 

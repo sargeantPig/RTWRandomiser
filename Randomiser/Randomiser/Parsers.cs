@@ -312,7 +312,7 @@ namespace Randomiser
                             Data.units[counter].priAttri |= stat_pri_attr.ap;
                         else if (STRING.Trim() == "bp")
                             Data.units[counter].priAttri |= stat_pri_attr.bp;
-                        else if (STRING.Trim() == "pa_spear")
+                        else if (STRING.Trim() == "spear")
                             Data.units[counter].priAttri |= stat_pri_attr.pa_spear;
                         else if (STRING.Trim() == "long_pike")
                             Data.units[counter].priAttri |= stat_pri_attr.long_pike;
@@ -320,12 +320,18 @@ namespace Randomiser
                             Data.units[counter].priAttri |= stat_pri_attr.short_pike;
                         else if (STRING.Trim() == "prec")
                             Data.units[counter].priAttri |= stat_pri_attr.prec;
-                        else if (STRING.Trim() == "pa_thrown")
+                        else if (STRING.Trim() == "thrown")
                             Data.units[counter].priAttri |= stat_pri_attr.pa_thrown;
                         else if (STRING.Trim() == "launching")
                             Data.units[counter].priAttri |= stat_pri_attr.launching;
                         else if (STRING.Trim() == "area")
                             Data.units[counter].priAttri |= stat_pri_attr.area;
+                        else if (STRING.Trim() == "spear_bonus_4")
+                            Data.units[counter].priAttri |= stat_pri_attr.spear_bonus_4;
+                        else if (STRING.Trim() == "spear_bonus_8")
+                            Data.units[counter].priAttri |= stat_pri_attr.spear_bonus_8;
+                        else if (STRING.Trim() == "thrown ap")
+                            Data.units[counter].priAttri |= stat_pri_attr.thrown_ap;
                         else if (STRING.Trim() == "no")
                             Data.units[counter].priAttri |= stat_pri_attr.PA_no;
                     }

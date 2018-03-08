@@ -34,11 +34,12 @@ namespace Randomiser
     {
 
         Formation_Phalanx = 1 << 0,
-        Formation_Testudo = 1 << 1,
-        Formation_Schiltrom = 1 << 2,
-        Formation_Horde = 1 << 3,
-        Formation_Square = 1 << 4,
-        Formation_Wedge = 1 << 5
+        Formation_Horde = 1 << 1,
+        Formation_Square = 1 << 2,
+        Formation_Testudo = 1 << 3,
+        Formation_Schiltrom = 1 << 4,
+        Formation_Wedge = 1 << 5,
+        Formation_None = 1 << 6
     };
 
     public enum MissleType
@@ -136,7 +137,10 @@ namespace Randomiser
         launching = 1 << 7,
         area = 1 << 8,
         fire = 1 << 9,
-        PA_no = 1 << 10
+        spear_bonus_4 = 1 << 10,
+        spear_bonus_8 = 1 << 11,
+        thrown_ap = 1 << 12,
+        PA_no = 1 << 13
     };
 
     public enum Cultures
