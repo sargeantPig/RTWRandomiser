@@ -69,6 +69,8 @@
             this.chk_rndAttri = new System.Windows.Forms.CheckBox();
             this.numUpDown_maxAtrri = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chk_selectAll = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,6 +81,7 @@
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_maxAtrri)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -190,6 +193,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.txt_Seed);
@@ -212,7 +216,7 @@
             this.groupBox2.Controls.Add(this.chk_treasury);
             this.groupBox2.Location = new System.Drawing.Point(163, 9);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(271, 224);
+            this.groupBox2.Size = new System.Drawing.Size(153, 224);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Factions";
@@ -557,6 +561,27 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Max Attributes";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chk_selectAll);
+            this.groupBox3.Location = new System.Drawing.Point(323, 9);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(114, 224);
+            this.groupBox3.TabIndex = 21;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Misc";
+            // 
+            // chk_selectAll
+            // 
+            this.chk_selectAll.AutoSize = true;
+            this.chk_selectAll.Location = new System.Drawing.Point(6, 19);
+            this.chk_selectAll.Name = "chk_selectAll";
+            this.chk_selectAll.Size = new System.Drawing.Size(76, 17);
+            this.chk_selectAll.TabIndex = 7;
+            this.chk_selectAll.Text = "Select All?";
+            this.chk_selectAll.UseVisualStyleBackColor = true;
+            this.chk_selectAll.CheckedChanged += new System.EventHandler(this.chk_selectAll_CheckedChanged);
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -584,6 +609,8 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_maxAtrri)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -632,6 +659,8 @@
         private System.Windows.Forms.CheckBox chk_rndAttri;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numUpDown_maxAtrri;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox chk_selectAll;
     }
 }
 

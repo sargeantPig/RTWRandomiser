@@ -1581,5 +1581,31 @@ namespace Randomiser
         
         }
 
+        private void chk_selectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_selectAll.Checked) {
+                chk_ai.Checked = true;
+                chk_costs.Checked = true;
+                chk_rndAttri.Checked = true;
+                chk_rndSounds.Checked = true;
+                chk_rndStats.Checked = true;
+                chk_rndTraining.Checked = true;
+                chk_treasury.Checked = true;
+                chk_UnitSizes.Checked = true;
+            }
+
+            else {
+                chk_ai.Checked = false;
+                chk_costs.Checked = false;
+                chk_rndAttri.Checked = false;
+                chk_rndSounds.Checked = false;
+                chk_rndStats.Checked = false;
+                chk_rndTraining.Checked = false;
+                chk_treasury.Checked = false;
+                chk_UnitSizes.Checked = false;
+            }
+
+
+        }
     }
 }

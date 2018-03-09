@@ -27,10 +27,8 @@ namespace Randomiser
                     TrainingRandomise();
 
                 if (RandomiseData.rndAttri)
-                {
                     AttributeRandomise();
 
-                }
                 if (RandomiseData.reasonableStats)
                 {
 
@@ -40,9 +38,7 @@ namespace Randomiser
                     SoundsRandomise();
 
                 if (RandomiseData.rndCost)
-                { //costs here 
                     costRandomise();
-                }
 
             }
         }
@@ -122,8 +118,6 @@ namespace Randomiser
 
                     if (!unit.attributes.HasFlag(a))
                         unit.attributes |= a;
-
-
 
                 }
 
