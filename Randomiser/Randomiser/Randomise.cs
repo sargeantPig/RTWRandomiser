@@ -15,7 +15,9 @@ namespace Randomiser
     {
         public static void RandomiseEdu()
         {
-            foreach (Unit unit in Data.units)
+            Data.ModdedUnits = new List<Unit>(Data.Vanunits);
+
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 if (RandomiseData.unitSizes)
                     UnitSizeRandomise();
@@ -28,6 +30,9 @@ namespace Randomiser
 
                 if (RandomiseData.rndAttri)
                     AttributeRandomise();
+
+                if (RandomiseData.rndGroundBonus)
+                    GroundBonusRandomise();
 
                 if (RandomiseData.reasonableStats)
                 {
@@ -43,9 +48,23 @@ namespace Randomiser
             }
         }
 
+        static void GroundBonusRandomise()
+        {
+            foreach (Unit unit in Data.ModdedUnits)
+            {
+                unit.ground[0] = Data.rnd.Next(-6, 7);
+                unit.ground[1] = Data.rnd.Next(-6, 7);
+                unit.ground[2] = Data.rnd.Next(-6, 7);
+                unit.ground[3] = Data.rnd.Next(-6, 7);
+
+
+            }
+
+        }
+
         static void UnitSizeRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 unit.soldier.number = Data.rnd.Next(15, 60);
             }
@@ -54,7 +73,7 @@ namespace Randomiser
 
         static void StatsRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 if (unit.primaryWeapon.WeaponFlags != WeaponType.WT_no)
                 {
@@ -77,7 +96,7 @@ namespace Randomiser
 
         static void TrainingRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 unit.mental.training = Functions.RandomFlag<statmental_training>();
                 unit.mental.discipline = Functions.RandomFlag<statmental_discipline>();
@@ -90,7 +109,7 @@ namespace Randomiser
 
         static void FormationRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 if (!unit.priAttri.HasFlag(stat_pri_attr.long_pike) || !unit.priAttri.HasFlag(stat_pri_attr.short_pike) || !unit.priAttri.HasFlag(stat_pri_attr.pa_spear))
                 {
@@ -105,7 +124,7 @@ namespace Randomiser
 
         static void AttributeRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 unit.attributes = Attributes.sea_faring;
 
@@ -126,7 +145,7 @@ namespace Randomiser
         }
         static void SoundsRandomise()
         {
-            foreach(Unit unit in Data.units)
+            foreach(Unit unit in Data.ModdedUnits)
             {
                 unit.voiceType = RandomiseData.VoiceTypes[Data.rnd.Next(RandomiseData.VoiceTypes.Length)];
                 unit.primaryWeapon.SoundFlags = Functions.RandomFlag<SoundType>();
@@ -136,7 +155,7 @@ namespace Randomiser
 
         static void costRandomise()
         {
-            foreach (Unit unit in Data.units)
+            foreach (Unit unit in Data.ModdedUnits)
             {
                 unit.cost[1] = Data.rnd.Next(200, 3000); // cost to build 
                 unit.cost[2] = (int)(unit.cost[1] * 0.25); // cost to upkeep 

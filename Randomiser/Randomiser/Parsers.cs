@@ -13,7 +13,7 @@ namespace Randomiser
     {
         public static void ParseEdu(string filePath, ref TextBox txt_Output)
         {
-            Data.units.Clear();
+            Data.Vanunits.Clear();
 
             string line;
             int counter = -1;
@@ -29,12 +29,12 @@ namespace Randomiser
                 {
                     counter++;
 
-                    Data.units.Add(new Unit());
+                    Data.Vanunits.Add(new Unit());
 
                     string trimmed = Functions.RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
 
-                    Data.units[counter].type = trimmed;
+                    Data.Vanunits[counter].type = trimmed;
 
                     txt_Output.AppendText(trimmed + "\n");
 
@@ -49,7 +49,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].dictionary = trimmed;
+                    Data.Vanunits[counter].dictionary = trimmed;
                 }
 
                 else if (line.StartsWith("category"))
@@ -61,7 +61,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].category = trimmed;
+                    Data.Vanunits[counter].category = trimmed;
                 }
 
                 else if (line.StartsWith("class"))
@@ -73,7 +73,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].unitClass = trimmed;
+                    Data.Vanunits[counter].unitClass = trimmed;
                 }
 
                 else if (line.StartsWith("voice_type"))
@@ -85,7 +85,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].voiceType = trimmed;
+                    Data.Vanunits[counter].voiceType = trimmed;
                 }
 
                 else if (line.StartsWith("soldier"))
@@ -95,10 +95,10 @@ namespace Randomiser
 
                     string[] splitted = trimmed.Split(',');
 
-                    Data.units[counter].soldier.name = splitted[0].Trim();
-                    Data.units[counter].soldier.number = Convert.ToInt16(splitted[1].Trim());
-                    Data.units[counter].soldier.extras = Convert.ToInt16(splitted[2].Trim());
-                    Data.units[counter].soldier.collisionMass = (float)Convert.ToDouble(splitted[3].Trim());
+                    Data.Vanunits[counter].soldier.name = splitted[0].Trim();
+                    Data.Vanunits[counter].soldier.number = Convert.ToInt16(splitted[1].Trim());
+                    Data.Vanunits[counter].soldier.extras = Convert.ToInt16(splitted[2].Trim());
+                    Data.Vanunits[counter].soldier.collisionMass = (float)Convert.ToDouble(splitted[3].Trim());
                 }
 
                 else if (line.StartsWith("officer"))
@@ -110,7 +110,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].officer.Add(trimmed);
+                    Data.Vanunits[counter].officer.Add(trimmed);
                 }
 
                 else if (line.StartsWith("engine"))
@@ -122,7 +122,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].engine = trimmed;
+                    Data.Vanunits[counter].engine = trimmed;
                 }
 
                 else if (line.StartsWith("animal"))
@@ -134,7 +134,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].animal = trimmed;
+                    Data.Vanunits[counter].animal = trimmed;
                 }
 
                 else if (line.StartsWith("mount_effect"))
@@ -157,9 +157,9 @@ namespace Randomiser
                     foreach (string STRING in reSplit)
                     {
 
-                        Data.units[counter].mountEffect.mountType.Add(reSplit[i]);
+                        Data.Vanunits[counter].mountEffect.mountType.Add(reSplit[i]);
                         i++;
-                        Data.units[counter].mountEffect.modifier.Add(Convert.ToInt16(reSplit[i]));
+                        Data.Vanunits[counter].mountEffect.modifier.Add(Convert.ToInt16(reSplit[i]));
                         i++;
 
                         if (i > splitted.Count())
@@ -177,7 +177,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].mount = trimmed;
+                    Data.Vanunits[counter].mount = trimmed;
                 }
 
                 else if (line.StartsWith("ship"))
@@ -189,7 +189,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].naval = trimmed;
+                    Data.Vanunits[counter].naval = trimmed;
                 }
 
 
@@ -205,39 +205,39 @@ namespace Randomiser
                         trimmed = STRING.Trim();
 
                         if (trimmed == "sea_faring")
-                            Data.units[counter].attributes |= Attributes.sea_faring;
+                            Data.Vanunits[counter].attributes |= Attributes.sea_faring;
                         else if (trimmed == "hide_forest")
-                            Data.units[counter].attributes |= Attributes.hide_forest;
+                            Data.Vanunits[counter].attributes |= Attributes.hide_forest;
                         else if (trimmed == "hide_improved_forest")
-                            Data.units[counter].attributes |= Attributes.hide_improved_forest;
+                            Data.Vanunits[counter].attributes |= Attributes.hide_improved_forest;
                         else if (trimmed == "hide_long_grass")
-                            Data.units[counter].attributes |= Attributes.hide_long_grass;
+                            Data.Vanunits[counter].attributes |= Attributes.hide_long_grass;
                         else if (trimmed == "hide_anywhere")
-                            Data.units[counter].attributes |= Attributes.hide_anywhere;
+                            Data.Vanunits[counter].attributes |= Attributes.hide_anywhere;
                         else if (trimmed == "can_sap")
-                            Data.units[counter].attributes |= Attributes.can_sap;
+                            Data.Vanunits[counter].attributes |= Attributes.can_sap;
                         else if (trimmed == "frighten_foot")
-                            Data.units[counter].attributes |= Attributes.frighten_foot;
+                            Data.Vanunits[counter].attributes |= Attributes.frighten_foot;
                         else if (trimmed == "frighten_mounted")
-                            Data.units[counter].attributes |= Attributes.frighten_mounted;
+                            Data.Vanunits[counter].attributes |= Attributes.frighten_mounted;
                         else if (trimmed == "can_run_amok")
-                            Data.units[counter].attributes |= Attributes.can_run_amok;
+                            Data.Vanunits[counter].attributes |= Attributes.can_run_amok;
                         else if (trimmed == "general_unit")
-                            Data.units[counter].attributes |= Attributes.general_unit;
+                            Data.Vanunits[counter].attributes |= Attributes.general_unit;
                         else if (trimmed == "general_unit_upgrade")
-                            Data.units[counter].attributes |= Attributes.general_unit_upgrade;
+                            Data.Vanunits[counter].attributes |= Attributes.general_unit_upgrade;
                         else if (trimmed == "cantabrian_circle")
-                            Data.units[counter].attributes |= Attributes.cantabrian_circle;
+                            Data.Vanunits[counter].attributes |= Attributes.cantabrian_circle;
                         else if (trimmed == "no_custom")
-                            Data.units[counter].attributes |= Attributes.no_custom;
+                            Data.Vanunits[counter].attributes |= Attributes.no_custom;
                         else if (trimmed == "command")
-                            Data.units[counter].attributes |= Attributes.command;
+                            Data.Vanunits[counter].attributes |= Attributes.command;
                         else if (trimmed == "mercenary_unit")
-                            Data.units[counter].attributes |= Attributes.mercenary_unit;
+                            Data.Vanunits[counter].attributes |= Attributes.mercenary_unit;
                         else if (trimmed == "druid")
-                            Data.units[counter].attributes |= Attributes.druid;
+                            Data.Vanunits[counter].attributes |= Attributes.druid;
                         else if (trimmed == "warcry")
-                            Data.units[counter].attributes |= Attributes.warcry;
+                            Data.Vanunits[counter].attributes |= Attributes.warcry;
 
                     }
 
@@ -259,30 +259,30 @@ namespace Randomiser
                     foreach (string STRING in splitted)
                     {
                         if (i < 2)
-                            Data.units[counter].formation.FormationTight[i] = (float)Convert.ToDouble(STRING.Trim());
+                            Data.Vanunits[counter].formation.FormationTight[i] = (float)Convert.ToDouble(STRING.Trim());
                         else if (a < 2)
                         {
-                            Data.units[counter].formation.FormationSparse[a] = (float)Convert.ToDouble(STRING.Trim());
+                            Data.Vanunits[counter].formation.FormationSparse[a] = (float)Convert.ToDouble(STRING.Trim());
                             a++;
                         }
                         else if (b < 1)
                         {
-                            Data.units[counter].formation.FormationRanks = Convert.ToInt16(STRING.Trim());
+                            Data.Vanunits[counter].formation.FormationRanks = Convert.ToInt16(STRING.Trim());
                             b++;
                         }
 
                         else if (STRING.Trim() == "phalanx")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Phalanx;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Phalanx;
                         else if (STRING.Trim() == "testudo")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Testudo;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Testudo;
                         else if (STRING.Trim() == "schiltrom")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Schiltrom;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Schiltrom;
                         else if (STRING.Trim() == "horde")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Horde;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Horde;
                         else if (STRING.Trim() == "square")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Square;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Square;
                         else if (STRING.Trim() == "wedge")
-                            Data.units[counter].formation.FormationFlags |= FormationTypes.Formation_Wedge;
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Wedge;
 
                         i++;
                     }
@@ -295,8 +295,8 @@ namespace Randomiser
 
                     string[] splitted = trimmed.Split(',');
 
-                    Data.units[counter].heatlh[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].heatlh[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].heatlh[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].heatlh[1] = Convert.ToInt16(splitted[1]);
                 }
 
                 else if (line.StartsWith("stat_pri_attr"))
@@ -309,31 +309,31 @@ namespace Randomiser
                     foreach (string STRING in splitted)
                     {
                         if (STRING.Trim() == "ap")
-                            Data.units[counter].priAttri |= stat_pri_attr.ap;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.ap;
                         else if (STRING.Trim() == "bp")
-                            Data.units[counter].priAttri |= stat_pri_attr.bp;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.bp;
                         else if (STRING.Trim() == "spear")
-                            Data.units[counter].priAttri |= stat_pri_attr.pa_spear;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.pa_spear;
                         else if (STRING.Trim() == "long_pike")
-                            Data.units[counter].priAttri |= stat_pri_attr.long_pike;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.long_pike;
                         else if (STRING.Trim() == "short_pike")
-                            Data.units[counter].priAttri |= stat_pri_attr.short_pike;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.short_pike;
                         else if (STRING.Trim() == "prec")
-                            Data.units[counter].priAttri |= stat_pri_attr.prec;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.prec;
                         else if (STRING.Trim() == "thrown")
-                            Data.units[counter].priAttri |= stat_pri_attr.pa_thrown;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.pa_thrown;
                         else if (STRING.Trim() == "launching")
-                            Data.units[counter].priAttri |= stat_pri_attr.launching;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.launching;
                         else if (STRING.Trim() == "area")
-                            Data.units[counter].priAttri |= stat_pri_attr.area;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.area;
                         else if (STRING.Trim() == "spear_bonus_4")
-                            Data.units[counter].priAttri |= stat_pri_attr.spear_bonus_4;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.spear_bonus_4;
                         else if (STRING.Trim() == "spear_bonus_8")
-                            Data.units[counter].priAttri |= stat_pri_attr.spear_bonus_8;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.spear_bonus_8;
                         else if (STRING.Trim() == "thrown ap")
-                            Data.units[counter].priAttri |= stat_pri_attr.thrown_ap;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.thrown_ap;
                         else if (STRING.Trim() == "no")
-                            Data.units[counter].priAttri |= stat_pri_attr.PA_no;
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.PA_no;
                     }
 
                 }
@@ -347,16 +347,16 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].primaryArmour.stat_pri_armour[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].primaryArmour.stat_pri_armour[1] = Convert.ToInt16(splitted[1]);
-                    Data.units[counter].primaryArmour.stat_pri_armour[2] = Convert.ToInt16(splitted[2]);
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[2] = Convert.ToInt16(splitted[2]);
 
                     if (splitted[3].Trim() == "flesh")
-                        Data.units[counter].primaryArmour.armour_sound = ArmourSound.flesh;
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.flesh;
                     else if (splitted[3].Trim() == "leather")
-                        Data.units[counter].primaryArmour.armour_sound = ArmourSound.leather;
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.leather;
                     else if (splitted[3].Trim() == "metal")
-                        Data.units[counter].primaryArmour.armour_sound = ArmourSound.metal;
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.metal;
 
                 }
 
@@ -369,85 +369,85 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].primaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].primaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].primaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].primaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
 
-                    Data.units[counter].primaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
-                    Data.units[counter].primaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
+                    Data.Vanunits[counter].primaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
+                    Data.Vanunits[counter].primaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
 
-                    Data.units[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
-                    Data.units[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
+                    Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
 
                     if (splitted[2].Trim() == "javelin")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.javelin;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.javelin;
                     else if (splitted[2].Trim() == "stone")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.stone;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.stone;
                     else if (splitted[2].Trim() == "pilum")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.pilum;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.pilum;
                     else if (splitted[2].Trim() == "arrow")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.arrow;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.arrow;
                     else if (splitted[2].Trim() == "no")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.MT_no;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.MT_no;
                     else if (splitted[2].Trim() == "ballista")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.ballista;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.ballista;
                     else if (splitted[2].Trim() == "boulder")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.onager;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.onager;
                     else if (splitted[2].Trim() == "big_boulder")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.heavy_onager;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.heavy_onager;
                     else if (splitted[2].Trim() == "scorpion")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.scorpion;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.scorpion;
                     else if (splitted[2].Trim() == "repeating_ballista")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.repeating_ballista;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.repeating_ballista;
                     else if (splitted[2].Trim() == "bullet")
-                        Data.units[counter].primaryWeapon.missletypeFlags = MissleType.bullet;
+                        Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.bullet;
 
                     if (splitted[5].Trim() == "melee")
-                        Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.melee;
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.melee;
                     else if (splitted[5].Trim() == "thrown")
-                        Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.thrown;
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.thrown;
                     else if (splitted[5].Trim() == "missle")
-                        Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.missle;
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.missle;
                     else if (splitted[5].Trim() == "siege_missile")
-                        Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.siege_missle;
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.siege_missle;
                     else if (splitted[5].Trim() == "no")
-                        Data.units[counter].primaryWeapon.WeaponFlags = WeaponType.WT_no;
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.WT_no;
 
                     if (splitted[6].Trim() == "simple")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.simple;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.simple;
                     else if (splitted[6].Trim() == "other")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.other;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.other;
                     else if (splitted[6].Trim() == "blade")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.blade;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.blade;
                     else if (splitted[6].Trim() == "archery")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.archery;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.archery;
                     else if (splitted[6].Trim() == "siege")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.siege;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.siege;
                     else if (splitted[6].Trim() == "no")
-                        Data.units[counter].primaryWeapon.TechFlags = techType.TT_no;
+                        Data.Vanunits[counter].primaryWeapon.TechFlags = techType.TT_no;
 
                     if (splitted[7].Trim() == "piercing")
-                        Data.units[counter].primaryWeapon.DamageFlags = DamageType.piercing;
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.piercing;
                     else if (splitted[7].Trim() == "blunt")
-                        Data.units[counter].primaryWeapon.DamageFlags = DamageType.blunt;
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.blunt;
                     else if (splitted[7].Trim() == "slashing")
-                        Data.units[counter].primaryWeapon.DamageFlags = DamageType.slashing;
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.slashing;
                     else if (splitted[7].Trim() == "fire")
-                        Data.units[counter].primaryWeapon.DamageFlags = DamageType.fire;
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.fire;
                     else if (splitted[7].Trim() == "no")
-                        Data.units[counter].primaryWeapon.DamageFlags = DamageType.DM_no;
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.DM_no;
 
                     if (splitted[8].Trim() == "none")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.ST_no;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.ST_no;
                     else if (splitted[8].Trim() == "knife")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.knife;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.knife;
                     else if (splitted[8].Trim() == "mace")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.mace;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.mace;
                     else if (splitted[8].Trim() == "axe")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.axe;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.axe;
                     else if (splitted[8].Trim() == "sword")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.sword;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.sword;
                     else if (splitted[8].Trim() == "spear")
-                        Data.units[counter].primaryWeapon.SoundFlags = SoundType.spear;
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.spear;
 
                 }
 
@@ -461,27 +461,27 @@ namespace Randomiser
                     foreach (string STRING in splitted)
                     {
                         if (STRING.Trim() == "ap")
-                            Data.units[counter].secAttri |= stat_pri_attr.ap;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.ap;
                         else if (STRING.Trim() == "bp")
-                            Data.units[counter].secAttri |= stat_pri_attr.bp;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.bp;
                         else if (STRING.Trim() == "pa_spear")
-                            Data.units[counter].secAttri |= stat_pri_attr.pa_spear;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.pa_spear;
                         else if (STRING.Trim() == "long_pike")
-                            Data.units[counter].secAttri |= stat_pri_attr.long_pike;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.long_pike;
                         else if (STRING.Trim() == "short_pike")
-                            Data.units[counter].secAttri |= stat_pri_attr.short_pike;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.short_pike;
                         else if (STRING.Trim() == "prec")
-                            Data.units[counter].secAttri |= stat_pri_attr.prec;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.prec;
                         else if (STRING.Trim() == "pa_thrown")
-                            Data.units[counter].secAttri |= stat_pri_attr.pa_thrown;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.pa_thrown;
                         else if (STRING.Trim() == "launching")
-                            Data.units[counter].secAttri |= stat_pri_attr.launching;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.launching;
                         else if (STRING.Trim() == "area")
-                            Data.units[counter].secAttri |= stat_pri_attr.area;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.area;
                         else if (STRING.Trim() == "fire")
-                            Data.units[counter].secAttri |= stat_pri_attr.fire;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.fire;
                         else if (STRING.Trim() == "no")
-                            Data.units[counter].secAttri |= stat_pri_attr.PA_no;
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.PA_no;
                     }
 
                 }
@@ -495,15 +495,15 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].secondaryArmour.stat_sec_armour[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].secondaryArmour.stat_sec_armour[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].secondaryArmour.stat_sec_armour[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].secondaryArmour.stat_sec_armour[1] = Convert.ToInt16(splitted[1]);
 
                     if (splitted[2].Trim() == "flesh")
-                        Data.units[counter].secondaryArmour.sec_armour_sound = ArmourSound.flesh;
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.flesh;
                     else if (splitted[2].Trim() == "leather")
-                        Data.units[counter].secondaryArmour.sec_armour_sound = ArmourSound.leather;
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.leather;
                     else if (splitted[2].Trim() == "metal")
-                        Data.units[counter].secondaryArmour.sec_armour_sound = ArmourSound.metal;
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.metal;
 
                 }
 
@@ -516,85 +516,85 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].secondaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].secondaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].secondaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].secondaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
 
-                    Data.units[counter].secondaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
-                    Data.units[counter].secondaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
+                    Data.Vanunits[counter].secondaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
+                    Data.Vanunits[counter].secondaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
 
-                    Data.units[counter].secondaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
-                    Data.units[counter].secondaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    Data.Vanunits[counter].secondaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
+                    Data.Vanunits[counter].secondaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
 
                     if (splitted[2].Trim() == "javelin")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.javelin;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.javelin;
                     else if (splitted[2].Trim() == "stone")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.stone;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.stone;
                     else if (splitted[2].Trim() == "pilum")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.pilum;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.pilum;
                     else if (splitted[2].Trim() == "arrow")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.arrow;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.arrow;
                     else if (splitted[2].Trim() == "no")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.MT_no;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.MT_no;
                     else if (splitted[2].Trim() == "ballista")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.ballista;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.ballista;
                     else if (splitted[2].Trim() == "boulder")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.onager;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.onager;
                     else if (splitted[2].Trim() == "big_boulder")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.heavy_onager;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.heavy_onager;
                     else if (splitted[2].Trim() == "scorpion")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.scorpion;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.scorpion;
                     else if (splitted[2].Trim() == "repeating_ballista")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.repeating_ballista;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.repeating_ballista;
                     else if (splitted[2].Trim() == "bullet")
-                        Data.units[counter].secondaryWeapon.missletypeFlags = MissleType.bullet;
+                        Data.Vanunits[counter].secondaryWeapon.missletypeFlags = MissleType.bullet;
 
                     if (splitted[5].Trim() == "melee")
-                        Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.melee;
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.melee;
                     else if (splitted[5].Trim() == "thrown")
-                        Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.thrown;
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.thrown;
                     else if (splitted[5].Trim() == "missle")
-                        Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.missle;
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.missle;
                     else if (splitted[5].Trim() == "siege_missile")
-                        Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.siege_missle;
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.siege_missle;
                     else if (splitted[5].Trim() == "no")
-                        Data.units[counter].secondaryWeapon.WeaponFlags = WeaponType.WT_no;
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.WT_no;
 
                     if (splitted[6].Trim() == "simple")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.simple;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.simple;
                     else if (splitted[6].Trim() == "other")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.other;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.other;
                     else if (splitted[6].Trim() == "blade")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.blade;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.blade;
                     else if (splitted[6].Trim() == "archery")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.archery;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.archery;
                     else if (splitted[6].Trim() == "siege")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.siege;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.siege;
                     else if (splitted[6].Trim() == "no")
-                        Data.units[counter].secondaryWeapon.TechFlags = techType.TT_no;
+                        Data.Vanunits[counter].secondaryWeapon.TechFlags = techType.TT_no;
 
                     if (splitted[7].Trim() == "piercing")
-                        Data.units[counter].secondaryWeapon.DamageFlags = DamageType.piercing;
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.piercing;
                     else if (splitted[7].Trim() == "blunt")
-                        Data.units[counter].secondaryWeapon.DamageFlags = DamageType.blunt;
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.blunt;
                     else if (splitted[7].Trim() == "slashing")
-                        Data.units[counter].secondaryWeapon.DamageFlags = DamageType.slashing;
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.slashing;
                     else if (splitted[7].Trim() == "fire")
-                        Data.units[counter].secondaryWeapon.DamageFlags = DamageType.fire;
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.fire;
                     else if (splitted[7].Trim() == "no")
-                        Data.units[counter].secondaryWeapon.DamageFlags = DamageType.DM_no;
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.DM_no;
 
                     if (splitted[8].Trim() == "none")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.ST_no;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.ST_no;
                     else if (splitted[8].Trim() == "knife")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.knife;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.knife;
                     else if (splitted[8].Trim() == "mace")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.mace;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.mace;
                     else if (splitted[8].Trim() == "axe")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.axe;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.axe;
                     else if (splitted[8].Trim() == "sword")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.sword;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.sword;
                     else if (splitted[8].Trim() == "spear")
-                        Data.units[counter].secondaryWeapon.SoundFlags = SoundType.spear;
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.spear;
 
                 }
 
@@ -607,7 +607,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].heat = Convert.ToInt16(trimmed);
+                    Data.Vanunits[counter].heat = Convert.ToInt16(trimmed);
 
                 }
 
@@ -620,10 +620,10 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].ground[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].ground[1] = Convert.ToInt16(splitted[1]);
-                    Data.units[counter].ground[2] = Convert.ToInt16(splitted[2]);
-                    Data.units[counter].ground[3] = Convert.ToInt16(splitted[3]);
+                    Data.Vanunits[counter].ground[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].ground[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].ground[2] = Convert.ToInt16(splitted[2]);
+                    Data.Vanunits[counter].ground[3] = Convert.ToInt16(splitted[3]);
 
                 }
 
@@ -636,25 +636,25 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].mental.morale = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].mental.morale = Convert.ToInt16(splitted[0]);
 
                     if (splitted[1].Trim() == "normal")
-                        Data.units[counter].mental.discipline = statmental_discipline.normal;
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.normal;
                     else if (splitted[1].Trim() == "low")
-                        Data.units[counter].mental.discipline = statmental_discipline.low;
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.low;
                     else if (splitted[1].Trim() == "disciplined")
-                        Data.units[counter].mental.discipline = statmental_discipline.disciplined;
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.disciplined;
                     else if (splitted[1].Trim() == "impetuous")
-                        Data.units[counter].mental.discipline = statmental_discipline.impetuous;
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.impetuous;
                     else if (splitted[1].Trim() == "berserker")
-                        Data.units[counter].mental.discipline = statmental_discipline.berserker;
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.berserker;
 
                     if (splitted[2].Trim() == "untrained")
-                        Data.units[counter].mental.training = statmental_training.untrained;
+                        Data.Vanunits[counter].mental.training = statmental_training.untrained;
                     else if (splitted[2].Trim() == "trained")
-                        Data.units[counter].mental.training = statmental_training.trained;
+                        Data.Vanunits[counter].mental.training = statmental_training.trained;
                     else if (splitted[2].Trim() == "highly_trained")
-                        Data.units[counter].mental.training = statmental_training.highly_trained;
+                        Data.Vanunits[counter].mental.training = statmental_training.highly_trained;
                 }
 
                 else if (line.StartsWith("stat_charge_dist"))
@@ -666,7 +666,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].chargeDistance = Convert.ToInt16(trimmed);
+                    Data.Vanunits[counter].chargeDistance = Convert.ToInt16(trimmed);
 
                 }
 
@@ -679,7 +679,7 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].fireDelay = Convert.ToInt16(trimmed);
+                    Data.Vanunits[counter].fireDelay = Convert.ToInt16(trimmed);
 
                 }
 
@@ -692,8 +692,8 @@ namespace Randomiser
 
                     trimmed = splitted[0].TrimEnd();
 
-                    Data.units[counter].food[0] = Convert.ToInt16(splitted[0]);
-                    Data.units[counter].food[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].food[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].food[1] = Convert.ToInt16(splitted[1]);
 
                 }
 
@@ -709,7 +709,7 @@ namespace Randomiser
                     int i = 0;
                     foreach (string STRING in splitted)
                     {
-                        Data.units[counter].cost[i] = Convert.ToInt16(STRING);
+                        Data.Vanunits[counter].cost[i] = Convert.ToInt16(STRING);
                         i++;
                     }
 
@@ -727,65 +727,65 @@ namespace Randomiser
                     foreach (string STRING in splitted)
                     {
                         if (STRING.Trim() == "romans_julii")
-                            Data.units[counter].ownership |= FactionOwnership.roman;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.roman;
                         else if (STRING.Trim() == "roman")
-                            Data.units[counter].ownership |= FactionOwnership.roman;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.roman;
                         else if (STRING.Trim() == "egyptian")
-                            Data.units[counter].ownership |= FactionOwnership.egyptian;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.egyptian;
                         else if (STRING.Trim() == "eastern")
-                            Data.units[counter].ownership |= FactionOwnership.eastern;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.eastern;
                         else if (STRING.Trim() == "parthian")
-                            Data.units[counter].ownership |= FactionOwnership.parthian;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.parthian;
                         else if (STRING.Trim() == "greek")
-                            Data.units[counter].ownership |= FactionOwnership.greek;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.greek;
                         else if (STRING.Trim() == "carthaginian")
-                            Data.units[counter].ownership |= FactionOwnership.carthaginian;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.carthaginian;
                         else if (STRING.Trim() == "egypt")
-                            Data.units[counter].ownership |= FactionOwnership.egypt;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.egypt;
                         else if (STRING.Trim() == "seleucid")
-                            Data.units[counter].ownership |= FactionOwnership.seleucid;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.seleucid;
                         else if (STRING.Trim() == "carthage")
-                            Data.units[counter].ownership |= FactionOwnership.carthage;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.carthage;
                         else if (STRING.Trim() == "parthia")
-                            Data.units[counter].ownership |= FactionOwnership.parthia;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.parthia;
                         else if (STRING.Trim() == "gauls")
-                            Data.units[counter].ownership |= FactionOwnership.gauls;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.gauls;
                         else if (STRING.Trim() == "germans")
-                            Data.units[counter].ownership |= FactionOwnership.germans;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.germans;
                         else if (STRING.Trim() == "britons")
-                            Data.units[counter].ownership |= FactionOwnership.britons;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.britons;
                         else if (STRING.Trim() == "greek_cities")
-                            Data.units[counter].ownership |= FactionOwnership.greek_cities;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.greek_cities;
                         else if (STRING.Trim() == "romans_senate")
-                            Data.units[counter].ownership |= FactionOwnership.romans_senate;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.romans_senate;
                         else if (STRING.Trim() == "macedon")
-                            Data.units[counter].ownership |= FactionOwnership.macedon;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.macedon;
                         else if (STRING.Trim() == "pontus")
-                            Data.units[counter].ownership |= FactionOwnership.pontus;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.pontus;
                         else if (STRING.Trim() == "armenia")
-                            Data.units[counter].ownership |= FactionOwnership.armenia;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.armenia;
                         else if (STRING.Trim() == "dacia")
-                            Data.units[counter].ownership |= FactionOwnership.dacia;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.dacia;
                         else if (STRING.Trim() == "numidia")
-                            Data.units[counter].ownership |= FactionOwnership.numidia;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.numidia;
                         else if (STRING.Trim() == "scythia")
-                            Data.units[counter].ownership |= FactionOwnership.scythia;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.scythia;
                         else if (STRING.Trim() == "spain")
-                            Data.units[counter].ownership |= FactionOwnership.spain;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.spain;
                         else if (STRING.Trim() == "thrace")
-                            Data.units[counter].ownership |= FactionOwnership.thrace;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.thrace;
                         else if (STRING.Trim() == "slave")
-                            Data.units[counter].ownership |= FactionOwnership.slave;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.slave;
                         else if (STRING.Trim() == "numidian")
-                            Data.units[counter].ownership |= FactionOwnership.numidian;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.numidian;
                         else if (STRING.Trim() == "barbarian")
-                            Data.units[counter].ownership |= FactionOwnership.barbarian;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.barbarian;
 
                     }
                 }
             }
 
-            txt_Output.AppendText("\n" + Data.units.Count + "Units loaded from EDU");
+            txt_Output.AppendText("\n" + Data.Vanunits.Count + "Units loaded from EDU");
 
             edu.Close();
         }

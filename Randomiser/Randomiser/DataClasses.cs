@@ -280,7 +280,8 @@ namespace Randomiser
         { }
     }
 
-    public class Unit
+    [Serializable]
+    public class Unit 
     {
         public string type; //internal name
         public string dictionary; //tag for finding screen name
@@ -290,7 +291,7 @@ namespace Randomiser
         public Soldier soldier; //see soldier class
         public List<string> officer; //name of the officer model (can be up to three)
         public string engine; //type of siege used ( ballista, scorpion, onager, heavy_onager, repeating_ballista)
-        public string animal; // The type of non-ridden on animals used by the unit. wardogs, pigs
+        public string animal; // The type of non-ridden on animals used by the  wardogs, pigs
         public string mount; // mount used by the unit
         public string naval;
         public MountEffect mountEffect; //modifiers vs different mounts
@@ -329,6 +330,1099 @@ namespace Randomiser
             food = new int[2];
             cost = new int[6];
         
+        }
+
+        public string unitOutput()
+        {
+            string unitString = "";
+
+                unitString +=(
+                    "type\t\t\t\t " + type + "\r\n" +
+                    "dictionary\t\t\t " + dictionary + "\r\n" +
+                    "category\t\t\t " + category + "\r\n" +
+                    "class\t\t\t\t " + unitClass + "\r\n" +
+                    "voice_type\t\t\t " + voiceType + "\r\n" +
+                    "soldier\t\t\t\t " + soldier.name + ", " + soldier.number.ToString() + ", " + soldier.extras.ToString() + ", " + soldier.collisionMass.ToString());
+
+                //unitString +=("\r\n");
+
+                if (engine != null)
+                    unitString +=("\r\nengine\t\t\t " + engine);
+
+                if (animal != null)
+                    unitString +=("\r\nanimal\t\t\t " + animal);
+
+                if (mount != null)
+                    unitString +=("\r\nmount\t\t\t " + mount);
+
+                if (officer.Count > 0)
+                {
+                    if (officer[0] != null)
+                    {
+                        unitString +=("\r\nofficer\t\t\t " + officer[0]);
+                    }
+                }
+
+                if (officer.Count > 1)
+                {
+                    if (officer[1] != null)
+                    {
+                        unitString +=("\r\nofficer\t\t\t " + officer[1]);
+                    }
+                }
+
+                if (officer.Count > 2)
+                {
+                    if (officer[2] != null)
+                    {
+                        unitString +=("\r\nofficer\t\t\t " + officer[2]);
+                    }
+                }
+
+                if (naval != null)
+                    unitString +=("\r\nship\t\t\t\t " + naval);
+
+                unitString +=("\r\nattributes\t\t\t "); // write attributes
+
+                bool firstAttr = false;
+                if (attributes.HasFlag(Attributes.sea_faring))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.sea_faring));
+                }
+
+                if (attributes.HasFlag(Attributes.can_run_amok))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.can_run_amok));
+
+                }
+                if (attributes.HasFlag(Attributes.can_sap))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.can_sap));
+                }
+                if (attributes.HasFlag(Attributes.cantabrian_circle))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.cantabrian_circle));
+                }
+
+                if (attributes.HasFlag(Attributes.command))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.command));
+                }
+                if (attributes.HasFlag(Attributes.druid))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.druid));
+                }
+                if (attributes.HasFlag(Attributes.frighten_foot))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.frighten_foot));
+                }
+                if (attributes.HasFlag(Attributes.frighten_mounted))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.frighten_mounted));
+                }
+                if (attributes.HasFlag(Attributes.general_unit))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.general_unit));
+                }
+                if (attributes.HasFlag(Attributes.general_unit_upgrade))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.general_unit_upgrade));
+                }
+                if (attributes.HasFlag(Attributes.hide_anywhere))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_anywhere));
+                }
+                if (attributes.HasFlag(Attributes.hide_forest))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_forest));
+                }
+                if (attributes.HasFlag(Attributes.hide_improved_forest))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_improved_forest));
+                }
+                if (attributes.HasFlag(Attributes.hide_long_grass))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_long_grass));
+                }
+                if (attributes.HasFlag(Attributes.mercenary_unit))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.mercenary_unit));
+                }
+                if (attributes.HasFlag(Attributes.no_custom))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.no_custom));
+                }
+                if (attributes.HasFlag(Attributes.warcry))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.AttributesToString(Attributes.warcry));
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("formation\t\t\t "); // write formation
+                foreach (float num in formation.FormationTight)
+                    unitString +=(num.ToString() + ", ");
+                foreach (float num in formation.FormationSparse)
+                    unitString +=(num.ToString() + ", ");
+                unitString +=(formation.FormationRanks + ", ");
+
+                bool firstForm = false;
+
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Phalanx))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Phalanx));
+                }
+
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Testudo))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Testudo));
+                }
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Schiltrom))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Schiltrom));
+                }
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Horde))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Horde));
+
+                }
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Square))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Square));
+                }
+                if (formation.FormationFlags.HasFlag(FormationTypes.Formation_Wedge))
+                {
+                    if (!firstForm)
+                    {
+                        firstForm = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FormationTostring(FormationTypes.Formation_Wedge));
+
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_health\t\t\t "); //write health
+                bool firstHealth = false;
+                foreach (int health in heatlh)
+                {
+
+                    if (!firstHealth)
+                    {
+                        firstHealth = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(health);
+
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_pri\t\t\t "); // write primary weapon
+                foreach (int atk in primaryWeapon.attack)
+                    unitString +=(atk + ", ");
+                unitString +=(enumsToStrings.MissleTypeToString(primaryWeapon.missletypeFlags) + ", ");
+                foreach (int miss in primaryWeapon.Missleattri)
+                    unitString +=(miss + ", ");
+                unitString +=(
+                    enumsToStrings.WeaponTypeToString(primaryWeapon.WeaponFlags) + ", " +
+                    enumsToStrings.TechTypeToString(primaryWeapon.TechFlags) + ", " +
+                    enumsToStrings.DamageTypeToString(primaryWeapon.DamageFlags) + ", " +
+                    enumsToStrings.SoundTypeToString(primaryWeapon.SoundFlags) + ", ");
+
+                bool firstattk = false;
+                foreach (float atkd in primaryWeapon.attackdelay)
+                {
+                    if (!firstattk)
+                    {
+                        firstattk = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(atkd);
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_pri_attr\t\t "); //attributes
+
+                bool attrFirst = false;
+
+                if (priAttri.HasFlag(stat_pri_attr.ap))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.ap));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.bp))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.bp));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.pa_spear))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.pa_spear));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.long_pike))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.long_pike));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.short_pike))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.short_pike));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.prec))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.prec));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.pa_thrown))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.pa_thrown));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.launching))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.launching));
+                }
+                if (priAttri.HasFlag(stat_pri_attr.area))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.area));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.PA_no))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.PA_no));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.spear_bonus_4))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.spear_bonus_4));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.spear_bonus_8))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.spear_bonus_8));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.thrown_ap))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.thrown_ap));
+                }
+
+                if (priAttri.HasFlag(stat_pri_attr.fire))
+                {
+                    if (!attrFirst)
+                    {
+                        attrFirst = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.fire));
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_sec\t\t\t "); // secondary weapon
+                foreach (int atk in secondaryWeapon.attack)
+                    unitString +=(atk + ", ");
+                unitString +=(enumsToStrings.MissleTypeToString(secondaryWeapon.missletypeFlags) + ", ");
+                foreach (int miss in secondaryWeapon.Missleattri)
+                    unitString +=(miss + ", ");
+                unitString +=(
+                    enumsToStrings.WeaponTypeToString(secondaryWeapon.WeaponFlags) + ", " +
+                    enumsToStrings.TechTypeToString(secondaryWeapon.TechFlags) + ", " +
+                    enumsToStrings.DamageTypeToString(secondaryWeapon.DamageFlags) + ", " +
+                    enumsToStrings.SoundTypeToString(secondaryWeapon.SoundFlags) + ", ");
+
+                bool firstatkD = false;
+                foreach (float atkd in secondaryWeapon.attackdelay)
+                {
+                    if (!firstatkD)
+                    {
+                        firstatkD = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(atkd);
+
+                }
+
+                unitString +=("\r\n");
+
+                bool firstsecAttr = false;
+                unitString +=("stat_sec_attr\t\t ");
+                if (secAttri.HasFlag(stat_pri_attr.ap))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.ap));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.bp))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.bp));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.pa_spear))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.pa_spear));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.long_pike))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.long_pike));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.short_pike))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.short_pike));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.prec))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.prec));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.pa_thrown))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.pa_thrown));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.launching))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.launching));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.area))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.area));
+                }
+                if (secAttri.HasFlag(stat_pri_attr.PA_no))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.PA_no));
+                }
+
+                if (secAttri.HasFlag(stat_pri_attr.fire))
+                {
+                    if (!firstsecAttr)
+                    {
+                        firstsecAttr = true;
+                    }
+
+                    else unitString +=(", ");
+
+
+                    unitString +=(enumsToStrings.PriAttrToString(stat_pri_attr.fire));
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_pri_armour\t\t ");
+                foreach (int numb in primaryArmour.stat_pri_armour)
+                    unitString +=(numb + ", ");
+                unitString +=(enumsToStrings.ArmourSndToString(primaryArmour.armour_sound));
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_sec_armour\t\t ");
+                foreach (int numb in secondaryArmour.stat_sec_armour)
+                    unitString +=(numb + ", ");
+                unitString +=(enumsToStrings.ArmourSndToString(secondaryArmour.sec_armour_sound));
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_heat\t\t\t " + heat);
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_ground\t\t\t ");
+                bool firstGround = false;
+                foreach (int numb in ground)
+                {
+                    if (!firstGround)
+                    {
+                        firstGround = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(numb);
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_mental\t\t\t " + mental.morale + ", ");
+                unitString +=(enumsToStrings.DisciplineToString(mental.discipline) + ", " + enumsToStrings.TrainingToString(mental.training));
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_charge_dist\t " + chargeDistance);
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_fire_delay\t\t " + fireDelay);
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_food\t\t\t " + food[0] + ", " + food[1]);
+
+                unitString +=("\r\n");
+
+                unitString +=("stat_cost\t\t\t ");
+                bool firstCost = false;
+                foreach (int cost in cost)
+                {
+                    if (!firstCost)
+                    {
+                        firstCost = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(cost);
+                }
+
+                unitString +=("\r\n");
+
+                unitString +=("ownership\t\t\t ");
+
+                bool firstStatOwnership = false;
+                if (ownership.HasFlag(FactionOwnership.armenia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.armenia));
+
+                }
+                if (ownership.HasFlag(FactionOwnership.britons))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.britons));
+                }
+                if (ownership.HasFlag(FactionOwnership.carthage))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.carthage));
+                }
+                if (ownership.HasFlag(FactionOwnership.carthaginian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.carthaginian));
+                }
+                if (ownership.HasFlag(FactionOwnership.dacia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.dacia));
+                }
+                if (ownership.HasFlag(FactionOwnership.eastern))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.eastern));
+                }
+                if (ownership.HasFlag(FactionOwnership.egypt))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.egypt));
+                }
+                if (ownership.HasFlag(FactionOwnership.egyptian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.egyptian));
+                }
+                if (ownership.HasFlag(FactionOwnership.gauls))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.gauls));
+                }
+                if (ownership.HasFlag(FactionOwnership.germans))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.germans));
+                }
+                if (ownership.HasFlag(FactionOwnership.greek))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.greek));
+                }
+                if (ownership.HasFlag(FactionOwnership.greek_cities))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.greek_cities));
+                }
+                if (ownership.HasFlag(FactionOwnership.macedon))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.macedon));
+                }
+                if (ownership.HasFlag(FactionOwnership.none))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.none));
+                }
+                if (ownership.HasFlag(FactionOwnership.numidia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.numidia));
+                }
+                if (ownership.HasFlag(FactionOwnership.parthia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.parthia));
+                }
+                if (ownership.HasFlag(FactionOwnership.parthian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.parthian));
+                }
+                if (ownership.HasFlag(FactionOwnership.pontus))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.pontus));
+                }
+                if (ownership.HasFlag(FactionOwnership.roman))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.roman));
+                }
+                if (ownership.HasFlag(FactionOwnership.romans_brutii))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_brutii));
+                }
+                if (ownership.HasFlag(FactionOwnership.romans_julii))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_julii));
+                }
+                if (ownership.HasFlag(FactionOwnership.romans_scipii))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_scipii));
+                }
+                if (ownership.HasFlag(FactionOwnership.romans_senate))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_senate));
+                }
+                if (ownership.HasFlag(FactionOwnership.scythia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.scythia));
+                }
+                if (ownership.HasFlag(FactionOwnership.seleucid))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.seleucid));
+                }
+                if (ownership.HasFlag(FactionOwnership.slave))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.slave));
+                }
+                if (ownership.HasFlag(FactionOwnership.spain))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.spain));
+                }
+                if (ownership.HasFlag(FactionOwnership.thrace))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.thrace));
+                }
+                if (ownership.HasFlag(FactionOwnership.numidian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.numidian));
+                }
+                if (ownership.HasFlag(FactionOwnership.barbarian))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString +=(", ");
+                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.barbarian));
+                }
+
+                unitString +=("\r\n\n");
+
+            return unitString;
         }
 
     }

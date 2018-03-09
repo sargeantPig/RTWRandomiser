@@ -71,6 +71,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chk_selectAll = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbx_units = new System.Windows.Forms.ComboBox();
+            this.chk_groundBonus = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -91,7 +94,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(472, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(504, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -116,7 +119,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(448, 372);
+            this.tabControl1.Size = new System.Drawing.Size(480, 372);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -130,7 +133,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(440, 280);
+            this.tabPage1.Size = new System.Drawing.Size(472, 346);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Load";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -159,12 +162,12 @@
             this.txt_Output.Multiline = true;
             this.txt_Output.Name = "txt_Output";
             this.txt_Output.ReadOnly = true;
-            this.txt_Output.Size = new System.Drawing.Size(306, 268);
+            this.txt_Output.Size = new System.Drawing.Size(306, 334);
             this.txt_Output.TabIndex = 4;
             // 
             // butt_LoadData
             // 
-            this.butt_LoadData.Location = new System.Drawing.Point(7, 251);
+            this.butt_LoadData.Location = new System.Drawing.Point(7, 317);
             this.butt_LoadData.Name = "butt_LoadData";
             this.butt_LoadData.Size = new System.Drawing.Size(111, 23);
             this.butt_LoadData.TabIndex = 2;
@@ -203,7 +206,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(440, 346);
+            this.tabPage2.Size = new System.Drawing.Size(472, 346);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Randomise";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -274,6 +277,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chk_groundBonus);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.numUpDown_maxAtrri);
             this.groupBox1.Controls.Add(this.chk_rndAttri);
@@ -371,6 +375,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.cbx_units);
             this.tabPage3.Controls.Add(this.chk_viewRandomised);
             this.tabPage3.Controls.Add(this.chk_viewVanilla);
             this.tabPage3.Controls.Add(this.label10);
@@ -380,7 +386,7 @@
             this.tabPage3.Controls.Add(this.cbox_factions);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(440, 280);
+            this.tabPage3.Size = new System.Drawing.Size(472, 346);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "View";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -388,7 +394,7 @@
             // chk_viewRandomised
             // 
             this.chk_viewRandomised.AutoSize = true;
-            this.chk_viewRandomised.Location = new System.Drawing.Point(7, 236);
+            this.chk_viewRandomised.Location = new System.Drawing.Point(4, 302);
             this.chk_viewRandomised.Name = "chk_viewRandomised";
             this.chk_viewRandomised.Size = new System.Drawing.Size(85, 17);
             this.chk_viewRandomised.TabIndex = 6;
@@ -398,7 +404,7 @@
             // chk_viewVanilla
             // 
             this.chk_viewVanilla.AutoSize = true;
-            this.chk_viewVanilla.Location = new System.Drawing.Point(7, 259);
+            this.chk_viewVanilla.Location = new System.Drawing.Point(4, 325);
             this.chk_viewVanilla.Name = "chk_viewVanilla";
             this.chk_viewVanilla.Size = new System.Drawing.Size(57, 17);
             this.chk_viewVanilla.TabIndex = 5;
@@ -458,7 +464,8 @@
             this.txt_outputview.Multiline = true;
             this.txt_outputview.Name = "txt_outputview";
             this.txt_outputview.ReadOnly = true;
-            this.txt_outputview.Size = new System.Drawing.Size(318, 274);
+            this.txt_outputview.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_outputview.Size = new System.Drawing.Size(350, 340);
             this.txt_outputview.TabIndex = 1;
             // 
             // cbox_factions
@@ -496,7 +503,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(440, 280);
+            this.tabPage4.Size = new System.Drawing.Size(472, 346);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Tools";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -582,11 +589,59 @@
             this.chk_selectAll.UseVisualStyleBackColor = true;
             this.chk_selectAll.CheckedChanged += new System.EventHandler(this.chk_selectAll_CheckedChanged);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Units";
+            // 
+            // cbx_units
+            // 
+            this.cbx_units.FormattingEnabled = true;
+            this.cbx_units.Items.AddRange(new object[] {
+            "armenia",
+            "britons",
+            "carthage",
+            "dacia",
+            "egypt",
+            "gauls",
+            "germans",
+            "greek_cities",
+            "macedon",
+            "numidia",
+            "parthia",
+            "pontus",
+            "roman",
+            "scythia",
+            "seleucid",
+            "slave",
+            "spain",
+            "thrace"});
+            this.cbx_units.Location = new System.Drawing.Point(4, 133);
+            this.cbx_units.Name = "cbx_units";
+            this.cbx_units.Size = new System.Drawing.Size(109, 21);
+            this.cbx_units.Sorted = true;
+            this.cbx_units.TabIndex = 7;
+            this.cbx_units.SelectedIndexChanged += new System.EventHandler(this.cbx_units_SelectedIndexChanged);
+            // 
+            // chk_groundBonus
+            // 
+            this.chk_groundBonus.AutoSize = true;
+            this.chk_groundBonus.Location = new System.Drawing.Point(9, 157);
+            this.chk_groundBonus.Name = "chk_groundBonus";
+            this.chk_groundBonus.Size = new System.Drawing.Size(143, 17);
+            this.chk_groundBonus.TabIndex = 19;
+            this.chk_groundBonus.Text = "Random Ground Bonus?";
+            this.chk_groundBonus.UseVisualStyleBackColor = true;
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 411);
+            this.ClientSize = new System.Drawing.Size(504, 411);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -661,6 +716,9 @@
         private System.Windows.Forms.NumericUpDown numUpDown_maxAtrri;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckBox chk_selectAll;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbx_units;
+        private System.Windows.Forms.CheckBox chk_groundBonus;
     }
 }
 

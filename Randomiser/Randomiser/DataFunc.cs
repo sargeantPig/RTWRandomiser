@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Randomiser
 {
     public static class Data
     {
+        public static bool dataIsLoaded = false;
+
         public static int Seed = 0;
 
         public static Random rnd = new Random();
-
         public static List<string> desc_StratData = new List<string>();
-        public static List<Unit> units = new List<Unit>();
+        public static List<Unit> ModdedUnits = new List<Unit>();
+        public static List<Unit> Vanunits = new List<Unit>();
         public static List<string> Factions = new List<string>();
         public static List<Character> chars = new List<Character>();
         public static List<string> strLine = new List<string>();
@@ -39,7 +43,7 @@ namespace Randomiser
     public static class RandomiseData
     {
         public static int OwnershipPerUnit, maxCities, maxAttri;
-        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri;
+        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus;
         public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
         public static string[] AIEconomy = {"comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
         public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
@@ -67,6 +71,13 @@ namespace Randomiser
             var a = (T)flags.GetValue(Data.rnd.Next(flags.Length));
 
             return a;
+        }
+
+        public static int GetIndex<T>(T searchFor, List<Unit> listToSearch)
+        {
+            int find = listToSearch.FindIndex(x => x.dictionary == (object)searchFor);
+
+            return find;
         }
 
         public static string RemoveFirstWord(string String)
@@ -102,6 +113,20 @@ namespace Randomiser
             Vector2 coords = new Vector2(Data.rgbRegions[index].x, Data.rgbRegions[index].y);
 
             return coords;
+        }
+
+        public static object DeepClone(object obj)
+        {
+            object objResult = null;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, obj);
+
+                ms.Position = 0;
+                objResult = bf.Deserialize(ms);
+            }
+            return objResult;
         }
     }
 }
