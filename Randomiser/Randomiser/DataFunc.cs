@@ -38,6 +38,8 @@ namespace Randomiser
         public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
         public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
 
+
+        public static string[] EDBTabSpacers = { "    ", "        ", "            ", "                " };  // the edb uses spaces instead of tabs
     }
 
     public static class RandomiseData

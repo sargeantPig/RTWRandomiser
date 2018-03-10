@@ -792,7 +792,18 @@ namespace Randomiser
 
         public static void ParseEdb(string filepath, ref TextBox txt_Output)
         {
+            string line;
+            string notrim;
 
+            StreamReader strat = new StreamReader(filepath);
+
+            //get factions
+            while ((line = strat.ReadLine()) != null)
+            {
+                
+
+
+            }
 
 
         }

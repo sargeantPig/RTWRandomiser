@@ -1427,22 +1427,210 @@ namespace Randomiser
 
     }
 
-
-
-    public class Capability
+    public class EDB
     {
-        List<string> recruit;
-        int value;
-        List<string> FactionRecruit;
+        List<string> hiddenResources = new List<string>();
+        List<coreBuilding> buildingTrees = new List<coreBuilding>();
+
+        public EDB()
+        {
+        }
+
+        public string outputEDB()
+        {
+            string a = "";
+
+            a += "hidden_resources ";
+
+            foreach (string resource in hiddenResources)
+            {
+                a += resource + " ";
+
+            }
+
+            a += "\r\n\r\n";
+
+            foreach (coreBuilding cBuilding in buildingTrees)
+            {
+                a += cBuilding.outputCoreBuilding() + "\r\n";
+            }
+
+            return a;
+        }
+
+    }
+
+    public class coreBuilding
+    {
+        public string buildingType; //eg. "core_building"
+        public List<string> levels;
+        public List<Building> buildings = new List<Building>();
+
+        public coreBuilding()
+        { }
+
+
+        public string outputCoreBuilding()
+        {
+            string a = "";
+
+            a += "building " + buildingType + "\r\n"
+                + "{" + "\r\n"
+                + Data.EDBTabSpacers[0] + "levels ";
+
+            foreach (string level in levels)
+            {
+                a += level + " ";
+
+            }
+
+            a += Data.EDBTabSpacers[1] + "{" + "\r\n";
+
+            foreach (Building building in buildings)
+            {
+                a += building.outputBuilding();
+
+            }
+
+            a += Data.EDBTabSpacers[0] + "plugins" + "\r\n"
+                + Data.EDBTabSpacers[0] + "{" + "\r\n"
+                + Data.EDBTabSpacers[0] + "}" + "\r\n"
+                + "}"; 
+
+            return a;
+        }
 
     }
 
     public class Building
     {
-        string buildingName;
-        List<string> levels;
-        List<string> factionsRequired;
+        
+        public string buildingName; //eg governors_house
+        public List<string> factionsRequired;
+        public Bcapability capability;
+        public Bconstruction construction;
+        public Building()
+        {
 
+        }
+
+        public string outputBuilding()
+        {
+            string a = "";
+
+            a += Data.EDBTabSpacers[1] + "requires factions { ";
+
+            foreach (string faction in factionsRequired)
+            {
+                a += faction + ", ";
+            }
+
+            a += "\r\n" + capability.outputCapability();
+
+            a += construction.outputConstruction();
+            a += Data.EDBTabSpacers[1] + "}" + "\r\n";
+
+            return a;
+
+        }
+
+
+    }
+
+    public class Bcapability
+    {
+        List<Brecruit> canRecruit = new List<Brecruit>();
+
+        public Bcapability()
+        { }
+
+        public string outputCapability()
+        {
+            string a = "";
+
+            a += Data.EDBTabSpacers[2] + "capability" + "\r\n"
+                + Data.EDBTabSpacers[2] + "{" + "\r\n";
+
+            foreach (Brecruit recruit in canRecruit)
+            {
+                a += recruit.outputRecruit() + "\r\n";
+
+            }
+
+            a += Data.EDBTabSpacers[2] + "}" + "\r\n";
+
+            return a;
+
+        }
+
+    }
+
+    public class Brecruit
+    {
+        public string name; //eg. carthaginian peasant
+        public int experience;
+        public List<string> requiresFactions = new List<string>();
+
+        public Brecruit()
+        {
+
+        }
+
+        public string outputRecruit()
+        {
+            string a = "";
+
+            a += Data.EDBTabSpacers[3] + "recruit " + name + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
+
+            foreach (string faction in requiresFactions)
+            {
+                a += faction + ", ";
+
+            }
+
+            a += " }";
+
+            return a;
+        }
+
+
+    }
+
+    public class Bconstruction
+    {
+        public int turnsToBuild;
+        public int cost;
+        public string settlement_min;
+        List<string> upgrades = new List<string>();
+
+        public Bconstruction()
+        {
+
+
+        }
+
+
+        public string outputConstruction()
+        {
+            string a = "";
+
+            a += Data.EDBTabSpacers[2] + "construction  " + turnsToBuild.ToString() + "\r\n"
+                + Data.EDBTabSpacers[2] + "cost  " + cost.ToString() + "\r\n"
+                + Data.EDBTabSpacers[2] + "settlement_min " + settlement_min + "\r\n"
+                + Data.EDBTabSpacers[2] + "upgrades" + "\r\n"
+                + Data.EDBTabSpacers[2] + "{" + "\r\n";
+
+            foreach (string upgrade in upgrades)
+            {
+                a += Data.EDBTabSpacers[3] + upgrade + "\r\n";
+
+            }
+
+            a += Data.EDBTabSpacers[2] + "}" + "\r\n";
+
+            return a;
+
+        }
 
     }
 
