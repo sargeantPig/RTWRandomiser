@@ -794,19 +794,283 @@ namespace Randomiser
         {
             string line;
             string notrim;
+            string previous = "";
+            int counter = -1;
 
             StreamReader strat = new StreamReader(filepath);
 
             //get factions
             while ((line = strat.ReadLine()) != null)
             {
-                
+                string trimmedLine = line.Trim();
+
+                if (trimmedLine.StartsWith("hidden_resources"))
+                {
+
+                    string modified = Functions.RemoveFirstWord(trimmedLine);
+                    string[] splitStr = modified.Split(' ');
 
 
+                    foreach (string str in splitStr)
+                    {
+                        Data.EDBData.hiddenResources.Add(str);
+
+                    }
+
+                }
+
+
+                if (trimmedLine.StartsWith("building"))
+                {
+                    counter++;
+
+                    Data.EDBData.buildingTrees.Add(new coreBuilding());
+
+                    //get building type
+                    string[] split = trimmedLine.Split(' ');
+                    Data.EDBData.buildingTrees[counter].buildingType = split[1].Trim();
+
+                    //start new while loop after every { and stop at }
+                    line = strat.ReadLine();
+
+                    txt_Output.AppendText("Loading: " + split[1].Trim() + "\r\n");
+                    if (line.Trim().StartsWith("{")) // start the while loop
+                    {
+                        bool whileOne = false;
+
+
+                        while (!whileOne)
+                        {
+                            line = strat.ReadLine();
+
+                            if (line.Trim().StartsWith("}"))
+                            {
+                                whileOne = true; //break out of loop
+                                break;
+                            }
+
+                            if (line.Trim().StartsWith("levels"))
+                            {
+                                string firstWordRemoved = Functions.RemoveFirstWord(line.Trim());
+                                string[] levelsSplit = firstWordRemoved.Split();
+
+                                foreach (string str in levelsSplit)
+                                {
+                                    Data.EDBData.buildingTrees[counter].levels.Add(str);
+                                }
+
+                                line = strat.ReadLine(); //continue to next line
+
+                                if (line.Trim().StartsWith("{"))
+                                {
+                                    bool whileTwo = false;
+
+                                    //start another while loop (loop through the buildings foreach level)
+                                    //line = strat.ReadLine(); //continue to next line
+                                    bool buildingNext = true;
+
+                                    Building newBuilding = new Building();
+                                    
+
+                                    while (!whileTwo)
+                                    {
+                                        line = strat.ReadLine(); //continue to next line
+
+                                        if (line.Trim().StartsWith("}"))
+                                        {
+                                            whileTwo = true; //break out of loop
+                                            break;
+                                        }
+
+                                        if (buildingNext)
+                                        {
+                                            newBuilding.factionsRequired = new List<string>();
+
+                                            newBuilding.buildingName = Functions.GetFirstWord(line.Trim());
+                                            //get factions
+                                            string output = line.Trim().Substring(line.Trim().IndexOf('{') + 1);
+                                            output = Functions.RemoveLastWord(output);
+                                            string[] factionSplit = output.Split(',');
+
+                                            foreach (string faction in factionSplit)
+                                            {
+                                                newBuilding.factionsRequired.Add(faction.Trim());
+                                            }
+
+
+                                            buildingNext = false;
+                                        }
+
+
+                                        if (line.Trim().StartsWith("{"))
+                                        {
+                                            bool whileThree = false;
+
+                                            //start looping through capabilitys of buildings, constuction and plugins
+                                            while (!whileThree)
+                                            {
+                                                line = strat.ReadLine(); //continue to next line
+
+                                                if (line.Trim().StartsWith("}"))
+                                                {
+                                                    whileThree = true; //break out of loop
+                                                    break;
+                                                }
+
+                                                if (line.Trim().StartsWith("capability")) //loop through capabilities
+                                                {
+                                                    bool whileFour = false;
+
+                                                    Bcapability newCapa = new Bcapability();
+
+                                                    while (!whileFour)
+                                                    {
+                                                        line = strat.ReadLine();
+
+                                                        if (line.Trim().StartsWith("}"))
+                                                        {
+
+                                                            newBuilding.capability = newCapa;
+
+                                                            whileFour = true; //break out of loop
+                                                            break;
+                                                        }
+
+                                                        if (Functions.GetFirstWord(line.Trim()) == "recruit")
+                                                        {
+                                                            Brecruit newRecruit = new Brecruit();
+
+                                                            //get unit name
+                                                            string[] unitSplit = line.Trim().Split('"');
+                                                            newRecruit.name = unitSplit[1]; // unit name should always be here;
+
+                                                            //get unit experience
+                                                            string[] expSplit = unitSplit[2].Trim().Split(' ');
+                                                            newRecruit.experience = Convert.ToInt32(expSplit[0].Trim());
+
+                                                            //get factions
+                                                            string output = line.Trim().Substring(line.Trim().IndexOf('{') + 1);
+                                                            output = Functions.RemoveLastWord(output);
+                                                            string[] factionSplit = output.Split(',');
+
+                                                            foreach (string faction in factionSplit)
+                                                            {
+                                                                newRecruit.requiresFactions.Add(faction);
+                                                            }
+
+                                                            newCapa.canRecruit.Add(newRecruit);
+                                                        }
+
+                                                        else if (Functions.GetFirstWord(line.Trim()) == "agent")
+                                                        {
+                                                            newCapa.agentList.Add(line.Trim());
+                                                        }
+
+                                                        else if (!line.Trim().StartsWith("}"))
+                                                        {
+                                                            newCapa.effectList.Add(line.Trim());
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                                if (line.Trim().StartsWith("construction"))
+                                                {
+                                                    bool whileFive = false;
+
+                                                    Bconstruction newConstruction = new Bconstruction();
+
+                                                    //set initial construction value
+                                                    string[] constructionSplit = line.Trim().Split(' ');
+                                                    newConstruction.turnsToBuild = Convert.ToInt32(constructionSplit[2].Trim());
+
+                                                    
+                                                    while (!whileFive)
+                                                    {
+                                                        line = strat.ReadLine();
+
+                                                        if (line.Trim().StartsWith("}"))
+                                                        {
+                                                            whileFive = true; //break out of loop
+                                                            break;
+                                                        }
+
+
+                                                        if (line.Trim().StartsWith("cost"))
+                                                        {
+                                                            newConstruction.cost = Convert.ToInt32(Functions.RemoveFirstWord(line.Trim()).Trim());
+
+                                                        }
+
+                                                        if (line.Trim().StartsWith("settlement_min"))
+                                                        {
+                                                            newConstruction.settlement_min = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                                                        }
+
+                                                        if (line.Trim().StartsWith("upgrades"))
+                                                        {
+                                                            bool whileSix = false;
+
+                                                            while (!whileSix)
+                                                            {
+                                                                line = strat.ReadLine();
+
+                                                                if (line.Trim().StartsWith("}"))
+                                                                {
+                                                                    newBuilding.construction = newConstruction;
+                                                                    Data.EDBData.buildingTrees[counter].buildings.Add(new Building(newBuilding));
+                                                                    buildingNext = true;
+                                                                    whileFive = true; //break out of loop
+                                                                    break;
+                                                                }
+
+                                                                if (!line.Trim().StartsWith("{"))
+                                                                {
+                                                                    newConstruction.upgrades.Add(line.Trim());
+                                                                
+                                                                }
+                                                            }
+                                                        }
+
+                                                    }
+
+
+
+                                                }
+
+                                            }
+
+                                        }
+
+
+                                    }
+                                    
+                                    
+                                }
+
+
+
+
+                            }
+
+
+                        }
+
+
+                    }
+                    
+
+
+
+                }
             }
 
+            strat.Close();
 
         }
+        
 
         public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
         {

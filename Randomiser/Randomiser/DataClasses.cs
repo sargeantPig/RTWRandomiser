@@ -1429,8 +1429,8 @@ namespace Randomiser
 
     public class EDB
     {
-        List<string> hiddenResources = new List<string>();
-        List<coreBuilding> buildingTrees = new List<coreBuilding>();
+        public List<string> hiddenResources = new List<string>();
+        public List<coreBuilding> buildingTrees = new List<coreBuilding>();
 
         public EDB()
         {
@@ -1463,7 +1463,7 @@ namespace Randomiser
     public class coreBuilding
     {
         public string buildingType; //eg. "core_building"
-        public List<string> levels;
+        public List<string> levels = new List<string>();
         public List<Building> buildings = new List<Building>();
 
         public coreBuilding()
@@ -1484,7 +1484,7 @@ namespace Randomiser
 
             }
 
-            a += Data.EDBTabSpacers[1] + "{" + "\r\n";
+            a += "\r\n" + Data.EDBTabSpacers[0] + "{" + "\r\n";
 
             foreach (Building building in buildings)
             {
@@ -1506,7 +1506,7 @@ namespace Randomiser
     {
         
         public string buildingName; //eg governors_house
-        public List<string> factionsRequired;
+        public List<string> factionsRequired = new List<string>();
         public Bcapability capability;
         public Bconstruction construction;
         public Building()
@@ -1514,18 +1514,30 @@ namespace Randomiser
 
         }
 
+        public Building(Building b)
+        {
+            buildingName = b.buildingName;
+            factionsRequired = new List<string>(b.factionsRequired);
+            capability = b.capability;
+            construction = b.construction;
+        }
+
+
         public string outputBuilding()
         {
             string a = "";
 
-            a += Data.EDBTabSpacers[1] + "requires factions { ";
+            a += Data.EDBTabSpacers[1] + buildingName + " requires factions { ";
 
             foreach (string faction in factionsRequired)
             {
                 a += faction + ", ";
             }
 
-            a += "\r\n" + capability.outputCapability();
+
+            a += "}" + "\r\n"
+                + Data.EDBTabSpacers[1] + "{" + "\r\n"
+                + capability.outputCapability();
 
             a += construction.outputConstruction();
             a += Data.EDBTabSpacers[1] + "}" + "\r\n";
@@ -1539,7 +1551,9 @@ namespace Randomiser
 
     public class Bcapability
     {
-        List<Brecruit> canRecruit = new List<Brecruit>();
+        public List<Brecruit> canRecruit = new List<Brecruit>();
+        public List<string> agentList = new List<string>();
+        public List<string> effectList = new List<string>();
 
         public Bcapability()
         { }
@@ -1555,6 +1569,17 @@ namespace Randomiser
             {
                 a += recruit.outputRecruit() + "\r\n";
 
+            }
+
+            foreach (string agent in agentList)
+            {
+                a += Data.EDBTabSpacers[3] + agent + "\r\n";
+
+            }
+
+            foreach (string eff in effectList)
+            {
+                a += Data.EDBTabSpacers[3] + eff + "\r\n";
             }
 
             a += Data.EDBTabSpacers[2] + "}" + "\r\n";
@@ -1601,7 +1626,7 @@ namespace Randomiser
         public int turnsToBuild;
         public int cost;
         public string settlement_min;
-        List<string> upgrades = new List<string>();
+        public List<string> upgrades = new List<string>();
 
         public Bconstruction()
         {

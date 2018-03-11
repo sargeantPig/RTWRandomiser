@@ -11,6 +11,9 @@ namespace Randomiser
 {
     public static class Data
     {
+
+        //implement cleanup for edb data, such as extra commas and extra "{, }"
+
         public static bool dataIsLoaded = false;
 
         public static int Seed = 0;
@@ -27,11 +30,13 @@ namespace Randomiser
         public static List<Region> rgbRegions = new List<Region>();
         public static bool[,] regionWater = new bool[255, 156];
 
+        public static EDB EDBData = new EDB();
+
         public static string RtwFolderPath = "";
         public static string ModFolderPath = "";
         public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
         public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
-        public static string EDBFILEPATH = @"\data\export_desc_buildings.txt";
+        public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
         public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
         public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
         public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
@@ -99,6 +104,34 @@ namespace Randomiser
             }
 
             return newString;
+        }
+
+        public static string RemoveLastWord(string String)
+        {
+            string newString = "";
+
+            string[] Temp = String.Split(' ');
+
+            int i = 0;
+
+            foreach (string temp in Temp)
+            {
+                if (i != Temp.Count() - 1)
+                    newString += temp + " ";
+
+                i++;
+            }
+
+            return newString;
+        }
+
+        public static string GetFirstWord(string String)
+        {
+            string newString = "";
+
+            string[] Temp = String.Split(' ');
+
+            return Temp[0];
         }
 
         public static double DistanceTo(Vector2 a, Vector2 b)

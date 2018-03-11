@@ -59,7 +59,7 @@ namespace Randomiser
 #endif
 
             string completeEduPath = Data.RtwFolderPath + Data.EDUFILEPATH;
-            string completedEdbPath = Data.ModFolderPath + Data.EDBFILEPATH;
+            string completedEdbPath = Data.RtwFolderPath + Data.EDBFILEPATH;
             string completedStratPath = Data.RtwFolderPath + Data.DESCSTRAT;
       
             txt_Output.AppendText("Loading files...\r\n");
@@ -91,6 +91,14 @@ namespace Randomiser
                 Parsers.ParseVanRegions(Data.RtwFolderPath + Data.REGIONSFILEPATH, ref txt_Output);
             }
 
+            if (File.Exists(completedEdbPath))
+            {
+                Parsers.ParseEdb(completedEdbPath, ref txt_Output);
+            }
+
+            else txt_Output.AppendText("File cannot be found!\r\n");
+
+
             List<string> tempRegions = new List<string>();
 
             foreach(Settlement s in Data.settlements)
@@ -104,6 +112,8 @@ namespace Randomiser
             {
                 unitNames.Add(s.dictionary);
             }
+
+            Data.EDBData.GetHashCode();
 
             cbox_regions.DataSource = tempRegions;
             cbox_regions.Refresh();
@@ -200,6 +210,7 @@ namespace Randomiser
             //SAVE EDU and then randomise and save DS
             SaveEDU();
             SaveDStrat();
+            SaveEDB();
         }
 
         private void butt_coordOutput_Click(object sender, EventArgs e)
@@ -508,8 +519,21 @@ namespace Randomiser
         }
 
         public void SaveEDB()
-        { 
-        
+        {
+            StreamWriter edb = new StreamWriter(Data.ModFolderPath + Data.EDBFILEPATH);
+
+            edb.WriteLine(";RANDOMISED SEED: " + Convert.ToString(Data.Seed) + "\r\n\n");
+
+            foreach (string resource in Data.EDBData.hiddenResources)
+            {
+                edb.Write(resource + " ");
+            }
+
+            edb.Write("\r\n\r\n");
+
+           edb.Write(Data.EDBData.outputEDB());
+
+            edb.Close();
         }
 
         private void chk_selectAll_CheckedChanged(object sender, EventArgs e)
