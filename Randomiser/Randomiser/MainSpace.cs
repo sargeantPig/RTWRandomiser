@@ -524,14 +524,9 @@ namespace Randomiser
 
             edb.WriteLine(";RANDOMISED SEED: " + Convert.ToString(Data.Seed) + "\r\n\n");
 
-            foreach (string resource in Data.EDBData.hiddenResources)
-            {
-                edb.Write(resource + " ");
-            }
-
             edb.Write("\r\n\r\n");
 
-           edb.Write(Data.EDBData.outputEDB());
+            edb.Write(Data.EDBData.outputEDB());
 
             edb.Close();
         }

@@ -1492,6 +1492,8 @@ namespace Randomiser
 
             }
 
+            a += Data.EDBTabSpacers[0] + "}" + "\r\n";
+
             a += Data.EDBTabSpacers[0] + "plugins" + "\r\n"
                 + Data.EDBTabSpacers[0] + "{" + "\r\n"
                 + Data.EDBTabSpacers[0] + "}" + "\r\n"
@@ -1605,7 +1607,7 @@ namespace Randomiser
         {
             string a = "";
 
-            a += Data.EDBTabSpacers[3] + "recruit " + name + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
+            a += Data.EDBTabSpacers[3] + "recruit " + "\"" + name + "\"" + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
 
             foreach (string faction in requiresFactions)
             {

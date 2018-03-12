@@ -890,7 +890,9 @@ namespace Randomiser
                                             //get factions
                                             string output = line.Trim().Substring(line.Trim().IndexOf('{') + 1);
                                             output = Functions.RemoveLastWord(output);
-                                            string[] factionSplit = output.Split(',');
+                                            List<string> factionSplit = output.Split(',').ToList();
+
+                                            factionSplit.Remove(factionSplit.Last());
 
                                             foreach (string faction in factionSplit)
                                             {
@@ -951,7 +953,9 @@ namespace Randomiser
                                                             //get factions
                                                             string output = line.Trim().Substring(line.Trim().IndexOf('{') + 1);
                                                             output = Functions.RemoveLastWord(output);
-                                                            string[] factionSplit = output.Split(',');
+                                                            List<string> factionSplit = output.Split(',').ToList();
+
+                                                            factionSplit.Remove(factionSplit.Last());
 
                                                             foreach (string faction in factionSplit)
                                                             {
@@ -965,6 +969,9 @@ namespace Randomiser
                                                         {
                                                             newCapa.agentList.Add(line.Trim());
                                                         }
+
+                                                        else if (Functions.GetFirstWord(line.Trim()) == "{")
+                                                        { }
 
                                                         else if (!line.Trim().StartsWith("}"))
                                                         {
