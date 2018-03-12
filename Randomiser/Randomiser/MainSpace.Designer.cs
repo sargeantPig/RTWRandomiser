@@ -74,6 +74,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cbx_units = new System.Windows.Forms.ComboBox();
             this.chk_groundBonus = new System.Windows.Forms.CheckBox();
+            this.chk_rosters = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -213,6 +214,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chk_rosters);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.numupdown_nocities);
             this.groupBox2.Controls.Add(this.chk_ai);
@@ -637,6 +639,16 @@
             this.chk_groundBonus.Text = "Random Ground Bonus?";
             this.chk_groundBonus.UseVisualStyleBackColor = true;
             // 
+            // chk_rosters
+            // 
+            this.chk_rosters.AutoSize = true;
+            this.chk_rosters.Location = new System.Drawing.Point(6, 65);
+            this.chk_rosters.Name = "chk_rosters";
+            this.chk_rosters.Size = new System.Drawing.Size(133, 17);
+            this.chk_rosters.TabIndex = 7;
+            this.chk_rosters.Text = "Random Unit Rosters?";
+            this.chk_rosters.UseVisualStyleBackColor = true;
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,6 +731,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbx_units;
         private System.Windows.Forms.CheckBox chk_groundBonus;
+        private System.Windows.Forms.CheckBox chk_rosters;
     }
 }
 

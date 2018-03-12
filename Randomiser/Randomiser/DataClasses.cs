@@ -185,10 +185,8 @@ namespace Randomiser
         greek = 1 << 23,
         egyptian = 1 << 24,
         eastern = 1 << 25,
-        parthian = 1 << 26,
-        barbarian = 1 << 27,
-        numidian = 1 << 28,
-        none = 1 << 29
+        barbarian = 1 << 26,
+        none = 1 << 27
     }
 
     public class Soldier 
@@ -1279,16 +1277,6 @@ namespace Randomiser
                     else unitString +=(", ");
                     unitString +=(enumsToStrings.FactionToString(FactionOwnership.parthia));
                 }
-                if (ownership.HasFlag(FactionOwnership.parthian))
-                {
-                    if (!firstStatOwnership)
-                    {
-                        firstStatOwnership = true;
-                    }
-
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.parthian));
-                }
                 if (ownership.HasFlag(FactionOwnership.pontus))
                 {
                     if (!firstStatOwnership)
@@ -1398,16 +1386,6 @@ namespace Randomiser
 
                     else unitString +=(", ");
                     unitString +=(enumsToStrings.FactionToString(FactionOwnership.thrace));
-                }
-                if (ownership.HasFlag(FactionOwnership.numidian))
-                {
-                    if (!firstStatOwnership)
-                    {
-                        firstStatOwnership = true;
-                    }
-
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.numidian));
                 }
                 if (ownership.HasFlag(FactionOwnership.barbarian))
                 {
@@ -1745,6 +1723,24 @@ namespace Randomiser
 
         }
 
+
+
+    }
+
+    public class UnitFaction
+    {
+        public string dicName;
+        public List<string> factions = new List<string>();
+
+        public UnitFaction()
+        { }
+
+        public UnitFaction(UnitFaction uf)
+        {
+            dicName = uf.dicName;
+
+            factions = new List<string>(uf.factions);
+        }
 
 
     }

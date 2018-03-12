@@ -34,6 +34,9 @@ namespace Randomiser
                 if (RandomiseData.rndGroundBonus)
                     GroundBonusRandomise();
 
+                if (RandomiseData.rndRosters)
+                    UnitFactionRandmise();
+
                 if (RandomiseData.reasonableStats)
                 {
 
@@ -46,6 +49,105 @@ namespace Randomiser
                     costRandomise();
 
             }
+        }
+
+        public static void RandomiseEDB()
+        {
+            if (RandomiseData.rndRosters)
+                RosterRandomise();
+
+
+        }
+
+       
+
+        static void RosterRandomise()
+        {
+
+            //get all unique recruits into a list
+            List<UnitFaction> uf = new List<UnitFaction>();
+
+            foreach (coreBuilding cb in Data.EDBData.buildingTrees)
+            {
+                foreach (Building building in cb.buildings)
+                {
+                    foreach (Brecruit br in building.capability.canRecruit)
+                    {
+                        int index = uf.FindIndex(x => x.dicName == br.name);
+                        int index2 = br.requiresFactions.FindIndex(x => x == "slave");
+
+                        if (index == -1 && index2 == -1)
+                        {
+                            FactionOwnership fo = Functions.RandomFlag<FactionOwnership>();
+                            while (fo == FactionOwnership.slave || fo == FactionOwnership.none)
+                            {
+
+                                fo = Functions.RandomFlag<FactionOwnership>();
+                                
+                            }
+
+                            string faction = enumsToStrings.FactionToString(fo);
+
+                            UnitFaction unit = new UnitFaction();
+                            unit.dicName = br.name;
+                            unit.factions.Add(faction);
+
+                            uf.Add(new UnitFaction(unit));
+
+                            RandomiseData.UnitsFaction.Add(new UnitFaction(unit));
+                        }
+                    }
+                }
+
+            }
+
+            //set factions according to unique entries
+
+            foreach (coreBuilding cb in Data.EDBData.buildingTrees)
+            {
+                foreach (Building building in cb.buildings)
+                {
+                    foreach (Brecruit br in building.capability.canRecruit)
+                    {
+                        int index = uf.FindIndex(x => x.dicName == br.name);
+                        int index2 = br.requiresFactions.FindIndex(x => x == "slave");
+
+                        if (index2 == -1)
+                        {
+                            br.requiresFactions = uf[index].factions;
+
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+        static void UnitFactionRandmise()
+        {
+            foreach (Unit unit in Data.ModdedUnits)
+            {
+                int index = RandomiseData.UnitsFaction.FindIndex(x => x.dicName == unit.type);
+                bool isSlave = false;
+
+                if (unit.ownership.HasFlag(FactionOwnership.slave))
+                {
+                    isSlave = true;
+
+                }
+
+                if (index > -1)
+                {
+                    unit.ownership = enumsToStrings.StringToFaction(RandomiseData.UnitsFaction[index].factions[0]);
+                    
+                    unit.ownership |= FactionOwnership.slave;
+                }
+
+
+            }
+
         }
 
         static void GroundBonusRandomise()

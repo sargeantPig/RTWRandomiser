@@ -50,10 +50,11 @@ namespace Randomiser
     public static class RandomiseData
     {
         public static int OwnershipPerUnit, maxCities, maxAttri;
-        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus;
+        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus, rndRosters;
         public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
         public static string[] AIEconomy = {"comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
         public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
+        public static List<UnitFaction> UnitsFaction = new List<UnitFaction>();
     }
 
     public static class ViewTabData
@@ -82,7 +83,14 @@ namespace Randomiser
 
         public static int GetIndex<T>(T searchFor, List<Unit> listToSearch)
         {
-            int find = listToSearch.FindIndex(x => x.dictionary == (object)searchFor);
+            int find = listToSearch.FindIndex(x => x.dictionary.Trim() == (object)searchFor);
+
+            return find;
+        }
+
+        public static int GetIndex<T>(T searchFor, List<UnitFaction> listToSearch)
+        {
+            int find = listToSearch.FindIndex(x => x.dicName == (object)searchFor);
 
             return find;
         }

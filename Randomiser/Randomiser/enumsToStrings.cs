@@ -86,9 +86,6 @@ namespace Randomiser
                 case "carthaginian":
                     faction = FactionOwnership.carthaginian | FactionOwnership.carthage | FactionOwnership.numidia;
                     break;
-                case "numidian":
-                    faction = FactionOwnership.numidian | FactionOwnership.carthaginian;
-                    break;
                 case "barbarian":
                     faction = FactionOwnership.barbarian | FactionOwnership.britons | FactionOwnership.dacia | FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.scythia | FactionOwnership.spain;
                     break;
@@ -97,9 +94,6 @@ namespace Randomiser
                     break;
                 case "greek":
                     faction = FactionOwnership.greek | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.seleucid | FactionOwnership.thrace;
-                    break;
-                case "parthian":
-                    faction = FactionOwnership.parthian;
                     break;
                 case "eastern":
                     faction = FactionOwnership.eastern | FactionOwnership.armenia | FactionOwnership.parthia | FactionOwnership.pontus;
@@ -124,7 +118,7 @@ namespace Randomiser
                     break;
 
                 case FactionOwnership.romans_julii:
-                    str = "roman_julii";
+                    str = "romans_julii";
                     break;
 
                 case FactionOwnership.romans_brutii:
@@ -197,14 +191,8 @@ namespace Randomiser
                 case FactionOwnership.greek:
                     str = "greek";
                     break;
-                case FactionOwnership.parthian:
-                    str = "parthian";
-                    break;
                 case FactionOwnership.barbarian:
                     str = "barbarian";
-                    break;
-                case FactionOwnership.numidian:
-                    str = "numidian";
                     break;
                 case FactionOwnership.numidia:
                     str = "numidia";

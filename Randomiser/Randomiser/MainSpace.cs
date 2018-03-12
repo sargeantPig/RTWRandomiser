@@ -189,7 +189,7 @@ namespace Randomiser
             RandomiseData.rndTraining = chk_rndTraining.Checked;
             RandomiseData.rndAttri = chk_rndAttri.Checked;
             RandomiseData.rndGroundBonus = chk_groundBonus.Checked;
-
+            RandomiseData.rndRosters = chk_rosters.Checked;
 
             if (chx_useSeed.Checked)
             {
@@ -204,9 +204,10 @@ namespace Randomiser
                 txt_randomiserOutput.AppendText("No custom seed" + "\n");
 
             }
-            
 
+            Randomise.RandomiseEDB();
             Randomise.RandomiseEdu();
+            
             //SAVE EDU and then randomise and save DS
             SaveEDU();
             SaveDStrat();

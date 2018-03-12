@@ -727,15 +727,17 @@ namespace Randomiser
                     foreach (string STRING in splitted)
                     {
                         if (STRING.Trim() == "romans_julii")
-                            Data.Vanunits[counter].ownership |= FactionOwnership.roman;
+                            Data.Vanunits[counter].ownership |= FactionOwnership.romans_julii;
+                        else if (STRING.Trim() == "romans_brutii")
+                            Data.Vanunits[counter].ownership |= FactionOwnership.romans_brutii;
+                        else if (STRING.Trim() == "romans_scipii")
+                            Data.Vanunits[counter].ownership |= FactionOwnership.romans_scipii;
                         else if (STRING.Trim() == "roman")
                             Data.Vanunits[counter].ownership |= FactionOwnership.roman;
                         else if (STRING.Trim() == "egyptian")
                             Data.Vanunits[counter].ownership |= FactionOwnership.egyptian;
                         else if (STRING.Trim() == "eastern")
                             Data.Vanunits[counter].ownership |= FactionOwnership.eastern;
-                        else if (STRING.Trim() == "parthian")
-                            Data.Vanunits[counter].ownership |= FactionOwnership.parthian;
                         else if (STRING.Trim() == "greek")
                             Data.Vanunits[counter].ownership |= FactionOwnership.greek;
                         else if (STRING.Trim() == "carthaginian")
@@ -776,8 +778,6 @@ namespace Randomiser
                             Data.Vanunits[counter].ownership |= FactionOwnership.thrace;
                         else if (STRING.Trim() == "slave")
                             Data.Vanunits[counter].ownership |= FactionOwnership.slave;
-                        else if (STRING.Trim() == "numidian")
-                            Data.Vanunits[counter].ownership |= FactionOwnership.numidian;
                         else if (STRING.Trim() == "barbarian")
                             Data.Vanunits[counter].ownership |= FactionOwnership.barbarian;
 
