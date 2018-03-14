@@ -14,12 +14,21 @@ RTWRandomiser aims to randomise all feasible things within the game.
   Random Treasury
   
   Random faction ai
+  
+  Random Faction Rosters
 
 # Other features:
 
   view units by faction
   
   view region and corresponding settlement
+  
+# Known Bugs
+
+  If there's more armies than the amount of cities a faction has they'll stack on the capital. You just need to use the "Army Lists" scroll to move them. I'll prob fix this at some point, but imo its low priority as I'd rather get more things randomised.
+  
+  Unit cards will default to the peasant card if a faction can't normally recruit it. This is fine however as this does not cause a      crash.
+
 
 # Installation
 
