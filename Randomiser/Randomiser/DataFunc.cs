@@ -11,13 +11,22 @@ namespace Randomiser
 {
     public static class Data
     {
+        //cross compaitable variables 
+        public static bool isM2TWMode = false;
+        public static bool isRTWMode = false;
 
-        //implement cleanup for edb data, such as extra commas and extra "{, }"
+        public static string MainFolderPath = "";
+        public static string ModFolderPath = "";
+        public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
+        public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
+        public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
+        public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
+        public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
+        public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
+        public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
 
         public static bool dataIsLoaded = false;
-
         public static int Seed = 0;
-
         public static Random rnd = new Random();
         public static List<string> desc_StratData = new List<string>();
         public static List<Unit> ModdedUnits = new List<Unit>();
@@ -29,32 +38,30 @@ namespace Randomiser
         public static List<Settlement> settlements = new List<Settlement>();
         public static List<Region> rgbRegions = new List<Region>();
         public static bool[,] regionWater = new bool[255, 156];
-
         public static EDB EDBData = new EDB();
-
-        public static string RtwFolderPath = "";
-        public static string ModFolderPath = "";
-        public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
-        public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
-        public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
-        public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
-        public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
-        public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
-        public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
-        public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
-
-
         public static string[] EDBTabSpacers = { "    ", "        ", "            ", "                " };  // the edb uses spaces instead of tabs
+
+        //Rome only variables
+        public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
+
+        //m2tw only variables
+        public static string M2TWDESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
+
+
+
+
     }
 
     public static class RandomiseData
     {
         public static int OwnershipPerUnit, maxCities, maxAttri;
         public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus, rndRosters;
+        public static List<UnitFaction> UnitsFaction = new List<UnitFaction>();
+        //ROME ONLY
         public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
         public static string[] AIEconomy = {"comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
         public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
-        public static List<UnitFaction> UnitsFaction = new List<UnitFaction>();
+      
     }
 
     public static class ViewTabData

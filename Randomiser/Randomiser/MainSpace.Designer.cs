@@ -75,6 +75,11 @@
             this.cbx_units = new System.Windows.Forms.ComboBox();
             this.chk_groundBonus = new System.Windows.Forms.CheckBox();
             this.chk_rosters = new System.Windows.Forms.CheckBox();
+            this.rdb_Rome = new System.Windows.Forms.RadioButton();
+            this.rdb_medieval = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numUpDown_factionperunit = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,6 +91,8 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_maxAtrri)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_factionperunit)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -125,6 +132,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.txt_modFolderLoc);
             this.tabPage1.Controls.Add(this.btn_selModFolder);
             this.tabPage1.Controls.Add(this.txt_Output);
@@ -141,7 +149,7 @@
             // 
             // txt_modFolderLoc
             // 
-            this.txt_modFolderLoc.Location = new System.Drawing.Point(7, 91);
+            this.txt_modFolderLoc.Location = new System.Drawing.Point(7, 290);
             this.txt_modFolderLoc.Name = "txt_modFolderLoc";
             this.txt_modFolderLoc.ReadOnly = true;
             this.txt_modFolderLoc.Size = new System.Drawing.Size(111, 20);
@@ -149,7 +157,7 @@
             // 
             // btn_selModFolder
             // 
-            this.btn_selModFolder.Location = new System.Drawing.Point(7, 61);
+            this.btn_selModFolder.Location = new System.Drawing.Point(7, 260);
             this.btn_selModFolder.Name = "btn_selModFolder";
             this.btn_selModFolder.Size = new System.Drawing.Size(111, 23);
             this.btn_selModFolder.TabIndex = 5;
@@ -159,11 +167,11 @@
             // 
             // txt_Output
             // 
-            this.txt_Output.Location = new System.Drawing.Point(128, 6);
+            this.txt_Output.Location = new System.Drawing.Point(124, 6);
             this.txt_Output.Multiline = true;
             this.txt_Output.Name = "txt_Output";
             this.txt_Output.ReadOnly = true;
-            this.txt_Output.Size = new System.Drawing.Size(306, 334);
+            this.txt_Output.Size = new System.Drawing.Size(342, 334);
             this.txt_Output.TabIndex = 4;
             // 
             // butt_LoadData
@@ -178,7 +186,7 @@
             // 
             // txt_FolderPath
             // 
-            this.txt_FolderPath.Location = new System.Drawing.Point(7, 35);
+            this.txt_FolderPath.Location = new System.Drawing.Point(7, 234);
             this.txt_FolderPath.Name = "txt_FolderPath";
             this.txt_FolderPath.ReadOnly = true;
             this.txt_FolderPath.Size = new System.Drawing.Size(111, 20);
@@ -187,11 +195,11 @@
             // 
             // butt_FolderSelect
             // 
-            this.butt_FolderSelect.Location = new System.Drawing.Point(6, 6);
+            this.butt_FolderSelect.Location = new System.Drawing.Point(6, 205);
             this.butt_FolderSelect.Name = "butt_FolderSelect";
             this.butt_FolderSelect.Size = new System.Drawing.Size(112, 23);
             this.butt_FolderSelect.TabIndex = 0;
-            this.butt_FolderSelect.Text = "Select RTW Folder";
+            this.butt_FolderSelect.Text = "Select Main Folder";
             this.butt_FolderSelect.UseVisualStyleBackColor = true;
             this.butt_FolderSelect.Click += new System.EventHandler(this.butt_FolderSelect_Click);
             // 
@@ -214,6 +222,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.numUpDown_factionperunit);
             this.groupBox2.Controls.Add(this.chk_rosters);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.numupdown_nocities);
@@ -649,6 +659,70 @@
             this.chk_rosters.Text = "Random Unit Rosters?";
             this.chk_rosters.UseVisualStyleBackColor = true;
             // 
+            // rdb_Rome
+            // 
+            this.rdb_Rome.AutoSize = true;
+            this.rdb_Rome.Location = new System.Drawing.Point(6, 19);
+            this.rdb_Rome.Name = "rdb_Rome";
+            this.rdb_Rome.Size = new System.Drawing.Size(81, 17);
+            this.rdb_Rome.TabIndex = 7;
+            this.rdb_Rome.TabStop = true;
+            this.rdb_Rome.Text = "RTW Mode";
+            this.rdb_Rome.UseVisualStyleBackColor = true;
+            // 
+            // rdb_medieval
+            // 
+            this.rdb_medieval.AutoSize = true;
+            this.rdb_medieval.Location = new System.Drawing.Point(5, 42);
+            this.rdb_medieval.Name = "rdb_medieval";
+            this.rdb_medieval.Size = new System.Drawing.Size(88, 17);
+            this.rdb_medieval.TabIndex = 8;
+            this.rdb_medieval.TabStop = true;
+            this.rdb_medieval.Text = "M2TW Mode\r\n";
+            this.rdb_medieval.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdb_Rome);
+            this.groupBox4.Controls.Add(this.rdb_medieval);
+            this.groupBox4.Location = new System.Drawing.Point(8, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(110, 76);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Select Mode";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 143);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Max Factions per unit";
+            // 
+            // numUpDown_factionperunit
+            // 
+            this.numUpDown_factionperunit.Location = new System.Drawing.Point(9, 159);
+            this.numUpDown_factionperunit.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numUpDown_factionperunit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUpDown_factionperunit.Name = "numUpDown_factionperunit";
+            this.numUpDown_factionperunit.Size = new System.Drawing.Size(120, 20);
+            this.numUpDown_factionperunit.TabIndex = 8;
+            this.numUpDown_factionperunit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -678,6 +752,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_maxAtrri)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_factionperunit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,6 +809,11 @@
         private System.Windows.Forms.ComboBox cbx_units;
         private System.Windows.Forms.CheckBox chk_groundBonus;
         private System.Windows.Forms.CheckBox chk_rosters;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rdb_Rome;
+        private System.Windows.Forms.RadioButton rdb_medieval;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numUpDown_factionperunit;
     }
 }
 

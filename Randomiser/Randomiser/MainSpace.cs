@@ -29,9 +29,9 @@ namespace Randomiser
 
             folderDialog.ShowDialog();
 
-            Data.RtwFolderPath = @folderDialog.SelectedPath;
+            Data.MainFolderPath = @folderDialog.SelectedPath;
 
-            txt_FolderPath.Text = Data.RtwFolderPath;
+            txt_FolderPath.Text = Data.MainFolderPath;
 
             
         }
@@ -51,16 +51,28 @@ namespace Randomiser
 
         private void butt_LoadData_Click(object sender, EventArgs e)
         {
+            Data.isM2TWMode = rdb_medieval.Checked;
+            Data.isRTWMode = rdb_Rome.Checked;
+
 
 #if DEBUG
-           Data.ModFolderPath = @"G:\Games\Rome Total war testing\randomiser";
-            Data.RtwFolderPath = @"G:\Games\Rome Total war testing";
+
+            if (Data.isRTWMode)
+            {
+                Data.ModFolderPath = @"G:\Games\Rome Total war testing\randomiser";
+                Data.MainFolderPath = @"G:\Games\Rome Total war testing";
+            }
+            else if (Data.isM2TWMode)
+            {
+
+
+            }
 
 #endif
 
-            string completeEduPath = Data.RtwFolderPath + Data.EDUFILEPATH;
-            string completedEdbPath = Data.RtwFolderPath + Data.EDBFILEPATH;
-            string completedStratPath = Data.RtwFolderPath + Data.DESCSTRAT;
+            string completeEduPath = Data.MainFolderPath + Data.EDUFILEPATH;
+            string completedEdbPath = Data.MainFolderPath + Data.EDBFILEPATH;
+            string completedStratPath = Data.MainFolderPath + Data.DESCSTRAT;
       
             txt_Output.AppendText("Loading files...\r\n");
             
@@ -86,9 +98,9 @@ namespace Randomiser
           
             //Parsers.ParseDscrStrat(ref txt_Output);
 
-            if (File.Exists(Data.RtwFolderPath + Data.REGIONSFILEPATH))
+            if (File.Exists(Data.MainFolderPath + Data.REGIONSFILEPATH))
             {
-                Parsers.ParseVanRegions(Data.RtwFolderPath + Data.REGIONSFILEPATH, ref txt_Output);
+                Parsers.ParseVanRegions(Data.MainFolderPath + Data.REGIONSFILEPATH, ref txt_Output);
             }
 
             if (File.Exists(completedEdbPath))
@@ -190,6 +202,7 @@ namespace Randomiser
             RandomiseData.rndAttri = chk_rndAttri.Checked;
             RandomiseData.rndGroundBonus = chk_groundBonus.Checked;
             RandomiseData.rndRosters = chk_rosters.Checked;
+            RandomiseData.OwnershipPerUnit = (int)numUpDown_factionperunit.Value;
 
             if (chx_useSeed.Checked)
             {

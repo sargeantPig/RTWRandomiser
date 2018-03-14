@@ -1077,7 +1077,6 @@ namespace Randomiser
             strat.Close();
 
         }
-        
 
         public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
         {
@@ -1123,7 +1122,7 @@ namespace Randomiser
 
             reg.Close();
 
-            Bitmap img = Paloma.TargaImage.LoadTargaImage(Data.RtwFolderPath + Data.MAPREGIONSPATH);
+            Bitmap img = Paloma.TargaImage.LoadTargaImage(Data.MainFolderPath + Data.MAPREGIONSPATH);
 
             img.RotateFlip(RotateFlipType.RotateNoneFlipY);
             for (int x = 0; x < img.Width; x++)

@@ -78,22 +78,27 @@ namespace Randomiser
 
                         if (index == -1 && index2 == -1)
                         {
-                            FactionOwnership fo = Functions.RandomFlag<FactionOwnership>();
-                            while (fo == FactionOwnership.slave || fo == FactionOwnership.none)
-                            {
-
-                                fo = Functions.RandomFlag<FactionOwnership>();
-                                
-                            }
-
-                            string faction = enumsToStrings.FactionToString(fo);
 
                             UnitFaction unit = new UnitFaction();
                             unit.dicName = br.name;
-                            unit.factions.Add(faction);
+                            FactionOwnership prev = FactionOwnership.none;
+                            int rnd = Data.rnd.Next(1, RandomiseData.OwnershipPerUnit);
 
+                            for (int i = 0; i < rnd; i++)
+                            {
+                                FactionOwnership fo = Functions.RandomFlag<FactionOwnership>();
+                                while (fo == FactionOwnership.slave || fo == FactionOwnership.none || fo == prev)
+                                {
+
+                                    fo = Functions.RandomFlag<FactionOwnership>();
+
+                                }
+
+                                prev = fo;
+                                string faction = enumsToStrings.FactionToString(fo);
+                                unit.factions.Add(faction);
+                            }
                             uf.Add(new UnitFaction(unit));
-
                             RandomiseData.UnitsFaction.Add(new UnitFaction(unit));
                         }
                     }
@@ -114,7 +119,12 @@ namespace Randomiser
 
                         if (index2 == -1)
                         {
-                            br.requiresFactions = uf[index].factions;
+                            br.requiresFactions.Clear();
+
+                            foreach (string str in uf[index].factions)
+                            {
+                                br.requiresFactions.Add(str);
+                            }
 
                         }
                     }
@@ -140,8 +150,12 @@ namespace Randomiser
 
                 if (index > -1)
                 {
-                    unit.ownership = enumsToStrings.StringToFaction(RandomiseData.UnitsFaction[index].factions[0]);
-                    
+
+                    foreach (string str in RandomiseData.UnitsFaction[index].factions)
+                    {
+                        unit.ownership |= enumsToStrings.StringToFaction(str);
+
+                    }
                     unit.ownership |= FactionOwnership.slave;
                 }
 

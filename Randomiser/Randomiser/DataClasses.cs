@@ -26,7 +26,7 @@ namespace Randomiser
         command = 1 << 13,
         mercenary_unit = 1 << 14,
         druid = 1 << 15,
-        warcry = 1 << 16
+        warcry = 1 << 16,
     }
 
     [Flags]
@@ -189,6 +189,43 @@ namespace Randomiser
         none = 1 << 27
     }
 
+    [Flags]
+    public enum M2TWFactionOwnership
+    {
+        england = 1 << 0,
+        france = 1 << 1,
+        hre = 1 << 2,
+        spain = 1 << 3,
+        venice = 1 << 4,
+        sicily = 1 << 5,
+        milan = 1 << 6,
+        scotland = 1 << 7,
+        byzantium = 1 << 8,
+        russia = 1 << 9,
+        moors = 1 << 10,
+        turks = 1 << 11,
+        egypt = 1 << 12,
+        denmark = 1 << 13,
+        portugal = 1 << 14,
+        poland = 1 << 15,
+        hungary = 1 << 16,
+        papal_states = 1 << 17,
+        aztexs = 1 << 18,
+        mongols = 1 << 19,
+        timurids = 1 << 20,
+        slave = 1 << 21,
+        //cultures
+        northern_european = 1 << 22,
+        eastern_european = 1 << 23,
+        middle_eastern = 1 << 24,
+        southern_european = 1 << 25,
+        normans = 1 << 26,
+        saxons = 1 << 27,
+        greek = 1 << 28,
+
+
+    }
+
     public class Soldier 
     {
         public string name; // name of model
@@ -310,6 +347,25 @@ namespace Randomiser
         public int[] food;
         public int[] cost;
         public FactionOwnership ownership;
+
+        //M2TW ONLY
+        public string stat_ter; //M2TW
+        public string stat_ter_ex; //M2TW
+        public string stat_ter_attr; //M2tw
+        public string stat_armour_ex; //M2TW
+        public string stat_pri_ex; // M2TW
+        public string bannerFaction; //M2TW BANNER
+        public string bannerHoly; //M2TW HOLY banner
+        public string stat_sec_ex; //M2TW
+        public string stat_stl; //M2TW
+        public string armour_ug_levels;
+        public string armour_ug_models;
+        public string era0;
+        public string era1;
+        public string era2;
+        public string info_pic_dir;
+        public string card_pic_info;
+        public string unit_info;
 
         public Unit()
         {
