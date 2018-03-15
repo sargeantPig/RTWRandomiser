@@ -30,9 +30,31 @@ namespace Randomiser
     }
 
     [Flags]
+    public enum M2TWAttributes
+    {
+        sea_faring = 1 << 0,
+        hide_forest = 1 << 1,
+        hide_improved_forest = 1 << 2,
+        hide_long_grass = 1 << 3,
+        hide_anywhere = 1 << 4,
+        can_sap = 1 << 5,
+        frighten_foot = 1 << 6,
+        frighten_mounted = 1 << 7,
+        can_run_amok = 1 << 8,
+        general_unit = 1 << 9,
+        general_unit_upgrade = 1 << 10,
+        cantabrian_circle = 1 << 11,
+        no_custom = 1 << 12,
+        command = 1 << 13,
+        mercenary_unit = 1 << 14,
+        druid = 1 << 15,
+        warcry = 1 << 16,
+        free_upkeep_unit = 1 << 17,
+    }
+
+    [Flags]
     public enum FormationTypes
     {
-
         Formation_Phalanx = 1 << 0,
         Formation_Horde = 1 << 1,
         Formation_Square = 1 << 2,
@@ -57,6 +79,67 @@ namespace Randomiser
         MT_no
     };
 
+    public enum M2TWAmmunition
+    {
+        no,
+        arrow,
+        arrow_fiery,
+        composite_arrow,
+        composite_arrow_fiery,
+        cav_composite_arrow,
+        cav_composite_arrow_fiery,
+        bodkin_arrow,
+        bodkin_arrow_fiery,
+        cav_bodkin_arrow,
+        cav_bodkin_arrow_fiery,
+        catapult,
+        fiery_catapult,
+        trebuchet,
+        fiery_trebuchet,
+        tarred_rock,
+        stone,
+        bolt,
+        javelin,
+        ballista,
+        flaming_ballista,
+        tower_ballista,
+        tower_flaming_ballista,
+        scorpion,
+        flaming_scorpion,
+        repeating_ballista,
+        bombard_shot,
+        flaming_bombard_shot,
+        ribault_shot,
+        monster_ribault_shot,
+        grand_bombard_shot,
+        flaming_grand_bombard_shot,
+        monster_bombard_shot,
+        cannon_shot,
+        exploding_cannon_shot,
+        culverin_shot,
+        exploding_culverin_shot,
+        mortar_shot,
+        basilisk_shot,
+        exploding_basilisk_shot,
+        serpentine_shot,
+        elephant_cannon_shot,
+        cow_carcass,
+        rocket,
+        elephant_rocket,
+        test_cannon_ball,
+        naphtha_bomb,
+        hand_gun_bullet,
+        arquebus_bullet,
+        musket_bullet,
+        pistol_bullet,
+        camel_gun_bullet,
+        crossbow_bolt,
+        steel_crossbow_bolt,
+        norman_catapult,
+        fiery_norman_catapult,
+
+    }
+
     public enum WeaponType
     {
 
@@ -75,6 +158,17 @@ namespace Randomiser
         blade,
         archery,
         siege,
+        TT_no
+    };
+
+    public enum M2TWtechType
+    {
+        melee_simple,
+        melee_blade,
+        missile_mechanical,
+        missile_gunpowder,
+        artillery_mechanical,
+        artillery_gunpowder,
         TT_no
     };
 
@@ -210,7 +304,7 @@ namespace Randomiser
         poland = 1 << 15,
         hungary = 1 << 16,
         papal_states = 1 << 17,
-        aztexs = 1 << 18,
+        aztecs = 1 << 18,
         mongols = 1 << 19,
         timurids = 1 << 20,
         slave = 1 << 21,
@@ -222,6 +316,7 @@ namespace Randomiser
         normans = 1 << 26,
         saxons = 1 << 27,
         greek = 1 << 28,
+        none = 1 << 29,
 
 
     }
@@ -273,6 +368,11 @@ namespace Randomiser
         public DamageType DamageFlags; // 7
         public SoundType SoundFlags; //  8
         public float[] attackdelay; //9, 10
+
+        //m2tw only
+        public string musketString;
+        public M2TWAmmunition m2twammunitionflags;
+        public M2TWtechType m2twTechType;
 
         public StatWeapons()
         {
@@ -348,7 +448,9 @@ namespace Randomiser
         public int[] cost;
         public FactionOwnership ownership;
 
-        //M2TW ONLY
+
+        //M2TW ONLY for now most of these will not be randomised
+        public int[] M2TWcost;
         public string stat_ter; //M2TW
         public string stat_ter_ex; //M2TW
         public string stat_ter_attr; //M2tw
@@ -366,6 +468,8 @@ namespace Randomiser
         public string info_pic_dir;
         public string card_pic_info;
         public string unit_info;
+        public M2TWFactionOwnership M2TWOwnership;
+        public M2TWAttributes M2TWAttributes;
 
         public Unit()
         {
@@ -383,6 +487,7 @@ namespace Randomiser
             ground = new int[4];
             food = new int[2];
             cost = new int[6];
+            M2TWcost = new int[8];
         
         }
 
@@ -390,13 +495,23 @@ namespace Randomiser
         {
             string unitString = "";
 
-                unitString +=(
-                    "type\t\t\t\t " + type + "\r\n" +
-                    "dictionary\t\t\t " + dictionary + "\r\n" +
-                    "category\t\t\t " + category + "\r\n" +
-                    "class\t\t\t\t " + unitClass + "\r\n" +
-                    "voice_type\t\t\t " + voiceType + "\r\n" +
-                    "soldier\t\t\t\t " + soldier.name + ", " + soldier.number.ToString() + ", " + soldier.extras.ToString() + ", " + soldier.collisionMass.ToString());
+            unitString += (
+                "type\t\t\t\t " + type + "\r\n" +
+                "dictionary\t\t\t " + dictionary + "\r\n" +
+                "category\t\t\t " + category + "\r\n" +
+                "class\t\t\t\t " + unitClass + "\r\n" +
+                "voice_type\t\t\t " + voiceType + "\r\n");
+
+            if (Data.isM2TWMode)
+            {
+                if (bannerFaction != null)
+                    unitString += "banner faction\t\t\t " + bannerFaction + "\r\n";
+                if (bannerHoly != null)
+                    unitString += "banner faction\t\t\t " + bannerHoly + "\r\n";
+            }
+
+
+            unitString += "soldier\t\t\t\t " + soldier.name + ", " + soldier.number.ToString() + ", " + soldier.extras.ToString() + ", " + soldier.collisionMass.ToString();
 
                 //unitString +=("\r\n");
 
@@ -439,6 +554,9 @@ namespace Randomiser
                 unitString +=("\r\nattributes\t\t\t "); // write attributes
 
                 bool firstAttr = false;
+
+            if (Data.isRTWMode)
+            {
                 if (attributes.HasFlag(Attributes.sea_faring))
                 {
                     if (!firstAttr)
@@ -446,9 +564,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.sea_faring));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.sea_faring));
                 }
 
                 if (attributes.HasFlag(Attributes.can_run_amok))
@@ -458,9 +576,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.can_run_amok));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.can_run_amok));
 
                 }
                 if (attributes.HasFlag(Attributes.can_sap))
@@ -470,9 +588,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.can_sap));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.can_sap));
                 }
                 if (attributes.HasFlag(Attributes.cantabrian_circle))
                 {
@@ -481,9 +599,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.cantabrian_circle));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.cantabrian_circle));
                 }
 
                 if (attributes.HasFlag(Attributes.command))
@@ -493,9 +611,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.command));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.command));
                 }
                 if (attributes.HasFlag(Attributes.druid))
                 {
@@ -504,9 +622,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.druid));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.druid));
                 }
                 if (attributes.HasFlag(Attributes.frighten_foot))
                 {
@@ -515,9 +633,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.frighten_foot));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.frighten_foot));
                 }
                 if (attributes.HasFlag(Attributes.frighten_mounted))
                 {
@@ -526,9 +644,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.frighten_mounted));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.frighten_mounted));
                 }
                 if (attributes.HasFlag(Attributes.general_unit))
                 {
@@ -537,9 +655,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.general_unit));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.general_unit));
                 }
                 if (attributes.HasFlag(Attributes.general_unit_upgrade))
                 {
@@ -548,9 +666,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.general_unit_upgrade));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.general_unit_upgrade));
                 }
                 if (attributes.HasFlag(Attributes.hide_anywhere))
                 {
@@ -559,9 +677,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_anywhere));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.hide_anywhere));
                 }
                 if (attributes.HasFlag(Attributes.hide_forest))
                 {
@@ -570,9 +688,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_forest));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.hide_forest));
                 }
                 if (attributes.HasFlag(Attributes.hide_improved_forest))
                 {
@@ -581,9 +699,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_improved_forest));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.hide_improved_forest));
                 }
                 if (attributes.HasFlag(Attributes.hide_long_grass))
                 {
@@ -592,9 +710,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.hide_long_grass));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.hide_long_grass));
                 }
                 if (attributes.HasFlag(Attributes.mercenary_unit))
                 {
@@ -603,9 +721,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.mercenary_unit));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.mercenary_unit));
                 }
                 if (attributes.HasFlag(Attributes.no_custom))
                 {
@@ -614,9 +732,9 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.no_custom));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.no_custom));
                 }
                 if (attributes.HasFlag(Attributes.warcry))
                 {
@@ -625,12 +743,220 @@ namespace Randomiser
                         firstAttr = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.AttributesToString(Attributes.warcry));
+                    unitString += (enumsToStrings.AttributesToString(Attributes.warcry));
                 }
 
-                unitString +=("\r\n");
+            }
+
+            if (Data.isM2TWMode)
+            {
+                if (M2TWAttributes.HasFlag(M2TWAttributes.sea_faring))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.sea_faring));
+                }
+
+                if (M2TWAttributes.HasFlag(M2TWAttributes.can_run_amok))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.can_run_amok));
+
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.can_sap))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.can_sap));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.cantabrian_circle))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.cantabrian_circle));
+                }
+
+                if (M2TWAttributes.HasFlag(M2TWAttributes.command))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.command));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.druid))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.druid));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.frighten_foot))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.frighten_foot));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.frighten_mounted))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.frighten_mounted));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.general_unit))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.general_unit));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.general_unit_upgrade))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.general_unit_upgrade));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.hide_anywhere))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.hide_anywhere));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.hide_forest))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.hide_forest));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.hide_improved_forest))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.hide_improved_forest));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.hide_long_grass))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.hide_long_grass));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.mercenary_unit))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.mercenary_unit));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.no_custom))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.no_custom));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.warcry))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.warcry));
+                }
+                if (M2TWAttributes.HasFlag(M2TWAttributes.free_upkeep_unit))
+                {
+                    if (!firstAttr)
+                    {
+                        firstAttr = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWAttributesToString(M2TWAttributes.free_upkeep_unit));
+                }
+
+            }
+
+            unitString +=("\r\n");
 
                 unitString +=("formation\t\t\t "); // write formation
                 foreach (float num in formation.FormationTight)
@@ -733,16 +1059,42 @@ namespace Randomiser
                 unitString +=("\r\n");
 
                 unitString +=("stat_pri\t\t\t "); // write primary weapon
+
                 foreach (int atk in primaryWeapon.attack)
                     unitString +=(atk + ", ");
-                unitString +=(enumsToStrings.MissleTypeToString(primaryWeapon.missletypeFlags) + ", ");
+
+            if (Data.isRTWMode)
+            {
+                unitString += (enumsToStrings.MissleTypeToString(primaryWeapon.missletypeFlags) + ", ");
                 foreach (int miss in primaryWeapon.Missleattri)
-                    unitString +=(miss + ", ");
-                unitString +=(
+                    unitString += (miss + ", ");
+                unitString += (
                     enumsToStrings.WeaponTypeToString(primaryWeapon.WeaponFlags) + ", " +
                     enumsToStrings.TechTypeToString(primaryWeapon.TechFlags) + ", " +
                     enumsToStrings.DamageTypeToString(primaryWeapon.DamageFlags) + ", " +
                     enumsToStrings.SoundTypeToString(primaryWeapon.SoundFlags) + ", ");
+
+            }
+
+            if (Data.isM2TWMode)
+            {
+                unitString += (enumsToStrings.M2TWMissleTypeToString(primaryWeapon.m2twammunitionflags) + ", ");
+                foreach (int miss in primaryWeapon.Missleattri)
+                    unitString += (miss + ", ");
+                unitString += (
+                    enumsToStrings.WeaponTypeToString(primaryWeapon.WeaponFlags) + ", " +
+                    enumsToStrings.M2TWTechTypeToString(primaryWeapon.m2twTechType) + ", " +
+                    enumsToStrings.DamageTypeToString(primaryWeapon.DamageFlags) + ", " +
+                    enumsToStrings.SoundTypeToString(primaryWeapon.SoundFlags) + ", ");
+
+
+            }
+
+            if (Data.isM2TWMode && primaryWeapon.musketString != null)
+            {
+                unitString += primaryWeapon.musketString + ", ";
+
+            }
 
                 bool firstattk = false;
                 foreach (float atkd in primaryWeapon.attackdelay)
@@ -940,17 +1292,43 @@ namespace Randomiser
 
                 unitString +=("\r\n");
 
+            if (Data.isM2TWMode)
+            {
+                if (stat_pri_ex != null)
+                    unitString += "stat_pri_ex\t\t\t " + stat_pri_ex + "\r\n";
+
+            } 
+
                 unitString +=("stat_sec\t\t\t "); // secondary weapon
                 foreach (int atk in secondaryWeapon.attack)
                     unitString +=(atk + ", ");
-                unitString +=(enumsToStrings.MissleTypeToString(secondaryWeapon.missletypeFlags) + ", ");
+
+            if (Data.isRTWMode)
+            {
+                unitString += (enumsToStrings.MissleTypeToString(secondaryWeapon.missletypeFlags) + ", ");
                 foreach (int miss in secondaryWeapon.Missleattri)
-                    unitString +=(miss + ", ");
-                unitString +=(
+                    unitString += (miss + ", ");
+                unitString += (
                     enumsToStrings.WeaponTypeToString(secondaryWeapon.WeaponFlags) + ", " +
                     enumsToStrings.TechTypeToString(secondaryWeapon.TechFlags) + ", " +
                     enumsToStrings.DamageTypeToString(secondaryWeapon.DamageFlags) + ", " +
                     enumsToStrings.SoundTypeToString(secondaryWeapon.SoundFlags) + ", ");
+
+            }
+
+            if (Data.isM2TWMode)
+            {
+                unitString += (enumsToStrings.M2TWMissleTypeToString(secondaryWeapon.m2twammunitionflags) + ", ");
+                foreach (int miss in secondaryWeapon.Missleattri)
+                    unitString += (miss + ", ");
+                unitString += (
+                    enumsToStrings.WeaponTypeToString(secondaryWeapon.WeaponFlags) + ", " +
+                    enumsToStrings.M2TWTechTypeToString(secondaryWeapon.m2twTechType) + ", " +
+                    enumsToStrings.DamageTypeToString(secondaryWeapon.DamageFlags) + ", " +
+                    enumsToStrings.SoundTypeToString(secondaryWeapon.SoundFlags) + ", ");
+
+
+            }
 
                 bool firstatkD = false;
                 foreach (float atkd in secondaryWeapon.attackdelay)
@@ -967,6 +1345,12 @@ namespace Randomiser
 
                 }
 
+            if (Data.isM2TWMode)
+            {
+                if (stat_sec_ex != null)
+                    unitString += "\r\n" + "stat_sec_ex\t\t\t " + stat_sec_ex;
+            }
+                
                 unitString +=("\r\n");
 
                 bool firstsecAttr = false;
@@ -1097,12 +1481,30 @@ namespace Randomiser
 
                 unitString +=("\r\n");
 
+            if (Data.isM2TWMode)
+            {
+                if (stat_ter != null)
+                    unitString += ("stat_ter\t\t\t " + stat_ter + "\r\n");
+                if (stat_ter_ex != null)
+                    unitString += ("stat_ter_ex\t\t\t " + stat_ter_ex + "\r\n");
+                if (stat_ter_attr != null)
+                    unitString += ("stat_ter_attr\t\t\t " + stat_ter_attr + "\r\n");
+                
+            }
+
                 unitString +=("stat_pri_armour\t\t ");
                 foreach (int numb in primaryArmour.stat_pri_armour)
                     unitString +=(numb + ", ");
                 unitString +=(enumsToStrings.ArmourSndToString(primaryArmour.armour_sound));
 
                 unitString +=("\r\n");
+
+            if (Data.isM2TWMode)
+            {
+                if (stat_armour_ex != null)
+                    unitString += "stat_armour_ex\t\t\t " + stat_armour_ex + "\r\n";
+
+            }
 
                 unitString +=("stat_sec_armour\t\t ");
                 foreach (int numb in secondaryArmour.stat_sec_armour)
@@ -1150,6 +1552,8 @@ namespace Randomiser
 
                 unitString +=("stat_cost\t\t\t ");
                 bool firstCost = false;
+            if (Data.isRTWMode)
+            {
                 foreach (int cost in cost)
                 {
                     if (!firstCost)
@@ -1157,16 +1561,48 @@ namespace Randomiser
                         firstCost = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(cost);
+                    unitString += (cost);
+                }
+            }
+
+            if(Data.isM2TWMode)
+            {
+                foreach (int cost in M2TWcost)
+                {
+                    if (!firstCost)
+                    {
+                        firstCost = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (cost);
                 }
 
+
+            }
+
                 unitString +=("\r\n");
+
+            if (Data.isM2TWMode)
+            {
+                if (stat_stl != null)
+                    unitString += "stat_stl\t\t\t " + stat_stl + "\r\n";
+                if (armour_ug_levels != null)
+                    unitString += "armour_ug_levels\t\t\t " + armour_ug_levels + "\r\n";
+                if (armour_ug_models != null)
+                    unitString += "armour_ug_models\t\t\t " + armour_ug_models + "\r\n";
+
+            }
 
                 unitString +=("ownership\t\t\t ");
 
                 bool firstStatOwnership = false;
+
+            if (Data.isRTWMode)
+            {
                 if (ownership.HasFlag(FactionOwnership.armenia))
                 {
                     if (!firstStatOwnership)
@@ -1174,9 +1610,9 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.armenia));
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.armenia));
 
                 }
                 if (ownership.HasFlag(FactionOwnership.britons))
@@ -1186,8 +1622,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.britons));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.britons));
                 }
                 if (ownership.HasFlag(FactionOwnership.carthage))
                 {
@@ -1196,9 +1632,9 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.carthage));
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.carthage));
                 }
                 if (ownership.HasFlag(FactionOwnership.carthaginian))
                 {
@@ -1207,8 +1643,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.carthaginian));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.carthaginian));
                 }
                 if (ownership.HasFlag(FactionOwnership.dacia))
                 {
@@ -1217,9 +1653,9 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.dacia));
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.dacia));
                 }
                 if (ownership.HasFlag(FactionOwnership.eastern))
                 {
@@ -1228,9 +1664,9 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.eastern));
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.eastern));
                 }
                 if (ownership.HasFlag(FactionOwnership.egypt))
                 {
@@ -1239,9 +1675,9 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
+                    else unitString += (", ");
 
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.egypt));
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.egypt));
                 }
                 if (ownership.HasFlag(FactionOwnership.egyptian))
                 {
@@ -1250,8 +1686,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.egyptian));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.egyptian));
                 }
                 if (ownership.HasFlag(FactionOwnership.gauls))
                 {
@@ -1260,8 +1696,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.gauls));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.gauls));
                 }
                 if (ownership.HasFlag(FactionOwnership.germans))
                 {
@@ -1270,8 +1706,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.germans));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.germans));
                 }
                 if (ownership.HasFlag(FactionOwnership.greek))
                 {
@@ -1280,8 +1716,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.greek));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.greek));
                 }
                 if (ownership.HasFlag(FactionOwnership.greek_cities))
                 {
@@ -1290,8 +1726,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.greek_cities));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.greek_cities));
                 }
                 if (ownership.HasFlag(FactionOwnership.macedon))
                 {
@@ -1300,8 +1736,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.macedon));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.macedon));
                 }
                 if (ownership.HasFlag(FactionOwnership.none))
                 {
@@ -1310,8 +1746,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.none));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.none));
                 }
                 if (ownership.HasFlag(FactionOwnership.numidia))
                 {
@@ -1320,8 +1756,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.numidia));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.numidia));
                 }
                 if (ownership.HasFlag(FactionOwnership.parthia))
                 {
@@ -1330,8 +1766,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.parthia));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.parthia));
                 }
                 if (ownership.HasFlag(FactionOwnership.pontus))
                 {
@@ -1340,8 +1776,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.pontus));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.pontus));
                 }
                 if (ownership.HasFlag(FactionOwnership.roman))
                 {
@@ -1350,8 +1786,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.roman));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.roman));
                 }
                 if (ownership.HasFlag(FactionOwnership.romans_brutii))
                 {
@@ -1360,8 +1796,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_brutii));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.romans_brutii));
                 }
                 if (ownership.HasFlag(FactionOwnership.romans_julii))
                 {
@@ -1370,8 +1806,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_julii));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.romans_julii));
                 }
                 if (ownership.HasFlag(FactionOwnership.romans_scipii))
                 {
@@ -1380,8 +1816,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_scipii));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.romans_scipii));
                 }
                 if (ownership.HasFlag(FactionOwnership.romans_senate))
                 {
@@ -1390,8 +1826,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.romans_senate));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.romans_senate));
                 }
                 if (ownership.HasFlag(FactionOwnership.scythia))
                 {
@@ -1400,8 +1836,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.scythia));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.scythia));
                 }
                 if (ownership.HasFlag(FactionOwnership.seleucid))
                 {
@@ -1410,8 +1846,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.seleucid));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.seleucid));
                 }
                 if (ownership.HasFlag(FactionOwnership.slave))
                 {
@@ -1420,8 +1856,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.slave));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.slave));
                 }
                 if (ownership.HasFlag(FactionOwnership.spain))
                 {
@@ -1430,8 +1866,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.spain));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.spain));
                 }
                 if (ownership.HasFlag(FactionOwnership.thrace))
                 {
@@ -1440,8 +1876,8 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.thrace));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.thrace));
                 }
                 if (ownership.HasFlag(FactionOwnership.barbarian))
                 {
@@ -1450,11 +1886,340 @@ namespace Randomiser
                         firstStatOwnership = true;
                     }
 
-                    else unitString +=(", ");
-                    unitString +=(enumsToStrings.FactionToString(FactionOwnership.barbarian));
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.FactionToString(FactionOwnership.barbarian));
                 }
 
-                unitString +=("\r\n\n");
+            }
+
+            if (Data.isM2TWMode) //
+            {
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.aztecs))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.aztecs));
+
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.byzantium))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.byzantium));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.denmark))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.denmark));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.eastern_european))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.eastern_european));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.egypt))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.egypt));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.england))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.england));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.france))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.france));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.greek))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.greek));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.hre))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.hre));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.hungary))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.hungary));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.middle_eastern))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.middle_eastern));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.milan))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.milan));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.mongols))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.mongols));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.none))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.none));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.moors))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.moors));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.normans))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.normans));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.northern_european))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.northern_european));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.papal_states))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.papal_states));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.poland))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.poland));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.portugal))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.portugal));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.russia))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.russia));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.saxons))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.saxons));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.scotland))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.scotland));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.sicily))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.sicily));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.slave))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.slave));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.southern_european))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.southern_european));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.spain))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.spain));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.timurids))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.timurids));
+                }
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.turks))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.turks));
+                }
+
+                if (M2TWOwnership.HasFlag(M2TWFactionOwnership.venice))
+                {
+                    if (!firstStatOwnership)
+                    {
+                        firstStatOwnership = true;
+                    }
+
+                    else unitString += (", ");
+                    unitString += (enumsToStrings.M2TWFactionToString(M2TWFactionOwnership.venice));
+                }
+            }
+
+            if (Data.isM2TWMode)
+            {
+                if (era0 != null)
+                    unitString += "era 0\t\t\t\t " + era0 + "\r\n";
+                if (era1 != null)
+                    unitString += "era 1\t\t\t\t " + era1 + "\r\n";
+                if (era2 != null)
+                    unitString += "era 2\t\t\t\t " + era2 + "\r\n";
+                if (info_pic_dir != null)
+                    unitString += "info_pic_dir\t\t\t\t " + info_pic_dir + "\r\n";
+                if (card_pic_info != null)
+                    unitString += "card_pic_info\t\t\t\t " + card_pic_info + "\r\n";
+                if (unit_info != null)
+                    unitString += "unit_info\t\t\t\t " + unit_info + "\r\n";
+            }
+
+            unitString +=("\r\n\n");
 
             return unitString;
         }
@@ -1499,6 +2264,7 @@ namespace Randomiser
         public string buildingType; //eg. "core_building"
         public List<string> levels = new List<string>();
         public List<Building> buildings = new List<Building>();
+        public string CBconvert_to;
 
         public coreBuilding()
         { }
@@ -1509,8 +2275,12 @@ namespace Randomiser
             string a = "";
 
             a += "building " + buildingType + "\r\n"
-                + "{" + "\r\n"
-                + Data.EDBTabSpacers[0] + "levels ";
+                + "{" + "\r\n";
+
+            if (Data.isM2TWMode)
+                a += Data.EDBTabSpacers[0] + "convert_to " + CBconvert_to + "\r\n";
+
+               a += Data.EDBTabSpacers[0] + "levels ";
 
             foreach (string level in levels)
             {
@@ -1545,6 +2315,8 @@ namespace Randomiser
         public List<string> factionsRequired = new List<string>();
         public Bcapability capability;
         public Bconstruction construction;
+        public string Bconvert_to; 
+
         public Building()
         {
 
@@ -1556,6 +2328,7 @@ namespace Randomiser
             factionsRequired = new List<string>(b.factionsRequired);
             capability = b.capability;
             construction = b.construction;
+            Bconvert_to = b.Bconvert_to;
         }
 
 
@@ -1570,9 +2343,10 @@ namespace Randomiser
                 a += faction + ", ";
             }
 
-
             a += "}" + "\r\n"
-                + Data.EDBTabSpacers[1] + "{" + "\r\n"
+                + Data.EDBTabSpacers[1] + "{" + "\r\n";
+
+            a += Data.EDBTabSpacers[2] + "convert_to " + Bconvert_to + "\r\n"
                 + capability.outputCapability();
 
             a += construction.outputConstruction();

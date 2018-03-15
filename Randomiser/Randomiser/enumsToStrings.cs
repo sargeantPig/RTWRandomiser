@@ -106,6 +106,109 @@ namespace Randomiser
 
         }
 
+        static public M2TWFactionOwnership M2TWStringToFaction(string str)
+        {
+            M2TWFactionOwnership faction = M2TWFactionOwnership.none;
+
+            switch (str)
+            {
+                case "england":
+                    faction = M2TWFactionOwnership.england | M2TWFactionOwnership.northern_european;
+                    break;
+                case "france":
+                    faction = M2TWFactionOwnership.france | M2TWFactionOwnership.northern_european;
+                    break;
+                case "hre":
+                    faction = M2TWFactionOwnership.hre | M2TWFactionOwnership.northern_european;
+                    break;
+                case "spain":
+                    faction = M2TWFactionOwnership.spain | M2TWFactionOwnership.southern_european;
+                    break;
+                case "venice":
+                    faction = M2TWFactionOwnership.venice | M2TWFactionOwnership.southern_european;
+                    break;
+                case "sicily":
+                    faction = M2TWFactionOwnership.sicily | M2TWFactionOwnership.southern_european;
+                    break;
+                case "milan":
+                    faction = M2TWFactionOwnership.milan | M2TWFactionOwnership.southern_european;
+                    break;
+                case "scotland":
+                    faction = M2TWFactionOwnership.scotland | M2TWFactionOwnership.northern_european;
+                    break;
+                case "byzantium":
+                    faction = M2TWFactionOwnership.byzantium | M2TWFactionOwnership.greek;
+                    break;
+                case "russia":
+                    faction = M2TWFactionOwnership.russia | M2TWFactionOwnership.eastern_european;
+                    break;
+                case "moors":
+                    faction = M2TWFactionOwnership.moors | M2TWFactionOwnership.middle_eastern;
+                    break;
+                case "turks":
+                    faction = M2TWFactionOwnership.turks | M2TWFactionOwnership.middle_eastern;
+                    break;
+                case "egypt":
+                    faction = M2TWFactionOwnership.egypt | M2TWFactionOwnership.middle_eastern;
+                    break;
+                case "denmark":
+                    faction = M2TWFactionOwnership.denmark | M2TWFactionOwnership.northern_european;
+                    break;
+                case "portugal":
+                    faction = M2TWFactionOwnership.portugal | M2TWFactionOwnership.southern_european;
+                    break;
+                case "poland":
+                    faction = M2TWFactionOwnership.poland | M2TWFactionOwnership.eastern_european;
+                    break;
+                case "hungary":
+                    faction = M2TWFactionOwnership.hungary | M2TWFactionOwnership.eastern_european;
+                    break;
+                case "papal_states":
+                    faction = M2TWFactionOwnership.papal_states | M2TWFactionOwnership.southern_european;
+                    break;
+                case "aztecs":
+                    faction = M2TWFactionOwnership.aztecs;
+                    break;
+                case "mongols":
+                    faction = M2TWFactionOwnership.mongols | M2TWFactionOwnership.middle_eastern;
+                    break;
+                case "timurids":
+                    faction = M2TWFactionOwnership.timurids | M2TWFactionOwnership.middle_eastern;
+                    break;
+                case "slave":
+                    faction = M2TWFactionOwnership.slave | M2TWFactionOwnership.northern_european;
+                    break;
+                case "northern_european":
+                    faction = M2TWFactionOwnership.northern_european | M2TWFactionOwnership.england | M2TWFactionOwnership.france | M2TWFactionOwnership.hre | M2TWFactionOwnership.scotland | M2TWFactionOwnership.denmark | M2TWFactionOwnership.slave;
+                    break;
+                case "eastern_european":
+                    faction = M2TWFactionOwnership.eastern_european | M2TWFactionOwnership.russia | M2TWFactionOwnership.hungary | M2TWFactionOwnership.poland;
+                    break;
+                case "middle_eastern":
+                    faction = M2TWFactionOwnership.middle_eastern | M2TWFactionOwnership.moors | M2TWFactionOwnership.turks | M2TWFactionOwnership.egypt | M2TWFactionOwnership.mongols | M2TWFactionOwnership.timurids;
+                    break;
+                case "southern_european":
+                    faction = M2TWFactionOwnership.southern_european | M2TWFactionOwnership.spain | M2TWFactionOwnership.venice | M2TWFactionOwnership.sicily | M2TWFactionOwnership.milan | M2TWFactionOwnership.portugal | M2TWFactionOwnership.papal_states;
+                    break;
+                case "normans":
+                    faction = M2TWFactionOwnership.normans;
+                    break;
+                case "saxons":
+                    faction = M2TWFactionOwnership.saxons;
+                    break;
+                case "greek":
+                    faction = M2TWFactionOwnership.greek | M2TWFactionOwnership.byzantium ;
+                    break;
+
+
+            }
+
+            return faction;
+
+        }
+
+
+
         static public string FactionToString(FactionOwnership faction)
         {
 
@@ -207,6 +310,112 @@ namespace Randomiser
 
         }
 
+        static public string M2TWFactionToString(M2TWFactionOwnership faction)
+        {
+
+            string str = "";
+
+            switch (faction)
+            {
+                case M2TWFactionOwnership.aztecs:
+                    str = "aztecs";
+                    break;
+
+                case M2TWFactionOwnership.byzantium:
+                    str = "byzantium";
+                    break;
+
+                case M2TWFactionOwnership.denmark:
+                    str = "denmark";
+                    break;
+
+                case M2TWFactionOwnership.eastern_european:
+                    str = "eastern_european";
+                    break;
+                case M2TWFactionOwnership.egypt:
+                    str = "egypt";
+                    break;
+                case M2TWFactionOwnership.england:
+                    str = "england";
+                    break;
+                case M2TWFactionOwnership.france:
+                    str = "france";
+                    break;
+                case M2TWFactionOwnership.greek:
+                    str = "greek";
+                    break;
+                case M2TWFactionOwnership.hre:
+                    str = "hre";
+                    break;
+                case M2TWFactionOwnership.hungary:
+                    str = "hungary";
+                    break;
+                case M2TWFactionOwnership.middle_eastern:
+                    str = "middle_eastern";
+                    break;
+                case M2TWFactionOwnership.milan:
+                    str = "milan";
+                    break;
+                case M2TWFactionOwnership.mongols:
+                    str = "mongols";
+                    break;
+                case M2TWFactionOwnership.moors:
+                    str = "moors";
+                    break;
+                case M2TWFactionOwnership.normans:
+                    str = "normans";
+                    break;
+                case M2TWFactionOwnership.northern_european:
+                    str = "northern_european";
+                    break;
+                case M2TWFactionOwnership.papal_states:
+                    str = "papal_states";
+                    break;
+                case M2TWFactionOwnership.poland:
+                    str = "poland";
+                    break;
+                case M2TWFactionOwnership.portugal:
+                    str = "portugal";
+                    break;
+                case M2TWFactionOwnership.russia:
+                    str = "russia";
+                    break;
+                case M2TWFactionOwnership.saxons:
+                    str = "saxons";
+                    break;
+                case M2TWFactionOwnership.scotland:
+                    str = "scotland";
+                    break;
+                case M2TWFactionOwnership.sicily:
+                    str = "sicily";
+                    break;
+                case M2TWFactionOwnership.slave:
+                    str = "slave";
+                    break;
+                case M2TWFactionOwnership.southern_european:
+                    str = "southern_european";
+                    break;
+                case M2TWFactionOwnership.spain:
+                    str = "spain";
+                    break;
+                case M2TWFactionOwnership.timurids:
+                    str = "timurids";
+                    break;
+                case M2TWFactionOwnership.turks:
+                    str = "turks";
+                    break;
+                case M2TWFactionOwnership.venice:
+                    str = "venice";
+                    break;
+
+            }
+
+
+
+            return str;
+
+        }
+
         static public string AttributesToString(Attributes attr)
         {
             string str = "";
@@ -275,6 +484,80 @@ namespace Randomiser
 
 
         }
+
+        static public string M2TWAttributesToString(M2TWAttributes attr)
+        {
+            string str = "";
+
+            switch (attr)
+            {
+                case M2TWAttributes.sea_faring:
+                    str = "sea_faring";
+                    break;
+
+                case M2TWAttributes.hide_forest:
+                    str = "hide_forest";
+                    break;
+
+                case M2TWAttributes.hide_improved_forest:
+                    str = "hide_improved_forest";
+                    break;
+
+                case M2TWAttributes.hide_long_grass:
+                    str = "hide_long_grass";
+                    break;
+                case M2TWAttributes.hide_anywhere:
+                    str = "hide_anywhere";
+                    break;
+                case M2TWAttributes.can_sap:
+                    str = "can_sap";
+                    break;
+                case M2TWAttributes.frighten_foot:
+                    str = "frighten_foot";
+                    break;
+                case M2TWAttributes.frighten_mounted:
+                    str = "frighten_mounted";
+                    break;
+                case M2TWAttributes.can_run_amok:
+                    str = "can_run_amok";
+                    break;
+                case M2TWAttributes.general_unit:
+                    str = "general_unit";
+                    break;
+                case M2TWAttributes.general_unit_upgrade:
+                    str = "general_unit_upgrade";
+                    break;
+                case M2TWAttributes.cantabrian_circle:
+                    str = "cantabrian_circle";
+                    break;
+                case M2TWAttributes.no_custom:
+                    str = "no_custom";
+                    break;
+                case M2TWAttributes.command:
+                    str = "command";
+                    break;
+                case M2TWAttributes.mercenary_unit:
+                    str = "mercenary_unit";
+                    break;
+                case M2TWAttributes.druid:
+                    str = "druid";
+                    break;
+                case M2TWAttributes.warcry:
+                    str = "warcry";
+                    break;
+                case M2TWAttributes.free_upkeep_unit:
+                    str = "free_upkeep_unit";
+                    break;
+
+
+            }
+
+            return str;
+
+
+
+        }
+
 
         static public string FormationTostring(FormationTypes formation)
         {
@@ -429,6 +712,219 @@ namespace Randomiser
             }
 
             return str;
+        }
+
+        static public string M2TWTechTypeToString(M2TWtechType tech)
+        {
+            string tt = "";
+
+            switch(tech)
+            {
+                case M2TWtechType.artillery_gunpowder:
+                    tt = "artillery_gunpowder";
+                    break;
+                case M2TWtechType.artillery_mechanical:
+                    tt = "artillery_mechanical";
+                    break;
+                case M2TWtechType.melee_blade:
+                    tt = "melee_blade";
+                    break;
+                case M2TWtechType.melee_simple:
+                    tt = "melee_simple";
+                    break;
+                case M2TWtechType.missile_gunpowder:
+                    tt = "missile_gunpowder";
+                    break;
+                case M2TWtechType.missile_mechanical:
+                    tt = "missile_mechanical";
+                    break;
+                case M2TWtechType.TT_no:
+                    tt = "TT_no";
+                    break;
+            }
+
+            return tt;
+        }
+
+        static public string M2TWMissleTypeToString(M2TWAmmunition miss)
+        {
+            string missle = "";
+
+            switch (miss)
+            {
+                case M2TWAmmunition.arquebus_bullet:
+                    missle = "arquebus_bullet";
+                    break;
+                case M2TWAmmunition.arrow:
+                    missle = "arrow";
+                    break;
+                case M2TWAmmunition.arrow_fiery:
+                    missle = "arrow_fiery";
+                    break;
+                case M2TWAmmunition.ballista:
+                    missle = "ballista";
+                    break;
+                case M2TWAmmunition.basilisk_shot:
+                    missle = "basilisk_shot";
+                    break;
+                case M2TWAmmunition.bodkin_arrow:
+                    missle = "bodkin_arrow";
+                    break;
+                case M2TWAmmunition.bodkin_arrow_fiery:
+                    missle = "bodkin_arrow_fiery";
+                    break;
+                case M2TWAmmunition.bolt:
+                    missle = "bolt";
+                    break;
+                case M2TWAmmunition.bombard_shot:
+                    missle = "bombard_shot";
+                    break;
+                case M2TWAmmunition.camel_gun_bullet:
+                    missle = "camel_gun_bullet";
+                    break;
+                case M2TWAmmunition.cannon_shot:
+                    missle = "cannon_shot";
+                    break;
+                case M2TWAmmunition.catapult:
+                    missle = "catapult";
+                    break;
+                case M2TWAmmunition.cav_bodkin_arrow:
+                    missle = "cav_bodkin_arrow";
+                    break;
+                case M2TWAmmunition.cav_bodkin_arrow_fiery:
+                    missle = "cav_bodkin_arrow_fiery";
+                    break;
+                case M2TWAmmunition.cav_composite_arrow:
+                    missle = "cav_composite_arrow";
+                    break;
+                case M2TWAmmunition.cav_composite_arrow_fiery:
+                    missle = "cav_composite_arrow_fiery";
+                    break;
+                case M2TWAmmunition.composite_arrow:
+                    missle = "composite_arrow";
+                    break;
+                case M2TWAmmunition.composite_arrow_fiery:
+                    missle = "composite_arrow_fiery";
+                    break;
+                case M2TWAmmunition.cow_carcass:
+                    missle = "cow_carcass";
+                    break;
+                case M2TWAmmunition.crossbow_bolt:
+                    missle = "crossbow_bolt";
+                    break;
+                case M2TWAmmunition.culverin_shot:
+                    missle = "culverin_shot";
+                    break;
+                case M2TWAmmunition.elephant_cannon_shot:
+                    missle = "elephant_cannon_shot";
+                    break;
+                case M2TWAmmunition.elephant_rocket:
+                    missle = "elephant_rocket";
+                    break;
+                case M2TWAmmunition.exploding_basilisk_shot:
+                    missle = "exploding_basilisk_shot";
+                    break;
+                case M2TWAmmunition.exploding_cannon_shot:
+                    missle = "exploding_cannon_shot";
+                    break;
+                case M2TWAmmunition.exploding_culverin_shot:
+                    missle = "exploding_culverin_shot";
+                    break;
+                case M2TWAmmunition.fiery_catapult:
+                    missle = "fiery_catapult";
+                    break;
+                case M2TWAmmunition.fiery_norman_catapult:
+                    missle = "fiery_norman_catapult";
+                    break;
+                case M2TWAmmunition.fiery_trebuchet:
+                    missle = "fiery_trebuchet";
+                    break;
+                case M2TWAmmunition.flaming_ballista:
+                    missle = "flaming_ballista";
+                    break;
+                case M2TWAmmunition.flaming_bombard_shot:
+                    missle = "flaming_bombard_shot";
+                    break;
+                case M2TWAmmunition.flaming_grand_bombard_shot:
+                    missle = "flaming_grand_bombard_shot";
+                    break;
+                case M2TWAmmunition.flaming_scorpion:
+                    missle = "flaming_scorpion";
+                    break;
+                case M2TWAmmunition.grand_bombard_shot:
+                    missle = "grand_bombard_shot";
+                    break;
+                case M2TWAmmunition.hand_gun_bullet:
+                    missle = "hand_gun_bullet";
+                    break;
+                case M2TWAmmunition.javelin:
+                    missle = "javelin";
+                    break;
+                case M2TWAmmunition.monster_bombard_shot:
+                    missle = "monster_bombard_shot";
+                    break;
+                case M2TWAmmunition.monster_ribault_shot:
+                    missle = "monster_ribault_shot";
+                    break;
+                case M2TWAmmunition.mortar_shot:
+                    missle = "mortar_shot";
+                    break;
+                case M2TWAmmunition.musket_bullet:
+                    missle = "musket_bullet";
+                    break;
+                case M2TWAmmunition.naphtha_bomb:
+                    missle = "naphtha_bomb";
+                    break;
+                case M2TWAmmunition.no:
+                    missle = "no";
+                    break;
+                case M2TWAmmunition.norman_catapult:
+                    missle = "norman_catapult";
+                    break;
+                case M2TWAmmunition.pistol_bullet:
+                    missle = "pistol_bullet";
+                    break;
+                case M2TWAmmunition.repeating_ballista:
+                    missle = "repeating_ballista";
+                    break;
+                case M2TWAmmunition.ribault_shot:
+                    missle = "ribault_shot";
+                    break;
+                case M2TWAmmunition.rocket:
+                    missle = "rocket";
+                    break;
+                case M2TWAmmunition.scorpion:
+                    missle = "scorpion";
+                    break;
+                case M2TWAmmunition.serpentine_shot:
+                    missle = "serpentine_shot";
+                    break;
+                case M2TWAmmunition.steel_crossbow_bolt:
+                    missle = "steel_crossbow_bolt";
+                    break;
+                case M2TWAmmunition.stone:
+                    missle = "stone";
+                    break;
+                case M2TWAmmunition.tarred_rock:
+                    missle = "tarred_rock";
+                    break;
+                case M2TWAmmunition.test_cannon_ball:
+                    missle = "test_cannon_ball";
+                    break;
+                case M2TWAmmunition.tower_ballista:
+                    missle = "tower_ballista";
+                    break;
+                case M2TWAmmunition.tower_flaming_ballista:
+                    missle = "tower_flaming_ballista";
+                    break;
+                case M2TWAmmunition.trebuchet:
+                    missle = "trebuchet";
+                    break;
+               
+            }
+
+            return missle;
+
         }
 
         static public string DamageTypeToString(DamageType dmg)

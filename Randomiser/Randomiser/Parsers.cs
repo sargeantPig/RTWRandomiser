@@ -11,6 +11,1115 @@ namespace Randomiser
 {
     public static class Parsers
     {
+        public static void M2TWParseEDU(string filePath, ref TextBox txt_Output)
+        {
+            Data.Vanunits.Clear();
+
+            string line;
+            int counter = -1;
+
+            StreamReader edu = new StreamReader(filePath);
+
+            while ((line = edu.ReadLine()) != null)
+            {
+
+                string[] key = line.Split(' ', ';');
+
+                if (line.StartsWith("type"))
+                {
+                    counter++;
+
+                    Data.Vanunits.Add(new Unit());
+
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    Data.Vanunits[counter].type = trimmed;
+
+                    txt_Output.AppendText(trimmed + "\n");
+
+                }
+
+                else if (line.StartsWith("dictionary"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].dictionary = trimmed;
+                }
+
+                else if (line.StartsWith("category"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].category = trimmed;
+                }
+
+                else if (line.StartsWith("class"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].unitClass = trimmed;
+                }
+
+                else if (line.StartsWith("voice_type"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].voiceType = trimmed;
+                }
+
+                else if (line.StartsWith("soldier"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    Data.Vanunits[counter].soldier.name = splitted[0].Trim();
+                    Data.Vanunits[counter].soldier.number = Convert.ToInt16(splitted[1].Trim());
+                    Data.Vanunits[counter].soldier.extras = Convert.ToInt16(splitted[2].Trim());
+                    Data.Vanunits[counter].soldier.collisionMass = (float)Convert.ToDouble(splitted[3].Trim());
+                }
+
+                else if (line.StartsWith("officer"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].officer.Add(trimmed);
+                }
+
+                else if (line.StartsWith("engine"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].engine = trimmed;
+                }
+
+                else if (line.StartsWith("animal"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].animal = trimmed;
+                }
+
+                else if (line.StartsWith("mount_effect"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    string newCombined = "";
+
+                    foreach (string full in splitted)
+                    {
+                        newCombined += full;
+                    }
+
+                    string[] reSplit = newCombined.Split(' ');
+
+                    int i = 0;
+                    foreach (string STRING in reSplit)
+                    {
+
+                        Data.Vanunits[counter].mountEffect.mountType.Add(reSplit[i]);
+                        i++;
+                        Data.Vanunits[counter].mountEffect.modifier.Add(Convert.ToInt16(reSplit[i]));
+                        i++;
+
+                        if (i > splitted.Count())
+                            break;
+
+                    }
+                }
+
+                else if (line.StartsWith("mount"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].mount = trimmed;
+                }
+
+                else if (line.StartsWith("ship"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(';');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].naval = trimmed;
+                }
+
+                else if (line.StartsWith("formation"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    int i = 0;
+                    int a = 0;
+                    int b = 0;
+
+                    foreach (string STRING in splitted)
+                    {
+                        if (i < 2)
+                            Data.Vanunits[counter].formation.FormationTight[i] = (float)Convert.ToDouble(STRING.Trim());
+                        else if (a < 2)
+                        {
+                            Data.Vanunits[counter].formation.FormationSparse[a] = (float)Convert.ToDouble(STRING.Trim());
+                            a++;
+                        }
+                        else if (b < 1)
+                        {
+                            Data.Vanunits[counter].formation.FormationRanks = Convert.ToInt16(STRING.Trim());
+                            b++;
+                        }
+
+                        else if (STRING.Trim() == "phalanx")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Phalanx;
+                        else if (STRING.Trim() == "testudo")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Testudo;
+                        else if (STRING.Trim() == "schiltrom")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Schiltrom;
+                        else if (STRING.Trim() == "horde")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Horde;
+                        else if (STRING.Trim() == "square")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Square;
+                        else if (STRING.Trim() == "wedge")
+                            Data.Vanunits[counter].formation.FormationFlags |= FormationTypes.Formation_Wedge;
+
+                        i++;
+                    }
+                }
+
+                else if (line.StartsWith("stat_health"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    Data.Vanunits[counter].heatlh[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].heatlh[1] = Convert.ToInt16(splitted[1]);
+                }
+
+                else if (line.StartsWith("stat_pri_attr"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    foreach (string STRING in splitted)
+                    {
+                        if (STRING.Trim() == "ap")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.ap;
+                        else if (STRING.Trim() == "bp")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.bp;
+                        else if (STRING.Trim() == "spear")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.pa_spear;
+                        else if (STRING.Trim() == "long_pike")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.long_pike;
+                        else if (STRING.Trim() == "short_pike")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.short_pike;
+                        else if (STRING.Trim() == "prec")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.prec;
+                        else if (STRING.Trim() == "thrown")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.pa_thrown;
+                        else if (STRING.Trim() == "launching")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.launching;
+                        else if (STRING.Trim() == "area")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.area;
+                        else if (STRING.Trim() == "spear_bonus_4")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.spear_bonus_4;
+                        else if (STRING.Trim() == "spear_bonus_8")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.spear_bonus_8;
+                        else if (STRING.Trim() == "thrown ap")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.thrown_ap;
+                        else if (STRING.Trim() == "no")
+                            Data.Vanunits[counter].priAttri |= stat_pri_attr.PA_no;
+                    }
+
+                }
+
+                else if (line.StartsWith("stat_pri_armour"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].primaryArmour.stat_pri_armour[2] = Convert.ToInt16(splitted[2]);
+
+                    if (splitted[3].Trim() == "flesh")
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.flesh;
+                    else if (splitted[3].Trim() == "leather")
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.leather;
+                    else if (splitted[3].Trim() == "metal")
+                        Data.Vanunits[counter].primaryArmour.armour_sound = ArmourSound.metal;
+
+                }
+
+                else if (line.StartsWith("stat_pri"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].primaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].primaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
+
+                    Data.Vanunits[counter].primaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
+                    Data.Vanunits[counter].primaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
+
+                    if (Data.isM2TWMode && splitted.Count() == 12)
+                    {
+                        Data.Vanunits[counter].primaryWeapon.musketString = splitted[9];
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[10]);
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[11]);
+                    }
+                    else
+                    {
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    }
+
+
+                    if (splitted[2].Trim() == "arquebus_bullet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.arquebus_bullet;
+                    else if (splitted[2].Trim() == "stone")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.stone;
+                    else if (splitted[2].Trim() == "arrow_fiery")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.arrow_fiery;
+                    else if (splitted[2].Trim() == "arrow")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.arrow;
+                    else if (splitted[2].Trim() == "ballista")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.ballista;
+                    else if (splitted[2].Trim() == "basilisk_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.basilisk_shot;
+                    else if (splitted[2].Trim() == "bodkin_arrow")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.bodkin_arrow;
+                    else if (splitted[2].Trim() == "bodkin_arrow_fiery")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.bodkin_arrow_fiery;
+                    else if (splitted[2].Trim() == "bolt")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.bolt;
+                    else if (splitted[2].Trim() == "bombard_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.bombard_shot;
+                    else if (splitted[2].Trim() == "camel_gun_bullet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.camel_gun_bullet;
+                    else if (splitted[2].Trim() == "cav_bodkin_arrow")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_bodkin_arrow;
+                    else if (splitted[2].Trim() == "catapult")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.catapult;
+                    else if (splitted[2].Trim() == "cav_bodkin_arrow_fiery")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_bodkin_arrow_fiery;
+                    else if (splitted[2].Trim() == "cav_composite_arrow")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_composite_arrow;
+                    else if (splitted[2].Trim() == "cav_composite_arrow_fiery")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_composite_arrow_fiery;
+                    else if (splitted[2].Trim() == "composite_arrow")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.composite_arrow;
+                    else if (splitted[2].Trim() == "composite_arrow_fiery")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.composite_arrow_fiery;
+                    else if (splitted[2].Trim() == "crossbow_bolt")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.crossbow_bolt;
+                    else if (splitted[2].Trim() == "cow_carcass")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.cow_carcass;
+                    else if (splitted[2].Trim() == "culverin_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.culverin_shot;
+                    else if (splitted[2].Trim() == "elephant_cannon_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.elephant_cannon_shot;
+                    else if (splitted[2].Trim() == "elephant_rocket")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.elephant_rocket;
+                    else if (splitted[2].Trim() == "exploding_basilisk_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_basilisk_shot;
+                    else if (splitted[2].Trim() == "exploding_cannon_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_cannon_shot;
+                    else if (splitted[2].Trim() == "exploding_culverin_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_culverin_shot;
+                    else if (splitted[2].Trim() == "fiery_catapult")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_catapult;
+                    else if (splitted[2].Trim() == "fiery_norman_catapult")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_norman_catapult;
+                    else if (splitted[2].Trim() == "fiery_trebuchet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_trebuchet;
+                    else if (splitted[2].Trim() == "flaming_ballista")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_ballista;
+                    else if (splitted[2].Trim() == "flaming_bombard_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_bombard_shot;
+                    else if (splitted[2].Trim() == "flaming_grand_bombard_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_grand_bombard_shot;
+                    else if (splitted[2].Trim() == "flaming_scorpion")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_scorpion;
+                    else if (splitted[2].Trim() == "grand_bombard_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.grand_bombard_shot;
+                    else if (splitted[2].Trim() == "hand_gun_bullet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.hand_gun_bullet;
+                    else if (splitted[2].Trim() == "javelin")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.javelin;
+                    else if (splitted[2].Trim() == "monster_bombard_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.monster_bombard_shot;
+                    else if (splitted[2].Trim() == "monster_ribault_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.monster_ribault_shot;
+                    else if (splitted[2].Trim() == "mortar_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.mortar_shot;
+                    else if (splitted[2].Trim() == "musket_bullet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.musket_bullet;
+                    else if (splitted[2].Trim() == "naphtha_bomb")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.naphtha_bomb;
+                    else if (splitted[2].Trim() == "no")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.no;
+                    else if (splitted[2].Trim() == "norman_catapult")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.norman_catapult;
+                    else if (splitted[2].Trim() == "pistol_bullet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.pistol_bullet;
+                    else if (splitted[2].Trim() == "repeating_ballista")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.repeating_ballista;
+                    else if (splitted[2].Trim() == "ribault_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.ribault_shot;
+                    else if (splitted[2].Trim() == "rocket")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.rocket;
+                    else if (splitted[2].Trim() == "serpentine_shot")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.serpentine_shot;
+                    else if (splitted[2].Trim() == "scorpion")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.scorpion;
+                    else if (splitted[2].Trim() == "steel_crossbow_bolt")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.steel_crossbow_bolt;
+                    else if (splitted[2].Trim() == "stone")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.stone;
+                    else if (splitted[2].Trim() == "tarred_rock")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.tarred_rock;
+                    else if (splitted[2].Trim() == "test_cannon_ball")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.test_cannon_ball;
+                    else if (splitted[2].Trim() == "tower_ballista")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.tower_ballista;
+                    else if (splitted[2].Trim() == "tower_flaming_ballista")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.tower_flaming_ballista;
+                    else if (splitted[2].Trim() == "trebuchet")
+                        Data.Vanunits[counter].primaryWeapon.m2twammunitionflags = M2TWAmmunition.trebuchet;
+
+                    if (splitted[5].Trim() == "melee")
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.melee;
+                    else if (splitted[5].Trim() == "missle")
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.missle;
+                    else if (splitted[5].Trim() == "siege_missile")
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.siege_missle;
+                    else if (splitted[5].Trim() == "thrown")
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.thrown;
+                    else if (splitted[5].Trim() == "no")
+                        Data.Vanunits[counter].primaryWeapon.WeaponFlags = WeaponType.WT_no;
+
+                    if (splitted[6].Trim() == "artillery_gunpowder")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.artillery_gunpowder;
+                    else if (splitted[6].Trim() == "artillery_mechanical")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.artillery_mechanical;
+                    else if (splitted[6].Trim() == "melee_blade")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.melee_blade;
+                    else if (splitted[6].Trim() == "melee_simple")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.melee_simple;
+                    else if (splitted[6].Trim() == "missile_gunpowder")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.missile_gunpowder;
+                    else if (splitted[6].Trim() == "missile_mechanical")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.missile_mechanical;
+                    else if (splitted[6].Trim() == "TT_no")
+                        Data.Vanunits[counter].primaryWeapon.m2twTechType = M2TWtechType.TT_no;
+
+                    if (splitted[7].Trim() == "piercing")
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.piercing;
+                    else if (splitted[7].Trim() == "blunt")
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.blunt;
+                    else if (splitted[7].Trim() == "slashing")
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.slashing;
+                    else if (splitted[7].Trim() == "fire")
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.fire;
+                    else if (splitted[7].Trim() == "no")
+                        Data.Vanunits[counter].primaryWeapon.DamageFlags = DamageType.DM_no;
+
+                    if (splitted[8].Trim() == "none")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.ST_no;
+                    else if (splitted[8].Trim() == "knife")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.knife;
+                    else if (splitted[8].Trim() == "mace")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.mace;
+                    else if (splitted[8].Trim() == "axe")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.axe;
+                    else if (splitted[8].Trim() == "sword")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.sword;
+                    else if (splitted[8].Trim() == "spear")
+                        Data.Vanunits[counter].primaryWeapon.SoundFlags = SoundType.spear;
+
+                }
+
+                else if (line.StartsWith("stat_sec_attr"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    foreach (string STRING in splitted)
+                    {
+                        if (STRING.Trim() == "ap")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.ap;
+                        else if (STRING.Trim() == "bp")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.bp;
+                        else if (STRING.Trim() == "pa_spear")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.pa_spear;
+                        else if (STRING.Trim() == "long_pike")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.long_pike;
+                        else if (STRING.Trim() == "short_pike")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.short_pike;
+                        else if (STRING.Trim() == "prec")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.prec;
+                        else if (STRING.Trim() == "pa_thrown")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.pa_thrown;
+                        else if (STRING.Trim() == "launching")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.launching;
+                        else if (STRING.Trim() == "area")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.area;
+                        else if (STRING.Trim() == "fire")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.fire;
+                        else if (STRING.Trim() == "no")
+                            Data.Vanunits[counter].secAttri |= stat_pri_attr.PA_no;
+                    }
+
+                }
+
+                else if (line.StartsWith("stat_sec_armour"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].secondaryArmour.stat_sec_armour[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].secondaryArmour.stat_sec_armour[1] = Convert.ToInt16(splitted[1]);
+
+                    if (splitted[2].Trim() == "flesh")
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.flesh;
+                    else if (splitted[2].Trim() == "leather")
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.leather;
+                    else if (splitted[2].Trim() == "metal")
+                        Data.Vanunits[counter].secondaryArmour.sec_armour_sound = ArmourSound.metal;
+
+                }
+
+                else if (line.StartsWith("stat_sec"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].secondaryWeapon.attack[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].secondaryWeapon.attack[1] = Convert.ToInt16(splitted[1]);
+
+                    Data.Vanunits[counter].secondaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
+                    Data.Vanunits[counter].secondaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
+
+                    if (Data.isM2TWMode && splitted.Count() == 12)
+                    {
+                        Data.Vanunits[counter].secondaryWeapon.musketString = splitted[9];
+                        Data.Vanunits[counter].secondaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[10]);
+                        Data.Vanunits[counter].secondaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[11]);
+                    }
+                    else
+                    {
+                        Data.Vanunits[counter].secondaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
+                        Data.Vanunits[counter].secondaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    }
+
+
+                    if (splitted[2].Trim() == "arquebus_bullet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.arquebus_bullet;
+                    else if (splitted[2].Trim() == "stone")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.stone;
+                    else if (splitted[2].Trim() == "arrow_fiery")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.arrow_fiery;
+                    else if (splitted[2].Trim() == "arrow")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.arrow;
+                    else if (splitted[2].Trim() == "ballista")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.ballista;
+                    else if (splitted[2].Trim() == "basilisk_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.basilisk_shot;
+                    else if (splitted[2].Trim() == "bodkin_arrow")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.bodkin_arrow;
+                    else if (splitted[2].Trim() == "bodkin_arrow_fiery")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.bodkin_arrow_fiery;
+                    else if (splitted[2].Trim() == "bolt")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.bolt;
+                    else if (splitted[2].Trim() == "bombard_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.bombard_shot;
+                    else if (splitted[2].Trim() == "camel_gun_bullet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.camel_gun_bullet;
+                    else if (splitted[2].Trim() == "cav_bodkin_arrow")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_bodkin_arrow;
+                    else if (splitted[2].Trim() == "catapult")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.catapult;
+                    else if (splitted[2].Trim() == "cav_bodkin_arrow_fiery")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_bodkin_arrow_fiery;
+                    else if (splitted[2].Trim() == "cav_composite_arrow")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_composite_arrow;
+                    else if (splitted[2].Trim() == "cav_composite_arrow_fiery")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.cav_composite_arrow_fiery;
+                    else if (splitted[2].Trim() == "composite_arrow")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.composite_arrow;
+                    else if (splitted[2].Trim() == "composite_arrow_fiery")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.composite_arrow_fiery;
+                    else if (splitted[2].Trim() == "crossbow_bolt")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.crossbow_bolt;
+                    else if (splitted[2].Trim() == "cow_carcass")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.cow_carcass;
+                    else if (splitted[2].Trim() == "culverin_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.culverin_shot;
+                    else if (splitted[2].Trim() == "elephant_cannon_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.elephant_cannon_shot;
+                    else if (splitted[2].Trim() == "elephant_rocket")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.elephant_rocket;
+                    else if (splitted[2].Trim() == "exploding_basilisk_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_basilisk_shot;
+                    else if (splitted[2].Trim() == "exploding_cannon_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_cannon_shot;
+                    else if (splitted[2].Trim() == "exploding_culverin_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.exploding_culverin_shot;
+                    else if (splitted[2].Trim() == "fiery_catapult")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_catapult;
+                    else if (splitted[2].Trim() == "fiery_norman_catapult")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_norman_catapult;
+                    else if (splitted[2].Trim() == "fiery_trebuchet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.fiery_trebuchet;
+                    else if (splitted[2].Trim() == "flaming_ballista")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_ballista;
+                    else if (splitted[2].Trim() == "flaming_bombard_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_bombard_shot;
+                    else if (splitted[2].Trim() == "flaming_grand_bombard_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_grand_bombard_shot;
+                    else if (splitted[2].Trim() == "flaming_scorpion")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.flaming_scorpion;
+                    else if (splitted[2].Trim() == "grand_bombard_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.grand_bombard_shot;
+                    else if (splitted[2].Trim() == "hand_gun_bullet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.hand_gun_bullet;
+                    else if (splitted[2].Trim() == "javelin")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.javelin;
+                    else if (splitted[2].Trim() == "monster_bombard_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.monster_bombard_shot;
+                    else if (splitted[2].Trim() == "monster_ribault_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.monster_ribault_shot;
+                    else if (splitted[2].Trim() == "mortar_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.mortar_shot;
+                    else if (splitted[2].Trim() == "musket_bullet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.musket_bullet;
+                    else if (splitted[2].Trim() == "naphtha_bomb")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.naphtha_bomb;
+                    else if (splitted[2].Trim() == "no")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.no;
+                    else if (splitted[2].Trim() == "norman_catapult")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.norman_catapult;
+                    else if (splitted[2].Trim() == "pistol_bullet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.pistol_bullet;
+                    else if (splitted[2].Trim() == "repeating_ballista")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.repeating_ballista;
+                    else if (splitted[2].Trim() == "ribault_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.ribault_shot;
+                    else if (splitted[2].Trim() == "rocket")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.rocket;
+                    else if (splitted[2].Trim() == "serpentine_shot")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.serpentine_shot;
+                    else if (splitted[2].Trim() == "scorpion")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.scorpion;
+                    else if (splitted[2].Trim() == "steel_crossbow_bolt")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.steel_crossbow_bolt;
+                    else if (splitted[2].Trim() == "stone")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.stone;
+                    else if (splitted[2].Trim() == "tarred_rock")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.tarred_rock;
+                    else if (splitted[2].Trim() == "test_cannon_ball")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.test_cannon_ball;
+                    else if (splitted[2].Trim() == "tower_ballista")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.tower_ballista;
+                    else if (splitted[2].Trim() == "tower_flaming_ballista")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.tower_flaming_ballista;
+                    else if (splitted[2].Trim() == "trebuchet")
+                        Data.Vanunits[counter].secondaryWeapon.m2twammunitionflags = M2TWAmmunition.trebuchet;
+
+                    if (splitted[5].Trim() == "melee")
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.melee;
+                    else if (splitted[5].Trim() == "missle")
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.missle;
+                    else if (splitted[5].Trim() == "siege_missile")
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.siege_missle;
+                    else if (splitted[5].Trim() == "thrown")
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.thrown;
+                    else if (splitted[5].Trim() == "no")
+                        Data.Vanunits[counter].secondaryWeapon.WeaponFlags = WeaponType.WT_no;
+
+                    if (splitted[6].Trim() == "artillery_gunpowder")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.artillery_gunpowder;
+                    else if (splitted[6].Trim() == "artillery_mechanical")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.artillery_mechanical;
+                    else if (splitted[6].Trim() == "melee_blade")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.melee_blade;
+                    else if (splitted[6].Trim() == "melee_simple")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.melee_simple;
+                    else if (splitted[6].Trim() == "missile_gunpowder")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.missile_gunpowder;
+                    else if (splitted[6].Trim() == "missile_mechanical")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.missile_mechanical;
+                    else if (splitted[6].Trim() == "TT_no")
+                        Data.Vanunits[counter].secondaryWeapon.m2twTechType = M2TWtechType.TT_no;
+
+                    if (splitted[7].Trim() == "piercing")
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.piercing;
+                    else if (splitted[7].Trim() == "blunt")
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.blunt;
+                    else if (splitted[7].Trim() == "slashing")
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.slashing;
+                    else if (splitted[7].Trim() == "fire")
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.fire;
+                    else if (splitted[7].Trim() == "no")
+                        Data.Vanunits[counter].secondaryWeapon.DamageFlags = DamageType.DM_no;
+
+                    if (splitted[8].Trim() == "none")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.ST_no;
+                    else if (splitted[8].Trim() == "knife")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.knife;
+                    else if (splitted[8].Trim() == "mace")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.mace;
+                    else if (splitted[8].Trim() == "axe")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.axe;
+                    else if (splitted[8].Trim() == "sword")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.sword;
+                    else if (splitted[8].Trim() == "spear")
+                        Data.Vanunits[counter].secondaryWeapon.SoundFlags = SoundType.spear;
+
+                }
+
+                else if (line.StartsWith("stat_heat"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].heat = Convert.ToInt16(trimmed);
+
+                }
+
+                else if (line.StartsWith("stat_ground"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].ground[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].ground[1] = Convert.ToInt16(splitted[1]);
+                    Data.Vanunits[counter].ground[2] = Convert.ToInt16(splitted[2]);
+                    Data.Vanunits[counter].ground[3] = Convert.ToInt16(splitted[3]);
+
+                }
+
+                else if (line.StartsWith("stat_mental"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].mental.morale = Convert.ToInt16(splitted[0]);
+
+                    if (splitted[1].Trim() == "normal")
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.normal;
+                    else if (splitted[1].Trim() == "low")
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.low;
+                    else if (splitted[1].Trim() == "disciplined")
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.disciplined;
+                    else if (splitted[1].Trim() == "impetuous")
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.impetuous;
+                    else if (splitted[1].Trim() == "berserker")
+                        Data.Vanunits[counter].mental.discipline = statmental_discipline.berserker;
+
+                    if (splitted[2].Trim() == "untrained")
+                        Data.Vanunits[counter].mental.training = statmental_training.untrained;
+                    else if (splitted[2].Trim() == "trained")
+                        Data.Vanunits[counter].mental.training = statmental_training.trained;
+                    else if (splitted[2].Trim() == "highly_trained")
+                        Data.Vanunits[counter].mental.training = statmental_training.highly_trained;
+                }
+
+                else if (line.StartsWith("stat_charge_dist"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].chargeDistance = Convert.ToInt16(trimmed);
+
+                }
+
+                else if (line.StartsWith("stat_fire_delay"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].fireDelay = Convert.ToInt16(trimmed);
+
+                }
+
+                else if (line.StartsWith("stat_food"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    Data.Vanunits[counter].food[0] = Convert.ToInt16(splitted[0]);
+                    Data.Vanunits[counter].food[1] = Convert.ToInt16(splitted[1]);
+
+                }
+
+                else if (line.StartsWith("stat_cost"))
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    int i = 0;
+                    foreach (string STRING in splitted)
+                    {
+                        if (Data.isRTWMode)
+                            Data.Vanunits[counter].cost[i] = Convert.ToInt16(STRING);
+                        else if (Data.isM2TWMode)
+                            Data.Vanunits[counter].M2TWcost[i] = Convert.ToInt16(STRING);
+                        i++;
+                    }
+
+                }
+
+                else if (line.StartsWith("ownership") && Data.isM2TWMode)
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    trimmed = splitted[0].TrimEnd();
+
+                    foreach (string STRING in splitted)
+                    {
+                        if (STRING.Trim() == "aztecs")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.aztecs;
+                        else if (STRING.Trim() == "byzantium")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.byzantium;
+                        else if (STRING.Trim() == "denmark")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.denmark;
+                        else if (STRING.Trim() == "eastern_european")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.eastern_european;
+                        else if (STRING.Trim() == "egypt")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.egypt;
+                        else if (STRING.Trim() == "england")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.england;
+                        else if (STRING.Trim() == "france")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.france;
+                        else if (STRING.Trim() == "greek")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.greek;
+                        else if (STRING.Trim() == "hre")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.hre;
+                        else if (STRING.Trim() == "hungary")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.hungary;
+                        else if (STRING.Trim() == "middle_eastern")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.middle_eastern;
+                        else if (STRING.Trim() == "milan")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.milan;
+                        else if (STRING.Trim() == "mongols")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.mongols;
+                        else if (STRING.Trim() == "moors")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.moors;
+                        else if (STRING.Trim() == "normans")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.normans;
+                        else if (STRING.Trim() == "northern_european")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.northern_european;
+                        else if (STRING.Trim() == "papal_states")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.papal_states;
+                        else if (STRING.Trim() == "poland")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.poland;
+                        else if (STRING.Trim() == "portugal")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.portugal;
+                        else if (STRING.Trim() == "russia")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.russia;
+                        else if (STRING.Trim() == "saxons")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.saxons;
+                        else if (STRING.Trim() == "scotland")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.scotland;
+                        else if (STRING.Trim() == "sicily")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.sicily;
+                        else if (STRING.Trim() == "slave")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.slave;
+                        else if (STRING.Trim() == "southern_european")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.southern_european;
+                        else if (STRING.Trim() == "spain")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.spain;
+                        else if (STRING.Trim() == "timurids")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.timurids;
+                        else if (STRING.Trim() == "turks")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.turks;
+                        else if (STRING.Trim() == "venice")
+                            Data.Vanunits[counter].M2TWOwnership |= M2TWFactionOwnership.venice;
+
+                    }
+
+                }
+
+                else if (line.StartsWith("attributes") && Data.isM2TWMode)
+                {
+                    string trimmed = Functions.RemoveFirstWord(line);
+                    trimmed = trimmed.Trim();
+
+                    string[] splitted = trimmed.Split(',');
+
+                    foreach (string STRING in splitted)
+                    {
+                        trimmed = STRING.Trim();
+
+                        if (trimmed == "sea_faring")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.sea_faring;
+                        else if (trimmed == "hide_forest")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.hide_forest;
+                        else if (trimmed == "hide_improved_forest")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.hide_improved_forest;
+                        else if (trimmed == "hide_long_grass")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.hide_long_grass;
+                        else if (trimmed == "hide_anywhere")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.hide_anywhere;
+                        else if (trimmed == "can_sap")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.can_sap;
+                        else if (trimmed == "frighten_foot")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.frighten_foot;
+                        else if (trimmed == "frighten_mounted")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.frighten_mounted;
+                        else if (trimmed == "can_run_amok")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.can_run_amok;
+                        else if (trimmed == "general_unit")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.general_unit;
+                        else if (trimmed == "general_unit_upgrade")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.general_unit_upgrade;
+                        else if (trimmed == "cantabrian_circle")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.cantabrian_circle;
+                        else if (trimmed == "no_custom")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.no_custom;
+                        else if (trimmed == "command")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.command;
+                        else if (trimmed == "mercenary_unit")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.mercenary_unit;
+                        else if (trimmed == "druid")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.druid;
+                        else if (trimmed == "warcry")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.warcry;
+                        else if (trimmed == "warcry")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.warcry;
+                        else if (trimmed == "free_upkeep_unit")
+                            Data.Vanunits[counter].M2TWAttributes |= M2TWAttributes.free_upkeep_unit;
+                    }
+
+                }
+
+                else if (line.StartsWith("stat_pri_ex") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_pri_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+                else if (Functions.GetFirstWord(line.Trim()) == "stat_ter" && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (Functions.GetFirstWord(line.Trim()) == "stat_ter_ex" && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (Functions.GetFirstWord(line.Trim()) == "stat_ter_attr" && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter_attr = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_armour_ex") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_armour_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("banner faction") && Data.isM2TWMode)
+                {
+                    string firstRemove = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    string secondRemove = Functions.RemoveFirstWord(firstRemove);
+                    Data.Vanunits[counter].bannerFaction = secondRemove.Trim();
+
+                }
+
+                else if (line.StartsWith("banner holy") && Data.isM2TWMode)
+                {
+                    string firstRemove = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    string secondRemove = Functions.RemoveFirstWord(firstRemove);
+                    Data.Vanunits[counter].bannerFaction = secondRemove.Trim();
+
+                }
+
+                else if (line.StartsWith("stat_sec_ex") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].stat_sec_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_stl") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].stat_stl = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+                else if (line.StartsWith("armour_ug_levels") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].armour_ug_levels = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("armour_ug_models") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].armour_ug_models = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("era0") && Data.isM2TWMode)
+                {
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era0 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+
+                else if (line.StartsWith("era1") && Data.isM2TWMode)
+                {
+
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era1 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+                else if (line.StartsWith("era2") && Data.isM2TWMode)
+                {
+
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era2 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+
+                else if (line.StartsWith("info_pic_dir") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].info_pic_dir = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("card_pic_info") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].card_pic_info = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("unit_info") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].unit_info = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+            }
+
+            txt_Output.AppendText("\n" + Data.Vanunits.Count + "Units loaded from EDU");
+
+            edu.Close();
+
+        }
+
         public static void ParseEdu(string filePath, ref TextBox txt_Output)
         {
             Data.Vanunits.Clear();
@@ -193,7 +1302,7 @@ namespace Randomiser
                 }
 
 
-                else if (line.StartsWith("attributes"))
+                else if (line.StartsWith("attributes") && Data.isRTWMode)
                 {
                     string trimmed = Functions.RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
@@ -375,8 +1484,18 @@ namespace Randomiser
                     Data.Vanunits[counter].primaryWeapon.Missleattri[0] = Convert.ToInt16(splitted[3]);
                     Data.Vanunits[counter].primaryWeapon.Missleattri[1] = Convert.ToInt16(splitted[4]);
 
-                    Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
-                    Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    if (Data.isM2TWMode && splitted.Count() == 12)
+                    {
+                        Data.Vanunits[counter].primaryWeapon.musketString = splitted[9];
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[10]);
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[11]);
+                    }
+                    else
+                    {
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[0] = (float)Convert.ToDouble(splitted[9]);
+                        Data.Vanunits[counter].primaryWeapon.attackdelay[1] = (float)Convert.ToDouble(splitted[10]);
+                    }
+                    
 
                     if (splitted[2].Trim() == "javelin")
                         Data.Vanunits[counter].primaryWeapon.missletypeFlags = MissleType.javelin;
@@ -709,13 +1828,16 @@ namespace Randomiser
                     int i = 0;
                     foreach (string STRING in splitted)
                     {
-                        Data.Vanunits[counter].cost[i] = Convert.ToInt16(STRING);
+                        if (Data.isRTWMode)
+                            Data.Vanunits[counter].cost[i] = Convert.ToInt16(STRING);
+                        else if (Data.isM2TWMode)
+                            Data.Vanunits[counter].M2TWcost[i] = Convert.ToInt16(STRING);
                         i++;
                     }
 
                 }
 
-                else if (line.StartsWith("ownership"))
+                else if (line.StartsWith("ownership") && Data.isRTWMode)
                 {
                     string trimmed = Functions.RemoveFirstWord(line);
                     trimmed = trimmed.Trim();
@@ -783,6 +1905,122 @@ namespace Randomiser
 
                     }
                 }
+
+
+                else if (line.StartsWith("stat_pri_ex") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_pri_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+                else if (line.StartsWith("stat_ter") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_ter_ex") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_ter_attr") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_ter_attr = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_armour_ex") && Data.isM2TWMode)
+                {
+                    Data.Vanunits[counter].stat_armour_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("banner faction") && Data.isM2TWMode)
+                {
+                    string firstRemove = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    string secondRemove = Functions.RemoveFirstWord(firstRemove);
+                    Data.Vanunits[counter].bannerFaction = secondRemove.Trim();
+
+                }
+
+                else if (line.StartsWith("banner holy") && Data.isM2TWMode)
+                {
+                    string firstRemove = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    string secondRemove = Functions.RemoveFirstWord(firstRemove);
+                    Data.Vanunits[counter].bannerFaction = secondRemove.Trim();
+
+                }
+
+                else if (line.StartsWith("stat_sec_ex") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].stat_sec_ex = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("stat_stl") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].stat_stl = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+                else if (line.StartsWith("armour_ug_levels") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].armour_ug_levels = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("armour_ug_models") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].armour_ug_models = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("era0") && Data.isM2TWMode)
+                {
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era0 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+
+                else if (line.StartsWith("era1") && Data.isM2TWMode)
+                {
+
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era1 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+                else if (line.StartsWith("era2") && Data.isM2TWMode)
+                {
+
+                    string firstWordRemoved = Functions.RemoveFirstWord(line.Trim()).Trim();
+                    Data.Vanunits[counter].era2 = Functions.RemoveFirstWord(firstWordRemoved);
+
+                }
+
+                else if (line.StartsWith("info_pic_dir") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].info_pic_dir = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("card_pic_info") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].card_pic_info = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
+
+                else if (line.StartsWith("unit_info") && Data.isM2TWMode)
+                {
+
+                    Data.Vanunits[counter].unit_info = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+                }
             }
 
             txt_Output.AppendText("\n" + Data.Vanunits.Count + "Units loaded from EDU");
@@ -842,6 +2080,13 @@ namespace Randomiser
                         while (!whileOne)
                         {
                             line = strat.ReadLine();
+
+                            if (line.Trim().StartsWith("convert_to"))
+                            {
+                                string[] convSplit = line.Trim().Split(' ');
+
+                                Data.EDBData.buildingTrees[counter].CBconvert_to = convSplit[1];
+                            }
 
                             if (line.Trim().StartsWith("}"))
                             {
@@ -912,6 +2157,14 @@ namespace Randomiser
                                             while (!whileThree)
                                             {
                                                 line = strat.ReadLine(); //continue to next line
+
+                                                if (line.Trim().StartsWith("convert_to"))
+                                                {
+                                                    string[] convSplit = line.Trim().Split(' ');
+
+                                                    newBuilding.Bconvert_to = convSplit[1];
+
+                                                }
 
                                                 if (line.Trim().StartsWith("}"))
                                                 {
@@ -1135,20 +2388,48 @@ namespace Randomiser
                         tg = img.GetPixel(x, y + 1).G;
                         tb = img.GetPixel(x, y + 1).B;
 
+                        if (tr == 41 && tg == 140 && tb == 233)
+                        {
+                            tr = img.GetPixel(x, y - 1).R;
+                            tg = img.GetPixel(x, y - 1).G;
+                            tb = img.GetPixel(x, y - 1).B;
+
+                        }
+
+
                         int index = Data.rgbRegions.FindIndex(z => z.r == tr && z.g == tg && z.b == tb);
 
-                        Data.rgbRegions[index].x = x;
-                        Data.rgbRegions[index].y = y;
-
-                        Data.regionWater[x, y] = false;
+                        if (Data.isRTWMode)
+                        {
+                            Data.rgbRegions[index].x = x;
+                            Data.rgbRegions[index].y = y;
+                            Data.regionWater[x, y] = false;
+                        }
+                        else if (Data.isM2TWMode)
+                        {
+                            Data.rgbRegions[index].x = x;
+                            Data.rgbRegions[index].y = y;
+                            Data.M2TWregionWater[x, y] = false;
+                        }
                     }
 
                     else if (img.GetPixel(x, y).R == 41 && img.GetPixel(x, y).G == 140 && img.GetPixel(x, y).B == 233)
                     {
-                        Data.regionWater[x, y] = true;
+                        if (Data.isRTWMode)
+                            Data.regionWater[x, y] = true;
+                        else if (Data.isM2TWMode)
+                            Data.M2TWregionWater[x, y] = true;
                     }
 
-                    else Data.regionWater[x, y] = false;
+                    else
+                    {
+                        if(Data.isRTWMode)
+                            Data.regionWater[x, y] = false;
+                        else if (Data.isM2TWMode)
+                            Data.M2TWregionWater[x, y] = false;
+
+
+                    }
 
                 }
             

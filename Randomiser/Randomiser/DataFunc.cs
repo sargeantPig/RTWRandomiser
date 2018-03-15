@@ -46,7 +46,7 @@ namespace Randomiser
 
         //m2tw only variables
         public static string M2TWDESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
-
+        public static bool[,] M2TWregionWater = new bool[295, 189];
 
 
 
