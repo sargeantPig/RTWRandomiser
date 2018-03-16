@@ -2223,17 +2223,29 @@ namespace Randomiser
                                                             break;
                                                         }
 
-                                                        if (Functions.GetFirstWord(line.Trim()) == "recruit")
+                                                        if (Functions.GetFirstWord(line.Trim()) == "recruit" || Functions.GetFirstWord(line.Trim()) == "recruit_pool")
                                                         {
                                                             Brecruit newRecruit = new Brecruit();
 
                                                             //get unit name
                                                             string[] unitSplit = line.Trim().Split('"');
                                                             newRecruit.name = unitSplit[1]; // unit name should always be here;
+                                                            if (Data.isRTWMode)
+                                                            {
+                                                                //get unit experience
+                                                                string[] expSplit = unitSplit[2].Trim().Split(' ');
+                                                                newRecruit.experience = Convert.ToInt32(expSplit[0].Trim());
+                                                            }
 
-                                                            //get unit experience
-                                                            string[] expSplit = unitSplit[2].Trim().Split(' ');
-                                                            newRecruit.experience = Convert.ToInt32(expSplit[0].Trim());
+                                                            else if (Data.isM2TWMode)
+                                                            {
+                                                                //get unit experience
+                                                                string[] expSplit = unitSplit[2].Trim().Split(' ');
+                                                                newRecruit.startingPoints = Convert.ToInt32(expSplit[0].Trim());
+                                                                newRecruit.pointBuildingGains = Convert.ToDouble(expSplit[3].Trim());
+                                                                newRecruit.maximumPoints = Convert.ToDouble(expSplit[6].Trim());
+                                                                newRecruit.experience = Convert.ToInt32(expSplit[8].Trim());
+                                                            }
 
                                                             //get factions
                                                             string output = line.Trim().Substring(line.Trim().IndexOf('{') + 1);

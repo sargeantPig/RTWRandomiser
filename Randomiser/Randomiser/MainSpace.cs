@@ -17,7 +17,7 @@ namespace Randomiser
         public MainForm1()
         {
             InitializeComponent();
-
+            Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
 
         }
 
@@ -38,14 +38,36 @@ namespace Randomiser
 
         private void btn_selModFolder_Click(object sender, EventArgs e)
         {
+            Data.isM2TWMode = rdb_medieval.Checked;
+            Data.isRTWMode = rdb_Rome.Checked;
+
+            if (!Data.isRTWMode && !Data.isM2TWMode)
+            {
+                txt_Output.AppendText("\r\nPlease select a mode.\r\n");
+                return;
+            }
+
             FolderBrowserDialog folderDialog;
 
             folderDialog = new FolderBrowserDialog();
 
             folderDialog.ShowDialog();
 
-            Data.ModFolderPath = @folderDialog.SelectedPath;
+            string[] split = @folderDialog.SelectedPath.Split('\\');
 
+            if (split.Last() != "randomiser" && Data.isRTWMode)
+            {
+                txt_Output.AppendText("\r\n Mod folder is not 'randomiser'");
+                return;
+            }
+
+            else if (split.Last() != "M2TWrandomiser" && Data.isM2TWMode)
+            {
+                txt_Output.AppendText("\r\n Mod folder is not 'M2TWrandomiser'");
+                return;
+            }
+
+            Data.ModFolderPath = @folderDialog.SelectedPath;
             txt_modFolderLoc.Text = Data.ModFolderPath;
         }
 
@@ -221,20 +243,26 @@ namespace Randomiser
 
             }
 
+            txt_randomiserOutput.AppendText("Randomising EDB\r\n");
             Randomise.RandomiseEDB();
+            txt_randomiserOutput.AppendText("Randomising EDU\r\n");
             Randomise.RandomiseEdu();
             
             //SAVE EDU and then randomise and save DS
             SaveEDU();
 
+            txt_randomiserOutput.AppendText("Saving descr_strat\r\n");
+
             if (Data.isRTWMode)
                 SaveDStrat();
             else M2TWDStrat();
 
-
+            txt_randomiserOutput.AppendText("Saving EDB\r\n");
             if (Data.isRTWMode)
                 SaveEDB();
             else SaveEDB();
+
+            txt_randomiserOutput.AppendText("Complete\r\n");
         }
 
         private void butt_coordOutput_Click(object sender, EventArgs e)
@@ -304,7 +332,7 @@ namespace Randomiser
                     else strat.WriteLine(s);
 
 
-                    txt_randomiserOutput.AppendText("Randomising " + faction + "\r\n");
+                   // txt_randomiserOutput.AppendText("Randomising " + faction + "\r\n");
                 }
 
 
@@ -312,7 +340,7 @@ namespace Randomiser
                 {
                     string[] split = s.Split('\t');
 
-                    if (RandomiseData.rndCost) {
+                    if (RandomiseData.rndTreasury) {
 
                         split[1] = Convert.ToString(Data.rnd.Next(0, 6000));
 
@@ -565,37 +593,55 @@ namespace Randomiser
 
             foreach (string s in Data.desc_StratData)
             {
-                if (s.StartsWith("faction") && !s.StartsWith("faction_relationships"))
+                if (s.StartsWith("faction") && !s.StartsWith("faction_relationships") && !s.StartsWith("faction_standings"))
                 {
                     //strat.WriteLine(s);
                     string[] split = s.Split(',');
                     string[] splitAgain = split[0].Split('\t');
                     string[] aiSplit = split[1].Split(' ');
 
-                    if (RandomiseData.rndAI)
+                    faction = splitAgain[1].Trim();
+
+                    if (RandomiseData.rndAI && Data.isRTWMode)
                     {
                         int rnds = Data.rnd.Next(0, RandomiseData.AIEconomy.Count() - 1);
                         int rnd2 = Data.rnd.Next(0, RandomiseData.AIMilitary.Count() - 1);
                         aiSplit[0] = RandomiseData.AIEconomy[rnds];
                         aiSplit[1] = RandomiseData.AIMilitary[rnd2];
 
-                        faction = splitAgain[1].Trim();
+                        
 
                         string final = split[0] + ", " + aiSplit[0] + "\t" + aiSplit[1] + "\r\n";
 
                         strat.WriteLine(final);
                     }
+                    else if (RandomiseData.rndAI && Data.isM2TWMode)
+                    {
+                        int rnds = Data.rnd.Next(0, RandomiseData.AIEconomy.Count() - 1);
+                        int rnd2 = Data.rnd.Next(0, RandomiseData.AIMilitary.Count() - 1);
+                        aiSplit[0] = RandomiseData.AIEconomy[rnds];
+                        aiSplit[1] = RandomiseData.AIMilitary[rnd2];
+
+
+
+                        string final = split[0] + ", " + aiSplit[0] + "\t" + aiSplit[1] + "\r\n";
+
+                        strat.WriteLine(final);
+                    }
+
                     else strat.WriteLine(s);
 
 
-                    txt_randomiserOutput.AppendText("Randomising " + faction + "\r\n");
+                    //txt_randomiserOutput.AppendText("Randomising " + faction + "\r\n");
                 }
 
                 else if (s.StartsWith("denari") && !s.StartsWith("denari_kings_purse"))
                 {
-                    string[] split = s.Split('\t');
+                    string[] split = s.Split('\t', ' ');
 
-                    if (RandomiseData.rndCost)
+                    
+
+                    if (RandomiseData.rndTreasury)
                     {
 
                         split[1] = Convert.ToString(Data.rnd.Next(0, 6000));

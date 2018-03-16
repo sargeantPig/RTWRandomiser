@@ -59,8 +59,6 @@ namespace Randomiser
 
         }
 
-       
-
         static void RosterRandomise()
         {
 
@@ -73,33 +71,72 @@ namespace Randomiser
                 {
                     foreach (Brecruit br in building.capability.canRecruit)
                     {
-                        int index = uf.FindIndex(x => x.dicName == br.name);
-                        int index2 = br.requiresFactions.FindIndex(x => x == "slave");
-
-                        if (index == -1 && index2 == -1)
+                        if (Data.isRTWMode)
                         {
 
-                            UnitFaction unit = new UnitFaction();
-                            unit.dicName = br.name;
-                            FactionOwnership prev = FactionOwnership.none;
-                            int rnd = Data.rnd.Next(1, RandomiseData.OwnershipPerUnit);
+                            int index = uf.FindIndex(x => x.dicName == br.name);
+                            int index2 = br.requiresFactions.FindIndex(x => x == "slave");
 
-                            for (int i = 0; i < rnd; i++)
+                            if (index == -1 && index2 == -1)
                             {
-                                FactionOwnership fo = Functions.RandomFlag<FactionOwnership>();
-                                while (fo == FactionOwnership.slave || fo == FactionOwnership.none || fo == prev)
+
+                                UnitFaction unit = new UnitFaction();
+                                unit.dicName = br.name;
+                                FactionOwnership prev = FactionOwnership.none;
+                                int rnd = Data.rnd.Next(1, RandomiseData.OwnershipPerUnit);
+
+                                for (int i = 0; i < rnd; i++)
                                 {
+                                    FactionOwnership fo = Functions.RandomFlag<FactionOwnership>();
+                                    while (fo == FactionOwnership.slave || fo == FactionOwnership.none || fo == prev)
+                                    {
 
-                                    fo = Functions.RandomFlag<FactionOwnership>();
+                                        fo = Functions.RandomFlag<FactionOwnership>();
 
+                                    }
+
+                                    prev = fo;
+                                    string faction = enumsToStrings.FactionToString(fo);
+                                    unit.factions.Add(faction);
                                 }
-
-                                prev = fo;
-                                string faction = enumsToStrings.FactionToString(fo);
-                                unit.factions.Add(faction);
+                                uf.Add(new UnitFaction(unit));
+                                RandomiseData.UnitsFaction.Add(new UnitFaction(unit));
                             }
-                            uf.Add(new UnitFaction(unit));
-                            RandomiseData.UnitsFaction.Add(new UnitFaction(unit));
+
+                        }
+
+                        else if (Data.isM2TWMode)
+                        {
+                            int index = uf.FindIndex(x => x.dicName == br.name);
+                            int index2 = br.requiresFactions.FindIndex(x => x == "slave");
+
+                            if (index == -1 && index2 == -1)
+                            {
+
+                                UnitFaction unit = new UnitFaction();
+                                unit.dicName = br.name;
+                                M2TWFactionOwnership prev = M2TWFactionOwnership.none;
+                                int rnd = Data.rnd.Next(1, RandomiseData.OwnershipPerUnit);
+
+                                for (int i = 0; i < rnd; i++)
+                                {
+                                    M2TWFactionOwnership fo = Functions.RandomFlag<M2TWFactionOwnership>();
+                                    while (fo == M2TWFactionOwnership.slave || fo == M2TWFactionOwnership.none || fo == prev)
+                                    {
+
+                                        fo = Functions.RandomFlag<M2TWFactionOwnership>();
+
+                                    }
+
+                                    prev = fo;
+                                    string faction = enumsToStrings.M2TWFactionToString(fo);
+                                    unit.factions.Add(faction);
+                                }
+                                uf.Add(new UnitFaction(unit));
+                                RandomiseData.UnitsFaction.Add(new UnitFaction(unit));
+                            }
+
+
                         }
                     }
                 }
@@ -139,26 +176,55 @@ namespace Randomiser
         {
             foreach (Unit unit in Data.ModdedUnits)
             {
-                int index = RandomiseData.UnitsFaction.FindIndex(x => x.dicName == unit.type);
-                bool isSlave = false;
-
-                if (unit.ownership.HasFlag(FactionOwnership.slave))
-                {
-                    isSlave = true;
-
-                }
-
-                if (index > -1)
+                if (Data.isRTWMode)
                 {
 
-                    foreach (string str in RandomiseData.UnitsFaction[index].factions)
+                    int index = RandomiseData.UnitsFaction.FindIndex(x => x.dicName == unit.type);
+                    bool isSlave = false;
+
+                    if (unit.ownership.HasFlag(FactionOwnership.slave))
                     {
-                        unit.ownership |= enumsToStrings.StringToFaction(str);
+                        isSlave = true;
 
                     }
-                    unit.ownership |= FactionOwnership.slave;
+
+                    if (index > -1)
+                    {
+
+                        foreach (string str in RandomiseData.UnitsFaction[index].factions)
+                        {
+                            unit.ownership |= enumsToStrings.StringToFaction(str);
+
+                        }
+                        unit.ownership |= FactionOwnership.slave;
+                    }
+
                 }
 
+                if (Data.isM2TWMode)
+                {
+
+                    int index = RandomiseData.UnitsFaction.FindIndex(x => x.dicName == unit.type);
+                    bool isSlave = false;
+
+                    if (unit.M2TWOwnership.HasFlag(M2TWFactionOwnership.slave))
+                    {
+                        isSlave = true;
+
+                    }
+
+                    if (index > -1)
+                    {
+
+                        foreach (string str in RandomiseData.UnitsFaction[index].factions)
+                        {
+                            unit.M2TWOwnership |= enumsToStrings.M2TWStringToFaction(str);
+
+                        }
+                        unit.M2TWOwnership |= M2TWFactionOwnership.slave;
+                    }
+
+                }
 
             }
 
@@ -227,14 +293,31 @@ namespace Randomiser
         {
             foreach (Unit unit in Data.ModdedUnits)
             {
-                if (!unit.priAttri.HasFlag(stat_pri_attr.long_pike) || !unit.priAttri.HasFlag(stat_pri_attr.short_pike) || !unit.priAttri.HasFlag(stat_pri_attr.pa_spear))
+                if (Data.isRTWMode)
                 {
-                    unit.formation.FormationFlags = Functions.RandomFlag<FormationTypes>(0, 3);
+                    if (!unit.priAttri.HasFlag(stat_pri_attr.long_pike) || !unit.priAttri.HasFlag(stat_pri_attr.short_pike) || !unit.priAttri.HasFlag(stat_pri_attr.pa_spear))
+                    {
+                        unit.formation.FormationFlags = Functions.RandomFlag<FormationTypes>(0, 3);
 
-                    if (unit.formation.FormationFlags != FormationTypes.Formation_Phalanx)
-                        unit.formation.FormationFlags |= Functions.RandomFlag<FormationTypes>(4, 7);
+                        if (unit.formation.FormationFlags != FormationTypes.Formation_Phalanx)
+                            unit.formation.FormationFlags |= Functions.RandomFlag<FormationTypes>(4, 7);
+
+                    }
 
                 }
+                if (Data.isM2TWMode)
+                {
+                    if (!unit.priAttri.HasFlag(stat_pri_attr.long_pike) || !unit.priAttri.HasFlag(stat_pri_attr.short_pike) || !unit.priAttri.HasFlag(stat_pri_attr.pa_spear))
+                    {
+                        unit.formation.FormationFlags = Functions.RandomFlag<FormationTypes>(0, 3);
+
+                        if (unit.formation.FormationFlags != FormationTypes.Formation_Phalanx)
+                            unit.formation.FormationFlags |= Functions.RandomFlag<FormationTypes>(4, 7);
+
+                    }
+
+                }
+
             }
         }
 
@@ -242,17 +325,40 @@ namespace Randomiser
         {
             foreach (Unit unit in Data.ModdedUnits)
             {
-                unit.attributes = Attributes.sea_faring;
 
-                int max = Data.rnd.Next(1, RandomiseData.maxAttri + 1);
-
-                for (int i = 0; i < max; i++)
+                if (Data.isRTWMode)
                 {
+                    unit.attributes = Attributes.sea_faring;
 
-                    Attributes a = Functions.RandomFlag<Attributes>(1, 17);
+                    int max = Data.rnd.Next(1, RandomiseData.maxAttri + 1);
 
-                    if (!unit.attributes.HasFlag(a))
-                        unit.attributes |= a;
+                    for (int i = 0; i < max; i++)
+                    {
+
+                        Attributes a = Functions.RandomFlag<Attributes>(1, 17);
+
+                        if (!unit.attributes.HasFlag(a))
+                            unit.attributes |= a;
+
+                    }
+
+                }
+
+                else if (Data.isM2TWMode)
+                {
+                    unit.M2TWAttributes = M2TWAttributes.sea_faring;
+
+                    int max = Data.rnd.Next(1, RandomiseData.maxAttri + 1);
+
+                    for (int i = 0; i < max; i++)
+                    {
+
+                        M2TWAttributes a = Functions.RandomFlag<M2TWAttributes>(1, 17);
+
+                        if (!unit.M2TWAttributes.HasFlag(a))
+                            unit.M2TWAttributes |= a;
+
+                    }
 
                 }
 
@@ -263,9 +369,19 @@ namespace Randomiser
         {
             foreach(Unit unit in Data.ModdedUnits)
             {
-                unit.voiceType = RandomiseData.VoiceTypes[Data.rnd.Next(RandomiseData.VoiceTypes.Length)];
-                unit.primaryWeapon.SoundFlags = Functions.RandomFlag<SoundType>();
-                unit.primaryArmour.armour_sound = Functions.RandomFlag<ArmourSound>();
+                if (Data.isRTWMode)
+                {
+                    unit.voiceType = RandomiseData.VoiceTypes[Data.rnd.Next(RandomiseData.VoiceTypes.Length)];
+                    unit.primaryWeapon.SoundFlags = Functions.RandomFlag<SoundType>();
+                    unit.primaryArmour.armour_sound = Functions.RandomFlag<ArmourSound>();
+                }
+                if (Data.isM2TWMode)
+                {
+                    unit.voiceType = RandomiseData.VoiceTypes[Data.rnd.Next(RandomiseData.M2TWVoiceTypes.Length)];
+                    unit.primaryWeapon.SoundFlags = Functions.RandomFlag<SoundType>();
+                    unit.primaryArmour.armour_sound = Functions.RandomFlag<ArmourSound>();
+                }
+
             }
         }
 
@@ -273,8 +389,17 @@ namespace Randomiser
         {
             foreach (Unit unit in Data.ModdedUnits)
             {
-                unit.cost[1] = Data.rnd.Next(200, 3000); // cost to build 
-                unit.cost[2] = (int)(unit.cost[1] * 0.25); // cost to upkeep 
+                if (Data.isRTWMode)
+                {
+                    unit.cost[1] = Data.rnd.Next(200, 3000); // cost to build 
+                    unit.cost[2] = (int)(unit.cost[1] * 0.25); // cost to upkeep 
+                }
+                else if (Data.isM2TWMode)
+                {
+                    unit.M2TWcost[1] = Data.rnd.Next(200, 3000); // cost to build 
+                    unit.M2TWcost[2] = (int)(unit.cost[1] * 0.25); // cost to upkeep 
+
+                }
             }
         }
 

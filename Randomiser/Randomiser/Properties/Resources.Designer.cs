@@ -59,5 +59,15 @@ namespace Randomiser.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Medieval_II_Total_War_2_icon {
+            get {
+                object obj = ResourceManager.GetObject("Medieval_II_Total_War_2_icon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

@@ -2450,6 +2450,9 @@ namespace Randomiser
     {
         public string name; //eg. carthaginian peasant
         public int experience;
+        public int startingPoints;
+        public double pointBuildingGains;
+        public double maximumPoints;
         public List<string> requiresFactions = new List<string>();
 
         public Brecruit()
@@ -2461,7 +2464,10 @@ namespace Randomiser
         {
             string a = "";
 
-            a += Data.EDBTabSpacers[3] + "recruit " + "\"" + name + "\"" + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
+            if(Data.isRTWMode)
+                a += Data.EDBTabSpacers[3] + "recruit " + "\"" + name + "\"" + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
+            else if(Data.isM2TWMode)
+                a += Data.EDBTabSpacers[3] + "recruit_pool " + "\"" + name + "\"" + "  " + startingPoints.ToString() + "  " + pointBuildingGains.ToString() + "  " + maximumPoints.ToString() + "  " + experience.ToString() + "  " + "requires factions " + "{ ";
 
             foreach (string faction in requiresFactions)
             {

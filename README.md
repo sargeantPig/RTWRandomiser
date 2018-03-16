@@ -1,5 +1,11 @@
-# RTWRandomiser (Rome Total War Randomiser)
-RTWRandomiser aims to randomise all feasible things within the game.
+# Total War Randomiser
+TWRandomiser aims to randomise all feasible things within the game(s).
+
+# Games supported
+
+  Rome Total War (v1.5)
+  
+  Medieval 2 Total War (steam version)
 
 # Randomiser Features so far:
 
@@ -14,25 +20,20 @@ RTWRandomiser aims to randomise all feasible things within the game.
   Random Treasury
   
   Random faction ai
-  
-  Random Faction Rosters
 
 # Other features:
 
   view units by faction
   
   view region and corresponding settlement
-  
-# Known Bugs
 
-  If there's more armies than the amount of cities a faction has they'll stack on the capital. You just need to use the "Army Lists" scroll to move them. I'll prob fix this at some point, but imo its low priority as I'd rather get more things randomised.
-  
-  Unit cards will default to the peasant card if a faction can't normally recruit it. This is fine however as this does not cause a      crash.
+# Installation (differs by game READ CAREFULLY)
 
+Place the .exe, .dll's into Main Total War folder (where the RomeTW.exe is located for rome, or where medieval2.exe is located for medieval 2)
 
-# Installation
+For RomeTW:
 
-Place the .exe, .dll's and randomiser folder into your Main Rome Total War folder (where the RomeTW.exe is located)
+Place the randomiser folder into the main rome folder, like the step above
 
 Right click the RomeTW.exe and create a shortcut
 
@@ -41,6 +42,19 @@ Right click the newly created shortcut and add this to the end of the target lin
 Open the randomiser.exe, select the correct folders, then click load to load the initial data.
 
 Now on the randomise tab, select your options and click randomise.
+
+For Medieval 2 Total War (steam version):
+
+Place the M2TWrandomiser folder into the mods folder located in the main Medieval 2 directory (where the medieval2.exe is located)
+
+Right click Medieval 2 total war on your steam game list
+
+Click properties
+
+Click set launch options and paste this '--features.mod=mods/M2TWrandomiser' without the quotes
+
+Click ok
+
 
 You are now ready to play.
 
