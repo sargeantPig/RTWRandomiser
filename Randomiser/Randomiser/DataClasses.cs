@@ -2314,8 +2314,10 @@ namespace Randomiser
         public string buildingName; //eg governors_house
         public List<string> factionsRequired = new List<string>();
         public Bcapability capability;
+        public Fcapability fcapability;
         public Bconstruction construction;
-        public string Bconvert_to; 
+        public string Bconvert_to;
+        public string material;
 
         public Building()
         {
@@ -2329,6 +2331,8 @@ namespace Randomiser
             capability = b.capability;
             construction = b.construction;
             Bconvert_to = b.Bconvert_to;
+            fcapability = b.fcapability;
+            material = b.material;
         }
 
 
@@ -2345,9 +2349,16 @@ namespace Randomiser
 
             a += "}" + "\r\n"
                 + Data.EDBTabSpacers[1] + "{" + "\r\n";
+            if (Bconvert_to != null)
+                a += Data.EDBTabSpacers[2] + "convert_to " + Bconvert_to + "\r\n";
 
-            a += Data.EDBTabSpacers[2] + "convert_to " + Bconvert_to + "\r\n"
-                + capability.outputCapability();
+            a += capability.outputCapability();
+
+            if (fcapability != null)
+                a += fcapability.outputFcapa();
+
+            if (material != null)
+                a += Data.EDBTabSpacers[2] + "material " + material + "\r\n";
 
             a += construction.outputConstruction();
             a += Data.EDBTabSpacers[1] + "}" + "\r\n";
@@ -2395,6 +2406,41 @@ namespace Randomiser
             a += Data.EDBTabSpacers[2] + "}" + "\r\n";
 
             return a;
+
+        }
+
+    }
+
+    public class Fcapability
+    {
+        public List<string> effectList = new List<string>();
+
+        public Fcapability()
+        {
+
+
+
+
+        }
+
+        public string outputFcapa()
+        {
+            string a = "";
+
+            a += Data.EDBTabSpacers[2] + "faction_capability" + "\r\n"
+                + Data.EDBTabSpacers[2] + "{" + "\r\n";
+
+          
+            foreach (string eff in effectList)
+            {
+                a += Data.EDBTabSpacers[3] + eff + "\r\n";
+            }
+
+            a += Data.EDBTabSpacers[2] + "}" + "\r\n";
+
+            return a;
+
+
 
         }
 

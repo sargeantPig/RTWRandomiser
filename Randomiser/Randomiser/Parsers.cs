@@ -2172,6 +2172,38 @@ namespace Randomiser
                                                     break;
                                                 }
 
+                                                if (line.Trim().StartsWith("faction_capability"))
+                                                {
+                                                    bool whileSeven = false;
+
+                                                    Fcapability FnewCapa = new Fcapability();
+
+                                                    while (!whileSeven)
+                                                    {
+                                                        line = strat.ReadLine();
+
+                                                        if (line.Trim().StartsWith("}"))
+                                                        {
+
+                                                            newBuilding.fcapability = FnewCapa;
+
+                                                            whileSeven = true; //break out of loop
+                                                            break;
+                                                        }
+
+                                                        else if (Functions.GetFirstWord(line.Trim()) == "{")
+                                                        { }
+
+                                                        else if (!line.Trim().StartsWith("}"))
+                                                        {
+                                                            FnewCapa.effectList.Add(line.Trim());
+                                                        }
+
+
+                                                    }
+
+                                                }
+
                                                 if (line.Trim().StartsWith("capability")) //loop through capabilities
                                                 {
                                                     bool whileFour = false;
@@ -2235,6 +2267,13 @@ namespace Randomiser
 
                                                 }
 
+                                                if (line.Trim().StartsWith("material"))
+                                                {
+                                                    newBuilding.material = Functions.RemoveFirstWord(line.Trim()).Trim();
+
+
+                                                }
+
                                                 if (line.Trim().StartsWith("construction"))
                                                 {
                                                     bool whileFive = false;
@@ -2279,6 +2318,11 @@ namespace Randomiser
 
                                                                 if (line.Trim().StartsWith("}"))
                                                                 {
+                                                                    if (newBuilding.buildingName == "alchemists_guild")
+                                                                    {
+
+
+                                                                    }
                                                                     newBuilding.construction = newConstruction;
                                                                     Data.EDBData.buildingTrees[counter].buildings.Add(new Building(newBuilding));
                                                                     buildingNext = true;

@@ -232,8 +232,9 @@ namespace Randomiser
             else M2TWDStrat();
 
 
-            if(Data.isRTWMode)
+            if (Data.isRTWMode)
                 SaveEDB();
+            else SaveEDB();
         }
 
         private void butt_coordOutput_Click(object sender, EventArgs e)
