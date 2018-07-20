@@ -31,8 +31,9 @@ namespace Randomiser
         public static List<string> desc_StratData = new List<string>();
         public static List<Unit> ModdedUnits = new List<Unit>();
         public static List<Unit> Vanunits = new List<Unit>();
-        public static List<string> Factions = new List<string>();
-        public static List<Character> chars = new List<Character>();
+        public static List<FactionOwnership> RomeFactions = new List<FactionOwnership>();
+		public static List<M2TWFactionOwnership> M2TWFactions = new List<M2TWFactionOwnership>();
+		public static List<Character> chars = new List<Character>();
         public static List<string> strLine = new List<string>();
         public static List<string> regions = new List<string>();
         public static List<Settlement> settlements = new List<Settlement>();
@@ -55,7 +56,7 @@ namespace Randomiser
     public static class RandomiseData
     {
         public static int OwnershipPerUnit, maxCities, maxAttri;
-        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus, rndRosters;
+        public static bool unitSizes, stats, reasonableStats, rndCost, rndSounds, rndAI, rndTreasury, rndTraining, rndAttri, rndGroundBonus, rndRosters, balanced;
         public static List<UnitFaction> UnitsFaction = new List<UnitFaction>();
         //ROME ONLY
         public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
@@ -178,5 +179,38 @@ namespace Randomiser
             }
             return objResult;
         }
-    }
+
+		public static Dictionary<TEnum, string> ToDictionary<TEnum>()
+		{
+			Type enumType = typeof(TEnum);
+
+			if (!enumType.IsEnum)
+				throw new ArgumentException("Not enum type.");
+
+			var values = (TEnum[])Enum.GetValues(enumType);
+
+			var dictionary = new Dictionary<TEnum, string>();
+
+			foreach (var value in values)
+			{
+				dictionary.Add(value, Enum.GetName(enumType, value));
+			}
+
+			return dictionary;
+		}
+
+		public static void ListUniqueAdd<T>(T[] items, ref List<T> list)
+		{
+			foreach (T item in items)
+			{
+				int index = list.IndexOf(item);
+
+				if (index == -1)
+				{
+					list.Add(item);
+
+				}
+			}
+		}
+	}
 }

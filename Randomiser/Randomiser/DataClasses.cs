@@ -471,6 +471,9 @@ namespace Randomiser
         public M2TWFactionOwnership M2TWOwnership;
         public M2TWAttributes M2TWAttributes;
 
+		public float unitPointValue = 0;
+
+
         public Unit()
         {
             soldier = new Soldier();
@@ -1121,7 +1124,7 @@ namespace Randomiser
                     {
                         attrFirst = true;
                     }
-
+					
                     else unitString +=(", ");
 
 
@@ -2627,6 +2630,32 @@ namespace Randomiser
 
     }
 
-    
+	public static class FactionRosters
+	{
+		static public Dictionary<FactionOwnership, List<Unit>> RTWrosters = new Dictionary<FactionOwnership, List<Unit>>();
+		static public Dictionary<M2TWFactionOwnership, List<Unit>> M2TWRosters = new Dictionary<M2TWFactionOwnership, List<Unit>>();
+
+		static public void AddUnitsToFaction(List<Unit> units, FactionOwnership faction)
+		{
+			RTWrosters[faction] = units;
+		}
+
+		static public void AddUnitToFaction(List<Unit> units, M2TWFactionOwnership faction)
+		{
+			M2TWRosters[faction] = units;
+		}
+
+		static public void AddFactionKey(FactionOwnership faction)
+		{
+			if(!RTWrosters.ContainsKey(faction))
+				RTWrosters.Add(faction, new List<Unit>());
+		}
+
+		static public void AddFactionKey(M2TWFactionOwnership faction)
+		{
+			M2TWRosters.Add(faction, new List<Unit>());
+		}
+
+	}
 
 }

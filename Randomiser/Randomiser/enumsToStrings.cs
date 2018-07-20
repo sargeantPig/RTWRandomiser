@@ -15,7 +15,7 @@ namespace Randomiser
             switch (str)
             {
                 case "roman":
-                    faction = FactionOwnership.roman | FactionOwnership.romans_brutii | FactionOwnership.romans_julii | FactionOwnership.romans_scipii | FactionOwnership.romans_senate;
+                    faction = FactionOwnership.roman;
                     break;
 
                 case "romans_julii":
@@ -81,22 +81,22 @@ namespace Randomiser
                     faction = FactionOwnership.thrace | FactionOwnership.greek;
                     break;
                 case "slave":
-                    faction = FactionOwnership.slave | FactionOwnership.roman;
+                    faction = FactionOwnership.slave;
                     break;
                 case "carthaginian":
-                    faction = FactionOwnership.carthaginian | FactionOwnership.carthage | FactionOwnership.numidia;
+                    faction = FactionOwnership.carthaginian;
                     break;
                 case "barbarian":
-                    faction = FactionOwnership.barbarian | FactionOwnership.britons | FactionOwnership.dacia | FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.scythia | FactionOwnership.spain;
+                    faction = FactionOwnership.barbarian;
                     break;
                 case "egyptian":
-                    faction = FactionOwnership.egyptian | FactionOwnership.egypt;
+                    faction = FactionOwnership.egyptian;
                     break;
                 case "greek":
-                    faction = FactionOwnership.greek | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.seleucid | FactionOwnership.thrace;
+                    faction = FactionOwnership.greek;
                     break;
                 case "eastern":
-                    faction = FactionOwnership.eastern | FactionOwnership.armenia | FactionOwnership.parthia | FactionOwnership.pontus;
+                    faction = FactionOwnership.eastern;
                     break;
             }
 
@@ -105,6 +105,104 @@ namespace Randomiser
             return faction;
 
         }
+
+		static public FactionOwnership SpecialStringToFaction(string str)
+		{
+			FactionOwnership faction = FactionOwnership.none;
+
+			switch (str)
+			{
+				case "roman":
+					faction = FactionOwnership.roman;
+					break;
+
+				case "romans_julii":
+					faction = FactionOwnership.romans_julii;
+					break;
+
+				case "romans_brutii":
+					faction = FactionOwnership.romans_brutii;
+					break;
+
+				case "romans_scipii":
+					faction = FactionOwnership.romans_scipii;
+					break;
+				case "egypt":
+					faction = FactionOwnership.egypt;
+					break;
+				case "seleucid":
+					faction = FactionOwnership.seleucid;
+					break;
+				case "carthage":
+					faction = FactionOwnership.carthage;
+					break;
+				case "parthia":
+					faction = FactionOwnership.parthia;
+					break;
+				case "gauls":
+					faction = FactionOwnership.gauls;
+					break;
+				case "germans":
+					faction = FactionOwnership.germans;
+					break;
+				case "britons":
+					faction = FactionOwnership.britons;
+					break;
+				case "greek_cities":
+					faction = FactionOwnership.greek_cities;
+					break;
+				case "romans_senate":
+					faction = FactionOwnership.romans_senate;
+					break;
+				case "macedon":
+					faction = FactionOwnership.macedon;
+					break;
+				case "pontus":
+					faction = FactionOwnership.pontus;
+					break;
+				case "armenia":
+					faction = FactionOwnership.armenia;
+					break;
+				case "dacia":
+					faction = FactionOwnership.dacia;
+					break;
+				case "numidia":
+					faction = FactionOwnership.numidia;
+					break;
+				case "scythia":
+					faction = FactionOwnership.scythia;
+					break;
+				case "spain":
+					faction = FactionOwnership.spain;
+					break;
+				case "thrace":
+					faction = FactionOwnership.thrace;
+					break;
+				case "slave":
+					faction = FactionOwnership.slave;
+					break;
+				case "carthaginian":
+					faction = FactionOwnership.carthaginian;
+					break;
+				case "barbarian":
+					faction = FactionOwnership.barbarian;
+					break;
+				case "egyptian":
+					faction = FactionOwnership.egyptian;
+					break;
+				case "greek":
+					faction = FactionOwnership.greek;
+					break;
+				case "eastern":
+					faction = FactionOwnership.eastern;
+					break;
+			}
+
+
+
+			return faction;
+
+		}
 
         static public M2TWFactionOwnership M2TWStringToFaction(string str)
         {
@@ -207,11 +305,9 @@ namespace Randomiser
 
         }
 
-
-
         static public string FactionToString(FactionOwnership faction)
         {
-
+			//account for 
             string str = "";
 
             switch (faction)
@@ -310,7 +406,149 @@ namespace Randomiser
 
         }
 
-        static public string M2TWFactionToString(M2TWFactionOwnership faction)
+		static public string[] SpecialFactionToString(FactionOwnership faction)
+		{
+			//account for 
+			List<string> str = new List<string>();
+
+			switch (faction)
+			{
+				case FactionOwnership.roman:
+					str = new List<string>(new string[] { "roman", "romans_brutii", "romans_julii", "romans_scipii", "romans_senate" });
+					break;
+				case FactionOwnership.romans_brutii:
+					str = new List<string>(new string[] { "romans_brutii" });
+					break;
+				case FactionOwnership.romans_scipii:
+					str = new List<string>(new string[] { "romans_scipii" });
+					break;
+				case FactionOwnership.romans_julii:
+					str = new List<string>(new string[] { "romans_julii" });
+					break;
+				case FactionOwnership.romans_senate:
+					str = new List<string>(new string[] { "romans_senate" });
+					break;
+				case FactionOwnership.egypt | FactionOwnership.egyptian:
+					str = new List<string>(new string[] { "egypt" });
+					break;
+				case FactionOwnership.egypt:
+					str = new List<string>(new string[] { "egypt"});
+					break;
+				case FactionOwnership.seleucid | FactionOwnership.greek:
+					str = new List<string>(new string[] { "seleucid" });
+					break;
+				case FactionOwnership.seleucid:
+					str = new List<string>(new string[] { "seleucid"});
+					break;
+				case FactionOwnership.carthage | FactionOwnership.carthaginian:
+					str = new List<string>(new string[] { "carthage" });
+					break;
+				case FactionOwnership.carthage:
+					str = new List<string>(new string[] { "carthage"});
+					break;
+				case FactionOwnership.parthia | FactionOwnership.eastern:
+					str = new List<string>(new string[] { "parthia" });
+					break;
+				case FactionOwnership.parthia:
+					str = new List<string>(new string[] { "parthia"});
+					break;
+				case FactionOwnership.gauls | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "gauls" });
+					break;
+				case FactionOwnership.gauls:
+					str = new List<string>(new string[] { "gauls"});
+					break;
+				case FactionOwnership.germans | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "germans" });
+					break;
+				case FactionOwnership.germans:
+					str = new List<string>(new string[] { "germans"});
+					break;
+				case FactionOwnership.britons | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "britons" });
+					break;
+				case FactionOwnership.britons:
+					str = new List<string>(new string[] { "britons"});
+					break;
+				case FactionOwnership.greek_cities | FactionOwnership.greek:
+					str = new List<string>(new string[] { "greek_cities" });
+					break;
+				case FactionOwnership.greek_cities:
+					str = new List<string>(new string[] { "greek_cities" });
+					break;
+				case FactionOwnership.macedon |FactionOwnership.greek:
+					str = new List<string>(new string[] { "macedon" });
+					break;
+				case FactionOwnership.macedon:
+					str = new List<string>(new string[] { "macedon" });
+					break;
+				case FactionOwnership.pontus | FactionOwnership.eastern:
+					str = new List<string>(new string[] { "pontus" });
+					break;
+				case FactionOwnership.pontus:
+					str = new List<string>(new string[] { "pontus" });
+					break;
+				case FactionOwnership.armenia | FactionOwnership.eastern:
+					str = new List<string>(new string[] { "armenia" });
+					break;
+				case FactionOwnership.armenia:
+					str = new List<string>(new string[] { "armenia" });
+					break;
+				case FactionOwnership.dacia | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "dacia" });
+					break;
+				case FactionOwnership.dacia:
+					str = new List<string>(new string[] { "dacia" });
+					break;
+				case FactionOwnership.eastern:
+					str = new List<string>(new string[] { "pontus", "eastern", "armenia", "parthia" });
+					break;
+				case FactionOwnership.scythia | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "scythia" });
+					break;
+				case FactionOwnership.scythia:
+					str = new List<string>(new string[] { "scythia" });
+					break;
+				case FactionOwnership.spain | FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "spain" });
+					break;
+				case FactionOwnership.spain:
+					str = new List<string>(new string[] { "spain" });
+					break;
+				case FactionOwnership.thrace | FactionOwnership.greek:
+					str = new List<string>(new string[] { "thrace" });
+					break;
+				case FactionOwnership.thrace:
+					str = new List<string>(new string[] { "thrace" });
+					break;
+				case FactionOwnership.slave:
+					str = new List<string>(new string[] { "slave" });
+					break;
+				case FactionOwnership.carthaginian: 
+					str = new List<string>(new string[] { "carthaginian", "carthage", "numidia"});
+					break;
+				case FactionOwnership.greek: 
+					str = new List<string>(new string[] { "greek", "macedon", "seleucid", "thrace", "greek_cities" });
+					break;
+				case FactionOwnership.barbarian:
+					str = new List<string>(new string[] { "barbarian", "dacia", "gauls", "britons", "germans", "spain", "scythia" });
+					break;
+				case FactionOwnership.numidia | FactionOwnership.carthaginian:
+					str = new List<string>(new string[] { "numidia" });
+					break;
+				case FactionOwnership.numidia:
+					str = new List<string>(new string[] { "numidia" });
+					break;
+
+			}
+
+
+
+			return str.ToArray();
+
+		}
+
+		static public string M2TWFactionToString(M2TWFactionOwnership faction)
         {
 
             string str = "";
@@ -557,7 +795,6 @@ namespace Randomiser
 
 
         }
-
 
         static public string FormationTostring(FormationTypes formation)
         {

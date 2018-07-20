@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
 using TargaImage;
+
 namespace Randomiser
 {
     public static class Parsers
@@ -2504,6 +2505,16 @@ namespace Randomiser
             //get factions
             while ((line = strat.ReadLine()) != null)
             {
+				if(line.StartsWith("faction"))
+				{
+					string[] split = line.Split(',', ' ', '\t');
+
+					if(Data.isRTWMode)
+						FactionRosters.AddFactionKey(enumsToStrings.SpecialStringToFaction(split[1]));
+					else if(Data.isM2TWMode)
+						FactionRosters.AddFactionKey(enumsToStrings.M2TWStringToFaction(split[1]));
+				}
+
                 if (line.StartsWith("settlement"))
                 {
                     Settlement tempSettlement;

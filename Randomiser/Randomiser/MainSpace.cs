@@ -81,8 +81,8 @@ namespace Randomiser
 
             if (Data.isRTWMode)
             {
-                Data.ModFolderPath = @"G:\Games\Rome Total war testing\randomiser";
-                Data.MainFolderPath = @"G:\Games\Rome Total war testing";
+                Data.ModFolderPath = @"C:\Program Files (x86)\Steam\steamapps\common\Rome Total War Gold\randomiser";
+                Data.MainFolderPath = @"C:\Program Files (x86)\Steam\steamapps\common\Rome Total War Gold";
             }
             else if (Data.isM2TWMode)
             {
@@ -228,6 +228,7 @@ namespace Randomiser
             RandomiseData.rndGroundBonus = chk_groundBonus.Checked;
             RandomiseData.rndRosters = chk_rosters.Checked;
             RandomiseData.OwnershipPerUnit = (int)numUpDown_factionperunit.Value;
+			RandomiseData.balanced = chk_balanced_rosters.Checked;
 
             if (chx_useSeed.Checked)
             {
@@ -974,5 +975,30 @@ namespace Randomiser
             }
 
         }
-    }
+
+		private void cb_tiers_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			string selected = cb_tiers.SelectedItem.ToString();
+
+			List<Unit> units = new List<Unit>();
+
+			if (selected == "High")
+				units = Randomise.highTierUnits;
+			else if (selected == "Mid")
+				units = Randomise.midTierUnits;
+			else if (selected == "Low")
+				units = Randomise.lowTierUnits;
+
+			int counter = 0;
+
+			txt_outputview.Clear();
+			foreach (Unit unit in units)
+			{
+				txt_outputview.AppendText("\n" + unit.dictionary + " --- " + unit.unitPointValue + "\n\r");
+				counter++;
+			}
+
+			txt_outputview.AppendText("\n" + counter);
+		}
+	}
 }
