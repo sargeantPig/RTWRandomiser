@@ -161,7 +161,8 @@ namespace Randomiser
 
 		public static void RandomiseEDB()
         {
-			Data.ModdedUnits = new List<Unit>(Data.Vanunits);
+			Data.ModdedUnits.Clear();
+			Data.ModdedUnits.AddRange(Data.Vanunits);
 
 			if (RandomiseData.rndRosters)
 			{

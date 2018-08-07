@@ -2388,6 +2388,40 @@ namespace Randomiser
 
         }
 
+		public static void ParseSMFactions(string filepath, ref TextBox txt_Output)
+		{
+			StreamReader edu = new StreamReader(filepath);
+
+			string line, faction = "";
+
+			txt_Output.AppendText("Retrieving Faction Colours" + "\r\n");
+
+			while ((line = edu.ReadLine()) != null)
+			{
+				string trim = line.Trim();
+
+				if (trim.StartsWith("faction"))
+				{
+					string[] split = trim.Split('\t');
+					faction = split[6];
+					txt_Output.AppendText("Getting Colours for: " + faction + "\r\n");
+				}
+
+				if (trim.StartsWith("primary_colour"))
+				{
+					Color col = Functions.SMFGetColour(trim);
+					Data.factionColours[enumsToStrings.SpecialStringToFaction(faction)][0] = col;
+				}
+
+				if (trim.StartsWith("secondary_colour"))
+				{
+					Color col = Functions.SMFGetColour(trim);
+					Data.factionColours[enumsToStrings.SpecialStringToFaction(faction)][1] = col;
+				}
+			}
+
+		}
+
         public static void ParseVanRegions(string filePath, ref TextBox txt_Output)
         {
             
@@ -2501,14 +2535,16 @@ namespace Randomiser
             string notrim;
 
             StreamReader strat = new StreamReader(PATH);
-
-            //get factions
-            while ((line = strat.ReadLine()) != null)
+			string faction = "";
+			//get factions
+			while ((line = strat.ReadLine()) != null)
             {
+				
+
 				if(line.StartsWith("faction"))
 				{
 					string[] split = line.Split(',', ' ', '\t');
-
+					faction = split[1];
 					if(Data.isRTWMode)
 						FactionRosters.AddFactionKey(enumsToStrings.SpecialStringToFaction(split[1]));
 					else if(Data.isM2TWMode)
@@ -2541,7 +2577,8 @@ namespace Randomiser
                             trimmed = trimmed.Trim();
 
                             region = trimmed;
-
+							FactionOwnership fo = enumsToStrings.SpecialStringToFaction(faction);
+							Data.settlementOwnership[fo].Add(region);
                         }
 
                         else if (line.Trim().StartsWith("year_founded"))
@@ -2614,7 +2651,6 @@ namespace Randomiser
             strat.Close();
 
         }
-
         //coord changes
         public static void DsCoordGet(string filepath, ref TextBox txt_Output)
         {

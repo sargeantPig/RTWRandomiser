@@ -6,44 +6,99 @@ using System.Threading.Tasks;
 using System.Numerics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Drawing;
+using System.Windows.Forms;
+using ImageMagick;
 
 namespace Randomiser
 {
-    public static class Data
-    {
-        //cross compaitable variables 
-        public static bool isM2TWMode = false;
-        public static bool isRTWMode = false;
+	public static class Data
+	{
+		//cross compaitable variables 
+		public static bool isM2TWMode = false;
+		public static bool isRTWMode = false;
 
-        public static string MainFolderPath = "";
-        public static string ModFolderPath = "";
-        public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
-        public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
-        public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
-        public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
-        public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
-        public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
-        public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
+		public static string MainFolderPath = "";
+		public static string ModFolderPath = "";
+		public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
+		public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
+		public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
+		public static string VAN_REGIONS = @"just_regions_vanRTW.txt";
+		public static string REGIONSFILEPATH = @"\data\world\maps\base\descr_regions.txt";
+		public static string MAPREGIONSPATH = @"\data\world\maps\base\map_regions.tga";
+		public static string MAPGROUNDTYPESPATH = @"\data\world\maps\base\map_ground_types.bmp";
+		public static string RADARMAP = @"\data\world\maps\campaign\imperial_campaign\radar_map1.tga";
+		public static string FACTIONSELECTMAPS = @"\data\world\maps\campaign\imperial_campaign\";
+		public static string SMFACTIONS = @"\data\descr_sm_factions.txt";
 
-        public static bool dataIsLoaded = false;
-        public static int Seed = 0;
-        public static Random rnd = new Random();
-        public static List<string> desc_StratData = new List<string>();
-        public static List<Unit> ModdedUnits = new List<Unit>();
-        public static List<Unit> Vanunits = new List<Unit>();
-        public static List<FactionOwnership> RomeFactions = new List<FactionOwnership>();
+		public static bool dataIsLoaded = false;
+		public static int Seed = 0;
+		public static Random rnd = new Random();
+		public static List<string> desc_StratData = new List<string>();
+		public static List<Unit> ModdedUnits = new List<Unit>();
+		public static List<Unit> Vanunits = new List<Unit>();
+		public static List<FactionOwnership> RomeFactions = new List<FactionOwnership>();
 		public static List<M2TWFactionOwnership> M2TWFactions = new List<M2TWFactionOwnership>();
 		public static List<Character> chars = new List<Character>();
-        public static List<string> strLine = new List<string>();
-        public static List<string> regions = new List<string>();
-        public static List<Settlement> settlements = new List<Settlement>();
-        public static List<Region> rgbRegions = new List<Region>();
-        public static bool[,] regionWater = new bool[255, 156];
-        public static EDB EDBData = new EDB();
-        public static string[] EDBTabSpacers = { "    ", "        ", "            ", "                " };  // the edb uses spaces instead of tabs
+		public static List<string> strLine = new List<string>();
+		public static List<string> regions = new List<string>();
+		public static List<Settlement> settlements = new List<Settlement>();
+		public static List<Region> rgbRegions = new List<Region>();
+		public static bool[,] regionWater = new bool[255, 156];
+		public static EDB EDBData = new EDB();
+		public static string[] EDBTabSpacers = { "    ", "        ", "            ", "                " };  // the edb uses spaces instead of tabs
+		public static Dictionary<FactionOwnership, List<string>> settlementOwnership = new Dictionary<FactionOwnership, List<string>>() {
 
-        //Rome only variables
-        public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
+			{FactionOwnership.armenia, new List<string>()},
+			{FactionOwnership.britons, new List<string>() },
+			{FactionOwnership.carthage, new List<string>() },
+			{FactionOwnership.dacia, new List<string>() },
+			{FactionOwnership.egypt, new List<string>() },
+			{FactionOwnership.gauls, new List<string>() },
+			{FactionOwnership.germans, new List<string>() },
+			{FactionOwnership.greek_cities, new List<string>() },
+			{FactionOwnership.macedon, new List<string>() },
+			{FactionOwnership.numidia, new List<string>() },
+			{FactionOwnership.parthia, new List<string>() },
+			{FactionOwnership.pontus, new List<string>() },
+			{FactionOwnership.romans_brutii, new List<string>() },
+			{FactionOwnership.romans_julii, new List<string>() },
+			{FactionOwnership.romans_scipii, new List<string>() },
+			{FactionOwnership.romans_senate, new List<string>() },
+			{FactionOwnership.scythia, new List<string>() },
+			{FactionOwnership.seleucid, new List<string>() },
+			{FactionOwnership.slave, new List<string>() },
+			{FactionOwnership.spain, new List<string>() },
+			{FactionOwnership.thrace, new List<string>() }
+		};
+		public static Dictionary<FactionOwnership, Color[]> factionColours = new Dictionary<FactionOwnership, Color[]>()
+		{
+			{FactionOwnership.armenia, new Color[]{Color.DarkGreen, Color.Red } },
+			{FactionOwnership.britons, new Color[]{Color.LightBlue, Color.Orange } },
+			{FactionOwnership.carthage, new Color[] { Color.Gray, Color.Wheat } },
+			{FactionOwnership.dacia, new Color[]{Color.Brown, Color.Green } },
+			{FactionOwnership.egypt, new Color[]{ Color.LightYellow, Color.Purple } },
+			{FactionOwnership.gauls, new Color[]{ Color.DarkOliveGreen, Color.Red } },
+			{FactionOwnership.germans, new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.greek_cities, new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.macedon,new Color[]{Color.MediumPurple, Color.Yellow }},
+			{FactionOwnership.numidia,new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.parthia,new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.pontus,new Color[]{Color.MediumPurple, Color.Yellow }},
+			{FactionOwnership.romans_brutii, new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.romans_julii, new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.romans_scipii,new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.romans_senate, new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.scythia,new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.seleucid,new Color[]{Color.MediumPurple, Color.Yellow } },
+			{FactionOwnership.slave,new Color[]{Color.MediumPurple, Color.Yellow }},
+			{FactionOwnership.spain,new Color[]{Color.MediumPurple, Color.Yellow }},
+			{FactionOwnership.thrace,new Color[]{Color.MediumPurple, Color.Yellow }}
+		};
+
+
+		//Rome only variables
+		public static string DESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
 
         //m2tw only variables
         public static string M2TWDESCSTRAT = @"\data\world\maps\campaign\imperial_campaign\descr_strat.txt";
@@ -212,5 +267,152 @@ namespace Randomiser
 				}
 			}
 		}
+
+		public static ushort[] Blend(MagickColor color, MagickColor backColor, double amount)
+		{
+			ushort R = (ushort)((color.R * amount) + backColor.R * (1 - amount));
+			ushort G = (ushort)((color.G * amount) + backColor.G * (1 - amount));
+			ushort B = (ushort)((color.B * amount) + backColor.B * (1 - amount));
+
+			return new ushort[]{R, G, B};
+		}
+
+		public static Color SMFGetColour(string line)
+		{
+			string[] split = line.Split(' ');
+
+			for(int i = 0; i < split.Count() -1; i++)
+			{
+				split[i] = split[i].Trim(',');
+			}
+			return Color.FromArgb(Convert.ToInt32(split[1]), Convert.ToInt32(split[3]), Convert.ToInt32(split[5]));
+
+		}
+
+		public static bool CheckIfNull<T>(T item, string msg)
+		{
+			if (item == null)
+			{
+				MessageBox.Show(msg);
+				return true;
+
+			}
+
+			return false;
+
+		}
+
+		public static void ApplyGlow(ref IPixelCollection pixels,
+			ref IPixelCollection regionPixels,
+			int radius,
+			Vector2 origin,
+			Vector2 mapSize,
+			MagickColor ucolour,
+			double Gamount,
+			ref List<Pixel> excludePix,
+			double dropOff,
+			MagickImage regionMap,
+			List<string> regions)
+		{
+			int maxX = Clamp((int)(origin.X + radius), 0, (int)(mapSize.X-1));
+			int maxY = Clamp((int)(origin.Y + radius), 0, (int)(mapSize.Y-1));
+			int minX = Clamp((int)(origin.X - radius), 0, (int)(mapSize.X-1));
+			int minY = Clamp((int)(origin.Y - radius), 0, (int)(mapSize.X-1));
+
+			for (int x = minX; x <= maxX; x++)
+				for (int y = minY; y <= maxY; y++)
+				{
+					double dis = DistanceTo(new Vector2(x, y), origin);
+					if (dis <= radius)
+					{
+						double blendAmount = Gamount - dis*dropOff;
+
+						if (!ContainsPixel(excludePix, pixels[x, y]))
+						{
+							if (!CheckRegionsForPixel(regionMap, regions, regionPixels, new Vector2(x, y)))
+							{
+								excludePix.Add(pixels[x, y]);
+								DoGlow(pixels[x, y], blendAmount, ucolour);
+
+							}
+							else Console.WriteLine("pixel found");
+
+						}
+
+						else
+						{
+							Console.WriteLine("invalid pixel");
+
+						}
+					}
+
+
+				}
+		}
+
+		public static bool ContainsPixel(List<Pixel> pixels, Pixel toCheck)
+		{
+			foreach (Pixel pixel in pixels)
+			{
+				if (toCheck.X == pixel.X && toCheck.Y == pixel.Y)
+					return true;
+			}
+
+			return false;
+		}
+
+		public static void DoGlow(Pixel pixel, double amount, MagickColor prim)
+		{
+			MagickColor mcol = pixel.ToColor();
+			pixel.Set(Blend(prim, mcol, amount));
+
+		}
+
+		public static ushort[] ColToUshort(Color col)
+		{
+			MagickColor mc = MagickColor.FromRgb(col.R, col.G, col.B);
+
+			return new ushort[] {mc.R, mc.G, mc.B };
+		}
+
+		public static MagickColor ushortToMagickColor(ushort[] ucol)
+		{
+			MagickColor mc = new MagickColor(ucol[0], ucol[1], ucol[2]);
+			return mc;
+
+		}
+
+		public static int Clamp(int num, int min, int max)
+		{
+			if (num < min)
+				num = min;
+			if (num > max)
+				num = max;
+
+			return num;
+
+		}
+
+		public static bool CheckRegionsForPixel(MagickImage regionMap, List<string> regions, IPixelCollection pixels,  Vector2 loc)
+		{
+			MagickColor pixCol = pixels[(int)loc.X, (int)loc.Y].ToColor();
+			foreach (string region in regions)
+			{
+				var reg = Data.rgbRegions.Find(x => x.name == region);
+				MagickColor mc = MagickColor.FromRgb((byte)reg.r, (byte)reg.g, (byte)reg.b);
+
+				//check pixel matches
+				
+				if (pixCol == mc)
+					return true;
+			}
+
+			return false;
+		}
+
+		
 	}
+
+
+
 }
