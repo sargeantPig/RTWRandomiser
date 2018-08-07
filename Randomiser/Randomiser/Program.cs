@@ -15,9 +15,11 @@ namespace Randomiser
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+			
+			Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm1());
+
+			Application.Run(new MainForm1());
 
         }
 

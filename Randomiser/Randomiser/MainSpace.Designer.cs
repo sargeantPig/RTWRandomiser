@@ -80,16 +80,21 @@
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tabControl3 = new System.Windows.Forms.TabControl();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.gbox_general = new System.Windows.Forms.GroupBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.numUpDown_brightness = new System.Windows.Forms.NumericUpDown();
+			this.label8 = new System.Windows.Forms.Label();
+			this.numUpDown_contrast = new System.Windows.Forms.NumericUpDown();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.label12 = new System.Windows.Forms.Label();
+			this.numUpDown_dropoff = new System.Windows.Forms.NumericUpDown();
+			this.label11 = new System.Windows.Forms.Label();
+			this.numUpDown_borderIntensity = new System.Windows.Forms.NumericUpDown();
+			this.label9 = new System.Windows.Forms.Label();
 			this.numUpDownBRadius = new System.Windows.Forms.NumericUpDown();
 			this.chk_glow = new System.Windows.Forms.CheckBox();
 			this.chk_border = new System.Windows.Forms.CheckBox();
-			this.label8 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
-			this.numUpDown_contrast = new System.Windows.Forms.NumericUpDown();
-			this.numUpDown_brightness = new System.Windows.Forms.NumericUpDown();
 			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.btn_setColour = new System.Windows.Forms.Button();
 			this.txt_factionColourOutput = new System.Windows.Forms.TextBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.chk_transparency = new System.Windows.Forms.CheckBox();
@@ -100,16 +105,12 @@
 			this.btn_refreshPreview = new System.Windows.Forms.Button();
 			this.picBox_fmap = new System.Windows.Forms.PictureBox();
 			this.lst_faction_colours = new System.Windows.Forms.ListView();
-			this.button1 = new System.Windows.Forms.Button();
+			this.btn_createMaps = new System.Windows.Forms.Button();
+			this.btn_setColour = new System.Windows.Forms.Button();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
 			this.colDia = new System.Windows.Forms.ColorDialog();
-			this.gbox_general = new System.Windows.Forms.GroupBox();
-			this.label9 = new System.Windows.Forms.Label();
-			this.numUpDown_borderIntensity = new System.Windows.Forms.NumericUpDown();
-			this.label11 = new System.Windows.Forms.Label();
-			this.numUpDown_dropoff = new System.Windows.Forms.NumericUpDown();
-			this.label12 = new System.Windows.Forms.Label();
+			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -126,17 +127,17 @@
 			this.tabPage5.SuspendLayout();
 			this.tabControl3.SuspendLayout();
 			this.tabPage7.SuspendLayout();
-			this.groupBox6.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDownBRadius)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_contrast)).BeginInit();
+			this.gbox_general.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numUpDown_brightness)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_contrast)).BeginInit();
+			this.groupBox6.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_dropoff)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_borderIntensity)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDownBRadius)).BeginInit();
 			this.groupBox5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numUpDown_intensity)).BeginInit();
 			this.tabPage8.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_fmap)).BeginInit();
-			this.gbox_general.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_borderIntensity)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_dropoff)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -176,6 +177,7 @@
 			// 
 			// tabPage1
 			// 
+			this.tabPage1.Controls.Add(this.textBox2);
 			this.tabPage1.Controls.Add(this.txt_Output);
 			this.tabPage1.Controls.Add(this.butt_LoadData);
 			this.tabPage1.Controls.Add(this.txt_FolderPath);
@@ -190,11 +192,11 @@
 			// 
 			// txt_Output
 			// 
-			this.txt_Output.Location = new System.Drawing.Point(124, 6);
+			this.txt_Output.Location = new System.Drawing.Point(245, 6);
 			this.txt_Output.Multiline = true;
 			this.txt_Output.Name = "txt_Output";
 			this.txt_Output.ReadOnly = true;
-			this.txt_Output.Size = new System.Drawing.Size(558, 334);
+			this.txt_Output.Size = new System.Drawing.Size(437, 334);
 			this.txt_Output.TabIndex = 4;
 			// 
 			// butt_LoadData
@@ -745,7 +747,7 @@
 			// 
 			this.tabPage5.Controls.Add(this.tabControl3);
 			this.tabPage5.Controls.Add(this.lst_faction_colours);
-			this.tabPage5.Controls.Add(this.button1);
+			this.tabPage5.Controls.Add(this.btn_createMaps);
 			this.tabPage5.Controls.Add(this.btn_setColour);
 			this.tabPage5.Location = new System.Drawing.Point(4, 22);
 			this.tabPage5.Name = "tabPage5";
@@ -780,6 +782,61 @@
 			this.tabPage7.Text = "Settings";
 			this.tabPage7.UseVisualStyleBackColor = true;
 			// 
+			// gbox_general
+			// 
+			this.gbox_general.Controls.Add(this.label6);
+			this.gbox_general.Controls.Add(this.numUpDown_brightness);
+			this.gbox_general.Controls.Add(this.label8);
+			this.gbox_general.Controls.Add(this.numUpDown_contrast);
+			this.gbox_general.Location = new System.Drawing.Point(149, 6);
+			this.gbox_general.Name = "gbox_general";
+			this.gbox_general.Size = new System.Drawing.Size(127, 75);
+			this.gbox_general.TabIndex = 17;
+			this.gbox_general.TabStop = false;
+			this.gbox_general.Text = "General";
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(65, 16);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(46, 13);
+			this.label6.TabIndex = 14;
+			this.label6.Text = "Contrast";
+			// 
+			// numUpDown_brightness
+			// 
+			this.numUpDown_brightness.Location = new System.Drawing.Point(8, 42);
+			this.numUpDown_brightness.Name = "numUpDown_brightness";
+			this.numUpDown_brightness.Size = new System.Drawing.Size(50, 20);
+			this.numUpDown_brightness.TabIndex = 12;
+			this.numUpDown_brightness.Value = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(65, 42);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(56, 13);
+			this.label8.TabIndex = 15;
+			this.label8.Text = "Brightness";
+			// 
+			// numUpDown_contrast
+			// 
+			this.numUpDown_contrast.Location = new System.Drawing.Point(8, 16);
+			this.numUpDown_contrast.Name = "numUpDown_contrast";
+			this.numUpDown_contrast.Size = new System.Drawing.Size(50, 20);
+			this.numUpDown_contrast.TabIndex = 13;
+			this.numUpDown_contrast.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+			// 
 			// groupBox6
 			// 
 			this.groupBox6.Controls.Add(this.label12);
@@ -796,6 +853,89 @@
 			this.groupBox6.TabIndex = 16;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Border";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(58, 81);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(70, 13);
+			this.label12.TabIndex = 12;
+			this.label12.Text = "Glow drop off";
+			// 
+			// numUpDown_dropoff
+			// 
+			this.numUpDown_dropoff.DecimalPlaces = 2;
+			this.numUpDown_dropoff.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numUpDown_dropoff.Location = new System.Drawing.Point(6, 74);
+			this.numUpDown_dropoff.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+			this.numUpDown_dropoff.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+			this.numUpDown_dropoff.Name = "numUpDown_dropoff";
+			this.numUpDown_dropoff.Size = new System.Drawing.Size(45, 20);
+			this.numUpDown_dropoff.TabIndex = 11;
+			this.numUpDown_dropoff.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Location = new System.Drawing.Point(58, 103);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(80, 13);
+			this.label11.TabIndex = 10;
+			this.label11.Text = "Border Intensity";
+			// 
+			// numUpDown_borderIntensity
+			// 
+			this.numUpDown_borderIntensity.DecimalPlaces = 1;
+			this.numUpDown_borderIntensity.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numUpDown_borderIntensity.Location = new System.Drawing.Point(6, 100);
+			this.numUpDown_borderIntensity.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.numUpDown_borderIntensity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+			this.numUpDown_borderIntensity.Name = "numUpDown_borderIntensity";
+			this.numUpDown_borderIntensity.Size = new System.Drawing.Size(45, 20);
+			this.numUpDown_borderIntensity.TabIndex = 9;
+			this.numUpDown_borderIntensity.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            65536});
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Location = new System.Drawing.Point(57, 128);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(90, 13);
+			this.label9.TabIndex = 8;
+			this.label9.Text = "Border Thickness";
 			// 
 			// numUpDownBRadius
 			// 
@@ -842,48 +982,6 @@
 			this.chk_border.Text = "Border?";
 			this.chk_border.UseVisualStyleBackColor = true;
 			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(65, 42);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(56, 13);
-			this.label8.TabIndex = 15;
-			this.label8.Text = "Brightness";
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(65, 16);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(46, 13);
-			this.label6.TabIndex = 14;
-			this.label6.Text = "Contrast";
-			// 
-			// numUpDown_contrast
-			// 
-			this.numUpDown_contrast.Location = new System.Drawing.Point(8, 16);
-			this.numUpDown_contrast.Name = "numUpDown_contrast";
-			this.numUpDown_contrast.Size = new System.Drawing.Size(50, 20);
-			this.numUpDown_contrast.TabIndex = 13;
-			this.numUpDown_contrast.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-			// 
-			// numUpDown_brightness
-			// 
-			this.numUpDown_brightness.Location = new System.Drawing.Point(8, 42);
-			this.numUpDown_brightness.Name = "numUpDown_brightness";
-			this.numUpDown_brightness.Size = new System.Drawing.Size(50, 20);
-			this.numUpDown_brightness.TabIndex = 12;
-			this.numUpDown_brightness.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-			// 
 			// textBox1
 			// 
 			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
@@ -894,16 +992,6 @@
 			this.textBox1.Size = new System.Drawing.Size(479, 97);
 			this.textBox1.TabIndex = 11;
 			this.textBox1.Text = resources.GetString("textBox1.Text");
-			// 
-			// btn_setColour
-			// 
-			this.btn_setColour.Location = new System.Drawing.Point(7, 249);
-			this.btn_setColour.Name = "btn_setColour";
-			this.btn_setColour.Size = new System.Drawing.Size(146, 23);
-			this.btn_setColour.TabIndex = 2;
-			this.btn_setColour.Text = "Set Colour";
-			this.btn_setColour.UseVisualStyleBackColor = true;
-			this.btn_setColour.Click += new System.EventHandler(this.btn_setColour_Click);
 			// 
 			// txt_factionColourOutput
 			// 
@@ -1028,22 +1116,32 @@
 			this.lst_faction_colours.UseCompatibleStateImageBehavior = false;
 			this.lst_faction_colours.View = System.Windows.Forms.View.List;
 			// 
-			// button1
+			// btn_createMaps
 			// 
-			this.button1.Location = new System.Drawing.Point(6, 278);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(147, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Create Faction Select Maps";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.btn_createMaps.Location = new System.Drawing.Point(6, 278);
+			this.btn_createMaps.Name = "btn_createMaps";
+			this.btn_createMaps.Size = new System.Drawing.Size(147, 23);
+			this.btn_createMaps.TabIndex = 0;
+			this.btn_createMaps.Text = "Create Faction Select Maps";
+			this.btn_createMaps.UseVisualStyleBackColor = true;
+			this.btn_createMaps.Click += new System.EventHandler(this.btn_createMaps_Click_1);
+			// 
+			// btn_setColour
+			// 
+			this.btn_setColour.Location = new System.Drawing.Point(7, 249);
+			this.btn_setColour.Name = "btn_setColour";
+			this.btn_setColour.Size = new System.Drawing.Size(146, 23);
+			this.btn_setColour.TabIndex = 2;
+			this.btn_setColour.Text = "Set Colour";
+			this.btn_setColour.UseVisualStyleBackColor = true;
+			this.btn_setColour.Click += new System.EventHandler(this.btn_setColour_Click);
 			// 
 			// tabPage6
 			// 
 			this.tabPage6.Location = new System.Drawing.Point(4, 22);
 			this.tabPage6.Name = "tabPage6";
 			this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage6.Size = new System.Drawing.Size(473, 307);
+			this.tabPage6.Size = new System.Drawing.Size(667, 307);
 			this.tabPage6.TabIndex = 1;
 			this.tabPage6.Text = "none";
 			this.tabPage6.UseVisualStyleBackColor = true;
@@ -1054,101 +1152,15 @@
 			this.colDia.FullOpen = true;
 			this.colDia.ShowHelp = true;
 			// 
-			// gbox_general
+			// textBox2
 			// 
-			this.gbox_general.Controls.Add(this.label6);
-			this.gbox_general.Controls.Add(this.numUpDown_brightness);
-			this.gbox_general.Controls.Add(this.label8);
-			this.gbox_general.Controls.Add(this.numUpDown_contrast);
-			this.gbox_general.Location = new System.Drawing.Point(149, 6);
-			this.gbox_general.Name = "gbox_general";
-			this.gbox_general.Size = new System.Drawing.Size(127, 75);
-			this.gbox_general.TabIndex = 17;
-			this.gbox_general.TabStop = false;
-			this.gbox_general.Text = "General";
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(57, 128);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(90, 13);
-			this.label9.TabIndex = 8;
-			this.label9.Text = "Border Thickness";
-			// 
-			// numUpDown_borderIntensity
-			// 
-			this.numUpDown_borderIntensity.DecimalPlaces = 1;
-			this.numUpDown_borderIntensity.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numUpDown_borderIntensity.Location = new System.Drawing.Point(6, 100);
-			this.numUpDown_borderIntensity.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-			this.numUpDown_borderIntensity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-			this.numUpDown_borderIntensity.Name = "numUpDown_borderIntensity";
-			this.numUpDown_borderIntensity.Size = new System.Drawing.Size(45, 20);
-			this.numUpDown_borderIntensity.TabIndex = 9;
-			this.numUpDown_borderIntensity.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            65536});
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(58, 103);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(80, 13);
-			this.label11.TabIndex = 10;
-			this.label11.Text = "Border Intensity";
-			// 
-			// numUpDown_dropoff
-			// 
-			this.numUpDown_dropoff.DecimalPlaces = 2;
-			this.numUpDown_dropoff.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-			this.numUpDown_dropoff.Location = new System.Drawing.Point(6, 74);
-			this.numUpDown_dropoff.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-			this.numUpDown_dropoff.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-			this.numUpDown_dropoff.Name = "numUpDown_dropoff";
-			this.numUpDown_dropoff.Size = new System.Drawing.Size(45, 20);
-			this.numUpDown_dropoff.TabIndex = 11;
-			this.numUpDown_dropoff.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            65536});
-			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(58, 81);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(70, 13);
-			this.label12.TabIndex = 12;
-			this.label12.Text = "Glow drop off";
+			this.textBox2.Location = new System.Drawing.Point(128, 8);
+			this.textBox2.Multiline = true;
+			this.textBox2.Name = "textBox2";
+			this.textBox2.ReadOnly = true;
+			this.textBox2.Size = new System.Drawing.Size(111, 282);
+			this.textBox2.TabIndex = 5;
+			this.textBox2.Text = resources.GetString("textBox2.Text");
 			// 
 			// MainForm1
 			// 
@@ -1184,21 +1196,21 @@
 			this.tabControl3.ResumeLayout(false);
 			this.tabPage7.ResumeLayout(false);
 			this.tabPage7.PerformLayout();
+			this.gbox_general.ResumeLayout(false);
+			this.gbox_general.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_brightness)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_contrast)).EndInit();
 			this.groupBox6.ResumeLayout(false);
 			this.groupBox6.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_dropoff)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numUpDown_borderIntensity)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numUpDownBRadius)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_contrast)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_brightness)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numUpDown_intensity)).EndInit();
 			this.tabPage8.ResumeLayout(false);
 			this.tabPage8.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_fmap)).EndInit();
-			this.gbox_general.ResumeLayout(false);
-			this.gbox_general.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_borderIntensity)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.numUpDown_dropoff)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1257,7 +1269,7 @@
 		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.Button btn_setColour;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btn_createMaps;
 		private System.Windows.Forms.TabPage tabPage6;
 		private System.Windows.Forms.ColorDialog colDia;
 		private System.Windows.Forms.ListView lst_faction_colours;
@@ -1287,6 +1299,7 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.NumericUpDown numUpDown_dropoff;
+		private System.Windows.Forms.TextBox textBox2;
 	}
 }
 

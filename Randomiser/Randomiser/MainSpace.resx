@@ -120,6 +120,16 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>4, 31</value>
   </metadata>
+  <data name="textBox2.Text" xml:space="preserve">
+    <value>'Select Main Folder'
+
+Select the folder of the files you intend to use, this can either be a mod folder or the main Rome Total War folder (where the exe is located).
+
+Be sure to select the main RTW folder if you intend to use the randomisation features.
+
+You can still use the currently available tools if you select a mod folder.
+</value>
+  </data>
   <data name="textBox1.Text" xml:space="preserve">
     <value>Click on a faction to the left then use set colour to choose what colour that faction uses on it's selection map.
 
@@ -138,6 +148,6 @@ Colour Intensity: How much of the faction colour remains when blending with terr
     <value>5, 3</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>57</value>
   </metadata>
 </root>

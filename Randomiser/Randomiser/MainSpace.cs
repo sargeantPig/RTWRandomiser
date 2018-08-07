@@ -301,7 +301,7 @@ namespace Randomiser
 
 			txt_randomiserOutput.AppendText("Creating select maps\r\n");
 
-			CreateFactionSelectionMaps(Data.ModFolderPath + Data.FACTIONSELECTMAPS);
+			CreateFactionSelectionMaps(Data.ModFolderPath + Data.FACTIONSELECTMAPS, ref txt_randomiserOutput);
 
 			txt_randomiserOutput.AppendText("Complete\r\n");
 		}
@@ -1052,26 +1052,39 @@ namespace Randomiser
 			txt_outputview.AppendText("\n" + counter);
 		}
 
-		public void CreateFactionSelectionMaps(string outputLoc)
+		public void CreateFactionSelectionMaps(string outputLoc, ref TextBox outputBox)
 		{
-			txt_factionColourOutput.Clear();
+
+			if (!File.Exists(Data.MainFolderPath + Data.MAPREGIONSPATH))
+			{
+				txt_factionColourOutput.AppendText("region map not found! Have you chosen the correct modfolder?");
+				return;
+			}
+
+			if (!File.Exists(Data.MainFolderPath + Data.RADARMAP))
+			{
+				txt_factionColourOutput.AppendText("radar map not found! Have you chosen the correct modfolder?");
+				return;
+			}
+
+
+			//txt_factionColourOutput.Clear();
 			double intensity = (double)numUpDown_intensity.Value;
+			MagickImage regionMap = new MagickImage(Data.MainFolderPath + Data.MAPREGIONSPATH);
 
 			foreach (KeyValuePair<FactionOwnership, List<string>> kv in Data.settlementOwnership)
 			{
-
-				MagickImage regionMap = new MagickImage(Data.MainFolderPath + Data.MAPREGIONSPATH);
 				MagickImage factionMap = new MagickImage(Data.MainFolderPath + Data.RADARMAP);
 				string faction = enumsToStrings.FactionToString(kv.Key);
 
-				txt_factionColourOutput.AppendText("Painting " + faction + " map\r\n");
+				outputBox.AppendText("Painting " + faction + " map\r\n");
 
 				PaintMap(regionMap, ref factionMap, kv, intensity);
 
 				SaveSelectMaps(outputLoc, factionMap, faction, MagickFormat.Tga);
 			}
 
-			txt_factionColourOutput.AppendText("Saved to " + outputLoc);
+			outputBox.AppendText("Saved to " + outputLoc + "\r\n");
 		}
 
 		public void PaintMap(MagickImage regionMap, ref MagickImage factionMap, KeyValuePair<FactionOwnership, List<string>> kv, double intensity)
@@ -1159,8 +1172,6 @@ namespace Randomiser
 
 		}
 
-
-
 		private void btn_setColour_Click(object sender, EventArgs e)
 		{
 			if (Functions.CheckIfNull<ListViewItem>(lst_faction_colours.FocusedItem, "No faction selected!"))
@@ -1177,13 +1188,21 @@ namespace Randomiser
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			CreateFactionSelectionMaps(Data.MainFolderPath + @"\select_maps\");
-		}
+
 
 		private void btn_refreshPreview_Click(object sender, EventArgs e)
 		{
+			if (!File.Exists(Data.MainFolderPath + Data.MAPREGIONSPATH))
+			{
+				txt_factionColourOutput.AppendText("region map not found! Have you chosen the correct modfolder?");
+				return;
+			}
+
+			if (!File.Exists(Data.MainFolderPath + Data.RADARMAP))
+			{
+				txt_factionColourOutput.AppendText("radar map not found! Have you chosen the correct modfolder?");
+				return;
+			}
 
 			if (Functions.CheckIfNull(lst_faction_colours.FocusedItem, "No faction selected!"))
 			{
@@ -1257,6 +1276,23 @@ namespace Randomiser
 
 		}
 
+		private void button2_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog folderDialog;
+
+			folderDialog = new FolderBrowserDialog();
+
+			folderDialog.ShowDialog();
+
+			Data.ModFolderMapSelect = @folderDialog.SelectedPath;
+
+			txt_factionColourOutput.AppendText(Data.ModFolderMapSelect + "\r\n");
+
+
+		}
+
+		private void btn_createMaps_Click_1(object sender, EventArgs e) => CreateFactionSelectionMaps(Data.MainFolderPath + @"\select_maps\", ref txt_factionColourOutput);
+		
 	}
 
 }

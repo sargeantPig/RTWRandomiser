@@ -20,6 +20,7 @@ namespace Randomiser
 
 		public static string MainFolderPath = "";
 		public static string ModFolderPath = "";
+		public static string ModFolderMapSelect = "";
 		public static string EDUFILEPATH = @"\data\export_descr_unit.txt";
 		public static string EDUFILEPATHMOD = @"\data\export_descr_unit.txt";
 		public static string EDBFILEPATH = @"\data\export_descr_buildings.txt";
