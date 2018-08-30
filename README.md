@@ -7,7 +7,7 @@ Head over to the release page and download the latest release!
 Then just extract all the files from the downloaded archive into the root Rome Total War directory (where the RomeTW.exe is). 
 
 # Showcase
-![Imgur](https://i.imgur.com/NnHqeim.png, "Randomiser Screenshot")
+![Screenshot](https://i.imgur.com/NnHqeim.png "Randomiser Screenshot")
 
 The randomiser has many options, some ridiculous but some that really do create enjoyable scenarios. There's also many more more features planned!
 
