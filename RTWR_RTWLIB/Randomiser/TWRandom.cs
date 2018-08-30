@@ -10,6 +10,8 @@ using RTWLib.Functions;
 using RTWLib.Objects;
 using RTWLib.Data;
 using RTWLib.Logger;
+using System.Threading;
+
 namespace RTWR_RTWLIB.Randomiser
 {
 	public static class TWRandom
@@ -106,6 +108,7 @@ namespace RTWR_RTWLIB.Randomiser
 					pb.Increment(increment);
 					ss.Refresh();
 
+					Thread.Sleep(250);
 					m.Invoke(null, parameters);
 				}
 
@@ -323,12 +326,10 @@ namespace RTWR_RTWLIB.Randomiser
 
 				NumericUpDown maxS = new NumericUpDown();
 				maxS = maxSettlements as NumericUpDown;
-
 				Descr_Region tempDR = new Descr_Region(dr as Descr_Region);
-
 				List<Settlement> tempSettlements = new List<Settlement>();
 
-				Action<Faction> AddSettlement = (f) =>
+				Action<Faction> AddRSettlement = (f) =>
 				{
 					int index = TWRandom.rnd.Next(tempSettlements.Count());
 					Settlement rndS = tempSettlements[index];
@@ -336,6 +337,12 @@ namespace RTWR_RTWLIB.Randomiser
 					tempSettlements.RemoveAt(index);
 				};
 
+				Action<Settlement, Faction> AddSettlement = (s, f) =>
+				{
+					f.settlements.Add(new Settlement(s));
+					tempSettlements.Remove(s);
+				};
+			
 				//get all settlements
 				foreach (Faction f in ds.factions)
 				{
@@ -345,17 +352,25 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 				}
 
-				//redistribute settlements
+				tempSettlements = CreateMissingSettlements(tempSettlements, (Descr_Region)dr);
+
+				//set capitals for each faction
 				foreach (Faction f in ds.factions)
 				{
 					f.settlements.Clear();
-					AddSettlement(f); //add first settlement, (this will be the capital)
-					int[] capitalCoords = tempDR.GetCityCoords(tempSettlements.First().region);
+					AddRSettlement(f); //add first settlement, (this will be the capital)
+				}
 
-					for (int i = 0; i < maxS.Value - 1; i++)
+				ds.ShuffleFactions(TWRandom.rnd);
+
+				foreach (Faction f in ds.factions)
+				{
+					int maxrnd = TWRandom.rnd.Next((int)maxS.Value + 1);
+					int[] capitalCoords = tempDR.GetCityCoords(f.settlements.First().region);
+					for (int i = 0; i < maxrnd - 1; i++)
 					{
-						double distance = 10000;
-						Settlement cityToAdd = new Settlement();
+						double distance = 100;
+						Settlement cityToAdd = null;
 
 						foreach (Settlement s in tempSettlements)
 						{
@@ -365,14 +380,21 @@ namespace RTWR_RTWLIB.Randomiser
 							if (tempDis < distance)
 							{
 								distance = tempDis;
-								cityToAdd = new Settlement(s);
+								cityToAdd = s;
+
 							}
 						}
 
-						AddSettlement(f);
+							if (cityToAdd != null)
+								AddSettlement(cityToAdd, f);
 					}
 
 				}
+
+
+
+
+
 			}
 			else
 			{
@@ -380,10 +402,150 @@ namespace RTWR_RTWLIB.Randomiser
 				ds.DisplayLog();
 			}
 
+			CharacterCoordinateFix(ds, ((Descr_Region)dr));
+		}
+
+		public static void VoronoiSettlements(Descr_Strat ds, object dr)
+		{
+			Dictionary<int[], List<Settlement>> voronoiCoords = new Dictionary<int[], List<Settlement>>();
+			List<Settlement> tempSettlements = new List<Settlement>();
+
+			ds.ShuffleFactions(TWRandom.rnd);
+
+			//get all settlements
+			foreach (Faction f in ds.factions)
+			{
+				foreach (Settlement s in f.settlements)
+				{
+					tempSettlements.Add(new Settlement(s));
+				}
+			}
+
+			tempSettlements = CreateMissingSettlements(tempSettlements, (Descr_Region)dr);
+
+			while (!CheckVoronoiPoints(voronoiCoords))
+			{
+				//set voronoi points 
+				for (int i = 0; i < ds.factions.Count; i++)
+				{
+
+					int x = TWRandom.rnd.Next(20, 231);
+					int y = TWRandom.rnd.Next(20, 131);
+
+					while (voronoiCoords.ContainsKey(new int[] { x, y }))
+					{
+						x = TWRandom.rnd.Next(20, 231);
+						y = TWRandom.rnd.Next(20, 131);
+					}
+					voronoiCoords.Add(new int[] { x, y }, new List<Settlement>());
+				}
+
+				//assign each settlement to closest voronoi point
+				foreach (Settlement s in tempSettlements)
+				{
+					int[] closestPoint = new int[2];
+					int distance = 10000;
+					int[] cityCoord = ((Descr_Region)dr).GetCityCoords(s.region);
+					foreach (KeyValuePair<int[], List<Settlement>> kv in voronoiCoords)
+					{	
+						int tempDistance = (int)Functions_General.DistanceTo(cityCoord, kv.Key);
+						if (tempDistance < distance)
+						{
+							distance = tempDistance;
+							closestPoint = kv.Key;
+						}
+					}
+
+					voronoiCoords[closestPoint].Add(s);
+				}
+
+				if (!CheckVoronoiPoints(voronoiCoords))
+				{
+					voronoiCoords.Clear();
+				}
+			}
 
 
 
+			//give factions settlements
+			int counter = 0;
+			foreach (KeyValuePair<int[], List<Settlement>> kv in voronoiCoords)
+			{
+				ds.factions[counter].settlements = new List<Settlement>(kv.Value);
+				counter++;
+			}
 
+			CharacterCoordinateFix(ds, ((Descr_Region)dr));
+		}
+
+		public static void RagingRebels(Descr_Strat ds)
+		{
+			ds.brigand_spawn_value = 0;
+		}
+
+		public static void MightyEmpires(Descr_Strat ds)
+		{
+
+
+		}
+
+		private static List<Settlement> CreateMissingSettlements(List<Settlement> settlements, Descr_Region dr)
+		{
+			foreach (KeyValuePair<string, Region> kv in dr.rgbRegions)
+			{
+				int index = settlements.FindIndex(x => x.region == kv.Key);
+				if (index == -1)
+					settlements.Add(new Settlement("village", kv.Value.name, kv.Value.faction_creator, new List<string>(), 0, 500));
+			}
+
+			return new List<Settlement>(settlements);
+		}
+
+		private static bool CheckVoronoiPoints(Dictionary<int[], List<Settlement>> dic)
+		{
+			foreach (KeyValuePair<int[], List<Settlement>> kv in dic)
+			{
+				if (kv.Value.Count == 0)
+					return false;
+			}
+
+			if (dic.Count == 0)
+				return false;
+
+			return true;
+		}
+
+		private static void CharacterCoordinateFix(Descr_Strat ds, Descr_Region dr)
+		{
+			foreach (Faction f in ds.factions)
+			{
+				List<int[]> coordList = new List<int[]>();
+
+				foreach (Settlement s in f.settlements)
+				{
+					coordList.Add(dr.GetCityCoords(s.region));
+				}
+				
+				int counter = 0;
+				foreach (DSCharacter c in f.characters)
+				{
+					if (c.type == "admiral")
+						c.coords = Misc_Data.GetClosestWater(coordList[0]);
+					else if(c.type == "spy" || c.type == "diplomat")
+						c.coords = coordList[counter];
+					else
+					{
+						c.coords = coordList[counter];
+						counter++;
+
+						if (counter >= coordList.Count)
+							counter = 0;
+
+					}
+				}
+				
+				coordList.Clear();
+			}
 		}
 
 	}
