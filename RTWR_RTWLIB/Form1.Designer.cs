@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.lbl_seed = new System.Windows.Forms.Label();
+			this.btn_play = new System.Windows.Forms.Button();
 			this.picBox_map = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.btn_load = new System.Windows.Forms.Button();
@@ -37,6 +39,7 @@
 			this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
 			this.chk_misc_selectA = new System.Windows.Forms.CheckBox();
 			this.grp_settings_factions = new System.Windows.Forms.GroupBox();
+			this.chk_faction_mempires_6 = new System.Windows.Forms.CheckBox();
 			this.chk_fation_ragingRebels_5 = new System.Windows.Forms.CheckBox();
 			this.chk_faction_voronoi_4 = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
@@ -65,9 +68,8 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
 			this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
-			this.chk_faction_mempires_6 = new System.Windows.Forms.CheckBox();
-			this.btn_play = new System.Windows.Forms.Button();
-			this.lbl_seed = new System.Windows.Forms.Label();
+			this.chk_windowed = new System.Windows.Forms.CheckBox();
+			this.chk_ai = new System.Windows.Forms.CheckBox();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -84,6 +86,8 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.Transparent;
+			this.panel1.Controls.Add(this.chk_ai);
+			this.panel1.Controls.Add(this.chk_windowed);
 			this.panel1.Controls.Add(this.lbl_seed);
 			this.panel1.Controls.Add(this.btn_play);
 			this.panel1.Controls.Add(this.picBox_map);
@@ -92,8 +96,27 @@
 			this.panel1.Controls.Add(this.grp_box_settings);
 			this.panel1.Location = new System.Drawing.Point(3, 4);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(719, 358);
+			this.panel1.Size = new System.Drawing.Size(719, 375);
 			this.panel1.TabIndex = 0;
+			// 
+			// lbl_seed
+			// 
+			this.lbl_seed.AutoSize = true;
+			this.lbl_seed.Location = new System.Drawing.Point(76, 55);
+			this.lbl_seed.Name = "lbl_seed";
+			this.lbl_seed.Size = new System.Drawing.Size(0, 13);
+			this.lbl_seed.TabIndex = 6;
+			// 
+			// btn_play
+			// 
+			this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+			this.btn_play.Location = new System.Drawing.Point(9, 315);
+			this.btn_play.Name = "btn_play";
+			this.btn_play.Size = new System.Drawing.Size(153, 34);
+			this.btn_play.TabIndex = 5;
+			this.btn_play.Text = "Play";
+			this.btn_play.UseVisualStyleBackColor = true;
+			this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
 			// 
 			// picBox_map
 			// 
@@ -190,6 +213,17 @@
 			this.grp_settings_factions.TabIndex = 8;
 			this.grp_settings_factions.TabStop = false;
 			this.grp_settings_factions.Text = "Faction Settings";
+			// 
+			// chk_faction_mempires_6
+			// 
+			this.chk_faction_mempires_6.AutoSize = true;
+			this.chk_faction_mempires_6.Location = new System.Drawing.Point(7, 160);
+			this.chk_faction_mempires_6.Name = "chk_faction_mempires_6";
+			this.chk_faction_mempires_6.Size = new System.Drawing.Size(103, 17);
+			this.chk_faction_mempires_6.TabIndex = 8;
+			this.chk_faction_mempires_6.Tag = "MightyEmpires";
+			this.chk_faction_mempires_6.Text = "Mighty Empires?";
+			this.chk_faction_mempires_6.UseVisualStyleBackColor = true;
 			// 
 			// chk_fation_ragingRebels_5
 			// 
@@ -473,7 +507,7 @@
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbl_progress,
             this.pb_progress});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 375);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 395);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(734, 22);
 			this.statusStrip1.TabIndex = 2;
@@ -491,42 +525,32 @@
 			this.pb_progress.Name = "pb_progress";
 			this.pb_progress.Size = new System.Drawing.Size(200, 16);
 			// 
-			// chk_faction_mempires_6
+			// chk_windowed
 			// 
-			this.chk_faction_mempires_6.AutoSize = true;
-			this.chk_faction_mempires_6.Location = new System.Drawing.Point(7, 160);
-			this.chk_faction_mempires_6.Name = "chk_faction_mempires_6";
-			this.chk_faction_mempires_6.Size = new System.Drawing.Size(103, 17);
-			this.chk_faction_mempires_6.TabIndex = 8;
-			this.chk_faction_mempires_6.Tag = "MightyEmpires";
-			this.chk_faction_mempires_6.Text = "Mighty Empires?";
-			this.chk_faction_mempires_6.UseVisualStyleBackColor = true;
+			this.chk_windowed.AutoSize = true;
+			this.chk_windowed.Location = new System.Drawing.Point(79, 355);
+			this.chk_windowed.Name = "chk_windowed";
+			this.chk_windowed.Size = new System.Drawing.Size(83, 17);
+			this.chk_windowed.TabIndex = 7;
+			this.chk_windowed.Text = "Windowed?";
+			this.chk_windowed.UseVisualStyleBackColor = true;
 			// 
-			// btn_play
+			// chk_ai
 			// 
-			this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-			this.btn_play.Location = new System.Drawing.Point(9, 315);
-			this.btn_play.Name = "btn_play";
-			this.btn_play.Size = new System.Drawing.Size(61, 34);
-			this.btn_play.TabIndex = 5;
-			this.btn_play.Text = "Play";
-			this.btn_play.UseVisualStyleBackColor = true;
-			this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
-			// 
-			// lbl_seed
-			// 
-			this.lbl_seed.AutoSize = true;
-			this.lbl_seed.Location = new System.Drawing.Point(76, 55);
-			this.lbl_seed.Name = "lbl_seed";
-			this.lbl_seed.Size = new System.Drawing.Size(0, 13);
-			this.lbl_seed.TabIndex = 6;
+			this.chk_ai.AutoSize = true;
+			this.chk_ai.Location = new System.Drawing.Point(9, 355);
+			this.chk_ai.Name = "chk_ai";
+			this.chk_ai.Size = new System.Drawing.Size(63, 17);
+			this.chk_ai.TabIndex = 8;
+			this.chk_ai.Text = "Ai only?";
+			this.chk_ai.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-			this.ClientSize = new System.Drawing.Size(734, 397);
+			this.ClientSize = new System.Drawing.Size(734, 417);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.panel1);
 			this.Name = "Form1";
@@ -595,6 +619,8 @@
 		private System.Windows.Forms.CheckBox chk_faction_mempires_6;
 		private System.Windows.Forms.Label lbl_seed;
 		private System.Windows.Forms.Button btn_play;
+		private System.Windows.Forms.CheckBox chk_ai;
+		private System.Windows.Forms.CheckBox chk_windowed;
 	}
 }
 

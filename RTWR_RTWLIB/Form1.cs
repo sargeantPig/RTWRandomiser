@@ -14,7 +14,7 @@ using RTWLib.Functions;
 using RTWR_RTWLIB.Randomiser;
 using System.Threading;
 using System.Diagnostics;
-
+using RTWLib.Memory;
 namespace RTWR_RTWLIB
 {
 
@@ -214,10 +214,17 @@ namespace RTWR_RTWLIB
 
 		private void btn_play_Click(object sender, EventArgs e)
 		{
-			Functions_General.ExecuteCommand("RomeTW.exe", new string[] { "-mod:randomiser -show_err -nm -ai" });
+			string[] args = new string[1];
 
-			Thread.Sleep(5000);
-			Application.Exit();
-		}
+			args[0] = "-mod:randomiser -show_err -nm ";
+
+			if (chk_ai.Checked)
+				args[0] += "-ai ";
+
+			if (chk_windowed.Checked)
+				args[0] += "-ne ";
+
+			Functions_General.ExecuteCommand("RomeTW.exe", args);
+		}		
 	}
 }
