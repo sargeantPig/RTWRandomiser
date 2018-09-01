@@ -71,18 +71,31 @@ namespace RTWR_RTWLIB.Randomiser
 		public static Task RandomiseFile<T, A>(this A file, GroupBox grp, ToolStripLabel label, StatusStrip ss, ToolStripProgressBar pb, object[] arguments)
 		{
 			Type t = typeof(T);
-			int increment = 100/grp.Controls.Count;
+			int increment = 100 / grp.Controls.Count;
+
+			List<CheckBox> checkBoxes = new List<CheckBox>();
 
 			foreach (Control control in grp.Controls)
 			{
 				CheckBox cb = new CheckBox();
 				if (control is CheckBox)
+				{
 					cb = control as CheckBox;
+
+					if (cb.Checked)
+						checkBoxes.Add(cb);
+				}
 				else continue;
 
 				if (!cb.Checked)
 					continue;
 
+			}
+
+			checkBoxes.Sort(new Comparison<CheckBox>(Functions_General.CompareNameEnd));
+
+			foreach (CheckBox cb in checkBoxes)
+			{
 				try
 				{
 					MethodInfo m = t.GetMethod(cb.Tag.ToString());
@@ -99,9 +112,16 @@ namespace RTWR_RTWLIB.Randomiser
 						requiredTypes.Add(pi.ParameterType);
 					}
 
-					for (int i = 1; i < objs; i++)
+					int index = 0;
+					foreach (Type type in requiredTypes)
 					{
-						parameters[i] = arguments[i - 1];
+						foreach (object o in arguments)
+						{
+							if (o.GetType() == type)
+								parameters[index] = o;  //add correct argument for the method
+						}
+
+						index++;
 					}
 
 					label.Text = m.Name;
@@ -121,14 +141,14 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 
 			return Task.CompletedTask;
-
 		}
-		
+
 	}
 
 	public class RandomEDU
 	{
-		public static void RandomSizes(EDU edu) {
+		public static void RandomSizes(EDU edu)
+		{
 
 			foreach (Unit unit in edu.units)
 				unit.soldier.number = TWRandom.rnd.Next(15, 60 + 1);
@@ -136,7 +156,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 		public static void RandomCosts(EDU edu)
 		{
-			foreach(Unit unit in edu.units)
+			foreach (Unit unit in edu.units)
 			{
 				unit.cost[1] = TWRandom.rnd.Next(200, 3000); // cost to build 
 				unit.cost[2] = (int)(unit.cost[1] * 0.25); // cost to upkeep 
@@ -188,7 +208,7 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 		}
 
-		public static void RandomAttributes(EDU edu, object maxAttributes)
+		public static void RandomAttributes(EDU edu, NumericUpDown maxAttributes)
 		{
 			if (maxAttributes is NumericUpDown)
 			{
@@ -232,7 +252,7 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 		}
 
-		public static void RandomOwnership(EDU edu, object maxOwnership)
+		public static void RandomOwnership(EDU edu, NumericUpDown maxOwnership)
 		{
 			if (maxOwnership is NumericUpDown)
 			{
@@ -342,7 +362,7 @@ namespace RTWR_RTWLIB.Randomiser
 					f.settlements.Add(new Settlement(s));
 					tempSettlements.Remove(s);
 				};
-			
+
 				//get all settlements
 				foreach (Faction f in ds.factions)
 				{
@@ -385,8 +405,8 @@ namespace RTWR_RTWLIB.Randomiser
 							}
 						}
 
-							if (cityToAdd != null)
-								AddSettlement(cityToAdd, f);
+						if (cityToAdd != null)
+							AddSettlement(cityToAdd, f);
 					}
 
 				}
@@ -405,7 +425,7 @@ namespace RTWR_RTWLIB.Randomiser
 			CharacterCoordinateFix(ds, ((Descr_Region)dr));
 		}
 
-		public static void VoronoiSettlements(Descr_Strat ds, object dr)
+		public static void VoronoiSettlements(Descr_Strat ds, Descr_Region dr)
 		{
 			Dictionary<int[], List<Settlement>> voronoiCoords = new Dictionary<int[], List<Settlement>>();
 			List<Settlement> tempSettlements = new List<Settlement>();
@@ -447,7 +467,7 @@ namespace RTWR_RTWLIB.Randomiser
 					int distance = 10000;
 					int[] cityCoord = ((Descr_Region)dr).GetCityCoords(s.region);
 					foreach (KeyValuePair<int[], List<Settlement>> kv in voronoiCoords)
-					{	
+					{
 						int tempDistance = (int)Functions_General.DistanceTo(cityCoord, kv.Key);
 						if (tempDistance < distance)
 						{
@@ -475,7 +495,7 @@ namespace RTWR_RTWLIB.Randomiser
 				counter++;
 			}
 
-			CharacterCoordinateFix(ds, ((Descr_Region)dr));
+			CharacterCoordinateFix(ds, dr);
 		}
 
 		public static void RagingRebels(Descr_Strat ds)
@@ -483,11 +503,193 @@ namespace RTWR_RTWLIB.Randomiser
 			ds.brigand_spawn_value = 0;
 		}
 
-		public static void MightyEmpires(Descr_Strat ds)
+		public static void MightyEmpires(Descr_Strat ds, EDU edu, NamesFile names, Descr_Region dr, EDB edb)
 		{
+			foreach (Faction f in ds.factions)
+			{
+				List<string> usedNames = new List<string>();
 
+				int CWithArmies = 0;
+				foreach (DSCharacter c in f.characters)
+				{
+					if (c.type == "named character" || c.type == "general")
+						CWithArmies++;
+					usedNames.Add(c.name.Trim());
+				}
 
+				foreach (CharacterRecord cr in f.characterRecords)
+				{
+					usedNames.Add(cr.name);
+				}
+
+				int power = f.settlements.Count() * 2;
+				int armyDeficit = f.settlements.Count() - CWithArmies;
+				int armySize = power;
+				if (armySize > 20)
+					armySize = 20;
+
+				List<Unit> factionUnits = ((EDU)edu).FindUnitsByFaction(f.name);
+
+				int emptySettlements = f.settlements.Count() - f.characters.Count();
+
+				int rndSize = TWRandom.rnd.Next(armySize / 2, armySize);
+
+				for (int i = 0; i < armyDeficit; i++)
+				{
+					string name = names.GetRandomUniqueName(TWRandom.rnd, f.name, usedNames);
+
+					f.characters.Add(new DSCharacter(name, TWRandom.rnd));
+
+				}
+
+				foreach (DSCharacter character in f.characters)
+				{
+					rndSize = TWRandom.rnd.Next(armySize / 2, armySize);
+					if (rndSize == 0)
+						rndSize = 1;
+					if (character.type == "general" || character.type == "named character")
+					{
+						character.army.Clear();
+						for (int i = 0; i < rndSize; i++)
+						{
+							character.army.Add(new DSUnit(factionUnits[TWRandom.rnd.Next(factionUnits.Count)].type, 0, 0, 0));
+						}
+					}
+
+				}
+
+				foreach (Settlement s in f.settlements)
+				{
+					Action<string, int, List<DSBuilding>, int> ChangeSettlement = (string level, int pop, List<DSBuilding> dSBuildings, int mod) =>
+					{
+						s.s_level = level;
+						s.population = pop;
+						s.b_types = new List<DSBuilding>(dSBuildings);
+						power -= mod;
+					};
+
+					if (power > 32)
+					{
+						s.b_types.Clear();
+
+						string levels = "huge_city";
+						int population = 25000;
+		
+						List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, dsbs, 8);
+
+						
+					}
+
+					else if (power > 16)
+					{
+						s.b_types.Clear();
+
+						string levels = "large_city";
+						int population = 20000;
+
+						List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, dsbs, 4);
+					}
+
+					else if (power > 8)
+					{
+						s.b_types.Clear();
+
+						string levels = "city";
+						int population = 15000;
+
+						List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, dsbs, 2);
+
+						
+					}
+
+					else if (power > 4)
+					{
+						s.b_types.Clear();
+
+						string levels = "large_town";
+						int population = 9000;
+
+						List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, dsbs, 1);
+
+						
+					}
+
+					else if (power > 2)
+					{
+						s.b_types.Clear();
+
+						string levels = "town";
+						int population = 3500;
+
+						List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, dsbs, 0);
+
+						
+					}
+
+					else if (power > 1)
+					{
+						s.b_types.Clear();
+
+						string levels = "village";
+						int population = 1000;
+
+						//List<DSBuilding> dsbs = GetBuildings(levels, edb);
+
+						ChangeSettlement(levels, population, new List<DSBuilding>(), 0);
+
+					}
+
+					
+				}
+			}
+
+			CharacterCoordinateFix(ds, dr);
 		}
+
+		static private List<DSBuilding> GetBuildings(string level, EDB edb)
+		{
+			List<DSBuilding> dSBuildings = new List<DSBuilding>();
+			List<string[]> buildings = new List<string[]>();
+
+			buildings.Add(edb.GetSpecificBuildingFromChain("core_building", level));
+			buildings.Add(edb.GetRandomBuildingFromChain("defenses", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("barracks", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("equestrian", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("missles", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("market", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("smith", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("health", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("hinterland_farms", level, TWRandom.rnd));
+			buildings.Add(edb.GetSpecificBuildingFromChain("hinterland_roads", level));
+			buildings.Add(edb.GetRandomBuildingFromChain("academic", level, TWRandom.rnd));
+			buildings.Add(edb.GetRandomBuildingFromChain("amphitheatres", level, TWRandom.rnd));
+
+			foreach (string[] nt in buildings)
+			{
+				if (nt == null)
+					continue;
+
+				DSBuilding dsb = new DSBuilding();
+
+				dsb.name = nt[0];
+				dsb.type = nt[1];
+
+				dSBuildings.Add(dsb);
+			}
+
+			return dSBuildings;
+		}
+
 
 		private static List<Settlement> CreateMissingSettlements(List<Settlement> settlements, Descr_Region dr)
 		{
@@ -495,7 +697,7 @@ namespace RTWR_RTWLIB.Randomiser
 			{
 				int index = settlements.FindIndex(x => x.region == kv.Key);
 				if (index == -1)
-					settlements.Add(new Settlement("village", kv.Value.name, kv.Value.faction_creator, new List<string>(), 0, 500));
+					settlements.Add(new Settlement("village", kv.Value.name, kv.Value.faction_creator, new List<DSBuilding>(), 0, 500));
 			}
 
 			return new List<Settlement>(settlements);
@@ -525,13 +727,13 @@ namespace RTWR_RTWLIB.Randomiser
 				{
 					coordList.Add(dr.GetCityCoords(s.region));
 				}
-				
+
 				int counter = 0;
 				foreach (DSCharacter c in f.characters)
 				{
 					if (c.type == "admiral")
 						c.coords = Misc_Data.GetClosestWater(coordList[0]);
-					else if(c.type == "spy" || c.type == "diplomat")
+					else if (c.type == "spy" || c.type == "diplomat")
 						c.coords = coordList[counter];
 					else
 					{
@@ -543,7 +745,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 					}
 				}
-				
+
 				coordList.Clear();
 			}
 		}
@@ -557,8 +759,9 @@ namespace RTWR_RTWLIB.Randomiser
 			foreach (CoreBuilding cb in edb.buildingTrees)
 				foreach (Building b in cb.buildings)
 					foreach (Brecruit br in b.capability.canRecruit)
-						br.requiresFactions = new List<string>( TWRandom.UnitByFaction.GetFactions(br.name));
+						br.requiresFactions = new List<string>(TWRandom.UnitByFaction.GetFactions(br.name));
 		}
-
 	}
+
+
 }

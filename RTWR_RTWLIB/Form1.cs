@@ -24,7 +24,8 @@ namespace RTWR_RTWLIB
 		export_descr_unit,
 		descr_strat,
 		descr_regions,
-		descr_sm_faction
+		descr_sm_faction,
+		names,
 	}
 
 	public partial class Form1 : Form
@@ -35,6 +36,7 @@ namespace RTWR_RTWLIB
 				{FileNames.export_descr_buildings, new EDB()},
 				{FileNames.export_descr_unit, new EDU()},
 				{FileNames.descr_sm_faction, new SM_Factions()},
+				{FileNames.names, new NamesFile() }
 			};
 
 		Dictionary<FileNames, IFile> randfiles = new Dictionary<FileNames, IFile>(){
@@ -45,6 +47,8 @@ namespace RTWR_RTWLIB
 				{FileNames.descr_sm_faction, new SM_Factions()},
 			};
 
+		int seed;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -53,6 +57,15 @@ namespace RTWR_RTWLIB
 			if (!logger.FileCheck(FilePaths.RTWEXE))
 				logger.DisplayLog();
 			else lbl_progress.Text = "RomeTW.exe Found.";
+
+			//get current seed
+			if (File.Exists("randomiser_.txt"))
+			{
+				StreamReader sr = new StreamReader("randomiser_.txt");
+				string line = sr.ReadToEnd();
+				sr.Close();
+				lbl_seed.Text = "Current Randomiser Seed: " + line;
+			}
 		}
 
 		async private void btn_load_Click(object sender, EventArgs e)
@@ -65,7 +78,6 @@ namespace RTWR_RTWLIB
 				await LoadAll(file.Value, (int)increment);	
 			}
 
-			//get unit data
 			lbl_progress.Text = "Files Loaded.";
 
 			pictureBox1.BackgroundImage = Properties.Resources.symbol48_romans_brutii;
@@ -85,8 +97,22 @@ namespace RTWR_RTWLIB
 
 		private void btn_randomise_Click(object sender, EventArgs e)
 		{
-			if(chk_seed.Checked)
-				TWRandom.rnd = new Random(txt_seed.Text.GetHashCode());
+			if (chk_seed.Checked)
+			{
+				int h = txt_seed.Text.GetHashCode();
+				seed = h;
+				lbl_seed.Text = "Current Randomiser Seed: " + h;
+				TWRandom.rnd = new Random(h);
+			}
+			else
+			{
+				int rnd = TWRandom.rnd.Next(int.MaxValue);
+				seed = rnd;
+				lbl_seed.Text = "Current Randomiser Seed: " + rnd;
+				TWRandom.rnd = new Random(rnd);
+			}
+
+			
 
 			pb_progress.Value = 0;
 			lbl_progress.Text = "Starting...";
@@ -114,10 +140,11 @@ namespace RTWR_RTWLIB
 			Descr_Strat R_DS = (Descr_Strat)((Descr_Strat)vanfiles[FileNames.descr_strat]).Clone();
 			Descr_Region R_DR = vanfiles[FileNames.descr_regions] as Descr_Region;
 			SM_Factions R_SMF = vanfiles[FileNames.descr_sm_faction] as SM_Factions;
+			NamesFile R_N = vanfiles[FileNames.names] as NamesFile;
 
 			R_EDU.RandomiseFile<RandomEDU, EDU>(grp_settings_units, lbl_progress, statusStrip1, pb_progress, new object[] {numUpDown_unit_attributes, numUpDown_unit_ownership });
 			R_EDB.SetRecruitment();
-			R_DS.RandomiseFile<RandomDS, Descr_Strat>(grp_settings_factions, lbl_progress, statusStrip1, pb_progress, new object[] {R_DR, numUpDown_faction_cities});
+			R_DS.RandomiseFile<RandomDS, Descr_Strat>(grp_settings_factions, lbl_progress, statusStrip1, pb_progress, new object[] {R_DR, numUpDown_faction_cities, R_EDU, R_N, R_EDB});
 
 			
 			lbl_progress.Text = "Creating preview map...";
@@ -136,6 +163,10 @@ namespace RTWR_RTWLIB
 			FileWrite(R_EDU as IFile);
 			FileWrite(R_EDB as IFile);
 			FileWrite(R_DS as IFile);
+
+			StreamWriter sw = new StreamWriter("randomiser_.txt");
+			sw.Write(seed);
+			sw.Close();
 
 			lbl_progress.Text = "Randomisation Complete!";
 			pb_progress.Value = 100;
@@ -172,13 +203,21 @@ namespace RTWR_RTWLIB
 		private void chk_faction_voronoi_CheckedChanged(object sender, EventArgs e)
 		{
 			if (((CheckBox)sender).Checked)
-				chk_faction_settlements.Checked = !((CheckBox)sender).Checked;
+				chk_faction_settlements_4.Checked = !((CheckBox)sender).Checked;
 		}
 
 		private void chk_faction_settlements_CheckedChanged(object sender, EventArgs e)
 		{
 			if(((CheckBox)sender).Checked)
-				chk_faction_voronoi.Checked = !((CheckBox)sender).Checked;
+				chk_faction_voronoi_4.Checked = !((CheckBox)sender).Checked;
+		}
+
+		private void btn_play_Click(object sender, EventArgs e)
+		{
+			Functions_General.ExecuteCommand("RomeTW.exe", new string[] { "-mod:randomiser -show_err -nm -ai" });
+
+			Thread.Sleep(5000);
+			Application.Exit();
 		}
 	}
 }

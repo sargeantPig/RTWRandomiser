@@ -34,15 +34,17 @@
 			this.btn_load = new System.Windows.Forms.Button();
 			this.grp_box_settings = new System.Windows.Forms.GroupBox();
 			this.grp_settings_misc = new System.Windows.Forms.GroupBox();
+			this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
 			this.chk_misc_selectA = new System.Windows.Forms.CheckBox();
 			this.grp_settings_factions = new System.Windows.Forms.GroupBox();
-			this.chk_faction_voronoi = new System.Windows.Forms.CheckBox();
+			this.chk_fation_ragingRebels_5 = new System.Windows.Forms.CheckBox();
+			this.chk_faction_voronoi_4 = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.numUpDown_faction_cities = new System.Windows.Forms.NumericUpDown();
-			this.chk_faction_settlements = new System.Windows.Forms.CheckBox();
-			this.chk_misc_Ufactions = new System.Windows.Forms.CheckBox();
-			this.chk_faction_ai = new System.Windows.Forms.CheckBox();
-			this.chk_faction_treasury = new System.Windows.Forms.CheckBox();
+			this.chk_faction_settlements_4 = new System.Windows.Forms.CheckBox();
+			this.chk_misc_Ufactions_3 = new System.Windows.Forms.CheckBox();
+			this.chk_faction_ai_2 = new System.Windows.Forms.CheckBox();
+			this.chk_faction_treasury_1 = new System.Windows.Forms.CheckBox();
 			this.grp_settings_units = new System.Windows.Forms.GroupBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.numUpDown_unit_ownership = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +65,9 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
 			this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
-			this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
-			this.chk_fation_ragingRebels = new System.Windows.Forms.CheckBox();
+			this.chk_faction_mempires_6 = new System.Windows.Forms.CheckBox();
+			this.btn_play = new System.Windows.Forms.Button();
+			this.lbl_seed = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -81,6 +84,8 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.Transparent;
+			this.panel1.Controls.Add(this.lbl_seed);
+			this.panel1.Controls.Add(this.btn_play);
 			this.panel1.Controls.Add(this.picBox_map);
 			this.panel1.Controls.Add(this.pictureBox1);
 			this.panel1.Controls.Add(this.btn_load);
@@ -146,6 +151,17 @@
 			this.grp_settings_misc.TabStop = false;
 			this.grp_settings_misc.Text = "Misc Settings";
 			// 
+			// chk_misc_unitInfo
+			// 
+			this.chk_misc_unitInfo.AutoSize = true;
+			this.chk_misc_unitInfo.ForeColor = System.Drawing.Color.DarkRed;
+			this.chk_misc_unitInfo.Location = new System.Drawing.Point(7, 263);
+			this.chk_misc_unitInfo.Name = "chk_misc_unitInfo";
+			this.chk_misc_unitInfo.Size = new System.Drawing.Size(82, 17);
+			this.chk_misc_unitInfo.TabIndex = 1;
+			this.chk_misc_unitInfo.Text = "Unit Info Fix";
+			this.chk_misc_unitInfo.UseVisualStyleBackColor = true;
+			// 
 			// chk_misc_selectA
 			// 
 			this.chk_misc_selectA.AutoSize = true;
@@ -159,14 +175,15 @@
 			// 
 			// grp_settings_factions
 			// 
-			this.grp_settings_factions.Controls.Add(this.chk_fation_ragingRebels);
-			this.grp_settings_factions.Controls.Add(this.chk_faction_voronoi);
+			this.grp_settings_factions.Controls.Add(this.chk_faction_mempires_6);
+			this.grp_settings_factions.Controls.Add(this.chk_fation_ragingRebels_5);
+			this.grp_settings_factions.Controls.Add(this.chk_faction_voronoi_4);
 			this.grp_settings_factions.Controls.Add(this.label2);
 			this.grp_settings_factions.Controls.Add(this.numUpDown_faction_cities);
-			this.grp_settings_factions.Controls.Add(this.chk_faction_settlements);
-			this.grp_settings_factions.Controls.Add(this.chk_misc_Ufactions);
-			this.grp_settings_factions.Controls.Add(this.chk_faction_ai);
-			this.grp_settings_factions.Controls.Add(this.chk_faction_treasury);
+			this.grp_settings_factions.Controls.Add(this.chk_faction_settlements_4);
+			this.grp_settings_factions.Controls.Add(this.chk_misc_Ufactions_3);
+			this.grp_settings_factions.Controls.Add(this.chk_faction_ai_2);
+			this.grp_settings_factions.Controls.Add(this.chk_faction_treasury_1);
 			this.grp_settings_factions.Location = new System.Drawing.Point(151, 20);
 			this.grp_settings_factions.Name = "grp_settings_factions";
 			this.grp_settings_factions.Size = new System.Drawing.Size(126, 286);
@@ -174,17 +191,28 @@
 			this.grp_settings_factions.TabStop = false;
 			this.grp_settings_factions.Text = "Faction Settings";
 			// 
-			// chk_faction_voronoi
+			// chk_fation_ragingRebels_5
 			// 
-			this.chk_faction_voronoi.AutoSize = true;
-			this.chk_faction_voronoi.Location = new System.Drawing.Point(7, 114);
-			this.chk_faction_voronoi.Name = "chk_faction_voronoi";
-			this.chk_faction_voronoi.Size = new System.Drawing.Size(108, 17);
-			this.chk_faction_voronoi.TabIndex = 7;
-			this.chk_faction_voronoi.Tag = "VoronoiSettlements";
-			this.chk_faction_voronoi.Text = "Voronoi Empires?";
-			this.chk_faction_voronoi.UseVisualStyleBackColor = true;
-			this.chk_faction_voronoi.CheckedChanged += new System.EventHandler(this.chk_faction_voronoi_CheckedChanged);
+			this.chk_fation_ragingRebels_5.AutoSize = true;
+			this.chk_fation_ragingRebels_5.Location = new System.Drawing.Point(7, 137);
+			this.chk_fation_ragingRebels_5.Name = "chk_fation_ragingRebels_5";
+			this.chk_fation_ragingRebels_5.Size = new System.Drawing.Size(102, 17);
+			this.chk_fation_ragingRebels_5.TabIndex = 2;
+			this.chk_fation_ragingRebels_5.Tag = "RagingRebels";
+			this.chk_fation_ragingRebels_5.Text = "Raging Rebels?";
+			this.chk_fation_ragingRebels_5.UseVisualStyleBackColor = true;
+			// 
+			// chk_faction_voronoi_4
+			// 
+			this.chk_faction_voronoi_4.AutoSize = true;
+			this.chk_faction_voronoi_4.Location = new System.Drawing.Point(7, 114);
+			this.chk_faction_voronoi_4.Name = "chk_faction_voronoi_4";
+			this.chk_faction_voronoi_4.Size = new System.Drawing.Size(108, 17);
+			this.chk_faction_voronoi_4.TabIndex = 7;
+			this.chk_faction_voronoi_4.Tag = "VoronoiSettlements";
+			this.chk_faction_voronoi_4.Text = "Voronoi Empires?";
+			this.chk_faction_voronoi_4.UseVisualStyleBackColor = true;
+			this.chk_faction_voronoi_4.CheckedChanged += new System.EventHandler(this.chk_faction_voronoi_CheckedChanged);
 			// 
 			// label2
 			// 
@@ -202,50 +230,50 @@
 			this.numUpDown_faction_cities.Size = new System.Drawing.Size(36, 20);
 			this.numUpDown_faction_cities.TabIndex = 5;
 			// 
-			// chk_faction_settlements
+			// chk_faction_settlements_4
 			// 
-			this.chk_faction_settlements.AutoSize = true;
-			this.chk_faction_settlements.Location = new System.Drawing.Point(7, 90);
-			this.chk_faction_settlements.Name = "chk_faction_settlements";
-			this.chk_faction_settlements.Size = new System.Drawing.Size(100, 17);
-			this.chk_faction_settlements.TabIndex = 4;
-			this.chk_faction_settlements.Tag = "RandomSettlements";
-			this.chk_faction_settlements.Text = "Random Cities?";
-			this.chk_faction_settlements.UseVisualStyleBackColor = true;
-			this.chk_faction_settlements.CheckedChanged += new System.EventHandler(this.chk_faction_settlements_CheckedChanged);
+			this.chk_faction_settlements_4.AutoSize = true;
+			this.chk_faction_settlements_4.Location = new System.Drawing.Point(7, 90);
+			this.chk_faction_settlements_4.Name = "chk_faction_settlements_4";
+			this.chk_faction_settlements_4.Size = new System.Drawing.Size(100, 17);
+			this.chk_faction_settlements_4.TabIndex = 4;
+			this.chk_faction_settlements_4.Tag = "RandomSettlements";
+			this.chk_faction_settlements_4.Text = "Random Cities?";
+			this.chk_faction_settlements_4.UseVisualStyleBackColor = true;
+			this.chk_faction_settlements_4.CheckedChanged += new System.EventHandler(this.chk_faction_settlements_CheckedChanged);
 			// 
-			// chk_misc_Ufactions
+			// chk_misc_Ufactions_3
 			// 
-			this.chk_misc_Ufactions.AutoSize = true;
-			this.chk_misc_Ufactions.Location = new System.Drawing.Point(7, 66);
-			this.chk_misc_Ufactions.Name = "chk_misc_Ufactions";
-			this.chk_misc_Ufactions.Size = new System.Drawing.Size(106, 17);
-			this.chk_misc_Ufactions.TabIndex = 3;
-			this.chk_misc_Ufactions.Tag = "UnlockFactions";
-			this.chk_misc_Ufactions.Text = "Unlock factions?";
-			this.chk_misc_Ufactions.UseVisualStyleBackColor = true;
+			this.chk_misc_Ufactions_3.AutoSize = true;
+			this.chk_misc_Ufactions_3.Location = new System.Drawing.Point(7, 66);
+			this.chk_misc_Ufactions_3.Name = "chk_misc_Ufactions_3";
+			this.chk_misc_Ufactions_3.Size = new System.Drawing.Size(106, 17);
+			this.chk_misc_Ufactions_3.TabIndex = 3;
+			this.chk_misc_Ufactions_3.Tag = "UnlockFactions";
+			this.chk_misc_Ufactions_3.Text = "Unlock factions?";
+			this.chk_misc_Ufactions_3.UseVisualStyleBackColor = true;
 			// 
-			// chk_faction_ai
+			// chk_faction_ai_2
 			// 
-			this.chk_faction_ai.AutoSize = true;
-			this.chk_faction_ai.Location = new System.Drawing.Point(7, 43);
-			this.chk_faction_ai.Name = "chk_faction_ai";
-			this.chk_faction_ai.Size = new System.Drawing.Size(85, 17);
-			this.chk_faction_ai.TabIndex = 1;
-			this.chk_faction_ai.Tag = "RandomAI";
-			this.chk_faction_ai.Text = "Random AI?";
-			this.chk_faction_ai.UseVisualStyleBackColor = true;
+			this.chk_faction_ai_2.AutoSize = true;
+			this.chk_faction_ai_2.Location = new System.Drawing.Point(7, 43);
+			this.chk_faction_ai_2.Name = "chk_faction_ai_2";
+			this.chk_faction_ai_2.Size = new System.Drawing.Size(85, 17);
+			this.chk_faction_ai_2.TabIndex = 1;
+			this.chk_faction_ai_2.Tag = "RandomAI";
+			this.chk_faction_ai_2.Text = "Random AI?";
+			this.chk_faction_ai_2.UseVisualStyleBackColor = true;
 			// 
-			// chk_faction_treasury
+			// chk_faction_treasury_1
 			// 
-			this.chk_faction_treasury.AutoSize = true;
-			this.chk_faction_treasury.Location = new System.Drawing.Point(7, 19);
-			this.chk_faction_treasury.Name = "chk_faction_treasury";
-			this.chk_faction_treasury.Size = new System.Drawing.Size(112, 17);
-			this.chk_faction_treasury.TabIndex = 0;
-			this.chk_faction_treasury.Tag = "RandomTreasury";
-			this.chk_faction_treasury.Text = "Random treasury?";
-			this.chk_faction_treasury.UseVisualStyleBackColor = true;
+			this.chk_faction_treasury_1.AutoSize = true;
+			this.chk_faction_treasury_1.Location = new System.Drawing.Point(7, 19);
+			this.chk_faction_treasury_1.Name = "chk_faction_treasury_1";
+			this.chk_faction_treasury_1.Size = new System.Drawing.Size(112, 17);
+			this.chk_faction_treasury_1.TabIndex = 0;
+			this.chk_faction_treasury_1.Tag = "RandomTreasury";
+			this.chk_faction_treasury_1.Text = "Random treasury?";
+			this.chk_faction_treasury_1.UseVisualStyleBackColor = true;
 			// 
 			// grp_settings_units
 			// 
@@ -463,27 +491,35 @@
 			this.pb_progress.Name = "pb_progress";
 			this.pb_progress.Size = new System.Drawing.Size(200, 16);
 			// 
-			// chk_misc_unitInfo
+			// chk_faction_mempires_6
 			// 
-			this.chk_misc_unitInfo.AutoSize = true;
-			this.chk_misc_unitInfo.ForeColor = System.Drawing.Color.DarkRed;
-			this.chk_misc_unitInfo.Location = new System.Drawing.Point(7, 263);
-			this.chk_misc_unitInfo.Name = "chk_misc_unitInfo";
-			this.chk_misc_unitInfo.Size = new System.Drawing.Size(82, 17);
-			this.chk_misc_unitInfo.TabIndex = 1;
-			this.chk_misc_unitInfo.Text = "Unit Info Fix";
-			this.chk_misc_unitInfo.UseVisualStyleBackColor = true;
+			this.chk_faction_mempires_6.AutoSize = true;
+			this.chk_faction_mempires_6.Location = new System.Drawing.Point(7, 160);
+			this.chk_faction_mempires_6.Name = "chk_faction_mempires_6";
+			this.chk_faction_mempires_6.Size = new System.Drawing.Size(103, 17);
+			this.chk_faction_mempires_6.TabIndex = 8;
+			this.chk_faction_mempires_6.Tag = "MightyEmpires";
+			this.chk_faction_mempires_6.Text = "Mighty Empires?";
+			this.chk_faction_mempires_6.UseVisualStyleBackColor = true;
 			// 
-			// chk_fation_ragingRebels
+			// btn_play
 			// 
-			this.chk_fation_ragingRebels.AutoSize = true;
-			this.chk_fation_ragingRebels.Location = new System.Drawing.Point(7, 137);
-			this.chk_fation_ragingRebels.Name = "chk_fation_ragingRebels";
-			this.chk_fation_ragingRebels.Size = new System.Drawing.Size(102, 17);
-			this.chk_fation_ragingRebels.TabIndex = 2;
-			this.chk_fation_ragingRebels.Tag = "RagingRebels";
-			this.chk_fation_ragingRebels.Text = "Raging Rebels?";
-			this.chk_fation_ragingRebels.UseVisualStyleBackColor = true;
+			this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+			this.btn_play.Location = new System.Drawing.Point(9, 315);
+			this.btn_play.Name = "btn_play";
+			this.btn_play.Size = new System.Drawing.Size(61, 34);
+			this.btn_play.TabIndex = 5;
+			this.btn_play.Text = "Play";
+			this.btn_play.UseVisualStyleBackColor = true;
+			this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
+			// 
+			// lbl_seed
+			// 
+			this.lbl_seed.AutoSize = true;
+			this.lbl_seed.Location = new System.Drawing.Point(76, 55);
+			this.lbl_seed.Name = "lbl_seed";
+			this.lbl_seed.Size = new System.Drawing.Size(0, 13);
+			this.lbl_seed.TabIndex = 6;
 			// 
 			// Form1
 			// 
@@ -496,6 +532,7 @@
 			this.Name = "Form1";
 			this.Text = "Rome Total War Randomiser";
 			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_map)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.grp_box_settings.ResumeLayout(false);
@@ -531,8 +568,8 @@
 		private System.Windows.Forms.GroupBox grp_settings_factions;
 		private System.Windows.Forms.CheckBox chk_faction_balanced;
 		private System.Windows.Forms.CheckBox chk_faction_rosters;
-		private System.Windows.Forms.CheckBox chk_faction_ai;
-		private System.Windows.Forms.CheckBox chk_faction_treasury;
+		private System.Windows.Forms.CheckBox chk_faction_ai_2;
+		private System.Windows.Forms.CheckBox chk_faction_treasury_1;
 		private System.Windows.Forms.GroupBox grp_settings_units;
 		private System.Windows.Forms.CheckBox chk_unit_groundb;
 		private System.Windows.Forms.CheckBox chk_unit_attributes;
@@ -545,16 +582,19 @@
 		private System.Windows.Forms.CheckBox chk_seed;
 		private System.Windows.Forms.Label lbl_unit_attributes;
 		private System.Windows.Forms.NumericUpDown numUpDown_unit_attributes;
-		private System.Windows.Forms.CheckBox chk_misc_Ufactions;
+		private System.Windows.Forms.CheckBox chk_misc_Ufactions_3;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.NumericUpDown numUpDown_unit_ownership;
-		private System.Windows.Forms.CheckBox chk_faction_settlements;
+		private System.Windows.Forms.CheckBox chk_faction_settlements_4;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.NumericUpDown numUpDown_faction_cities;
 		private System.Windows.Forms.PictureBox picBox_map;
-		private System.Windows.Forms.CheckBox chk_faction_voronoi;
+		private System.Windows.Forms.CheckBox chk_faction_voronoi_4;
 		private System.Windows.Forms.CheckBox chk_misc_unitInfo;
-		private System.Windows.Forms.CheckBox chk_fation_ragingRebels;
+		private System.Windows.Forms.CheckBox chk_fation_ragingRebels_5;
+		private System.Windows.Forms.CheckBox chk_faction_mempires_6;
+		private System.Windows.Forms.Label lbl_seed;
+		private System.Windows.Forms.Button btn_play;
 	}
 }
 
