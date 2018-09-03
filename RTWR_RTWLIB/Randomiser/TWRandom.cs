@@ -217,8 +217,8 @@ namespace RTWR_RTWLIB.Randomiser
 
 				foreach (Unit unit in edu.units)
 				{
-					unit.attributes = Attributes.sea_faring;
-
+					unit.attributes = Attributes.sea_faring | Attributes.general_unit | Attributes.general_unit_upgrade;
+					
 					int max = TWRandom.rnd.Next(1, (int)maxA.Value + 1);
 
 					for (int i = 0; i < max; i++)
@@ -231,6 +231,8 @@ namespace RTWR_RTWLIB.Randomiser
 
 					}
 				}
+
+
 			}
 
 			else
@@ -300,7 +302,6 @@ namespace RTWR_RTWLIB.Randomiser
 
 
 		}
-
 	}
 
 	public class RandomDS
@@ -339,14 +340,9 @@ namespace RTWR_RTWLIB.Randomiser
 			ds.campaignNonPlayable.Clear();
 		}
 
-		public static void RandomSettlements(Descr_Strat ds, object dr, object maxSettlements)
+		public static void RandomSettlements(Descr_Strat ds, Descr_Region dr, NumericUpDown maxSettlements)
 		{
-			if (maxSettlements is NumericUpDown && dr is Descr_Region)
-			{
-
-				NumericUpDown maxS = new NumericUpDown();
-				maxS = maxSettlements as NumericUpDown;
-				Descr_Region tempDR = new Descr_Region(dr as Descr_Region);
+		
 				List<Settlement> tempSettlements = new List<Settlement>();
 
 				Action<Faction> AddRSettlement = (f) =>
@@ -372,7 +368,7 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 				}
 
-				tempSettlements = CreateMissingSettlements(tempSettlements, (Descr_Region)dr);
+				tempSettlements = CreateMissingSettlements(tempSettlements, dr);
 
 				//set capitals for each faction
 				foreach (Faction f in ds.factions)
@@ -385,8 +381,8 @@ namespace RTWR_RTWLIB.Randomiser
 
 				foreach (Faction f in ds.factions)
 				{
-					int maxrnd = TWRandom.rnd.Next((int)maxS.Value + 1);
-					int[] capitalCoords = tempDR.GetCityCoords(f.settlements.First().region);
+					int maxrnd = TWRandom.rnd.Next((int)maxSettlements.Value + 1);
+					int[] capitalCoords = dr.GetCityCoords(f.settlements.First().region);
 					for (int i = 0; i < maxrnd - 1; i++)
 					{
 						double distance = 100;
@@ -394,7 +390,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 						foreach (Settlement s in tempSettlements)
 						{
-							int[] cityCoords = tempDR.GetCityCoords(s.region);
+							int[] cityCoords = dr.GetCityCoords(s.region);
 							double tempDis = Functions_General.DistanceTo(cityCoords, capitalCoords);
 
 							if (tempDis < distance)
@@ -410,19 +406,6 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 
 				}
-
-
-
-
-
-			}
-			else
-			{
-				ds.PLog("Error: wrong param type");
-				ds.DisplayLog();
-			}
-
-			CharacterCoordinateFix(ds, ((Descr_Region)dr));
 		}
 
 		public static void VoronoiSettlements(Descr_Strat ds, Descr_Region dr)

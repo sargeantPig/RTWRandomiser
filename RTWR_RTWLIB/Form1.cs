@@ -15,6 +15,7 @@ using RTWR_RTWLIB.Randomiser;
 using System.Threading;
 using System.Diagnostics;
 using RTWLib.Memory;
+using RTWR_RTWLIB.Tests;
 namespace RTWR_RTWLIB
 {
 
@@ -49,6 +50,8 @@ namespace RTWR_RTWLIB
 
 		int seed;
 
+		TestStore tests = new TestStore();
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -65,6 +68,19 @@ namespace RTWR_RTWLIB
 				string line = sr.ReadToEnd();
 				sr.Close();
 				lbl_seed.Text = "Current Randomiser Seed: " + line;
+			}
+
+			if (Directory.Exists(tests.DIRECTORY))
+			{
+				var files = Directory.GetFiles(tests.DIRECTORY);
+
+				foreach (var file in files)
+				{
+					tests.tests.Add(new Test().Parse(file));
+
+				}
+
+
 			}
 		}
 
@@ -212,7 +228,13 @@ namespace RTWR_RTWLIB
 				chk_faction_voronoi_4.Checked = !((CheckBox)sender).Checked;
 		}
 
-		private void btn_play_Click(object sender, EventArgs e)
+		private async void btn_play_Click(object sender, EventArgs e)
+		{
+			await Play();
+			StartTests();
+		}
+
+		private Task Play()
 		{
 			string[] args = new string[1];
 
@@ -224,7 +246,23 @@ namespace RTWR_RTWLIB
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
 
-			Functions_General.ExecuteCommand("RomeTW.exe", args);
-		}		
+			if (chk_test.Checked)
+				args[0] += "-strat:imperial_campaign ";
+
+			RTWCore.core.StartProcess(args);
+
+			return Task.CompletedTask;
+		}
+
+		private async void StartTests()
+		{
+			if (chk_test.Checked)
+			{
+				Test test = tests.tests[0];
+
+				await RTWCore.core.TestLoop(test.iter, test.target, test.name, this.Play);
+
+			}
+		}
 	}
 }

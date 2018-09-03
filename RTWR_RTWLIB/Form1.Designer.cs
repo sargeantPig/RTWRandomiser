@@ -70,6 +70,7 @@
 			this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
 			this.chk_windowed = new System.Windows.Forms.CheckBox();
 			this.chk_ai = new System.Windows.Forms.CheckBox();
+			this.chk_test = new System.Windows.Forms.CheckBox();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -86,6 +87,7 @@
 			// panel1
 			// 
 			this.panel1.BackColor = System.Drawing.Color.Transparent;
+			this.panel1.Controls.Add(this.chk_test);
 			this.panel1.Controls.Add(this.chk_ai);
 			this.panel1.Controls.Add(this.chk_windowed);
 			this.panel1.Controls.Add(this.lbl_seed);
@@ -545,6 +547,16 @@
 			this.chk_ai.Text = "Ai only?";
 			this.chk_ai.UseVisualStyleBackColor = true;
 			// 
+			// chk_test
+			// 
+			this.chk_test.AutoSize = true;
+			this.chk_test.Location = new System.Drawing.Point(169, 355);
+			this.chk_test.Name = "chk_test";
+			this.chk_test.Size = new System.Drawing.Size(53, 17);
+			this.chk_test.TabIndex = 9;
+			this.chk_test.Text = "Test?";
+			this.chk_test.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -621,6 +633,7 @@
 		private System.Windows.Forms.Button btn_play;
 		private System.Windows.Forms.CheckBox chk_ai;
 		private System.Windows.Forms.CheckBox chk_windowed;
+		private System.Windows.Forms.CheckBox chk_test;
 	}
 }
 
