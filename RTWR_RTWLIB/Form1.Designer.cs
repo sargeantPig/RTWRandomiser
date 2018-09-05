@@ -29,6 +29,9 @@
 		private void InitializeComponent()
 		{
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.chk_test = new System.Windows.Forms.CheckBox();
+			this.chk_ai = new System.Windows.Forms.CheckBox();
+			this.chk_windowed = new System.Windows.Forms.CheckBox();
 			this.lbl_seed = new System.Windows.Forms.Label();
 			this.btn_play = new System.Windows.Forms.Button();
 			this.picBox_map = new System.Windows.Forms.PictureBox();
@@ -68,9 +71,6 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
 			this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
-			this.chk_windowed = new System.Windows.Forms.CheckBox();
-			this.chk_ai = new System.Windows.Forms.CheckBox();
-			this.chk_test = new System.Windows.Forms.CheckBox();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -100,6 +100,36 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(719, 375);
 			this.panel1.TabIndex = 0;
+			// 
+			// chk_test
+			// 
+			this.chk_test.AutoSize = true;
+			this.chk_test.Location = new System.Drawing.Point(169, 355);
+			this.chk_test.Name = "chk_test";
+			this.chk_test.Size = new System.Drawing.Size(53, 17);
+			this.chk_test.TabIndex = 9;
+			this.chk_test.Text = "Test?";
+			this.chk_test.UseVisualStyleBackColor = true;
+			// 
+			// chk_ai
+			// 
+			this.chk_ai.AutoSize = true;
+			this.chk_ai.Location = new System.Drawing.Point(9, 355);
+			this.chk_ai.Name = "chk_ai";
+			this.chk_ai.Size = new System.Drawing.Size(63, 17);
+			this.chk_ai.TabIndex = 8;
+			this.chk_ai.Text = "Ai only?";
+			this.chk_ai.UseVisualStyleBackColor = true;
+			// 
+			// chk_windowed
+			// 
+			this.chk_windowed.AutoSize = true;
+			this.chk_windowed.Location = new System.Drawing.Point(79, 355);
+			this.chk_windowed.Name = "chk_windowed";
+			this.chk_windowed.Size = new System.Drawing.Size(83, 17);
+			this.chk_windowed.TabIndex = 7;
+			this.chk_windowed.Text = "Windowed?";
+			this.chk_windowed.UseVisualStyleBackColor = true;
 			// 
 			// lbl_seed
 			// 
@@ -265,6 +295,7 @@
 			this.numUpDown_faction_cities.Name = "numUpDown_faction_cities";
 			this.numUpDown_faction_cities.Size = new System.Drawing.Size(36, 20);
 			this.numUpDown_faction_cities.TabIndex = 5;
+			this.numUpDown_faction_cities.Tag = "RandomSettlements";
 			// 
 			// chk_faction_settlements_4
 			// 
@@ -526,36 +557,6 @@
 			// 
 			this.pb_progress.Name = "pb_progress";
 			this.pb_progress.Size = new System.Drawing.Size(200, 16);
-			// 
-			// chk_windowed
-			// 
-			this.chk_windowed.AutoSize = true;
-			this.chk_windowed.Location = new System.Drawing.Point(79, 355);
-			this.chk_windowed.Name = "chk_windowed";
-			this.chk_windowed.Size = new System.Drawing.Size(83, 17);
-			this.chk_windowed.TabIndex = 7;
-			this.chk_windowed.Text = "Windowed?";
-			this.chk_windowed.UseVisualStyleBackColor = true;
-			// 
-			// chk_ai
-			// 
-			this.chk_ai.AutoSize = true;
-			this.chk_ai.Location = new System.Drawing.Point(9, 355);
-			this.chk_ai.Name = "chk_ai";
-			this.chk_ai.Size = new System.Drawing.Size(63, 17);
-			this.chk_ai.TabIndex = 8;
-			this.chk_ai.Text = "Ai only?";
-			this.chk_ai.UseVisualStyleBackColor = true;
-			// 
-			// chk_test
-			// 
-			this.chk_test.AutoSize = true;
-			this.chk_test.Location = new System.Drawing.Point(169, 355);
-			this.chk_test.Name = "chk_test";
-			this.chk_test.Size = new System.Drawing.Size(53, 17);
-			this.chk_test.TabIndex = 9;
-			this.chk_test.Text = "Test?";
-			this.chk_test.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 

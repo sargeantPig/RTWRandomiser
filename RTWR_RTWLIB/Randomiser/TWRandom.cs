@@ -117,8 +117,15 @@ namespace RTWR_RTWLIB.Randomiser
 					{
 						foreach (object o in arguments)
 						{
-							if (o.GetType() == type)
+							if (o.GetType() == type && type != typeof(NumericUpDown))
 								parameters[index] = o;  //add correct argument for the method
+							else if(o.GetType() == type && type == typeof(NumericUpDown))
+							{
+								if ((string)((NumericUpDown)o).Tag == m.Name)
+								{
+									parameters[index] = o;
+								}
+							}
 						}
 
 						index++;
@@ -265,14 +272,17 @@ namespace RTWR_RTWLIB.Randomiser
 				{
 					unit.ownership = FactionOwnership.slave;
 
-					for (int i = 0; i < (int)maxO.Value; i++)
+					for (int i = 0; i < (int)maxO.Value - 1; i++)
 					{
 						FactionOwnership fo = FactionOwnership.slave;
 						bool dup = false;
 
 						while ((fo = Functions_General.RandomFlag<FactionOwnership>(TWRandom.rnd)) == FactionOwnership.slave
 							|| (dup = FlagDuplicateCheck(fo, unit.ownership)) == true
-							|| (fo = Functions_General.RandomFlag<FactionOwnership>(TWRandom.rnd)) == FactionOwnership.none) ;
+							|| (fo = Functions_General.RandomFlag<FactionOwnership>(TWRandom.rnd)) == FactionOwnership.none)
+						{
+
+						}
 
 						unit.ownership |= fo;
 
@@ -406,6 +416,7 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 
 				}
+			CharacterCoordinateFix(ds, dr);
 		}
 
 		public static void VoronoiSettlements(Descr_Strat ds, Descr_Region dr)
@@ -490,6 +501,14 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			foreach (Faction f in ds.factions)
 			{
+				if (f.name == "slave") //  skip slave
+				{
+					f.characters.Clear();
+					f.relatives.Clear();
+					f.characterRecords.Clear();
+					continue;
+				}
+
 				List<string> usedNames = new List<string>();
 
 				int CWithArmies = 0;
@@ -540,6 +559,13 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 
 				}
+
+				LookUpTables lt = new LookUpTables();
+
+				Cultures culture = lt.LookUpKey<Cultures>(f.name);
+
+				if (culture == Cultures.barbarian)
+					power = 4;
 
 				foreach (Settlement s in f.settlements)
 				{
