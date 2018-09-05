@@ -115,10 +115,23 @@ namespace RTWR_RTWLIB
 		{
 			if (chk_seed.Checked)
 			{
-				int h = txt_seed.Text.GetHashCode();
-				seed = h;
-				lbl_seed.Text = "Current Randomiser Seed: " + h;
-				TWRandom.rnd = new Random(h);
+				int rseed;
+
+				try
+				{
+					rseed = Convert.ToInt32(txt_seed.Text);
+
+				}
+
+				catch
+				{
+					rseed = txt_seed.Text.GetHashCode();
+
+				}
+
+				seed = rseed;
+				lbl_seed.Text = "Randomiser Seed: " + rseed;
+				TWRandom.rnd = new Random(rseed);
 			}
 			else
 			{

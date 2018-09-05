@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWR_RTWLIB", "RTWR_RTWLIB\RTWR_RTWLIB.csproj", "{F6C27841-4403-4F64-BDF2-D22AF4D3591B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWLib", "..\RTWLibrary\RTWLib\RTWLib.csproj", "{E19BA4E2-2E33-461C-9698-40D6599A9226}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWLib", "..\RTWLib\RTWLib\RTWLib.csproj", "{E19BA4E2-2E33-461C-9698-40D6599A9226}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

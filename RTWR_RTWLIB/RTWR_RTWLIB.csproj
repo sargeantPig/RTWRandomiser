@@ -17,10 +17,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Rome Total War Gold\</OutputPath>
+    <OutputPath>G:\Games\RomeModding\steamapps\common\Rome Total War Gold\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -86,12 +88,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RTWLibrary\RTWLib\RTWLib.csproj">
-      <Project>{e19ba4e2-2e33-461c-9698-40d6599a9226}</Project>
-      <Name>RTWLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\marble.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\symbol48_romans_brutii.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\RTWLib\RTWLib\RTWLib.csproj">
+      <Project>{e19ba4e2-2e33-461c-9698-40d6599a9226}</Project>
+      <Name>RTWLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
