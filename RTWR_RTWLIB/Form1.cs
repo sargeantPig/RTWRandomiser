@@ -40,14 +40,6 @@ namespace RTWR_RTWLIB
 				{FileNames.names, new NamesFile() }
 			};
 
-		Dictionary<FileNames, IFile> randfiles = new Dictionary<FileNames, IFile>(){
-				{FileNames.descr_regions, new Descr_Region() },
-				{FileNames.descr_strat, new Descr_Strat()},
-				{FileNames.export_descr_buildings, new EDB()},
-				{FileNames.export_descr_unit, new EDU()},
-				{FileNames.descr_sm_faction, new SM_Factions()},
-			};
-
 		int seed;
 
 		TestStore tests = new TestStore();
@@ -67,7 +59,7 @@ namespace RTWR_RTWLIB
 				StreamReader sr = new StreamReader("randomiser_.txt");
 				string line = sr.ReadToEnd();
 				sr.Close();
-				lbl_seed.Text = "Current Randomiser Seed: " + line;
+				lbl_seed.Text = "Randomiser Seed: " + line;
 			}
 
 			if (Directory.Exists(tests.DIRECTORY))
@@ -82,6 +74,25 @@ namespace RTWR_RTWLIB
 
 
 			}
+
+			if (File.Exists(@"randomiser\full_map.png"))
+			{
+				Image image = Image.FromFile(@"randomiser\full_map.png");
+
+				picBox_map.Image = image;
+
+			}
+
+			if (!Functions_General.IsAdministrator())
+			{
+				chk_misc_unitInfo.Enabled = false;
+			}
+
+			if (Directory.Exists(@"randomiser\data\ui\unit_info\assets\"))
+			{
+				chk_misc_unitInfo.Enabled = false;
+			}
+
 		}
 
 		async private void btn_load_Click(object sender, EventArgs e)
@@ -155,7 +166,7 @@ namespace RTWR_RTWLIB
 				{
 					chk_misc_unitInfo.Checked = false;
 					chk_misc_unitInfo.Enabled = false;
-					Functions_General.ExecuteCommand(@"randomiser\data\ui\unit_info\", "copy_all_units.bat");
+					Functions_General.ExecuteCommand(@"randomiser\data\ui\", "assets_do.bat");
 				}
 			}
 
@@ -179,15 +190,18 @@ namespace RTWR_RTWLIB
 			lbl_progress.Text = "Creating preview map...";
 			statusStrip1.Refresh();
 
-			Thread.Sleep(250);
+			Image oldImage = picBox_map.Image;
+			picBox_map.Image = null;
+			if (oldImage != null)
+				oldImage.Dispose();
 
-			Image image = sm.CreateCompleteMap(R_DS, R_DR, R_SMF);
+			picBox_map.Image = sm.CreateCompleteMap(R_DS, R_DR, R_SMF);
 
-			if(picBox_map.Image != null)
-				picBox_map.Image.Dispose();
-
-			picBox_map.Image = image;
 			picBox_map.Refresh();
+
+			sm.Save(@"randomiser\full_map.png");
+
+			Thread.Sleep(250);
 
 			FileWrite(R_EDU as IFile);
 			FileWrite(R_EDB as IFile);

@@ -55,16 +55,16 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.numUpDown_unit_ownership = new System.Windows.Forms.NumericUpDown();
 			this.lbl_unit_attributes = new System.Windows.Forms.Label();
-			this.chk_faction_balanced = new System.Windows.Forms.CheckBox();
+			this.chk_faction_balanced_8 = new System.Windows.Forms.CheckBox();
 			this.numUpDown_unit_attributes = new System.Windows.Forms.NumericUpDown();
-			this.chk_faction_rosters = new System.Windows.Forms.CheckBox();
-			this.chk_unit_groundb = new System.Windows.Forms.CheckBox();
-			this.chk_unit_attributes = new System.Windows.Forms.CheckBox();
-			this.chk_unit_training = new System.Windows.Forms.CheckBox();
-			this.chk_unit_sounds = new System.Windows.Forms.CheckBox();
-			this.chk_unit_stats = new System.Windows.Forms.CheckBox();
-			this.chk_unit_costs = new System.Windows.Forms.CheckBox();
-			this.chk_units_sizes = new System.Windows.Forms.CheckBox();
+			this.chk_faction_rosters_7 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_groundb_6 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_attributes_9 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_training_5 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_sounds_4 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_stats_3 = new System.Windows.Forms.CheckBox();
+			this.chk_unit_costs_2 = new System.Windows.Forms.CheckBox();
+			this.chk_units_sizes_1 = new System.Windows.Forms.CheckBox();
 			this.txt_seed = new System.Windows.Forms.TextBox();
 			this.chk_seed = new System.Windows.Forms.CheckBox();
 			this.btn_randomise = new System.Windows.Forms.Button();
@@ -347,16 +347,16 @@
 			this.grp_settings_units.Controls.Add(this.label1);
 			this.grp_settings_units.Controls.Add(this.numUpDown_unit_ownership);
 			this.grp_settings_units.Controls.Add(this.lbl_unit_attributes);
-			this.grp_settings_units.Controls.Add(this.chk_faction_balanced);
+			this.grp_settings_units.Controls.Add(this.chk_faction_balanced_8);
 			this.grp_settings_units.Controls.Add(this.numUpDown_unit_attributes);
-			this.grp_settings_units.Controls.Add(this.chk_faction_rosters);
-			this.grp_settings_units.Controls.Add(this.chk_unit_groundb);
-			this.grp_settings_units.Controls.Add(this.chk_unit_attributes);
-			this.grp_settings_units.Controls.Add(this.chk_unit_training);
-			this.grp_settings_units.Controls.Add(this.chk_unit_sounds);
-			this.grp_settings_units.Controls.Add(this.chk_unit_stats);
-			this.grp_settings_units.Controls.Add(this.chk_unit_costs);
-			this.grp_settings_units.Controls.Add(this.chk_units_sizes);
+			this.grp_settings_units.Controls.Add(this.chk_faction_rosters_7);
+			this.grp_settings_units.Controls.Add(this.chk_unit_groundb_6);
+			this.grp_settings_units.Controls.Add(this.chk_unit_attributes_9);
+			this.grp_settings_units.Controls.Add(this.chk_unit_training_5);
+			this.grp_settings_units.Controls.Add(this.chk_unit_sounds_4);
+			this.grp_settings_units.Controls.Add(this.chk_unit_stats_3);
+			this.grp_settings_units.Controls.Add(this.chk_unit_costs_2);
+			this.grp_settings_units.Controls.Add(this.chk_units_sizes_1);
 			this.grp_settings_units.Location = new System.Drawing.Point(7, 20);
 			this.grp_settings_units.Name = "grp_settings_units";
 			this.grp_settings_units.Size = new System.Drawing.Size(138, 286);
@@ -390,16 +390,16 @@
 			this.lbl_unit_attributes.TabIndex = 14;
 			this.lbl_unit_attributes.Text = "Max Attributes";
 			// 
-			// chk_faction_balanced
+			// chk_faction_balanced_8
 			// 
-			this.chk_faction_balanced.AutoSize = true;
-			this.chk_faction_balanced.Location = new System.Drawing.Point(6, 183);
-			this.chk_faction_balanced.Name = "chk_faction_balanced";
-			this.chk_faction_balanced.Size = new System.Drawing.Size(111, 17);
-			this.chk_faction_balanced.TabIndex = 3;
-			this.chk_faction_balanced.Tag = "BalancedRosters?";
-			this.chk_faction_balanced.Text = "Balanced rosters?";
-			this.chk_faction_balanced.UseVisualStyleBackColor = true;
+			this.chk_faction_balanced_8.AutoSize = true;
+			this.chk_faction_balanced_8.Location = new System.Drawing.Point(6, 183);
+			this.chk_faction_balanced_8.Name = "chk_faction_balanced_8";
+			this.chk_faction_balanced_8.Size = new System.Drawing.Size(111, 17);
+			this.chk_faction_balanced_8.TabIndex = 3;
+			this.chk_faction_balanced_8.Tag = "BalancedRosters?";
+			this.chk_faction_balanced_8.Text = "Balanced rosters?";
+			this.chk_faction_balanced_8.UseVisualStyleBackColor = true;
 			// 
 			// numUpDown_unit_attributes
 			// 
@@ -414,93 +414,93 @@
 			this.numUpDown_unit_attributes.TabIndex = 13;
 			this.numUpDown_unit_attributes.Tag = "RandomAttributes";
 			// 
-			// chk_faction_rosters
+			// chk_faction_rosters_7
 			// 
-			this.chk_faction_rosters.AutoSize = true;
-			this.chk_faction_rosters.Location = new System.Drawing.Point(6, 160);
-			this.chk_faction_rosters.Name = "chk_faction_rosters";
-			this.chk_faction_rosters.Size = new System.Drawing.Size(125, 17);
-			this.chk_faction_rosters.TabIndex = 2;
-			this.chk_faction_rosters.Tag = "RandomOwnership";
-			this.chk_faction_rosters.Text = "Random Ownership?";
-			this.chk_faction_rosters.UseVisualStyleBackColor = true;
+			this.chk_faction_rosters_7.AutoSize = true;
+			this.chk_faction_rosters_7.Location = new System.Drawing.Point(6, 160);
+			this.chk_faction_rosters_7.Name = "chk_faction_rosters_7";
+			this.chk_faction_rosters_7.Size = new System.Drawing.Size(125, 17);
+			this.chk_faction_rosters_7.TabIndex = 2;
+			this.chk_faction_rosters_7.Tag = "RandomOwnership";
+			this.chk_faction_rosters_7.Text = "Random Ownership?";
+			this.chk_faction_rosters_7.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_groundb
+			// chk_unit_groundb_6
 			// 
-			this.chk_unit_groundb.AutoSize = true;
-			this.chk_unit_groundb.Location = new System.Drawing.Point(6, 137);
-			this.chk_unit_groundb.Name = "chk_unit_groundb";
-			this.chk_unit_groundb.Size = new System.Drawing.Size(129, 17);
-			this.chk_unit_groundb.TabIndex = 12;
-			this.chk_unit_groundb.Tag = "RandomGBonus";
-			this.chk_unit_groundb.Text = "Rand Ground Bonus?";
-			this.chk_unit_groundb.UseVisualStyleBackColor = true;
+			this.chk_unit_groundb_6.AutoSize = true;
+			this.chk_unit_groundb_6.Location = new System.Drawing.Point(6, 137);
+			this.chk_unit_groundb_6.Name = "chk_unit_groundb_6";
+			this.chk_unit_groundb_6.Size = new System.Drawing.Size(129, 17);
+			this.chk_unit_groundb_6.TabIndex = 12;
+			this.chk_unit_groundb_6.Tag = "RandomGBonus";
+			this.chk_unit_groundb_6.Text = "Rand Ground Bonus?";
+			this.chk_unit_groundb_6.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_attributes
+			// chk_unit_attributes_9
 			// 
-			this.chk_unit_attributes.AutoSize = true;
-			this.chk_unit_attributes.Location = new System.Drawing.Point(6, 209);
-			this.chk_unit_attributes.Name = "chk_unit_attributes";
-			this.chk_unit_attributes.Size = new System.Drawing.Size(119, 17);
-			this.chk_unit_attributes.TabIndex = 11;
-			this.chk_unit_attributes.Tag = "RandomAttributes";
-			this.chk_unit_attributes.Text = "Random Attributes?";
-			this.chk_unit_attributes.UseVisualStyleBackColor = true;
+			this.chk_unit_attributes_9.AutoSize = true;
+			this.chk_unit_attributes_9.Location = new System.Drawing.Point(6, 209);
+			this.chk_unit_attributes_9.Name = "chk_unit_attributes_9";
+			this.chk_unit_attributes_9.Size = new System.Drawing.Size(119, 17);
+			this.chk_unit_attributes_9.TabIndex = 11;
+			this.chk_unit_attributes_9.Tag = "RandomAttributes";
+			this.chk_unit_attributes_9.Text = "Random Attributes?";
+			this.chk_unit_attributes_9.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_training
+			// chk_unit_training_5
 			// 
-			this.chk_unit_training.AutoSize = true;
-			this.chk_unit_training.Location = new System.Drawing.Point(6, 114);
-			this.chk_unit_training.Name = "chk_unit_training";
-			this.chk_unit_training.Size = new System.Drawing.Size(113, 17);
-			this.chk_unit_training.TabIndex = 10;
-			this.chk_unit_training.Tag = "RandomTraining";
-			this.chk_unit_training.Text = "Random Training?";
-			this.chk_unit_training.UseVisualStyleBackColor = true;
+			this.chk_unit_training_5.AutoSize = true;
+			this.chk_unit_training_5.Location = new System.Drawing.Point(6, 114);
+			this.chk_unit_training_5.Name = "chk_unit_training_5";
+			this.chk_unit_training_5.Size = new System.Drawing.Size(113, 17);
+			this.chk_unit_training_5.TabIndex = 10;
+			this.chk_unit_training_5.Tag = "RandomTraining";
+			this.chk_unit_training_5.Text = "Random Training?";
+			this.chk_unit_training_5.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_sounds
+			// chk_unit_sounds_4
 			// 
-			this.chk_unit_sounds.AutoSize = true;
-			this.chk_unit_sounds.Location = new System.Drawing.Point(6, 90);
-			this.chk_unit_sounds.Name = "chk_unit_sounds";
-			this.chk_unit_sounds.Size = new System.Drawing.Size(111, 17);
-			this.chk_unit_sounds.TabIndex = 9;
-			this.chk_unit_sounds.Tag = "RandomSounds";
-			this.chk_unit_sounds.Text = "Random Sounds?";
-			this.chk_unit_sounds.UseVisualStyleBackColor = true;
+			this.chk_unit_sounds_4.AutoSize = true;
+			this.chk_unit_sounds_4.Location = new System.Drawing.Point(6, 90);
+			this.chk_unit_sounds_4.Name = "chk_unit_sounds_4";
+			this.chk_unit_sounds_4.Size = new System.Drawing.Size(111, 17);
+			this.chk_unit_sounds_4.TabIndex = 9;
+			this.chk_unit_sounds_4.Tag = "RandomSounds";
+			this.chk_unit_sounds_4.Text = "Random Sounds?";
+			this.chk_unit_sounds_4.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_stats
+			// chk_unit_stats_3
 			// 
-			this.chk_unit_stats.AutoSize = true;
-			this.chk_unit_stats.Location = new System.Drawing.Point(6, 67);
-			this.chk_unit_stats.Name = "chk_unit_stats";
-			this.chk_unit_stats.Size = new System.Drawing.Size(99, 17);
-			this.chk_unit_stats.TabIndex = 8;
-			this.chk_unit_stats.Tag = "RandomStats";
-			this.chk_unit_stats.Text = "Random Stats?";
-			this.chk_unit_stats.UseVisualStyleBackColor = true;
+			this.chk_unit_stats_3.AutoSize = true;
+			this.chk_unit_stats_3.Location = new System.Drawing.Point(6, 67);
+			this.chk_unit_stats_3.Name = "chk_unit_stats_3";
+			this.chk_unit_stats_3.Size = new System.Drawing.Size(99, 17);
+			this.chk_unit_stats_3.TabIndex = 8;
+			this.chk_unit_stats_3.Tag = "RandomStats";
+			this.chk_unit_stats_3.Text = "Random Stats?";
+			this.chk_unit_stats_3.UseVisualStyleBackColor = true;
 			// 
-			// chk_unit_costs
+			// chk_unit_costs_2
 			// 
-			this.chk_unit_costs.AutoSize = true;
-			this.chk_unit_costs.Location = new System.Drawing.Point(6, 43);
-			this.chk_unit_costs.Name = "chk_unit_costs";
-			this.chk_unit_costs.Size = new System.Drawing.Size(101, 17);
-			this.chk_unit_costs.TabIndex = 7;
-			this.chk_unit_costs.Tag = "RandomCosts";
-			this.chk_unit_costs.Text = "Random Costs?";
-			this.chk_unit_costs.UseVisualStyleBackColor = true;
+			this.chk_unit_costs_2.AutoSize = true;
+			this.chk_unit_costs_2.Location = new System.Drawing.Point(6, 43);
+			this.chk_unit_costs_2.Name = "chk_unit_costs_2";
+			this.chk_unit_costs_2.Size = new System.Drawing.Size(101, 17);
+			this.chk_unit_costs_2.TabIndex = 7;
+			this.chk_unit_costs_2.Tag = "RandomCosts";
+			this.chk_unit_costs_2.Text = "Random Costs?";
+			this.chk_unit_costs_2.UseVisualStyleBackColor = true;
 			// 
-			// chk_units_sizes
+			// chk_units_sizes_1
 			// 
-			this.chk_units_sizes.AutoSize = true;
-			this.chk_units_sizes.Location = new System.Drawing.Point(6, 19);
-			this.chk_units_sizes.Name = "chk_units_sizes";
-			this.chk_units_sizes.Size = new System.Drawing.Size(100, 17);
-			this.chk_units_sizes.TabIndex = 6;
-			this.chk_units_sizes.Tag = "RandomSizes";
-			this.chk_units_sizes.Text = "Random Sizes?";
-			this.chk_units_sizes.UseVisualStyleBackColor = true;
+			this.chk_units_sizes_1.AutoSize = true;
+			this.chk_units_sizes_1.Location = new System.Drawing.Point(6, 19);
+			this.chk_units_sizes_1.Name = "chk_units_sizes_1";
+			this.chk_units_sizes_1.Size = new System.Drawing.Size(100, 17);
+			this.chk_units_sizes_1.TabIndex = 6;
+			this.chk_units_sizes_1.Tag = "RandomSizes";
+			this.chk_units_sizes_1.Text = "Random Sizes?";
+			this.chk_units_sizes_1.UseVisualStyleBackColor = true;
 			// 
 			// txt_seed
 			// 
@@ -603,18 +603,18 @@
 		private System.Windows.Forms.GroupBox grp_settings_misc;
 		private System.Windows.Forms.CheckBox chk_misc_selectA;
 		private System.Windows.Forms.GroupBox grp_settings_factions;
-		private System.Windows.Forms.CheckBox chk_faction_balanced;
-		private System.Windows.Forms.CheckBox chk_faction_rosters;
+		private System.Windows.Forms.CheckBox chk_faction_balanced_8;
+		private System.Windows.Forms.CheckBox chk_faction_rosters_7;
 		private System.Windows.Forms.CheckBox chk_faction_ai_2;
 		private System.Windows.Forms.CheckBox chk_faction_treasury_1;
 		private System.Windows.Forms.GroupBox grp_settings_units;
-		private System.Windows.Forms.CheckBox chk_unit_groundb;
-		private System.Windows.Forms.CheckBox chk_unit_attributes;
-		private System.Windows.Forms.CheckBox chk_unit_training;
-		private System.Windows.Forms.CheckBox chk_unit_sounds;
-		private System.Windows.Forms.CheckBox chk_unit_stats;
-		private System.Windows.Forms.CheckBox chk_unit_costs;
-		private System.Windows.Forms.CheckBox chk_units_sizes;
+		private System.Windows.Forms.CheckBox chk_unit_groundb_6;
+		private System.Windows.Forms.CheckBox chk_unit_attributes_9;
+		private System.Windows.Forms.CheckBox chk_unit_training_5;
+		private System.Windows.Forms.CheckBox chk_unit_sounds_4;
+		private System.Windows.Forms.CheckBox chk_unit_stats_3;
+		private System.Windows.Forms.CheckBox chk_unit_costs_2;
+		private System.Windows.Forms.CheckBox chk_units_sizes_1;
 		private System.Windows.Forms.TextBox txt_seed;
 		private System.Windows.Forms.CheckBox chk_seed;
 		private System.Windows.Forms.Label lbl_unit_attributes;

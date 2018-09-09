@@ -59,6 +59,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomiser\RandomDS.cs" />
+    <Compile Include="Randomiser\RandomEDB.cs" />
+    <Compile Include="Randomiser\RandomEDU.cs" />
     <Compile Include="Randomiser\TWRandom.cs" />
     <Compile Include="Tests\Tests.cs" />
     <EmbeddedResource Include="Form1.resx">
