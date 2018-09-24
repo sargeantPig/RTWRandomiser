@@ -142,7 +142,7 @@ namespace RTWR_RTWLIB.Randomiser
 				{
 					Logger logger = new Logger();
 					logger.PLog("Exception: " + e.Message + " in " + e.TargetSite);
-					logger.DisplayLog();
+					logger.DisplayLogExit();
 				}
 			}
 

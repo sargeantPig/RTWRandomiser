@@ -21,7 +21,12 @@ namespace RTWR_RTWLIB.Randomiser
 			foreach (CoreBuilding cb in edb.buildingTrees)
 				foreach (Building b in cb.buildings)
 					foreach (Brecruit br in b.capability.canRecruit)
+					{
+						br.requiresFactions.Clear();
+
 						br.requiresFactions = new List<string>(TWRandom.UnitByFaction.GetFactions(br.name));
+					}
+
 		}
 	}
 

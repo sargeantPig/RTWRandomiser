@@ -102,7 +102,7 @@ namespace RTWR_RTWLIB.Randomiser
 			else
 			{
 				edu.PLog("Error: wrong param type");
-				edu.DisplayLog();
+				edu.DisplayLogExit();
 			}
 
 			FactionOwnership fo = FactionOwnership.romans_senate | FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
@@ -189,7 +189,7 @@ namespace RTWR_RTWLIB.Randomiser
 			else
 			{
 				edu.PLog("Error: wrong param type");
-				edu.DisplayLog();
+				edu.DisplayLogExit();
 			}
 
 		}

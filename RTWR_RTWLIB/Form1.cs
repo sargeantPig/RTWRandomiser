@@ -46,11 +46,13 @@ namespace RTWR_RTWLIB
 
 		public Form1()
 		{
+			this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
+
 			InitializeComponent();
 			Logger logger = new Logger();
 
 			if (!logger.FileCheck(FilePaths.RTWEXE))
-				logger.DisplayLog();
+				logger.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
 
 			//get current seed
@@ -60,6 +62,7 @@ namespace RTWR_RTWLIB
 				string line = sr.ReadToEnd();
 				sr.Close();
 				lbl_seed.Text = "Randomiser Seed: " + line;
+				txt_seed.Text = line;
 			}
 
 			if (Directory.Exists(tests.DIRECTORY))
@@ -83,9 +86,10 @@ namespace RTWR_RTWLIB
 
 			}
 
-			if (!Functions_General.IsAdministrator())
+			if (!logger.AdminCheck())
 			{
 				chk_misc_unitInfo.Enabled = false;
+				logger.DisplayLog();
 			}
 
 			if (Directory.Exists(@"randomiser\data\ui\unit_info\assets\"))
@@ -108,6 +112,8 @@ namespace RTWR_RTWLIB
 			lbl_progress.Text = "Files Loaded.";
 
 			pictureBox1.BackgroundImage = Properties.Resources.symbol48_romans_brutii;
+
+			pb_progress.Value = 100;
 
 			btn_load.Enabled = false;
 			btn_randomise.Enabled = true;
@@ -160,7 +166,7 @@ namespace RTWR_RTWLIB
 
 			if (chk_misc_unitInfo.Checked)
 			{
-				DialogResult dialogResult = MessageBox.Show("The option 'Unit Info Fix' will use around 600mb~ of space!\n" +
+				DialogResult dialogResult = MessageBox.Show("The option 'Unit Info Fix' fixes the ui pictures for unit_info and unit_cards.\n" +
 					"The fix will open in a cmd prompt. Please wait for it to finish (it will disappear once done).\nAre you sure you want to continue?\n", "Unit Info Fix", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 				if (dialogResult == DialogResult.Yes)
 				{
@@ -186,7 +192,8 @@ namespace RTWR_RTWLIB
 			R_EDB.SetRecruitment();
 			R_DS.RandomiseFile<RandomDS, Descr_Strat>(grp_settings_factions, lbl_progress, statusStrip1, pb_progress, new object[] {R_DR, numUpDown_faction_cities, R_EDU, R_N, R_EDB});
 
-			
+			TWRandom.UnitByFaction.Clear();
+
 			lbl_progress.Text = "Creating preview map...";
 			statusStrip1.Refresh();
 

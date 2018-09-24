@@ -370,7 +370,7 @@ namespace RTWR_RTWLIB.Randomiser
 			List<string[]> buildings = new List<string[]>();
 
 			buildings.Add(edb.GetSpecificBuildingFromChain("core_building", level));
-			buildings.Add(edb.GetRandomBuildingFromChain("defenses", level, TWRandom.rnd));
+			buildings.Add(edb.GetSpecificBuildingFromChain("defenses", level));
 			buildings.Add(edb.GetRandomBuildingFromChain("barracks", level, TWRandom.rnd));
 			buildings.Add(edb.GetRandomBuildingFromChain("equestrian", level, TWRandom.rnd));
 			buildings.Add(edb.GetRandomBuildingFromChain("missles", level, TWRandom.rnd));
@@ -380,7 +380,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 			foreach (string[] nt in buildings)
 			{
-				if (nt == null)
+				if (nt == null || nt[0] == null || nt[1] == null)
 					continue;
 
 				DSBuilding dsb = new DSBuilding();

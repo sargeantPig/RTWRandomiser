@@ -55,7 +55,6 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.numUpDown_unit_ownership = new System.Windows.Forms.NumericUpDown();
 			this.lbl_unit_attributes = new System.Windows.Forms.Label();
-			this.chk_faction_balanced_8 = new System.Windows.Forms.CheckBox();
 			this.numUpDown_unit_attributes = new System.Windows.Forms.NumericUpDown();
 			this.chk_faction_rosters_7 = new System.Windows.Forms.CheckBox();
 			this.chk_unit_groundb_6 = new System.Windows.Forms.CheckBox();
@@ -104,6 +103,7 @@
 			// chk_test
 			// 
 			this.chk_test.AutoSize = true;
+			this.chk_test.Enabled = false;
 			this.chk_test.Location = new System.Drawing.Point(169, 355);
 			this.chk_test.Name = "chk_test";
 			this.chk_test.Size = new System.Drawing.Size(53, 17);
@@ -292,10 +292,25 @@
 			// numUpDown_faction_cities
 			// 
 			this.numUpDown_faction_cities.Location = new System.Drawing.Point(77, 258);
+			this.numUpDown_faction_cities.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.numUpDown_faction_cities.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numUpDown_faction_cities.Name = "numUpDown_faction_cities";
 			this.numUpDown_faction_cities.Size = new System.Drawing.Size(36, 20);
 			this.numUpDown_faction_cities.TabIndex = 5;
 			this.numUpDown_faction_cities.Tag = "RandomSettlements";
+			this.numUpDown_faction_cities.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
 			// 
 			// chk_faction_settlements_4
 			// 
@@ -347,7 +362,6 @@
 			this.grp_settings_units.Controls.Add(this.label1);
 			this.grp_settings_units.Controls.Add(this.numUpDown_unit_ownership);
 			this.grp_settings_units.Controls.Add(this.lbl_unit_attributes);
-			this.grp_settings_units.Controls.Add(this.chk_faction_balanced_8);
 			this.grp_settings_units.Controls.Add(this.numUpDown_unit_attributes);
 			this.grp_settings_units.Controls.Add(this.chk_faction_rosters_7);
 			this.grp_settings_units.Controls.Add(this.chk_unit_groundb_6);
@@ -376,10 +390,25 @@
 			// numUpDown_unit_ownership
 			// 
 			this.numUpDown_unit_ownership.Location = new System.Drawing.Point(90, 258);
+			this.numUpDown_unit_ownership.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+			this.numUpDown_unit_ownership.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numUpDown_unit_ownership.Name = "numUpDown_unit_ownership";
 			this.numUpDown_unit_ownership.Size = new System.Drawing.Size(35, 20);
 			this.numUpDown_unit_ownership.TabIndex = 15;
 			this.numUpDown_unit_ownership.Tag = "RandomOwnership";
+			this.numUpDown_unit_ownership.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
 			// 
 			// lbl_unit_attributes
 			// 
@@ -390,17 +419,6 @@
 			this.lbl_unit_attributes.TabIndex = 14;
 			this.lbl_unit_attributes.Text = "Max Attributes";
 			// 
-			// chk_faction_balanced_8
-			// 
-			this.chk_faction_balanced_8.AutoSize = true;
-			this.chk_faction_balanced_8.Location = new System.Drawing.Point(6, 183);
-			this.chk_faction_balanced_8.Name = "chk_faction_balanced_8";
-			this.chk_faction_balanced_8.Size = new System.Drawing.Size(111, 17);
-			this.chk_faction_balanced_8.TabIndex = 3;
-			this.chk_faction_balanced_8.Tag = "BalancedRosters?";
-			this.chk_faction_balanced_8.Text = "Balanced rosters?";
-			this.chk_faction_balanced_8.UseVisualStyleBackColor = true;
-			// 
 			// numUpDown_unit_attributes
 			// 
 			this.numUpDown_unit_attributes.Location = new System.Drawing.Point(90, 232);
@@ -409,10 +427,20 @@
             0,
             0,
             0});
+			this.numUpDown_unit_attributes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
 			this.numUpDown_unit_attributes.Name = "numUpDown_unit_attributes";
 			this.numUpDown_unit_attributes.Size = new System.Drawing.Size(35, 20);
 			this.numUpDown_unit_attributes.TabIndex = 13;
 			this.numUpDown_unit_attributes.Tag = "RandomAttributes";
+			this.numUpDown_unit_attributes.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
 			// 
 			// chk_faction_rosters_7
 			// 
@@ -439,7 +467,7 @@
 			// chk_unit_attributes_9
 			// 
 			this.chk_unit_attributes_9.AutoSize = true;
-			this.chk_unit_attributes_9.Location = new System.Drawing.Point(6, 209);
+			this.chk_unit_attributes_9.Location = new System.Drawing.Point(6, 183);
 			this.chk_unit_attributes_9.Name = "chk_unit_attributes_9";
 			this.chk_unit_attributes_9.Size = new System.Drawing.Size(119, 17);
 			this.chk_unit_attributes_9.TabIndex = 11;
@@ -603,7 +631,6 @@
 		private System.Windows.Forms.GroupBox grp_settings_misc;
 		private System.Windows.Forms.CheckBox chk_misc_selectA;
 		private System.Windows.Forms.GroupBox grp_settings_factions;
-		private System.Windows.Forms.CheckBox chk_faction_balanced_8;
 		private System.Windows.Forms.CheckBox chk_faction_rosters_7;
 		private System.Windows.Forms.CheckBox chk_faction_ai_2;
 		private System.Windows.Forms.CheckBox chk_faction_treasury_1;
