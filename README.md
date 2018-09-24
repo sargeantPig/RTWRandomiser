@@ -19,6 +19,6 @@ The randomiser has many options, some ridiculous but some that really do create 
 ## Unit Info Fix
 The option fixes the unit info page images, instead of defaulting to peasants it will be the correct unit. 
 This is a single use fix, you will not have to run the fix twice.
-This option **will use around 600mb of disk space** due to how it works. The fix simply copies all the unit_info.tga's and puts them all into each induvidual fation roster.
-This option **will open a cmd to apply the fix**, it may take upward to **5-10 mins** depending on your PC.
+The fix runs from a .bat file and requires the randomiser to be run as an administrator.
+It simply copies all the required unit_info and unit images into an assets folder, and then makes each faction folder a symlink to the assets folder.
 
