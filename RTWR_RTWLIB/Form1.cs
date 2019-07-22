@@ -16,29 +16,15 @@ using System.Threading;
 using System.Diagnostics;
 using RTWLib.Memory;
 using RTWR_RTWLIB.Tests;
+using RTWR_RTWLIB.Data;
 namespace RTWR_RTWLIB
 {
 
-	enum FileNames
-	{
-		export_descr_buildings,
-		export_descr_unit,
-		descr_strat,
-		descr_regions,
-		descr_sm_faction,
-		names,
-	}
+	
 
 	public partial class Form1 : Form
 	{
-		Dictionary<FileNames, IFile> vanfiles = new Dictionary<FileNames, IFile>(){
-				{FileNames.descr_regions, new Descr_Region() },
-				{FileNames.descr_strat, new Descr_Strat()},
-				{FileNames.export_descr_buildings, new EDB()},
-				{FileNames.export_descr_unit, new EDU()},
-				{FileNames.descr_sm_faction, new SM_Factions()},
-				{FileNames.names, new NamesFile() }
-			};
+        Dictionary<FileNames, IFile> vanfiles;
 
 		int seed;
 
@@ -46,12 +32,16 @@ namespace RTWR_RTWLIB
 
 		public Form1()
 		{
-			this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
+            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 
 			InitializeComponent();
-			Logger logger = new Logger();
 
-			if (!logger.FileCheck(FilePaths.RTWEXE))
+            
+            Logger logger = new Logger();
+
+            logger.CleanLog();
+
+			if (!logger.FileCheck(FilePaths.RTWEXE) || !logger.DirectoryCheck(FilePaths.MOD_FOLDER))
 				logger.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
 
@@ -64,6 +54,7 @@ namespace RTWR_RTWLIB
 				lbl_seed.Text = "Randomiser Seed: " + line;
 				txt_seed.Text = line;
 			}
+
 
 			if (Directory.Exists(tests.DIRECTORY))
 			{
@@ -96,17 +87,26 @@ namespace RTWR_RTWLIB
 			{
 				chk_misc_unitInfo.Enabled = false;
 			}
-
+            
 		}
 
 		async private void btn_load_Click(object sender, EventArgs e)
 		{
-			//start loading data
-			float increment = 100 / vanfiles.Count();
+            //start loading data
+            vanfiles = new Dictionary<FileNames, IFile>(){
+                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked) },
+                {FileNames.descr_strat, new Descr_Strat()},
+                {FileNames.export_descr_buildings, new EDB(chk_LogAll.Checked)},
+                {FileNames.export_descr_unit, new EDU(chk_LogAll.Checked)},
+                {FileNames.descr_sm_faction, new SM_Factions()},
+                {FileNames.names, new NamesFile(chk_LogAll.Checked) }
+            };
 
-			foreach (KeyValuePair<FileNames, IFile> file in vanfiles)
+            float increment = 100 / vanfiles.Count();
+
+            foreach (KeyValuePair<FileNames, IFile> file in vanfiles)
 			{
-				await LoadAll(file.Value, (int)increment);	
+				LoadAll(file.Value, (int)increment);	
 			}
 
 			lbl_progress.Text = "Files Loaded.";
@@ -119,11 +119,11 @@ namespace RTWR_RTWLIB
 			btn_randomise.Enabled = true;
 		}
 
-		async Task LoadAll(IFile file, int increment)
+		private void LoadAll(IFile file, int increment)
 		{
-			lbl_progress.Text = file.Log("Loading " + file.Description);
+            lbl_progress.Text = file.Log("Loading " + file.Description);
 			statusStrip1.Refresh();
-			await file.Parse();
+		    file.Parse(FileDestinations.paths[file.Name]["load"]);
 			pb_progress.Increment(increment);
 			
 		}
@@ -188,6 +188,10 @@ namespace RTWR_RTWLIB
 			SM_Factions R_SMF = vanfiles[FileNames.descr_sm_faction] as SM_Factions;
 			NamesFile R_N = vanfiles[FileNames.names] as NamesFile;
 
+            //remove spqr
+            R_DS.RemoveSPQR();
+       
+
 			R_EDU.RandomiseFile<RandomEDU, EDU>(grp_settings_units, lbl_progress, statusStrip1, pb_progress, new object[] {numUpDown_unit_attributes, numUpDown_unit_ownership });
 			R_EDB.SetRecruitment();
 			R_DS.RandomiseFile<RandomDS, Descr_Strat>(grp_settings_factions, lbl_progress, statusStrip1, pb_progress, new object[] {R_DR, numUpDown_faction_cities, R_EDU, R_N, R_EDB});
@@ -243,7 +247,7 @@ namespace RTWR_RTWLIB
 
 		private void FileWrite(IFile file)
 		{
-			StreamWriter sw = new StreamWriter(@"randomiser\" + file.FilePath, false);
+			StreamWriter sw = new StreamWriter(FileDestinations.paths[file.Name]["save"][0], false);
 
 			sw.WriteLine(file.Output());
 

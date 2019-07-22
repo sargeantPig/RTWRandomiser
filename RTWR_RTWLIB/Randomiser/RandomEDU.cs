@@ -86,6 +86,7 @@ namespace RTWR_RTWLIB.Randomiser
 				foreach (Unit unit in edu.units)
 				{
 					unit.attributes = Attributes.sea_faring;
+                    unit.attributes |= Attributes.mercenary_unit;
 
 					int max = TWRandom.rnd.Next(1, (int)maxA.Value + 1);
 
@@ -105,7 +106,7 @@ namespace RTWR_RTWLIB.Randomiser
 				edu.DisplayLogExit();
 			}
 
-			FactionOwnership fo = FactionOwnership.romans_senate | FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
+			FactionOwnership fo = FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
 			| FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.britons | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.pontus | FactionOwnership.armenia | FactionOwnership.dacia | FactionOwnership.numidia | FactionOwnership.scythia |
 			FactionOwnership.spain | FactionOwnership.thrace | FactionOwnership.slave;
 			edu.units.Shuffle(TWRandom.rnd);
@@ -122,7 +123,7 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 
 
-			fo = FactionOwnership.romans_senate | FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
+			fo = FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
 			| FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.britons | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.pontus | FactionOwnership.armenia | FactionOwnership.dacia | FactionOwnership.numidia | FactionOwnership.scythia |
 			FactionOwnership.spain | FactionOwnership.thrace | FactionOwnership.slave;
 			edu.units.Shuffle(TWRandom.rnd);
@@ -133,14 +134,7 @@ namespace RTWR_RTWLIB.Randomiser
 					unit.attributes |= Attributes.general_unit_upgrade;
 					fo = fo & ~unit.ownership;
 				}
-
-
-
-
 			}
-
-
-
 		}
 
 		public static void RandomGBonus(EDU edu)
