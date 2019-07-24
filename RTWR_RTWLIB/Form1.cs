@@ -256,14 +256,23 @@ namespace RTWR_RTWLIB
 
 		private void chk_faction_voronoi_CheckedChanged(object sender, EventArgs e)
 		{
-			if (((CheckBox)sender).Checked)
-				chk_faction_settlements_4.Checked = !((CheckBox)sender).Checked;
+            if (((CheckBox)sender).Checked)
+            {
+                chk_faction_settlements_4.Checked = !((CheckBox)sender).Checked;
+                numUpDown_faction_cities.Enabled = false;
+            }
+
+
 		}
 
 		private void chk_faction_settlements_CheckedChanged(object sender, EventArgs e)
 		{
-			if(((CheckBox)sender).Checked)
-				chk_faction_voronoi_4.Checked = !((CheckBox)sender).Checked;
+            if (((CheckBox)sender).Checked)
+            {
+                chk_faction_voronoi_4.Checked = !((CheckBox)sender).Checked;
+                numUpDown_faction_cities.Enabled = true;
+            }
+
 		}
 
 		private async void btn_play_Click(object sender, EventArgs e)
@@ -302,5 +311,5 @@ namespace RTWR_RTWLIB
 
 			}
 		}
-	}
+    }
 }

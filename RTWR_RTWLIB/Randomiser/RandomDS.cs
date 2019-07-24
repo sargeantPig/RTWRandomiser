@@ -10,7 +10,8 @@ using RTWLib.Objects;
 using RTWLib.Data;
 using RTWLib.Logger;
 using System.Threading;
-
+using RTWLib.Objects.Descr_strat;
+using RTWLib.Objects.Buildings;
 namespace RTWR_RTWLIB.Randomiser
 {
 	public class RandomDS
@@ -198,7 +199,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 		public static void MightyEmpires(Descr_Strat ds, EDU edu, NamesFile names, Descr_Region dr, EDB edb)
 		{
-			foreach (Faction f in ds.factions)
+            foreach (Faction f in ds.factions)
 			{
 				if (f.name == "slave") //  skip slave
 				{
@@ -245,7 +246,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 				foreach (DSCharacter character in f.characters)
 				{
-					rndSize = TWRandom.rnd.Next(armySize / 2, armySize);
+					rndSize = TWRandom.rnd.Next(2, armySize/2);
 					if (rndSize == 0)
 						rndSize = 1;
 					if (character.type == "general" || character.type == "named character")
@@ -356,13 +357,12 @@ namespace RTWR_RTWLIB.Randomiser
 						ChangeSettlement(levels, population, new List<DSBuilding>(), 0);
 
 					}
-
-
 				}
-			}
 
-			CharacterCoordinateFix(ds, dr);
-		}
+                CharacterCoordinateFix(ds, dr);
+            }
+            
+        }
 
 		static private List<DSBuilding> GetBuildings(string level, EDB edb)
 		{

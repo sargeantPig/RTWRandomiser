@@ -28,7 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_test = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
             this.chk_windowed = new System.Windows.Forms.CheckBox();
@@ -61,8 +63,8 @@
             this.chk_unit_attributes_9 = new System.Windows.Forms.CheckBox();
             this.chk_unit_training_5 = new System.Windows.Forms.CheckBox();
             this.chk_unit_sounds_4 = new System.Windows.Forms.CheckBox();
-            this.chk_unit_stats_3 = new System.Windows.Forms.CheckBox();
-            this.chk_unit_costs_2 = new System.Windows.Forms.CheckBox();
+            this.chk_unit_stats_2 = new System.Windows.Forms.CheckBox();
+            this.chk_unit_costs_3 = new System.Windows.Forms.CheckBox();
             this.chk_units_sizes_1 = new System.Windows.Forms.CheckBox();
             this.txt_seed = new System.Windows.Forms.TextBox();
             this.chk_seed = new System.Windows.Forms.CheckBox();
@@ -70,7 +72,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
             this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
-            this.chk_LogAll = new System.Windows.Forms.CheckBox();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -102,6 +104,20 @@
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
             // 
+            // chk_LogAll
+            // 
+            this.chk_LogAll.AutoSize = true;
+            this.chk_LogAll.Checked = true;
+            this.chk_LogAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_LogAll.Location = new System.Drawing.Point(222, 355);
+            this.chk_LogAll.Name = "chk_LogAll";
+            this.chk_LogAll.Size = new System.Drawing.Size(64, 17);
+            this.chk_LogAll.TabIndex = 2;
+            this.chk_LogAll.Text = "Log All?";
+            this.tooltip.SetToolTip(this.chk_LogAll, "Create a detailed log file (turn this off for faster load times within the random" +
+        "iser).");
+            this.chk_LogAll.UseVisualStyleBackColor = true;
+            // 
             // chk_test
             // 
             this.chk_test.AutoSize = true;
@@ -111,6 +127,7 @@
             this.chk_test.Size = new System.Drawing.Size(53, 17);
             this.chk_test.TabIndex = 9;
             this.chk_test.Text = "Test?";
+            this.tooltip.SetToolTip(this.chk_test, "N/A");
             this.chk_test.UseVisualStyleBackColor = true;
             // 
             // chk_ai
@@ -121,6 +138,7 @@
             this.chk_ai.Size = new System.Drawing.Size(63, 17);
             this.chk_ai.TabIndex = 8;
             this.chk_ai.Text = "Ai only?";
+            this.tooltip.SetToolTip(this.chk_ai, "Allows for ai campaigns.");
             this.chk_ai.UseVisualStyleBackColor = true;
             // 
             // chk_windowed
@@ -131,6 +149,7 @@
             this.chk_windowed.Size = new System.Drawing.Size(83, 17);
             this.chk_windowed.TabIndex = 7;
             this.chk_windowed.Text = "Windowed?";
+            this.tooltip.SetToolTip(this.chk_windowed, "Puts the game in windowed mode.");
             this.chk_windowed.UseVisualStyleBackColor = true;
             // 
             // lbl_seed
@@ -149,6 +168,7 @@
             this.btn_play.Size = new System.Drawing.Size(153, 34);
             this.btn_play.TabIndex = 5;
             this.btn_play.Text = "Play";
+            this.tooltip.SetToolTip(this.btn_play, "Play the game!");
             this.btn_play.UseVisualStyleBackColor = true;
             this.btn_play.Click += new System.EventHandler(this.btn_play_Click);
             // 
@@ -159,6 +179,7 @@
             this.picBox_map.Size = new System.Drawing.Size(277, 235);
             this.picBox_map.TabIndex = 4;
             this.picBox_map.TabStop = false;
+            this.tooltip.SetToolTip(this.picBox_map, "Preview of the faction positions on the map.");
             // 
             // pictureBox1
             // 
@@ -179,6 +200,7 @@
             this.btn_load.Size = new System.Drawing.Size(108, 35);
             this.btn_load.TabIndex = 2;
             this.btn_load.Text = "Load";
+            this.tooltip.SetToolTip(this.btn_load, "Load data from RTW that can then be randomised.");
             this.btn_load.UseVisualStyleBackColor = true;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
@@ -227,6 +249,7 @@
             this.chk_misc_selectA.Size = new System.Drawing.Size(75, 17);
             this.chk_misc_selectA.TabIndex = 0;
             this.chk_misc_selectA.Text = "Select all?";
+            this.tooltip.SetToolTip(this.chk_misc_selectA, "Select all options.");
             this.chk_misc_selectA.UseVisualStyleBackColor = true;
             this.chk_misc_selectA.CheckedChanged += new System.EventHandler(this.chk_misc_selectA_CheckedChanged);
             // 
@@ -257,6 +280,8 @@
             this.chk_faction_mempires_6.TabIndex = 8;
             this.chk_faction_mempires_6.Tag = "MightyEmpires";
             this.chk_faction_mempires_6.Text = "Mighty Empires?";
+            this.tooltip.SetToolTip(this.chk_faction_mempires_6, "Gives factions armies for each city that vary in size and composition. The bigger" +
+        " the empire the more armies!");
             this.chk_faction_mempires_6.UseVisualStyleBackColor = true;
             // 
             // chk_fation_ragingRebels_5
@@ -268,6 +293,7 @@
             this.chk_fation_ragingRebels_5.TabIndex = 2;
             this.chk_fation_ragingRebels_5.Tag = "RagingRebels";
             this.chk_fation_ragingRebels_5.Text = "Raging Rebels?";
+            this.tooltip.SetToolTip(this.chk_fation_ragingRebels_5, "Ramps up the rebel spawn value. WARNING this causes a lot of trouble for the ai.");
             this.chk_fation_ragingRebels_5.UseVisualStyleBackColor = true;
             // 
             // chk_faction_voronoi_4
@@ -279,6 +305,8 @@
             this.chk_faction_voronoi_4.TabIndex = 7;
             this.chk_faction_voronoi_4.Tag = "VoronoiSettlements";
             this.chk_faction_voronoi_4.Text = "Voronoi Empires?";
+            this.tooltip.SetToolTip(this.chk_faction_voronoi_4, "Distributes cities to factions using a voronoi grid. Forms large cohesive empires" +
+        ".");
             this.chk_faction_voronoi_4.UseVisualStyleBackColor = true;
             this.chk_faction_voronoi_4.CheckedChanged += new System.EventHandler(this.chk_faction_voronoi_CheckedChanged);
             // 
@@ -290,6 +318,8 @@
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Max Cities";
+            this.tooltip.SetToolTip(this.label2, "Max amount of cities a faction can have when using \"random cities\". This is disab" +
+        "led if using voronoi empires.");
             // 
             // numUpDown_faction_cities
             // 
@@ -323,6 +353,8 @@
             this.chk_faction_settlements_4.TabIndex = 4;
             this.chk_faction_settlements_4.Tag = "RandomSettlements";
             this.chk_faction_settlements_4.Text = "Random Cities?";
+            this.tooltip.SetToolTip(this.chk_faction_settlements_4, "Distributes cities to factions randomly. Attempts to keep the cities linked or re" +
+        "latively close.");
             this.chk_faction_settlements_4.UseVisualStyleBackColor = true;
             this.chk_faction_settlements_4.CheckedChanged += new System.EventHandler(this.chk_faction_settlements_CheckedChanged);
             // 
@@ -335,6 +367,7 @@
             this.chk_misc_Ufactions_3.TabIndex = 3;
             this.chk_misc_Ufactions_3.Tag = "UnlockFactions";
             this.chk_misc_Ufactions_3.Text = "Unlock factions?";
+            this.tooltip.SetToolTip(this.chk_misc_Ufactions_3, "Unlocks locked factions and unplayable factions.");
             this.chk_misc_Ufactions_3.UseVisualStyleBackColor = true;
             // 
             // chk_faction_ai_2
@@ -346,6 +379,7 @@
             this.chk_faction_ai_2.TabIndex = 1;
             this.chk_faction_ai_2.Tag = "RandomAI";
             this.chk_faction_ai_2.Text = "Random AI?";
+            this.tooltip.SetToolTip(this.chk_faction_ai_2, "The ai each faction uses.");
             this.chk_faction_ai_2.UseVisualStyleBackColor = true;
             // 
             // chk_faction_treasury_1
@@ -357,6 +391,7 @@
             this.chk_faction_treasury_1.TabIndex = 0;
             this.chk_faction_treasury_1.Tag = "RandomTreasury";
             this.chk_faction_treasury_1.Text = "Random treasury?";
+            this.tooltip.SetToolTip(this.chk_faction_treasury_1, "Starting gold.");
             this.chk_faction_treasury_1.UseVisualStyleBackColor = true;
             // 
             // grp_settings_units
@@ -370,8 +405,8 @@
             this.grp_settings_units.Controls.Add(this.chk_unit_attributes_9);
             this.grp_settings_units.Controls.Add(this.chk_unit_training_5);
             this.grp_settings_units.Controls.Add(this.chk_unit_sounds_4);
-            this.grp_settings_units.Controls.Add(this.chk_unit_stats_3);
-            this.grp_settings_units.Controls.Add(this.chk_unit_costs_2);
+            this.grp_settings_units.Controls.Add(this.chk_unit_stats_2);
+            this.grp_settings_units.Controls.Add(this.chk_unit_costs_3);
             this.grp_settings_units.Controls.Add(this.chk_units_sizes_1);
             this.grp_settings_units.Location = new System.Drawing.Point(7, 20);
             this.grp_settings_units.Name = "grp_settings_units";
@@ -388,6 +423,8 @@
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 16;
             this.label1.Text = "Max Ownership";
+            this.tooltip.SetToolTip(this.label1, "Max number of factions that can recruit a single unit when using \"random ownershi" +
+        "p\".");
             // 
             // numUpDown_unit_ownership
             // 
@@ -420,6 +457,7 @@
             this.lbl_unit_attributes.Size = new System.Drawing.Size(74, 13);
             this.lbl_unit_attributes.TabIndex = 14;
             this.lbl_unit_attributes.Text = "Max Attributes";
+            this.tooltip.SetToolTip(this.lbl_unit_attributes, "Max attributes a unit can have when using \"random attributes\".");
             // 
             // numUpDown_unit_attributes
             // 
@@ -453,6 +491,7 @@
             this.chk_faction_rosters_7.TabIndex = 2;
             this.chk_faction_rosters_7.Tag = "RandomOwnership";
             this.chk_faction_rosters_7.Text = "Random Ownership?";
+            this.tooltip.SetToolTip(this.chk_faction_rosters_7, "Which factions can recruit the unit.");
             this.chk_faction_rosters_7.UseVisualStyleBackColor = true;
             // 
             // chk_unit_groundb_6
@@ -464,6 +503,7 @@
             this.chk_unit_groundb_6.TabIndex = 12;
             this.chk_unit_groundb_6.Tag = "RandomGBonus";
             this.chk_unit_groundb_6.Text = "Rand Ground Bonus?";
+            this.tooltip.SetToolTip(this.chk_unit_groundb_6, "Bonuses the unit recieves on certain terrains.");
             this.chk_unit_groundb_6.UseVisualStyleBackColor = true;
             // 
             // chk_unit_attributes_9
@@ -475,6 +515,7 @@
             this.chk_unit_attributes_9.TabIndex = 11;
             this.chk_unit_attributes_9.Tag = "RandomAttributes";
             this.chk_unit_attributes_9.Text = "Random Attributes?";
+            this.tooltip.SetToolTip(this.chk_unit_attributes_9, "Abilities of the unit. (warcry, cantabrian circle etc).");
             this.chk_unit_attributes_9.UseVisualStyleBackColor = true;
             // 
             // chk_unit_training_5
@@ -486,6 +527,7 @@
             this.chk_unit_training_5.TabIndex = 10;
             this.chk_unit_training_5.Tag = "RandomTraining";
             this.chk_unit_training_5.Text = "Random Training?";
+            this.tooltip.SetToolTip(this.chk_unit_training_5, "Training (how tidy the formation is), discipline (morale) and base morale.");
             this.chk_unit_training_5.UseVisualStyleBackColor = true;
             // 
             // chk_unit_sounds_4
@@ -497,29 +539,32 @@
             this.chk_unit_sounds_4.TabIndex = 9;
             this.chk_unit_sounds_4.Tag = "RandomSounds";
             this.chk_unit_sounds_4.Text = "Random Sounds?";
+            this.tooltip.SetToolTip(this.chk_unit_sounds_4, "The sound the unit makes.");
             this.chk_unit_sounds_4.UseVisualStyleBackColor = true;
             // 
-            // chk_unit_stats_3
+            // chk_unit_stats_2
             // 
-            this.chk_unit_stats_3.AutoSize = true;
-            this.chk_unit_stats_3.Location = new System.Drawing.Point(6, 67);
-            this.chk_unit_stats_3.Name = "chk_unit_stats_3";
-            this.chk_unit_stats_3.Size = new System.Drawing.Size(99, 17);
-            this.chk_unit_stats_3.TabIndex = 8;
-            this.chk_unit_stats_3.Tag = "RandomStats";
-            this.chk_unit_stats_3.Text = "Random Stats?";
-            this.chk_unit_stats_3.UseVisualStyleBackColor = true;
+            this.chk_unit_stats_2.AutoSize = true;
+            this.chk_unit_stats_2.Location = new System.Drawing.Point(6, 42);
+            this.chk_unit_stats_2.Name = "chk_unit_stats_2";
+            this.chk_unit_stats_2.Size = new System.Drawing.Size(99, 17);
+            this.chk_unit_stats_2.TabIndex = 8;
+            this.chk_unit_stats_2.Tag = "RandomStats";
+            this.chk_unit_stats_2.Text = "Random Stats?";
+            this.tooltip.SetToolTip(this.chk_unit_stats_2, "Stats of the unit (attack, defence)");
+            this.chk_unit_stats_2.UseVisualStyleBackColor = true;
             // 
-            // chk_unit_costs_2
+            // chk_unit_costs_3
             // 
-            this.chk_unit_costs_2.AutoSize = true;
-            this.chk_unit_costs_2.Location = new System.Drawing.Point(6, 43);
-            this.chk_unit_costs_2.Name = "chk_unit_costs_2";
-            this.chk_unit_costs_2.Size = new System.Drawing.Size(101, 17);
-            this.chk_unit_costs_2.TabIndex = 7;
-            this.chk_unit_costs_2.Tag = "RandomCosts";
-            this.chk_unit_costs_2.Text = "Random Costs?";
-            this.chk_unit_costs_2.UseVisualStyleBackColor = true;
+            this.chk_unit_costs_3.AutoSize = true;
+            this.chk_unit_costs_3.Location = new System.Drawing.Point(6, 65);
+            this.chk_unit_costs_3.Name = "chk_unit_costs_3";
+            this.chk_unit_costs_3.Size = new System.Drawing.Size(101, 17);
+            this.chk_unit_costs_3.TabIndex = 7;
+            this.chk_unit_costs_3.Tag = "RandomCosts";
+            this.chk_unit_costs_3.Text = "Random Costs?";
+            this.tooltip.SetToolTip(this.chk_unit_costs_3, "Cost to recruit and upkeep cost.");
+            this.chk_unit_costs_3.UseVisualStyleBackColor = true;
             // 
             // chk_units_sizes_1
             // 
@@ -530,6 +575,7 @@
             this.chk_units_sizes_1.TabIndex = 6;
             this.chk_units_sizes_1.Tag = "RandomSizes";
             this.chk_units_sizes_1.Text = "Random Sizes?";
+            this.tooltip.SetToolTip(this.chk_units_sizes_1, "Number of men in a unit.");
             this.chk_units_sizes_1.UseVisualStyleBackColor = true;
             // 
             // txt_seed
@@ -539,6 +585,7 @@
             this.txt_seed.Size = new System.Drawing.Size(159, 20);
             this.txt_seed.TabIndex = 5;
             this.txt_seed.Text = "Seed here";
+            this.tooltip.SetToolTip(this.txt_seed, "Enter a seed here!");
             // 
             // chk_seed
             // 
@@ -548,6 +595,7 @@
             this.chk_seed.Size = new System.Drawing.Size(73, 17);
             this.chk_seed.TabIndex = 4;
             this.chk_seed.Text = "Use Seed";
+            this.tooltip.SetToolTip(this.chk_seed, "Forces the randomiser to use your given seed.");
             this.chk_seed.UseVisualStyleBackColor = true;
             // 
             // btn_randomise
@@ -587,18 +635,6 @@
             // 
             this.pb_progress.Name = "pb_progress";
             this.pb_progress.Size = new System.Drawing.Size(200, 16);
-            // 
-            // chk_LogAll
-            // 
-            this.chk_LogAll.AutoSize = true;
-            this.chk_LogAll.Checked = true;
-            this.chk_LogAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_LogAll.Location = new System.Drawing.Point(222, 355);
-            this.chk_LogAll.Name = "chk_LogAll";
-            this.chk_LogAll.Size = new System.Drawing.Size(64, 17);
-            this.chk_LogAll.TabIndex = 2;
-            this.chk_LogAll.Text = "Log All?";
-            this.chk_LogAll.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -653,8 +689,8 @@
 		private System.Windows.Forms.CheckBox chk_unit_attributes_9;
 		private System.Windows.Forms.CheckBox chk_unit_training_5;
 		private System.Windows.Forms.CheckBox chk_unit_sounds_4;
-		private System.Windows.Forms.CheckBox chk_unit_stats_3;
-		private System.Windows.Forms.CheckBox chk_unit_costs_2;
+		private System.Windows.Forms.CheckBox chk_unit_stats_2;
+		private System.Windows.Forms.CheckBox chk_unit_costs_3;
 		private System.Windows.Forms.CheckBox chk_units_sizes_1;
 		private System.Windows.Forms.TextBox txt_seed;
 		private System.Windows.Forms.CheckBox chk_seed;
@@ -677,6 +713,7 @@
 		private System.Windows.Forms.CheckBox chk_windowed;
 		private System.Windows.Forms.CheckBox chk_test;
         private System.Windows.Forms.CheckBox chk_LogAll;
+        private System.Windows.Forms.ToolTip tooltip;
     }
 }
 
