@@ -59,7 +59,6 @@ namespace RTWR_RTWLIB.Randomiser
 				unit.primaryArmour.stat_pri_armour[0] = TWRandom.rnd.Next(0, 20);
 				unit.primaryArmour.stat_pri_armour[1] = TWRandom.rnd.Next(0, 10);
 				unit.primaryArmour.stat_pri_armour[2] = TWRandom.rnd.Next(0, 7);
-
 			}
 
 		}

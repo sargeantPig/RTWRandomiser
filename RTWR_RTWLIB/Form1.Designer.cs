@@ -44,8 +44,9 @@
             this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
             this.chk_misc_selectA = new System.Windows.Forms.CheckBox();
             this.grp_settings_factions = new System.Windows.Forms.GroupBox();
+            this.chk_faction_coreA_7 = new System.Windows.Forms.CheckBox();
             this.chk_faction_mempires_6 = new System.Windows.Forms.CheckBox();
-            this.chk_fation_ragingRebels_5 = new System.Windows.Forms.CheckBox();
+            this.chk_faction_ragingRebels_5 = new System.Windows.Forms.CheckBox();
             this.chk_faction_voronoi_4 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.numUpDown_faction_cities = new System.Windows.Forms.NumericUpDown();
@@ -73,6 +74,7 @@
             this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
             this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.chk_total_war_8 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -255,8 +257,10 @@
             // 
             // grp_settings_factions
             // 
+            this.grp_settings_factions.Controls.Add(this.chk_total_war_8);
+            this.grp_settings_factions.Controls.Add(this.chk_faction_coreA_7);
             this.grp_settings_factions.Controls.Add(this.chk_faction_mempires_6);
-            this.grp_settings_factions.Controls.Add(this.chk_fation_ragingRebels_5);
+            this.grp_settings_factions.Controls.Add(this.chk_faction_ragingRebels_5);
             this.grp_settings_factions.Controls.Add(this.chk_faction_voronoi_4);
             this.grp_settings_factions.Controls.Add(this.label2);
             this.grp_settings_factions.Controls.Add(this.numUpDown_faction_cities);
@@ -271,6 +275,18 @@
             this.grp_settings_factions.TabStop = false;
             this.grp_settings_factions.Text = "Faction Settings";
             // 
+            // chk_faction_coreA_7
+            // 
+            this.chk_faction_coreA_7.AutoSize = true;
+            this.chk_faction_coreA_7.Location = new System.Drawing.Point(7, 183);
+            this.chk_faction_coreA_7.Name = "chk_faction_coreA_7";
+            this.chk_faction_coreA_7.Size = new System.Drawing.Size(116, 17);
+            this.chk_faction_coreA_7.TabIndex = 9;
+            this.chk_faction_coreA_7.Tag = "RandCoreAttitudes";
+            this.chk_faction_coreA_7.Text = "Random Attitudes?";
+            this.tooltip.SetToolTip(this.chk_faction_coreA_7, "Determines the base attitudes between each faction.");
+            this.chk_faction_coreA_7.UseVisualStyleBackColor = true;
+            // 
             // chk_faction_mempires_6
             // 
             this.chk_faction_mempires_6.AutoSize = true;
@@ -284,17 +300,17 @@
         " the empire the more armies!");
             this.chk_faction_mempires_6.UseVisualStyleBackColor = true;
             // 
-            // chk_fation_ragingRebels_5
+            // chk_faction_ragingRebels_5
             // 
-            this.chk_fation_ragingRebels_5.AutoSize = true;
-            this.chk_fation_ragingRebels_5.Location = new System.Drawing.Point(7, 137);
-            this.chk_fation_ragingRebels_5.Name = "chk_fation_ragingRebels_5";
-            this.chk_fation_ragingRebels_5.Size = new System.Drawing.Size(102, 17);
-            this.chk_fation_ragingRebels_5.TabIndex = 2;
-            this.chk_fation_ragingRebels_5.Tag = "RagingRebels";
-            this.chk_fation_ragingRebels_5.Text = "Raging Rebels?";
-            this.tooltip.SetToolTip(this.chk_fation_ragingRebels_5, "Ramps up the rebel spawn value. WARNING this causes a lot of trouble for the ai.");
-            this.chk_fation_ragingRebels_5.UseVisualStyleBackColor = true;
+            this.chk_faction_ragingRebels_5.AutoSize = true;
+            this.chk_faction_ragingRebels_5.Location = new System.Drawing.Point(7, 137);
+            this.chk_faction_ragingRebels_5.Name = "chk_faction_ragingRebels_5";
+            this.chk_faction_ragingRebels_5.Size = new System.Drawing.Size(102, 17);
+            this.chk_faction_ragingRebels_5.TabIndex = 2;
+            this.chk_faction_ragingRebels_5.Tag = "RagingRebels";
+            this.chk_faction_ragingRebels_5.Text = "Raging Rebels?";
+            this.tooltip.SetToolTip(this.chk_faction_ragingRebels_5, "Ramps up the rebel spawn value. WARNING this causes a lot of trouble for the ai.");
+            this.chk_faction_ragingRebels_5.UseVisualStyleBackColor = true;
             // 
             // chk_faction_voronoi_4
             // 
@@ -636,6 +652,18 @@
             this.pb_progress.Name = "pb_progress";
             this.pb_progress.Size = new System.Drawing.Size(200, 16);
             // 
+            // chk_total_war_8
+            // 
+            this.chk_total_war_8.AutoSize = true;
+            this.chk_total_war_8.Location = new System.Drawing.Point(7, 207);
+            this.chk_total_war_8.Name = "chk_total_war_8";
+            this.chk_total_war_8.Size = new System.Drawing.Size(76, 17);
+            this.chk_total_war_8.TabIndex = 10;
+            this.chk_total_war_8.Tag = "TotalWar";
+            this.chk_total_war_8.Text = "Total War!";
+            this.tooltip.SetToolTip(this.chk_total_war_8, "Makes all factions to be at war wirh eachother.");
+            this.chk_total_war_8.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -705,7 +733,7 @@
 		private System.Windows.Forms.PictureBox picBox_map;
 		private System.Windows.Forms.CheckBox chk_faction_voronoi_4;
 		private System.Windows.Forms.CheckBox chk_misc_unitInfo;
-		private System.Windows.Forms.CheckBox chk_fation_ragingRebels_5;
+		private System.Windows.Forms.CheckBox chk_faction_ragingRebels_5;
 		private System.Windows.Forms.CheckBox chk_faction_mempires_6;
 		private System.Windows.Forms.Label lbl_seed;
 		private System.Windows.Forms.Button btn_play;
@@ -714,6 +742,8 @@
 		private System.Windows.Forms.CheckBox chk_test;
         private System.Windows.Forms.CheckBox chk_LogAll;
         private System.Windows.Forms.ToolTip tooltip;
+        private System.Windows.Forms.CheckBox chk_faction_coreA_7;
+        private System.Windows.Forms.CheckBox chk_total_war_8;
     }
 }
 
