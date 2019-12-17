@@ -1,0 +1,1371 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+
+
+	label_unit 0 0 0	PLAYER_Hannibal	
+	label_unit 0 0 1	PLAYER_poeni	
+	label_unit 0 0 2	PLAYER_peltast1
+	label_unit 0 0 3	PLAYER_peltast2
+	label_unit 0 0 4	PLAYER_poeni3
+	label_unit 0 0 5	PLAYER_cavalry
+	label_unit 0 0 6	PLAYER_elephant
+	label_unit 0 0 7	PLAYER_cat_elephant
+	label_unit 0 0 8	PLAYER_numidian_cav
+	label_unit 0 0 9	PLAYER_barb_infantry
+	label_unit 0 0 10	PLAYER_sacred_band_cav
+	label_unit 0 0 11	PLAYER_med_cav
+	label_unit 0 0 12	PLAYER_barb_infantry2
+	label_unit 0 0 13	PLAYER_barb_cavalry	
+	label_unit 0 0 14	PLAYER_poeni2
+	label_unit 0 0 15	PLAYER_cretan_archers
+
+
+	label_unit 1 0 0	ROMAN_velite1
+	label_unit 1 0 1	ROMAN_velite2
+	label_unit 1 0 2	ROMAN_velite3
+	label_unit 1 0 3	ROMAN_velite4
+	label_unit 1 0 4	ROMAN_hastati1
+	label_unit 1 0 5	ROMAN_hastati2
+	label_unit 1 0 6	ROMAN_hastati3
+	label_unit 1 0 7	ROMAN_hastati4
+	label_unit 1 0 8	ROMAN_princeps1
+	label_unit 1 0 9	ROMAN_princeps2
+	label_unit 1 0 10	ROMAN_princeps3
+	label_unit 1 0 11	ROMAN_princeps4
+	label_unit 1 0 12	ROMAN_triarii1
+	label_unit 1 0 13	ROMAN_triarii2
+	label_unit 1 0 14	ROMAN_triarii3
+	label_unit 1 0 15	ROMAN_triarii4
+	label_unit 1 0 16	ROMAN_cav_auxillia
+	label_unit 1 0 17	ROMAN_light_cav
+	label_unit 1 0 18	ROMAN_general
+
+
+
+;	disable_cursor						;prevent the player clicking
+;	suspend_unscripted_advice true
+;	disable_shortcuts true		
+;	disable_entire_ui
+;	inhibit_camera_input true
+	camera_default_mode_set tw
+	camera_restrictions_set off
+
+
+
+
+	define_unit_group GRP_PLAYER_ARMY PLAYER_poeni PLAYER_peltast1 PLAYER_peltast2 PLAYER_poeni3 PLAYER_cavalry PLAYER_elephant PLAYER_cat_elephant PLAYER_numidian_cav PLAYER_barb_infantry PLAYER_sacred_band_cav PLAYER_med_cav PLAYER_barb_infantry2 PLAYER_barb_cavalry PLAYER_poeni2 PLAYER_cretan_archers
+		
+	define_unit_group GRP_ROMAN_ARMY ROMAN_velite1 ROMAN_velite2 ROMAN_velite3 ROMAN_velite4 ROMAN_hastati1 ROMAN_hastati2 ROMAN_hastati3 ROMAN_hastati4 ROMAN_princeps1 ROMAN_princeps2	ROMAN_princeps3	ROMAN_princeps4	ROMAN_triarii1	ROMAN_triarii2	ROMAN_triarii3	ROMAN_triarii4 ROMAN_cav_auxillia ROMAN_light_cav ROMAN_general
+
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_not_escape
+	declare_counter cancel_radius_monitors
+	declare_counter general_radius_monitor
+
+;I_TimerElapsed rout_timer > 1000
+;if TimerElapsed < 1000
+;while TimerElapsed < 1000
+;declare_timer rout_timer
+;restart_timer
+;declare_timer battle_timer
+;restart_timer battle_timer
+;while TimerElapsed battle_timer <10
+
+
+
+
+	; *********************************************************************************************
+	;	Roman army unit settings
+	; *********************************************************************************************
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	Set up global counters and monitors
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+	while ! I_BattleStarted					; battle_wait FOR DEPLOYMENT
+	end_while
+
+;-----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------------
+
+;			OPEN SCRIPT SECTION
+
+;-----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------------
+
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+	ai_active_set off
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+		set_camera_bookmark 1, -12.5225, 389.493, -655.465 13.2169, 350.323, -878.233
+		camera_position_at_bookmark 1
+		set_counter battle_start 1
+	terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+; *********************************************************************************************
+; *********************************************************************************************
+;			Intro sequence - INTRO MONITOR
+; *********************************************************************************************
+; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+
+; ----------------- set intro sequence bookmarks -------------------------------------------------------
+;						   x value   y value  z value
+
+set_camera_bookmark 1, 158.985, 474.857, 89.3232 149.256, 446.008, -219.595
+set_camera_bookmark 2, -71.3685, 422.275, -228.293 -35.7459, 388.201, -484.492
+
+
+
+
+
+
+
+
+;set_camera_bookmark 3, -137.724, 369.493, -439.005 -62.2442, 378.199, -493.62
+;set_camera_bookmark 4, -104.523, 370.628, -491.428 -68.0574, 374.987, -520.526
+
+set_camera_bookmark 3, 57.0739, 373.111, -657.388 57.6712, 374.5, -667.33
+set_camera_bookmark 4, 26.6118, 370.86, -679.948 26.0051, 372.249, -689.889
+
+
+
+
+
+
+set_camera_bookmark 5, 348.445, 385.194, -90.0746 355.778, 388.655, -95.3813
+
+;set_camera_bookmark 6, 509.16, 381.723, 74.0122 518.186, 381.601, 78.1729
+;set_camera_bookmark 7, 521.621, 382.875, 110.906 530.754, 383.429, 104.938
+
+set_camera_bookmark 6, 509.283, 381.864, 82.951 518.885, 381.742, 85.513
+
+set_camera_bookmark 7, 522.636, 382.946, 107.996 525.174, 383.081, 107.222
+
+set_camera_bookmark 8, 518.113, 383.351, 109.191 528.475, 383.905, 105.774
+
+;set_camera_bookmark 9, 533.716, 381.822, 98.078 543.519, 381.646, 96.3188
+set_camera_bookmark 9, 528.332, 380.696, 69.585 533.28, 380.52, 78.228
+
+
+
+;set_camera_bookmark 10, 357.698, 377.669, 104.187 360.069, 378.025, 94.5088
+set_camera_bookmark 10, 352.581, 379.538, 80.7172 361.142, 379.006, 85.8814
+
+
+
+;set_camera_bookmark 11, 351.88, 377.928, 95.5157 361.552, 379.027, 92.9994
+set_camera_bookmark 11, 347.771, 378.372, 91.1776 356.032, 377.554, 96.8025
+
+
+;set_camera_bookmark 12, 356.013, 378.656, 109.444 356.708, 378.024, 119.381
+set_camera_bookmark 12, 357.094, 379.752, 124.124 358.478, 378.494, 143.905
+
+set_camera_bookmark 13, 321.525, 365.321, 147.164 366.658, 371.202, 148.804
+set_camera_bookmark 14, 71.9754, 367.03, 245.698 80.6344, 368.073, 240.705
+
+set_camera_bookmark 15, 43.8473, 371.922, 252.114 51.6525, 371.154, 246.047
+;set_camera_bookmark 15, -21.4311, 394.061, 32.7323 -47.8354, 388.257, 32.7701
+
+set_camera_bookmark 16, -110.583, 366.003, 31.6416 -170.302, 352.875, 31.727
+;set_camera_bookmark 16, 432.945, 404.577, 54.6714 422.97, 403.304, 55.1251
+
+set_camera_bookmark 17, -137.967, 363.512, 33.0827 -147.829, 361.344, 33.0968
+set_camera_bookmark 18, -508.729, 381.136, 205.773 -518.054, 379.108, 203.469
+set_camera_bookmark 19, -525.69, 379.212, 200.448 -516.118, 379.946, 203.331
+
+set_camera_bookmark 20, 693.449, 447.033, 76.9865 683.644, 444.831, 76.8248
+set_camera_bookmark 21, -156.276, 362.443, 36.0353 -291.162, 350.99, 43.9907
+
+
+
+	hide_ui
+
+	camera_position_at_bookmark 1
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 2 5
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_01 tag = trebia_SPEECH_01
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 3
+
+	battle_wait 0.001
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 4 8
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_02 tag = trebia_SPEECH_02
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 5			; Hannibal rearing horse
+
+	unit_order_attack_unit PLAYER_numidian_cav ROMAN_velite1 run
+
+	play_sound_event TREBIA_SPEECH_03 tag = trebia_SPEECH_03
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_group_order_relative_move_unformed GRP_PLAYER_ARMY 0 30
+
+	battle_wait 2.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 6
+
+	battle_wait 4.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_04 tag = trebia_SPEECH_04
+
+	camera_position_at_bookmark 7
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 8 2			; pan in front of elephants
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 9			;sacred band infantry march by
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	undefine_unit_group GRP_PLAYER_ARMY
+
+	unit_immediate_place PLAYER_numidian_cav 401.647, 58.307, -76
+	unit_immediate_place PLAYER_sacred_band_cav 368.215, 64.193, -96
+	unit_immediate_place PLAYER_med_cav 383.362, 68.420, -95
+	unit_immediate_place PLAYER_Hannibal 356.337, 92.445, -134
+	unit_immediate_place PLAYER_barb_cavalry 574.225, 80.768, -101
+
+	camera_position_at_bookmark 10				; HANNIBAL BARKING ORDERS AT CAVALRY
+
+
+
+
+	define_unit_group GRP_PLAYER_ARMY PLAYER_poeni PLAYER_peltast1 PLAYER_peltast2 PLAYER_poeni3 PLAYER_cavalry PLAYER_elephant PLAYER_cat_elephant PLAYER_barb_infantry PLAYER_barb_infantry2 PLAYER_poeni2 PLAYER_cretan_archers
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_group_order_relative_move_unformed GRP_PLAYER_ARMY 0 1
+
+	unit_order_move PLAYER_sacred_band_cav 143 -174 run
+	unit_order_move PLAYER_med_cav 161 -171 run
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_turn PLAYER_Hannibal 135 relative
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 11 2
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move PLAYER_numidian_cav 299 197 run
+	unit_order_move PLAYER_barb_cavalry 147 271 run
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_05 tag = trebia_SPEECH_05
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 12 10
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 13
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_immediate_place PLAYER_barb_cavalry 118.198, 243.496, -90
+	unit_order_move PLAYER_barb_cavalry 24.471 238.552 run
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_06 tag = trebia_SPEECH_06
+
+	camera_position_at_bookmark 14
+
+	battle_wait 0.1
+
+	unit_immediate_place PLAYER_numidian_cav -87.176, 29.548, -90
+	unit_order_move PLAYER_numidian_cav -398.533, 30.148 run
+
+	camera_zoom_to_bookmark 15 4
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 16
+
+	play_sound_event TREBIA_SPEECH_07 tag = trebia_SPEECH_07
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 17 8
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 18
+
+	unit_immediate_place PLAYER_numidian_cav -503.468, 198.661, -90
+	unit_order_move_relative PLAYER_numidian_cav -5 15 run
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_taunt PLAYER_numidian_cav
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 19		;head on numidians
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	undefine_unit_group GRP_ROMAN_ARMY
+
+	unit_immediate_place ROMAN_velite1 -205.498, 67.556, 96
+	unit_immediate_place ROMAN_velite2 -207.732, 66.915, 88
+	unit_immediate_place ROMAN_velite3 -217.213, 65.638, 92
+	unit_immediate_place ROMAN_velite4 -228.258, 65.006, 88
+	unit_immediate_place ROMAN_hastati1 -241.470, 41.563, 91
+	unit_immediate_place ROMAN_hastati2 -228.846, 47.398, 96
+	unit_immediate_place ROMAN_hastati3 -240.134, 62.921, 94
+	unit_immediate_place ROMAN_hastati4 -228.500, 78.916, 83
+	unit_immediate_place ROMAN_princeps1 -254.703, 51.531, 92
+	unit_immediate_place ROMAN_princeps2 -254.146, 33.852, 93
+	unit_immediate_place ROMAN_princeps3 -250.829, 66.070, 94
+	unit_immediate_place ROMAN_princeps4 -241.021, 77.453, 106
+	unit_immediate_place ROMAN_triarii1 -269.051, 51.709, 94
+	unit_immediate_place ROMAN_triarii2 -264.079, 84.397, 89
+	unit_immediate_place ROMAN_triarii3 -276.066, 65.124, -87
+	unit_immediate_place ROMAN_triarii4 -270.746, 34.438, 89
+	unit_immediate_place ROMAN_cav_auxillia -268.615, 109.562, 92
+	unit_immediate_place ROMAN_light_cav -274.514, 19.852, 88
+	unit_immediate_place ROMAN_general -272.511, 61.118, 93
+
+	define_unit_group GRP_ROMAN_ARMY ROMAN_velite1 ROMAN_velite2 ROMAN_velite3 ROMAN_velite4 ROMAN_hastati1 ROMAN_hastati2 ROMAN_hastati3 ROMAN_hastati4 ROMAN_princeps1 ROMAN_princeps2	ROMAN_princeps3	ROMAN_princeps4	ROMAN_triarii1	ROMAN_triarii2	ROMAN_triarii3	ROMAN_triarii4 ROMAN_cav_auxillia ROMAN_light_cav ROMAN_general
+
+	unit_group_order_relative_move_unformed GRP_ROMAN_ARMY 0 400 run
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 20
+
+	play_sound_event TREBIA_SPEECH_08 tag = trebia_SPEECH_08
+
+	unit_immediate_place PLAYER_numidian_cav -120 37.631, 90
+;	unit_order_move PLAYER_numidian_cav -56.208 36.3 run
+	unit_order_move_relative PLAYER_numidian_cav 0 65 run
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 21 100
+
+	battle_wait 14
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+
+
+
+
+
+;---------------------- re-set camera bookmarks -------------------------------
+
+	set_camera_bookmark 1, -188.521, 363.095, 42.2407 465.319, 290.933, -503.007
+;	set_camera_bookmark 2, -68.3085, 367.406, 27.2983 -78.2691, 365.916, 27.7445
+
+	set_camera_bookmark 2, -50.3365, 369.26, 27.3672 -60.182, 367.042, 28.3056
+	set_camera_bookmark 3, -130.984, 370.562, 53.1031 -137.061, 368.337, 45.2567
+	set_camera_bookmark 4, -105.862, 369.363, 47.9321 -112.841, 367.138, 40.8762
+	set_camera_bookmark 5, -247.752, 394.315, 30.2021 -237.807, 392.825, 29.49
+	set_camera_bookmark 6, -112.153, 366.552, 33.2854 -122.047, 364.311, 32.5146
+	set_camera_bookmark 7, -0.0534602, 385.2, 68.3158 -9.94747, 382.959, 67.545
+	set_camera_bookmark 8, 489.567, 382.696, 103.581 1148.72, 376.335, 448.952
+
+
+
+
+
+
+
+
+;	set_camera_bookmark 9, 509.712, 391.91, 125.863 501.959, 389.338, 120.356
+;	set_camera_bookmark 10, 549.986, 406.012, 23.1713 449.217, 377.128, 58.5217
+
+	set_camera_bookmark 9, 515.438, 385.59, 134.132 506.352, 384.786, 130.164
+	set_camera_bookmark 10, 511.458, 382.477, 63.5826 501.481, 382.728, 63.1091
+
+	set_camera_bookmark 11, 483.096, 381.163, 70.2008 490.796, 380.7, 76.576
+	set_camera_bookmark 12, 480.707, 381.457, 68.2178 483.792, 380.994, 77.7262
+	set_camera_bookmark 13, 487.215, 387.446, 11.0612 489.866, 385.879, 20.4214
+	set_camera_bookmark 14, 433.136, 383.327, 100.932 441.512, 382.347, 95.8325
+
+	set_camera_bookmark 15, 519.914, 396.163, 27.0164 472.808, 388.598, 46.6853
+;	set_camera_bookmark 15, 519.702, 390.599, 35.1034 511, 389.153, 39.5168
+
+;	set_camera_bookmark 16, 97.3958, 380.541, -126.077 100.031, 378.558, -116.826
+;	set_camera_bookmark 17, 112.146, 380.702, -117.994 111.924, 377.789, -108.29
+
+	set_camera_bookmark 16, 127.109, 385.823, -165.007 128.022, 385.985, -155.065
+	set_camera_bookmark 17, 92.2312, 377.044, -87.2247 68.788, 377.251, -22.3545
+
+	set_camera_bookmark 18, 136.076, 402.636, 10.3107 128.46, 399.67, 16.307
+
+;	set_camera_bookmark 19, 60.9899, 367.439, 50.2595 51.0757, 366.041, 49.1269
+	set_camera_bookmark 19, 58.6427, 368.782, 57.4633 48.7496, 367.86, 57.7649
+
+
+;	set_camera_bookmark 20, 16.5024, 366.293, 101.303 9.6736, 365.675, 94.1247
+	set_camera_bookmark 20, 27.5397, 363.218, 137.404 22.7349, 363.401, 128.651
+
+
+	set_camera_bookmark 21, -8.7932, 367.425, 79.2934 1.05358, 367.098, 77.5569
+
+;------------------------------------------------------------------------------
+
+
+
+
+
+	camera_position_at_bookmark 1
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 5
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_set_skirmish_mode PLAYER_numidian_cav off
+
+	unit_order_attack_unit PLAYER_numidian_cav ROMAN_velite1 run
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move_relative PLAYER_numidian_cav 100 -165 run ;????????????????????????????
+
+	unit_set_skirmish_mode PLAYER_numidian_cav on
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 2
+
+;	battle_wait 5
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_set_skirmish_mode ROMAN_velite1 off
+	unit_set_skirmish_mode ROMAN_velite2 off
+	unit_set_skirmish_mode ROMAN_velite3 off
+	unit_set_skirmish_mode ROMAN_velite4 off
+
+;	unit_order_move_relative PLAYER_numidian_cav 100 -165 run
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+;	battle_wait 7
+	battle_wait 2
+
+	camera_zoom_to_bookmark 4 10
+
+;	unit_immediate_place PLAYER_Hannibal 513.345, 108.376, -90
+	unit_immediate_place PLAYER_Hannibal 508.345, 108.376, -90
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 10
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 5
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 8
+
+	unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 70
+	unit_order_move_relative PLAYER_Hannibal 0 40
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_immediate_place PLAYER_numidian_cav 120.234, 295.383, 150
+
+	undefine_unit_group GRP_ROMAN_ARMY
+
+	unit_immediate_place ROMAN_velite1 22.464, 179.944, 90
+	unit_immediate_place ROMAN_velite2 17.895, 131.999, 90
+	unit_immediate_place ROMAN_velite3 15.395, 79.497, 90
+	unit_immediate_place ROMAN_velite4 15.290, 28.393, 90
+	unit_immediate_place ROMAN_hastati1 -24.765, 131.622, 90
+	unit_immediate_place ROMAN_hastati2 -25.647, 100.541, 90
+	unit_immediate_place ROMAN_hastati3 -27.487, 68.168, 90
+	unit_immediate_place ROMAN_hastati4 -28.569, 37.004, 90
+	unit_immediate_place ROMAN_princeps1 -44.103, 116.404, 90
+	unit_immediate_place ROMAN_princeps2 -46.959, 83.552, 90
+	unit_immediate_place ROMAN_princeps3 -46.525, 51.412, 90
+	unit_immediate_place ROMAN_princeps4 -48.967, 19.341, 90
+	unit_immediate_place ROMAN_triarii1 -63.511, 133.813, 90
+	unit_immediate_place ROMAN_triarii2 -65.422, 98.482, 90
+	unit_immediate_place ROMAN_triarii3 -65.321, 33.048, 90
+	unit_immediate_place ROMAN_triarii4 -65.577, 67.325, 90
+	unit_immediate_place ROMAN_cav_auxillia -82.828, 187.514, 90
+	unit_immediate_place ROMAN_light_cav -75.710, -23.369, 90
+	unit_immediate_place ROMAN_general -87.595, 77.715, 90
+
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	define_unit_group GRP_ROMAN_ARMY ROMAN_velite1 ROMAN_velite2 ROMAN_velite3 ROMAN_velite4 ROMAN_hastati1 ROMAN_hastati2 ROMAN_hastati3 	ROMAN_hastati4 ROMAN_princeps1 ROMAN_princeps2	ROMAN_princeps3	ROMAN_princeps4	ROMAN_triarii1	ROMAN_triarii2	ROMAN_triarii3	ROMAN_triarii4	ROMAN_cav_auxillia ROMAN_light_cav ROMAN_general
+
+	unit_group_order_relative_move_formed GRP_ROMAN_ARMY 0 180
+
+	camera_position_at_bookmark 9
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 10 8			;SWING DOWN BEHIND ELEPHANTS AND HANNIBAL'S ARMY ***************************
+
+	battle_wait 6
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 15 8		; SWING UP FROM BEHIND HANNIBAL'S ARMY
+
+	battle_wait 8
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 16	; long pan to behind ambushing cavalry
+
+	unit_order_move PLAYER_med_cav 94.014 -108.715 run
+	unit_order_move PLAYER_sacred_band_cav 114.014 -108.715 run
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_09 tag = trebia_SPEECH_09
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 17 10
+	
+	battle_wait 9
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_10 tag = trebia_SPEECH_10
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 18		; high up looking down on advancing roman army
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 19			; zoom down to princeps
+
+	play_sound_event TREBIA_SPEECH_11 tag = trebia_SPEECH_11
+
+	battle_wait 6
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 20			; cut to Triarii march by
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 21			; cut to roman general
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+
+;---------------------- re-set camera bookmarks -------------------------------
+
+	set_camera_bookmark 1, 106.984, 365.861, 301.5 152.916, 346.63, 201.616
+	set_camera_bookmark 2, 314.852, 390.706, 189.32 236.311, 371.475, 112.392
+	set_camera_bookmark 3, 382.329, 377.279, 102.83 392.191, 379.359, 102.363
+
+;	set_camera_bookmark 3, 377.615, 377.999, 85.8899 385.82, 380.589, 90.6973
+
+	set_camera_bookmark 4, 419.56, 408.246, 53.8074 409.896, 406.316, 54.6077
+
+;------------------------------------------------------------------------------
+
+	unit_immediate_place PLAYER_Hannibal 364.4936, 56.120348, -90		
+	unit_immediate_place PLAYER_poeni 338.471072, 40.70876, -90
+	unit_immediate_place PLAYER_peltast1 283.152096, 86.705936, -90
+	unit_immediate_place PLAYER_peltast2 270.187232, -10.146518, -90
+	unit_immediate_place PLAYER_poeni3 338.150272, 62.09446, -90
+	unit_immediate_place PLAYER_cavalry 333.175264, -23.040322, -90
+	unit_immediate_place PLAYER_elephant 354.413504, -5.592386, -90
+
+;	unit_immediate_place PLAYER_cat_elephant 373.054, 87.719, -90
+
+	unit_immediate_place PLAYER_cat_elephant 393.054, 100, -90
+
+	unit_immediate_place PLAYER_numidian_cav 120.234, 295.383, 150
+	unit_immediate_place PLAYER_barb_infantry 341.050, 112.266, -90
+	unit_immediate_place PLAYER_sacred_band_cav 69.816, -172.475, -9
+	unit_immediate_place PLAYER_med_cav 44.016, -168.557, -6
+	unit_immediate_place PLAYER_barb_infantry2 340.288, 24.595, -90    
+	unit_immediate_place PLAYER_barb_cavalry 88.517, 292.744, 141
+	unit_immediate_place PLAYER_poeni2 339.618, 82.214, -90
+	unit_immediate_place PLAYER_cretan_archers 358.430, 39.613, -90
+
+	camera_position_at_bookmark 1
+
+	play_sound_event TREBIA_SPEECH_12 tag = trebia_SPEECH_12
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 2 30
+
+	battle_wait 8
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TREBIA_SPEECH_13 tag = trebia_SPEECH_13
+
+	camera_position_at_bookmark 3
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	set_counter player_not_escape 1	  
+	set_counter battle_start 1	  
+
+	terminate_monitor
+	end_monitor
+
+
+
+
+
+	; *********************************************************************************************
+	; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+	; *********************************************************************************************
+
+
+
+
+
+
+;-----------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+	; *********************************************************************************************
+	; *********************************************************************************************
+	;	Start of battle - BATTLESTART MONITOR
+	; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+
+	stop_sound_event trebia_SPEECH_00
+	stop_sound_event trebia_SPEECH_01
+	stop_sound_event trebia_SPEECH_02
+	stop_sound_event trebia_SPEECH_03
+	stop_sound_event trebia_SPEECH_04
+	stop_sound_event trebia_SPEECH_05
+	stop_sound_event trebia_SPEECH_06
+	stop_sound_event trebia_SPEECH_07
+	stop_sound_event trebia_SPEECH_08
+	stop_sound_event trebia_SPEECH_09
+	stop_sound_event trebia_SPEECH_10
+	stop_sound_event trebia_SPEECH_11
+	stop_sound_event trebia_SPEECH_12
+	stop_sound_event trebia_SPEECH_13
+
+
+
+;------------------------------------------------------------------
+	monitor_conditions I_CompareCounter player_not_escape = 1
+		battle_wait 2
+		play_sound_event TREBIA_SPEECH_14 tag = trebia_SPEECH_14
+		terminate_monitor
+	end_monitor
+;-------------------------------------------------------------------
+
+;-----------------------------------------------------------------------------------------
+;---------------------------------- BATTLE MONITORS --------------------------------------
+;-----------------------------------------------------------------------------------------
+
+
+;	monitor_conditions I_PercentageOfArmyKilled 1 0 > 70
+;		advance_advice_thread Teutoburgerwald_intro_Thread		;;;	"Get 100 men to fort"
+;		pause_battle
+;	terminate_monitor
+;	end_monitor
+
+
+
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_cav_auxillia 70
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_cav_auxillia
+		unit_order_attack_closest_unit ROMAN_cav_auxillia 180 run
+		battle_wait 20
+		release_unit ROMAN_cav_auxillia
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_light_cav 70
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_light_cav
+		unit_order_attack_closest_unit ROMAN_light_cav 180 run
+		battle_wait 20
+		release_unit ROMAN_light_cav
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_general 70
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_general
+;		unit_order_attack_unit ROMAN_general PLAYER_Hannibal run
+;		battle_wait 20
+		release_unit ROMAN_general
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_CompareCounter general_radius_monitor = 1
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_general
+		unit_order_attack_unit ROMAN_general PLAYER_Hannibal run
+;		battle_wait 20
+		release_unit ROMAN_general
+	terminate_monitor
+	end_monitor
+
+;------------------------------- VELITE MONITORS -----------------------
+
+	monitor_conditions I_PercentageUnitKilled ROMAN_velite1 > 40
+		unit_set_morale ROMAN_velite1 routing
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft ROMAN_velite1 < 5
+		unit_set_morale ROMAN_velite1 routing
+	terminate_monitor
+	end_monitor
+
+
+
+	monitor_conditions I_PercentageUnitKilled ROMAN_velite2 > 40
+		unit_set_morale ROMAN_velite2 routing
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft ROMAN_velite2 < 5
+		unit_set_morale ROMAN_velite2 routing
+	terminate_monitor
+	end_monitor
+
+
+
+	monitor_conditions I_PercentageUnitKilled ROMAN_velite3 > 40
+		unit_set_morale ROMAN_velite3 routing
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft ROMAN_velite3 < 5
+		unit_set_morale ROMAN_velite3 routing
+	terminate_monitor
+	end_monitor
+
+
+
+	monitor_conditions I_PercentageUnitKilled ROMAN_velite4 > 40
+		unit_set_morale ROMAN_velite4 routing
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft ROMAN_velite4 < 5
+		unit_set_morale ROMAN_velite4 routing
+	terminate_monitor
+	end_monitor
+
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_velite1 20
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_velite1
+		release_unit ROMAN_velite1
+	terminate_monitor
+	end_monitor
+	
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_velite2 20
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_velite2
+		release_unit ROMAN_velite2
+	terminate_monitor
+	end_monitor
+	
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_velite3 20
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_velite3
+		release_unit ROMAN_velite3
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_velite4 20
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_velite4
+		release_unit ROMAN_velite4
+	terminate_monitor
+	end_monitor
+
+;------------------------------ END OF VELITE MONITORS ----------------------------
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_triarii1 40
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_triarii1
+		unit_order_attack_closest_unit ROMAN_triarii1 180 run
+		battle_wait 20
+		release_unit ROMAN_triarii1
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_triarii2 40
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_triarii1
+		unit_order_attack_closest_unit ROMAN_triarii2 180 run
+		battle_wait 20
+		release_unit ROMAN_triarii2
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_triarii3 40
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_triarii3
+		unit_order_attack_closest_unit ROMAN_triarii3 180 run
+		battle_wait 20
+		release_unit ROMAN_triarii3
+	terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_triarii4 40
+	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_triarii4
+		unit_order_attack_closest_unit ROMAN_triarii4 180 run
+		battle_wait 20
+		release_unit ROMAN_triarii4
+	terminate_monitor
+	end_monitor
+	
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_princeps1 20
+;	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_princeps1
+;		unit_order_attack_closest_unit ROMAN_princeps1 360 run
+;		battle_wait 50
+		release_unit ROMAN_princeps1
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_princeps2 20
+;	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_princeps2
+;		unit_order_attack_closest_unit ROMAN_princeps2 360 run
+;		battle_wait 50
+		release_unit ROMAN_princeps2
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_princeps3 20
+;	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_princeps3
+;		unit_order_attack_closest_unit ROMAN_princeps3 360 run
+;		battle_wait 50
+		release_unit ROMAN_princeps3
+	terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitEnemyUnitInRadius ROMAN_princeps4 20
+;	and I_CompareCounter cancel_radius_monitors = 0
+;		remove_unit_from_group GRP_ROMAN_ARMY ROMAN_princeps4
+;		unit_order_attack_closest_unit ROMAN_princeps4 360 run
+;		battle_wait 50
+		release_unit ROMAN_princeps3
+	terminate_monitor
+	end_monitor
+
+
+;-----------------------------------------------------------------------------------------
+;---------------------------------- END OF BATTLE MONITORS --------------------------------------
+;-----------------------------------------------------------------------------------------
+
+
+	unit_use_special_ability PLAYER_cretan_archers
+
+	unit_set_skirmish_mode PLAYER_numidian_cav on
+
+	unit_set_skirmish_mode ROMAN_velite1 on
+	unit_set_skirmish_mode ROMAN_velite2 on
+	unit_set_skirmish_mode ROMAN_velite3 on
+	unit_set_skirmish_mode ROMAN_velite4 on
+
+	undefine_unit_group GRP_ROMAN_ARMY
+
+	unit_immediate_place ROMAN_velite1 187, 155, 90
+	unit_immediate_place ROMAN_velite2 187, 110, 90
+	unit_immediate_place ROMAN_velite3 187, 67, 90
+	unit_immediate_place ROMAN_velite4 187, 23, 90
+	unit_immediate_place ROMAN_hastati1 146.765, 131.622, 90
+	unit_immediate_place ROMAN_hastati2 145.647, 100.541, 90
+	unit_immediate_place ROMAN_hastati3 143.487, 68.168, 90
+	unit_immediate_place ROMAN_hastati4 142.569, 37.004, 90
+	unit_immediate_place ROMAN_princeps1 126.103, 116.404, 90
+	unit_immediate_place ROMAN_princeps2 124.959, 83.552, 90
+	unit_immediate_place ROMAN_princeps3 124.525, 51.412, 90
+	unit_immediate_place ROMAN_princeps4 122.967, 19.341, 90
+	unit_immediate_place ROMAN_triarii1 107.511, 133.813, 90
+	unit_immediate_place ROMAN_triarii2 105.422, 98.482, 90
+	unit_immediate_place ROMAN_triarii3 105.321, 33.048, 90
+	unit_immediate_place ROMAN_triarii4 105.577, 67.325, 90
+	unit_immediate_place ROMAN_cav_auxillia 88.828, 160.514, 90
+	unit_immediate_place ROMAN_light_cav 95.710, -3.369, 90
+
+;	unit_immediate_place ROMAN_cav_auxillia 88.828, 187.514, 90
+;	unit_immediate_place ROMAN_light_cav 95.710, -23.369, 90
+
+	unit_immediate_place ROMAN_general 83.595, 77.715, 90
+
+	undefine_unit_group GRP_PLAYER_ARMY
+
+	unit_immediate_place PLAYER_Hannibal 364.4936, 56.120348, -90		
+	unit_immediate_place PLAYER_poeni 338.471072, 40.70876, -90
+	unit_immediate_place PLAYER_peltast1 283.152096, 86.705936, -90
+	unit_immediate_place PLAYER_peltast2 270.187232, -10.146518, -90
+	unit_immediate_place PLAYER_poeni3 338.150272, 62.09446, -90
+	unit_immediate_place PLAYER_cavalry 333.175264, -23.040322, -90
+
+;	unit_immediate_place PLAYER_elephant 354.413504, -5.592386, -90
+;	unit_immediate_place PLAYER_cat_elephant 373.054, 87.719, -90
+
+	unit_immediate_place PLAYER_elephant 374.413504, -15.592386, -90
+	unit_immediate_place PLAYER_cat_elephant 393.054, 100, -90
+	unit_immediate_place PLAYER_numidian_cav 120.234, 295.383, 150
+
+;	unit_immediate_place PLAYER_barb_infantry 341.050, 112.266, -90
+	unit_immediate_place PLAYER_barb_infantry 341.050, 117.266, -90
+
+
+	unit_immediate_place PLAYER_sacred_band_cav 69.816, -172.475, -9
+	unit_immediate_place PLAYER_med_cav 44.016, -168.557, -6
+	unit_immediate_place PLAYER_barb_infantry2 340.288, 24.595, -90    
+	unit_immediate_place PLAYER_barb_cavalry 88.517, 292.744, 141
+	unit_immediate_place PLAYER_poeni2 339.618, 82.214, -90
+	unit_immediate_place PLAYER_cretan_archers 358.430, 39.613, -90
+
+
+	define_unit_group GRP_ROMAN_ARMY ROMAN_hastati1 ROMAN_hastati2 ROMAN_hastati3 ROMAN_hastati4 ROMAN_princeps1 ROMAN_princeps2 ROMAN_princeps3	ROMAN_princeps4	ROMAN_triarii1	ROMAN_triarii2 ROMAN_triarii3 ROMAN_triarii4 ROMAN_cav_auxillia ROMAN_light_cav ROMAN_general
+
+	define_unit_group GRP_ROMAN_velites ROMAN_velite1 ROMAN_velite2 ROMAN_velite3 ROMAN_velite4
+
+	battle_wait 1
+
+	set_camera_bookmark 5, 367.515, 379.102, 56.4189 357.791, 377.519, 56.5234
+;	set_camera_bookmark 5, 370.376, 379.003, 57.3844 361.098, 375.794, 57.4841
+
+	camera_position_at_bookmark 5
+
+	battle_wait 3
+
+	unit_order_move_relative PLAYER_med_cav 0 0 run
+
+	set_camera_bookmark 6, 381.862, 395.748, 57.2611 349.382, 373.569, 57.6098
+
+	camera_zoom_to_bookmark 6 15
+
+	battle_wait 5
+
+
+	show_ui
+	suspend_unscripted_advice false
+	enable_cursor						;enable player to click
+	disable_shortcuts false	
+	inhibit_camera_input false
+	enable_entire_ui
+	steal_esc_key off
+
+	camera_default_mode_set user_pref
+
+	pause_battle		
+
+	suspend_unscripted_advice false
+
+	unit_group_order_relative_move_formed GRP_ROMAN_ARMY 0 170
+	unit_group_order_relative_move_formed GRP_ROMAN_velites 0 170
+
+	camera_restrictions_set on
+
+;	release_unit ROMAN_velite1
+;	release_unit ROMAN_velite2
+;	release_unit ROMAN_velite3
+;	release_unit ROMAN_velite4
+
+	battle_wait 100
+
+	set_counter cancel_radius_monitors 1	; stops radius monitors from kicking in
+
+	undefine_unit_group GRP_ROMAN_ARMY
+
+;	release_unit ROMAN_velite1
+;	release_unit ROMAN_velite2
+;	release_unit ROMAN_velite3
+;	release_unit ROMAN_velite4
+
+;	unit_set_morale ROMAN_velite1 routing
+;	unit_set_morale ROMAN_velite2 routing
+;	unit_set_morale ROMAN_velite3 routing
+;	unit_set_morale ROMAN_velite4 routing
+
+;	unit_set_fire_at_will_mode ROMAN_hastati1 on
+;	unit_set_fire_at_will_mode ROMAN_hastati2 on
+;	unit_set_fire_at_will_mode ROMAN_hastati3 on
+;	unit_set_fire_at_will_mode ROMAN_hastati4 on
+
+;	unit_order_attack_closest_unit ROMAN_hastati1 40 run
+;	unit_order_attack_closest_unit ROMAN_hastati2 10 run
+;	unit_order_attack_closest_unit ROMAN_hastati3 20 run
+;	unit_order_attack_closest_unit ROMAN_hastati4 20 run
+
+	unit_order_attack_closest_unit ROMAN_hastati1 60 run
+	unit_order_attack_closest_unit ROMAN_hastati2 60 run
+	unit_order_attack_closest_unit ROMAN_hastati3 60 run
+	unit_order_attack_closest_unit ROMAN_hastati4 60 run
+
+	battle_wait 20
+
+;	unit_set_fire_at_will_mode ROMAN_princeps1 on
+;	unit_set_fire_at_will_mode ROMAN_princeps2 on
+;	unit_set_fire_at_will_mode ROMAN_princeps3 on
+;	unit_set_fire_at_will_mode ROMAN_princeps4 on
+
+;	unit_order_attack_closest_unit ROMAN_princeps1 10 run
+;	unit_order_attack_closest_unit ROMAN_princeps2 10 run
+;	unit_order_attack_closest_unit ROMAN_princeps3 10 run
+;	unit_order_attack_closest_unit ROMAN_princeps4 20 run
+
+	unit_order_attack_closest_unit ROMAN_princeps1 60 run
+	unit_order_attack_closest_unit ROMAN_princeps2 60 run
+	unit_order_attack_closest_unit ROMAN_princeps3 60 run
+	unit_order_attack_closest_unit ROMAN_princeps4 60 run
+
+	release_unit ROMAN_cav_auxillia
+	release_unit  ROMAN_light_cav
+
+	battle_wait 15
+
+	release_unit ROMAN_triarii1
+	release_unit ROMAN_triarii2
+	release_unit ROMAN_triarii3
+	release_unit ROMAN_triarii4
+
+	battle_wait 10
+	
+	set_counter cancel_radius_monitors 1	; stops radius monitors from kicking in
+	set_counter general_radius_monitor 1	; kicks off new engagement rules in general units monitor
+
+	ai_active_set on
+
+	terminate_monitor
+	end_monitor
+
+
+	; *********************************************************************************************
+	; ********************* END OF BATTLE START MONITOR *******************************************
+	; *********************************************************************************************
+
+	while I_InBattle
+	end_while
+
+	end_script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;------------ ROUT VELITES AFTER MINIMAL CASUALTIES --------------------------------
+
+;	monitor_conditions I_PercentageUnitKilled ROMAN_velite1 > 10
+;	unit_set_morale ROMAN_velite1 routing
+;	terminate_monitor
+;	end_monitor
+;
+;	monitor_conditions I_PercentageUnitKilled ROMAN_velite2 > 10
+;	unit_set_morale ROMAN_velite2 routing
+;	unit_set_morale ROMAN_velite1 routing
+;	terminate_monitor
+;	end_monitor
+;
+;	monitor_conditions I_PercentageUnitKilled ROMAN_velite3 > 10
+;	unit_set_morale ROMAN_velite3 routing
+;	unit_set_morale ROMAN_velite1 routing
+;	terminate_monitor
+;	end_monitor
+;
+;	monitor_conditions I_PercentageUnitKilled ROMAN_velite4 > 10
+;	unit_set_morale ROMAN_velite4 routing
+;	unit_set_morale ROMAN_velite1 routing
+;	terminate_monitor
+;	end_monitor
+
+;---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

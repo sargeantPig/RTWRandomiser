@@ -1,0 +1,111 @@
+;
+; regions list
+;
+
+Gallia_Cispadana				
+	Ravenna				
+	gauls				
+	Boii				
+	157 13 198				
+	timber, hides, pigs		
+	5
+	8
+
+Umbria				
+	Ariminum				
+	gauls				
+	Helvetii				
+	13 198 117				
+	grain, iron		
+	5
+	8
+
+Dalmatia				
+	Salona				
+	thrace				
+	Odrysae				
+	58 173 177				
+	olive_oil, pigs		
+	5
+	8
+
+Illyricum				
+	Dyrrhachium				
+	greek_cities				
+	Delmatae				
+	177 142 58				
+	pottery, olive_oil, pigs		
+	5
+	8
+
+Epirus				
+	Apollonia				
+	greek_cities				
+	Odrysae				
+	61 177 58				
+	olive_oil, pigs		
+	5
+	8
+
+Picenum				
+	Ancona				
+	gauls				
+	Veneti				
+	198 43 13				
+	timber, iron, olive_oil, pigs		
+	5
+	8
+
+Etruria				
+	Tarquinii				
+	greek_cities				
+	Etruscans				
+	157 198 13				
+	grain, gold, marble, pigs		
+	5
+	8
+
+Latium				
+	Rome				
+	romans_senate				
+	Latins				
+	52 13 198				
+	grain, iron, wine, marble, purple_dye, pigs		
+	5
+	8
+
+Samnium				
+	Bovianum				
+	romans_scipii				
+	Campanians				
+	198 13 174				
+	olive_oil, hides, pigs		
+	5
+	8
+
+Apulia				
+	Tarentum				
+	greek_cities				
+	Epirots				
+	33 196 58				
+	pottery, purple_dye, pigs		
+	5
+	8
+
+Magna_Graecia				
+	Croton				
+	greek_cities				
+	Lucanians				
+	13 170 198				
+	purple_dye, pigs		
+	5
+	8
+
+Sicilia				
+	Messana				
+	greek_cities				
+	Syracusans				
+	198 178 13				
+	grain, pigs		
+	5
+	8

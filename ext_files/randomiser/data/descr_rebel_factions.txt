@@ -1,0 +1,1174 @@
+rebel_type			Brigantes	//Britons
+category			peasant_revolt
+chance				0					
+description			Brigantes
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb chariot heavy slave
+unit				barbarian rebel general
+
+rebel_type			Trinovantes	//Britons
+category			peasant_revolt
+chance				0					
+description			Trinovantes
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb chariot heavy slave
+unit				barbarian rebel general
+
+rebel_type 			Suebi		//Germans
+category			peasant_revolt
+chance				3					
+description			Suebi
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Saxones		//Germans
+category			peasant_revolt
+chance				3					
+description			Saxones
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barbarian rebel general
+					
+rebel_type 			Gepids		//Germans
+category			peasant_revolt
+chance				3					
+description			Gepids
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Amazons		//Scythians
+category			peasant_revolt 
+chance				6					
+description			Amazons
+unit				rebel amazon chariots						
+unit				eastern rebel general
+					
+rebel_type 			Saka		// Scythians
+category			peasant_revolt 
+chance				0					
+description			Saka
+unit				east peasant
+unit				east horse archer
+unit				east horse archer
+unit				eastern rebel general
+					
+rebel_type 			Hibernians	//Britons
+category			peasant_revolt 
+chance				0					
+description			Hibernians
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb druids slave
+unit				barbarian rebel general
+					
+rebel_type 			Alans		//Scythians
+category			peasant_revolt 
+chance				0					
+description			Alans
+unit				barb peasant slave
+unit				barb archer slave
+unit				barb cavalry slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barbarian rebel general
+					
+rebel_type 			Silures		//Britons
+category			peasant_revolt 
+chance				6					
+description			Silures	
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb druids slave
+unit				barbarian rebel general
+					
+rebel_type 			Goths		//Germans
+category			peasant_revolt 
+chance				3					
+description			Goths
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Sarmatians	//Scythians
+category			peasant_revolt 
+chance				0					
+description			Sarmatians
+unit				barb peasant slave
+unit				barb archer slave
+unit				barb cavalry slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barbarian rebel general
+					
+rebel_type 			Iceni		//Britons
+category			peasant_revolt 
+chance				6					
+description			Iceni	
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb chariot heavy slave
+unit				barbarian rebel general
+					
+rebel_type 			Batavi		//Germans
+category			peasant_revolt 
+chance				3					
+description			Batavi	
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Chatti		//Germans
+category			peasant_revolt 
+chance				3					
+description			Chatti
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Venedae		//dacians
+category			peasant_revolt 
+chance				0					
+description			Venedae
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb cavalry slave
+unit				barb archer slave
+unit				barb archer slave
+unit				barbarian rebel general
+					
+rebel_type 			Marcomanni	//germans
+category			peasant_revolt 
+chance				3					
+description			Marcomanni
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Belgae		//Britons
+category			peasant_revolt 
+chance				0					
+description			Belgae
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb druids slave
+unit				barbarian rebel general
+					
+rebel_type 			Maeotae 	//Scythians
+category			peasant_revolt 
+chance				3					
+description			Maeotae
+unit				barb peasant slave
+unit				barb archer slave
+unit				barb cavalry slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barbarian rebel general
+					
+rebel_type 			Alamanni	//germans
+category			peasant_revolt 
+chance				3					
+description			Alamanni
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Carnutes		//gauls
+category			peasant_revolt 
+chance				0					
+description			Carnutes
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb druids slave
+unit				barb cavalry slave
+unit				barb noble cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Veneti		//gauls
+category			peasant_revolt 
+chance				0					
+description			Veneti
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Sequani		//gauls
+category			peasant_revolt 
+chance				0					
+description			Sequani
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb druids slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Nervii		//gauls
+category			peasant_revolt 
+chance				0					
+description			Nervii
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb druids slave
+unit				barbarian rebel general
+
+;rebel_type 			Belgae		//gauls
+;category			peasant_revolt 
+;chance				0					
+;description			Belgae
+;unit				barb peasant slave
+;unit				barb infantry slave
+;unit				barb naked fanatics slave
+;unit				barb druids slave
+;unit				barbarian rebel general
+
+rebel_type 			Arverni		//gauls
+category			peasant_revolt 
+chance				0					
+description			Arverni
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Bituriges		//gauls
+category			peasant_revolt 
+chance				0					
+description			Bituriges
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb druids slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Ausci		//gauls
+category			peasant_revolt 
+chance				0					
+description			Ausci
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Allobroges		//gauls
+category			peasant_revolt 
+chance				0					
+description			Allobroges
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Seduni		//gauls
+category			peasant_revolt 
+chance				0					
+description			Seduni
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Tectosages		//gauls
+category			peasant_revolt 
+chance				0					
+description			Tectosages
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+
+rebel_type 			Treveri		//germans
+category			peasant_revolt 
+chance				0					
+description			Treveri
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Boii		//gauls
+category			peasant_revolt 
+chance				0					
+description			Boii
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Roxolani	//scythia
+category			peasant_revolt 
+chance				0					
+description			Roxolani
+unit				barb peasant slave
+unit				barb archer slave
+unit				barb cavalry slave
+unit				barb horse archers slave
+unit				barb horse archers slave
+unit				barbarian rebel general
+					
+rebel_type 			Iazyges		// dacia
+category			peasant_revolt 
+chance				0					
+description			Iazyges
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb cavalry slave
+unit				barb archer slave
+unit				barbarian rebel general
+					
+rebel_type 			Senones		//gauls
+category			peasant_revolt 
+chance				0					
+description			Senones
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb druids slave
+unit				barb cavalry slave
+unit				barb noble cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Carpi		//dacia
+category			peasant_revolt 
+chance				0					
+description			Carpi
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb cavalry slave
+unit				barb archer slave
+unit				merc bastarnae	
+unit				barbarian rebel general
+					
+rebel_type 			Helvetii	//gauls
+category			peasant_revolt 
+chance				0					
+description			Helvetii
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Troglodytae	//thrace
+category			peasant_revolt 
+chance				0					
+description			Troglodytae
+unit				merc thracian
+unit				barb horse archers slave
+unit				greek peasant
+unit				greek peltast
+;unit				barbarian rebel general
+
+rebel_type 			Scordisci	//dacia
+category			peasant_revolt 
+chance				0					
+description			Scordisci
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb cavalry slave
+unit				barb archer slave
+unit				barbarian rebel general
+						
+rebel_type 			Bosphorans	//macedon
+category			peasant_revolt 
+chance				0					
+description			Bosphorans
+unit				greek peasant
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek cavalry
+unit				barb horse archers slave
+unit				generic rebel general
+					
+rebel_type 			Pictones	//gauls
+category			peasant_revolt 
+chance				0					
+description			Pictones
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Aedui		//gauls
+category			peasant_revolt 
+chance				0					
+description			Aedui
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb druids slave
+unit				barb cavalry slave
+unit				barb noble cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Colchians	//Armenia
+category			peasant_revolt 
+chance				0					
+description			Colchians
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east horse archer
+unit				eastern rebel general
+					
+rebel_type 			Medes		//Parthians
+category			peasant_revolt 
+chance				0					
+description			Medes
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east horse archer
+unit				east horse archer
+unit				eastern rebel general
+					
+rebel_type 			Insubres	//gauls
+category			peasant_revolt 
+chance				0					
+description			Insubres
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barb noble cavalry slave
+unit				barbarian rebel general
+
+;Duplicates of veneti. Can't remove as it breaks the save game
+rebel_type 			VenetiII		//gauls
+category			peasant_revolt 
+chance				0					
+description			Veneti
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+									
+rebel_type 			Vocontii	//gauls
+category			peasant_revolt 
+chance				0					
+description			Vocontii
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Breuci		//illyria
+category			peasant_revolt 
+chance				0					
+description			Breuci
+unit				barb infantry slave
+unit				barb peasant slave
+unit				barb cavalry slave
+unit				barb archer slave
+unit				barbarian rebel general
+					
+					
+rebel_type 			Odrysae		//thrace
+category			peasant_revolt 
+chance				3					
+description			Odrysae
+unit				merc thracian
+unit				greek cavalry
+unit				greek peasant
+unit				greek peltast
+unit				merc bastarnae	
+unit				barbarian rebel general
+					
+rebel_type 			Iberians	//Spain
+category			peasant_revolt 
+chance				3					
+description			Iberians
+unit				carthaginian peasant
+unit				carthaginian peltast
+unit				carthaginian infantry
+unit				carthaginian infantry
+unit				barb naked fanatics slave
+unit				merc spanish infantry
+unit				merc balearic slingers
+unit				barbarian rebel general
+					
+rebel_type 			Delmatae		//illyria
+category			peasant_revolt 
+chance				0					
+description			Delmatae
+unit				greek peasant
+unit				greek peltast
+unit				greek hoplite militia
+unit				generic rebel general
+					
+rebel_type 			Volcae		//gauls
+category			peasant_revolt 
+chance				0					
+description			Volcae
+unit				barb peasant slave
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Ligurians	//gauls
+category			peasant_revolt 
+chance				0					
+description			Ligurians
+unit				barb peasant slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb infantry slave
+unit				barb naked fanatics slave
+unit				barbarian rebel general
+					
+rebel_type 			Paphlagonians	//Pontus
+category			peasant_revolt 
+chance				0					
+description			Paphlagonians
+unit				east peasant
+unit				east peasant
+unit				east archer
+unit				east archer
+unit				east infantry
+unit				east infantry
+unit				east heavy cavalry
+unit				eastern rebel general
+					
+rebel_type 			Paionians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Paionians
+unit				greek peasant
+unit				greek peltast
+unit				greek peltast
+unit				greek hoplite militia
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Etruscans	//romans
+category			peasant_revolt 
+chance				0					
+description			Etruscans
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				roman city militia
+unit				roman hastati
+unit				roman hastati
+unit				roman light cavalry
+unit				generic rebel general					
+					
+					
+rebel_type 			Umbrians	//romans
+category			peasant_revolt 
+chance				0					
+description			Umbrians
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				roman hastati
+unit				roman light cavalry
+unit				generic rebel general					
+					
+rebel_type 			Beronicensis	//carthage
+category			peasant_revolt 
+chance				0					
+description			Beronicensis
+unit				carthaginian peasant
+unit				carthaginian peltast
+unit				carthaginian peltast
+unit				carthaginian city militia
+unit				merc balearic slingers
+unit				generic rebel general					
+					
+rebel_type 			Latins		//Romans
+category			peasant_revolt 
+chance				0					
+description			Latins
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				roman hastati
+unit				roman hastati
+unit				roman light cavalry
+unit				generic rebel general					
+					
+rebel_type 			Edones		//Macedon
+category			peasant_revolt 
+chance				0					
+description			Edones
+unit				greek peasant
+unit				greek peltast
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek cavalry
+unit				greek medium cavalry
+unit				generic rebel general					
+					
+rebel_type 			Sithones	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Sithones
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek cavalry
+unit				merc thracian		
+unit				generic rebel general					
+					
+rebel_type 			Bithynians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Bithynians
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek cavalry
+unit				merc thracian		
+unit				generic rebel general					
+					
+rebel_type 			Galatians	//Gauls
+category			peasant_revolt 
+chance				0					
+description			Galatians
+unit				barb peasant slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb naked fanatics slave
+unit				barb cavalry slave
+unit				barbarian rebel general
+					
+rebel_type 			Cappadocians	//Pontus
+category			peasant_revolt 
+chance				0					
+description			Cappadocians
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east heavy cavalry
+unit				eastern rebel general
+					
+rebel_type 			Epirots		//Macedon
+category			peasant_revolt 
+chance				0					
+description			Epirots
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek cavalry
+unit				merc illyrian	
+unit				generic rebel general					
+					
+rebel_type 			Calabrians	//romans_brutii
+category			peasant_revolt 
+chance				0					
+description			Calabrians
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				roman hastati
+unit				roman light cavalry
+unit				merc samnite
+unit				greek hoplite militia
+unit				greek hoplite
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Campanians 	//romans_scipii
+category			peasant_revolt 
+chance				0					
+description			Campanians
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				roman city militia
+unit				roman hastati
+unit				roman light cavalry
+unit				merc samnite
+unit				generic rebel general					
+					
+rebel_type 			Syrians		//Seleucid
+category			peasant_revolt 
+chance				0					
+description			Syrians
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east infantry
+unit				east horse archer
+unit				eastern rebel general
+					
+rebel_type 			Lesbians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Lesbians
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite
+unit				greek cavalry
+unit				greek medium cavalry
+unit				generic rebel general					
+						
+					
+rebel_type 			Cilicians	//Seleucid
+category			peasant_revolt 
+chance				6					
+description			Cilicians
+unit				merc cilician pirate
+unit				generic rebel general					
+						
+					
+rebel_type 			Thessalians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Thessalians
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek cavalry
+unit				greek cavalry
+unit				greek medium cavalry
+unit				generic rebel general					
+						
+					
+rebel_type 			Lucanians	//romans_brutii
+category			peasant_revolt 
+chance				3					
+description			Lucanians
+unit				roman peasant
+unit				roman velite
+unit				roman city militia
+unit				merc samnite
+unit				merc samnite
+unit				generic rebel general					
+					
+rebel_type 			Ionians		//seleucids
+category			peasant_revolt 
+chance				0					
+description			Ionians
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek hoplite
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Aetolians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Aetolians
+unit				greek peasant
+unit				greek peltast
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek heavy peltast
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Athenians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Athenians
+unit				greek peasant
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek hoplite
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Elamites	//Parthia
+category			peasant_revolt 
+chance				0					
+description			Elamites
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east heavy cavalry
+unit				east horse archer
+unit				eastern rebel general
+					
+rebel_type 			Achaeans	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Achaeans
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek heavy peltast
+unit				greek cavalry
+unit				generic rebel general					
+					
+rebel_type 			Lycians		//Macedon
+category			peasant_revolt 
+chance				0					
+description			Lycians
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				merc cilician pirate
+unit				generic rebel general					
+					
+rebel_type 			Sicani		//Carthage
+category			peasant_revolt 
+chance				0					
+description			Sicani
+unit				carthaginian peasant
+unit				carthaginian peltast
+unit				carthaginian city militia
+unit				carthaginian infantry
+unit				carthaginian cavalry
+unit				generic rebel general					
+					
+rebel_type 			Moors		//numidia
+category			peasant_revolt 
+chance				0					
+description			Moors
+unit				carthaginian peasant
+unit				numidian javelinmen
+unit				numidian cavalry
+unit				generic rebel general					
+					
+rebel_type 			Palmyrans	//armenia
+category			peasant_revolt 
+chance				0					
+description			Palmyrans
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				east horse archer
+unit				merc arab cavalry
+unit				merc bedouin
+unit				merc bedouin archers
+unit				eastern rebel general
+					
+rebel_type 			Cypriots	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Cypriots
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite
+unit				merc cilician pirate
+unit				generic rebel general					
+					
+rebel_type 			Phoenicians	//seleucids
+category			peasant_revolt 
+chance				0					
+description			Phoenicians
+unit				carthaginian peasant
+unit				carthaginian city militia
+unit				carthaginian city militia
+unit				eastern rebel general
+					
+rebel_type 			Syracusans	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Syracusans
+unit				greek peasant
+unit				greek peltast
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				greek hoplite
+unit				greek cavalry
+unit				greek medium cavalry
+unit				generic rebel general					
+					
+rebel_type 			Helots		//Macedon
+category			peasant_revolt 
+chance				0					
+description			Helots
+unit				greek peasant
+unit				greek peasant
+unit				greek peasant
+unit				greek peltast
+unit				greek hoplite militia
+unit				generic rebel general					
+					
+rebel_type 			Poeni		//Carthage
+category			peasant_revolt 
+chance				0					
+description			Poeni
+unit				carthaginian peasant
+unit				carthaginian peltast
+unit				carthaginian city militia
+unit				carthaginian infantry
+unit				carthaginian cavalry
+unit				generic rebel general					
+					
+rebel_type 			Rhodians	//Macedon
+category			peasant_revolt 
+chance				0					
+description			Rhodians
+unit				greek peasant
+unit				greek heavy peltast
+unit				greek hoplite militia
+unit				greek hoplite militia
+unit				merc rhodian slingers
+unit				generic rebel general					
+					
+rebel_type 			Nabataeans	//parthia
+category			peasant_revolt 
+chance				3					
+description			Nabataeans
+unit				east peasant
+unit				east archer
+unit				east infantry
+unit				merc arab cavalry
+unit				merc bedouin
+unit				merc bedouin archers
+unit				eastern rebel general
+					
+rebel_type 			Cretans		//macedon
+category			peasant_revolt 
+chance				0					
+description			Cretans
+unit				greek peasant
+unit				greek peltast
+unit				greek hoplite militia
+unit				greek hoplite
+unit				merc cretan archers
+unit				merc cretan archers
+unit				merc cilician pirate
+unit				generic rebel general					
+					
+rebel_type 			Judaeans	//parthia
+category			peasant_revolt 
+chance				6					
+description			Judaeans
+unit				east archer
+unit				rebel judaean zealots
+unit				rebel judaean zealots
+unit				eastern rebel general
+					
+rebel_type 			Gaetuli		//Numidia
+category			peasant_revolt 
+chance				3					
+description			Gaetuli
+unit				carthaginian peasant
+unit				numidian javelinmen
+unit				numidian cavalry
+unit				numidian cavalry
+unit				generic rebel general					
+					
+rebel_type 			Libyans		//Macedon
+category			peasant_revolt 
+chance				0					
+description			Libyans
+unit				egyptian peasant
+unit				egyptian peasant
+unit				egyptian peltast
+unit				egyptian peltast
+unit				egyptian peltast
+unit				egyptian archer
+unit				egyptian archer
+unit				egyptian chariot
+unit				generic rebel general					
+					
+rebel_type 			Illyrians		//macedonia
+category			peasant_revolt 
+chance				3				
+description			Illyrians
+unit				greek peasant
+unit				greek peasant
+unit				greek peltast
+unit				greek cavalry
+unit				merc illyrian	
+unit				merc illyrian	
+unit				generic rebel general					
+					
+;;;;;;;;;;;;		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;				
+;non region			based
+;;;;;;;;;;;;		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+					
+rebel_type			gladiator_uprising
+category			gladiator_revolt
+chance				100
+description			gladiator_uprising
+unit				roman peasant		
+unit				roman peasant		
+unit				roman velite gladiator	
+unit				roman samnite gladiator	
+unit				roman mirmillo gladiator
+					
+rebel_type			brigands
+category			brigands
+chance				50
+description			brigands
+unit				merc peltast		
+unit				merc illyrian	
+unit				merc samnite
+unit				merc thracian		
+unit				merc bastarnae	
+unit				merc sarmatian cavalry
+unit				merc horse archers
+unit				merc spanish infantry
+unit				merc eastern infantry
+unit				merc rhodian slingers
+unit				merc cretan archers
+unit				merc greek hoplites
+unit				merc libyan infantry
+unit				merc numidian cavalry
+unit				merc arab cavalry
+unit				merc bedouin
+unit				merc bedouin archers
+unit				merc balearic slingers
+unit				merc barbarian infantry
+unit				merc barbarian cavalry		
+					
+rebel_type			pirates
+category			pirates
+chance				50
+description			pirates
+unit				naval pirate ships		
+					
+					

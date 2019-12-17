@@ -1,0 +1,930 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+	label_unit 0 0 0	PLAYER_VEL
+	label_unit 0 0 1	PLAYER_HAST
+	label_unit 0 0 2	PLAYER_PRINC
+	label_unit 0 0 3	PLAYER_GEN
+	label_unit 0 0 4	PLAYER_TRII
+	label_unit 0 0 5	PLAYER_HEAVY_CAV
+
+	label_unit 0 1 0	SPQR_VEL_0
+	label_unit 0 1 1	SPQR_HAST_1
+	label_unit 0 1 2	SPQR_PRINC_2
+	label_unit 0 1 3	SPQR_TRII_3
+	label_unit 0 1 4	SPQR_TOWN_WATCH_4
+	label_unit 0 1 5	SPQR_HAST_5
+	label_unit 0 1 6	SPQR_HAST_6
+	label_unit 0 1 7	SPQR_PRINC_7
+	label_unit 0 1 8	SPQR_PRINC_8
+	label_unit 0 1 9	SPQR_TRII_9
+	label_unit 0 1 10	SPQR_TRII_10
+	label_unit 0 1 11	SPQR_ROMAN_GEN_11
+	label_unit 0 1 12	SPQR_EQUITES_12
+
+	label_unit 1 0 0	SELEUCID_PHALANX_0
+	label_unit 1 0 1	SELEUCID_PELTAST_1
+	label_unit 1 0 2	SELEUCID_PELTAST_2
+	label_unit 1 0 3	SELEUCID_SLING_3
+	label_unit 1 0 4	SELEUCID_ELEPHANT_4
+	label_unit 1 0 5	SELEUCID_ARCH_5
+	label_unit 1 0 6	SELEUCID_HOPLITE_MILITIA_6
+	label_unit 1 0 7	SELEUCID_HOPLITE_MILITIA_7
+	label_unit 1 0 8	SELEUCID_GEN_8
+	label_unit 1 0 9	SELEUCID_CAV_9
+	label_unit 1 0 10	SELEUCID_CAV_10
+	label_unit 1 0 11	SELEUCID_ARCH_11
+	label_unit 1 0 12	SELEUCID_PHALANX_12
+	label_unit 1 0 13	SELEUCID_BARB_INFANTRY_13
+
+
+
+
+
+
+
+
+
+;;;camera_zoom_to 0, 0, 0, 100, 100, 100
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+
+	while ! I_BattleStarted					; WAIT FOR DEPLOYMENT
+	end_while
+
+	ai_active_set off
+
+	define_unit_group GRP_SELEUCID_ARMY SELEUCID_PHALANX_0 SELEUCID_PELTAST_1 SELEUCID_PELTAST_2 SELEUCID_SLING_3 SELEUCID_ELEPHANT_4 SELEUCID_ARCH_5 SELEUCID_HOPLITE_MILITIA_6 SELEUCID_HOPLITE_MILITIA_7 SELEUCID_GEN_8 SELEUCID_CAV_9 SELEUCID_CAV_10 SELEUCID_ARCH_11 SELEUCID_PHALANX_12
+
+	define_unit_group GRP_SENATE_ARMY SPQR_VEL_0 SPQR_HAST_1 SPQR_PRINC_2 SPQR_TRII_3 SPQR_TOWN_WATCH_4 SPQR_HAST_5 SPQR_HAST_6 SPQR_PRINC_7 SPQR_PRINC_8 SPQR_TRII_9 SPQR_TRII_10 SPQR_EQUITES_12
+
+	define_unit_group GRP_PLAYER_ARMY	PLAYER_VEL PLAYER_HAST PLAYER_PRINC PLAYER_GEN PLAYER_TRII PLAYER_HEAVY_CAV
+
+
+
+	unit_set_fire_at_will_mode SELEUCID_PELTAST_1 off
+	unit_set_fire_at_will_mode SELEUCID_PELTAST_2 off
+
+;	define_unit_group GRP_SPQR_HASTATI		SPQR_HAST_1 SPQR_HAST_7	SPQR_HAST_8
+;	define_unit_group GRP_SPQR_PRINCEPS		SPQR_PRINC_2 SPQR_PRINC_9 SPQR_PRINC_10
+;	define_unit_group GRP_SPQR_TRIARII		SPQR_TRII_3 SPQR_TRII_11 SPQR_TRII_12
+;	define_unit_group GRP_SPQR_CAV			SPQR_EQUITES_5 
+;	define_unit_group GRP_SELEUCID_SKIRMISHERS	SELEUCID_PELTAST_1 SELEUCID_PELTAST_2	 
+;	define_unit_group GRP_SELEUCID_ARCHERS		SELEUCID_SLING_3 SELEUCID_ARCH_11
+;	define_unit_group GRP_SELEUCID_CAV		SELEUCID_GEN_8 SELEUCID_CAV_9 SELEUCID_CAV_10
+
+
+	set_camera_bookmark 1, -151.327, 392.028, 647.819 327.655, 286.225, 1072.95	;start camera pos
+	set_camera_bookmark 2, -96.8519, 358.259, 702.735 -88.4004, 356.955, 707.77	;look across farms
+	set_camera_bookmark 3, -96.8519, 358.259, 702.735 -95.5108, 356.955, 692.989
+	set_camera_bookmark 4, -190.322, 342.002, 442.54 -190.148, 337.799, 433.136	;barbarian first sight
+	set_camera_bookmark 5, -190.322, 342.002, 442.54 -181.9, 337.799, 446.728	;barbarian walk by
+	set_camera_bookmark 6, -90.7643, 356.221, 666.115 -95.127, 354.316, 674.787	;general signal
+	set_camera_bookmark 7, -92.6136, 358.573, 671.309 -94.0108, 358.033, 673.106	;pan above general signal
+	set_camera_bookmark 8, -127.703, 360.379, 640.974 -119.33, 358.398, 646.237	;equites gallop by
+	set_camera_bookmark 9, -144.304, 367.651, 611.436 -135.391, 364.26, 609.166	;panorama
+	set_camera_bookmark 10, -176.165, 341.927, 456.693 -169.903, 339.079, 464.13	;barbarian behind
+	set_camera_bookmark 11, -77.2807, 336.583, 520.445 -84.2898, 336.981, 527.577	;general gallop by
+	set_camera_bookmark 12, -141.534, 343.888, 536.805 -145.279, 341.423, 528.02	;equites gallop under	;general gallop by
+	set_camera_bookmark 13, -180.154, 341.467, 459.568 -107.564, 318.952, 482.709	;next to barbs
+	set_camera_bookmark 14, -178.654, 342.66, 457.163 -169.537, 339.116, 457.743	;raise above barbs for charge
+	set_camera_bookmark 15, -184.309, 346.763, 460.729 -177.161, 343.233, 455.029	;raise above melee
+	set_camera_bookmark 16, -37.4328, 290.686, 157.925 -37.2769, 290.35, 156.938	;first sight of battle
+	set_camera_bookmark 17, -37.876, 290.869, 157.421 -33.0742, 286.461, 149.548	;pan left from first sight
+	set_camera_bookmark 18, 23.5741, 250.478, 35.0792 17.1034, 250.635, 27.4621	;hoplites angled march
+	set_camera_bookmark 19, 27.8843, 253.937, 7.95639 19.2371, 249.47, 7.67714	;hoplites towards camera
+	set_camera_bookmark 20, 39.3034, 257.246, -93.7575 34.5317, 255.214, -85.6052	;whole seleucid army high angle
+	set_camera_bookmark 21, 12.1514, 251.085, -60.642 6.38681, 250.676, -52.5516	;elephants march by
+
+
+
+
+
+
+
+
+
+	;;; *******************************************************************************************
+	;;;		Make all units have HIGH morale
+	;;; *******************************************************************************************
+
+	unit_set_morale		PLAYER_VEL				  	high
+	unit_set_morale		PLAYER_HAST				  	high
+	unit_set_morale		PLAYER_PRINC			  	high
+	unit_set_morale		PLAYER_GEN				  	high
+	unit_set_morale		PLAYER_TRII				  	high
+	unit_set_morale		PLAYER_HEAVY_CAV		  	high
+						
+	unit_set_morale		SPQR_VEL_0				  	high
+	unit_set_morale		SPQR_HAST_1				  	high
+	unit_set_morale		SPQR_PRINC_2			  	high
+	unit_set_morale		SPQR_TRII_3				  	high
+	unit_set_morale		SPQR_TOWN_WATCH_4		  	high
+	unit_set_morale		SPQR_HAST_5				  	high
+	unit_set_morale		SPQR_HAST_6				  	high
+	unit_set_morale		SPQR_PRINC_7			  	high
+	unit_set_morale		SPQR_PRINC_8			  	high
+	unit_set_morale		SPQR_TRII_9				  	high
+	unit_set_morale		SPQR_TRII_10			  	high
+	unit_set_morale		SPQR_ROMAN_GEN_11		  	high
+	unit_set_morale		SPQR_EQUITES_12			  	high
+						
+	unit_set_morale		SELEUCID_PHALANX_0		  	high
+	unit_set_morale		SELEUCID_PELTAST_1		  	high
+	unit_set_morale		SELEUCID_PELTAST_2		  	high
+	unit_set_morale		SELEUCID_SLING_3		  	high
+	unit_set_morale		SELEUCID_ELEPHANT_4		  	high
+	unit_set_morale		SELEUCID_ARCH_5			  	high
+	unit_set_morale		SELEUCID_HOPLITE_MILITIA_6	high
+	unit_set_morale		SELEUCID_HOPLITE_MILITIA_7	high
+	unit_set_morale		SELEUCID_GEN_8			  	high
+	unit_set_morale		SELEUCID_CAV_9			  	high
+	unit_set_morale		SELEUCID_CAV_10			  	high
+	unit_set_morale		SELEUCID_ARCH_11		  	high
+	unit_set_morale		SELEUCID_PHALANX_12		  	high
+	unit_set_morale		SELEUCID_BARB_INFANTRY_13 	high
+
+
+	;;; ***************************************************************************
+	;;;		Set up a monitor for each of the three armies:
+	;;;		if any general dies (unit has 100% casualties) then rout their
+	;;;		army thereby ending the battle.
+	;;; ***************************************************************************
+
+	monitor_conditions I_PercentageUnitKilled PLAYER_GEN = 100			;;;	i.e. 100% casualties
+		unit_group_set_morale GRP_PLAYER_ARMY	routing					;;;	Rout all Romans
+		unit_group_set_morale GRP_SENATE_ARMY	routing					;;;	Rout all Romans
+
+		advance_advice_thread Historical_Asculum_Your_General_Killed_Thread		;;;	"Your general has been killed. You have lost the battle."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SPQR_ROMAN_GEN_11 = 100	;;;	i.e. 100% casualties
+		unit_group_set_morale GRP_PLAYER_ARMY	routing					;;;	Rout all Romans
+		unit_group_set_morale GRP_SENATE_ARMY	routing					;;;	Rout all Romans
+
+		advance_advice_thread Historical_Asculum_Allied_General_Killed_Thread	;;;	"The Senate general has been killed. You have lost the battle."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_GEN_8 = 100		;;;	i.e. 100% casualties
+		unit_group_set_morale GRP_SELEUCID_ARMY	routing					;;;	Rout all Seleucids
+
+		advance_advice_thread Historical_Asculum_Enemy_General_Killed_Thread	;;;	"The Seleucid general has been killed. You have won the battle."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+	;;; ***************************************************************************
+	;;;		Set up monitors whereby if Seleucid cavalry are engaged with player units
+	;;;		and sustain > 45% casualties then rout Seleucid cavalry
+	;;; ***************************************************************************
+
+	;;;	SELEUCID_CAV_9	=============================================
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_VEL
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_HAST
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_PRINC
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_GEN
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_TRII
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_9 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_9	PLAYER_HEAVY_CAV
+		unit_set_morale	SELEUCID_CAV_9	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	;;;	SELEUCID_CAV_10	=============================================
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_VEL
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_HAST
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_PRINC
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_GEN
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_TRII
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled SELEUCID_CAV_10 > 45		;;;	i.e. 45% casualties
+	and I_IsUnitEngagedWithUnit	SELEUCID_CAV_10	PLAYER_HEAVY_CAV
+		unit_set_morale	SELEUCID_CAV_10	routing					;;;	Rout this cavalry unit
+		advance_advice_thread Historical_Asculum_Enemy_Cavalry_Routing_Thread		;;;	"The enemy cavalry have been routed."
+		while I_AdvisorVisible											;;;	Click to continue
+		end_while
+		terminate_monitor
+	end_monitor
+
+		
+
+
+
+	; *********************************************************************************************
+	;	Start sequence
+	; *********************************************************************************************
+
+
+;	battle_default_camera
+
+	camera_restrictions_set off
+
+	set_music_state tension
+
+;	tension, mobilize or battle
+
+	camera_position -151.327, 392.028, 647.819 327.655, 286.225, 1072.95
+
+	unit_order_move SPQR_ROMAN_GEN_11 -96.480 647.384
+
+	unit_order_move SPQR_EQUITES_12 -96.480 647.394
+
+	wait 11
+
+	camera_zoom_to_bookmark 2
+
+	wait 9
+
+	camera_zoom_to_bookmark 3
+
+	set_music_state battle
+
+	unit_order_move_relative SELEUCID_BARB_INFANTRY_13 0 40
+
+	wait 7
+
+	camera_position_at_bookmark 4						;view barbarians
+
+	wait 3
+
+	camera_zoom_to_bookmark 5						;view barbarian march by
+
+	wait 5
+
+	camera_position_at_bookmark 6						;view general signal
+
+	unit_order_attack_unit SPQR_EQUITES_12 SELEUCID_BARB_INFANTRY_13 run
+
+	wait 3
+
+	camera_zoom_to_bookmark 7						;raise above general signal
+
+	wait 6
+
+	unit_order_move SPQR_ROMAN_GEN_11 -39.872 153.713 run
+
+	camera_position_at_bookmark 8						;equites gallop by
+
+	wait 6
+
+	camera_position_at_bookmark 9						;panorama
+
+	wait 4
+
+	camera_position_at_bookmark 10						;behind barbarians
+
+	wait 4
+
+	camera_position_at_bookmark 11						;general gallop by
+
+	wait 3
+
+	camera_position_at_bookmark 12						;equites gallop under
+
+	wait 3
+	
+	camera_position_at_bookmark 13						;next to barbs
+
+	wait 3
+
+	camera_zoom_to_bookmark 14						;rise above melee
+
+	wait 8
+
+	camera_zoom_to_bookmark 15						;above melee watching general
+
+	wait 7
+
+	camera_track_unit SPQR_ROMAN_GEN_11 back -41 2
+
+	unit_group_order_relative_move_formed GRP_SELEUCID_ARMY 0 200
+
+	wait 23
+
+	camera_zoom_to_bookmark 17						;pan left from first sight of selucid army
+	
+	wait 5
+
+	unit_order_move SPQR_ROMAN_GEN_11 199.872 130.713 run
+
+	wait 4
+
+	camera_zoom_to_bookmark 18						;hoplites angled march
+
+	wait 9
+
+	camera_position_at_bookmark 19						;hoplites towards camera
+
+	wait 3
+
+	camera_position_at_bookmark 20						;whole army overview
+	
+	wait 4
+
+	camera_zoom_to_bookmark 21						;elephants march by
+
+	wait 7
+
+
+;----------------------------------
+	set_camera_bookmark 1, -15.4516, 253.417, 24.6146 -5.71578, 250.432, 25.1743	;behind seleucid general
+	set_camera_bookmark 2, 288.11, 280.722, 75.7658 278.964, 276.506, 73.592	;behind player army
+	set_camera_bookmark 3, 238.119, 269.59, 111.84 230.753, 266.715, 105.984	;senate general gallop by
+	set_camera_bookmark 4, 269.393, 267.137, 30.5472 265.591, 264.35, 39.5767	;zoom to player general for chat
+	set_camera_bookmark 5, 296.372, 298.943, 91.3928 289.759, 294.653, 85.9053	;start position for battle
+
+;	set_camera_bookmark 6,
+;	set_camera_bookmark 7, 
+;	set_camera_bookmark 8, 
+;	set_camera_bookmark 9, 
+;	set_camera_bookmark 10,
+;	set_camera_bookmark 11,
+;------------------------------------
+
+
+	camera_position_at_bookmark 1
+
+	unit_order_move SPQR_ROMAN_GEN_11 263.542, 88.477 run
+
+	wait 5
+
+	camera_position_at_bookmark 2			;behind player army
+
+	wait 5
+
+	camera_position_at_bookmark 3			;senate general gallop by
+
+	wait 5
+
+	unit_order_move SPQR_ROMAN_GEN_11 264.542, 31.477 run
+
+	camera_position_at_bookmark 4			;zoom to player general
+
+	wait 10
+
+	enable_cursor						
+
+	advance_advice_thread Historical_Asculum_Generals_Conversation_1_Thread		;;;	"Welcome General. Yesterday we harassed the enemy in the woods. Today we shall defeat them."			
+	while I_AdvisorVisible								;CLICK TO CONTINUE
+	end_while
+
+	advance_advice_thread Historical_Asculum_Generals_Conversation_2_Thread		;;;	"Protect my right flank"
+	while I_AdvisorVisible								;CLICK TO CONTINUE
+	end_while
+
+	disable_cursor						
+
+	unit_order_move SPQR_ROMAN_GEN_11 275.542, -84.477 run
+
+	wait 6
+
+	camera_zoom_to_bookmark 5			;start position for battle
+
+	wait 3
+
+	enable_cursor						
+	disable_shortcuts false		
+	enable_entire_ui
+	inhibit_camera_input false
+;;;	camera_restrictions_set on
+
+	;;;	Move Senate general to holding area near cornfield where Seleucid
+	;;;	cavalry will try to attack them.
+;;;	unit_order_move SPQR_ROMAN_GEN_11 275.542, -84.477 run
+	unit_order_move SPQR_ROMAN_GEN_11 265, -110 run
+	unit_order_turn SPQR_ROMAN_GEN_11 270		;;;	Turn to bearing 270 degrees
+
+	unit_group_order_relative_move_formed GRP_SENATE_ARMY 0 55
+
+;	wait 7
+
+;	unit_order_move SPQR_ROMAN_GEN_11 225.542, -84.477
+
+;	wait 20
+
+
+;---------------------------
+;BATTLE STARTS
+
+
+;---------------------------
+;SELEUCID SKIRMISHERS START TO FIRE
+
+	unit_set_fire_at_will_mode SELEUCID_PELTAST_1 on
+	unit_set_fire_at_will_mode SELEUCID_PELTAST_2 on
+
+;---------------------------
+
+
+
+
+;---------------------------
+;SELEUCID HOPLITES FORM PHALANX
+
+	undefine_unit_group GRP_SELEUCID_ARMY
+
+	unit_order_change_formation SELEUCID_PHALANX_0 phalanx
+	unit_order_change_formation SELEUCID_HOPLITE_MILITIA_6 phalanx
+	unit_order_change_formation SELEUCID_HOPLITE_MILITIA_7 phalanx
+	unit_order_change_formation SELEUCID_PHALANX_12 phalanx
+
+
+;---------------------------
+;SENATE BEGIN ATTACK
+
+
+
+
+	wait 50
+
+;---------------------------
+;SELEUCID CAVALRY STARTS TO CHARGE
+
+	unit_order_move SELEUCID_CAV_9 112.3246 129.6092 run
+	unit_order_move SELEUCID_CAV_10 122.3246 129.6092 run
+;;;	unit_order_move SELEUCID_ELEPHANT_4 132.3246 129.6092 run
+;;;	unit_order_move SELEUCID_ELEPHANT_4 142.3246 129.6092 run
+	unit_order_move SELEUCID_ELEPHANT_4 142.3246 150 run
+
+
+	wait 15
+
+
+
+	unit_order_attack_unit SELEUCID_CAV_9 SPQR_ROMAN_GEN_11 run		;;;	Seleucid cavalry gallop past player's army to attack Senate general
+	unit_order_attack_unit SELEUCID_CAV_10 SPQR_ROMAN_GEN_11 run
+	unit_order_attack_unit SELEUCID_ELEPHANT_4 PLAYER_HAST run		;;;	Elephants to attack player's units rather than Senate general
+
+
+
+	;;;	Set up a monitor to warn the player when the Seleucid cavalry are approaching the Senate general
+	monitor_conditions I_UnitDistanceFromUnit SELEUCID_CAV_10 SPQR_ROMAN_GEN_11 < 50
+
+		advance_advice_thread Historical_Asculum_Protect_Allied_General_Thread		;;;	"The Allied general is under attack. Protect him or the battle will be lost"
+		while I_AdvisorVisible			;CLICK TO CONTINUE
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+
+;;;	define_unit_group GRP_SELEUCID_CAV SELEUCID_CAV_9 SELEUCID_CAV_10 SELEUCID_ELEPHANT_4
+
+;;;	unit_group_order_move_formed GRP_SELEUCID_CAV 124.542 31.477 run
+
+	wait 10
+
+;;;	undefine_unit_group GRP_SELEUCID_CAV
+
+;;;	ai_active_set on
+
+
+;-------------------------
+;	define_unit_group GRP_SENATE_CENTRE_TRIARII SPQR_TRII_9 SPQR_TRII_3
+;-------------------------
+;	unit_group_order_relative_move_formed GRP_SENATE_CENTRE_TRIARII 0 80
+;	
+;	wait 20
+;-------------------------
+;	undefine_unit_group GRP_SELEUCID_ARMY
+;	define_unit_group GRP_SELEUCID_CAVALRY SELEUCID_ELEPHANT_4 SELEUCID_CAV_9 SELEUCID_CAV_10
+;------------------------
+;
+;	undefine_unit_group GRP_SENATE_CENTRE_TRIARII
+
+
+
+	;;;	**************************************************************************
+	;;;		Move Senate army forward (without the general)
+	;;;	**************************************************************************
+;;;	define_unit_group GRP_SENATE_ARMY SPQR_VEL_0 SPQR_HAST_1 SPQR_PRINC_2 SPQR_TRII_3 SPQR_TOWN_WATCH_4 SPQR_HAST_5 SPQR_HAST_6 SPQR_PRINC_7 SPQR_PRINC_8 SPQR_TRII_9 SPQR_TRII_10 SPQR_EQUITES_12
+
+	unit_group_order_relative_move_formed GRP_SENATE_ARMY 0 20 run		;;;		RELATIVE movement, not to specific coordinates in the world
+
+	;;;	**************************************************************************
+	;;;		Withdraw Seleucid skirmishers then turn 180 degrees to face enemy again
+	;;;	**************************************************************************
+	unit_order_move_relative	SELEUCID_PELTAST_1	0 -83 run		;;;		RELATIVE movement, not to specific coordinates in the world
+	unit_order_move_relative	SELEUCID_PELTAST_2	0 -84 run		;;;		RELATIVE movement, not to specific coordinates in the world
+	wait 5
+	unit_order_turn				SELEUCID_PELTAST_1	180 relative	;;;		RELATIVE angle, i.e. 180 degrees from previous orientation rather than an absolute bearing
+	unit_order_turn				SELEUCID_PELTAST_2	180 relative	;;;		RELATIVE angle, i.e. 180 degrees from previous orientation rather than an absolute bearing
+
+	;;;	**************************************************************************
+	;;;		Senate army pair off and engage with phalanx
+	;;;	**************************************************************************
+
+	;;;	First row of Senate
+	wait 10
+
+	unit_order_attack_unit SPQR_HAST_1	SELEUCID_HOPLITE_MILITIA_6	run
+	unit_order_attack_unit SPQR_VEL_0	SELEUCID_PHALANX_12			run
+	unit_order_attack_unit SPQR_HAST_6	SELEUCID_HOPLITE_MILITIA_7	run
+	unit_order_attack_unit SPQR_HAST_5	SELEUCID_PHALANX_0			run
+
+	;;; Second row of Senate
+	wait 10
+	unit_order_attack_unit SPQR_PRINC_8	SELEUCID_HOPLITE_MILITIA_6	run
+	unit_order_attack_unit SPQR_PRINC_2	SELEUCID_PHALANX_12			run
+	unit_order_attack_unit SPQR_PRINC_7	SELEUCID_HOPLITE_MILITIA_7	run
+	unit_order_attack_unit SPQR_TOWN_WATCH_4	SELEUCID_PHALANX_0			run
+
+	;;; Third row of Senate
+	wait 10
+	unit_order_attack_unit SPQR_TRII_3	SELEUCID_HOPLITE_MILITIA_6	run
+	unit_order_attack_unit SPQR_TRII_9	SELEUCID_PHALANX_12			run
+	unit_order_attack_unit SPQR_TRII_10	SELEUCID_HOPLITE_MILITIA_7	run
+
+
+	; *********************************************************************************************
+	; *********************************************************************************************
+	;		AI REACTIVATED!
+	; *********************************************************************************************
+	; *********************************************************************************************
+
+	;;;unit_unset_morale		PLAYER_VEL				  	
+	;;;unit_unset_morale		PLAYER_HAST				  	
+	;;;unit_unset_morale		PLAYER_PRINC			  	
+	;;;unit_unset_morale		PLAYER_GEN				  	
+	;;;unit_unset_morale		PLAYER_TRII				  	
+	;;;unit_unset_morale		PLAYER_HEAVY_CAV		  	
+						
+	;;;unit_unset_morale		SPQR_VEL_0				  	
+	;;;unit_unset_morale		SPQR_HAST_1				  	
+	;;;unit_unset_morale		SPQR_PRINC_2			  	
+	;;;unit_unset_morale		SPQR_TRII_3				  	
+	;;;unit_unset_morale		SPQR_TOWN_WATCH_4		  	
+	;;;unit_unset_morale		SPQR_HAST_5				  	
+	;;;unit_unset_morale		SPQR_HAST_6				  	
+	;;;unit_unset_morale		SPQR_PRINC_7			  	
+	;;;unit_unset_morale		SPQR_PRINC_8			  	
+	;;;unit_unset_morale		SPQR_TRII_9				  	
+	;;;unit_unset_morale		SPQR_TRII_10			  	
+	;;;unit_unset_morale		SPQR_ROMAN_GEN_11		  	
+	;;;unit_unset_morale		SPQR_EQUITES_12			  	
+						
+	;;;unit_unset_morale		SELEUCID_PHALANX_0		  	
+	;;;unit_unset_morale		SELEUCID_PELTAST_1		  	
+	;;;unit_unset_morale		SELEUCID_PELTAST_2		  	
+	;;;unit_unset_morale		SELEUCID_SLING_3		  	
+	;;;unit_unset_morale		SELEUCID_ELEPHANT_4		  	
+	;;;unit_unset_morale		SELEUCID_ARCH_5			  	
+	;;;unit_unset_morale		SELEUCID_HOPLITE_MILITIA_6	
+	;;;unit_unset_morale		SELEUCID_HOPLITE_MILITIA_7	
+	;;;unit_unset_morale		SELEUCID_GEN_8			  	
+	;;;unit_unset_morale		SELEUCID_CAV_9			  	
+	;;;unit_unset_morale		SELEUCID_CAV_10			  	
+	;;;unit_unset_morale		SELEUCID_ARCH_11		  	
+	;;;unit_unset_morale		SELEUCID_PHALANX_12		  	
+	;;;unit_unset_morale		SELEUCID_BARB_INFANTRY_13 	
+
+
+
+;;;	ai_active_set on
+
+
+
+																			       
+	unit_order_attack_closest_unit   		SPQR_VEL_0				  		45  run
+	unit_order_attack_closest_unit   		SPQR_HAST_1				  		45  run
+	unit_order_attack_closest_unit   		SPQR_PRINC_2			  		45  run
+	unit_order_attack_closest_unit   		SPQR_TRII_3				  		45  run
+	unit_order_attack_closest_unit   		SPQR_TOWN_WATCH_4		  		45  run
+	unit_order_attack_closest_unit   		SPQR_HAST_5				  		45  run
+	unit_order_attack_closest_unit   		SPQR_HAST_6				  		45  run
+	unit_order_attack_closest_unit   		SPQR_PRINC_7			  		45  run
+	unit_order_attack_closest_unit   		SPQR_PRINC_8			  		45  run
+	unit_order_attack_closest_unit   		SPQR_TRII_9				  		45  run
+	unit_order_attack_closest_unit   		SPQR_TRII_10			  		45  run
+	unit_order_attack_closest_unit   		SPQR_ROMAN_GEN_11		  		45  run
+	unit_order_attack_closest_unit   		SPQR_EQUITES_12			  		45  run
+																			       
+	unit_order_attack_closest_unit   		SELEUCID_PHALANX_0		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_PELTAST_1		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_PELTAST_2		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_SLING_3		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_ELEPHANT_4		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_ARCH_5			  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_HOPLITE_MILITIA_6		45  run
+	unit_order_attack_closest_unit   		SELEUCID_HOPLITE_MILITIA_7		45  run
+;;;	unit_order_attack_closest_unit   		SELEUCID_GEN_8			  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_CAV_9			  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_CAV_10			  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_ARCH_11		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_PHALANX_12		  		45  run
+	unit_order_attack_closest_unit   		SELEUCID_BARB_INFANTRY_13 		45  run
+
+
+
+	wait 120
+	unit_order_attack_unit   		SELEUCID_GEN_8		PLAYER_GEN	run
+	advance_advice_thread Historical_Asculum_Protect_Your_General_Thread		;;;	"Your general is under attack. Protect him or the battle will be lost"
+	while I_AdvisorVisible								;CLICK TO CONTINUE
+	end_while
+
+
+
+
+
+;
+;	unit_order_move SPQR_ROMAN_GEN_11 267.478, 34.643 run
+;
+;	camera_position_at_bookmark 4			;close-up player general
+;
+;	wait 3
+;
+;	camera_position_at_bookmark 8			;seleucid archers
+;
+;	wait 4
+;
+;	undefine_unit_group GRP_SELEUCID_ARMY
+;
+;	define_unit_group GRP_SPQR_SKIRMISHERS SPQR_VEL_0 SPQR_TOWN_WATCH_4
+;
+;	define_unit_group GRP_SELEUCID_PHALANX SELEUCID_PHALANX_0 SELEUCID_HOPLITE_MILITIA_6 SELEUCID_HOPLITE_MILITIA_7 SELEUCID_PHALANX_12
+;	
+;	camera_zoom_to_bookmark 9
+;
+;	unit_order_change_formation SELEUCID_PHALANX_0 phalanx
+;	unit_order_change_formation SELEUCID_HOPLITE_MILITIA_6 phalanx
+;	unit_order_change_formation SELEUCID_HOPLITE_MILITIA_7 phalanx
+;	unit_order_change_formation SELEUCID_PHALANX_12 phalanx
+;
+;	unit_order_change_formation GRP_SELEUCID_PHALANX phalanx
+;
+;	wait 8
+;
+;	camera_zoom_to_bookmark 10
+;
+;
+;
+;
+;------------------------------------
+;	set_camera_bookmark 1, -37.4328, 290.686, 157.925 -37.2769, 290.35, 156.938	;
+;	set_camera_bookmark 2, -96.8519, 358.259, 702.735 -88.4004, 356.955, 707.77	;
+;	set_camera_bookmark 3, -96.8519, 358.259, 702.735 -95.5108, 356.955, 692.989
+;------------------------------------
+;
+;
+;
+;	camera_zoom_to_bookmark 19						;
+;	wait 3
+;	camera_zoom_to_bookmark 20						;
+;	camera_track_unit SPQR_EQUITES_12 back -10 3
+;	advance_advice_thread Prologue_battle_1_generic_10_Thread			;ADVICE: "Your lightly armoured archers are vulnerable to cavalry attacks. Protect them by moving your Triarii to the pointer.
+;	while I_AdvisorVisible								;CLICK TO CONTINUE
+;	end_while
+;	advance_advice_thread Prologue_battle_1_spare_01_Thread			
+;	while I_AdvisorVisible								;CLICK TO CONTINUE
+;	end_while
+;	camera_track_unit SPQR_ROMAN_GEN_11 back -20 3
+;	wait 3
+;	camera_track_unit SPQR_ROMAN_GEN_11 back -20 20
+;	while I_AdvisorVisible								;CLICK TO CONTINUE
+;	end_while
+;	camera_zoom_to_bookmark 2
+;	wait 8
+;	SELEUCID_HOPLITES_13
+;	unit_order_attack_unit SELEUCID_ARCH_5 SPQR_ROMAN_GEN_11 run		; order seleucid archers to attack senate general
+;	unit_order_move_relative SPQR_ROMAN_GEN_11 0 100
+;	unit_order_move_relative SPQR_EQUITES_12 0 100
+;	camera_zoom_to_bookmark 4
+;	wait 8
+;	unit_order_change_formation SPQR_EQUITES_12 wedge
+;	unit_order_attack_unit SPQR_ROMAN_GEN_11 SELEUCID_BARB_INFANTRY_13 run
+;	advance_advice_thread Prologue_battle_1_spare_01_Thread			
+;	while I_AdvisorVisible								;CLICK TO CONTINUE
+;	end_while
+;	wait 5
+
+
+	
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+
+end_script
+
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+	;;;	**************************************************************************	END OF SCRIPT
+
+
+
+
+	; *********************************************************************************************
+	;	Advance velites
+	; *********************************************************************************************
+
+
+
+
+
+;;;	wait 5
+
+
+
+
+
+;	unit_group_order_relative_move_formed	GRP_SPQR_SKIRMISHERS	0 150 run
+
+	; *********************************************************************************************
+	;	Advance entire Greek army to meet them
+	; *********************************************************************************************
+
+;;;	wait 5
+;;;	unit_group_move_to_missile_range_of_group	GRP_SELEUCID_SKIRMISHERS	GRP_SPQR_SKIRMISHERS	run	 
+	unit_group_order_relative_move_formed	GRP_SELEUCID_SKIRMISHERS	0 100 run
+
+;;;	wait 3
+;;;	unit_group_order_relative_move_formed	GRP_SELEUCID_INFANTRY		0 90 run
+
+;;;	wait 4
+;;;	unit_group_order_relative_move_formed	GRP_SELEUCID_ARCHERS		0 80 run
+
+
+	; *********************************************************************************************
+	;	Opposing skirmish lines will automatically exchange missiles so no need to tell
+	;	skirmish groups to attack each other
+	; *********************************************************************************************
+
+
+	; *********************************************************************************************
+	;	Velites retreat
+	; *********************************************************************************************
+
+;;;	wait 30
+;;;	unit_group_order_relative_move_formed	GRP_SPQR_SKIRMISHERS	0 -150 run
+
+	; *********************************************************************************************
+	;	Roman Infantry advance
+	; *********************************************************************************************
+
+
+;	unit_group_order_relative_move_formed GRP_SPQR_HASTATI 0 100 run
+
+;	wait 4
+;	unit_group_order_relative_move_formed GRP_SPQR_PRINCEPS 0 100 run
+
+;	wait 6
+;	unit_group_order_relative_move_formed GRP_SPQR_TRIARII 0 100 run
+
+
+
+
+
+
+	; *********************************************************************************************
+	;	Greek skirmishers retreat
+	; *********************************************************************************************
+
+;;;	wait 20
+;;;	unit_group_order_relative_move_formed	GRP_SELEUCID_SKIRMISHERS	0 -150 run
+
+	; *********************************************************************************************
+	;	Phalangites lower their spears
+	; *********************************************************************************************
+
+
+;;;	unit_order_change_formation	SELEUCID_PHALANX_0	phalanx
+;;;	unit_order_change_formation	SELEUCID_PHALANX_12	phalanx
+;;;	unit_order_change_formation	SELEUCID_HOPLITE_MILITIA_6	phalanx
+;;;	unit_order_change_formation	SELEUCID_HOPLITE_MILITIA_7	phalanx
+
+
+
+	; *********************************************************************************************
+	;	Infantry engage
+	; *********************************************************************************************
+
+;;;	unit_group_order_attack_group		GRP_SPQR_HASTATI	GRP_SELEUCID_INFANTRY 
+
+
+;;;;;  <<<<<<<< 
+
+	; *********************************************************************************************
+	;	Cavalry advance but lag behind main body of armies
+	; *********************************************************************************************
+
+;;;	wait 30
+;;;	unit_group_order_relative_move_formed	GRP_SPQR_CAV		0 -300 
+;;;	unit_group_order_relative_move_formed	GRP_SELEUCID_CAV	0 -300 
+
+
+
+	; *********************************************************************************************
+	;	Cavalry engage
+	; *********************************************************************************************
+
+
+
+
+
+; end_script

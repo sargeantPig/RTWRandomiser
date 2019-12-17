@@ -1,0 +1,27 @@
+;
+;  Initial forest definition
+;  Only one forest created.  First line should be:
+;  forest <offset x>, <offset z>, <cells x>, <cells z>, <cell width>, <cell density>
+;  Then LOD distances, as:
+;  distances <d0>, <d1>, <d2>, <d3>, <d4>, <d5>
+;  Then up to five clip regions to make space for towns:
+;  clip <minx clip>, <maxx clip>, <minz clip>, <maxz clip>
+;
+;  This creates a grid of cells of trees.
+;  Each cell can have at most 256 trees, density as 0-1 reduces this.  The clip values allow a region to be masked
+;  for the settlement.
+;
+;  The LOD distances are currently as follows:
+;  first level - three billboards
+;  second      - two billboards
+;  third       - one billboard
+;  fourth      - one billboard, position-based angle rather than view direction, higher tolerance angle
+;  fifth       - one coloured facet, position-oriented
+;  sixth       - (not rendered currently) single point
+;
+;
+
+forest 0, 0, 15, 15, 256, 1.0
+distances 50, 0, 250, 500, 2000, 2000
+clip 1300, 1700, 1300, 1700
+;clip 1000, 1200, 1000, 1200

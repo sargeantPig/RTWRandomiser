@@ -1,0 +1,55 @@
+************** STARTING BATTLE EDITOR
+
+Loading from file data/world/maps/battle/custom/rome_desert_a01/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a02/descr_battle.txt
+Load finished **************************
+
+
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model tholos_tomb
+Loading from file data/world/maps/battle/custom/rome_desert_a03/descr_battle.txt
+Load finished **************************
+
+
+DELETE_MODEL_FUNCTION::do_func() - Removing (or moving) unnamed model
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model eastern_ruin_02
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model eastern_ruin_03
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model eastern_ruin_village
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model watchtower_egyptian_eastern
+DELETE_MODEL_FUNCTION::do_func() - Removing (or moving) unnamed model
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model watchtower_barbarian
+Loading from file data/world/maps/battle/custom/rome_desert_a04/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a05/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_tundra_a07/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a06/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a07/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a08/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a09/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_desert_a10/descr_battle.txt
+Load finished **************************
+
+
+PLACE_AND_MOVE_MODEL_FUNCTION::do_func() - Creating model clump_of_palm_trees_A

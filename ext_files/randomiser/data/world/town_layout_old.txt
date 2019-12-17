@@ -1,0 +1,151 @@
+;	
+;	Town layout
+;
+;   settlement				followed by name
+;	location				world position in metre coords
+;	building				followed by building spec list, which has type, offsetx, offsetz, azimuth
+
+
+
+
+settlement		roman town
+location		1500, 1500
+
+;			bottom left, top right, height above ground, falloff distance
+plinth			-300, -300, 300, 300, 0, 0
+
+building		town floor, 0, 0, 90, 0.4
+building		forum and basilica, 50, -44, 90, 0.7
+
+
+building		siege tower, 200, 200, 90, 0.7
+building		ballista, -200, -200, 90, 0.7
+building		onager, 200, -200, 90, 0.7
+
+
+building		thermae, 79, 85, 90, 0.7
+
+building		amphitheatre, -99, -100, 90, 0.7
+
+building		theatre, -85, 66, 90, 0.7
+
+building		praetorium, -31, -7, 0, 0.7
+
+building		hippodrome, 130, -80, 90, 0.7
+
+building		temple big, 149, 138, 180, 0.7		
+
+building		temple small, -155, 160, 90, 0.7
+building		temple small, -142, -154, 180, 0.7
+
+building		gymnasium big, -79, 146, 90, 0.7
+
+building		gymnasium small, -28, -117, 180, 0.7		
+building		gymnasium small, 155, 56, 180, 0.7
+building		gymnasium small, -156, -62, 0, 0.7
+building		gymnasium small, -154, 122, 0, 0.7
+
+building		academia, 26, -122, 180, 0.7
+building		academia, -60, -160, 90, 0.7
+building		academia, -65, -4, -90, 0.7
+building		academia, -29, 160, 90, 0.7
+building		academia, 79, 158, -90, 0.7
+
+building		domus, -113, -25, 90, 0.7
+building		domus, -149, 62, 180, 0.7
+building		domus, 61, -140, 180, 0.7
+
+building		hospital, -47, -37, 90, 0.7
+building		hospital, 27, 101, 180, 0.7
+building		hospital, 26, -156, 180, 0.7
+building		hospital, -52, 106, 90, 0.7
+building		hospital, -123, 108, 0, 0.7
+
+building		insulae single, -28, -165, 180, 0.7		
+building		insulae single, 112, 152, 180, 0.7
+building		insulae single, 112, 165, 0, 0.7
+building		insulae single, 20, 159, -90, 0.7
+building		insulae single, 20, 130, -90, 0.7
+building		insulae single, 130, 72, 90, 0.7
+building		insulae single, 130, 45, 90, 0.7
+building		insulae single, -20, 90, 90, 0.7
+building		insulae single, -20, 64, 90, 0.7
+building		insulae single, -97, 2, 0, 0.7
+building		insulae single, -126, 2, 0, 0.7
+building		insulae single, -20, -56, 90, 0.7
+building		insulae single, -20, -82, 90, 0.7
+building		insulae single, -163, -130, -90, 0.7
+building		insulae single, -163, -158, -90, 0.7
+
+building		workshop, -22, -33, 0, 0.7
+building		workshop, -71, -49, 90, 0.7
+building		workshop, -25, -148, 0, 0.7
+building		workshop, -124, 160, 90, 0.7
+building		workshop, 38, 130, 90, 0.7
+
+building		posthouse, 45, 157, -90, 0.7
+building		posthouse, -158, -100, 180, 0.7
+building		posthouse, -43, -67, 90, 0.7
+
+building		statue, 0, 20, 90, 0.7
+
+building		officers house, -72, -26, 90, 0.7
+building		officers house, -54, -136, 90, 0.7
+building		officers house, 90, -163, 90, 0.7
+building		officers house, -145, -126, 180, 0.7
+building		officers house, -124, 137, -90, 0.7
+building		officers house, 116, 134, -90, 0.7
+building		officers house, -35, 137, 0, 0.7
+building		officers house, 135, 94, 0, 0.7
+building		officers house, -27, 42, 90, 0.7
+
+building		corner watchtower, -192, -192, 90, 0.0
+building		corner watchtower, 192, -192, 0, 0.0
+building		corner watchtower, 192, 192, -90, 0.0
+building		corner watchtower, -192, 192, 180, 0.0
+
+building		double arched gateway, 0, 192, -90, 0.0
+building		double arched gateway, 0, -192, 90, 0.0
+
+building		arched gateway, -192, 14, -90, 0.0
+building		arched gateway, 192, 18, 90, 0.0
+
+building		town wall 32m section, -192, -144, 180, 0.0
+building		town wall 32m section, -192, -112, 180, 0.0
+building		town wall 32m section, -192, -80, 180, 0.0
+building		town wall 32m section, -192, -48, 180, 0.0
+building		town wall 32m section, -192, -16, 180, 0.0
+building		town wall 32m section, -192, 48, 180, 0.0
+building		town wall 32m section, -192, 80, 180, 0.0
+building		town wall 32m section, -192, 112, 180, 0.0
+building		town wall 32m section, -192, 144, 180, 0.0
+
+building		town wall 32m section, 192, -144, 0, 0.0
+building		town wall 32m section, 192, -112, 0, 0.0
+building		town wall 32m section, 192, -80, 0, 0.0
+building		town wall 32m section, 192, -48, 0, 0.0
+building		town wall 32m section, 192, -16, 0, 0.0
+building		town wall 32m section, 192, 48, 0, 0.0
+building		town wall 32m section, 192, 80, 0, 0.0
+building		town wall 32m section, 192, 112, 0, 0.0
+building		town wall 32m section, 192, 144, 0, 0.0
+
+building		town wall 32m section, -144, -192, 90, 0.0
+building		town wall 32m section, -112, -192, 90, 0.0
+building		town wall 32m section, -80, -192, 90, 0.0
+building		town wall 32m section, -48, -192, 90, 0.0
+building		town wall 32m section, 48, -192, 90, 0.0
+building		town wall 32m section, 80, -192, 90, 0.0
+building		town wall 32m section, 112, -192, 90, 0.0
+building		town wall 32m section, 144, -192, 90, 0.0
+
+building		town wall 32m section, -144, 192, -90, 0.0
+building		town wall 32m section, -112, 192, -90, 0.0
+building		town wall 32m section, -80, 192, -90, 0.0
+building		town wall 32m section, -48, 192, -90, 0.0
+building		town wall 32m section, 48, 192, -90, 0.0
+building		town wall 32m section, 80, 192, -90, 0.0
+building		town wall 32m section, 112, 192, -90, 0.0
+building		town wall 32m section, 144, 192, -90, 0.0
+
+;;;;;;;;;

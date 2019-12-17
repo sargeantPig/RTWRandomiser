@@ -1,0 +1,985 @@
+script
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; script begins
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+
+
+	label_unit 0 0 0	PLAYER_LEGIONARY_1
+	label_unit 0 0 1	PLAYER_LEGIONARY_2
+	label_unit 0 0 2	PLAYER_LEGIONARY_3
+	label_unit 0 0 3	PLAYER_LEGIONARY_4
+	label_unit 0 0 4	PLAYER_LEGIONARY_5
+	label_unit 0 0 5	PLAYER_LEGIONARY_6
+	label_unit 0 0 6	PLAYER_LEGIONARY_7
+	label_unit 0 0 7	PLAYER_LEGIONARY_8
+	label_unit 0 0 8	PLAYER_MEDIUM_CAVALRY
+  	label_unit 0 0 9	PLAYER_GENERAL
+	label_unit 0 0 10	PLAYER_MEDIUM_CAVALRY_1
+	label_unit 0 0 11	PLAYER_MEDIUM_CAVALRY_2
+	label_unit 0 0 12	PLAYER_MEDIUM_CAVALRY_3
+
+	label_unit 1 0 0	PARTHIAN_1_CATAPHRACT_1
+	label_unit 1 0 1	PARTHIAN_1_CATAPHRACT_2
+	label_unit 1 0 2	PARTHIAN_1_CATAPHRACT_3
+	label_unit 1 0 3	PARTHIAN_1_CATAPHRACT_4
+	label_unit 1 0 4	PARTHIAN_1_GENERAL
+
+	label_unit 1 1 0	PARTHIAN_2_HORSE_ARCHERS_1
+  	label_unit 1 1 1	PARTHIAN_2_HORSE_ARCHERS_2
+	label_unit 1 1 2	PARTHIAN_2_HORSE_ARCHERS_3
+   	label_unit 1 1 3	PARTHIAN_2_HORSE_ARCHERS_4
+	label_unit 1 1 4	PARTHIAN_2_HORSE_ARCHERS_5
+	label_unit 1 1 5	PARTHIAN_2_HORSE_ARCHERS_6
+	label_unit 1 1 6	PARTHIAN_2_GENERAL
+
+ 
+;-----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------------
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_not_escape
+	declare_counter cancel_radius_monitors
+	declare_counter general_radius_monitor
+	declare_counter cavalry_dead
+	declare_timer Wait_timer
+
+
+;-------------------------------------------------------------------------
+;------------------------------------------------------------------------
+
+;			OPEN SCRIPT SECTION
+
+;------------------------------------------------------------------------
+;-------------------------------------------------------------------------
+
+	camera_default_mode_set tw
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+	ai_active_set off
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+	while ! I_BattleStarted					; WAIT FOR DEPLOYMENT
+	end_while
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; pre-battle settings
+
+	set_music_state custom 
+
+	;mobilize3-Enemy_is_Near.mp3
+	;set_music_state mobilize
+
+	hide_ui
+
+ 	camera_restrictions_set off
+
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key on
+
+	monitor_event EscPressed TrueCondition
+		set_counter battle_start 1
+		terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+
+;-----------------------------------------------------------------------------------------
+;---------------------------------- BATTLE MONITORS --------------------------------------
+;-----------------------------------------------------------------------------------------
+
+;--------- ROUT HORSE ARCHERS AT MORE THAN 60% CASUALTIES -------------------
+
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_1 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_2 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_2 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_3 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_3 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_4 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_4 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_5 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_5 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled PARTHIAN_2_HORSE_ARCHERS_6 > 80
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_6 routing
+		terminate_monitor
+	end_monitor
+
+;-----------------------------------------------------------------------------------------------
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_1
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_2
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_3
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_4
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_5
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitRouting PARTHIAN_2_HORSE_ARCHERS_6
+		unit_set_morale	PARTHIAN_2_HORSE_ARCHERS_1 routing
+		terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------
+
+
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Start of battle - BATTLESTART MONITOR
+; *********************************************************************************************
+
+	
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+		stop_sound_event carrhae_speech1
+		stop_sound_event carrhae_speech2
+		stop_sound_event carrhae_speech3
+		stop_sound_event carrhae_speech4
+		stop_sound_event carrhae_speech5
+		stop_sound_event carrhae_speech6
+		stop_sound_event carrhae_speech7
+		stop_sound_event carrhae_speech8
+		stop_sound_event carrhae_speech9
+		stop_sound_event carrhae_speech10
+		stop_sound_event carrhae_speech11
+		stop_sound_event carrhae_speech12
+		stop_sound_event carrhae_speech13
+
+		steal_esc_key off
+
+
+
+
+
+;		set_camera_bookmark 1, 161.654, 248.68, -836.246 155.311, 246.813, -828.89
+		set_camera_bookmark 1, 25.2404, 330.621, -695.806 15.3494, 329.586, -696.52
+
+		camera_position_at_bookmark 1
+
+		battle_wait 0.1
+
+;		set_camera_bookmark 2, -124.972, 315.063, -459.34 -132.739, 313.416, -453.201
+;		camera_zoom_to_bookmark 2 20
+
+
+;		set_camera_bookmark 7, -155.616, 286.59, -371.065 -156.087, 281.695, -361.615
+
+		set_camera_bookmark 7, -159.628, 253.102, -345.05 -159.067, 248.781, -336.189
+
+		camera_zoom_to_bookmark 7 40	;pan to camera start pos
+
+	if I_CompareCounter cavalry_dead = 0
+
+		kill_unit PLAYER_MEDIUM_CAVALRY_1
+		kill_unit PLAYER_MEDIUM_CAVALRY_2
+		kill_unit PLAYER_MEDIUM_CAVALRY_3
+
+	end_if
+	
+	if I_CompareCounter player_not_escape = 0
+
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_1 on
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_2 on
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_3 on
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_4 on
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_5 on
+	;	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_6 on
+
+
+		undefine_unit_group GRP_PLAYER_ARMY_MAIN
+
+		unit_immediate_place  PLAYER_LEGIONARY_1 -192.185568, -245.44304, -7.009278
+		unit_immediate_place  PLAYER_LEGIONARY_2 -167.569888, -243.192192, -5.009766
+		unit_immediate_place  PLAYER_LEGIONARY_3 -145.683024, -241.512336, -5.009766
+		unit_immediate_place  PLAYER_LEGIONARY_4 -190.309872, -263.580624, -5.998535
+		unit_immediate_place  PLAYER_LEGIONARY_5 -126.215352, -239.298592, -5.009766
+		unit_immediate_place  PLAYER_LEGIONARY_6 -123.148208, -255.732144, -7.009278
+		unit_immediate_place  PLAYER_LEGIONARY_7 -187.347056, -281.427552, -7.009278
+		unit_immediate_place  PLAYER_LEGIONARY_8 -122.73396, -273.152, -5.009766
+		unit_immediate_place  PLAYER_MEDIUM_CAVALRY -172.160448, -265.906, -7.009278
+	  	unit_immediate_place  PLAYER_GENERAL -147.018944, -261.031152, -5.998535
+	
+	
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_1 -190.726256, -156.207616, 101.129152
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_2 -96.892536, -173.172432, -90.620728
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_3 -204.55224, -295.525536, 100.305176
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_4 -244.161216, -195.354144, 78.310536
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_5 -166.926304, -316.42688, -13.463746
+		unit_immediate_place  PARTHIAN_2_HORSE_ARCHERS_6 -60.11024, -280.651712, -91.873168
+	
+		unit_immediate_place  PARTHIAN_2_GENERAL 119.40232, -471.887296, -145.980832
+
+		;----------------------------------------- legionnaries form testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_1	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_2	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_3	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_4	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_5	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_6	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_7	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_8	testudo
+		;---------------------------------------------------------
+
+
+	end_if
+
+		battle_wait 2
+
+		play_sound_event CARRHAE_SPEECH_13
+
+		battle_wait 1
+
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_1 -141.539504, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_2 -128.194288, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_3 -149.305936, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_4  -107.462696, 143.512032, -174.79248
+
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_1 PLAYER_LEGIONARY_1 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_2 PLAYER_LEGIONARY_2 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_3 PLAYER_LEGIONARY_3 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_4 PLAYER_LEGIONARY_5 run
+		unit_order_attack_unit PARTHIAN_1_GENERAL PLAYER_GENERAL run
+
+
+;		set_camera_bookmark 7, -155.616, 286.59, -371.065 -156.087, 281.695, -361.615
+;		camera_zoom_to_bookmark 7 20	;pan to camera start pos
+
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_5	-150.527 -313.612 run
+
+
+		battle_wait 5
+
+		release_unit PARTHIAN_2_HORSE_ARCHERS_1
+		release_unit PARTHIAN_2_HORSE_ARCHERS_2
+		release_unit PARTHIAN_2_HORSE_ARCHERS_3
+		release_unit PARTHIAN_2_HORSE_ARCHERS_4
+		release_unit PARTHIAN_2_HORSE_ARCHERS_5
+		release_unit PARTHIAN_2_HORSE_ARCHERS_6
+	
+		battle_wait 4
+
+		show_ui
+
+	enable_cursor						;prevent the player clicking
+	disable_shortcuts false		
+	enable_entire_ui
+	inhibit_camera_input false
+	suspend_unscripted_advice false
+
+	camera_default_mode_set user_pref
+
+
+		pause_battle
+
+		camera_restrictions_set off
+
+		set_music_state battle
+
+		battle_wait 50
+
+		ai_active_set on
+
+		terminate_monitor
+	end_monitor
+
+
+
+; *********************************************************************************************
+; ********************* END OF BATTLE START MONITOR *******************************************
+; *********************************************************************************************
+
+
+;****************************************************************************
+;****************************************************************************
+;************************* INTRO SEQUENCE MONITOR ***************************
+;****************************************************************************
+;****************************************************************************
+;****************************************************************************
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+		unit_set_morale	PLAYER_MEDIUM_CAVALRY_1 high
+		unit_set_morale	PLAYER_MEDIUM_CAVALRY_2 high
+		unit_set_morale	PLAYER_MEDIUM_CAVALRY_3 high
+
+	 	unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_1 on
+		unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_2 on
+		unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_3 on
+		unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_4 on
+		unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_5 on
+		unit_set_skirmish_mode PARTHIAN_2_HORSE_ARCHERS_6 on
+
+		define_unit_group GRP_PLAYER_ARMY_MAIN PLAYER_LEGIONARY_1 PLAYER_LEGIONARY_2 PLAYER_LEGIONARY_3 PLAYER_LEGIONARY_4 PLAYER_LEGIONARY_5 PLAYER_LEGIONARY_6 PLAYER_LEGIONARY_7 PLAYER_LEGIONARY_8 PLAYER_MEDIUM_CAVALRY PLAYER_GENERAL
+
+		define_unit_group GRP_PLAYER_CAVALRY PLAYER_MEDIUM_CAVALRY_1 PLAYER_MEDIUM_CAVALRY_2 PLAYER_MEDIUM_CAVALRY_3
+
+	;	define_unit_group GRP_PARTHIAN_CATAPHRACTS_1 
+
+	;	disable_cursor						;prevent the player clicking
+		suspend_unscripted_advice true
+	;	disable_shortcuts true		
+	;	disable_entire_ui
+	;	inhibit_camera_input true
+
+;		set_camera_bookmark 1, -94.3278, 231.871, -330.155 -100.888, 233.355, -322.944
+	
+		set_camera_bookmark 1, -96.7489, 232.512, -337.265 -151.077, 230.379, -289.863
+
+;		set_camera_bookmark 2, -98.3544, 232.731, -339.79 -106.968, 233.472, -334.929
+		set_camera_bookmark 2, -89.3221, 239.395, -367.903 -97.4694, 237.96, -362.182
+
+		set_camera_bookmark 3, -133.226, 233.656, -341.68 -133.538, 235.101, -331.731	;behind general
+
+;		set_camera_bookmark 4, -181.513, 236.652, 512.019 -190.89, 238.997, 513.99
+		set_camera_bookmark 4, -184.198, 234.983, 520.169 -194.173, 235.173, 519.617
+
+		set_camera_bookmark 5, -44.6613, 300.36, 784.052 -64.1384, 289.008, 756.88
+		set_camera_bookmark 6, -93.741, 253.538, 621.318 -102.856, 249.926, 618.097
+
+		set_camera_bookmark 7, 180.189, 281.55, 555.466 172.27, 281.559, 549.365
+
+		set_camera_bookmark 8, 213.269, 303.38, 394.04 204.225, 302.894, 389.837
+		set_camera_bookmark 9, -133.792, 231.696, -331.141 -134.114, 231.235, -323.633	;zoom closer to general
+		set_camera_bookmark 10, -136.903, 253.115, 537.476 -136.51, 252.553, 547.468
+		set_camera_bookmark 11, -349.805, 262.751, 650.596 -278.033, 241.07, 631.945	;zoom with cataphracts
+		set_camera_bookmark 12, -166.512, 258.413, 534.007 -165.102, 255.59, 543.692
+		set_camera_bookmark 13, -190.656, 242.825, 606.256 -180.691, 241.267, 606.48	;cut to back of cataphract charge
+		set_camera_bookmark 14, -142.19, 242.156, 589.438 -74.5364, 243.617, 654.65	;turn around
+		set_camera_bookmark 15, -354.782, 265.378, 654.576 -596.053, 233.959, 398.124	;zoom from hill to cataphracts
+		set_camera_bookmark 16, -365.58, 268.845, 652.835 -358.368, 268.295, 646.028	;start behind cataphracts
+		set_camera_bookmark 17, -318.467, 260.721, 651.55 -311.237, 259.066, 644.704	;zoom over cataphracts
+
+;		set_camera_bookmark 18, -195.82, 242.017, 596.233 -188.477, 241.707, 589.447
+		set_camera_bookmark 18, -116.706, 230.588, -315.077 -112.701, 234.545, -344.563
+
+		set_camera_bookmark 19, -139.093, 240.701, 516.182 -132.697, 240.391, 523.866
+
+		set_camera_bookmark 20, -187.733, 236.036, 520.083 -192.284, 236.88, 528.981
+		set_camera_bookmark 21, -163.282, 237.284, 548.002 -140.471, 237.714, 566.102
+
+
+;		battle_default_camera
+
+		camera_position_at_bookmark 7
+
+		set_music_state mobilize
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		battle_wait 1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 8 2
+
+		battle_wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_01 tag = carrhae_speech1
+
+		battle_wait 4
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 1			;start pos
+
+;		set_music_state battle
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+	 	unit_group_order_relative_move_formed GRP_PLAYER_ARMY_MAIN 0 100
+
+		battle_wait 5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_02 tag = carrhae_speech2
+
+		battle_wait 2
+	
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 2 3		;zoom above roman army
+
+		battle_wait 5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 18		;cut above roman army
+
+
+		battle_wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 3		;cut above roman army
+
+		play_sound_event CARRHAE_SPEECH_03 tag = carrhae_speech3
+
+
+		battle_wait 4
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_group_order_relative_move_formed GRP_PLAYER_CAVALRY 0 180
+
+		camera_zoom_to_bookmark 9 8	;zoom to crassus
+
+
+		battle_wait 6
+
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_04 tag = carrhae_speech4
+
+	;	play_sound_event MUSIC_BATTLE_BATTLE 1
+
+		camera_position_at_bookmark 4	; position alongside cavalry
+
+		battle_wait 4
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		set_music_state battle
+
+		camera_position_at_bookmark 5	;cut to hill overlooking
+
+		battle_wait 0.1
+
+		set_music_state battle
+
+		camera_zoom_to_bookmark 6 5	;zoom over parthian general
+
+		battle_wait 4
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_order_move	PARTHIAN_1_CATAPHRACT_1	-212.571 643.038 run
+		unit_order_move	PARTHIAN_1_CATAPHRACT_2	-190.707 668.976 run
+		unit_order_move	PARTHIAN_1_CATAPHRACT_3	-180.467 693.534 run
+
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_4	PLAYER_MEDIUM_CAVALRY_2 run
+		unit_order_attack_unit PARTHIAN_1_GENERAL	PLAYER_MEDIUM_CAVALRY_2 run
+
+		battle_wait 1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_05 tag = carrhae_speech5
+
+		battle_wait 6
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 15		;zoom to parthian cataphracts
+
+		battle_wait 5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_06 tag = carrhae_speech6
+
+		camera_position_at_bookmark 16			;behind cataphracts
+
+		battle_wait 1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; start horse archer encirclement
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_1	-192.910 -170.3084 run
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_2	-97.763 -159.383 run
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_3	-205.760 -308.239 run
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_4	-241.339 -210.173 run
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_5	-145.527 -333.612 run
+		unit_order_move	PARTHIAN_2_HORSE_ARCHERS_6	-57.848 -257.650 run
+		unit_order_move	PARTHIAN_2_GENERAL		114.353 -468.138 run	
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_1 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_2 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_3 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_4 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_5 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_6 PLAYER_GENERAL run
+	;	unit_order_attack_unit PARTHIAN_2_GENERAL PLAYER_GENERAL run
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		camera_zoom_to_bookmark 17 10			;zoom behind cataphracts
+
+		battle_wait 6
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_07 tag = carrhae_speech7
+
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_1	PLAYER_MEDIUM_CAVALRY_3 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_2	PLAYER_MEDIUM_CAVALRY_2 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_3	PLAYER_MEDIUM_CAVALRY_3 run
+
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_1	100 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_2	100 30 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_3 100 60 run
+	
+		camera_position_at_bookmark 20			;roman cavalry runs away
+	
+		battle_wait 4
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 14 12			; zoom behind roman cavalry
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_1 -255.501376, 593.36032, 90
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_2 -255.715584, 613.424768, 90
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_3 -255.3952, 573.181504, 90
+
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_1	0 100 run
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_2	0 100 run
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_3 0 100 run
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_1	-20 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_2	-20 -30 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_3 -20 -30 run
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_1	20 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_2	20 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_3 20 0 run
+
+		camera_position_at_bookmark 12
+
+		battle_wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+
+
+
+
+
+
+
+
+
+
+
+;;;;;;; new bookmarks
+
+;		set_camera_bookmark 1, -182.192, 241.104, 614.146 -190.39, 241.485, 608.455 ;cut to front of cataphract charge
+
+		set_camera_bookmark 1, -173.797, 241.346, 614.269 -182.007, 241.468, 608.571 ;cut to front of cataphract charge
+
+
+		set_camera_bookmark 2, -166.174, 243.025, 606.369 -163.379, 240.138, 597.004 ;cataphract sandwich player cavalry
+		set_camera_bookmark 3, -157.596, 239.822, 585.868 -160.245, 237.781, 595.386 ;zoom behind charge
+		set_camera_bookmark 4, -154.026, 239.553, 559.92 -155.966, 237.512, 569.607 ;cut to carnage
+		set_camera_bookmark 5, -146.053, 242.308, 600.526 -155.657, 240.263, 598.933
+		set_camera_bookmark 6, -154.707, 238.207, 563.769 -157.03, 236.353, 573.403
+		set_camera_bookmark 7, -155.616, 286.59, -371.065 -156.087, 281.695, -361.615
+		set_camera_bookmark 8, -163.133, 243.24, 606.877 -153.169, 241.681, 607.102
+		set_camera_bookmark 9, 151.025, 268.443, -268.43 141.478, 267.059, -266.627	;pan to above horse archers
+
+
+;		set_camera_bookmark 10, -45.0198, 235.264, -153.675 -52.4539, 231.577, -160.209	;cut to horse archers
+
+		set_camera_bookmark 10, -73.0453, 235.277, -144.144 -79.3288, 233.272, -151.51 ;cut to horse archers
+
+
+		set_camera_bookmark 11, -219.308, 242.296, -182.865 -210.371, 240.11, -187.249
+		set_camera_bookmark 12, -85.8738, 232.839, -149.873 -92.3032, 231.155, -157.475	;pan along behind horse archers
+		;set_camera_bookmark 13, -148.66, 239.392, 38.4102 -148.913, 235.71, 28.4151
+		;set_camera_bookmark 14, -145.459, 241.314, 164.699 -145.712, 240.632, 154.704
+
+		set_camera_bookmark 13, -148.66, 234.392, 38.4102 -148.913, 235.71, 28.4151
+		set_camera_bookmark 14, -145.459, 242.314, 164.699 -145.712, 240.632, 154.704
+
+		set_camera_bookmark 15, -140.002, 240.705, 590.49 -135.075, 239.603, 599.045
+		set_camera_bookmark 16, -187.497, 243.607, 613.466 -182.319, 239.62, 599.869
+		set_camera_bookmark 17, -130.293, 243.249, 600.868 -107.498, 244.863, 661.172
+		set_camera_bookmark 18, -120.842, 232.689, -237.139 -126.619, 229.316, -244.161	;follow arrows zoom to testudo
+		set_camera_bookmark 19, -47.7346, 250, -206.659 -134.194, 214.543, -247.408	;zoom above roman army
+
+
+
+
+
+
+		camera_position_at_bookmark 1
+
+
+
+		unit_immediate_place PLAYER_MEDIUM_CAVALRY_1 -159.022, 540.575, -90
+		unit_immediate_place PLAYER_MEDIUM_CAVALRY_2 -159.975, 560.293, -90
+		unit_immediate_place PLAYER_MEDIUM_CAVALRY_3 -158.720, 580.298, -90
+
+;		unit_immediate_place PARTHIAN_1_CATAPHRACT_4 -59.326, 608.096, 90
+		unit_immediate_place PARTHIAN_1_CATAPHRACT_4 -133.326, 608.096, 90
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_4	PLAYER_MEDIUM_CAVALRY_1 run
+
+		unit_immediate_place PARTHIAN_1_GENERAL -113.409 635.816, 90
+;		unit_immediate_place PARTHIAN_1_GENERAL -73.409 635.816, 90
+		unit_order_attack_unit PARTHIAN_1_GENERAL PLAYER_MEDIUM_CAVALRY_2 run
+
+
+		battle_wait 1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_1	100 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_2	100 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_3 100 0 run
+
+
+
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_1	PLAYER_MEDIUM_CAVALRY_2 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_2	PLAYER_MEDIUM_CAVALRY_3 run
+		unit_order_attack_unit PARTHIAN_1_CATAPHRACT_3	PLAYER_MEDIUM_CAVALRY_1 run
+
+
+
+		battle_wait 1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+;		unit_order_attack_unit PLAYER_MEDIUM_CAVALRY_2 PARTHIAN_1_CATAPHRACT_4
+
+		camera_position_at_bookmark 16
+
+		battle_wait 0.1
+
+		camera_zoom_to_bookmark 2 15	;
+
+		battle_wait 2.5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_1	0 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_2	0 0 run
+		unit_order_move_relative	PLAYER_MEDIUM_CAVALRY_3 0 0 run
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 6
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 3
+
+		play_sound_event CARRHAE_SPEECH_08 tag = carrhae_speech8
+
+;		unit_order_attack_unit PLAYER_MEDIUM_CAVALRY_1 PARTHIAN_1_CATAPHRACT_1 run
+
+		battle_wait 0.1
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 4 5
+
+		battle_wait 6
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_set_morale PLAYER_MEDIUM_CAVALRY_1 routing
+		unit_set_morale PLAYER_MEDIUM_CAVALRY_2 routing
+		unit_set_morale PLAYER_MEDIUM_CAVALRY_3 routing
+
+		unit_order_move PARTHIAN_1_CATAPHRACT_1 -153.730 -214.664 run
+		unit_order_move PARTHIAN_1_CATAPHRACT_2 -153.730 -214.664 run
+		unit_order_move PARTHIAN_1_CATAPHRACT_3 -153.730 -214.664 run
+		unit_order_move PARTHIAN_1_CATAPHRACT_4 -153.730 -214.664 run
+		unit_order_move PARTHIAN_1_GENERAL -153.730 -214.664 run
+
+
+		;;;;;;;;;;;;;;;;;;;;;; cataphracts charge player army
+		;unit_order_attack_unit PARTHIAN_1_CATAPHRACT_1 PLAYER_GENERAL run
+		;unit_order_attack_unit PARTHIAN_1_CATAPHRACT_2 PLAYER_GENERAL run
+		;unit_order_attack_unit PARTHIAN_1_CATAPHRACT_3 PLAYER_GENERAL run
+		;unit_order_attack_unit PARTHIAN_1_CATAPHRACT_4 PLAYER_GENERAL run
+		;unit_order_attack_unit PARTHIAN_1_GENERAL PLAYER_GENERAL run
+		;;;;;;;;;;;;;;;;;;;;;;
+
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_09 tag = carrhae_speech9
+
+		camera_zoom_to_bookmark 9	;pan to horse archers
+
+		battle_wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		;;;;;;;;;;;;;;;;;;;;;; legionnaries form testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_1	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_2	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_3	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_4	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_5	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_6	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_7	testudo
+		unit_order_change_formation	PLAYER_LEGIONARY_8	testudo
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		restart_timer Wait_timer
+		while I_TimerElapsed Wait_timer < 6000
+		and I_CompareCounter battle_start = 0
+		end_while 
+		;;wait 6
+
+		kill_unit PLAYER_MEDIUM_CAVALRY_1
+		kill_unit PLAYER_MEDIUM_CAVALRY_2
+		kill_unit PLAYER_MEDIUM_CAVALRY_3
+
+		set_counter cavalry_dead 1
+
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+
+
+
+	;;;;;;;;;;;;;;;;;;; cavalry archers begin cantabrian circle
+
+	;unit_order_change_formation PARTHIAN_2_HORSE_ARCHERS_1 cantabrian
+	;unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_1 PLAYER_LEGIONARY_2
+
+
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_1
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_2
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_3
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_4
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_5
+	;	unit_use_special_ability PARTHIAN_2_HORSE_ARCHERS_6
+
+		unit_order_attack_unit PARTHIAN_2_HORSE_ARCHERS_6 PLAYER_LEGIONARY_1 run
+
+	;		-192.910 -170.3084 run
+	;	PARTHIAN_2_HORSE_ARCHERS_2	-97.763 -159.383 run
+	;	PARTHIAN_2_HORSE_ARCHERS_3	-205.760 -308.239 run
+	;	PARTHIAN_2_HORSE_ARCHERS_4	-241.339 -210.173 run
+	;	PARTHIAN_2_HORSE_ARCHERS_5	-145.527 -333.612 run
+	;	PARTHIAN_2_HORSE_ARCHERS_6	-57.848 -257.650 run
+	;	PARTHIAN_2_GENERAL		114.353 -468.138 run	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 10	;cut to horse archers
+
+		restart_timer Wait_timer
+		while I_TimerElapsed Wait_timer < 0001
+		and I_CompareCounter battle_start = 0
+		end_while 
+		;;wait 0.1
+
+		camera_zoom_to_bookmark 12 8	;pan behind horse archers firing
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		restart_timer Wait_timer
+		while I_TimerElapsed Wait_timer < 5500
+		and I_CompareCounter battle_start = 0
+		end_while 
+		;;wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 18	;follow arrows
+
+		restart_timer Wait_timer
+		while I_TimerElapsed Wait_timer < 2000
+		and I_CompareCounter battle_start = 0
+		end_while 
+		;;wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_10 tag = carrhae_speech10
+
+		restart_timer Wait_timer
+		while I_TimerElapsed Wait_timer < 6000
+		and I_CompareCounter battle_start = 0
+		end_while 
+		;;wait 6
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 19 10	;rise above roman army
+
+		battle_wait 5
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		play_sound_event CARRHAE_SPEECH_11 tag = carrhae_speech11
+
+		battle_wait 2
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_1 -141.539504, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_2 -128.194288, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_3 -149.305936, 143.512032, -174.79248
+		unit_immediate_place  PARTHIAN_1_CATAPHRACT_4  -107.462696, 143.512032, -174.79248
+
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_1	0 100 run
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_2	0 100 run
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_3 0 100 run
+		unit_order_move_relative	PARTHIAN_1_CATAPHRACT_4 0 100 run
+
+		battle_wait 3
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_position_at_bookmark 14	;cut to cataphracts
+
+		play_sound_event CARRHAE_SPEECH_12 tag = carrhae_speech12
+
+		battle_wait 0.1
+	
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		camera_zoom_to_bookmark 13 8	;pan right across cataphracts
+
+		battle_wait 8
+
+		while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+		end_while					; PLAYER CAN ESCAPE
+
+		set_counter player_not_escape 1	 
+ 
+		set_counter battle_start 1	  
+
+		terminate_monitor
+	end_monitor
+
+
+; *********************************************************************************************
+; *********************************************************************************************
+; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+; *********************************************************************************************
+; *********************************************************************************************
+
+
+	while I_InBattle
+	end_while
+
+	end_script
+
+
+
+
+
+
+
+

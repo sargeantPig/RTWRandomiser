@@ -1,0 +1,6739 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Names Database Entries
+;;
+;; Holds non-localised Latin names for settlements and characters.  These are arranged on
+;; a per faction basis.
+;;
+;; Entries are specified by the following syntax:
+;;
+;; faction: <faction name>
+;;	settlements
+;;		<settlement names list>
+;;	characters
+;;		<character names list>
+;;
+;; faction ... etc
+
+
+
+;; Sicily
+
+;; Italy
+faction: romans_senate
+
+	characters
+		Amulius
+		Augustus
+		Aulus
+		Caius
+		Cassius
+		Cnaeus
+		Cornelius
+		Decius
+		Flavius
+		Gaius
+		Galerius
+		Gnaeus
+		Julianus
+		Kaeso
+		Lentulus
+		Luca
+		Lucius
+		Manius 
+		Marcus
+		Nero
+		Numerius
+		Oppius
+		Placus
+		Publius
+		Quintis
+		Quintus
+		Secundus
+		Servius
+		Sextus
+		Sextius
+		Spurius
+		Tertius
+		Tiberius
+		Titus
+		Valerius
+		Vibius
+		Appius
+		Decimus
+		Herius
+		Herennius
+		Marcellus
+		Asinius
+
+
+	surnames
+		Acilius 
+		Aelius
+		Aemilius 
+		Afranius
+		Agricola
+		Albinus
+		Alfenius
+		Alienus
+		Ammianus
+		Ammonius 
+		Annaeus
+		Annius
+		Antio
+		Antonius
+		Appuleius
+		Aquilius
+		Asconius
+		Asinius
+		Atilius
+		Atinius
+		Attius
+		Aurelius
+		Ausonius
+		Avidius 
+		Avilius
+		Balbus
+		Caecilius
+		Caecina
+		Caelius
+		Caesennius
+		Calpurnius
+		Calvia
+		Canuleius
+		Carvilius
+		Casperius
+		Cassius
+		Ceionius
+		Cestius
+		Cilnius
+		Cincinnatus
+		Cincius
+		Cipius
+		Claudius
+		Clausus
+		Clodius
+		Cornelius
+		Coruncanius
+		Cossutius
+		Cottius
+		Curius
+		Curtius
+		Decius
+		Dellius
+		Didius
+		Dio
+		Domitianus
+		Domitius
+		Domna
+		Duillius
+		Ennius
+		Fabius
+		Fabricius
+		Falerius
+		Fannius
+		Flaminius
+		Flavius
+		Foedus
+		Fonteius
+		Fulvius
+		Furius
+		Gabinius
+		Galba
+		Gellius
+		Genucius
+		Gessius
+		Helvius
+		Herdonius
+		Hirtius
+		Hirtuleius
+		Horatius
+		Hordeonius
+		Hortensius
+		Hostilius
+		Ignatius
+		Iunius 
+		Iuventius
+		Julius
+		Junius
+		Laberius
+		Labienus
+		Laelius
+		Lappius
+		Libo
+		Licinius
+		Livius
+		Lollius
+		Lucullius
+		Lusius
+		Lutatius
+		Maccius
+		Macrinus
+		Maelius
+		Maenius
+		Maesa
+		Mallius
+		Mamaea
+		Mamilius
+		Mancinus
+		Manilius
+		Manlius
+		Marcius
+		Maximianus
+		Memmius
+		Menenius
+		Messius
+		Metellus
+		Mettius
+		Minucius
+		Mummius
+		Munatius
+		Naevius
+		Nigidius
+		Norbanus
+		Octavianus
+		Ofonius
+		Ogulnius
+		Opellius
+		Opimius
+		Oppius
+		Ostorius
+		Otho
+		Ovidius
+		Pacuvius
+		Papinius
+		Papirius
+		Pedius
+		Peducaeus
+		Perperna
+		Persius
+		Pescennius
+		Petillius
+		Petreius
+		Petronius
+		Piavonius
+		Platorius
+		Plautius
+		Pleminius
+		Plinius
+		Poetelius
+		Pompeius
+		Pompilius
+		Pomponius
+		Pontius
+		Popillius
+		Poppaedius
+		Poppaeus
+		Porcius
+		Postumius
+		Propertius
+		Publilius
+		Quinctilius
+		Quinctius
+		Rabirius
+		Rupilius
+		Rutilius
+		Sallustias
+		Salvidienus
+		Salvius
+		Scribonius
+		Sempronius
+		Septimius
+		Sergius
+		Sertorius
+		Servilius
+		Servius
+		Severus
+		Sextius
+		Silius
+		Sittius
+		Soaemias
+		Sosius
+		Statilius
+		Statius
+		Stertinius
+		Suetonius
+		Sulla
+		Sulpicius
+		Sutorius
+		Terentilius
+		Terentius
+		Tettius
+		Tiberius
+		Titus
+		Trajanus
+		Trebellius
+		Trebonianus
+		Trebonius
+		Triarius
+		Tullius
+		Tullus
+		Turranius
+		Ulpius
+		Ursus
+		Valens
+		Valerius
+		Varius
+		Vatinius
+		Vellius
+		Ventidius
+		Vergilius
+		Verginius
+		Verres
+		Verrius
+		Vespasianus
+		Vettius
+		Vibius
+		Vinicianus
+		Vipsanius
+		Virius
+		Vitellius
+		Vitruvius
+		Voconius
+		Volsinius
+		Volumnius
+		Agrippa
+		Aelianus
+		Aemilianus
+		Afer
+		Agricola
+		Ahala
+		Ahenobarbus
+		Alimentus
+		Andronicus
+		Antoninus
+		Arrianus
+		Asellio
+		Attianus
+		Attius
+		Augurinus
+		Aurelianus
+		Aureolus
+		Avidius
+		Balbillus
+		Balbinus
+		Barbatus
+		Blaesus
+		Bolanus
+		Brutus
+		Burrus
+		Caecilius
+		Caecina
+		Caecus
+		Caepio
+		Caldus
+		Calvinus
+		Camillus
+		Capito
+		Caprarius
+		Caracalla
+		Carausius
+		Carbo
+		Carinus
+		Carus
+		Cassianum
+		Cassius
+		Catalina
+		Cato
+		Catulus
+		Celadus
+		Celer
+		Celsus
+		Cerealis
+		Chaerea
+		Cicero
+		Cincinnatus
+		Cinna
+		Civilis
+		Classicianus
+		Classicus
+		Claudianus
+		Cocceianus
+		Cocles
+		Columella
+		Commodus
+		Constantinius
+		Constantius
+		Corbulo
+		Corialanus
+		Corvinus
+		Corvus
+		Cossus
+		Crassus
+		Creticus
+		Crispus
+		Cursor
+		Curtius
+		Decius
+		Delmeticus
+		Dentatus
+		Dolabella
+		Domitianus
+		Donatus
+		Drusus
+		Egnatius
+		Elagabalus
+		Fidenas
+		Figulus
+		Flaccus
+		Flaminius
+		Floarianus
+		Florus
+		Frontinus
+		Fronto
+		Fufetius
+		Fundanus
+		Fuscus
+		Gaetulicus
+		Galba
+		Galenus
+		Galerius
+		Galienus
+		Gallio
+		Geta
+		Glabrio
+		Glaucia
+		Gracchus
+		Hadrianus
+		Harsa
+		Hemina
+		Honoratus
+		Hostilius
+		Isauricus
+		Julianus
+		Laco
+		Laeca
+		Laenas
+		Laetus
+		Laevinus
+		Lentulus
+		Lepidus
+		Lepis
+		Libo
+		Licinianus
+		Licinius
+		Longinus
+		Longus
+		Lucanus
+		Lucullus
+		Luscinus
+		Macer
+		Macrianus
+		Macrinus
+		Macro
+		Maecenas
+		Maluginensis
+		Mamercus
+		Mancinus
+		Marcellinus
+		Marcellus
+		Maro
+		Maternus
+		Maxentius
+		Maximian
+		Mela
+		Messala
+		Milo
+		Mucianus
+		Murena
+		Mus
+		Nasica
+		Naso
+		Nepos
+		Nero
+		Nobilior
+		Octavius
+		Odaenathus
+		Ofella
+		Paelignus
+		Paetus
+		Palma
+		Pansa
+		Papinianus
+		Paterculus
+		Paulinus
+		Paullus
+		Paulus
+		Pedianus
+		Pennus
+		Pertinax
+		Philo
+		Pilatus
+		Piso
+		Plancus
+		Plautianus
+		Plautus
+		Pollio
+		Polybius
+		Potitus
+		Priscus
+		Probus
+		Pulcher
+		Pullus
+		Pupienus
+		Quadrigarius
+		Quietus
+		Quintilianus
+		Quirinius
+		Regillus
+		Regulus
+		Rex
+		Rullianus
+		Sabinus
+		Saccas
+		Sacrovir
+		Saturninus
+		Scaevola
+		Scapula
+		Scaurus
+		Scipio
+		Scribonianus
+		Secundus
+		Sejanus
+		Seneca
+		Senecio
+		Servianus
+		Servilianus
+		Severus
+		Sextus
+		Silanus
+		Silo
+		Silva
+		Silvanus
+		Statius
+		Stilo
+		Stolo
+		Sulla
+		Syrus
+		Tacitus
+		Thrasea
+		Tigellinus
+		Timesitheus
+		Torquatus
+		Trajanus
+		Tubertus
+		Tuditanus
+		Turbo
+		Ulpianus
+		Urbicus
+		Valens
+		Valerius
+		Varro
+		Varus
+		Verus
+		Vettus
+		Vinicianus
+		Volesus
+		Vulso
+
+	women
+		Metella
+		Domitia
+		Gratidia
+		Atia
+		Faustina
+		Ocellina
+		Magna
+		Poppaea
+		Verina
+		Ceacilia
+		Agrippina
+		Alfidia
+		Alypia
+		Ancharia
+		Antistia
+		Antonia
+		Arria
+		Aurelia
+		Baebiana
+		Caesonia
+		Claudia
+		Clodia
+		Cornelia
+		Crispina
+		Domitia
+		Domitilla
+		Drusilla
+		Dryantilla
+		Euphemia
+		Eutropia
+		Fabia
+		Fadia
+		Fannia
+		Fausta
+		Fulvia
+		Galla
+		Helena
+		Helvia
+		Honoria
+		Hostia
+		Julia
+		Ustina
+		Leontia
+		Lepida
+		Licinia
+		Livia
+		Livia
+		Livilla
+		Lucilla
+		Magia
+		Magna
+		Marcella
+		Marcia
+		Marciana
+		Mariniara
+		Matidia
+		Messalina
+		Minervina
+		Mucia
+		Octavia
+		Orbiana
+		Papiria
+		Paulina
+		Placidia
+		Plautilla
+		Plotina
+		Pompeia
+		Pomponia
+		Popillia
+		Porcia
+		Prisca
+		Pulcheria
+		Sabina
+		Salonina
+		Sempronia
+		Servilia
+		Severa
+		Severina
+		Sulpicia
+		Terentia
+		Titiana
+		Tranquillina
+		Tullia
+		Turia
+		Ulpia
+		Urgulania
+		Urgunalla
+		Vibia
+		Violentilla
+		Vipsania
+		Vistilia
+
+faction: romans_julii
+
+	characters
+		Amulius
+		Augustus
+		Aulus
+		Caius
+		Cassius
+		Cnaeus
+		Cornelius
+		Decius
+		Flavius
+		Gaius
+		Galerius
+		Gnaeus
+		Julianus
+		Kaeso
+		Lentulus
+		Luca
+		Lucius
+		Manius
+		Marcus
+		Nero
+		Numerius
+		Oppius
+		Placus
+		Publius
+		Quintis
+		Quintus
+		Secundus
+		Servius
+		Sextus
+		Spurius
+		Tertius
+		Tiberius
+		Titus
+		Valerius
+		Vibius
+		Appius
+		Decimus
+		Herius
+		Herennius
+		Marcellus
+		Asinius
+
+	surnames
+		Acilius
+		Aelius
+		Aemilius
+		Afranius
+		Agricola
+		Albinus
+		Alfenius
+		Alienus
+		Ammianus
+		Ammonius
+		Annaeus
+		Annius
+		Antio
+		Antonius
+		Appuleius
+		Aquilius
+		Asconius
+		Asinius
+		Atilius
+		Atinius
+		Attius
+		Aurelius
+		Ausonius
+		Avidius
+		Avilius
+		Balbus
+		Caecina
+		Caelius
+		Caesennius
+		Calpurnius
+		Calvia
+		Canuleius
+		Carvilius
+		Casperius
+		Cassius
+		Ceionius
+		Cestius
+		Cilnius
+		Cincinnatus
+		Cincius
+		Cipius
+		Clausus
+		Clodius
+		Coruncanius
+		Cossutius
+		Cottius
+		Curius
+		Curtius
+		Dellius
+		Didius
+		Dio
+		Domitianus
+		Domitius
+		Domna
+		Duillius
+		Ennius
+		Fabius
+		Fabricius
+		Falerius
+		Fannius
+		Flaminius
+		Flavius
+		Foedus
+		Fonteius
+		Fulvius
+		Furius
+		Gabinius
+		Galba
+		Gellius
+		Genucius
+		Gessius
+		Helvius
+		Herdonius
+		Hirtius
+		Hirtuleius
+		Horatius
+		Hordeonius
+		Hortensius
+		Hostilius
+		Ignatius
+		Iunius
+		Iuventius
+		Julius
+		Laberius
+		Labienus
+		Laelius
+		Lappius
+		Libo
+		Licinius
+		Livius
+		Lollius
+		Lucullius
+		Lusius
+		Lutatius
+		Maccius
+		Macrinus
+		Maelius
+		Maenius
+		Maesa
+		Mallius
+		Mamaea
+		Mamilius
+		Mancinus
+		Manilius
+		Manlius
+		Marcius
+		Maximianus
+		Memmius
+		Menenius
+		Messius
+		Mettius
+		Minucius
+		Mummius
+		Munatius
+		Naevius
+		Nigidius
+		Norbanus
+		Octavianus
+		Ofonius
+		Ogulnius
+		Opellius
+		Opimius
+		Oppius
+		Ostorius
+		Otho
+		Ovidius
+		Pacuvius
+		Papinius
+		Papirius
+		Pedius
+		Peducaeus
+		Perperna
+		Persius
+		Pescennius
+		Petillius
+		Petreius
+		Petronius
+		Piavonius
+		Platorius
+		Plautius
+		Pleminius
+		Plinius
+		Poetelius
+		Pompeius
+		Pompilius
+		Pomponius
+		Pontius
+		Popillius
+		Poppaedius
+		Poppaeus
+		Porcius
+		Postumius
+		Propertius
+		Publilius
+		Quinctilius
+		Quinctius
+		Rabirius
+		Rupilius
+		Rutilius
+		Sallustias
+		Salvidienus
+		Salvius
+		Scribonius
+		Sempronius
+		Septimius
+		Sergius
+		Sertorius
+		Servilius
+		Servius
+		Severus
+		Sextius
+		Silius
+		Sittius
+		Soaemias
+		Sosius
+		Statilius
+		Statius
+		Stertinius
+		Suetonius
+		Sulla
+		Sulpicius
+		Sutorius
+		Terentilius
+		Terentius
+		Tettius
+		Tiberius
+		Titus
+		Trajanus
+		Trebellius
+		Trebonianus
+		Trebonius
+		Triarius
+		Tullius
+		Tullus
+		Turranius
+		Ulpius
+		Ursus
+		Valens
+		Valerius
+		Varius
+		Vatinius
+		Vellius
+		Ventidius
+		Vergilius
+		Verginius
+		Verres
+		Verrius
+		Vespasianus
+		Vettius
+		Vibius
+		Vinicianus
+		Vipsanius
+		Virius
+		Vitellius
+		Vitruvius
+		Voconius
+		Volsinius
+		Volumnius
+		Agrippa
+		Aelianus
+		Aemilianus
+		Afer
+		Agricola
+		Ahala
+		Ahenobarbus
+		Alimentus
+		Andronicus
+		Antoninus
+		Arrianus
+		Asellio
+		Attianus
+		Attius
+		Augurinus
+		Aurelianus
+		Aureolus
+		Avidius
+		Balbillus
+		Balbinus
+		Barbatus
+		Blaesus
+		Bolanus
+		Burrus
+		Caecina
+		Caecus
+		Caepio
+		Caldus
+		Calvinus
+		Camillus
+		Capito
+		Caprarius
+		Caracalla
+		Carausius
+		Carbo
+		Carinus
+		Carus
+		Cassianum
+		Cassius
+		Catalina
+		Cato
+		Catulus
+		Celadus
+		Celer
+		Celsus
+		Cerealis
+		Chaerea
+		Cicero
+		Cincinnatus
+		Cinna
+		Civilis
+		Classicianus
+		Classicus
+		Claudianus
+		Cocceianus
+		Cocles
+		Columella
+		Commodus
+		Constantinius
+		Constantius
+		Corbulo
+		Corialanus
+		Corvinus
+		Corvus
+		Cossus
+		Crassus
+		Creticus
+		Crispus
+		Cursor
+		Curtius
+		Decius
+		Delmeticus
+		Dentatus
+		Dolabella
+		Domitianus
+		Donatus
+		Drusus
+		Egnatius
+		Elagabalus
+		Fidenas
+		Figulus
+		Flaccus
+		Flaminius
+		Floarianus
+		Florus
+		Frontinus
+		Fronto
+		Fufetius
+		Fundanus
+		Fuscus
+		Gaetulicus
+		Galba
+		Galenus
+		Galerius
+		Galienus
+		Gallio
+		Geta
+		Glabrio
+		Glaucia
+		Gracchus
+		Hadrianus
+		Harsa
+		Hemina
+		Honoratus
+		Hostilius
+		Isauricus
+		Julianus
+		Laco
+		Laeca
+		Laenas
+		Laetus
+		Laevinus
+		Lentulus
+		Lepidus
+		Lepis
+		Libo
+		Licinianus
+		Licinius
+		Longinus
+		Longus
+		Lucanus
+		Lucullus
+		Luscinus
+		Macer
+		Macrianus
+		Macrinus
+		Macro
+		Maecenas
+		Maluginensis
+		Mamercus
+		Mancinus
+		Marcellinus
+		Marcellus
+		Maro
+		Maternus
+		Maxentius
+		Maximian
+		Mela
+		Messala
+		Milo
+		Mucianus
+		Murena
+		Mus
+		Nasica
+		Naso
+		Nepos
+		Nero
+		Nobilior
+		Octavius
+		Odaenathus
+		Ofella
+		Paelignus
+		Paetus
+		Palma
+		Pansa
+		Papinianus
+		Paterculus
+		Paulinus
+		Paullus
+		Paulus
+		Pedianus
+		Pennus
+		Pertinax
+		Philo
+		Pilatus
+		Piso
+		Plancus
+		Plautianus
+		Plautus
+		Pollio
+		Polybius
+		Potitus
+		Priscus
+		Probus
+		Pulcher
+		Pullus
+		Pupienus
+		Quadrigarius
+		Quietus
+		Quintilianus
+		Quirinius
+		Regillus
+		Regulus
+		Rex
+		Rullianus
+		Sabinus
+		Saccas
+		Sacrovir
+		Saturninus
+		Scaevola
+		Scapula
+		Scaurus
+		Scribonianus
+		Secundus
+		Sejanus
+		Seneca
+		Senecio
+		Servianus
+		Servilianus
+		Severus
+		Sextus
+		Silanus
+		Silo
+		Silva
+		Silvanus
+		Statius
+		Stilo
+		Stolo
+		Sulla
+		Syrus
+		Tacitus
+		Thrasea
+		Tigellinus
+		Timesitheus
+		Torquatus
+		Trajanus
+		Tubertus
+		Tuditanus
+		Turbo
+		Ulpianus
+		Urbicus
+		Valens
+		Valerius
+		Varro
+		Varus
+		Verus
+		Vettus
+		Vinicianus
+		Volesus
+		Vulso
+
+	women
+		Metella
+		Domitia
+		Gratidia
+		Atia
+		Faustina
+		Ocellina
+		Magna
+		Poppaea
+		Verina
+		Ceacilia
+		Agrippina
+		Alfidia
+		Alypia
+		Ancharia
+		Antistia
+		Antonia
+		Arria
+		Aurelia
+		Baebiana
+		Caesonia
+		Claudia
+		Clodia
+		Cornelia
+		Crispina
+		Domitia
+		Domitilla
+		Drusilla
+		Dryantilla
+		Euphemia
+		Eutropia
+		Fabia
+		Fadia
+		Fannia
+		Fausta
+		Fulvia
+		Galla
+		Helena
+		Helvia
+		Honoria
+		Hostia
+		Julia
+		Ustina
+		Leontia
+		Lepida
+		Licinia
+		Livia
+		Livia
+		Livilla
+		Lucilla
+		Magia
+		Magna
+		Marcella
+		Marcia
+		Marciana
+		Mariniara
+		Matidia
+		Messalina
+		Minervina
+		Mucia
+		Octavia
+		Orbiana
+		Papiria
+		Paulina
+		Placidia
+		Plautilla
+		Plotina
+		Pompeia
+		Pomponia
+		Popillia
+		Porcia
+		Prisca
+		Pulcheria
+		Sabina
+		Salonina
+		Sempronia
+		Servilia
+		Severa
+		Severina
+		Sulpicia
+		Terentia
+		Titiana
+		Tranquillina
+		Tullia
+		Turia
+		Ulpia
+		Urgulania
+		Urgunalla
+		Vibia
+		Violentilla
+		Vipsania
+		Vistilia
+
+
+faction: romans_brutii
+
+	characters
+		Amulius
+		Augustus
+		Aulus
+		Caius
+		Cassius
+		Cnaeus
+		Cornelius
+		Decius
+		Flavius
+		Gaius
+		Galerius
+		Gnaeus
+		Julianus
+		Kaeso
+		Lentulus
+		Luca
+		Lucius
+		Manius
+		Marcus
+		Nero
+		Numerius
+		Oppius
+		Placus
+		Publius
+		Quintis
+		Quintus
+		Secundus
+		Servius
+		Sextus
+		Spurius
+		Tertius
+		Tiberius
+		Titus
+		Valerius
+		Vibius
+		Appius
+		Decimus
+		Herius
+		Herennius
+		Marcellus
+		Asinius
+
+	surnames
+		Acilius
+		Aelius
+		Aemilius
+		Afranius
+		Agricola
+		Albinus
+		Alfenius
+		Alienus
+		Ammianus
+		Ammonius
+		Annaeus
+		Annius
+		Antio
+		Antonius
+		Appuleius
+		Aquilius
+		Asconius
+		Asinius
+		Atilius
+		Atinius
+		Attius
+		Aurelius
+		Ausonius
+		Avidius
+		Avilius
+		Balbus
+		Caecilius
+		Caecina
+		Caelius
+		Caesennius
+		Calpurnius
+		Calvia
+		Canuleius
+		Carvilius
+		Casperius
+		Cassius
+		Ceionius
+		Cestius
+		Cilnius
+		Cincinnatus
+		Cincius
+		Cipius
+		Claudius
+		Clausus
+		Clodius
+		Cornelius
+		Coruncanius
+		Cossutius
+		Cottius
+		Curius
+		Curtius
+		Decius
+		Dellius
+		Didius
+		Dio
+		Domitianus
+		Domitius
+		Domna
+		Duillius
+		Ennius
+		Fabius
+		Fabricius
+		Falerius
+		Fannius
+		Flaminius
+		Flavius
+		Foedus
+		Fonteius
+		Fulvius
+		Furius
+		Gabinius
+		Galba
+		Gellius
+		Genucius
+		Gessius
+		Helvius
+		Herdonius
+		Hirtius
+		Hirtuleius
+		Horatius
+		Hordeonius
+		Hortensius
+		Hostilius
+		Ignatius
+		Iunius
+		Iuventius
+		Junius
+		Laberius
+		Labienus
+		Laelius
+		Lappius
+		Libo
+		Licinius
+		Livius
+		Lollius
+		Lucullius
+		Lusius
+		Lutatius
+		Maccius
+		Macrinus
+		Maelius
+		Maenius
+		Maesa
+		Mallius
+		Mamaea
+		Mamilius
+		Mancinus
+		Manilius
+		Manlius
+		Marcius
+		Maximianus
+		Memmius
+		Menenius
+		Messius
+		Metellus
+		Mettius
+		Minucius
+		Mummius
+		Munatius
+		Naevius
+		Nigidius
+		Norbanus
+		Ofonius
+		Ogulnius
+		Opellius
+		Opimius
+		Oppius
+		Ostorius
+		Otho
+		Ovidius
+		Pacuvius
+		Papinius
+		Papirius
+		Pedius
+		Peducaeus
+		Perperna
+		Persius
+		Pescennius
+		Petillius
+		Petreius
+		Petronius
+		Piavonius
+		Platorius
+		Plautius
+		Pleminius
+		Plinius
+		Poetelius
+		Pompeius
+		Pompilius
+		Pomponius
+		Pontius
+		Popillius
+		Poppaedius
+		Poppaeus
+		Porcius
+		Postumius
+		Propertius
+		Publilius
+		Quinctilius
+		Quinctius
+		Rabirius
+		Rupilius
+		Rutilius
+		Sallustias
+		Salvidienus
+		Salvius
+		Scribonius
+		Sempronius
+		Septimius
+		Sergius
+		Sertorius
+		Servilius
+		Servius
+		Severus
+		Sextius
+		Silius
+		Sittius
+		Soaemias
+		Sosius
+		Statilius
+		Statius
+		Stertinius
+		Suetonius
+		Sulla
+		Sulpicius
+		Sutorius
+		Terentilius
+		Terentius
+		Tettius
+		Tiberius
+		Titus
+		Trajanus
+		Trebellius
+		Trebonianus
+		Trebonius
+		Triarius
+		Tullius
+		Tullus
+		Turranius
+		Ulpius
+		Ursus
+		Valens
+		Valerius
+		Varius
+		Vatinius
+		Vellius
+		Ventidius
+		Vergilius
+		Verginius
+		Verres
+		Verrius
+		Vespasianus
+		Vettius
+		Vibius
+		Vinicianus
+		Vipsanius
+		Virius
+		Vitellius
+		Vitruvius
+		Voconius
+		Volsinius
+		Volumnius
+		Agrippa
+		Aelianus
+		Aemilianus
+		Afer
+		Agricola
+		Ahala
+		Ahenobarbus
+		Alimentus
+		Andronicus
+		Antoninus
+		Arrianus
+		Asellio
+		Attianus
+		Attius
+		Augurinus
+		Aurelianus
+		Aureolus
+		Avidius
+		Balbillus
+		Balbinus
+		Barbatus
+		Blaesus
+		Bolanus
+		Brutus
+		Burrus
+		Caecilius
+		Caecina
+		Caecus
+		Caepio
+		Caldus
+		Calvinus
+		Camillus
+		Capito
+		Caprarius
+		Caracalla
+		Carausius
+		Carbo
+		Carinus
+		Carus
+		Cassianum
+		Cassius
+		Catalina
+		Cato
+		Catulus
+		Celadus
+		Celer
+		Celsus
+		Cerealis
+		Chaerea
+		Cicero
+		Cincinnatus
+		Cinna
+		Civilis
+		Classicianus
+		Classicus
+		Claudianus
+		Cocceianus
+		Cocles
+		Columella
+		Commodus
+		Constantinius
+		Constantius
+		Corbulo
+		Corialanus
+		Corvinus
+		Corvus
+		Cossus
+		Crassus
+		Creticus
+		Crispus
+		Cursor
+		Curtius
+		Decius
+		Delmeticus
+		Dentatus
+		Dolabella
+		Domitianus
+		Donatus
+		Drusus
+		Egnatius
+		Elagabalus
+		Fidenas
+		Figulus
+		Flaccus
+		Flaminius
+		Floarianus
+		Florus
+		Frontinus
+		Fronto
+		Fufetius
+		Fundanus
+		Fuscus
+		Gaetulicus
+		Galba
+		Galenus
+		Galerius
+		Galienus
+		Gallio
+		Geta
+		Glabrio
+		Glaucia
+		Gracchus
+		Hadrianus
+		Harsa
+		Hemina
+		Honoratus
+		Hostilius
+		Isauricus
+		Julianus
+		Laco
+		Laeca
+		Laenas
+		Laetus
+		Laevinus
+		Lentulus
+		Lepidus
+		Lepis
+		Libo
+		Licinianus
+		Licinius
+		Longinus
+		Longus
+		Lucanus
+		Lucullus
+		Luscinus
+		Macer
+		Macrianus
+		Macrinus
+		Macro
+		Maecenas
+		Maluginensis
+		Mamercus
+		Mancinus
+		Marcellinus
+		Marcellus
+		Maro
+		Maternus
+		Maxentius
+		Maximian
+		Mela
+		Messala
+		Milo
+		Mucianus
+		Murena
+		Mus
+		Nasica
+		Naso
+		Nepos
+		Nobilior
+		Odaenathus
+		Ofella
+		Paelignus
+		Paetus
+		Palma
+		Pansa
+		Papinianus
+		Paterculus
+		Paulinus
+		Paullus
+		Paulus
+		Pedianus
+		Pennus
+		Pertinax
+		Philo
+		Pilatus
+		Piso
+		Plancus
+		Plautianus
+		Plautus
+		Pollio
+		Polybius
+		Potitus
+		Priscus
+		Probus
+		Pulcher
+		Pullus
+		Pupienus
+		Quadrigarius
+		Quietus
+		Quintilianus
+		Quirinius
+		Regillus
+		Regulus
+		Rex
+		Rullianus
+		Sabinus
+		Saccas
+		Sacrovir
+		Saturninus
+		Scaevola
+		Scapula
+		Scaurus
+		Scribonianus
+		Secundus
+		Sejanus
+		Seneca
+		Senecio
+		Servianus
+		Servilianus
+		Severus
+		Sextus
+		Silanus
+		Silo
+		Silva
+		Silvanus
+		Statius
+		Stilo
+		Stolo
+		Sulla
+		Syrus
+		Tacitus
+		Thrasea
+		Tigellinus
+		Timesitheus
+		Torquatus
+		Trajanus
+		Tubertus
+		Tuditanus
+		Turbo
+		Ulpianus
+		Urbicus
+		Valens
+		Valerius
+		Varro
+		Varus
+		Verus
+		Vettus
+		Vinicianus
+		Volesus
+		Vulso
+
+
+	women
+		Metella
+		Domitia
+		Gratidia
+		Atia
+		Faustina
+		Ocellina
+		Magna
+		Poppaea
+		Verina
+		Ceacilia
+		Agrippina
+		Alfidia
+		Alypia
+		Ancharia
+		Antistia
+		Antonia
+		Arria
+		Aurelia
+		Baebiana
+		Caesonia
+		Claudia
+		Clodia
+		Cornelia
+		Crispina
+		Domitia
+		Domitilla
+		Drusilla
+		Dryantilla
+		Euphemia
+		Eutropia
+		Fabia
+		Fadia
+		Fannia
+		Fausta
+		Fulvia
+		Galla
+		Helena
+		Helvia
+		Honoria
+		Hostia
+		Julia
+		Ustina
+		Leontia
+		Lepida
+		Licinia
+		Livia
+		Livia
+		Livilla
+		Lucilla
+		Magia
+		Magna
+		Marcella
+		Marcia
+		Marciana
+		Mariniara
+		Matidia
+		Messalina
+		Minervina
+		Mucia
+		Octavia
+		Orbiana
+		Papiria
+		Paulina
+		Placidia
+		Plautilla
+		Plotina
+		Pompeia
+		Pomponia
+		Popillia
+		Porcia
+		Prisca
+		Pulcheria
+		Sabina
+		Salonina
+		Sempronia
+		Servilia
+		Severa
+		Severina
+		Sulpicia
+		Terentia
+		Titiana
+		Tranquillina
+		Tullia
+		Turia
+		Ulpia
+		Urgulania
+		Urgunalla
+		Vibia
+		Violentilla
+		Vipsania
+		Vistilia
+
+faction: romans_scipii
+
+	characters
+		Amulius
+		Augustus
+		Aulus
+		Caius
+		Cassius
+		Cnaeus
+		Cornelius
+		Decius
+		Flavius
+		Gaius
+		Galerius
+		Gnaeus
+		Julianus
+		Kaeso
+		Lentulus
+		Luca
+		Lucius
+		Manius
+		Marcus
+		Nero
+		Numerius
+		Oppius
+		Placus
+		Publius
+		Quintis
+		Quintus
+		Secundus
+		Servius
+		Sextus
+		Spurius
+		Tertius
+		Tiberius
+		Titus
+		Valerius
+		Vibius
+		Appius
+		Decimus
+		Herius
+		Herennius
+		Marcellus
+		Asinius
+
+	surnames
+		Acilius
+		Aelius
+		Aemilius
+		Afranius
+		Agricola
+		Albinus
+		Alfenius
+		Alienus
+		Ammianus
+		Ammonius
+		Annaeus
+		Annius
+		Antio
+		Antonius
+		Appuleius
+		Aquilius
+		Asconius
+		Asinius
+		Atilius
+		Atinius
+		Attius
+		Aurelius
+		Ausonius
+		Avidius
+		Avilius
+		Balbus
+		Caecilius
+		Caecina
+		Caelius
+		Caesennius
+		Calpurnius
+		Calvia
+		Canuleius
+		Carvilius
+		Casperius
+		Cassius
+		Ceionius
+		Cestius
+		Cilnius
+		Cincinnatus
+		Cincius
+		Cipius
+		Claudius
+		Clausus
+		Clodius
+		Cornelius
+		Coruncanius
+		Cossutius
+		Cottius
+		Curius
+		Curtius
+		Decius
+		Dellius
+		Didius
+		Dio
+		Domitianus
+		Domitius
+		Domna
+		Duillius
+		Ennius
+		Fabius
+		Fabricius
+		Falerius
+		Fannius
+		Flaminius
+		Flavius
+		Foedus
+		Fonteius
+		Fulvius
+		Furius
+		Gabinius
+		Galba
+		Gellius
+		Genucius
+		Gessius
+		Helvius
+		Herdonius
+		Hirtius
+		Hirtuleius
+		Horatius
+		Hordeonius
+		Hortensius
+		Hostilius
+		Ignatius
+		Iunius
+		Iuventius
+		Junius
+		Laberius
+		Labienus
+		Laelius
+		Lappius
+		Libo
+		Licinius
+		Livius 
+		Lollius
+		Lucullius
+		Lusius
+		Lutatius
+		Maccius
+		Macrinus
+		Maelius
+		Maenius
+		Maesa
+		Mallius
+		Mamaea
+		Mamilius
+		Mancinus
+		Manilius
+		Manlius
+		Marcius
+		Maximianus
+		Memmius
+		Menenius
+		Messius
+		Metellus
+		Mettius
+		Minucius
+		Mummius
+		Munatius
+		Naevius
+		Nigidius
+		Norbanus
+		Ofonius
+		Ogulnius
+		Opellius
+		Opimius
+		Oppius
+		Ostorius
+		Otho
+		Ovidius
+		Pacuvius
+		Papinius
+		Papirius
+		Pedius
+		Peducaeus
+		Perperna
+		Persius
+		Pescennius
+		Petillius
+		Petreius
+		Petronius
+		Piavonius
+		Platorius
+		Plautius
+		Pleminius
+		Plinius
+		Poetelius
+		Pompeius
+		Pompilius
+		Pomponius
+		Pontius
+		Popillius
+		Poppaedius
+		Poppaeus
+		Porcius
+		Postumius
+		Propertius
+		Publilius
+		Quinctilius
+		Quinctius
+		Rabirius
+		Rupilius
+		Rutilius
+		Sallustias
+		Salvidienus
+		Salvius
+		Scribonius
+		Sempronius
+		Septimius
+		Sergius
+		Sertorius
+		Servilius
+		Servius
+		Severus
+		Sextius
+		Silius
+		Sittius
+		Soaemias
+		Sosius
+		Statilius
+		Statius
+		Stertinius
+		Suetonius
+		Sulla
+		Sulpicius
+		Sutorius
+		Terentilius
+		Terentius
+		Tettius
+		Tiberius
+		Titus
+		Trajanus
+		Trebellius
+		Trebonianus
+		Trebonius
+		Triarius
+		Tullius
+		Tullus
+		Turranius
+		Ulpius
+		Ursus
+		Valens
+		Valerius
+		Varius
+		Vatinius
+		Vellius
+		Ventidius
+		Vergilius
+		Verginius
+		Verres
+		Verrius
+		Vespasianus
+		Vettius
+		Vibius
+		Vinicianus
+		Vipsanius
+		Virius
+		Vitellius
+		Vitruvius
+		Voconius
+		Volsinius
+		Volumnius
+		Agrippa
+		Aelianus
+		Aemilianus
+		Afer
+		Agricola
+		Ahala
+		Ahenobarbus
+		Alimentus
+		Andronicus
+		Antoninus
+		Arrianus
+		Asellio
+		Attianus
+		Attius
+		Augurinus
+		Aurelianus
+		Aureolus
+		Avidius
+		Balbillus
+		Balbinus
+		Barbatus
+		Blaesus
+		Bolanus
+		Burrus
+		Caecilius
+		Caecina
+		Caecus
+		Caepio
+		Caldus
+		Calvinus
+		Camillus
+		Capito
+		Caprarius
+		Caracalla
+		Carausius
+		Carbo
+		Carinus
+		Carus
+		Cassianum
+		Cassius
+		Catalina
+		Cato
+		Catulus
+		Celadus
+		Celer
+		Celsus
+		Cerealis
+		Chaerea
+		Cicero
+		Cincinnatus
+		Cinna
+		Civilis
+		Classicianus
+		Classicus
+		Claudianus
+		Cocceianus
+		Cocles
+		Columella
+		Commodus
+		Constantinius
+		Constantius
+		Corbulo
+		Corialanus
+		Corvinus
+		Corvus
+		Cossus
+		Crassus
+		Creticus
+		Crispus
+		Cursor
+		Curtius
+		Decius
+		Delmeticus
+		Dentatus
+		Dolabella
+		Domitianus
+		Donatus
+		Drusus
+		Egnatius
+		Elagabalus
+		Fidenas
+		Figulus
+		Flaccus
+		Flaminius
+		Floarianus
+		Florus
+		Frontinus
+		Fronto
+		Fufetius
+		Fundanus
+		Fuscus
+		Gaetulicus
+		Galba
+		Galenus
+		Galerius
+		Galienus
+		Gallio
+		Geta
+		Glabrio
+		Glaucia
+		Gracchus
+		Hadrianus
+		Harsa
+		Hemina
+		Honoratus
+		Hostilius
+		Isauricus
+		Julianus
+		Laco
+		Laeca
+		Laenas
+		Laetus
+		Laevinus
+		Lentulus
+		Lepidus
+		Lepis
+		Libo
+		Licinianus
+		Licinius
+		Longinus
+		Longus
+		Lucanus
+		Lucullus
+		Luscinus
+		Macer
+		Macrianus
+		Macrinus
+		Macro
+		Maecenas
+		Maluginensis
+		Mamercus
+		Mancinus
+		Marcellinus
+		Marcellus
+		Maro
+		Maternus
+		Maxentius
+		Maximian
+		Mela
+		Messala
+		Milo
+		Mucianus
+		Murena
+		Mus
+		Nasica
+		Naso
+		Nepos
+		Nobilior
+		Odaenathus
+		Ofella
+		Paelignus
+		Paetus
+		Palma
+		Pansa
+		Papinianus
+		Paterculus
+		Paulinus
+		Paullus
+		Paulus
+		Pedianus
+		Pennus
+		Pertinax
+		Philo
+		Pilatus
+		Piso
+		Plancus
+		Plautianus
+		Plautus
+		Pollio
+		Polybius
+		Potitus
+		Priscus
+		Probus
+		Pulcher
+		Pullus
+		Pupienus
+		Quadrigarius
+		Quietus
+		Quintilianus
+		Quirinius
+		Regillus
+		Regulus
+		Rex
+		Rullianus
+		Sabinus
+		Saccas
+		Sacrovir
+		Saturninus
+		Scaevola
+		Scapula
+		Scaurus
+		Scipio
+		Scribonianus
+		Secundus
+		Sejanus
+		Seneca
+		Senecio
+		Servianus
+		Servilianus
+		Severus
+		Sextus
+		Silanus
+		Silo
+		Silva
+		Silvanus
+		Statius
+		Stilo
+		Stolo
+		Sulla
+		Syrus
+		Tacitus
+		Thrasea
+		Tigellinus
+		Timesitheus
+		Torquatus
+		Trajanus
+		Tubertus
+		Tuditanus
+		Turbo
+		Ulpianus
+		Urbicus
+		Valens
+		Valerius
+		Varro
+		Varus
+		Verus
+		Vettus
+		Vinicianus
+		Volesus
+		Vulso
+
+	women
+		Metella
+		Domitia
+		Gratidia
+		Atia
+		Faustina
+		Ocellina
+		Magna
+		Poppaea
+		Verina
+		Ceacilia
+		Agrippina
+		Alfidia
+		Alypia
+		Ancharia
+		Antistia
+		Antonia
+		Arria
+		Aurelia
+		Baebiana
+		Caesonia
+		Claudia
+		Clodia
+		Cornelia
+		Crispina
+		Domitia
+		Domitilla
+		Drusilla
+		Dryantilla
+		Euphemia
+		Eutropia
+		Fabia
+		Fadia
+		Fannia
+		Fausta
+		Fulvia
+		Galla
+		Helena
+		Helvia
+		Honoria
+		Hostia
+		Julia
+		Ustina
+		Leontia
+		Lepida
+		Licinia
+		Livia
+		Livia
+		Livilla
+		Lucilla
+		Magia
+		Magna
+		Marcella
+		Marcia
+		Marciana
+		Mariniara
+		Matidia
+		Messalina
+		Minervina
+		Mucia
+		Octavia
+		Orbiana
+		Papiria
+		Paulina
+		Placidia
+		Plautilla
+		Plotina
+		Pompeia
+		Pomponia
+		Popillia
+		Porcia
+		Prisca
+		Pulcheria
+		Sabina
+		Salonina
+		Sempronia
+		Servilia
+		Severa
+		Severina
+		Sulpicia
+		Terentia
+		Titiana
+		Tranquillina
+		Tullia
+		Turia
+		Ulpia
+		Urgulania
+		Urgunalla
+		Vibia
+		Violentilla
+		Vipsania
+		Vistilia
+
+;; Gaul
+faction: gauls
+
+	characters
+		Aneirin
+		Adcobrovatus
+		Amminos
+		Barrivendos
+		Budic
+		Belenus
+		Berdic
+		Brennus
+		Brigomaglos
+		Brycham
+		Cador
+		Custennyn
+		Cynan
+		Conan
+		Cacumattus
+		Cadwaladur
+		Caratawc
+		Cassivellaunus
+		Cadeyrn
+		Caratacus
+		Caradog
+		Catavignus
+		Calpornus
+		Ceanatis
+		Cintugnatus
+		Cocolitanus
+		Cogidubnus
+		Cunobelinos
+		Cunovindus
+		Dejotarus
+		Drustan
+		Diviciacus
+		Enemnogenus
+		Enestinus
+		Erbin
+		Geraint
+		Glasobrin
+		Gorteyrn
+		Ivomagus
+		Lannildut
+		Lucco
+		Lugotorix
+		Mabon
+		Maglocunus
+		Mandubracius
+		Matugenus
+		Meriadoc
+		Morirex
+		Motius
+		Tancogeistla
+		Tincommius
+		Vercingetorix
+		Vellocatus
+		Vindex
+		Vindomorucius
+		Virssuccius
+		Vortigern
+		Voteporix
+		Wotecorix
+		Praesutagus
+		Prasutagus
+		Rianorix
+		Segovax
+		Senaculus
+		Sennianus
+		Tasciovanus
+		Taximagulus
+		Togodumnus
+		Cerethreus
+		Dumnorix
+		Eporedorix
+		Vercassivellaunos
+		Bolgios
+		Ambiorix
+		Orgetorix
+		Casticos
+
+;;place names in Gaul
+	surnames
+		of Itius Portis
+		of Nemetocenna
+		of Scaldis
+		of Sabis
+ 		of Aduatuca
+ 		of Mosa
+ 		of Aduatucorum
+ 		of Arduenna
+ 		of Silva
+ 		of Isara
+ 		of Bibrax
+ 		of Axona
+		of Samarabriva
+ 		of Matrona
+ 		of Durocortorum
+ 		of Mosella
+ 		of Lutetia
+ 		of Meclodunum
+ 		of Vellaunodunum
+ 		of Cenabum
+ 		of Agedincum
+ 		of Alesia
+ 		of Vesontio
+ 		of Dubis
+ 		of Jura Mons
+ 		of Arurius
+ 		of Lacus Lemannus
+ 		of Dibractes
+ 		of Cabillonum
+ 		of Decetia
+ 		of Liger
+ 		of Noviodunum
+ 		of Gorgobina
+ 		of Elaver
+ 		of Matisco
+ 		of Lugdunum
+ 		of Genava
+ 		of Vienna
+ 		of Rhodanus
+ 		of Cevenna
+ 		of Lemonum
+ 		of Caranionus
+ 		of Garumna
+ 		of Burdigala
+ 		of Duranius
+ 		of Oltis
+ 		of Uxellodunum
+ 		of Tarnis
+ 		of Aturius
+ 		of Tolosa
+ 		of Carcaso
+ 		of Agathe
+ 		of Nemausus
+ 		of Fossae
+ 		of Massilia
+ 		of Arausio
+
+
+	women
+		Barita
+		Boudicca
+		Boudecea
+		Cartimandua
+		Cunoarda
+		Cuniovenda
+		Esselt
+		Eudaf
+		Huctia
+		Iseult
+		Keyne
+		Verctissa
+		Verica
+
+
+;; England
+
+faction: britons
+
+	characters
+		Aneirin
+		Adcobrovatus
+		Amminos
+		Barrivendos
+		Budic
+		Belenus
+		Berdic
+		Brennus
+		Brigomaglos
+		Brycham
+		Cador
+		Custennyn
+		Cynan
+		Conan
+		Cynfawr
+		Cacumattus
+		Cadwaladur
+		Caratawc
+		Cassivellaunus
+		Cadeyrn
+		Caratacus
+		Caradog
+		Catavignus
+		Calpornus
+		Ceanatis
+		Cintugnatus
+		Cocolitanus
+		Cogidubnus
+		Cunobelinos
+		Cunovindus
+		Dejotarus
+		Drustan
+		Diviciacus
+		Enemnogenus
+		Enestinus
+		Erbin
+		Geraint
+		Glasobrin
+		Gorteyrn
+		Gwenddolau
+		Ivomagus
+		Lannildut
+		Lucco
+		Lugotorix
+		Mabon
+		Maglocunus
+		Manawyddan
+		Mandubracius
+		Matugenus
+		Meriadoc
+		Morirex
+		Motius
+		Tancogeistla
+		Tincommius
+		Vellocatus
+		Vindex
+		Vindomorucius
+		Virssuccius
+		Vortigern
+		Voteporix
+		Wotecorix
+		Praesutagus
+		Prasutagus
+		Rhydderch
+		Rianorix
+		Segovax
+		Senaculus
+		Sennianus
+		Tasciovanus
+		Taximagulus
+		Togodumnus
+		Cerethreus
+		Dumnorix
+		Eporedorix
+		Vercassivellaunos
+		Bolgios
+		Ambiorix
+		Orgetorix
+		Casticos
+
+	surnames
+;;Scotish Tribes
+		the Damnonii
+		the Carvetii
+		the Novantae
+		the Selgovae
+		the Votadini
+ 		the Scotii
+;;English Tribes
+	 	the Britanii
+		the Britunculi
+		the Brigantes
+		the Parisi
+		the Coritani
+		the Iceni
+		the Cornovii
+		the Dobunni
+		the Catuvellauni
+		the Trinovantes
+		the Atrebates
+		the Dumnonii
+		the Durotriges
+		the Belgae
+		the Regnenses
+		the Cantiaci
+;;Welsh Tribes
+		the Deceangli
+		the Ordovices
+		the Demetae
+		the Silures
+;;Town/City - Britannae
+ 		of Eboracum
+ 		of Deva
+ 		of Isca
+ 		of Gleva
+ 		of Camulodunum
+ 		of Gesoriacum
+ 		of Durovernum
+ 		of Durobrivae
+ 		of Anderita
+ 		of Noviomagus
+ 		of Portus Adurni
+ 		of Venta
+ 		of Clausentum
+ 		of Sorviodunum
+ 		of Durnovaria
+ 		of Lindinis
+ 		of Aquae Sulis
+ 		of Cunetio
+ 		of Calleva
+ 		of Corinium
+ 		of Dyf
+ 		of Moridunum
+ 		of Alabum
+ 		of Bremia
+ 		of Salinae
+ 		of Glevum
+ 		of Lactodorum
+ 		of Verulamium
+ 		of Durolipons
+ 		of Durovigutum
+ 		of Venorae
+ 		of Ratae
+ 		of Mediomanum
+ 		of Segontium
+ 		of Canovium
+ 		of Aqua Arnemetiae
+ 		of Mamucium
+ 		of Danum
+ 		of Lindum
+ 		of Petuaria
+ 		of Olicana
+ 		of Isurium
+ 		of Ictis
+ 		of Bremetennacum
+ 		of Glannaventa
+ 		of Brocavum
+ 		of Luguvalium
+ 		of Corstopitum
+ 		of Arbeia
+ 		of Pons Aelius
+ 		of Vercovicium
+ 		of Blatooulgium
+ 		of Bremenium
+ 		of Trimontium
+ 		of Pinnata Castra
+ 		of Vectis
+
+	women
+		Barita
+		Boudicca
+		Cartimandua
+		Cunoarda
+		Cuniovenda
+		Esselt
+		Eudaf
+		Huctia
+		Iseult
+		Keyne
+		Verctissa
+		Verica
+
+;; Spain
+faction: spain
+
+	characters
+		Viriathus
+		Ambon
+		Arganthonios
+		Auaros
+		Caraunios
+		Caros
+		Leukon
+		Megaravicos
+		Rhetogenes
+		Viriathos
+		Avaros
+		Matugenus
+		Lucco
+		Segovax
+		Huevos					
+		Adiran	
+		Ager	
+		Aingeru	
+		Akil	
+		Ander	
+		Antton	
+		Asentzio	
+		Benat	
+		Bingen 	
+		Bittor	
+		Danel	
+		Deunoro	
+		Dunixi	
+		Edorta	
+		Edrigu	
+		Edur	
+		Elazar	
+		Erromon	
+		Etor	
+		Gabirel	
+		Gaizka	
+		Gentza	
+		Gotzon	
+		Gurutz	
+		Iker	
+		Inaki	
+		Ixaka	
+		Jakome	
+		Kemen	
+		Kerbasi	
+		Mikel	
+		Mikolas	
+		Mikolaus	
+		Ortzi	
+		Palben	
+		Txanton
+		Txomin		
+		Ugutz	
+		Unai	
+		Urtzi	
+		Xanti	
+		Yuli	
+		Zadornin		
+		Zigor
+		Zorion	
+		Erruki	
+		Ugutz
+		Ilixo
+		Txeru
+		Lon
+		Berriotxoa	
+		Xalbador	
+		Gartzi
+		Gergori	
+		Beila
+
+
+
+	surnames
+;;tribal name
+		the Callaici
+		the Lusitani
+		the Turdetani
+		the Oretani
+		the Edetani
+		the Vaccaei
+		the Illergetes
+		the Celtiberi
+		the Carpetani
+;;place name
+		of Ibaconn
+		of Osca
+		of Rhodae
+		of Emporiae
+		of Barcino
+		of Ilerda
+		of Brigantium
+		of Olisipo
+		of Emerita
+		of Toletum
+		of Segovia
+		of Clunia
+		of Pallantia
+		of Gracchuris
+		of Bilbilis
+		of Dertosa
+		of Ibera
+		of Segontia
+		of Segobriga
+		of Dianium
+		of Baecula
+		of Metellinum
+		of Valentia
+		of Castulo
+		of Corduba
+		of Ilipa
+		of Hispalis
+		of Carmo
+		of Urso
+		of Munda
+		of Tartessus
+		of Malaca
+		of Mainake
+		of Carthago Nova
+		of Saguntum
+		of Ilorci
+		of Carteia
+		of Gades
+		of Ebro
+		of Salo
+		of Galicia
+		of Castillejo
+
+	women
+		Barita
+		Cartimandua
+		Cunoarda
+		Cuniovenda
+		Esselta
+		Euda
+		Huctia
+		Iseulta
+		Keynea
+		Verctissa
+		Verica
+
+faction: macedon
+
+	characters
+		Admetos
+		Adymos
+		Akylos
+		Anaksarxos
+		Antigonos
+		Antiochos
+		Antipatros
+		Arrhideos
+		Argeos
+		Aristandros
+		Aristotelis
+		Aristoboulos
+		Aristokritos
+		Arpalos
+		Arrianos
+		Assandros
+		Attalos
+		Aegisthes
+		Abantes
+		Abreas
+		Acestes
+		Adeimanthos
+		Aeaces
+		Aenesidemos
+		Aeson
+		Aetolos
+		Agathocles
+		Agis
+		Aischylos
+		Alcaeos
+		Alcman
+		Alexarchos
+		Alexander
+		Alketas
+		Aloeus
+		Alypius
+		Amopaon
+		Amphion
+		Amythaon
+		Anaxagoras
+		Anaximander
+		Anchises
+		Androcles
+		Antaeus
+		Antidoros
+		Antiochus
+		Antisthenes
+		Apisaon
+		Arcesilaus
+		Archilochus
+		Areithous
+		Ariphron
+		Aristarchus
+		Aristocles
+		Aristonous
+		Aristoxenus
+		Artemios
+		Aschines
+		Asphalion
+		Astrabacus
+		Athenodorus
+		Attalos
+		Autesion
+		Axylus
+		Bolon
+		Bacis
+		Basileios
+		Baias
+		Borus
+		Bucoli
+		Carpus
+		Carenos
+		Ceas
+		Ceyx
+		Charax
+		Choerilos
+		Chrysolorus
+		Cleades
+		Cleombrotos
+		Clisthenes
+		Calisthenis
+		Charidimos
+		Cleitos
+		Damasos
+		Deinokratis
+		Deukalos
+		Euenus
+		Ermias
+		Eumenes
+		Eumenis
+		Gyras
+		Hermias
+		Hippostratos
+		Ifestionas
+		Iolaos
+		Icarus
+		Kalas
+		Kassandros
+		Krateros
+		Kleitarxos
+		Koinos
+		Leocharis
+		Leonatos
+		Lysippos
+		Lyssimachos
+		Marsias
+		Meleagros
+		Memmon
+		Nearchos
+		Neoptolemos
+		Olganos
+		Paramonos
+		Parmenion
+		Paterinos
+		Pausanias
+		Pefkolaos
+		Perdicas
+		Permenion
+		Perseas
+		Philotas
+		Philip
+		Philipos
+		Podaleirios
+		Polycratis
+		Polyperchon
+		Praxinos
+		Ptolemeos
+		Python
+		Sekoundos
+		Selefkos
+		Thessalos
+		Xenokratis
+		Zoilos
+		Zeuxis
+
+
+;;ofTownorCity(surnames)
+	surnames
+		of Scodra
+		of Lissus
+		of Dimale
+		of Dyrrachium
+		of Epidamnus
+		of Antipatreia
+		of Apollonia
+		of Oricus
+		of Antigonela
+		of Phoenice
+		of Ambracia
+		of Actium
+		of Same
+		of Naupactus
+		of Patrae
+		of Elis
+		of Olympia
+		of Messene
+		of Pylos
+		of Sparta
+		of Gythium
+		of Argos
+		of Corinth
+		of Aegium
+		of Delphi
+		of Piraeus
+		of Athens
+		of Oropus
+		of Thebes
+		of Delium
+		of Chalcis
+		of Eretria
+		of Nicaea
+		of Echinus
+		of Lamia
+		of Heraclea
+		of Gomphi
+		of Pharsalus
+		of Scotussa
+		of Pherae
+		of Demetrias
+		of Larissa
+		of Phalanna
+		of Gonni
+		of Heracleum
+		of Pythion
+		of Libethron
+		of Dium
+		of Portaes
+		of Petra
+		of Pydna
+		of Pella
+		of Ottolobus
+		of Thessalonica
+		of Cassandreia
+		of Amphipolis
+		of Abdera
+		of Maroneia
+		of Aenus
+		of Cypsela
+		of Lysimachia
+		of Lampsacus
+		of Abydos
+		of Ilium
+		
+;;of Sicilia
+		of Naulochus
+		of Messana
+		of Mylae
+		of Catana
+		of Centuripae
+		of Enna
+		of Armerinia
+		of Morgantina
+		of Syracuse
+		of Gela
+		of Agrigentum
+		of Selinus
+		of Lilybaeum
+		of Drepana
+		of Segesta
+		of Panormus
+		of Himera
+
+	women
+		Harmodias
+		Clymene
+		Menelaia
+		Thessala
+		Achaia
+		Aedon
+		Aganippe
+		Agave
+		Alcandre
+		Alkmena
+		Amatheia
+		Anastasia
+		Anthusa
+		Appollonia
+		Arisbe
+		Aspasia
+		Athis
+		Barbara
+		Caenis
+		Canace
+		Chloris
+		Circe
+		Cratais
+		Cymodoce
+		Damia
+		Delias
+		Dione
+		Dynamene
+		Electra
+		Eriboea
+		Eudokia
+		Eurycleia
+		Glyke
+		Harmonia
+		Helike
+		Hero
+		Hippolyta
+		Ianthe
+		Ione
+		Irene
+		Kallisto
+		Kharmion
+		Klytemnestra
+		Kypris
+		Lampito
+		Lasthena
+		Leucothoë
+		Maia
+		Megara
+		Melite
+		Milto
+		Nausicaa
+		Nikaia
+		Oitane
+		Orthia
+		Parthenope
+		Perialla
+		Pervica
+		Pherenike
+		Philomela
+		Phyllis
+		Polydora
+		Proto
+		Pythias
+		Rhodope
+		Sophia
+		Telephassa
+		Thelma
+		Theresa
+		Thoösa
+		Tyro
+		Zenobia
+		Achradina
+		Aegiolea
+		Agape
+		Aglaia
+		Alcestis
+		Althaea
+		Amphithoe
+		Andromeda
+		Anticleia
+		Apseudes
+		Aristonike
+		Astera
+		Auge
+		Basiane
+		Caleope
+		Castianiera
+		Chryse
+		Clio
+		Creusa
+		Cymothoe
+		Danaë
+		Demetria
+		Dirce
+		Egeria
+		Elpir
+		Erigone
+		Eunice
+		Eurydike
+		Gorgo
+		Hecuba
+		Heliodora
+		Herophile
+		Hypsipyle
+		Ino
+		Iphianassa
+		Iris
+		Kallixeina
+		Khlöe
+		Koré
+		Kyra
+		Lanike
+		Latona
+		Limnoreia
+		Maiandria
+		Megare
+		Molpadia
+		Neaera
+		Nikasepolis
+		Olympias
+		Otonia
+		Pasiphae
+		Periboea
+		Amphitrite
+		Antehe
+		Antigone
+		Arete
+		Aristophane
+		Astyoche
+		Augo
+		Baucis
+		Callianeira
+		Charis
+		Chryseis
+		Crisa
+		Cyrene
+		Deianeira
+		Demophile
+		Doris
+		Egina
+		Endeis
+		Eriopis
+		Euodias
+		Eurynome
+		Gygaea
+		Hekabe
+		Hellanike
+		Hesione
+		Hyrmina
+		Iola
+		Iphigenia
+		Isadora
+		Kassandra
+		Khloris
+		Koritto
+		Labda
+		Laodameia
+		Leda
+		Lois
+		Marpessa
+		Melanie
+		Merope
+		Monima
+		Nemerte
+		Niko
+		Omphale
+		Pales
+		Pelopia
+		Pero
+		Phaedra
+		Phigaleia
+		Phoebe
+		Phylomedusa
+		Polyxena
+		Psamathe
+		Rhea
+		Sappho
+		Speio
+		Thalassa
+		Theodotis
+		Thessalonike
+		Timandra
+		Xanthippe
+		Zoe
+		Adeia
+		Agamede
+		Agathonice
+		Aketa
+		Alemene
+		Amathea
+		Anais
+		Anthousa
+		Anysia
+		Ariadne
+		Artemisia
+		Atë
+		Axiothea
+		Briseis
+		Calypso
+		Chloë
+		Cilla
+		Corythia
+		Cydippe
+		Damaris
+		Deipyle
+		Diomede
+		Drosis
+		Elcmene
+		Epicaste
+		Eucarpia
+		Europa
+		Glauce
+		Helice
+		Hermione
+		Hippodamia
+		Ianessa
+		Iomene
+		Iphitheme
+		Jocasta
+		Kephissa
+		Klymene
+		Kynthia
+		Lampetie
+		Laothoe
+		Leucothea
+		Maera
+		Megaera
+		Melita
+		Milo
+		Myrine
+		Nicopolis
+		Oenone
+		Orithyia
+		Parthenia
+		Percalus
+		Persis
+		Phaia
+		Philomache
+		Phylia
+		Polydamna
+		Prone
+		Pyrrha
+		Rhode
+		Semele
+		Tecmessa
+		Thebe
+		Theophano
+		Thoë
+		Tryphosa
+		Xenophile
+		Ada
+		Aethre
+		Agathé
+		Aithra
+		Alcyone
+		Amarhyllis
+		Amplias
+		Antheia
+		Antiope
+		Argeia
+		Artemidora
+		Atalanta
+		Auxesia
+		Bito
+		Calliphana
+		Chiore
+		Cilissa
+		Colubra
+		Cybele
+		Cytheris
+		Deiphobe
+		Dianeme
+		Doto
+		Eileithyia
+		Eos
+		Eris
+		Euphrosyne
+		Galatea
+		Halie
+		Hekate
+		Hermine
+		Hippodameia
+		Ianeira
+		Iole
+		Iphis
+		Issa
+		Katina
+		Kleopatra
+		Kynna
+		Lalage
+		Laodice
+		Leto
+		Maeonia
+		Medesicaste
+		Melissa
+		Metriche
+		Mykale
+		Nesaea
+		Oreithyia
+		Panora
+		Penthesilea
+		Persephone
+		Phaethusa
+		Philinna
+		Phylace
+		Polycaste
+		Procris
+		Pylia
+		Rhoda
+		Sebasteia
+		Stratonice
+		Theano
+		Theophania
+		Thisbe
+		Tryphena
+		Xene
+		Actë
+		Aerope
+		Agarista
+		Aikaterine
+		Alcmene
+		Althea
+		Ampinomene
+		Anteia
+		Antiochis
+		Arethusa
+		Arsinoe
+		Astyocheia
+		Autonoe
+		Berenike
+		Callianessa
+		Chione
+		Chrysothemis
+		Clymere
+		Ctimene
+		Cythereia
+		Deineira
+		Dexamene
+		Dorothea
+		Eidothee
+		Enyo
+		Eriphyle
+		Euphro
+		Evadne
+		Haidee
+		Hekaline
+		Helle
+		Hilaera
+		Iaera
+		Iolanthe
+		Iphimedeia
+		Ismene
+		Katana
+		Kleio
+		Kydilla
+		Lais
+		Laodamia
+		Lede
+		Lyra
+		Medea
+		Melantho
+		Metis
+		Monime
+		Nephele
+		Niobe
+		Oreithuia
+		Panope
+		Penelope
+		Perse
+		Phaedre
+		Philea
+		Phryne
+		Podarge
+		Procne
+		Psyche
+		Rhene
+		Scylla
+		Stheneboea
+		Thaleia
+		Theophane
+		Thetis
+		Timo
+		Xantippe
+
+faction: egypt
+
+	characters
+		Hekhemmut
+		Khnumhoptep
+		Nakhrankh
+		Ptahhotep
+		Ptahotem
+		Wah
+		Ahmose
+		Heruben
+ 		Isetnofet
+		Khasekhem
+		Khu
+		Kiya
+		Neferet
+		Neferetiabet
+		Nakhti
+		Miwsher
+		Meryre
+		Menmaatre
+		Mutnodjmet
+		Pamiu
+		Pasebakhaen
+		Akhaenniut
+		Rameses
+		Tutankhemwy
+		Amunmose
+		Sekhemwy
+		Alexander
+		Akhoris
+		Amasis
+		Amyrtaios
+		Apries
+		Djehutimes
+		Nekho
+		Nektanebo
+		Philippos
+		Psammetikhos
+		Psamuthis
+		Ptolemy
+		Ramose
+		Shabaka
+		Shabataka
+		Tanutamun
+		Thutmose
+		Taharqa
+		Teos
+
+	surnames
+		Soter
+		Arrhidaeos
+		Philadelphos
+		Euergetes
+		Philopator
+		Epiphanes
+		Philometor
+		Neos Philopator
+		Alexander
+		Neos Dionysos
+		Philopater
+		Auletes
+		Kasaros
+		Helios
+
+	women
+		Arsinoe
+		Ankhesen
+		Hebeny
+		Berenike
+		Cleopatra
+		Euredice
+		Nepherites
+		Piye
+		Pepi
+		Bebi
+		Hetepheres
+		Aneksi
+		Bet
+		Satsobek
+		Senbi
+		Tepemkau
+		Wosret
+		Ahankh
+		Tiy
+		Teti
+		Pedibastet
+		Netikerty
+
+	
+faction: carthage
+
+	characters
+		Abdimilki
+		Abascantus
+		Abdeshmun
+		Abdmelqart
+		Abdosir
+		Abydos
+		Aderbal
+		Admetos
+		Adonibal
+		Aegicoros
+		Ahiram
+		Akbar
+		Amilkas
+		Annibas
+		Aqhat
+		Asdroubas
+		Ashtartyaton
+		Ashtzaph
+		Balhanno
+		Balshillek
+		Bathyaes
+		Bisaltes
+		Bodashtart
+		Bodeshmun
+		Bodinelqart
+		Bodmelqart
+		Bomilkar
+		Briareus
+		Burrhus
+		Carpophorus
+		Carthalo
+		Celeas
+		Chaeremon
+		Charidemos
+		Cheiron
+		Chremes
+		Chryses
+		Danel
+		Eshmunamash
+		Eshmunazar
+		Gelon
+		Germelqart
+		Giscon
+		Gisgo
+		Hamalcar
+		Hannibal
+		Hanno
+		Hasdrubal
+		Hiempsal
+		Himilcar
+		Himilco
+		Hiram
+		Juba
+		Jubal
+		Kanmi
+		Khilletzbal
+		Maharbal
+		Massinissa
+		Melqartpilles
+		Milkherem
+		Milkpilles
+		Milkyaton
+		Muttines
+		Mytonnes
+		Philosir
+		Ribaddi
+		Sakarbal
+		Tabnit
+		Theages
+		Theodekles
+		Theophanes
+		Theopropides
+		Thero
+		Timasion
+		Tydeides
+		Vettias
+		Xenophanes
+		Yehawwielon
+		Yutpan
+		Zamolxis
+		Zeuxis
+		Zimrida
+
+	surnames
+		Barca
+		Saunites
+		Gisgo
+		Phameas
+		Haedus
+		Saunites
+		Gisgo
+		Phameas
+		Haedus
+		Gades
+		Tartessus
+		Ilipa
+		Carmo
+		Urso
+		Munda
+		Mainake
+		Ilorci
+		Baecula
+		Castulo
+		Bilbilis
+		Dertosa
+		Ibera
+		Tarraco
+		Barcino
+		Ilerda
+		Osca
+		Balaeres
+		Olisipo
+		Aleria
+		Tingis
+		Cirta
+		Utica
+		Iol
+		Volubilis
+		Lambaesis
+		Thamagadi
+		Theveste
+		Tunis
+		Hadrumetum
+		Thapsus
+		Sabrata
+		Oea
+		Cyrene
+		Apollonia
+		Arsinoe
+		Ptolemais
+		Berenice
+		Corduba
+		Carales
+		Alalia
+		Emerita
+		Malaga
+		Lixus
+		Abdera
+		Russadir
+		Siga
+		Cartenna
+		Tipasa
+		Icosium
+		Rusucuru
+		Saldae
+		Rusicade
+		Chullu
+		Thabraca
+		Bulla
+		Naraggara
+		Sicca
+		Acholla
+		Adys
+		Nepheris
+		Cercina
+		Meninx
+		Sabratha
+		Mago
+		Ebusus
+		Clupea
+
+
+	women
+		Actaee
+		Aegle
+		Agapia
+		Aglaurus
+		Alcippe
+		Althaia
+		Arishat
+		Elissa
+		Muttunbaal
+		Pervinca
+		Pherusa
+		Philona
+		Phylo
+		Polymede
+		Protogonia
+		Raisa
+		Ramona
+		Roxane
+		Sotera
+		Thais
+		Thyia
+		Xanthe
+		Zita
+
+faction: germans
+
+	characters
+		Adalbert 
+		Adalgard
+		Adalwolf
+		Adalberina
+		Adelhaide
+		Adalmun
+		Adaluuih
+		Adgandestrius
+		Aia
+		Aioulfus
+		Alfsuind
+		Alfuuihi
+		Arminius
+		Alaric
+		Amalric
+		Ariogaisus
+		Ariovistus
+		Athanaric
+		Badeloga
+		Bava
+		Bertgarda
+		Boiocalus
+		Brinno
+		Burkhard
+		Butilinus
+		Catualdo
+		Carolus
+		Chariomerus
+		Chondomarius
+		Cimberius
+		Civilis
+		Clovis
+		Dodonis
+		Duva
+		Eutlinde
+		Eraric
+		Aelric
+		Etelgis
+		Etreleus
+		Flavus
+		Fulcaris
+		Furtuis
+		Gaiobomarus
+		Gundahar
+		Gunderic
+		Gundioc
+		Gaiseric
+		Hanhavaldi
+		Hariulfus
+		Hengist
+		Hema
+		Heriman
+		Hesa
+		Horsa
+		Hrodgar
+		Inguiomerus
+		Italicus
+		Kuonrad
+		Lutgardis
+		Malorix
+		Marcuui
+		Maroboduus
+		Nasua
+		Odovacar
+		Ostina
+		Othelhildis
+		Oza
+		Rando
+		Reingardis
+		Ricbolda
+		Ricburgis
+		Ricgard
+		Reudilo
+		Rodulf
+		Segestes
+		Segimerus
+		Serapio
+		Sesithacus
+		Sido
+		Sigimer
+		Tancred
+		Thelonius
+		Tillo
+		Theodoric
+		Tudrus
+		Vangio
+		Vannius
+		Verritus
+		Wallia
+
+	surnames
+		of Vetera
+		of Aduatuca
+		of Novaesium
+		of Colonia
+		of Moguntiacum
+		of Bonna
+		of Treverorum
+		of Argentorate
+		of Regina
+		of Vindelicum
+		of Vindonissa
+		of Tuetoburga
+		of Aventicum
+		of Raurica
+		of Genava
+		of Mediolanum
+		of Vienna
+		of Noreia
+		of Rhenus
+		of Albis
+		of Vesontio
+		of Lugdunum
+
+	women
+		Ulrike
+		Priska
+		Ludwiga
+		Isolde
+		Johanna
+		Olga
+		Gisela
+		Eva
+		Eberharde
+		Edith
+		Adelgund
+		Brunhild
+		Adelgund
+		Alba
+		Althilt
+		Ama
+		Amalberga
+		Asuui
+		Aurinia
+		Bebelina
+		Bernildis
+		Bescela
+		Biua
+		Ethelmoda
+		Herlinda
+		Irmingarda
+		Othelhildis
+		Ramis
+		Thusnelda
+		Veleda
+		Eponina
+
+
+faction: greek_cities
+
+	characters
+		Acaeus
+		Acamus
+		Acestes
+		Aclepiades
+		Acrisias
+		Acroneos
+		Adeimanthos
+		Admetos
+		Adrastos
+		Adymos
+		Aegicoros
+		Aegisthes
+		Aegon
+		Aeimnestos
+		Aeolus
+		Aeropus
+		Aeschreas
+		Aesculapius
+		Aesepus
+		Aeson
+		Aetes
+		Aethon
+		Aetion
+		Aetios
+		Agamedes
+		Agamemnon
+		Agapenor
+		Agapias
+		Agelaus
+		Agetos
+		Aischylos
+		Akadios
+		Akylos
+		Alcaeos
+		Alcides
+		Alcon
+		Alexandros
+		Alkamenos
+		Alkibiades
+		Alkimachos
+		Ameinokles
+		Amphidamos
+		Amphimachos
+		Anaksarxos
+		Anaxagoras
+		Anaxandros
+		Anaximander
+		Anaximenes
+		Androcles
+		Androdamos
+		Antaeus
+		Antagoras
+		Antigonos
+		Archemides
+		Antilochus
+		Antiochos
+		Antipatros
+		Antiphus
+		Antisthenes
+		Arcidamus
+		Argeos
+		Ariphron
+		Aristaeus
+		Aristagoras
+		Aristandros
+		Aristarchos
+		Aristides
+		Aristoboulos
+		Aristocles
+		Aristokritos
+		Aristophanes
+		Aristotelis
+		Arpalos
+		Arrhideos
+		Arrianos
+		Artemas
+		Asopus
+		Assandros
+		Athenaeus
+		Athenodorus
+		Attalos
+		Azeus
+		Bacchides
+		Bacis
+		Baerius
+		Balius
+		Basileios
+		Basilides
+		Bisaltes
+		Boethus
+		Bolon
+		Calisthenis
+		Callimachus
+		Casambus
+		Castor
+		Ceas
+		Celeas
+		Chabrias
+		Charax
+		Chares
+		Charidimos
+		Chersis
+		Chrysippos
+		Chrysogones
+		Chrysogonus
+		Cleades
+		Cleandros
+		Cleitos
+		Cleombrotos
+		Cleomenes
+		Cleon
+		Cleonymus
+		Cordylion
+		Coronos
+		Crathis
+		Cratippus
+		Cretheus
+		Crethon
+		Crios
+		Croesus
+		Cronos
+		Dadaces
+		Daedalos
+		Damasippus
+		Damasithymos
+		Damasos
+		Damastor
+		Damian
+		Damianos
+		Damiskos
+		Damoetas
+		Damon
+		Danaos
+		Danaus
+		Dardanus
+		Dares
+		Davos
+		Deinias
+		Deinokrates
+		Deinokratis
+		Deinomenes
+		Deiphobus
+		Deiphonous
+		Deipylus
+		Demades
+		Demaratos
+		Demarmenos
+		Demas
+		Demeas
+		Demetrios
+		Democedes
+		Demokrates
+		Demoleon
+		Demonous
+		Demophlos
+		Demosthenes
+		Deon
+		Deukalion
+		Deukalos
+		Diactorides
+		Diadromes
+		Diadumenus
+		Diagoras
+		Dicaeus
+		Dieneces
+		Diocles
+		Diodoros
+		Diokles
+		Diomedes
+		Dionysios
+		Dionysophanes
+		Dionysos
+		Diophantus
+		Diores
+		Dioscuros
+		Diotrephes
+		Dismas
+		Dithyrambos
+		Dmetor
+		Dolon
+		Doreios
+		Doreius
+		Dorian
+		Doriskos
+		Doros
+		Doryssos
+		Dosithios
+		Drimylos
+		Dromeus
+		Ducetius
+		Duris
+		Dymas
+		Dymnos
+		Echelaos
+		Echemmon
+		Echemus
+		Echephron
+		Echepolus
+		Elasus
+		Elatos
+		Elatreus
+		Eleon
+		Elpides
+		Elpidius
+		Empedocles
+		Endios
+		Endymion
+		Engenes
+		Eniopus
+		Ennaeus
+		Ennomus
+		Ennychus
+		Enops
+		Eos
+		Epaenetus
+		Epaphos
+		Epeigeus
+		Epeius
+		Ephialtes
+		Epicurus
+		Epicydes
+		Epikrates
+		Epimenes
+		Epiphanes
+		Epistrophos
+		Erasistratus
+		Eratosthenes
+		Eratostheres
+		Erechtheus
+		Eretmenus
+		Ereuthalion
+		Erginus
+		Ergiyios
+		Erichthonius
+		Ermias
+		Erxandros
+		Eryalus
+		Eteocles
+		Eteokles
+		Eteonous
+		Euaemon
+		Eualcidas
+		Euanthes
+		Euarestos
+		Eubulus
+		Eucarpus
+		Euchenor
+		Eucleides
+		Eudorus
+		Euenor
+		Euenus
+		Eugammon
+		Eugenios
+		Eugenius
+		Euhemenis
+		Eukles
+		Eumaeus
+		Eumastas
+		Eumelus
+		Eumenes
+		Eumenes
+		Eumenis
+		Eumolpus
+		Euneas
+		Euonomos
+		Eupalinus
+		Euphenes
+		Euryanax
+		Eurybiades
+		Eurycliedes
+		Eurydamus
+		Eurydemon
+		Eurydemos
+		Euryhus
+		Eurykrates
+		Eurykratides
+		Euryleon
+		Eurylochos
+		Eurymachos
+		Euryphon
+		Eurypylos
+		Eurystenes
+		Eurysthenes
+		Eurystheus
+		Eurysthios
+		Eurythion
+		Eurytos
+		Eutropios
+		Eutuches
+		Eutychides
+		Eutychus
+		Evaenetos
+		Geleon
+		Gelo
+		Gelon
+		Gennadios
+		Glaukias
+		Glaukos
+		Glycon
+		Gordias
+		Gorgias
+		Gurgos
+		Gyras
+		Gyrtias
+		Haemon
+		Hagias
+		Harmatidas
+		Harmocydes
+		Harmodios
+		Harmon
+		Heiron
+		Hektor
+		Helicaon
+		Herakleitos
+		Heraklides
+		Hermeias
+		Hermias
+		Hermolaos
+		Hermon
+		Hermotimos
+		Hero
+		Herodes
+		Herodion
+		Heromenes
+		Hicetaon
+		Hiero
+		Hipparchos
+		Hipparinos
+		Hippias
+		Hippoklides
+		Hippokratides
+		Hippomenes
+		Hippostratos
+		Hyakinthos
+		Hyrtacus
+		Hyrtius
+		Iakchos
+		Ialmenes
+		Iambulus
+		Iasos
+		Iatragoras
+		Iatrokles
+		Icarus
+		Idaeus
+		Idaios
+		Idas
+		Idomeneus
+		Ifestionas
+		Ilioneus
+		Ilus
+		Imbrus
+		Inachos
+		Iobates
+		Iolaos
+		Iolaos
+		Iollas
+		Iphiclus
+		Iphicrates
+		Iphikrates
+		Isagoras
+		Ischenous
+		Isidoros
+		Ismenios
+		Isocrates
+		Isodemos
+		Isokrates
+		Kaenas
+		Kaeneus
+		Kalas
+		Kalchas
+		Kalesius
+		Kalliaros
+		Kallias
+		Kallikles
+		Kallikrates
+		Kallimachos
+		Kallinicus
+		Kallinos
+		Kallipides
+		Kallipos
+		Kallisthenes
+		Kallon
+		Kandaules
+		Kapaneus
+		Kapys
+		Karipos
+		Karopophores
+		Kassandros
+		Kassandros
+		Kebalinos
+		Kebes
+		Kekrops
+		Kerameikos
+		Kerkyon
+		Keteus
+		Kimon
+		Kirphis
+		Kleitarxos
+		Kleobis
+		Kleomenes
+		Koinos
+		Krateros
+		Krateros
+		Kreon
+		Krinippos
+		Kritias
+		Kritoboulos
+		Kritodemos
+		Kroisos
+		Krokinos
+		Ktesiphon
+		Laertes
+		Laios
+		Lamachos
+		Laodamas
+		Laodocus
+		Laogonus
+		Laphanes
+		Lasos
+		Lasthenes
+		Leo
+		Leocedes
+		Leocharis
+		Leodes
+		Leon
+		Leonatos
+		Leonidas
+		Lichas
+		Linus
+		Lycomedes
+		Lycophon
+		Lykomedes
+		Lykon
+		Lysagoras
+		Lysandros
+		Lysias
+		Lysikles
+		Lysimachos
+		Lysippos
+		Lyssimachos
+		Machaon
+		Maeon
+		Maiandrios
+		Makarios
+		Maleos
+		Mantes
+		Mantios
+		Marcion
+		Marnes
+		Maron
+		Marsias
+		Marsyas
+		Mastor
+		Mausolos
+		Mecistes
+		Medios
+		Medon
+		Medus
+		Megadates
+		Megakles
+		Megareus
+		Megasthenes
+		Megistias
+		Meidias
+		Melampos
+		Melas
+		Meleagros
+		Meleagros
+		Melegros
+		Meles
+		Meliboeus
+		Melicertes
+		Memmon
+		Memnon
+		Menalcas
+		Menandros
+		Menares
+		Menekrates
+		Menelaos
+		Menestas
+		Menesthes
+		Menesthios
+		Mentes
+		Mentor
+		Meriones
+		Merops
+		Mesaulius
+		Mesthles
+		Metiochus
+		Meton
+		Metrobius
+		Metron
+		Metrophanes
+		Meurius
+		Micythos
+		Midas
+		Midylos
+		Mikkos
+		Mikon
+		Milanion
+		Miltiades
+		Minos
+		Misenus
+		Mnester
+		Mnesus
+		Moschion
+		Musaeus
+		Musaios
+		Mydon
+		Myrsinus
+		Myrto
+		Mys
+		Narkissos
+		Nearchos
+		Nelpus
+		Neokles
+		Neoptolemos
+		Neoptolemos
+		Neritos
+		Nestor
+		Niarchos
+		Nicandros
+		Nicanor
+		Nicias
+		Nicodromos
+		Nicomachos
+		Nicon
+		Nikandros
+		Nikanor
+		Nikasios
+		Nikeratos
+		Nikias
+		Nikomachos
+		Nikomedes
+		Nireus
+		Nisos
+		Noemon
+		Nomion
+		Nothon
+		Ocealu
+		Ochesius
+		Odysseus
+		Oedipus
+		Oenemaus
+		Oenomaus
+		Oenopion
+		Oicles
+		Olganos
+		Olus
+		Olympiodorus
+		Onamakritos
+		Onetas
+		Onias
+		Onomastos
+		Ophelestes
+		Orestes
+		Orion
+		Oroites
+		Orpheus
+		Orsilochus
+		Orsiphantes
+		Orthaeus
+		Otus
+		Paios
+		Palaechthon
+		Palaemon
+		Pallas
+		Panaetios
+		Panaetius
+		Panares
+		Pandaros
+		Pandion
+		Panionos
+		Panites
+		Pankratios
+		Pantites
+		Paraebates
+		Paramonos
+		Paris
+		Parmenides
+		Parmenion
+		Parthenopaeus
+		Paterinos
+		Patrobas
+		Pausanias
+		Pausanius
+		Pedocles
+		Pefkolaos
+		Peiros
+		Peithon
+		Pelagon
+		Pelegon
+		Peleus
+		Pelias
+		Pelicles
+		Peneleos
+		Peneus
+		Pentheus
+		Penthylos
+		Peolpidas
+		Perdicas
+		Perdikkas
+		Periandros
+		Periclymenus
+		Perikles
+		Perimedes
+		Perimos
+		Permenion
+		Perseas
+		Peteos
+		Peukestes
+		Phaedo
+		Phaestus
+		Phaidon
+		Phalanthus
+		Phalinos
+		Phanagoras
+		Pheidias
+		Pheidippides
+		Pheidon
+		Phemius
+		Phereclus
+		Pherecydes
+		Phidias
+		Phigaleios
+		Philagros
+		Philaon
+		Phileas
+		Philemon
+		Philiskos
+		Philistos
+		Phillipos
+		Philocrates
+		Philoctetes
+		Philocypros
+		Philoetius
+		Philogus
+		Philokles
+		Philokrates
+		Philolaos
+		Philon
+		Philonikos
+		Philopoemon
+		Philostratos
+		Philotas
+		Philotas
+		Philotectes
+		Phineus
+		Phokas
+		Phokion
+		Phorbas
+		Phorcys
+		Phrixus
+		Phrynichos
+		Phrynikos
+		Phrynon
+		Phylas
+		Pidytes
+		Pigres
+		Pinder
+		Pistias
+		Pittacos
+		Pittacus
+		Pixodarus
+		Pleistarchos
+		Pleistos
+		Podaeleirus
+		Podaleirios
+		Podaleirus
+		Podalinus
+		Podarces
+		Podargos
+		Podaroes
+		Podes
+		Poecas
+		Poimen
+		Polemion
+		Poliadas
+		Polybius
+		Polycratis
+		Polyctor
+		Polydectes
+		Polydeuces
+		Polydius
+		Polydoros
+		Polygonus
+		Polykleitos
+		Polykles
+		Polykritos
+		Polymedes
+		Polyperchon
+		Polyphetes
+		Porphyrios
+		Porphyrius
+		Posides
+		Posidonios
+		Pratinos
+		Praxilaus
+		Praxinos
+		Praxiteles
+		Praxites
+		Priam
+		Prinetadas
+		Procrustes
+		Proctus
+		Proetus
+		Protagoras
+		Protus
+		Proxenos
+		Prymneus
+		Ptolemeos
+		Pylaemenes
+		Pylaeus
+		Pylartes
+		Pylas
+		Pylenor
+		Pyris
+		Pyrrhus
+		Pythagoras
+		Pythogenes
+		Python
+		Salmoneus
+		Scamandius
+		Scylax
+		Sekoundos
+		Selefkos
+		Sicinnos
+		Simmias
+		Simo
+		Simoisius
+		Simonides
+		Sinis
+		Sippas
+		Siromos
+		Socus
+		Sophanes
+		Sophokles
+		Sosibios
+		Sosicles
+		Sosigines
+		Sosthenes
+		Sostias
+		Stolos
+		Strachys
+		Stratios
+		Strophius
+		Strymon
+		Syagros
+		Talaemenes
+		Talaos
+		Talaus
+		Talos
+		Tarchon
+		Taureas
+		Tebaeus
+		Tecton
+		Teiresias
+		Telamon
+		Telemacho
+		Telemachos
+		Telemachus
+		Telephos
+		Telephus
+		Telines
+		Tellias
+		Tellis
+		Telys
+		Tenes
+		Tereus
+		Teukros
+		Teutamos
+		Teuthranes
+		Teuthras
+		Thales
+		Thalysios
+		Tharybis
+		Thaulos
+		Theagenes
+		Theocydes
+		Theodekles
+		Theodoros
+		Theodotus
+		Theomestor
+		Theophanes
+		Theophrastos
+		Theophrastus
+		Theophylaktos
+		Theopompos
+		Theopropides
+		Theoros
+		Theos
+		Theramenes
+		Therapon
+		Theras
+		Theron
+		Thersandros
+		Therseandros
+		Thersilochus
+		Thersites
+		Thessalos
+		Thestor
+		Thrasidaios
+		Thrasilaus
+		Thrasymedes
+		Thukydides
+		Thyestes
+		Thymoetes
+		Thyrsos
+		Timagenidas
+		Timagoras
+		Timasion
+		Timasitheus
+		Timesithius
+		Timnes
+		Timoleon
+		Timon
+		Timonax
+		Timotheus
+		Timoxenos
+		Tiro
+		Tirynthius
+		Tithonius
+		Tmolus
+		Trechus
+		Triopas
+		Triptolemus
+		Tros
+		Trypho
+		Tydeids
+		Tymnes
+		Tyndareus
+		Tyndarios
+		Xanthippos
+		Xanthippus
+		Xenagoras
+		Xenokrates
+		Xenokratis
+		Xenophanes
+		Xenophon
+		Xiphilinus
+		Xuthos
+		Xuthus
+		Zagreus
+		Zenicetes
+		Zenodoros
+		Zethus
+		Zeuxis
+		Zoilos
+		Plato
+		Aristotle
+		Aristophenes
+		Anaxagoras
+		Hippocratus
+		Socrates
+		Democritus
+		Epictetus
+		Epicurus
+		Euclides
+		Heraclitus
+		Pythagoras
+		Zeno
+
+	surnames
+;;of Town/City in Greek areas
+		of Scodra
+		of Lissus
+		of Dimale
+		of Dyrrachium
+		of Epidamnus
+		of Antipatreia
+		of Apollonia
+		of Oricus
+		of Antigonela
+		of Phoenice
+		of Ambracia
+		of Actium
+		of Same
+		of Naupactus
+		of Patrae
+		of Elis
+		of Olympia
+		of Messene
+		of Pylos
+		of Sparta
+		of Gythium
+		of Argos
+		of Corinth
+		of Aegium
+		of Delphi
+		of Piraeus
+		of Athens
+		of Oropus
+		of Thebes
+		of Delium
+		of Chalcis
+		of Eretria
+		of Nicaea
+		of Echinus
+		of Lamia
+		of Heraclea
+		of Gomphi
+		of Pharsalus
+		of Scotussa
+		of Pherae
+		of Demetrias
+		of Larissa
+		of Phalanna
+		of Gonni
+		of Heracleum
+		of Pythion
+		of Libethron
+		of Dium
+		of Portaes
+		of Petra
+		of Pydna
+		of Pella
+		of Ottolobus
+		of Thessalonica
+		of Cassandreia
+		of Amphipolis
+		of Philippi
+		of Abdera
+		of Maroneia
+		of Aenus
+		of Cypsela
+		of Lysimachia
+		of Lampsacus
+		of Abydos
+		of Ilium
+		of Samos
+		of Chios
+		of Magnesia
+		of Miletus
+		of Smyrna
+		of Pergamum
+		of Cos
+		of Knossus
+		of Gortyn
+		of Demetrias
+;
+;;of Sicily
+		of Sicilia
+		of Naulochus
+		of Messana
+		of Mylae
+		of Catana
+		of Centuripae
+		of Enna
+		of Armerinia
+		of Morgantina
+		of Syracuse
+		of Gela
+		of Agrigentum
+		of Selinus
+		of Lilybaeum
+		of Drepana
+		of Segesta
+		of Panormus
+		of Himera
+;;;of Greek Region
+		of Dardania
+		of Paeonia
+		of Illyria
+		of Lyncestis
+		of Macedonia
+		of Chalcidice
+		of Epirus
+		of Thrace
+		of Thasos
+		of Samothrace
+		of Lemnos
+		of Lesbos
+		of Chios
+		of Samos
+		of Delos
+		of Perrhaebia
+		of Tempe
+		of Magnesia
+		of Hestiaeotis
+		of Athamania
+		of Dolopia
+		of Thessaly
+		of Achaea
+		of Phthiotis
+		of Acarnania
+		of Phocis
+		of Boeotia
+		of Attica
+		of Corcyra
+		of Leucas
+		of Cephallenia
+		of Zacynthos
+		of Crete
+		of Aegina
+		of Lacaedon
+		of Sicilia
+		of Lacedon
+		of Euboea
+		of Rhodes
+;
+
+	women
+		Harmodias
+		Clymene
+		Menelaia
+		Thessala
+		Achaia
+		Aedon
+		Aganippe
+		Agave
+		Alcandre
+		Alkmena
+		Amatheia
+		Anastasia
+		Anthusa
+		Appollonia
+		Arisbe
+		Aspasia
+		Athis
+		Barbara
+		Caenis
+		Canace
+		Chloris
+		Circe
+		Cratais
+		Cymodoce
+		Damia
+		Delias
+		Dione
+		Dynamene
+		Electra
+		Eriboea
+		Eudokia
+		Eurycleia
+		Glyke
+		Harmonia
+		Helike
+		Hero
+		Hippolyta
+		Ianthe
+		Ione
+		Irene
+		Kallisto
+		Kharmion
+		Klytemnestra
+		Kypris
+		Lampito
+		Lasthena
+		Leucothoë
+		Maia
+		Megara
+		Melite
+		Milto
+		Nausicaa
+		Nikaia
+		Oitane
+		Orthia
+		Parthenope
+		Perialla
+		Pervica
+		Pherenike
+		Philomela
+		Phyllis
+		Polydora
+		Proto
+		Pythias
+		Rhodope
+		Sophia
+		Telephassa
+		Thelma
+		Theresa
+		Thoösa
+		Tyro
+		Zenobia
+		Achradina
+		Aegiolea
+		Agape
+		Aglaia
+		Alcestis
+		Althaea
+		Amphithoe
+		Andromeda
+		Anticleia
+		Apseudes
+		Aristonike
+		Astera
+		Auge
+		Basiane
+		Caleope
+		Castianiera
+		Chryse
+		Clio
+		Creusa
+		Cymothoe
+		Danaë
+		Demetria
+		Dirce
+		Egeria
+		Elpir
+		Erigone
+		Eunice
+		Eurydike
+		Gorgo
+		Hecuba
+		Heliodora
+		Herophile
+		Hypsipyle
+		Ino
+		Iphianassa
+		Iris
+		Kallixeina
+		Khlöe
+		Koré
+		Kyra
+		Lanike
+		Latona
+		Limnoreia
+		Maiandria
+		Megare
+		Molpadia
+		Neaera
+		Nikasepolis
+		Olympias
+		Otonia
+		Pasiphae
+		Periboea
+		Amphitrite
+		Antehe
+		Antigone
+		Arete
+		Aristophane
+		Astyoche
+		Augo
+		Baucis
+		Callianeira
+		Charis
+		Chryseis
+		Crisa
+		Cyrene
+		Deianeira
+		Demophile
+		Doris
+		Egina
+		Endeis
+		Eriopis
+		Euodias
+		Eurynome
+		Gygaea
+		Hekabe
+		Hellanike
+		Hesione
+		Hyrmina
+		Iola
+		Iphigenia
+		Isadora
+		Kassandra
+		Khloris
+		Koritto
+		Labda
+		Laodameia
+		Leda
+		Lois
+		Marpessa
+		Melanie
+		Merope
+		Monima
+		Nemerte
+		Niko
+		Omphale
+		Pales
+		Pelopia
+		Pero
+		Phaedra
+		Phigaleia
+		Phoebe
+		Phylomedusa
+		Polyxena
+		Psamathe
+		Rhea
+		Sappho
+		Speio
+		Thalassa
+		Theodotis
+		Thessalonike
+		Timandra
+		Xanthippe
+		Zoe
+		Adeia
+		Agamede
+		Agathonice
+		Aketa
+		Alemene
+		Amathea
+		Anais
+		Anthousa
+		Anysia
+		Ariadne
+		Artemisia
+		Atë
+		Axiothea
+		Briseis
+		Calypso
+		Chloë
+		Cilla
+		Corythia
+		Cydippe
+		Damaris
+		Deipyle
+		Diomede
+		Drosis
+		Elcmene
+		Epicaste
+		Eucarpia
+		Europa
+		Glauce
+		Helice
+		Hermione
+		Hippodamia
+		Ianessa
+		Iomene
+		Iphitheme
+		Jocasta
+		Kephissa
+		Klymene
+		Kynthia
+		Lampetie
+		Laothoe
+		Leucothea
+		Maera
+		Megaera
+		Melita
+		Milo
+		Myrine
+		Nicopolis
+		Oenone
+		Orithyia
+		Parthenia
+		Percalus
+		Persis
+		Phaia
+		Philomache
+		Phylia
+		Polydamna
+		Prone
+		Pyrrha
+		Rhode
+		Semele
+		Tecmessa
+		Thebe
+		Theophano
+		Thoë
+		Tryphosa
+		Xenophile
+		Ada
+		Aethre
+		Agathé
+		Aithra
+		Alcyone
+		Amarhyllis
+		Amplias
+		Antheia
+		Antiope
+		Argeia
+		Artemidora
+		Atalanta
+		Auxesia
+		Bito
+		Calliphana
+		Chiore
+		Cilissa
+		Colubra
+		Cybele
+		Cytheris
+		Deiphobe
+		Dianeme
+		Doto
+		Eileithyia
+		Eos
+		Eris
+		Euphrosyne
+		Galatea
+		Halie
+		Hekate
+		Hermine
+		Hippodameia
+		Ianeira
+		Iole
+		Iphis
+		Issa
+		Katina
+		Kleopatra
+		Kynna
+		Lalage
+		Laodice
+		Leto
+		Maeonia
+		Medesicaste
+		Melissa
+		Metriche
+		Mykale
+		Nesaea
+		Oreithyia
+		Panora
+		Penthesilea
+		Persephone
+		Phaethusa
+		Philinna
+		Phylace
+		Polycaste
+		Procris
+		Pylia
+		Rhoda
+		Sebasteia
+		Stratonice
+		Theano
+		Theophania
+		Thisbe
+		Tryphena
+		Xene
+		Actë
+		Aerope
+		Agarista
+		Aikaterine
+		Alcmene
+		Althea
+		Ampinomene
+		Anteia
+		Antiochis
+		Arethusa
+		Arsinoe
+		Astyocheia
+		Autonoe
+		Berenike
+		Callianessa
+		Chione
+		Chrysothemis
+		Clymere
+		Ctimene
+		Cythereia
+		Deineira
+		Dexamene
+		Dorothea
+		Eidothee
+		Enyo
+		Eriphyle
+		Euphro
+		Evadne
+		Haidee
+		Hekaline
+		Helle
+		Hilaera
+		Iaera
+		Iolanthe
+		Iphimedeia
+		Ismene
+		Katana
+		Kleio
+		Kydilla
+		Lais
+		Laodamia
+		Lede
+		Lyra
+		Medea
+		Melantho
+		Metis
+		Monime
+		Nephele
+		Niobe
+		Oreithuia
+		Panope
+		Penelope
+		Perse
+		Phaedre
+		Philea
+		Phryne
+		Podarge
+		Procne
+		Psyche
+		Rhene
+		Scylla
+		Stheneboea
+		Thaleia
+		Theophane
+		Thetis
+		Timo
+		Xantippe
+
+faction: seleucid
+
+	characters
+;		Abantes
+		Abas
+		Abascantus
+		Abderos
+		Aberkios
+		Ablerus
+;		Abreas
+		Abronychus
+		Abydos
+		Achaeus
+;		Alexander
+;		Antiochus
+		Arsaces
+		Attalus
+;		Callinicus
+		Demetrius
+		Diodotus
+		Euthydemus
+		Hermeias
+		Molon
+		Perdiccas
+;		Philip
+		Ptolemy
+		Seleucus
+		Tigranes
+; Bob copied these in from the Macedonian list to increase the selection
+		Admetos
+		Adymos
+		Akylos
+		Anaksarxos
+		Antigonos
+		Antiochos
+		Antipatros
+		Arrhideos
+		Argeos
+		Aristandros
+		Aristotelis
+		Aristoboulos
+		Aristokritos
+		Arpalos
+		Arrianos
+		Assandros
+		Attalos
+		Aegisthes
+		Abantes
+		Abreas
+		Acestes
+		Adeimanthos
+		Aeaces
+		Aenesidemos
+		Aeson
+		Aetolos
+		Agathocles
+		Agis
+		Aischylos
+		Alcaeos
+		Alcman
+		Alexarchos
+		Alexander
+		Alketas
+		Aloeus
+		Alypius
+		Amopaon
+		Amphion
+		Amythaon
+		Anaxagoras
+		Anaximander
+		Anchises
+		Androcles
+		Antaeus
+		Antidoros
+		Antiochus
+		Antisthenes
+		Apisaon
+		Arcesilaus
+		Archilochus
+		Areithous
+		Ariphron
+		Aristarchus
+		Aristocles
+		Aristonous
+		Aristoxenus
+		Artemios
+		Aschines
+		Asphalion
+		Astrabacus
+		Athenodorus
+		Attalos
+		Autesion
+		Axylus
+		Bolon
+		Bacis
+		Basileios
+		Baias
+		Borus
+		Bucoli
+		Carpus
+		Carenos
+		Ceas
+		Ceyx
+		Charax
+		Choerilos
+		Chrysolorus
+		Cleades
+		Cleombrotos
+		Clisthenes
+		Calisthenis
+		Charidimos
+		Cleitos
+		Damasos
+		Deinokratis
+		Deukalos
+		Euenus
+		Ermias
+		Eumenes
+		Eumenis
+		Gyras
+		Hermias
+		Hippostratos
+		Ifestionas
+		Iolaos
+		Icarus
+		Kalas
+		Kassandros
+		Krateros
+		Kleitarxos
+		Koinos
+		Leocharis
+		Leonatos
+		Lysippos
+		Lyssimachos
+		Marsias
+		Meleagros
+		Memmon
+		Nearchos
+		Neoptolemos
+		Olganos
+		Paramonos
+		Parmenion
+		Paterinos
+		Pausanias
+		Pefkolaos
+		Perdicas
+		Permenion
+		Perseas
+		Philotas
+		Philip
+		Philipos
+		Podaleirios
+		Polycratis
+		Polyperchon
+		Praxinos
+		Ptolemeos
+		Python
+		Sekoundos
+		Selefkos
+		Thessalos
+		Xenokratis
+		Zoilos
+		Zeuxis
+		Pyrrhus
+
+	surnames
+		Nicator
+		Soter
+		Theos
+		Callinicus
+		Ceraunus
+		Philopator
+		Epiphanes
+		Eupator
+		Soter
+		Balas
+		Dionysus
+		Tryphon
+		Sidetes
+		Euergetes
+		Zabinas
+		Thea
+		Grypus
+		Cyzicenus
+		Epiphanes Nicator
+		Eusebes Philopator
+		Eucaerus
+		Ephiphanes Philadelphus
+		Philadelphus
+		Dionysus
+		of Armenia
+		Asiaticus
+		Philoromaeus
+		Poliorcetes
+		Hierax
+		of Ctesiphon
+		of Arbela
+		of Nisibis
+		of Sidera
+		of Ipsus
+		of Antiochus
+		of Philomelium
+		of Attaleia
+		of Perge
+		of Selge
+		of Aspendus
+		of Side
+		of Seleuceia
+		of Seleucis
+		of Ptolemais
+		of Arsinoe
+		of Philadelphia
+		of Olba
+		of Corycus
+		of Loadicea
+		of Iconium
+		of Soli
+		of Adana
+		of Tyana
+		of Mazaca
+		of Ariaratheia
+		of Comana
+		of Mallus
+		of Castabala
+		of Tarsus
+		of Zuegma
+		of Samosata
+		of Apamea
+		of Edessa
+		of Carrhae
+		of Nisibis
+		of Singara
+		of Ichnae
+		of Nicephorium
+		of Bambyce
+		of Thapsacus
+		of Chaonia
+		of Mopsuestia
+		of Rhosus
+		of Gindarus
+		of Chalcis
+		of Beroea
+		of Posideium
+		of Pieria
+		of Lysias
+		of Belum
+		of Laodicea
+		of Larissa
+		of Epiphaneia
+		of Antaradus
+		of Aradus
+		of Marathus
+		of Tripolis
+		of Arethusa
+		of Emesa
+		of Libanum
+		of Byblus
+		of Berytus
+		of Heliopolis
+		of Sidon
+		of Ace
+		of Philoteria
+		of Hippus
+		of Abila
+		of Gadara
+		of Dora
+		of Dium
+		of Bostra
+		of Gerasa
+		of Pella
+		of Samaria
+		of Appolonia
+		of Azotus
+		of Marisa
+		of Ascalon
+		of Raphia
+		of Epirus
+
+	women
+		Helena
+		Athena
+		Harmodias
+		Clymene
+		Achaia
+		Aganippe
+		Agave
+		Alcandre
+		Alkmena
+		Anastasia
+		Anthusa
+		Appollonia
+		Arisbe
+		Aspasia
+		Athis
+		Caenis
+		Canace
+		Chloris
+		Circe
+		Cratais
+		Cymodoce
+		Damia
+		Delias
+		Dione
+		Dynamene
+		Electra
+		Eriboea
+		Eudokia
+		Eurycleia
+		Glyke
+		Harmonia
+		Helike
+		Hero
+		Hippolyta
+		Ianthe
+		Ione
+		Irene
+		Kallisto
+		Kharmion
+		Klytemnestra
+		Kypris
+		Lampito
+		Lasthena
+		Leucothoë
+		Maia
+		Megara
+		Melite
+		Milto
+		Nausicaa
+		Nikaia
+		Oitane
+		Orthia
+		Parthenope
+		Perialla
+		Pervica
+		Pherenike
+		Philomela
+		Phyllis
+		Polydora
+		Proto
+		Pythias
+		Rhodope
+		Sophia
+		Telephassa
+		Thelma
+		Theresa
+		Thoösa
+		Tyro
+		Zenobia
+		Achradina
+		Aegiolea
+		Agape
+		Aglaia
+		Alcestis
+		Althaea
+		Amphithoe
+		Andromeda
+		Anticleia
+		Apseudes
+		Aristonike
+		Astera
+		Auge
+		Basiane
+		Caleope
+		Castianiera
+		Chryse
+		Clio
+		Creusa
+		Cymothoe
+		Danaë
+		Demetria
+		Dirce
+		Egeria
+		Elpir
+		Erigone
+		Eunice
+		Eurydike
+		Gorgo
+		Hecuba
+		Heliodora
+		Herophile
+		Hypsipyle
+		Ino
+		Iphianassa
+		Iris
+		Kallixeina
+		Khlöe
+		Koré
+		Kyra
+		Lanike
+		Latona
+		Limnoreia
+		Maiandria
+		Megare
+		Molpadia
+		Neaera
+		Nikasepolis
+		Olympias
+		Otonia
+		Pasiphae
+		Periboea
+		Amphitrite
+		Antehe
+		Antigone
+		Arete
+		Aristophane
+		Astyoche
+		Augo
+		Baucis
+		Callianeira
+		Charis
+		Chryseis
+		Crisa
+		Cyrene
+		Deianeira
+		Demophile
+		Doris
+		Egina
+		Endeis
+		Eriopis
+		Euodias
+		Eurynome
+		Gygaea
+		Hekabe
+		Hellanike
+		Hesione
+		Hyrmina
+		Iola
+		Iphigenia
+		Isadora
+		Kassandra
+		Khloris
+		Koritto
+		Labda
+		Laodameia
+		Leda
+		Lois
+		Marpessa
+		Melanie
+		Merope
+		Monima
+		Nemerte
+		Niko
+		Omphale
+		Pales
+		Pelopia
+		Pero
+		Phaedra
+		Phigaleia
+		Phoebe
+		Phylomedusa
+		Polyxena
+		Psamathe
+		Rhea
+		Sappho
+		Speio
+		Thalassa
+		Theodotis
+		Thessalonike
+		Timandra
+		Xanthippe
+		Zoe
+		Adeia
+		Agamede
+		Agathonice
+		Aketa
+		Alemene
+		Amathea
+		Anais
+		Anthousa
+		Anysia
+		Ariadne
+		Artemisia
+		Atë
+		Axiothea
+		Briseis
+		Calypso
+		Chloë
+		Cilla
+		Corythia
+		Cydippe
+		Damaris
+		Deipyle
+		Diomede
+		Drosis
+		Elcmene
+		Epicaste
+		Eucarpia
+		Europa
+		Glauce
+		Helice
+		Hermione
+		Hippodamia
+		Ianessa
+		Iomene
+		Iphitheme
+		Jocasta
+		Kephissa
+		Klymene
+		Kynthia
+		Lampetie
+		Laothoe
+		Leucothea
+		Maera
+		Megaera
+		Melita
+		Milo
+		Myrine
+		Nicopolis
+		Oenone
+		Orithyia
+		Parthenia
+		Percalus
+		Persis
+		Phaia
+		Philomache
+		Phylia
+		Polydamna
+		Prone
+		Pyrrha
+		Rhode
+		Semele
+		Tecmessa
+		Thebe
+		Theophano
+		Thoë
+		Tryphosa
+		Xenophile
+		Ada
+		Aethre
+		Agathé
+		Aithra
+		Alcyone
+		Amarhyllis
+		Amplias
+		Antheia
+		Antiope
+		Argeia
+		Artemidora
+		Atalanta
+		Auxesia
+		Bito
+		Calliphana
+		Chiore
+		Cilissa
+		Colubra
+		Cybele
+		Cytheris
+		Deiphobe
+		Dianeme
+		Doto
+		Eileithyia
+		Eos
+		Eris
+		Euphrosyne
+		Galatea
+		Halie
+		Hekate
+		Hermine
+		Hippodameia
+		Ianeira
+		Iole
+		Iphis
+		Issa
+		Katina
+		Kleopatra
+		Kynna
+		Lalage
+		Laodice
+		Leto
+		Maeonia
+		Medesicaste
+		Melissa
+		Metriche
+		Mykale
+		Nesaea
+		Oreithyia
+		Panora
+		Penthesilea
+		Persephone
+		Phaethusa
+		Philinna
+		Phylace
+		Polycaste
+		Procris
+		Pylia
+		Rhoda
+		Sebasteia
+		Stratonice
+		Theano
+		Theophania
+		Thisbe
+		Tryphena
+		Xene
+		Actë
+		Aerope
+		Agarista
+		Aikaterine
+		Alcmene
+		Althea
+		Ampinomene
+		Anteia
+		Antiochis
+		Arethusa
+		Arsinoe
+		Astyocheia
+		Autonoe
+		Berenike
+		Callianessa
+		Chione
+		Chrysothemis
+		Clymere
+		Ctimene
+		Cythereia
+		Deineira
+		Dexamene
+		Dorothea
+		Eidothee
+		Enyo
+		Eriphyle
+		Euphro
+		Evadne
+		Haidee
+		Hekaline
+		Helle
+		Hilaera
+		Iaera
+		Iolanthe
+		Iphimedeia
+		Ismene
+		Katana
+		Kleio
+		Kydilla
+		Lais
+		Laodamia
+		Lede
+		Lyra
+		Medea
+		Melantho
+		Metis
+		Monime
+		Nephele
+		Niobe
+		Oreithuia
+		Panope
+		Penelope
+		Perse
+		Phaedre
+		Philea
+		Phryne
+		Podarge
+		Procne
+		Psyche
+		Rhene
+		Scylla
+		Stheneboea
+		Thaleia
+		Theophane
+		Thetis
+		Timo
+		Xantippe
+		
+
+faction: parthia
+
+	characters
+		Abdieso
+		Achaemenes
+		Ardumanish
+		Ares
+		Ariaramnes
+		Arsaces
+		Arsames
+		Arses
+		Artavardiya
+		Artaxerxes
+		Artostes
+		Aspacanah
+		Bagabigna
+		Bagabuxsha
+		Bahar
+		Cambyses
+		Caspar
+		Cincixri
+		Cisantaxma.
+		Cishpi
+		Cyaxares
+		Cyrus
+		Dadarshi
+		Darayavahu
+		Darius
+		Datuvahya
+		Fariel
+		Fravarti
+		Gaspar
+		Gaubaruva
+		Gaumata
+		Gobryas
+		Haxamanish
+		Hydarnes
+		Hystaspes
+		Imanish
+		Intaphernes
+		Jahangir
+		Kambugiya
+		Kambyses
+		Khorshed
+		Khortdad
+		Kuru
+		Mardonius
+		Marduniya
+		Megabyzus
+		Melchior
+		Nabonidus
+		Nabukudracara
+		Nidintu-Bel
+		Otanes
+		Phraotes
+		Rashne
+		Roshan
+		Sarosh
+		Sherh
+		Siamak
+		Skunxa
+		Smerdis
+		Sogdianus
+		Sosimenes
+		Syrus
+		Tabor
+		Tallis
+		Taxmaspada
+		Teispes
+		Thuxra
+		Umamaita
+		Upadarma
+		Uvaxshtra
+		Vahauka
+		Vahumisa
+		Vahyavishdapaya
+		Vahyazdata
+		Vaumisa
+		Vayaspara
+		Vindarna
+		Vishtaspa
+		Xanthos
+		Xerxes
+		Xeus
+		Xshathrita
+		Xshayarshan
+		Zamolxis
+		Zircon
+		Zoroaster
+;;origin place name
+	surnames
+		of Adianbene
+		of Agbatana
+		of Agra
+		of Mesene
+		of Apaortenon
+		of Apavortene
+		of Arshak
+		of Artaxata
+		of Arzanene
+		of Ashkha
+		of Asaak
+		of Ashur
+		of Atropatene
+		of Babylon
+		of Babylonia
+		of Behistun
+		of Birs Nimrud
+		of Borsippa
+		of Carrhae
+		of Charax
+		of Ctesiphon
+		of Damghan
+		of Dara
+		of Eddur
+		of Dura-Europas
+		of Ecbatana
+		of Edessa
+		of Elymais
+		of Epardus
+		of Eulaeus
+		of Europa-Rhagai
+		of Fars
+		of Gabae
+		of Gedrosia
+		of Wyrsn
+		of Gordyene
+		of Hamadan
+		of Hatra
+		of Hecatompylos
+		of Hedyphon
+		of Herat
+		of Hyrcania
+		of Kangavar
+		of Kirkuk
+		of Konkobar
+		of Labus
+		of Lamavu
+		of Lycus
+		of Mange
+		of Media
+		of Merv
+		of Mesene
+		of Mithradatkart
+		of Nicephorium
+		of Nihavand
+		of Nineveh
+		of Nippur
+		of Nisa
+		of Nishapur
+		of Nisibis
+		of Nisaia
+		of Oratha
+		of Palmyra
+		of Persis
+		of Praaspa
+		of Saramana
+		of Seleucia
+		of Solace
+		of Sophene
+		of Spasini
+		of Susa
+		of Syrinx
+		of Tagae
+		of Tapuria
+		of Taxila
+		of Tambrax
+		of Traxiana
+		of Urfa
+		of Uruk
+		of Vologesocerta
+		of Zabdicene
+		of Zenodotium
+
+	women
+		Ava
+		Daria
+		Esther
+		Jasmine
+		Kira
+		Lila
+		Roxanna
+		Ardaxcashca
+		Arkha
+		Ariyamna
+		Arshaka
+		Arshama
+		Artaxshasa
+		Arxa
+		Asina
+		Atamaita
+		Athiyabaushna
+		Bardiya
+		Frada
+		Haldita
+		Martiya
+		Nabunaita
+		Utana
+		Vivana
+
+
+faction: pontus
+
+	characters
+		Akas
+		Ariobarzanes
+		Asander
+		Aspurgus
+		Cotys
+		Dionysos
+		Eupator
+		Herakles
+		Hygiaenon
+		Ininthimeus
+		Leucon
+		Mithradates
+		Paerisades
+		Pharnaces
+		Pharsanzes
+		Polemo
+		Rhadamsades
+		Rhescuporis
+		Rhoemetalces
+		Sauromates
+		Spartocus
+		Synges
+		Teiranes
+		Thothorses
+		Thyrsos
+
+	surnames
+		of Amasia
+		of Amisus
+		of Astacus
+		of Bithyniae
+		of Bithynium
+		of Cabeira
+		of Calchedon
+		of Cerasus
+		of Chabacta
+		of Cius
+		of Comana
+		of Dia
+		of Gaziura
+		of Geredeh
+		of Gordiucome
+		of Haemilium
+		of Heracleia
+		of Heracleopolis
+		of Kadikeui
+		of Laodiceia
+		of Myrlea
+		of Neocaesareia
+		of Nicaea
+		of Nicomedia
+		of Nicopolis
+		of Peiraeeus
+		of Pharnaceia
+		of Pimolisa
+		of Piourkh
+		of Prusa
+		of Prusias
+		of Sebasteia
+		of Taourla
+		of Taulara
+		of Tium
+		of Trapezus
+		of Trebizond
+		of Zela
+		of Pontus
+		of Amastris
+		of Ancyra
+		of Cierus
+		of Pessinus
+		of Dorylaeum
+		of Gordium
+		of Ancyra
+		of Tius
+		of Amastris
+		of Gangra
+		of Amasei
+		of Europatoria
+		of Trapezus
+		of Phasis
+		of Comana
+		of Tavium
+
+
+	women
+		Laodice
+		Pythodoris
+		Antonia
+		Dynamis
+		Gepaepyris
+		Tryphaena
+
+	
+faction: armenia
+
+	characters
+		Zipoetes
+		Arame
+		Artashes
+		Ara
+		Aram
+		Arame
+		Aramu
+		Argishti
+		Arkha
+		Artashes
+		Artavazd
+		Artaxias
+		Atheas
+		Belnirari
+		Eminos
+		Haldita
+		Kudurmabug
+		Liapos
+		Madyes
+		Menua
+		Partatua
+		Phillipos
+		Prusias
+		Rimsin
+		Rusa
+		Sarduri
+		Skunxa
+		Tigran
+		Tigranes
+		Trdat
+		Waradsin
+		Ziaelas
+
+
+	surnames
+		of Phasis
+		of Rhizus
+		of Kainepolis
+		of Gorneae
+		of Artaxata
+		of Carana
+		of Elegeia
+		of Satala
+		of Arsamosata
+		of Tigranocerta
+		of Tomisa
+
+	women
+		Erato
+		Karo
+		Pao
+		Arao
+		Donatiya
+		Hurriya
+		Pigat
+
+
+faction: dacia
+
+	characters
+		Anacharsis
+		Arapeithes
+		Atheas
+		Idanthyrsus
+		Madyes
+		Palacus
+		Partatua
+		Saulius
+		Scyles
+		Scylurus
+		Skunxa
+		Ata
+		Attila
+		Vencaslac
+		Burubista
+		Cotiso
+		Decebalus
+		Scorilo
+		Deceneu
+		Zalmoxis
+		Comosicus
+		Duras
+		Dicomes
+		Dnestr
+		Dapyx
+		Zyraxes
+		Roles
+		Diurpaneus
+		Vezina
+		Diegis
+		Banat
+		Oltenia
+		Decebal
+		Duras
+		Diegis
+		Markos
+		Comosikus
+		Dekainos
+		Ion
+		Dromichetes
+
+	women
+		Bendis
+		Serapia
+		Dana
+		Afina
+		Birkita
+		Branka
+		Devnet
+		Dita
+		Fallon
+		Hestia
+		
+	
+;faction: illyria
+
+;	characters
+;		Anacharsis
+;		Arapeithes
+;		Atheas
+;		Idanthyrsus
+;		Madyes
+;		Palacus
+;		Partatua
+;		Saulius
+;		Scyles
+;		Scylurus
+;		Skunxa
+;		Ata
+;		Attila
+;		Vencaslac
+;		Burubista
+;		Cotiso
+;		Decebalus
+;		Scorilo
+;		Deceneu
+;		Zalmoxis
+;		Comosicus
+;		Duras
+;		Dicomes
+;		Dnestr
+;		Dapyx
+;		Zyraxes
+;		Roles
+;		Diurpaneus
+;		Vezina
+;		Diegis
+;		Banat
+;		Oltenia
+;		Decebal
+;		Duras
+;		Diegis
+;		Markos
+;		Comosikus
+;		Dekainos
+;		Ion
+;		Dromichetes
+;
+;	women
+;		Bendis
+;		Serapia
+;		Dana
+;		Afina
+;		Birkita
+;		Branka
+;		Devnet
+;		Dita
+;		Fallon
+;		Hestia
+
+faction: numidia
+
+	characters
+		Oxynta
+		Abdimilki
+		Abascantus
+		Abdeshmun
+		Abdmelqart
+		Abdosir
+		Abydos
+		Admetos
+		Adonibal
+		Aegicoros
+		Ahiram
+		Akbar
+		Amilkas
+		Annibas
+		Aqhat
+		Ashtzaph
+		Balhanno
+		Balshillek
+		Bathyaes
+		Bisaltes
+		Bodashtart
+		Bodeshmun
+		Bodinelqart
+		Bodmelqart
+		Bomilkar
+		Burrhus
+		Gelon
+		Gisgo
+		Hiempsal
+		Hiram
+		Juba
+		Jubal
+		Kanmi
+		Khilletzbal
+		Maharbal
+		Melqart
+		Milkherem
+		Milkpilles
+		Muttines
+		Mytonnes
+		Philosir
+		Sakarbal
+		Tabnit
+		Theages
+		Thero
+		Timasion
+		Tydeides
+		Yutpan
+		Zimrida
+		Adherbal
+		Alyamas
+		Capussa
+		Gaia
+		Galussa
+		Gauda
+		Hiempsal
+		Isalcas
+		Oesalces
+		Jugurthen
+		Juva
+		Lacumaces
+		Masgava
+		Massinissa
+		Massnsen
+		Massiva
+		Mastanabal
+		Micipsa
+		Misagenes
+		Niptasan
+		Oxynta
+		Ptolemee
+		Stembanos
+		Tabat
+		Thabitah
+		Zalelsan
+		Syphax
+
+	women
+		Dahia
+		Dihya
+		Kahina
+; Bob copied down carthaginian names as this list is to short
+		Actaee
+		Aegle
+		Agapia
+		Aglaurus
+		Alcippe
+		Althaia
+		Arishat
+		Elissa
+		Muttunbaal
+		Pervinca
+		Pherusa
+		Philona
+		Phylo
+		Polymede
+		Protogonia
+		Raisa
+		Ramona
+		Roxane
+		Sotera
+		Thais
+		Thyia
+		Xanthe
+		Zita
+	
+faction: scythia
+
+	characters
+		Zipoetes
+		Arame
+		Artashes
+		Ara
+		Aram
+		Arame
+		Aramu
+		Argishti
+		Arkha
+		Artashes
+		Artavazd
+		Artaxias
+		Atheas
+		Belnirari
+		Eminos
+		Haldita
+		Kudurmabug
+		Liapos
+		Madyes
+		Menua
+		Partatua
+		Phillipos
+		Prusias
+		Rimsin
+		Rusa
+		Sarduri
+		Skunxa
+		Tigran
+		Tigranes
+		Trdat
+		Waradsin
+		Ziaelas
+		Anacharsis
+		Arapeithes
+		Atheas
+		Idanthyrsus
+		Madyes
+		Palacus
+		Partatua
+		Saulius
+		Scyles
+		Scylurus
+		Skunxa
+
+
+	women
+		Bendis
+		Serapia
+		Dana
+		Afina
+		Birkita
+		Branka
+		Devnet
+		Dita
+		Fallon
+		Hestia
+	
+faction: thrace
+
+	characters
+		Blendidoros
+		Brinkazis
+		Brinkazeis
+		Brinkainos
+		Bryzos
+		Byzas
+		Dentupes
+		Deopus
+		Desakenthos
+		Diazelmis
+		Diazenis
+		Dizazelmis
+		Drenis
+		Iptacens
+		Eptecentus
+		Eptaper
+		Eptepus
+		Eptepyris
+		Eptenis
+		Hezbenus
+		Gaidres
+		Kersos
+		Kersebleptos
+		Ketriporis
+		Mukaboris
+		Mukos
+		Mukazeis
+		Mukakenthos
+		Mukapaibes
+		Mukaporis
+		Mukazenis
+		Pytros
+		Rhaskos
+		Rhaskuporis
+		Rescuturme
+		Rhesus
+		Satres
+		Sautes
+		Skaris
+		Skílas
+		Suratralis
+		Tarusinas
+		Ziles
+		Zipaibes
+		Ziper
+		Ziepyrus
+		Spartacus
+
+
+
+	women
+		Karia
+		Bendidora
+		Cerzula
+		Dentysyka
+		Eptarys
+		Eptesyka
+		Ketripora
+		Mokasokos
+
+
+
+faction: slave
+
+	characters
+		Primus
+		Secundus
+		Sextus
+		Spartacus	
+		Solomon
+		Pontius
+		Abraham
+		Isaac
+		Esau
+		Moses
+		Aaron
+		Nautius
+		Oxynta
+		Juva
+		Jubal
+		Abdimilki
+		Abascantus
+		Decemius
+		Posthumus
+		Dentupes
+		Deopus
+		Desakenthos
+		Diazelmis
+		Diazenis
+		Rhaskos
+		Rhaskuporis
+		Rescuturme
+		Rhesus
+		Satres
+		Sautes
+		Skaris
+		Skílas
+
+	women
+		Beth
+		Rebecca
+		Bendis
+		Serapia
+		Dana
+		Afina
+		Birkita
+		Branka
+		Devnet
+		Dita
+		Fallon
+		Hestia
+		Karia
+		Bendidora
+		Cerzula
+		Dentysyka
+		Eptarys
+		Eptesyka
+		Ketripora
+		Mokasokos
+	

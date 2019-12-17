@@ -1,0 +1,693 @@
+;******************************************************************************************************************
+;	Setting up Battle with Script Commands
+;******************************************************************************************************************
+
+	prepare_for_battle
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Label Units & Groups
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;*************
+;PLAYER_UNITS
+;*************
+
+	label_unit 1 0 0	greek_general_1			
+	label_unit 1 0 1	greek_onager_1				
+	label_unit 1 0 2	greek_onager_2				
+	label_unit 1 0 3	greek_pikemen_1			
+	label_unit 1 0 4	greek_pikemen_2			
+	label_unit 1 0 5	greek_pikemen_3			
+	label_unit 1 0 6	greek_peltast_1			
+	label_unit 1 0 7	greek_royal_cavalry_1		
+	label_unit 1 0 8	greek_hoplite_militia_1	
+	label_unit 1 0 9	merc_rhodian_slingers_1	
+	label_unit 1 0 10	greek_elephant_small_1		
+	label_unit 1 0 11	greek_pikemen_4			
+	label_unit 1 0 12	greek_archer_1				
+	label_unit 1 0 13	greek_levy_pikemen_1		
+	label_unit 1 0 14	greek_levy_pikemen_2		
+	label_unit 1 0 15	greek_levy_pikemen_3		
+	label_unit 1 0 16	greek_levy_pikemen_4		
+	label_unit 1 0 17	merc_rhodian_slingers_2	
+	label_unit 1 0 18	greek_elephant_cataphract_1
+
+	define_unit_group	GREEK_PLAYER_UNITS greek_general_1 greek_onager_1 greek_onager_2 greek_pikemen_1 greek_pikemen_2 greek_pikemen_3 greek_peltast_1 greek_royal_cavalry_1 greek_hoplite_militia_1 merc_rhodian_slingers_1 greek_elephant_small_1 greek_pikemen_4 greek_archer_1 greek_levy_pikemen_1 greek_levy_pikemen_2 greek_levy_pikemen_3 greek_levy_pikemen_4 merc_rhodian_slingers_2 greek_elephant_cataphract_1
+
+;*************
+;SPARTAN_UNITS
+;*************
+
+;;; CITY DEFENCE
+
+	label_unit 0 0 0	Spartan_general_1
+	label_unit 0 0 1	Spartan_militia_1		
+	label_unit 0 0 2	Spartan_hoplite_1		
+	label_unit 0 0 3	Spartan_hoplite_2		
+	label_unit 0 0 4	Spartan_hoplite_3		
+	label_unit 0 0 5	Spartan_hoplite_4		
+	label_unit 0 0 6	Spartan_hoplite_5		
+	label_unit 0 0 7	Spartan_hoplite_6		
+	label_unit 0 0 8	Spartan_heavy_peltast_1			
+	label_unit 0 0 9	Spartan_peasant_1				
+	label_unit 0 0 10	Spartan_peltast_1				
+	label_unit 0 0 11	Spartan_peltast_2				
+	label_unit 0 0 12	Spartan_peltast_3				
+	label_unit 0 0 13	Spartan_heavy_peltast_2			
+
+	define_unit_group	SPARTAN_UNITS Spartan_general_1 Spartan_militia_1 Spartan_hoplite_1	Spartan_hoplite_2 Spartan_hoplite_3	Spartan_hoplite_4 Spartan_hoplite_5	Spartan_hoplite_6 Spartan_heavy_peltast_1 Spartan_peasant_1	Spartan_peltast_1 Spartan_peltast_2	Spartan_peltast_3 Spartan_heavy_peltast_2	
+
+
+;;; CITY REINFORCEMENTS
+
+	label_unit 0 1 0	Spartan_general_2
+	label_unit 0 1 1	Spartan_hoplite_7
+	label_unit 0 1 2	Spartan_hoplite_8
+	label_unit 0 1 3	Spartan_hoplite_9
+	label_unit 0 1 4	Spartan_hoplite_10
+	label_unit 0 1 5	Spartan_militia_2
+	label_unit 0 1 6	Spartan_militia_3
+
+	define_unit_group	SPARTAN_UNITS_2 Spartan_general_2 Spartan_hoplite_7 Spartan_hoplite_8 Spartan_hoplite_9 Spartan_hoplite_10 Spartan_militia_2 Spartan_militia_3
+
+;******************************************************************************************************************
+;;;	set the camera bookmarks
+;******************************************************************************************************************
+
+;Bookmark: Ruined Greek Temple on a Mountain in Snow
+;Position: -841.864, 1095.98, 816.022 -844.443, 1095.98, 817.553
+
+;Bookmark: Pyrhus and Army before orders are given
+;Position: 660.28, 668.849, 601.302 658.681, 668.849, 603.84
+
+;Bookmark: View of Sparta from a nearby hillock
+;Position: 588.383, 676.74, 484.696 -570.24, 676.74, -582.749
+
+;Bookmark: The view of Spartan City centre outside Temple
+;Position: 129.597, 670.59, 203.449 1374.49, 670.59, 1168.9
+
+;Bookmark: Looking closer at statue outside greek temple
+;Position: 154.045, 670.279, 221.002 161.872, 673.788, 225.731
+
+;Bookmark: View of Ornamental tree lined garden
+;Position: 227.084, 672.216, 129.32 -311.214, 672.216, 116.686
+
+;Bookmark: close up gates at end of the ornamental garden
+;Position: 144.982, 672.216, 128.541 -393.4, 672.216, 120.134
+
+;Bookmark: Looking up massive temple steps with lens flare
+;Position: 198.664, 670.479, 249.728 207.893, 674.814, 249.35
+
+;Bookmark: A city with most of its army away
+;Position: 312.152, 671.248, -430.595 305.729, 672.37, -422.963
+
+;Bookmark: Pyrrhus gives orders
+;Position: 660.663, 668.293, 603.801 655.647, 670.692, 612.282
+
+;Bookmark: Army moves out under camera
+;Position:  688.706, 681.417, 712.718 683.506, 679.374, 704.265
+
+;Bookmark: Spartans in street. The Heroes of Thermopylae
+;Position: 116.012, 668.5, -73.5635 -222.976, 668.5, 576.673
+
+;Bookmark: Spartan Smithy
+;Position: -87.7635, 670.238, -136.994 -18.3254, 670.238, -109.383
+
+;Bookmark: Spartan Youths
+;Position: 115.608, 668.339, -60.8651 101.267, 668.339, 12.4721
+
+;Bookmark: Helots
+;Position: -191.92, 668.769, 154.204 -119.751, 668.769, 134.819
+
+;Bookmark: Reinforcements
+;Position: 369.944, 669.269, -560.845 366.75, 669.362, -570.029
+
+;Bookmark: Sparta is ill defended - wall less
+;Position: 459.544, 686.532, 257.403 449.613, 686.312, 257.263
+
+;Bookmark: ONLY A SMALL FORCE IS PRESENT
+;Position: 150.674, 669.916, 454.995 144.692, 667.405, 447.107
+
+;Bookmark: Looking at general at start of battle
+;Position: 686.538, 695.183, -108.79 658.251, 674.954, -92.83
+
+
+	set_camera_bookmark 0, -841.864, 1095.98, 816.022 -844.443, 1095.98, 817.553	;Ruined Greek Temple on a Mountain in Snow
+	set_camera_bookmark 1, 660.28, 668.849, 601.302 658.681, 668.849, 603.84		;Pyrhus and Army before orders are given
+	set_camera_bookmark 2, 660.663, 668.293, 603.801 655.647, 670.692, 612.282		;Pyrrhus gives orders
+	set_camera_bookmark 3, 688.706, 681.417, 712.718 683.506, 679.374, 704.265		;Army moves out under camera
+	set_camera_bookmark 4, 588.383, 676.74, 484.696 -570.24, 676.74, -582.749		;View of Sparta from a nearby hillock
+	set_camera_bookmark 5, 129.597, 670.59, 203.449 1374.49, 670.59, 1168.9			;The view of Spartan City centre outside Temple
+	set_camera_bookmark 6, 154.045, 670.279, 221.002 161.872, 673.788, 225.731		;Looking closer at statue outside greek temple
+	set_camera_bookmark 7, 227.084, 672.216, 129.32 -311.214, 672.216, 116.686		;View of Ornamental tree lined garden
+	set_camera_bookmark 8, 144.982, 672.216, 128.541 -393.4, 672.216, 120.134		;Close up gates at end of the ornamental garden
+	set_camera_bookmark 9, 198.664, 670.479, 249.728 207.893, 674.814, 249.35		;Looking up massive temple steps with lens flare
+	set_camera_bookmark 10,	312.152, 671.248, -430.595 305.729, 672.37, -422.963	;A city with most of its army away
+	set_camera_bookmark 11,	116.012, 668.5, -73.5635 -222.976, 668.5, 576.673		;Spartans in street. The Heroes of Thermopylae
+	set_camera_bookmark 12,	-87.7635, 670.238, -136.994 -18.3254, 670.238, -109.383	;Spartan Smithy
+	set_camera_bookmark 13, 115.608, 668.339, -60.8651 101.267, 668.339, 12.4721	;Spartan Youths
+	set_camera_bookmark 14, -191.92, 668.769, 154.204 -119.751, 668.769, 134.819	;Helots
+	set_camera_bookmark 15, 369.944, 669.269, -560.845 366.75, 669.362, -570.029	;Reinforcements
+	set_camera_bookmark 16, 459.544, 686.532, 257.403 449.613, 686.312, 257.263		;Sparta is ill defended - wall less
+	set_camera_bookmark 17, 150.674, 669.916, 454.995 144.692, 667.405, 447.107		;ONLY A SMALL FORCE IS PRESENT
+	set_camera_bookmark 19, 686.538, 695.183, -108.79 658.251, 674.954, -92.83		;Looking at general at start of battle
+;	set_camera_bookmark 20,
+;	set_camera_bookmark 21,
+
+;SPARTAN CITY DEFENCE UNIT LOCATIONS
+;46.905, 123.939, 92	Spartan_general_1
+;-36.419, 433.220, 5	Spartan_militia_1		
+;54.310, 102.865, 91	Spartan_hoplite_1				
+;54.027, 78.101, 90		Spartan_hoplite_2		
+;416.662, 326.047, 92	Spartan_hoplite_3													
+;413.107, 196.726, 91	Spartan_hoplite_4		
+;116.682, -69.176, 178	Spartan_hoplite_5			
+;139.858, 450.775, 5	Spartan_hoplite_6								
+;116.933, -58.300, -178	Spartan_heavy_peltast_1				
+;-176.347, 149.185, -90	Spartan_peasant_1			
+;45.846, 102.083, 91	Spartan_peltast_1							
+;408.505, 324.269, 89	Spartan_peltast_2									
+;403.796, 196.663, 90	Spartan_peltast_3			
+;139.531, 439.363, -1	Spartan_heavy_peltast_2			
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;LOCATIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;label_location
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Set up global counters and timers
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	declare_counter have_units_formed_up		;PLAYER LET INTRO FINISH
+	declare_counter go_to_end_phase				;PLAYER HAS HIT ESCAPE KEY
+	declare_counter is_script_ready_to_end
+	declare_counter SPARTAN_UNITS_TELEPORTED	;
+	declare_counter PYRRHUS_UNITS_TELEPORTED	;
+	declare_timer	Esc_Key_Pressed_Timer		;This is the timer that makes sure you dont get jumping between stuff after esc key is pressed
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ALLOW ESC KEY TO BE USED TO JUMP TO END OF INTRO
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	steal_esc_key on			;ENSURE THIS IS ON WHEN PUT IN RELEASE
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; CHECK THAT BATTLE HAS STARTED
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while ! I_BattleStarted
+	end_while
+
+;*********************************************************
+;CAMERA START POSITION Ruined Greek Temple on a Mountain in Snow
+;*********************************************************
+
+	camera_position -841.864, 1095.98, 816.022 -844.443, 1095.98, 817.553
+
+;******************************************************************************************************************
+;	Setting up Battle
+;******************************************************************************************************************
+
+	hide_ui
+	hiding_enabled_set false		;REMOVE LATER WHEN NOT REQUIRED
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;	Set the music and the camera
+;;;	also stop - advice, active ai, camera 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	set_music_state tension
+
+	battle_default_camera
+
+	camera_restrictions_set 	off
+
+	camera_default_mode_set		tw
+
+	ai_active_set off
+
+	suspend_unscripted_advice true
+
+;*********************************************************
+;STOP PLAYER INTERFERENCE TURNED OFF FOR EDITING.
+;*********************************************************
+
+	disable_entire_ui								
+	inhibit_camera_input true										;Stopping player interaction with the game 
+	disable_shortcuts true
+	disable_cursor
+
+	battle_wait 1
+
+;*********************************************************
+;CAMERA START POSITION  Ruined Greek Temple on a Mountain in Snow
+;*********************************************************
+
+	camera_position -841.864, 1095.98, 816.022 -844.443, 1095.98, 817.553
+
+	battle_wait 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; EVENT MONITOR FOR ESC KEY BEING PRESSED DURING INTRO
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_event EscPressed TrueCondition
+		set_counter go_to_end_phase 1
+	end_monitor
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Start Narration and Cinematic sequence
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_conditions I_CompareCounter go_to_end_phase = 0
+
+		;*********************************************************
+		;King Pyrrhus life is an epic tale...
+		;*********************************************************
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while	
+
+		play_sound_event SIEGE_OF_SPARTA_01 tag = Siege_of_Sparta01
+
+		battle_wait 8
+
+		camera_zoom_to_bookmark 2						;zoom to Pyrhus and Army before orders are given
+		
+		battle_wait  13									;battle_wait for camera to reach pyrrhus
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while	
+		
+		;*********************************************************
+		;THAT WAS SEVEN YEARS AGO...
+		;*********************************************************
+
+		unit_group_order_move_unformed GREEK_PLAYER_UNITS 633, 174 walk
+
+		battle_wait 1
+
+		play_sound_event SIEGE_OF_SPARTA_02 tag = Siege_of_Sparta02
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 2
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 3 12						;Now he has raised a mighty army
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		battle_wait 6
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 4 						;he heads to the City of Sparta
+
+		battle_wait 7
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 11					;The heroes of thermopylae
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		;*********************************************************
+		;Word reaches pyrrhus Spartans ill defended - Show lack of walls etc
+		;*********************************************************
+
+		play_sound_event SIEGE_OF_SPARTA_03 tag = Siege_of_Sparta03
+
+		camera_position_at_bookmark 16					;spartan city
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		camera_position_at_bookmark 5					;spartan city outside temple looking at statue
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		battle_wait 2
+	
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 6 5						;Looking closer at statue outside greek temple
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		;*********************************************************
+		;King Areus of sparta is away on holiday fighting 
+		;- focus on Spartan General
+		;*********************************************************
+
+		play_sound_event SIEGE_OF_SPARTA_04 tag = Siege_of_Sparta04	
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 12					;Spartan smithy
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 1.5
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 9					;Looking up massive temple steps with lens flare
+
+		battle_wait 1.5
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		camera_position_at_bookmark 17					;Small force
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 5
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Easy target
+		;*********************************************************
+	
+		camera_position_at_bookmark 10					; A city with most of its army away
+	
+		play_sound_event SIEGE_OF_SPARTA_05 tag = Siege_of_Sparta05
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		battle_wait 9
+	
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Youths put up heroic fight - show peltasts etc
+		;*********************************************************
+
+		play_sound_event SIEGE_OF_SPARTA_06 tag = Siege_of_Sparta06	
+
+		camera_position_at_bookmark 13					;Spartan Youths
+	
+		battle_wait 4
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 14					;Helots
+	
+		battle_wait 5
+			
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Re-enforcements on the way
+		;*********************************************************
+
+		unit_group_order_move_unformed SPARTAN_UNITS_2 445.58 -498 walk
+
+		battle_wait 1
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while	
+				
+		camera_position_at_bookmark 15					;reinforcements
+	
+		play_sound_event SIEGE_OF_SPARTA_07 tag = Siege_of_Sparta07
+	
+		battle_wait 5
+	
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Pyrrhus must take city quickly!
+		;*********************************************************
+
+		steal_esc_key off
+	
+		camera_position_at_bookmark 9
+
+		hiding_enabled_set true
+	
+		play_sound_event SIEGE_OF_SPARTA_08 tag = Siege_of_Sparta08
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Teleport to Player Battle Start position.
+	;;;	place the players units in the position they need to be in 
+	;;;	when the fighting commences
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		undefine_unit_group		GREEK_PLAYER_UNITS
+		undefine_unit_group		SPARTAN_UNITS
+
+		unit_immediate_place	 greek_general_1				645.077, -90.421, -65,	25
+		unit_immediate_place	 greek_onager_1					624.441, -151.878, -64,	33
+		unit_immediate_place	 greek_onager_2					638.518, -123.618, -65,	33
+		unit_immediate_place	 greek_pikemen_1				646.798, -10.054, -85,	11
+		unit_immediate_place	 greek_pikemen_2				647.169, 2.865, -85,	11
+		unit_immediate_place	 greek_pikemen_3				647.731, 15.588, -87,	11
+		unit_immediate_place	 greek_peltast_1				634.916, -23.485, -88,	100
+		unit_immediate_place	 greek_royal_cavalry_1			605.925, -175.729, -81,	34
+		unit_immediate_place	 greek_hoplite_militia_1		650.310, 45.320, -82,	12
+		unit_immediate_place	 merc_rhodian_slingers_1		668.400, 28.248, -87,	46
+		unit_immediate_place	 greek_elephant_small_1			674.339, 103.100, -84,	42
+		unit_immediate_place	 greek_pikemen_4				646.926, -24.017, -89,	11
+		unit_immediate_place	 greek_archer_1					613.702, -142.274, -65, 59
+		unit_immediate_place	 greek_levy_pikemen_1			647.088, -37.057, -91,	11
+		unit_immediate_place	 greek_levy_pikemen_2			649.052, 29.161, -91,	11
+		unit_immediate_place	 greek_levy_pikemen_3			655.847, 72.703, -87,	11
+		unit_immediate_place	 greek_levy_pikemen_4			652.839, 59.324, -89,	11
+		unit_immediate_place	 merc_rhodian_slingers_2		663.389, -33.457, -89,	46
+		unit_immediate_place	 greek_elephant_cataphract_1	669.267, 146.879, -88,	88
+
+		stop_sound_event Siege_of_Sparta01
+		stop_sound_event Siege_of_Sparta02
+		stop_sound_event Siege_of_Sparta03
+		stop_sound_event Siege_of_Sparta04
+		stop_sound_event Siege_of_Sparta05
+		stop_sound_event Siege_of_Sparta06
+		stop_sound_event Siege_of_Sparta07
+;;;		stop_sound_event Siege_of_Sparta08
+
+
+;;;		unit_immediate_place	Spartan_general_2  368.939, -569.326, 49, 15
+;;;		unit_immediate_place	Spartan_hoplite_7  357.876, -575.786, 56, 10
+;;;		unit_immediate_place	Spartan_hoplite_8  350.410, -565.984, 53, 10
+;;;		unit_immediate_place	Spartan_hoplite_9  337.180, -591.009, 52, 10
+;;;		unit_immediate_place	Spartan_hoplite_10 330.761, -581.500, 54, 10
+;;;		unit_immediate_place	Spartan_militia_2  348.761, -582.387, 53, 10
+;;;		unit_immediate_place	Spartan_militia_3  340.916, -573.150, 50, 10
+
+		unit_group_immediate_place SPARTAN_UNITS_2 -419.8 -697.6 50
+
+		undefine_unit_group		SPARTAN_UNITS_2
+
+		set_counter have_units_formed_up 1					; If the player hasnt hit the escape key then 
+
+		battle_wait 3
+
+		while I_CompareCounter have_units_formed_up = 0		;stops further play of the intro sequence and puts units in start position
+		end_while	
+			
+		camera_position_at_bookmark 19
+
+		battle_wait 4
+	
+		;******************************************************************
+		;;;	Scripted sequence has finished, manually trigger the end phase
+		;******************************************************************
+	
+		set_counter is_script_ready_to_end 1
+		set_counter go_to_end_phase 1
+
+		terminate_monitor
+	end_monitor			
+
+
+	while I_CompareCounter go_to_end_phase = 0		;stops further play of the intro sequence and puts units in start position
+	end_while
+
+
+	monitor_conditions  I_CompareCounter go_to_end_phase = 1
+		and I_CompareCounter have_units_formed_up = 0
+
+		steal_esc_key off
+	
+		camera_position_at_bookmark 9
+
+		hiding_enabled_set true
+	
+		play_sound_event SIEGE_OF_SPARTA_08 tag = Siege_of_Sparta08
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Teleport to Player Battle Start position.
+	;;;	place the players units in the position they need to be in 
+	;;;	when the fighting commences
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		undefine_unit_group		GREEK_PLAYER_UNITS
+		undefine_unit_group		SPARTAN_UNITS
+
+		unit_immediate_place	 greek_general_1				645.077, -90.421, -65,	25
+		unit_immediate_place	 greek_onager_1					624.441, -151.878, -64,	33
+		unit_immediate_place	 greek_onager_2					638.518, -123.618, -65,	33
+		unit_immediate_place	 greek_pikemen_1				646.798, -10.054, -85,	11
+		unit_immediate_place	 greek_pikemen_2				647.169, 2.865, -85,	11
+		unit_immediate_place	 greek_pikemen_3				647.731, 15.588, -87,	11
+		unit_immediate_place	 greek_peltast_1				634.916, -23.485, -88,	100
+		unit_immediate_place	 greek_royal_cavalry_1			605.925, -175.729, -81,	34
+		unit_immediate_place	 greek_hoplite_militia_1		650.310, 45.320, -82,	12
+		unit_immediate_place	 merc_rhodian_slingers_1		668.400, 28.248, -87,	46
+		unit_immediate_place	 greek_elephant_small_1			674.339, 103.100, -84,	42
+		unit_immediate_place	 greek_pikemen_4				646.926, -24.017, -89,	11
+		unit_immediate_place	 greek_archer_1					613.702, -142.274, -65, 59
+		unit_immediate_place	 greek_levy_pikemen_1			647.088, -37.057, -91,	11
+		unit_immediate_place	 greek_levy_pikemen_2			649.052, 29.161, -91,	11
+		unit_immediate_place	 greek_levy_pikemen_3			655.847, 72.703, -87,	11
+		unit_immediate_place	 greek_levy_pikemen_4			652.839, 59.324, -89,	11
+		unit_immediate_place	 merc_rhodian_slingers_2		663.389, -33.457, -89,	46
+		unit_immediate_place	 greek_elephant_cataphract_1	669.267, 146.879, -88,	88
+
+		stop_sound_event Siege_of_Sparta01
+		stop_sound_event Siege_of_Sparta02
+		stop_sound_event Siege_of_Sparta03
+		stop_sound_event Siege_of_Sparta04
+		stop_sound_event Siege_of_Sparta05
+		stop_sound_event Siege_of_Sparta06
+		stop_sound_event Siege_of_Sparta07
+;;;		stop_sound_event Siege_of_Sparta08
+
+
+;;;		unit_immediate_place	Spartan_general_2  368.939, -569.326, 49, 15
+;;;		unit_immediate_place	Spartan_hoplite_7  357.876, -575.786, 56, 10
+;;;		unit_immediate_place	Spartan_hoplite_8  350.410, -565.984, 53, 10
+;;;		unit_immediate_place	Spartan_hoplite_9  337.180, -591.009, 52, 10
+;;;		unit_immediate_place	Spartan_hoplite_10 330.761, -581.500, 54, 10
+;;;		unit_immediate_place	Spartan_militia_2  348.761, -582.387, 53, 10
+;;;		unit_immediate_place	Spartan_militia_3  340.916, -573.150, 50, 10
+
+		unit_group_immediate_place SPARTAN_UNITS_2 -419.8 -697.6 50
+
+		undefine_unit_group		SPARTAN_UNITS_2
+
+		set_counter have_units_formed_up 1					; If the player hasnt hit the escape key then 
+
+		battle_wait 3
+
+		while I_CompareCounter have_units_formed_up = 0		;stops further play of the intro sequence and puts units in start position
+		end_while	
+			
+		camera_position_at_bookmark 19
+
+		battle_wait 2
+
+		set_counter is_script_ready_to_end 1
+
+		terminate_monitor
+	end_monitor
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;	Re-enable the UI for the player
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter is_script_ready_to_end = 0
+	end_while
+
+	steal_esc_key off
+
+	release_unit Spartan_general_1
+	release_unit Spartan_militia_1		
+	release_unit Spartan_hoplite_1		
+	release_unit Spartan_hoplite_2		
+	release_unit Spartan_hoplite_3		
+	release_unit Spartan_hoplite_4		
+	release_unit Spartan_hoplite_5		
+	release_unit Spartan_hoplite_6		
+	release_unit Spartan_heavy_peltast_1	
+	release_unit Spartan_peasant_1		
+	release_unit Spartan_peltast_1		
+	release_unit Spartan_peltast_2		
+	release_unit Spartan_peltast_3		
+	release_unit Spartan_heavy_peltast_2
+
+	enable_cursor
+
+	suspend_unscripted_advice false
+
+	camera_default_mode_set user_pref
+
+	camera_restrictions_set	on
+
+	wait 1
+
+	disable_shortcuts false
+
+	inhibit_camera_input false
+
+	show_ui
+
+	enable_entire_ui
+
+	pause_battle
+
+	monitor_conditions I_UnitEnemyUnitInRadius Spartan_general_2 100
+			ai_active_set on
+		terminate_monitor
+	end_monitor
+
+	battle_wait 300
+
+	ai_active_set on
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Don't terminate script until the script is ready
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_InBattle
+	end_while
+
+	end_script

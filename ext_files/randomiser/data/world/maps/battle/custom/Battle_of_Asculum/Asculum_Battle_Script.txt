@@ -1,0 +1,838 @@
+
+;******************************************************************************************************************
+;	Setting up Battle with Script Commands
+;******************************************************************************************************************
+
+	prepare_for_battle
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Label Units & Groups & LOCATIONS
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;*************
+;ROMAN_UNITS
+;*************
+
+	label_unit 0 0 0	roman_general_1			
+	label_unit 0 0 1	roman_velite_1				
+	label_unit 0 0 2	roman_velite_2				
+	label_unit 0 0 3	roman_velite_3			
+	label_unit 0 0 4	roman_hastati_1			
+	label_unit 0 0 5	roman_hastati_2			
+	label_unit 0 0 6	roman_hastati_3			
+	label_unit 0 0 7	roman_hastati_4		
+	label_unit 0 0 8	roman_hastati_5	
+	label_unit 0 0 9	roman_princeps_1	
+	label_unit 0 0 10	roman_princeps_2		
+	label_unit 0 0 11	roman_princeps_3			
+	label_unit 0 0 12	roman_princeps_4				
+	label_unit 0 0 13	roman_princeps_5		
+	label_unit 0 0 14	roman_triarii_1		
+	label_unit 0 0 15	roman_triarii_2		
+	label_unit 0 0 16	roman_triarii_3		
+	label_unit 0 0 17	roman_triarii_4
+	label_unit 0 0 18	roman_triarii_5
+	label_unit 0 0 19	roman_equites_1
+
+	define_unit_group	ROMAN_UNITS roman_general_1 roman_velite_1 roman_velite_2 roman_velite_3 roman_hastati_1 roman_hastati_2 roman_hastati_3 roman_hastati_4 roman_hastati_5 roman_princeps_1 roman_princeps_2 roman_princeps_3 roman_princeps_4 roman_princeps_5 roman_triarii_1 roman_triarii_2 roman_triarii_3 roman_triarii_4 roman_triarii_5 roman_equites_1
+
+
+;*************
+;GREEK_UNITS
+;*************
+
+	label_unit 1 0 0	Pyrrhus_general_1
+	label_unit 1 0 1	greek_elephant_african_1		
+	label_unit 1 0 2	greek_pikemen_1		
+	label_unit 1 0 3	greek_pikemen_2		
+	label_unit 1 0 4	greek_pikemen_3		
+	label_unit 1 0 5	greek_pikemen_4		
+	label_unit 1 0 6	greek_pikemen_5		
+	label_unit 1 0 7	greek_royal_cavalry_1	
+	label_unit 1 0 8	merc_barbarian_infantry_1			
+	label_unit 1 0 9	greek_archer_1				
+	label_unit 1 0 10	greek_peltast_1				
+	label_unit 1 0 11	greek_peltast_2				
+	label_unit 1 0 12	greek_levy_pikemen_1				
+	label_unit 1 0 13	greek_levy_pikemen_2
+	label_unit 1 0 14	greek_levy_pikemen_3	
+	label_unit 1 0 15	merc_samnite_1		
+	label_unit 1 0 16	greek_hoplite_militia_1	
+	label_unit 1 0 17	merc_rhodian_slingers_1
+			
+
+	define_unit_group	GREEK_UNITS Pyrrhus_general_1 greek_elephant_african_1 greek_pikemen_1 greek_pikemen_2 greek_pikemen_3 greek_pikemen_4 greek_pikemen_5 greek_royal_cavalry_1 merc_barbarian_infantry_1 greek_archer_1 greek_peltast_1 greek_peltast_2 greek_levy_pikemen_1 greek_levy_pikemen_2 greek_levy_pikemen_3 merc_samnite_1 greek_hoplite_militia_1 merc_rhodian_slingers_1
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;LOCATIONS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;label_location
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;		
+;;;	set the camera bookmarks
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;View over battlefield from behind roman general:	-234.104, 473.044, 417.914 -242.056, 468.298, 413.298
+
+;Start view pos:									-644.298, 440.895, 17.1162 -643.089, 436.15, 8.00142
+
+;Phalanxes...:										-651.264, 446.144, 293.446 -655.478, 441.399, 301.617
+
+;and Elephants:										-675.149, 446.049, 228.14 -681.44, 444.524, 235.651
+
+;Against the legions:								-274.160, 463.588, 270.054 -268.013, 458.842, 276.892
+
+;...of Rome:										-238.168, 465.138, 290.000 -231.504, 460.392, 296.335
+
+;View legion from above left:						-279.909, 475.793, 431.276 -276.256, 471.047, 422.839
+
+;Slight move forwards over romans:					-274.379, 475.842, 418.863 -257.161, 453.471, 379.091
+
+;Greek Column marches beneath:						-594.758, 355.984, -509.77 -591.039, 346.822, -528.344
+
+;Look back down column:								-586.152, 346.876, -559.444 -587.988, 337.713, -540.591 
+
+;Romans side right marching in formation			-280.285, 460.843, 272.779 -273.292, 456.097, 278.749
+
+;Romans in formation marching:						-262.386, 463.987, 295.336 -256.726, 459.241, 302.582
+
+
+
+	set_camera_bookmark 0, 776.089, 544.792, -693.721 780.338, 541.862, -702.173	;camera start pos
+
+	set_camera_bookmark 1, -595.073, 351.895, -485.032 -590.772, 349.003, -493.291	;Pyrrhus 
+
+	set_camera_bookmark 2, 266.201, 476.562, 371.705 261.768, 474.211, 379.856		;LOOKS AT ROMAN GENERAL
+
+	set_camera_bookmark 3, -594.758, 355.984, -509.77 -591.039, 346.822, -528.344	;Greek troops in column
+
+	set_camera_bookmark 4, -582.338, 344.491, -568.753 -582.656, 342.865, -559.025	;Elephants and units marching up hill
+
+	set_camera_bookmark 5, -696.867, 447.769, 345.45 -701.669, 446.273, 339.557		;View of pyrrhus, looking hard, orders troops 
+
+	set_camera_bookmark 6,	-702.983, 452.082, 350.022 -693.872, 450.127, 346.663	;Looking up from pyrrhus battle start position to Romans: 
+
+	set_camera_bookmark 7, -286.326, 472.373, 329.935 -276.489, 469.4, 330.474		;View front of Romans?
+
+	set_camera_bookmark 8, 462.92, 487.466, 719.396 437.934, 467.559, 741.833		;ROMAN FARMHOUSE - use for teleport diversion
+
+	set_camera_bookmark 9, -239.832, 464.021, 290.211 -233.212, 463.64, 297.645		;Romans at battle start position: 
+
+	set_camera_bookmark 10, 273.748, 474.875, 409.493 270.813, 463.077, 448.262		;Roman Army side front 1: looking down roman columns
+
+	set_camera_bookmark 11, -234.22, 473.008, 417.45 -242.46, 470.57, 412.667		;View over roman general towrds enemy and over battlefield
+
+	set_camera_bookmark 12, -650.679, 446.819, 262.765 -651.994, 445.187, 270.765	;Phalanxes  
+
+	set_camera_bookmark 13, -675.149, 446.049, 228.14 -681.44, 444.524, 235.651		;Elephants
+
+	set_camera_bookmark 14, -270.594, 461.927, 271.828 -263.918, 462.65, 279.161	;Against the legions...
+
+	set_camera_bookmark 15, -262.386, 463.987, 295.336 -256.726, 459.241, 302.582	;...of Rome
+
+	set_camera_bookmark 16, -279.909, 475.793, 431.276 -276.256, 471.047, 422.839	;View legion from above left: 
+
+	set_camera_bookmark 17, -274.379, 475.842, 418.863 -257.161, 453.471, 379.091	;Slight move forwards over romans:
+
+	set_camera_bookmark 18, 276.629, 477.097, 452.518 279.125, 465.3, 491.319		;Sweep down roman column at beginning rising slightly
+
+	set_camera_bookmark 19, -581.118, 451.27, 353.017 -649.504, 432.8, 347.37		;TWO CULTURES CLASH Greeks:
+
+	set_camera_bookmark 20, -343.76, 462.607, 348.011 -333.931, 460.348, 348.598	;TWO CULTURES CLASH ROMANS:
+
+;;;	set_camera_bookmark 21 NOT SET YET
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Set up global counters and timers
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	declare_counter have_units_formed_up		;PLAYER LET INTRO FINISH
+	declare_counter go_to_end_phase				;PLAYER HAS HIT ESCAPE KEY
+	declare_counter is_script_ready_to_end		;ITS ALL DONE NOW
+	declare_counter ROMAN_UNITS_TELEPORTED
+	declare_counter PYRRHUS_UNITS_TELEPORTED
+	declare_timer	Esc_Key_Pressed_Timer		;This is the timer that makes sure you dont get jumping between stuff after esc key is pressed
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ALLOW ESC KEY TO BE USED TO JUMP TO END OF INTRO
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	steal_esc_key on			;ENSURE THIS IS ON WHEN PUT IN RELEASE
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; CHECK THAT BATTLE HAS STARTED
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while ! I_BattleStarted
+	end_while
+
+;*********************************************************
+;CAMERA START POSITION 
+;*********************************************************
+
+	camera_position 776.089, 544.792, -693.721 780.338, 541.862, -702.173
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; HIDING UI IN MOVIE STYLE LETTERBOX
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	hide_ui ;ENSURE THIS IS ON WHEN PUT IN RELEASE
+
+	hiding_enabled_set false		;REMOVE LATER WHEN NOT REQUIRED
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;	Set the music and the camera
+;;;	also stop - advice, active ai, camera 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	set_music_state tension
+
+	battle_default_camera
+
+	camera_restrictions_set 	off
+
+	camera_default_mode_set		tw
+
+	ai_active_set off
+
+	suspend_unscripted_advice true
+
+;*********************************************************
+;STOP PLAYER INTERFERENCE TURNED OFF FOR EDITING.
+;*********************************************************
+
+	disable_entire_ui								
+	inhibit_camera_input true										;Stopping player interaction with the game 
+	disable_shortcuts true
+	disable_cursor
+
+	battle_wait 1
+
+;*********************************************************
+;CAMERA START POSITION 
+;*********************************************************
+
+	camera_position 776.089, 544.792, -693.721 780.338, 541.862, -702.173
+
+	battle_wait 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; EVENT MONITOR FOR ESC KEY BEING PRESSED DURING INTRO
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_event EscPressed TrueCondition
+		set_counter go_to_end_phase 1
+	end_monitor
+
+;;;;*********************************************************************************************************
+;;;;********************		PUT TELEPORT HERE WHEN FINISHED *********************************************
+;;;;*********************************************************************************************************
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;	Monitor for Teleport to Player Battle Start position.
+;;;	Place the player and AI units in the position they need to be in 
+;;;	when the fighting commences
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_conditions  I_CompareCounter go_to_end_phase = 1
+
+		camera_position_at_bookmark 8				;POSITION CAMERA SO THAT UNITS DONT BLINK IN AND OUT OF EXISTENCE
+
+		steal_esc_key off
+
+		battle_wait 1
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;STOPS SOUND EVENTS THAT ARE NOT RELEVANT ONCE ESC PRESSED
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		stop_sound_event BATTLE_OF_ASCULUM_01
+		stop_sound_event Battle_of_Asculum02
+		stop_sound_event Battle_of_Asculum03
+		stop_sound_event Battle_of_Asculum04
+		stop_sound_event Battle_of_Asculum05
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;POSITION ROMAN UNITS READY FOR BATTLE
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+									;UNIT					;LOCATION		         ;FACING	;formation_width
+																														
+			unit_immediate_place	 roman_general_1		-263.78064, 406.736384, -91.999,	10
+			unit_order_change_formation roman_general_1 wedge																	
+																			
+			unit_immediate_place	 roman_velite_1	        -282.027904, 355.662112, -90.554,	35
+			unit_order_change_formation roman_velite_1	square
+																			
+			unit_immediate_place	 roman_velite_2			-279.529728, 318.810304, -90.554,	35
+			unit_order_change_formation roman_velite_2	square	
+																					
+			unit_immediate_place	 roman_velite_3			-276.989152, 281.732128, -90.554,	35
+			unit_order_change_formation roman_velite_1	square
+																								
+			unit_immediate_place	 roman_hastati_1		-259.868256, 279.993984, -90.554,	12
+			unit_order_change_formation roman_hastati_1	square
+																								
+			unit_immediate_place	 roman_hastati_2		-263.259424, 327.914688, -90.554,	12
+			unit_order_change_formation roman_hastati_2	square
+																								
+			unit_immediate_place	 roman_hastati_3		-264.820768, 353.271488, -90.554,	12
+			unit_order_change_formation roman_hastati_3	square
+										
+			unit_immediate_place	 roman_hastati_4		-260.09216, 303.121184, -90.521,	12
+			unit_order_change_formation roman_hastati_4	square
+									
+			unit_immediate_place	 roman_hastati_5		-265.787872, 378.071136, -90.554,	12
+			unit_order_change_formation roman_hastati_5	square
+										
+			unit_immediate_place	 roman_princeps_1		-247.5572, 269.535872, -90.543,		12
+			unit_order_change_formation roman_princeps_1 square	
+									
+			unit_immediate_place	 roman_princeps_2		-253.917328, 317.719872, -90.554,	12
+			unit_order_change_formation roman_princeps_2 square
+										
+			unit_immediate_place	 roman_princeps_3		-255.21312, 343.861664, -90.549,	12
+			unit_order_change_formation roman_princeps_3 square
+									
+			unit_immediate_place	 roman_princeps_4		-257.207728, 368.53072, -90.554,	12
+			unit_order_change_formation roman_princeps_4 square	
+									
+			unit_immediate_place	 roman_princeps_5		-249.754896, 294.328128, -90.554,	12
+			unit_order_change_formation roman_princeps_5 square	
+									
+			unit_immediate_place	 roman_triarii_1		 -233.559504, 283.320224, -90.554,	10
+			unit_order_change_formation roman_triarii_1	square	
+									
+			unit_immediate_place	 roman_triarii_2		-233.105536, 307.161344, -90.554,	10
+			unit_order_change_formation roman_triarii_2	square
+										
+			unit_immediate_place	 roman_triarii_3		-237.702928, 331.144864, -90.554,	10
+			unit_order_change_formation roman_triarii_3	square	
+									
+			unit_immediate_place	 roman_triarii_4		-238.541568, 356.946784, -90.648,	10
+			unit_order_change_formation roman_triarii_4	square	
+									
+			unit_immediate_place	 roman_triarii_5		 -242.542592, 379.820288, -90.543,	10
+			unit_order_change_formation roman_triarii_5	square	
+									
+			unit_immediate_place	 roman_equites_1		-282.264192, 404.3448, -90.554,		10
+			unit_order_change_formation roman_equites_1	square
+					
+			undefine_unit_group ROMAN_UNITS
+	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;POSITION GREEK UNITS READY FOR BATTLE
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		unit_immediate_place	Pyrrhus_general_1			-668.66144, 340.826336, 103.397,	10  
+		unit_order_change_formation Pyrrhus_general_1 square
+															
+		unit_immediate_place	greek_elephant_african_1	-666.907904, 236.204064, 112.653,	10
+		unit_order_change_formation greek_elephant_african_1 square	
+															
+		unit_immediate_place	greek_pikemen_1				-640.818816, 379.917504, 104.941,	10
+		unit_order_change_formation greek_pikemen_1	phalanx				
+																	
+		unit_immediate_place	greek_pikemen_2				-640.599936, 352.169376, 101.887,	10
+		unit_order_change_formation greek_pikemen_2	phalanx		
+																				
+		unit_immediate_place	greek_pikemen_3				-641.548416, 324.12624, 98.464,		10				
+		unit_order_change_formation	greek_pikemen_3	phalanx		
+																			 
+		unit_immediate_place	greek_pikemen_4				-641.398528, 294.747296, 94.251,	10
+		unit_order_change_formation	greek_pikemen_4	phalanx							
+																					
+		unit_immediate_place	greek_pikemen_5				-646.222656, 280.895328, 92.504,	10
+		unit_order_change_formation	greek_pikemen_5	phalanx				
+																						
+		unit_immediate_place	greek_royal_cavalry_1		-645.374464, 433.97536, 89.423,		40
+		unit_order_change_formation	greek_royal_cavalry_1 square			
+																			
+		unit_immediate_place	merc_barbarian_infantry_1	-635.032896, 266.842768, 90.769,	15
+		unit_order_change_formation merc_barbarian_infantry_1	square				
+																			
+		unit_immediate_place	greek_archer_1				-652.556864, 326.321088, 96.580,	30
+		unit_order_change_formation	greek_archer_1	square	
+																		
+		unit_immediate_place	greek_peltast_1				-652.744064, 363.823456, 86.951,	30
+		unit_order_change_formation greek_peltast_1 square			
+
+		unit_immediate_place	greek_peltast_2				-650.978368, 284.196608, 101.975,	30
+		unit_order_change_formation	greek_peltast_2 square				
+																		
+		unit_immediate_place	greek_levy_pikemen_1		-642.417664, 338.0456, 99.772,		10
+		unit_order_change_formation	greek_levy_pikemen_1 phalanx	
+ 																		
+		unit_immediate_place	greek_levy_pikemen_2		-641.597568, 365.920288, 102.908,	10	
+		unit_order_change_formation greek_levy_pikemen_2 phalanx		
+
+		unit_immediate_place	greek_levy_pikemen_3		-631.99232, 309.573536, 97.036,		10
+		unit_order_change_formation greek_levy_pikemen_3 phalanx							
+																				
+		unit_immediate_place	merc_samnite_1				-630.244096, 394.081856, 99.349,	10
+		unit_order_change_formation	merc_samnite_1 square	
+																					
+		unit_immediate_place	greek_hoplite_militia_1		-641.897088, 404.609888, 113.049,	10					
+		unit_order_change_formation greek_hoplite_militia_1 phalanx	
+
+		unit_immediate_place	merc_rhodian_slingers_1		-654.592512, 402.17008, 77.701,		30						
+		unit_order_change_formation merc_rhodian_slingers_1 square																				
+
+		undefine_unit_group GREEK_UNITS
+
+		battle_wait 6																						
+
+		camera_position_at_bookmark 11					;POSITION CAMERA SO THAT UNITS DONT BLINK IN AND OUT OF EXISTENCE
+																										
+		set_counter have_units_formed_up 2
+																											
+		terminate_monitor																				
+	end_monitor
+																											
+			
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Start Narration and Cinematic sequence
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_conditions I_CompareCounter go_to_end_phase = 0
+
+		camera_zoom_to 633.304, 544.792, -765.512 684.388, 509.567, -867.112 3
+
+		battle_wait 2
+
+		;*********************************************************
+		;Talk about king Pyrrhus and focus on him
+		;*********************************************************
+		play_sound_event ASCULUM_SPEECH_01 ;tag = BATTLE_OF_ASCULUM_01	
+
+		battle_wait 4
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 1									;;Pyrrhus 
+
+		battle_wait 1												;allows the camera to reach the general
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;ORDER PYRRHUS AND ARMY TO MOVE TO A POSITION KEEPING DISTANCE
+		;*********************************************************
+		
+		unit_group_order_move_unformed GREEK_UNITS -587.804 166.553 walk		;WALKS UP ROAD
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 3 5										;Greek troops in column
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_position_at_bookmark 4										;look back up hill
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 1
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		;camera_position_at_bookmark
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 5
+
+		while I_CompareCounter go_to_end_phase = 1		;stops further play of the intro sequence and puts units in start position
+		end_while	
+		
+		;*********************************************************
+		;Show Romans and look at them
+		;*********************************************************
+
+		play_sound_event BATTLE_OF_ASCULUM_02 tag = BATTLE_OF_ASCULUM_02
+			
+		camera_position_at_bookmark 2					;LOOKS AT ROMAN GENERAL
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;POSITION GREEK UNITS READY FOR BATTLE AS WE HAVE FINISHED LOOKING AT EM
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		unit_immediate_place	Pyrrhus_general_1			-705.514, 341.879, 94, 10
+		unit_order_change_formation Pyrrhus_general_1 square
+
+		unit_immediate_place	greek_elephant_african_1	-709.567, 247.414, 91, 10
+		unit_order_change_formation greek_elephant_african_1 square
+
+		unit_immediate_place	greek_pikemen_1				-661.178, 381.039, 91, 10
+		unit_order_change_formation greek_pikemen_1	phalanx										;formation_type phalanx,
+		 
+		unit_immediate_place	greek_pikemen_2				-661.029, 353.104, 90, 10
+		unit_order_change_formation greek_pikemen_2	phalanx										;formation_type phalanx,
+
+		unit_immediate_place	greek_pikemen_3				-661.592, 324.967, 87, 10
+		unit_order_change_formation	greek_pikemen_3	phalanx										;formation_type phalanx, 
+
+		unit_immediate_place	greek_pikemen_4				-661.251, 295.307, 90, 10
+		unit_order_change_formation	greek_pikemen_4	phalanx										;formation_type phalanx, 
+
+		unit_immediate_place	greek_pikemen_5				-665.604, 281.309, 92, 10
+		unit_order_change_formation	greek_pikemen_5	phalanx										;formation_type phalanx, 
+
+		unit_immediate_place	greek_royal_cavalry_1		-677.296, 433.892, 90, 40
+		unit_order_change_formation	greek_royal_cavalry_1 square								;formation_type square, 
+
+		unit_immediate_place	merc_barbarian_infantry_1	-666.117, 266.706, 91, 15
+		unit_order_change_formation merc_barbarian_infantry_1	square							;formation_type square, 
+
+		unit_immediate_place	greek_archer_1				-686.389, 326.468, 90, 30
+		unit_order_change_formation	greek_archer_1	square										;formation_type square, 
+
+		unit_immediate_place	greek_peltast_1				-682.637, 363.673, 90, 30
+		unit_order_change_formation greek_peltast_1 square										;formation_type square, 
+
+		unit_immediate_place	greek_peltast_2				-686.854, 284.888, 91, 30
+		unit_order_change_formation	greek_peltast_2 square										;formation_type square, 
+
+		unit_immediate_place	greek_levy_pikemen_1		-661.902, 338.876, 89, 10
+		unit_order_change_formation	greek_levy_pikemen_1 phalanx								;formation_type phalanx, 
+
+		unit_immediate_place	greek_levy_pikemen_2		-661.475, 366.884, 90, 10
+		unit_order_change_formation greek_levy_pikemen_2 phalanx								;formation_type square, 
+
+		unit_immediate_place	greek_levy_pikemen_3		-663.493, 309.867, 90, 10
+		unit_order_change_formation greek_levy_pikemen_3 phalanx								;formation_type square, 
+
+		unit_immediate_place	merc_samnite_1				-661.910, 394.578, 89, 10
+		unit_order_change_formation	merc_samnite_1 square										;formation_type square, 
+
+		unit_immediate_place	greek_hoplite_militia_1		-661.565, 406.242, 89, 10
+		unit_order_change_formation greek_hoplite_militia_1 phalanx								;formation_type square, 
+
+		unit_immediate_place	merc_rhodian_slingers_1		-681.230, 402.472, 88, 30
+		unit_order_change_formation merc_rhodian_slingers_1 square	   							;formation_type square, 
+
+		undefine_unit_group	GREEK_UNITS
+
+		define_unit_group	GREEK_UNITS Pyrrhus_general_1 greek_elephant_african_1 greek_pikemen_1 greek_pikemen_2 greek_pikemen_3 greek_pikemen_4 greek_pikemen_5 greek_royal_cavalry_1 merc_barbarian_infantry_1 greek_archer_1 greek_peltast_1 greek_peltast_2 greek_levy_pikemen_1 greek_levy_pikemen_2 greek_levy_pikemen_3 merc_samnite_1 greek_hoplite_militia_1 merc_rhodian_slingers_1
+
+		set_counter PYRRHUS_UNITS_TELEPORTED 1
+
+		;*********************************************************
+		;ORDER ROMAN ARMY TO MOVE TO A POSITION KEEPING DISTANCE
+		;*********************************************************
+
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+		
+		unit_group_order_move_unformed ROMAN_UNITS 285.91 100.43 walk		;GET CO_ORDINATES AND ENTER THEM HERE
+
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		;*********************************************************
+		;Look down Roman column
+		;*********************************************************
+
+		camera_zoom_to_bookmark 10 5										;Roman Army side front 1:
+	
+		battle_wait 2
+
+		camera_zoom_to_bookmark 18 8										;Roman Army columns looking down the length of them:
+
+		battle_wait 6
+	
+		while I_CompareCounter go_to_end_phase = 1							;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Cultures clash at Asculum in south east italy
+		;Fighting romans and greeks in forest
+		;*********************************************************
+	
+		play_sound_event BATTLE_OF_ASCULUM_03 tag = BATTLE_OF_ASCULUM_03
+
+		camera_position_at_bookmark 19										;GREEKS looking out 
+
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;POSITION ROMAN UNITS READY FOR BATTLE
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	
+
+;									;UNIT				;LOCATION	;FACING	;formation_width
+
+		unit_immediate_place	 roman_general_1	-245.461, 403.861, -92, 10
+		unit_order_change_formation roman_general_1 wedge							;formation_type wedge,
+
+		unit_immediate_place	 roman_velite_1		-265.717, 356.065, -96, 35
+		unit_order_change_formation roman_velite_1	square							;formation_type square,
+
+		unit_immediate_place	 roman_velite_2		-263.058, 319.299, -95, 35
+		unit_order_change_formation roman_velite_2	square							;formation_type square, 
+
+		unit_immediate_place	 roman_velite_3		-260.119, 282.314, -96, 35
+		unit_order_change_formation roman_velite_3	square							;formation_type square,
+																					 
+		unit_immediate_place	 roman_hastati_1	-246.337, 280.059, -95, 12
+		unit_order_change_formation roman_hastati_1	square							;formation_type square, 
+
+		unit_immediate_place	 roman_hastati_2	-249.855, 327.997, -95, 12
+		unit_order_change_formation roman_hastati_2	square							;formation_type square, 
+
+		unit_immediate_place	 roman_hastati_3	-252.299, 353.347, -94, 12
+		unit_order_change_formation roman_hastati_3	square							;formation_type square, 
+
+		unit_immediate_place	 roman_hastati_4	-247.871, 303.163, -94, 12
+		unit_order_change_formation roman_hastati_4	square							;formation_type square,  
+
+		unit_immediate_place	 roman_hastati_5	-253.216, 378.091, -96, 12
+		unit_order_change_formation roman_hastati_5	square							;formation_type square, 
+																					 
+		unit_immediate_place	 roman_princeps_1	-233.947, 269.967, -91, 12
+		unit_order_change_formation roman_princeps_1	square						;formation_type square,  
+
+		unit_immediate_place	 roman_princeps_2	-236.848, 318.240, -92, 12
+		unit_order_change_formation roman_princeps_2	square						;formation_type square,
+
+		unit_immediate_place	 roman_princeps_3	-237.799, 344.426, -90, 12
+		unit_order_change_formation roman_princeps_3	square						;formation_type square,
+																					 
+		unit_immediate_place	 roman_princeps_4	-240.117, 369.064, -91, 12
+		unit_order_change_formation roman_princeps_4	square						;formation_type square, 
+
+		unit_immediate_place	 roman_princeps_5	-233.190, 294.840, -90, 12
+		unit_order_change_formation roman_princeps_5	square						;formation_type square,
+																						 
+		unit_immediate_place	 roman_triarii_1	-218.274, 283.873, -94, 10
+		unit_order_change_formation roman_triarii_1	square							;formation_type square,
+
+		unit_immediate_place	 roman_triarii_2	-218.484, 307.779, -89, 10
+		unit_order_change_formation roman_triarii_2	square							;formation_type square, 
+
+		unit_immediate_place	 roman_triarii_3	-220.253, 331.749, -92, 10
+		unit_order_change_formation roman_triarii_3	square							;formation_type square,
+																						 
+		unit_immediate_place	 roman_triarii_4	-221.965, 357.581, -93, 10
+		unit_order_change_formation roman_triarii_4	square							;formation_type square,
+																					 
+		unit_immediate_place	 roman_triarii_5	-225.596, 380.445, -90, 10
+		unit_order_change_formation roman_triarii_5	square							;formation_type square, 
+
+		unit_immediate_place	 roman_equites_1	-266.292, 404.477, -96, 10
+		unit_order_change_formation roman_equites_1	square							;formation_type square,
+
+		undefine_unit_group ROMAN_UNITS
+
+		define_unit_group	ROMAN_UNITS roman_general_1 roman_velite_1 roman_velite_2 roman_velite_3 roman_hastati_1 roman_hastati_2 roman_hastati_3 roman_hastati_4 roman_hastati_5 roman_princeps_1 roman_princeps_2 roman_princeps_3 roman_princeps_4 roman_princeps_5 roman_triarii_1 roman_triarii_2 roman_triarii_3 roman_triarii_4 roman_triarii_5 roman_equites_1
+
+		set_counter ROMAN_UNITS_TELEPORTED 1
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 1
+
+		camera_zoom_to	 -589.252, 448.504, 335.222 -598.779, 446.065, 335.165 10	;zoom up to spartans
+
+		battle_wait 2
+
+		camera_position_at_bookmark 20
+
+		battle_wait 1
+	
+		camera_zoom_to -311.752, 462.987, 352.038 -302.226, 460.549, 352.065 10		;zoom up to romans
+
+		battle_wait 2
+
+		while I_CompareCounter go_to_end_phase = 1									;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Forces line up on battlefield
+		;*********************************************************
+
+		camera_position_at_bookmark 5												;View of pyrrhus, looking hard, orders troops 
+	
+		play_sound_event BATTLE_OF_ASCULUM_04 tag = BATTLE_OF_ASCULUM_04
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 3
+
+		unit_group_order_relative_move_formed GREEK_UNITS 0 30 walk				; greek units advance
+
+;		battle_wait 1
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 6													;Looking up from pyrrhus battle start position to Romans:
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 6
+	
+		while I_CompareCounter go_to_end_phase = 1									;stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Elephants and phalanxes against the legions of Rome
+		;*********************************************************
+
+		camera_position_at_bookmark 13												;Elephants
+	
+		play_sound_event BATTLE_OF_ASCULUM_05 tag = BATTLE_OF_ASCULUM_05
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while									
+
+		battle_wait 1.2
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while	
+
+		camera_position_at_bookmark 12												;Phalanxes
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while	
+
+		battle_wait 1.5
+
+		while I_CompareCounter go_to_end_phase = 1									;Stops further play of the intro sequence and puts units in start position
+		end_while	
+
+		camera_position_at_bookmark 14												;Vs Romans?
+
+		;UNITS MARCH TOWARDS EACH OTHER
+		unit_group_order_relative_move_formed ROMAN_UNITS 0 30 walk
+
+		battle_wait 1.3
+	
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+	
+		;*********************************************************
+		;Can Romans stand firm?
+		;*********************************************************
+
+		play_sound_event BATTLE_OF_ASCULUM_06 tag = BATTLE_OF_ASCULUM_06
+		
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		battle_wait 2
+
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		camera_zoom_to_bookmark 11 10										;View over roman general towards enemy and over battlefield
+
+		while I_CompareCounter go_to_end_phase = 1							;Stops further play of the intro sequence and puts units in start position
+		end_while
+
+		steal_esc_key off
+			
+		battle_wait 14
+
+		unit_group_order_halt ROMAN_UNITS											;STOP THE ROMANS AND GREEKS
+		unit_group_order_halt GREEK_UNITS
+
+		undefine_unit_group ROMAN_UNITS
+		undefine_unit_group GREEK_UNITS
+
+		;******************************************************************
+		;;;	Scripted sequence has finished, trigger the end phase of intro
+		;******************************************************************
+	 
+		set_counter go_to_end_phase 2
+		set_counter have_units_formed_up 1					; If the player hasnt hit the escape key then
+				
+		terminate_monitor
+	end_monitor			
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Re-enable the UI for the player
+;;; Position Units if player hasnt got to the end of the intro sequence
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 0		;waits until units in start position
+	end_while
+
+	while I_CompareCounter have_units_formed_up = 0		; makes sure units are in place
+	end_while
+
+	steal_esc_key off
+
+	ai_active_set on
+
+	enable_cursor
+
+	suspend_unscripted_advice false
+
+	camera_default_mode_set user_pref
+
+	camera_restrictions_set	on
+
+	wait 1
+
+	disable_shortcuts false
+
+	inhibit_camera_input false
+
+	show_ui
+
+	enable_entire_ui
+
+	pause_battle
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;	Don't terminate script until the script is ready
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter is_script_ready_to_end = 0
+	end_while
+
+	while I_InBattle
+	end_while
+
+	end_script

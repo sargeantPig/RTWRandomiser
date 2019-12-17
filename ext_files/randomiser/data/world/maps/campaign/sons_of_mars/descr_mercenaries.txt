@@ -1,0 +1,30 @@
+
+pool Cisapline_Gaul
+	regions Gallia_Cispadana Umbria				
+	unit merc barbarian cavalry,		exp 0 cost 450 replenish 0.25 - 0.5 max 1 initial 1
+	unit merc barbarian infantry,		exp 0 cost 800 replenish 0.1 - 0.3 max 4 initial 0
+
+pool Illyria
+	regions Illyricum Dalmatia Epirus			
+	unit merc illyrian,			exp 1 cost 930 replenish 0.25 - 0.75 max 6 initial 2
+	unit merc peltast,			exp 1 cost 800 replenish 0.2 - 0.3 max 4 initial 2
+	unit merc cretan archers,		exp 0 cost 700 replenish 0.1 - 0.15 max 2 initial 0
+	unit merc greek hoplites,		exp 1 cost 850 replenish 0.2 - 0.3 max 4 initial 2
+	unit merc thracian,			exp 0 cost 1000 replenish 0.1 - 0.15 max 2 initial 1
+
+pool Northern_Italy
+	regions Etruria Latium	Picenum				
+	unit merc samnite,			exp 0 cost 930 replenish 0.05 - 0.1 max 1 initial 0
+	unit merc samnite,			exp 1 cost 930 replenish 0.2 - 0.3 max 4 initial 1
+	unit merc greek hoplites,		exp 0 cost 850 replenish 0.1 - 0.15 max 2 initial 0
+
+pool Southern_Italy
+	regions Apulia Samnium Magna_Graecia			
+	unit merc samnite,			exp 1 cost 930 replenish 0.2 - 0.3 max 4 initial 1
+	unit merc greek hoplites,		exp 0 cost 850 replenish 0.1 - 0.15 max 2 initial 0
+
+pool Sicily
+	regions Sicilia		
+	unit merc peltast,			exp 0 cost 800 replenish 0.2 - 0.3 max 4 initial 2
+	unit merc greek hoplites,		exp 0 cost 850 replenish 0.1 - 0.15 max 2 initial 1
+	unit merc balearic slingers,		exp 0 cost 420 replenish 0.05 - 0.1 max 1 initial 0

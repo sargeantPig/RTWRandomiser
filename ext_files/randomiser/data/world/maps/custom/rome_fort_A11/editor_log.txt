@@ -1,0 +1,5 @@
+Loading from file data/world/maps/battle/custom/rome_fort_A10/descr_battle.txt
+Created faction romans_julii from file
+Load finished **************************
+
+

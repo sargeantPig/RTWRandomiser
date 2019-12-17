@@ -1,0 +1,8 @@
+Loading from file data/world/maps/battle/custom/rome_hilltrees_a19/descr_battle.txt
+Load finished **************************
+
+
+Loading from file data/world/maps/battle/custom/rome_hilltrees_a20/descr_battle.txt
+Load finished **************************
+
+

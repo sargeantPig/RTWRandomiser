@@ -1,0 +1,1283 @@
+script
+
+; init
+	prepare_for_battle
+	label_unit 0 0 0 player_general
+	label_unit 0 0 1 player_triarii
+	label_unit 0 0 2 player_archer
+	
+	label_unit 1 1 0 barb_archer
+	label_unit 1 1 1 barb_peasants
+	label_unit 1 1 2 barb_general
+
+	label_unit 0 1 0 roman_general
+	label_unit 0 1 1 roman_velite_1
+	label_unit 0 1 2 roman_velite_2
+	label_unit 0 1 3 roman_velite_3
+	label_unit 0 1 4 roman_hastati_1
+	label_unit 0 1 5 roman_hastati_2
+	label_unit 0 1 6 roman_hastati_3
+	label_unit 0 1 7 roman_princeps_1
+	label_unit 0 1 8 roman_princeps_2
+	label_unit 0 1 9 roman_princeps_3
+	label_unit 0 1 10 roman_heavy_cavalry
+	label_unit 0 1 11 roman_medium_cavalry
+	
+	label_unit 1 0 0 barb_chieftain
+	label_unit 1 0 1 barb_peltast_1
+	label_unit 1 0 2 barb_peltast_2
+	label_unit 1 0 3 barb_peltast_3
+	label_unit 1 0 4 barb_axe
+	label_unit 1 0 5 barb_dhaxe_1
+	label_unit 1 0 6 barb_dhaxe_2
+	label_unit 1 0 7 barb_dhaxe_3
+	label_unit 1 0 8 barb_infantry
+	label_unit 1 0 9 barb_cavalry
+	label_unit 1 0 10 barb_noble_cavalry
+	label_unit 1 0 11 barb_archer
+
+
+
+
+; wait for end deployement
+
+	while ! I_BattleStarted				
+	end_while
+
+
+
+	set_camera_bookmark 1, -58.2579, 553.635, -777.107 82.5699, 70.518, 249.324
+
+	set_camera_bookmark 2,  -309.535, 248.077, -262.449 267.618, 211.504, -232.136
+	
+	set_camera_bookmark 3, -314.661, 255.905, -274.683 -307.172, 254.159, -269.05248
+
+	set_camera_bookmark 4,  -217.42, 253.041, 140.928 -215.505, 251.883, 150.557
+
+	set_camera_bookmark 5, -208.78, 250.925, 155.945 -207.314, 251.653, 165.837
+
+	set_camera_bookmark 6, -195.565, 255.5, 213.16 -196.606, 253.759, 203.264
+
+	set_camera_bookmark 7,  -333.408, 273.046, 121.976 -323.573, 270.966, 123.585
+
+	set_camera_bookmark 8,  -220.5, 255.137, 67.1722 -231.032, 237.81, 4.06374
+
+	set_camera_bookmark 9,  -274.624, 251.764, -39.8222 264.652, 251.303, -39.289
+
+	set_camera_bookmark 10, -224.845, 256.345, -73.2685 -225.807, 253.271, -82.4469
+
+	set_camera_bookmark 11, : -233.064, 252.036, -157.978 -235.116, 249.728, -167.085
+
+	set_camera_bookmark 12, -307.961, 271.798, -120.831 -299.415, 267.946, -120.878
+
+	set_camera_bookmark 13, 769.769, 283.347, -38.8671 777.072, 281.61, -32.4096
+
+ 	set_camera_bookmark 14, 797.757, 291.667, -31.8553 788.245, 287.521, -32.1986
+
+ 	set_camera_bookmark 15, 819.562, 303.188, -30.9325, 810.803, 299.169, -31.2487
+
+	set_camera_bookmark 16, 577.852, 282.208, -90.293 -92.4598, -32.1984, -17.5654				;POSITION BEHIND TRIARII UNIT START POS
+
+	set_camera_bookmark 17, 575.352, 283.283, -90.8698 66.349, 279.781, -91.4862
+
+	set_camera_bookmark 18, -327.054, 269.195, 130.746 -319.538, 266.384, 124.473				;2nd hilltop panorama shot
+
+	set_camera_bookmark 19, -43.939, 251.977, -39.7397 -52.447, 248.424, -42.6941				;cavalry attack
+
+
+	declare_counter already_learnt_to_move
+	declare_counter already_learnt_to_double_click	
+	declare_counter learning_to_double_click
+	declare_counter ready_for_attack
+	declare_counter cavalry_charge_to_bridge
+	declare_counter battle_has_begun
+
+
+	define_unit_group senate_armyform roman_general roman_velite_1 roman_velite_2 roman_velite_3 roman_hastati_1 roman_hastati_2 roman_hastati_3 roman_princeps_1 roman_princeps_2 roman_princeps_3 roman_heavy_cavalry roman_medium_cavalry 
+	
+	define_unit_group barb_armyform barb_chieftain barb_peltast_1 barb_peltast_2 barb_peltast_3 barb_axe barb_dhaxe_1 barb_dhaxe_2 barb_dhaxe_3 barb_infantry barb_cavalry barb_noble_cavalry barb_archer 
+
+
+
+	unit_set_morale	roman_general high
+	unit_set_morale	roman_velite_1 high
+	unit_set_morale	roman_velite_2 high
+	unit_set_morale	roman_velite_3 high
+	unit_set_morale	roman_hastati_1 high
+	unit_set_morale	roman_hastati_2 high
+	unit_set_morale	roman_hastati_3 high							
+	unit_set_morale	roman_princeps_1 high							
+	unit_set_morale	roman_princeps_2 high						;MAKE ALL UNITS HAVE PERMANENTLY HIGH MORALE TO FORCE ATTRITION
+	unit_set_morale	roman_princeps_3 high							
+	unit_set_morale	roman_heavy_cavalry high						
+	unit_set_morale	roman_medium_cavalry high
+
+	unit_set_morale	barb_chieftain high
+	unit_set_morale	barb_peltast_1 high
+	unit_set_morale	barb_peltast_2 high
+	unit_set_morale	barb_peltast_3 high
+	unit_set_morale	barb_axe high
+	unit_set_morale	barb_dhaxe_1 high
+	unit_set_morale	barb_dhaxe_2 high
+	unit_set_morale	barb_dhaxe_3 high
+	unit_set_morale	barb_infantry high
+	unit_set_morale	barb_cavalry high
+	unit_set_morale	barb_noble_cavalry high
+	unit_set_morale	barb_archer high
+
+	unit_set_morale	player_archer high
+
+
+
+
+
+;*********************************************************************************************
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;; CINEMATIC BATTLE START ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+;*********************************************************************************************
+
+
+
+
+
+
+	disable_entire_ui							;commented out in order to be able to speed up time for testing
+
+	use_camera_bookmark 1							;BATTLE CAMERA START POS
+
+;	*******************************						;PLAY AUDIO HERE
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;WAIT FOR A FEW MOMENTS AFTER BATTLE STARTS AND BRING UP ADVICE	1	
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;ADVICE
+
+	point_at_unit_pos player_triarii
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;ADVICE
+
+	point_at_unit_pos roman_general
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;ADVICE
+
+	point_at_unit_pos barb_chieftain
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;ADVICE
+
+	remove_battle_map_arrow	
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+	use_camera_bookmark 2							;MOVE CAMERA TO SENATE GENERAL
+
+	restart_timer
+	while I_TimerElapsed < 6000						;WAIT FOR 6 SECONDS 
+	end_while 
+
+	advance_advice_thread Start_Battle_Lure_Away_The_Camels_Thread		;BRING UP ADVICE
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+	
+	restart_timer
+	while I_TimerElapsed < 400						;WAIT FOR 0.4 SECONDS 
+	end_while 
+
+	unit_group_order_relative_move_formed senate_armyform 0 100		;SENATE ARMY MOVES FORWARD 100m
+
+	restart_timer
+	while I_TimerElapsed < 7000						;WAIT FOR 7 SECONDS 
+	end_while 
+
+	use_camera_bookmark 3							;MOVE CAMERA TO WATCH ARMY MARCH BY
+
+	advance_advice_thread Start_Battle_Lure_Away_The_Camels_Thread	;BRING UP ADVICE 4
+
+	restart_timer
+	while I_TimerElapsed < 7000						;WAIT FOR 7 SECONDS 
+	end_while 
+
+	use_camera_bookmark 4							;PAN CAMERA TO GAUL SKIRMISHERS
+
+	advance_advice_thread Start_Battle_Attacking_The_Gentle_Slope_Distraction_On_Steeper_Thread		;BRING UP ADVICE 5
+
+	unit_group_order_relative_move_formed barb_armyform 0 250 run		;GAUL ARMY RUNS FORWARD 250m
+
+	restart_timer
+	while I_TimerElapsed < 11000						;WAIT FOR 12 SECONDS 
+	end_while 
+	
+	use_camera_bookmark 7							;PAN CAMERA TO GAUL NOBLE CAVALRY ON HILL
+
+	restart_timer
+;;;;;;;	while I_TimerElapsed < 9000						;WAIT FOR 9 SECONDS 
+	while I_TimerElapsed < 6000						;WAIT FOR 6 SECONDS 
+	end_while 
+
+	use_camera_bookmark 18							;PAN CAMERA TO 2ND GAUL NOBLE CAVALRY ON HILL SHOT
+
+	restart_timer
+	while I_TimerElapsed < 5000						;WAIT FOR 5 SECONDS 
+	end_while 
+
+	use_camera_bookmark 8							;PAN CAMERA TO FACE SENATE ARMY WHILE GAULS RUN UNDERNEATH
+ 
+	advance_advice_thread Start_Battle_Fix_Phalanxes_Attack_Flanks_Thread	;BRING UP ADVICE 5
+
+	restart_timer
+;	while I_TimerElapsed < 8000						;WAIT FOR 8 SECONDS 
+	while I_TimerElapsed < 7000						;WAIT FOR 8 SECONDS 
+	end_while 
+
+	use_camera_bookmark 9							;PAN CAMERA LOW AS GAUL SKIRMISHERS RUN PAST
+	
+	restart_timer
+	while I_TimerElapsed < 8000						;WAIT FOR 8 SECONDS 
+	end_while 
+
+	use_camera_bookmark 10							;PAN CAMERA ABOVE GAUL ARMY WHILE THEY THROW JAVELINS
+
+	restart_timer
+	while I_TimerElapsed < 9000						;WAIT FOR 9 SECONDS 
+	end_while 
+
+	use_camera_bookmark 11							;PAN CAMERA TO VIEW SENATE VELITES BEING HIT BY JAVELINS AND RETURNING FIRE
+
+	restart_timer
+	while I_TimerElapsed < 8000						;WAIT FOR 8 SECONDS 
+	end_while 
+
+	use_camera_bookmark 12							;PAN CAMERA TO VIEW EXCHANGE OF SKIRMISH FIRE
+
+	restart_timer
+	while I_TimerElapsed < 4000						;WAIT FOR 4 SECONDS 
+	end_while 
+
+	use_camera_bookmark 1
+
+	advance_advice_thread Start_Battle_Enemy_Forming_For_Attack_Thread	;ADVICE 1_e
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+	end_while
+
+
+;	unit_order_move barb_peltast_1 -194, -88
+;	unit_order_move barb_peltast_2 -222, -90
+;	unit_order_move barb_peltast_3 -254, -91
+
+
+;-194.546, -88, -180, formation_type horde, formation_width 20.297
+;-222.948, -90, -175, formation_type horde, formation_width 16.605
+;-254.785, -91, -177, formation_type horde, formation_width 19.186
+
+
+
+;*********************************************************************************************
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	BATTLE TUTORIAL	START	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+;*********************************************************************************************
+
+
+
+;*********************************************************************************************
+;	TALK ABOUT THE GENERAL
+;*********************************************************************************************
+
+
+	use_camera_bookmark 13							;ZOOM TO PLAYER GENERAL
+
+	restart_timer
+	while I_TimerElapsed < 5000						;WAIT FOR 5 SECONDS 
+	end_while 
+
+	advance_advice_thread Start_Battle_Enemy_Defending_Hill_Thread		;ADVICE *YOUR GENERAL*
+
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK TO CONTINUE
+	end_while
+
+	use_camera_bookmark 14							;MOVE CAMERA BEHIND PLAYER GENERAL
+
+
+;*********************************************************************************************
+;	TEACH THE PLAYER TO MOVE THE CAMERA	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+
+	enable_entire_ui
+	
+	advance_advice_thread Incoming_Message_Unit_Routs_Thread		;ADVICE *CAMERA CONTROLS* USE CURSOR KEYS TO MOVE
+										
+	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK TO CONTINUE
+	end_while
+
+
+
+
+;*******************************************************************************************
+;	TEACH THE PLAYER TO SELECT AND MOVE A UNIT
+;*******************************************************************************************
+
+	use_camera_bookmark 15									;MOVE CAMERA TO HIGH UP BEHIND PLAYER'S GENERAL
+
+	advance_advice_thread Start_Battle_Wearing_Down_With_Skirmishers_Thread			;ADVICE *LEFT-CLICK ON GENERAL UNIT TO SELECT
+									
+	restart_timer
+	while I_TimerElapsed < 2000								;WAIT FOR 2 SECONDS 
+	end_while 										
+
+	point_at_unit_pos player_general							;POINTS TO PLAYER'S GENERAL UNIT ON BATTLEFIELD
+
+	monitor_conditions I_UnitSelected player_general				;MONITORS WHETHER THE PLAYER'S GENERAL UNIT HAS BEEN SELECTED
+		advance_advice_thread Start_Battle_Withdraw_Now_Run_Away_Thread		;IF UNIT IS SELECTED THEN ADVICE *NOW RIGHT-CLICK TO THE ARROW TO MOVE THE ARMY*
+		remove_battle_map_arrow							;POINTS TO UNIT CARD IN DISPLAY PANEL
+		point_at_location 600, 40						;POINTS AT AREA ON BATTLEMAP
+		terminate_monitor
+	end_monitor
+
+
+;---------------------------------------------------------
+;TEST TO SEE IF PLAYER HAS RIGHT-CLICKED
+;	monitor_conditions I_Un
+;		advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread		
+;		remove_battle_map_arrow	
+;		terminate_monitor
+;	end_monitor
+;IF HE HAS, THEN BRING UP NEW ADVICE SAYING THAT CAN DOUBLE-CLICK TO RUN
+;---------------------------------------------------------
+
+
+	monitor_conditions I_UnitDistanceFromPosition player_general 600, 40 < 40	;RUN THIS MONITOR IF UNT IS WITHIN 40M OF POINTER
+		advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread		;** CLICK TO CONTINUE. You've learned the basics of selecting and moving units.
+
+		remove_battle_map_arrow
+
+		while I_AdvisorVisible										;CLICK TO CONTINUE
+		end_while
+
+		inc_counter already_learnt_to_move 1								;MAKE already_learnt_to_move = 1
+
+		terminate_monitor
+	end_monitor
+
+
+
+;*******************************************************************************************
+;	TEACH THE PLAYER TO DOUBLE-CLICK A UNIT CARD ICON
+;*******************************************************************************************
+
+
+
+	monitor_conditions I_CompareCounter already_learnt_to_move = 1						;RUN THIS MONITOR IF PLAYER HAS LEARNT TO MOVE
+;	and I_CompareCounter learning_to_double-click = 0							;AND PLAYER HASN'T ALREADY DONE THIS BIT
+
+		inc_counter learning_to_double_click 1								;MAKE learning to double-click = 1
+
+		advance_advice_thread Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Thread			;** [LCLAS#1] CLICK TO CONTINUE. Now double-click on the unit card icon with the red arrow pointing to it.
+
+		point_at_unit_card player_triarii								; POINT AT TRIARII UNIT CARD
+
+		while I_AdvisorVisible										;CLICK TO CONTINUE
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+;--------------------------------------------------------------------------------
+;>>>>>>>MONITOR TO CHECK WHETHER PLAYER SELECTS THE TRIARI UNIT CARD <<<<<<<<<<
+
+	monitor_conditions I_UnitSelected player_triarii							;TRIARI UNIT HAS BEEN SELECTED
+;	and I_CompareCounter learning_to_double-click = 1							;AND learning_to_double_click = 1
+
+		ui_flash_stop player_triarii									;STOP FLASHING ARROW
+
+		advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread					;** CLICK HERE TO CONTINUE.You'll see that the camera pans directly to the unit.
+
+		while I_AdvisorVisible										;CLICK TO CONTINUE
+		end_while
+							
+		advance_advice_thread Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Thread			;** [LCLAS#2] CLICK HERE TO CONTINUE. This is a quick and easy way of locating your units in the thick of battle and assigning them new orders.
+
+		while I_AdvisorVisible										;CLICK TO CONTINUE
+		end_while
+
+		inc_counter already_learnt_to_double_click 1							;MAKE already_learnt_to_double-click = 1
+		inc_counter ready_for_attack 1
+		terminate_monitor
+	end_monitor
+
+
+;----------------------------------------------------------------------------------
+;>>>>>>>> IF PLAYER DOESN'T DOUBLE-CLICK
+
+;	monitor_conditions I_CompareCounter already_learnt_to_double_click = 1
+;	and I_CompareCounter learning_to_double_click = 1
+;	restart_timer												;SET TIMER NOW.
+
+;	while I_TimerElapsed < 10000										;IF PLAYER HASN'T DOUBLE-CLICKED WITHIN 10 SECONDS THEN 
+;	end_while 
+
+;	advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread						;** CLICK TO CONTINUE. [Eod#4] OK then, we'll carry on for now. I suggest you practice zooming the camera tou your units for a while.
+
+;	ui_flash_stop player_triarii										; STOP FLASHING THE TRIARI UNIT CARD
+	
+;	while I_AdvisorVisible											;CLICK TO CONTINUE
+;	end_while
+
+;-----------------------------------------------------------------------------------------
+
+
+
+
+;*******************************************************************************************
+;	BARBARIAN CAVALRY ATTACK
+;*******************************************************************************************
+
+
+	monitor_conditions I_CompareCounter ready_for_attack = 1						;checks that the counter ready_for_attack >0
+				
+		while I_AdvisorVisible											;CLICK TO CONTINUE
+		end_while
+
+		inc_counter cavalry_charge_to_bridge 1
+
+		terminate_monitor
+	end_monitor
+
+;SEVERAL ADVICE THREADS NEEDED HERE, INCLUDING: archers defaulting at skirmish mode, Drag box select, ctrl+a, pause option
+
+
+
+;----------------------------------------------------------------------------------------------------------------
+;>>>>>>>IF BARBARIAN CAVALRY MANAGE TO GET WITHIN 30M OF THE PLAYER'S ARCHERS, THEY WILL ATTACK THEM <<<<<<<<<<
+
+	monitor_conditions I_UnitDistanceFromUnit barb_cavalry player_archer < 90			;MONITORS TO SEE IF BARBARIAN CAVALRY ARE WITHIN 90M OF PLAYER ARCHERS
+		unit_order_attack_unit barb_cavalry player_archer run					;BARBARIAN CAVALRY ATTACKS PLAYER'S ARCHERS
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------------
+
+
+
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;; MOVIE SEQUENCE OF BARBARIAN CAVALRY CHARGING TOWARDS THE BRIDGE;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter cavalry_charge_to_bridge = 1	
+
+		advance_advice_thread Start_Battle_Wearing_Down_With_Skirmishers_Thread		;Our maneuvering seems to have attracted the attention of a unit of barbarian cavalry. Archers are vunerable to cavalry charges,
+
+		unit_order_move barb_archer 237.674 -32.108 run					;BARBARIAN ARCHERS TO MOVE JUSR EAST OF BRIDGE
+		unit_order_attack_unit barb_cavalry player_triarii run				;BARBARIAN CAVALRY TO ATTACK PLAYER'S TRIARII
+
+		use_camera_bookmark 19
+
+		restart_timer
+		while I_TimerElapsed < 10000									;WAIT 10 SECONDS 
+		end_while 
+
+		camera_track_unit barb_cavalry back 5 3	
+
+;		advance_advice_thread Start_Battle_Wearing_Down_With_Skirmishers_Thread		;the new tracking camera option allows you to lock the camera to any one of your units. To activate this, press ...
+
+		restart_timer
+		while I_TimerElapsed < 10000									;WAIT 10 SECONDS 
+		end_while 
+
+		use_camera_bookmark 16										;PAN CAMERA BACK TO BEHIND TRIARI UNIT
+
+		terminate_monitor
+	end_monitor
+;*********************************************************************************************
+
+
+
+;*********************************************************************************************
+;		PAUSE FEATURE			
+;*********************************************************************************************
+
+
+
+												;PAUSE ACTION WHEN CAVALRY NEARS THE BRIDGE AND HAVE A FEW ADVICE THREADS TALKING ABOUT IT
+
+
+
+
+
+;*********************************************************************************************
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;; CUT SCENE WHEN PLAYER HITS THE BRIDGE ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+;*********************************************************************************************
+
+;CAMERA ZOOMS OVER ROUTING VELITES AND WATCHES THE GAULS CHARGING INTO THE ROMANS
+;FEW DIFFERENT PCLOSE-UP PANS FOR THE MELEE
+
+
+
+;--------------------------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;SETS THE NEW CAMERA BOOKMARKS;;;;;;;;;;;;;;;;;;;;;;;
+
+	set_camera_bookmark 1, -135.413, 255.403, -66.2432 -144.867, 253.424, -68.0252
+
+	set_camera_bookmark 2, -182.04, 270.632, -61.3155 -213.873, 252.633, -88.4394
+	
+	set_camera_bookmark 3, -199.544, 255.932, -82.4106 -234.727, 207.842, -188.472
+;--------------------------------------------------------------------------
+
+	monitor_conditions I_CompareCounter battle_has_begun = 1	
+	
+		use_camera_bookmark 1							
+
+		restart_timer
+		while I_TimerElapsed < 6000						;WAIT FOR 6 SECONDS 
+		end_while 
+
+		use_camera_bookmark 2							
+
+		restart_timer
+		while I_TimerElapsed < 6000						;WAIT FOR 6 SECONDS 
+		end_while 
+
+		use_camera_bookmark 3							
+	
+		restart_timer
+		while I_TimerElapsed < 6000						;WAIT FOR 6 SECONDS 
+		end_while 
+
+		terminate_monitor
+
+	end_monitor
+
+;***************************************************************************************************
+
+
+
+
+
+
+
+
+
+;*********************************************************************************************
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;; BATTLE CONDITIONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+;*********************************************************************************************
+
+
+
+
+;*************************************************************************************************
+;;;;;;; IF PLAYER'S GENERAL UNIT ENGAGES IN COMBAT WITH ANY ENEMY UNIT, THAT UNIT WILL
+;;;;;;; ROUTE AFTER 10% CASUALTIES
+;------------------------------------------------------------------------------------------------
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_peltast_1 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_1 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_1	routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_peltast_1 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_1 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_1	routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_peltast_2 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_2 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_2	routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_peltast_3 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_3 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_3	routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_axe < 1		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_axe > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_axe routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_dhaxe_1 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_1 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_1 routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_dhaxe_2 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_2 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_2 routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_dhaxe_3 < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_3 > 15					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_3 routing					;ROUT THAT UNIT
+		end_monitor
+
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_noble_cavalry < 1	;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_noble_cavalry > 15				;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_noble_cavalry routing				;ROUT THAT UNIT
+		end_monitor
+
+	
+;*************************************************************************************************
+
+
+
+
+
+
+
+;*************************************************************************************************
+;;;;;;; IF PLAYER GENERAL UNIT ENGAGES IN COMBAT WITH ANY ENEMY UNIT, THAT UNIT WILL
+;;;;;;; ROUTE AFTER 10% CASUALTIES
+;------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+;*************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;; THE BATTLE HAS BEGUN ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*************************************************************************************************
+;;;;;;; THIS MONITOR WILL ACTIVATE THE BATTLE BETWEEN SENATE AND GAULS WHEN...
+;;;;;;; 1) The player General gets to within 100m of a point just East of the bridge
+;;;;;;; 2) approx 5 mins of game time has elapsed - (NOT YET IMPLEMENTED - FUCK KNOWS HOW TO DO IT - NEED A TIME ABSOLUTE EQUIVALENT
+;-------------------------------------------------------------------------------------------------
+	
+		monitor_conditions I_UnitDistanceFromPosition player_general 116 -32.842 < 20	
+
+			inc_counter battle_has_begun 1
+
+			unit_order_attack_unit barb_axe roman_medium_cavalry run
+			unit_order_attack_unit barb_dhaxe_1 roman_hastati_3 run
+			unit_order_attack_unit barb_dhaxe_2 roman_hastati_2 run
+			unit_order_attack_unit barb_dhaxe_3 roman_hastati_1 run
+			unit_order_attack_unit barb_infantry roman_general run
+
+			restart_timer
+			while I_TimerElapsed < 13000							;WAIT FOR 13 SECONDS 
+			end_while 
+
+			unit_order_attack_unit barb_noble_cavalry roman_heavy_cavalry run
+			unit_order_attack_unit roman_heavy_cavalry barb_noble_cavalry run
+			unit_order_attack_unit barb_chieftain roman_general run
+			unit_order_attack_unit roman_medium_cavalry barb_axe run
+
+		end_monitor
+
+;*************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+;*************************************************************************************************
+;;;;;;; THIS MONITOR WILL ACTIVATE THE VELITES TO RUN AND ROUT AND THE BARBARIAN PELATASTS TO CHASE THEM
+;;;;;;; WHEN THE PLAYER GETS TO WITHIN 30M OF THE BRIDGE. THIS GIVES THEM ENOUGH CHANCE TO GET CLEAR BEFORE THE MAIN
+;;;;;;; ATTACK IS TRIGGERED
+;-------------------------------------------------------------------------------------------------
+
+
+		monitor_conditions I_UnitDistanceFromPosition player_general 264 -31 < 70	
+
+			unit_order_move roman_velite_1 38 -170 run					;run velites prior to routing (to stop them routing through Gauls)
+			unit_order_move roman_velite_2 40 -170 run					;run velites prior to routing (to stop them routing through Gauls)
+			unit_order_move roman_velite_3 42 -170 run					;run velites prior to routing (to stop them routing through Gauls)
+
+			unit_order_move barb_peltast_1 38 -172 run					;run peltasts to chase velites off field
+			unit_order_move barb_peltast_1 38 -174 run					;run peltasts to chase velites off field
+			unit_order_move barb_peltast_1 38 -176 run					;run peltasts to chase velites off field
+
+			restart_timer
+			while I_TimerElapsed < 12000						;WAIT 6 SECONDS BEFORE ROUTING THE VELITES
+			end_while 
+
+			unit_order_attack_unit barb_peltast_1 roman_velite_1 run			;order peltasts to chase roman velites
+			unit_order_attack_unit barb_peltast_2 roman_velite_1 run
+			unit_order_attack_unit barb_peltast_3 roman_velite_1 run
+
+			unit_set_morale roman_velite_1	routing						;rout the velites
+			unit_set_morale roman_velite_2	routing						;rout the velites
+			unit_set_morale roman_velite_3	routing						;rout the velites
+
+			terminate_monitor
+
+		end_monitor
+
+
+;*************************************************************************************************
+
+
+
+
+
+
+
+
+
+;************************************************************************************************
+;<<<<<<<< WHEN HASTATI UNIT IS AT 50%, THE PRINCEP UNIT BEHIND IT WILL BEGIN TO ATTACK BY THROWING PILUMS
+;<<<<<<<< WHEN THAT HASTATI UNIT IS AT 80% CASUALTIES, IT WILL ROUT
+
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_1 > 50				;make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+			unit_order_attack_unit roman_princeps_1 barb_dhaxe_3 run
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_1 > 80				;order the hastati to rout at 80% casualties
+			unit_set_morale roman_hastati_1 routing
+			terminate_monitor
+		end_monitor
+
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_2 > 50				;make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+			unit_order_attack_unit roman_princeps_2 barb_dhaxe_2 run
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_2 > 80				;order the hastati to rout at 80% casualties
+			unit_set_morale roman_hastati_2 routing
+			terminate_monitor
+		end_monitor
+
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_3 > 50				;make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+			unit_order_attack_unit roman_princeps_3 barb_dhaxe_1 run
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_3 > 80				;order the hastati to rout at 80% casualties
+			unit_set_morale roman_hastati_3 routing
+			terminate_monitor
+		end_monitor
+
+;************************************************************************************************
+
+
+
+
+
+
+
+
+;************************************************************************************************
+;Make all other senate units rout at 80% casualties
+
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_1 > 80
+			unit_set_morale roman_princeps_1 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_2 > 80
+			unit_set_morale roman_princeps_2 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_2 > 80
+			unit_set_morale roman_princeps_2 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_3 > 80
+			unit_set_morale roman_princeps_3 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_heavy_cavalry > 80
+			unit_set_morale roman_heavy_cavalry routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_medium_cavalry > 80
+			unit_set_morale roman_medium_cavalry routing
+		end_monitor
+;***************************************************************************************************
+
+
+;-------------------------------------------------------------------------------------------------
+;<<<<<<<< CHECK FOR PLAYER UNIT WITHIN 130M OF PELTASTS
+	
+		monitor_conditions I_UnitDistanceFromUnit player_general barb_peltast_1 < 230
+			unit_order_attack_unit barb_peltast_1 player_general run			;order peltasts to attack player's general
+			unit_order_attack_unit barb_peltast_2 roman_hastati_2 run			;order peltasts to attack roman_hastati_2
+			unit_order_attack_unit barb_peltast_3 roman_hastati_1 run			;order peltasts to attack roman_hastati_1
+			terminate_monitor
+		end_monitor
+;-------------------------------------------------------------------------------------------------
+                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+end_script
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;or ! I_AdvisorVisible
+
+
+
+
+
+
+
+;*************************************************************************************************
+;;;;;;; THIS MONITOR WILL ACTIVATE THE FIRST ENCOUNTER FOR THE PLAYER WHEN...
+;;;;;;; 1) The player General gets to within 300m of the barbarians
+;;;;;;; 2) The player triarii get to within 300m of the barbarians
+;;;;;;;	3) The player archers get to within 300m of the barbarians
+;-------------------------------------------------------------------------------------------------	
+;		monitor_conditions I_UnitDistanceFromPosition player_general 647 411 < 300	
+;			unit_order_move barb_peasants 0 -300 run
+;		end_monitor
+;
+;		monitor_conditions I_UnitDistanceFromPosition player_triarii 647 411 < 300	
+;			camera_track_unit player_general back
+;		end_monitor
+;
+;		monitor_conditions I_UnitDistanceFromPosition player_archer 647 411 < 300	
+;			camera_track_unit player_general back
+;		end_monitor
+;
+;*************************************************************************************************
+
+
+
+;use_camera_bookmark 1												;ZOOM BACK TO START AS A TEST
+
+
+
+
+;advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread					;
+
+;		while I_AdvisorVisible										;WAIT
+;	end_while
+
+;		advance_advice_thread Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Thread			; 
+
+;		terminate_monitor
+;	end_monitor
+
+;** CLICK TO CONTINUE. You'll see that the camera pans directly to the unit.
+
+;------------------------------------------------------------------------------------------------------------------------------
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Thread_Thread	Start Battle Light Cavalry Lure Away Spearmen Thread
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Text_01	Start Battle Light Cavalry Lure Away Spearmen Text 01
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Text_01_Title	ZOOM TO UNIT
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Text_01_Text1	Now double-click on the unit card icon with the red arrow pointing to it.
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Text_01_Text2	T
+;Start_Battle_Light_Cavalry_Lure_Away_Spearmen_Text_01_Text3	There is a unit card for every one of the units under your control. Now practice selecting and moving your units and then CLICK TO CONTINUE.
+;--------------------------------------------------------------------------------------------------------------------------------
+;Start_Battle_Enemy_On_Defensive_Thread_Thread	Start Battle Enemy On Defensive Thread
+;Start_Battle_Enemy_On_Defensive_Text_01	Start Battle Enemy On Defensive Text 01
+;Start_Battle_Enemy_On_Defensive_Text_01_Title	WELL DONE! [Eod]
+;Start_Battle_Enemy_On_Defensive_Text_01_Text1	You've learned the basics of selecting and moving units.
+;Start_Battle_Enemy_On_Defensive_Text_01_Text2	You'll see that the camera pans directly to the unit. CLICK HERE TO CONTINUE.
+;Start_Battle_Enemy_On_Defensive_Text_01_Text3	[Eod] thread 3 The enemy are standing to, waiting for our attack. You should form a battleline and advance on them!
+;Start_Battle_Enemy_On_Defensive_Text_01_Text4	The enemy are content to stand on the defensive, apparently. Their strategy is wise, so ours needs to be bold! Form a strong line, and attack!
+;Start_Battle_Enemy_On_Defensive_Text_01_Text5	The enemy have deployed in a defensive fashion. They obviously expect us to attack - and we must if we are to win the day!
+;----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+;*******************************************************************************************
+;	TEACH THE PLAYER TO FIGHT
+;*******************************************************************************************
+
+
+
+
+
+
+
+
+
+;*******************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;*******************************************************************************************
+
+;*******************************************************************************************
+
+;*******************************************************************************************
+
+;*******************************************************************************************
+
+
+;once army has moved with right-click, immediately mention that player can select unit card icon and the fact that a double-click on this icon will panthe camera to the unit
+
+
+;	restart_timer
+;	while I_TimerElapsed < 30000								;WAIT FOR 8 SECONDS 
+;	end_while 										
+
+;	remove_battle_map_arrow									;POINTS TO UNIT CARD IN DISPLAY PANEL
+	
+
+
+
+
+;advance_advice_thread Start_Battle_Enemy_Scouting_Thread			; ******* WELL DONE. DOUBLE-CLICKING IN THIS WAY ....**********
+
+
+;	restart_timer
+;	while I_TimerElapsed < 8000						;WAIT FOR 8 SECONDS 
+;	end_while 
+
+
+
+
+
+;;;;;;;	use_camera_bookmark 5							;CAMERA PAN LOW TO AXEMEN
+
+;;;;;;;	
+
+;;;;;;;	restart_timer
+;;;;;;	while I_TimerElapsed < 4500						;WAIT FOR 8 SECONDS 
+;;;;;;	end_while 
+
+;;;;;	use_camera_bookmark 6							;--------
+
+;;;;;	restart_timer
+;;;;	while I_TimerElapsed < 10000						;WAIT FOR 10 SECONDS 
+;;;;	end_while 
+
+;	restart_timer
+;	while I_AdvisorVisible
+;	and I_TimeElapsed < 6000						;WAIT FOR PLAYER TO CLICK OK
+;	end_while
+
+;	unit_group_order_relative_move_formed barb_armyform 0 150 		;GAUL ARMY MOVES FORWARD 150m
+
+
+
+;	advance_advice_thread Start_Battle_Engage_Spears_And_Flank_With_Cavalry_Thread	;EXPLAIN CURSOR KEYS
+
+;	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+;	end_while
+
+;;;;;;	use_camera_bookmark 10							;;;;;;;;;;PAN TO CHARIOTS
+
+;;;;;;	restart_timer
+;;;;;;	while I_TimerElapsed < 8000						;;;;;;;;;;WAIT FOR 8 SECONDS 
+;;;;;;	end_while 
+
+;;;;;;	use_camera_bookmark 11							;---------------
+
+;;;;;;;	restart_timer
+;;;;;;;	while I_TimerElapsed < 8000						;;;;;;;;;;WAIT FOR 8 SECONDS 
+;;;;;;;	end_while 
+
+;;;;;;;	camera_track_unit barb_peltast_2 back 10 3
+
+;;;;;	unit_order_move_relative barb_peltast_2 0 100 run
+
+
+;;;;;	camera_track_unit barb_chieftain left 3 2				;TRACK CHIEFTAIN
+
+;;;;;;	camera_track_unit barb_chieftain right 20 20
+
+;;;;;;	restart_timer
+;;;;;	while I_TimerElapsed < 5000						;WAIT FOR 8 SECONDS 
+;;;;	end_while 
+
+;;;;;	camera_position -238.996, 262.535, 18.7562 -235.69, 222.974, 103.532
+
+;;;;;	unit_order_move_relative barb_noble_cavalry 0 100 run 
+
+
+
+;
+;	
+;
+;advance_advice_thread Start_Battle_Enemy_Scouting_Thread
+;
+;
+;
+;Start_Battle_Horse_Archers_Harrassing_Advancing_Enemy_Thread
+;
+;
+;Start_Battle_Form_Solid_Infantry_Line_Thread
+;S
+
+
+
+;;;;;;EXAMPLES SCRIPTING;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; declare_counter CursorKeysUsed
+
+; inc_counter CursorKeysUsed 1 ; increments the counter by 1
+
+; monitor_conditions I_compareCounter CursorKeysUsed = 3 ; condition checking counter value
+
+; set_counter 53 ; sets the counter value at a specific number
+
+
+
+	;monitor_event button_pressed {CURSOR KEYS}
+	     ;and cursorkeysused = 0
+		;advance_advice_thread cursorkeysused1	
+		;inc_counter CursorKeysUsed 1 ; increments the counter by 1
+		;terminate_monitor
+	;end_monitor
+
+	;monitor_event cursorkeysused = 4
+		;advance_advice_thread well done you used the cursor keys thread	
+		;inc_counter CursorKeysUsed 1 ; increments the counter by 1
+		;terminate_monitor
+	;end_monitor
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;	use_camera_bookmark 5							;
+
+;	restart_timer
+;	while I_TimerElapsed < 3000						;WAIT FOR 8 SECONDS 
+;	end_while 
+
+
+
+
+;	advance_advice_thread Start_Battle_Enemy_Scouting_Thread
+
+;	while I_AdvisorVisible							;WAIT FOR PLAYER TO CLICK OK
+;	end_while
+
+
+;	advance_advice_thread Start_Battle_Enemy_On_Defensive_Thread
+
+;;;;;;;	advance_advice_thread Prologue_Test_1_Thread				;BRING UP ADVICE 2		
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;; THIS IS THE SCRIPT FOR THE FIRST SECTION OF THE GAUL/SENATE ENGAGEMENT ;;;;;;;;;	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;	use_camera_bookmark 1							;GOTO CAM 1
+;	camera_position -57.8764, 464.284, -849, -57.9088, 463.73, -848.232	;BATTLE START CAMERA POS
+
+;	restart_timer
+;	while I_TimerElapsed < 5000						;WAIT FOR 5 SECONDS 
+;	end_while 
+
+
+;	unit_group_order_relative_move_formed senate_armyform 0 200		;SENATE ARMY MOVES FORWARD 100m
+
+;	unit_group_order_relative_move_formed barb_armyform 0 -150		;GAUL ARMY MOVES FORWARD 150m
+
+;	camera_track_unit roman_general 45 2 3
+
+;	use_camera_bookmark 2
+
+;	camera_position -325.778, 249.525, -197.737 -317.528, 248.561, -192.435	;BATTLE 1ST MOVE POS
+
+;	restart_timer
+;	while I_TimerElapsed < 5000						;WAIT FOR 5 SECONDS 
+;	end_while 
+
+;	camera_track_unit roman_general back
+
+;	restart_timer
+;	while I_TimerElapsed < 10000						;WAIT FOR 10 SECONDS 
+;	end_while 
+
+;	camera_track_unit roman_velite_2 back
+
+;	restart_timer
+;	while I_TimerElapsed < 10000						;WAIT FOR 10 SECONDS 
+;	end_while 
+
+;	camera_track_unit barb_wardogs back
+
+
+
+
+
+
+
+	
+
+
+
+
+
+;	unit_order_move_to_missile_range barb_peltast_1 roman_velite_3 run
+;	unit_order_move_to_missile_range barb_peltast_2 roman_velite_2 run	;BARBARIAN SKIRMISHERS RUN TO ATTACK RANGE
+;	unit_order_move_to_missile_range barb_peltast_3 roman_velite_1 run
+
+;	enable_entire_ui
+
+
+;	disable_entire_ui
+
+;	restart_timer
+;	while I_TimerElapsed < 1000000
+;	end_while 
+
+
+;	unit_order_move roman_velite_2 120 -415 run
+
+
+;	advance_advice_thread Prologue_Welcome_First_Turn_Thread
+
+
+
+
+; do stuff
+
+
+
+;	advance_advice_thread Prologue_Welcome_First_Turn_Thread
+
+;	restart_timer
+;	while I_TimerElapsed < 5000
+;	end_while 
+
+;	set_camera_bookmark 0, 49.2208, 691.617, -850, 49.416, 687.648, -841.718
+;	set_camera_bookmark 1,-253.83, 257.257, -161.483, -254.359, 253.472, -152.613
+
+;	use_camera_bookmark 0
+
+;	define_unit_group senate_skirmishers roman_velites_1 roman_velites_2 roman_hastati_1 roman_hastati_2
+
+;	unit_group_order_relative_move_formed senate_skirmishers 0 100
+
+;	use_camera_bookmark 1
+
+
+
+;	unit_order_move roman_velites_1 120 -415 run	
+
+;	unit_order_move roman_velites_1 120 -415 run		; command the velites to move into position
+;	camera_track_unit roman_velites_1 back
+
+;	unit_order_change_formation roman_pretorians testudo	; get the legionaries into testudo
+;	unit_order_change_formation roman_cohort1 testudo
+;	unit_order_change_formation roman_cohort2 testudo
+
+;	unit_set_weapon_upgrade roman_archers 3			; upgrade the archers
+;	unit_set_armour_upgrade roman_archers 3
+;	unit_set_experience roman_archers 9
+
+;	while I_UnitDistanceFromPosition roman_archers 120 -415 > 10
+;	end_while
+
+;	camera_look_at_unit roman_velites_1			; look at the archers when they're in position
+
+;	while I_PercentageUnitKilled roman_archers < 50
+;	end_while
+
+;	camera_track_unit roman_archers back
+;	point_at_unit_card roman_archers			; zoom in when they've taken 50% casualties
+
+
+;end_script

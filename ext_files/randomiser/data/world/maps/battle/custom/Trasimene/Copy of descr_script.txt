@@ -1,0 +1,937 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+	label_unit 0 0 0	PLAYER_GENERAL
+	label_unit 0 0 1	PLAYER_HAST1
+	label_unit 0 0 2	PLAYER_HAST2
+	label_unit 0 0 3	PLAYER_HAST3
+	label_unit 0 0 4	PLAYER_TRI1
+	label_unit 0 0 5	PLAYER_TRI2
+	label_unit 0 0 6	PLAYER_HAST4
+	label_unit 0 0 7	PLAYER_VEL1
+  	label_unit 0 0 8	PLAYER_VEL2
+	label_unit 0 0 9	PLAYER_TRI3
+	label_unit 0 0 10	PLAYER_TRI4
+	label_unit 0 0 11	PLAYER_CAV1
+	label_unit 0 0 12	PLAYER_CAV2
+	label_unit 0 0 13	PLAYER_ARC1
+	label_unit 0 0 14	PLAYER_ARC2
+	label_unit 0 0 15	PLAYER_LEGI1
+	label_unit 0 0 16	PLAYER_LEGI2
+	label_unit 0 0 17	PLAYER_PRI1
+	label_unit 0 0 18	PLAYER_PRI2
+
+
+	label_unit 1 0 0	CARTH_GENERAL
+	label_unit 1 0 1	CARTH_INF1
+	label_unit 1 0 2	CARTH_INF2
+	label_unit 1 0 3	CARTH_CAV1
+	label_unit 1 0 4	CARTH_PEL1
+	label_unit 1 0 5	CARTH_PEL2
+  	label_unit 1 0 6	CARTH_INF3
+	label_unit 1 0 7	CARTH_INF4
+   	label_unit 1 0 8	CARTH_CAV3
+	label_unit 1 0 9	CARTH_SAC1
+	label_unit 1 0 10	CARTH_CAV4
+	label_unit 1 0 11	CARTH_PEL3
+	label_unit 1 0 12	CARTH_INF5
+	label_unit 1 0 13	CARTH_SAC2
+   	label_unit 1 0 14	CARTH_SAC3
+	label_unit 1 0 15	CARTH_INF6
+	label_unit 1 0 16	CARTH_CAV5
+	label_unit 1 0 17	CARTH_PEL4
+	label_unit 1 0 18	CARTH_PEL5
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_control
+	declare_counter van_clash
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+;BATTLE SCRIPT
+
+	while ! I_BattleStarted					; wait FOR DEPLOYMENT
+	end_while
+
+	ai_active_set off
+
+	camera_restrictions_set off
+
+	camera_default_mode_set tw
+
+	battle_default_camera
+
+	hide_ui
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+
+			set_counter battle_start 1
+		terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+; *********************************************************************************************
+; ********************* BEGINNING INTRO SEQUENCE MONITOR **************************************
+; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   groups
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAST1 PLAYER_HAST2 PLAYER_HAST3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_HAST4 PLAYER_VEL1 PLAYER_VEL2 PLAYER_TRI3 PLAYER_TRI4 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_LEGI1 PLAYER_LEGI2 PLAYER_PRI1 PLAYER_PRI2
+
+			define_unit_group GRP_CARTH_FRONTAL CARTH_PEL1 CARTH_PEL2 CARTH_INF5 CARTH_SAC2 CARTH_SAC3 CARTH_CAV5
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   locations
+
+			label_location 295 -95 HANNIBALHILL
+			label_location -165 -595 ARMY1
+			label_location -35 -595 ARMY2
+			label_location 35 -540 ARMY3
+			label_location 300 -540 CVANJUMP
+			label_location 160 -535 VEL
+			label_location 200 -535 PEL
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   x value   y value  z value
+
+			set_camera_bookmark 1, -258.623, 197.102, -275.646 -250.067, 194.943, -280.108		;hill to lake
+			set_camera_bookmark 2, -294.289, 143.924, -470.451 -389.44, 54.3967, -629.382 		;hill to rome
+			set_camera_bookmark 3, 437.682, 23.2779, -463.345 445.72, 21.1269, -469.12		;carth in trees
+			set_camera_bookmark 4, 418.11, 15.2176, -491.434 427.046, 16.9753, -487.086		;carth in trees2
+			set_camera_bookmark 5, -360.259, 20.2357, -588.813 -362.796, 20.2537, -589.073		;roman army march 
+			set_camera_bookmark 6, -366.105, 23.0082, -588.586 -375.97, 21.3631, -590.093		;roman army march2
+			set_camera_bookmark 7, -382.6, 22.1058, -583.794 -389.934, 17.8353, -589.695		;roman army march3
+			set_camera_bookmark 8, -415.081, 18.1929, -662.042 -417.542, 15.858, -652.531		;flaminius
+			set_camera_bookmark 9, -414.609, 15.6879, -653.016 -419.129, 14.6257, -661.927		;flaminius2
+			set_camera_bookmark 10, -421.104, 18.1448, -655.987 -413.593, 17.2995, -653.374		;flaminius3
+			set_camera_bookmark 11, 291.932, 104.549, -116.277 275.084, 105.43, -110.634		;hannibal
+			set_camera_bookmark 12, 284.759, 109.797, -105.301 287.486, 107.056, -114.651		;hannibal to vanguard
+			set_camera_bookmark 13, 387.913, 15.5961, -461.4 570.963, -71.4847, -791.016		;vanguard in trees
+			set_camera_bookmark 14, 283.707, 108.385, -109.876 285.884, 105.591, -119.007		;look at carth van in trees
+			set_camera_bookmark 15, 395.606, 15.0567, -475.641 663.54, -71.0322, -733.881		;carth van in trees
+			set_camera_bookmark 16, 5.25373, 41.3192, -344.574 3.90442, 37.6818, -353.996		;amb1
+			set_camera_bookmark 17, -6.44907, 43.4182, -345.31 -6.2779, 39.7808, -354.827		;amb2
+			set_camera_bookmark 18, 96.1651, 29.2077, -319.107 88.8338, 25.5305, -330.84		;amb3
+			set_camera_bookmark 19, 85.1705, 28.7634, -314.943 79.745, 25.0863, -327.671		;amb4
+			set_camera_bookmark 20, 191.535, 14.2881, -506.885 218.685, 0.802145, -545.902		;pel
+			set_camera_bookmark 21, 149.478, 15.7517, -527.345 158.354, 14.546, -531.912		;vel				
+
+						  
+			; *********************************************************************************************
+			;	unit settings
+			; *********************************************************************************************
+
+
+			unit_set_fire_at_will_mode PLAYER_ARC1 off
+			unit_set_fire_at_will_mode PLAYER_ARC2 off
+			unit_set_fire_at_will_mode PLAYER_VEL1 off
+			unit_set_fire_at_will_mode PLAYER_VEL2 off
+			unit_set_fire_at_will_mode CARTH_PEL1 off
+			unit_set_fire_at_will_mode CARTH_PEL2 off
+			unit_set_fire_at_will_mode CARTH_PEL3 off
+			unit_set_fire_at_will_mode CARTH_PEL4 off
+			unit_set_fire_at_will_mode CARTH_PEL5 off
+
+			unit_set_skirmish_mode PLAYER_ARC1 off
+			unit_set_skirmish_mode PLAYER_ARC2 off
+
+			; *********************************************************************************************
+			;	Start sequence
+
+
+			hiding_enabled_set true
+
+		;Pan from hilltop
+
+			camera_position_at_bookmark 1
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_move_relative PLAYER_GENERAL 10 110
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_00 tag = TRASIMENE_SPEECH_00 
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 800
+
+			camera_zoom_to_bookmark 2 25
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;carthage marching in trees
+
+			unit_group_order_relative_move_formed GRP_CARTH_FRONTAL 0 40
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 3
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_01 tag = TRASIMENE_SPEECH_01
+
+			camera_zoom_to_bookmark 4 5
+
+			battle_wait 6
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;camera pans over Roman army
+
+			camera_position_at_bookmark 5
+
+			battle_wait 0.75
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 6 5
+
+			battle_wait 4.75
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 7
+	
+		;flaminius
+
+			unit_order_move_relative PLAYER_GENERAL 0 24 run
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_03 tag = TRASIMENE_SPEECH_03
+
+			camera_position_at_bookmark 8
+	
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 9
+
+			unit_order_move_relative PLAYER_GENERAL 0 200 run
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 10
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_immediate_place CARTH_GENERAL 295 -95 200
+
+			unit_order_move_relative CARTH_GENERAL 0 20 run
+
+		;unhide carthage
+
+			hiding_enabled_set false
+
+		;hannibal
+
+			set_camera_bookmark 1, 321.51, 158.183, -166.785 315.028, 156.387, -174.323		;Hannibal to Flaminius
+
+			camera_position_at_bookmark 1
+
+			battle_wait 1.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 11 100
+
+			play_sound_event TRASIMENE_SPEECH_04 tag = TRASIMENE_SPEECH_04
+	
+			battle_wait 2.5	
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_group_immediate_place GRP_PLAYER_ARMY -165 -595 90
+
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAST1 PLAYER_HAST2 PLAYER_HAST3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_HAST4 PLAYER_VEL1 PLAYER_VEL2 PLAYER_TRI3 PLAYER_TRI4 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_LEGI1 PLAYER_LEGI2 PLAYER_PRI1 PLAYER_PRI2
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 800
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 12
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;view from hannibal
+
+			unit_order_move_relative PLAYER_GENERAL -100 200
+
+			unit_group_order_relative_move_formed GRP_CARTH_FRONTAL 0 15
+
+			unit_group_immediate_place GRP_PLAYER_ARMY -35 -595 90
+
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAST1 PLAYER_HAST2 PLAYER_HAST3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_HAST4 PLAYER_VEL1 PLAYER_VEL2 PLAYER_TRI3 PLAYER_TRI4 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_LEGI1 PLAYER_LEGI2 PLAYER_PRI1 PLAYER_PRI2
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 800
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;frontal emerge from trees
+
+			camera_zoom_to_bookmark 13 100
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_05 tag = TRASIMENE_SPEECH_05
+
+			battle_wait 7
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;carthage lying in battle_wait 1.1
+
+			camera_position_at_bookmark 16
+
+			unit_group_immediate_place GRP_PLAYER_ARMY 35 -540 90
+
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAST1 PLAYER_HAST2 PLAYER_HAST3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_HAST4 PLAYER_VEL1 PLAYER_VEL2 PLAYER_TRI3 PLAYER_TRI4 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_LEGI1 PLAYER_LEGI2 PLAYER_PRI1 PLAYER_PRI2
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 800
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+	
+		;Vel charge forward
+
+			unit_order_move PLAYER_VEL1 VEL run
+			unit_order_move PLAYER_VEL2 VEL run
+
+		;carthage lying in battle_wait 1.2
+	
+			camera_zoom_to_bookmark 17 1
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_07  tag = TRASIMENE_SPEECH_07
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_group_immediate_place GRP_CARTH_FRONTAL 300 -540 -90
+
+		;redefine carth frontal
+	
+			undefine_unit_group GRP_CARTH_FRONTAL
+
+			define_unit_group GRP_CARTH_FRONTAL1 CARTH_INF5 CARTH_SAC2 CARTH_SAC3 CARTH_CAV5
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_group_order_move_formed GRP_CARTH_FRONTAL1 VEL
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;redefine units
+
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			define_unit_group GRP_PLAYER_VANGUARD PLAYER_HAST2 PLAYER_TRI4 PLAYER_CAV1 PLAYER_CAV2 PLAYER_PRI1 PLAYER_PRI2
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while
+
+			define_unit_group GRP_PLAYER_ARMY2 PLAYER_HAST1 PLAYER_HAST3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_HAST4 PLAYER_TRI3 PLAYER_ARC1 PLAYER_ARC2 PLAYER_LEGI1 PLAYER_LEGI2 
+
+		;skirmish parameters
+
+			unit_set_skirmish_mode PLAYER_VEL1 off
+			unit_set_skirmish_mode PLAYER_VEL2 off
+			unit_set_skirmish_mode CARTH_PEL1 off
+			unit_set_skirmish_mode CARTH_PEL2 off
+
+			unit_order_move CARTH_PEL1 PEL run
+			unit_order_move CARTH_PEL2 PEL run
+
+			unit_set_fire_at_will_mode PLAYER_VEL1 on
+			unit_set_fire_at_will_mode PLAYER_VEL2 on
+			unit_set_fire_at_will_mode CARTH_PEL1 on
+			unit_set_fire_at_will_mode CARTH_PEL2 on
+
+		;carthage lying in wait 2.1
+
+			camera_position_at_bookmark 18
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;jump Pel forwards
+
+			unit_immediate_place CARTH_PEL1 200 -535 -90
+			unit_immediate_place CARTH_PEL2 200 -535 -90
+
+		;carthage lying in wait 2.2
+	
+			camera_zoom_to_bookmark 19 5
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_08 tag = TRASIMENE_SPEECH_08
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;skirmish 2
+
+			camera_zoom_to_bookmark 21 25
+
+			battle_wait 16
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+	
+			play_sound_event TRASIMENE_SPEECH_09 tag = TRASIMENE_SPEECH_09
+
+			camera_zoom_to_bookmark 20 25
+
+			battle_wait 9
+	
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   x value   y value  z value
+
+			set_camera_bookmark 1, 90.0504, 17.4166, -500.902 85.3991, 15.0455, -509.629		;Rome charge
+			set_camera_bookmark 2, 212.192, 29.5312, -398.428 -89.7851, -18.5997, -493.544		;carth charge1
+			set_camera_bookmark 3, -170.355, 42.8111, -477.081 -160.779, 40.74, -479.648		;carth charge2
+			set_camera_bookmark 4, 293.309, 106.572, -111.407 291.044, 105.798, -116.769		;hannibal upper
+			set_camera_bookmark 5, 109.117, 21.7972, -568.407 89.1832, 5.93594, -517.513		;van deploy2
+			set_camera_bookmark 6, 195.237, 13.9399, -507.199 199.349, 10.8488, -515.507		;cav clash
+			set_camera_bookmark 7, 91.7973, 37.7411, -640.395 90.2978, 34.0463, -631.641		;player control
+
+		;charge
+
+			camera_position_at_bookmark 1
+	
+			play_sound_event TRASIMENE_SPEECH_10 tag = TRASIMENE_SPEECH_10
+
+		;vangaurd clash
+
+			unit_order_attack_unit PLAYER_PRI1 CARTH_INF5 run
+			unit_order_attack_unit PLAYER_PRI2 CARTH_SAC2 run 
+			unit_order_attack_unit PLAYER_HAST2 CARTH_SAC3 run
+			unit_order_attack_unit PLAYER_TRI4 CARTH_SAC2 run
+			unit_order_attack_unit PLAYER_CAV1 CARTH_PEL1 run
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 6 10
+
+		;Teleport Flaminius
+
+			unit_immediate_place PLAYER_GENERAL 90 -615 0
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_attack_unit CARTH_INF5 PLAYER_PRI1 run
+			unit_order_attack_unit CARTH_SAC2 PLAYER_PRI2 run 
+			unit_order_attack_unit CARTH_SAC3 PLAYER_HAST2 run
+			unit_order_attack_unit CARTH_SAC2 PLAYER_TRI4 run
+			unit_order_attack_unit CARTH_CAV5 PLAYER_CAV1 run
+
+			camera_position_at_bookmark 6
+
+			set_counter van_clash 1
+
+			battle_wait 10
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;ambush sprung
+
+			hiding_enabled_set false
+
+			camera_position_at_bookmark 4
+	
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_11 tag = TRASIMENE_SPEECH_11
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_attack_unit CARTH_CAV1 PLAYER_VEL1 run
+			unit_order_attack_unit CARTH_PEL3 PLAYER_HAST2 run
+			unit_order_attack_unit CARTH_CAV3 PLAYER_HAST2 run
+			unit_order_attack_unit CARTH_INF2 PLAYER_HAST1 run
+			unit_order_attack_unit CARTH_INF4 PLAYER_HAST1 run
+			unit_order_attack_unit CARTH_PEL4 PLAYER_HAST1 run
+			unit_order_attack_unit CARTH_INF1 PLAYER_ARC1 run
+			unit_order_attack_unit CARTH_PEL5 PLAYER_LEGI1 run
+			unit_order_attack_unit CARTH_SAC1 PLAYER_LEGI1 run
+			unit_order_attack_unit CARTH_INF3 PLAYER_TRI1 run
+			unit_order_attack_unit CARTH_INF6 PLAYER_TRI1 run
+			unit_order_attack_unit CARTH_CAV4 PLAYER_HAST3 run
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_move_relative PLAYER_CAV2 25 -25 run
+
+			unit_order_turn PLAYER_CAV2 0 absolute
+
+			unit_order_attack_unit CARTH_GENERAL PLAYER_HAST1 run
+
+			camera_position_at_bookmark 2
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_12 tag = TRASIMENE_SPEECH_12
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_move_relative PLAYER_CAV2 40 10 run
+
+			camera_zoom_to_bookmark 3 100
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TRASIMENE_SPEECH_13 tag = TRASIMENE_SPEECH_13
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;skirmish on
+
+			unit_set_skirmish_mode PLAYER_VEL1 on
+			unit_set_skirmish_mode PLAYER_VEL2 on
+			unit_set_skirmish_mode CARTH_PEL1 on
+			unit_set_skirmish_mode CARTH_PEL2 on
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			undefine_unit_group GRP_CARTH_FRONTAL1
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 7
+
+			play_sound_event TRASIMENE_SPEECH_14 tag = TRASIMENE_SPEECH_14
+
+			battle_wait 6	
+
+			undefine_unit_group GRP_PLAYER_VANGUARD
+			undefine_unit_group GRP_PLAYER_ARMY2
+
+			battle_wait 1
+
+			reduce_unit_strength PLAYER_PRI1 50
+			reduce_unit_strength PLAYER_PRI2 50
+			reduce_unit_strength PLAYER_HAST2 50
+			reduce_unit_strength PLAYER_TRI4 50
+			reduce_unit_strength PLAYER_CAV1 50
+			reduce_unit_strength PLAYER_VEL1 50
+			reduce_unit_strength PLAYER_VEL2 50
+
+			battle_wait 1
+
+			unit_set_morale PLAYER_PRI1 routing
+			unit_set_morale PLAYER_PRI2 routing
+			unit_set_morale PLAYER_HAST2 routing
+			unit_set_morale PLAYER_TRI4 routing
+			unit_set_morale PLAYER_CAV1 routing
+			unit_set_morale PLAYER_VEL1 routing
+			unit_set_morale PLAYER_VEL2 routing
+
+			set_counter player_control 1 
+
+		terminate_monitor
+	end_monitor
+
+; *********************************************************************************************
+; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+; *********************************************************************************************
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Start of battle - BATTLESTART MONITORS
+; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+			set_camera_bookmark 1, 739.258, 29.528, -674.93 735.825, 27.4161, -684.138		;stone circle
+			camera_position_at_bookmark 1
+
+			steal_esc_key off
+
+			stop_sound_event TRASIMENE_SPEECH_00
+			stop_sound_event TRASIMENE_SPEECH_01
+			stop_sound_event TRASIMENE_SPEECH_02
+			stop_sound_event TRASIMENE_SPEECH_03
+			stop_sound_event TRASIMENE_SPEECH_04
+			stop_sound_event TRASIMENE_SPEECH_05
+			stop_sound_event TRASIMENE_SPEECH_06
+			stop_sound_event TRASIMENE_SPEECH_07
+			stop_sound_event TRASIMENE_SPEECH_08
+			stop_sound_event TRASIMENE_SPEECH_09
+			stop_sound_event TRASIMENE_SPEECH_10
+			stop_sound_event TRASIMENE_SPEECH_11
+			stop_sound_event TRASIMENE_SPEECH_12
+			stop_sound_event TRASIMENE_SPEECH_13
+			stop_sound_event TRASIMENE_SPEECH_14
+
+			undefine_unit_group GRP_PLAYER_VANGUARD
+			undefine_unit_group GRP_PLAYER_ARMY2
+
+			unit_order_halt PLAYER_GENERAL
+			unit_order_halt PLAYER_HAST1
+			unit_order_halt PLAYER_HAST3
+			unit_order_halt PLAYER_TRI1
+			unit_order_halt PLAYER_TRI2
+			unit_order_halt PLAYER_HAST4
+			unit_order_halt PLAYER_TRI3
+			unit_order_halt PLAYER_CAV2
+			unit_order_halt PLAYER_ARC1
+			unit_order_halt PLAYER_ARC2
+			unit_order_halt PLAYER_LEGI1
+			unit_order_halt PLAYER_LEGI2
+
+			unit_order_halt CARTH_GENERAL
+			unit_order_halt CARTH_INF1
+			unit_order_halt CARTH_INF2
+			unit_order_halt CARTH_CAV1
+			unit_order_halt CARTH_PEL1
+			unit_order_halt CARTH_PEL2
+  			unit_order_halt CARTH_INF3
+			unit_order_halt CARTH_INF4
+   			unit_order_halt CARTH_CAV3
+			unit_order_halt CARTH_SAC1
+			unit_order_halt CARTH_CAV4
+			unit_order_halt CARTH_PEL3
+			unit_order_halt CARTH_INF5
+			unit_order_halt CARTH_SAC2
+   			unit_order_halt CARTH_SAC3
+			unit_order_halt CARTH_INF6
+			unit_order_halt CARTH_CAV5
+			unit_order_halt CARTH_PEL4
+			unit_order_halt CARTH_PEL5
+
+			battle_wait 1
+
+			play_sound_event TRASIMENE_SPEECH_14
+
+			unit_immediate_place PLAYER_GENERAL 87.89404, -610.73024, 0
+			unit_immediate_place PLAYER_HAST1 95.079008, -551.347904, 90.043944
+			unit_immediate_place PLAYER_HAST3 23.305032, -566.75232, 90.043944
+			unit_immediate_place PLAYER_TRI1 23.406956, -551.323328, 90.043944
+			unit_immediate_place PLAYER_TRI2 119.205048, -550.753984, 90.043944
+			unit_immediate_place PLAYER_HAST4 123.944664, -566.923776, 90.043944
+			unit_immediate_place PLAYER_TRI3 99.408352, -566.510784, 90.043944
+			unit_immediate_place PLAYER_CAV2 162.263664, -621.330048, 143.624272
+			unit_immediate_place PLAYER_ARC1 63.844552, -563.204928, -144.310912
+			unit_immediate_place PLAYER_ARC2 74.429144, -566.727552, 90.043944
+			unit_immediate_place PLAYER_LEGI1 47.707344, -551.348992, 90.043944
+			unit_immediate_place PLAYER_LEGI2 51.333296, -566.922304, 90.043944
+
+			set_camera_bookmark 1, 658.089, 136.881, -644.671 654.657, 134.769, -653.879		;lake T
+			camera_zoom_to_bookmark 1 25
+
+			unit_immediate_place CARTH_GENERAL 248.808368, -227.78168, -161.180416
+			unit_immediate_place CARTH_INF1 10.460006, -444.81232, 133.275128
+			unit_immediate_place CARTH_INF2 79.609328, -456.882592, 157.620832
+			unit_immediate_place CARTH_CAV1 181.548976, -533.082656, -161.718752
+			unit_immediate_place CARTH_PEL1 200.436992, -535.224384, -106.979368
+			unit_immediate_place CARTH_PEL2 200.404752, -535.722048, -109.077752
+  			unit_immediate_place CARTH_INF3 -84.136704, -432.39808, 128.39172
+			unit_immediate_place CARTH_INF4 60.709284, -464.121952, 148.139648
+   			unit_immediate_place CARTH_CAV3 192.214176, -518.932128, 178.18176
+			unit_immediate_place CARTH_SAC1 -65.555856, -422.716864, 130.67688
+			unit_immediate_place CARTH_CAV4 -66.44178, -502.952384, 116.608888
+			unit_immediate_place CARTH_PEL3 183.198672, -460.32992, 170.458368
+			unit_immediate_place CARTH_INF5 200.581552, -532.238208, -86.264648
+			unit_immediate_place CARTH_SAC2 200.358912, -535.553984, -87.4292
+   			unit_immediate_place CARTH_SAC3 200.841776, -535.371264, -90.164784
+			unit_immediate_place CARTH_INF6 -92.661192, -458.57616, 119.855344
+			unit_immediate_place CARTH_CAV5 200.708, -535.54304, -110.687256
+			unit_immediate_place CARTH_PEL4 53.537736, -465.38672, 145.453488
+			unit_immediate_place CARTH_PEL5 -15.10249, -452.620672, 139.38904
+
+		if I_CompareCounter van_clash = 1
+
+			reduce_unit_strength PLAYER_PRI1 25
+			reduce_unit_strength PLAYER_PRI2 32
+			reduce_unit_strength PLAYER_HAST2 35
+			reduce_unit_strength PLAYER_TRI4 38
+			reduce_unit_strength PLAYER_CAV1 25
+			reduce_unit_strength PLAYER_VEL1 25
+			reduce_unit_strength PLAYER_VEL2 28
+
+			battle_wait 1
+
+			unit_set_morale PLAYER_PRI1 routing
+			unit_set_morale PLAYER_PRI2 routing
+			unit_set_morale PLAYER_HAST2 routing
+			unit_set_morale PLAYER_TRI4 routing
+			unit_set_morale PLAYER_CAV1 routing
+			unit_set_morale PLAYER_VEL1 routing
+			unit_set_morale PLAYER_VEL2 routing 
+
+		end_if
+
+		if I_CompareCounter van_clash = 0
+
+			unit_immediate_place PLAYER_PRI1 200 -535 92
+			unit_immediate_place PLAYER_PRI2 200 -535 86
+			unit_immediate_place PLAYER_HAST2 200 -535 89
+			unit_immediate_place PLAYER_TRI4 200 -535 95
+			unit_immediate_place PLAYER_CAV1 200 -535 23
+
+			reduce_unit_strength CARTH_PEL1 88
+			reduce_unit_strength CARTH_PEL2 88
+			reduce_unit_strength CARTH_INF5 75
+			reduce_unit_strength CARTH_SAC2 92
+			reduce_unit_strength CARTH_SAC3 83
+			reduce_unit_strength CARTH_CAV5 83
+
+			reduce_unit_strength PLAYER_PRI1 25
+			reduce_unit_strength PLAYER_PRI2 32
+			reduce_unit_strength PLAYER_HAST2 35
+			reduce_unit_strength PLAYER_TRI4 38
+			reduce_unit_strength PLAYER_CAV1 25
+			reduce_unit_strength PLAYER_VEL1 25
+			reduce_unit_strength PLAYER_VEL2 28
+
+			unit_set_morale PLAYER_PRI1 routing
+			unit_set_morale PLAYER_PRI2 routing
+			unit_set_morale PLAYER_HAST2 routing
+			unit_set_morale PLAYER_TRI4 routing
+			unit_set_morale PLAYER_CAV1 routing
+			unit_set_morale PLAYER_VEL1 routing
+			unit_set_morale PLAYER_VEL2 routing
+
+		end_if
+
+			battle_wait 3
+
+			set_counter player_control 1
+
+		terminate_monitor
+	end_monitor
+
+
+
+			; *********************************************************************************************
+			;	unit settings
+			; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter player_control = 1
+
+			steal_esc_key off
+
+			hiding_enabled_set false
+
+			unit_set_fire_at_will_mode PLAYER_ARC1 on
+			unit_set_fire_at_will_mode PLAYER_ARC2 on
+			unit_set_fire_at_will_mode CARTH_PEL1 on
+			unit_set_fire_at_will_mode CARTH_PEL2 on
+			unit_set_fire_at_will_mode CARTH_PEL3 on
+			unit_set_fire_at_will_mode CARTH_PEL4 on
+			unit_set_fire_at_will_mode CARTH_PEL5 on
+
+			unit_set_skirmish_mode PLAYER_ARC1 on
+			unit_set_skirmish_mode PLAYER_ARC2 on
+
+			camera_restrictions_set on
+
+			show_ui
+
+			enable_cursor						;prevent the player clicking
+			disable_shortcuts false		
+			enable_entire_ui
+			inhibit_camera_input false
+
+			set_camera_bookmark 1, 91.7973, 37.7411, -640.395 90.2978, 34.0463, -631.641		;player control
+			camera_position_at_bookmark 1
+
+			battle_wait 1
+
+			pause_battle
+
+			suspend_unscripted_advice false
+
+			camera_default_mode_set user_pref
+
+			battle_wait 1
+
+			ai_active_set on
+
+		terminate_monitor
+	end_monitor
+
+	while I_InBattle
+	end_while
+
+	end_script

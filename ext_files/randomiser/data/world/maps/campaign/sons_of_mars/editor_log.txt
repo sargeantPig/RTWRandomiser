@@ -1,0 +1,116 @@
+************** STARTING CAMPAIGN EDITOR
+
+	Creating army controlled by Gaius Julius at 0x8cf8fa0 from script
+		Creating unit (Roman General) at 0x6334808
+		Creating unit (Triarii) at 0x8cf9178
+		Creating unit (Roman Archers) at 0x8cf9390
+	Creating army controlled by Cassius Scipio at 0x8cfa708 from script
+		Creating unit (Roman General) at 0x8eead80
+		Creating unit (Equites) at 0x8f86088
+		Creating unit (Principes) at 0x8f862a0
+		Creating unit (Hastati) at 0x8f864b8
+		Creating unit (Velites) at 0x8f866d0
+	Creating army controlled by Sextius Brutus at 0x8cfc238 from script
+		Creating unit (Roman General) at 0x8fd77b8
+		Creating unit (Equites) at 0x8fd79d0
+		Creating unit (Velites) at 0x8fd7be8
+		Creating unit (Velites) at 0x8fd7e00
+		Creating unit (Velites) at 0x8cfc348
+		Creating unit (Hastati) at 0x8cfc560
+		Creating unit (Hastati) at 0x8cfc778
+		Creating unit (Hastati) at 0x8cfc990
+		Creating unit (Principes) at 0x8cfcba8
+		Creating unit (Principes) at 0x8cfcdc0
+		Creating unit (Principes) at 0x8cfcfd8
+		Creating unit (Triarii) at 0x8cfd1f0
+		Creating unit (Principes) at 0x8cfd408
+		Creating unit (Hastati) at 0x8cfd620
+		Creating unit (Velites) at 0x8cfd838
+		Creating unit (Roman Archers) at 0x8cfda50
+		Creating unit (Roman Archers) at 0x8cfdc68
+		Creating unit (Town Watch) at 0x8cfde80
+	Creating army controlled by Decius Brutus at 0x90f2318 from script
+		Creating unit (Roman General) at 0x90cfb20
+		Creating unit (Velites) at 0x90cfd38
+		Creating unit (Velites) at 0x8cfe098
+		Creating unit (Velites) at 0x8cfe2b0
+		Creating unit (Hastati) at 0x8cfe4c8
+		Creating unit (Hastati) at 0x8cfe6e0
+		Creating unit (Hastati) at 0x8cfe8f8
+		Creating unit (Principes) at 0x8cfeb10
+		Creating unit (Principes) at 0x8cfed28
+		Creating unit (Principes) at 0x8cfef40
+		Creating unit (Equites) at 0x8cff158
+		Creating unit (Equites) at 0x8cff370
+	Creating army controlled by Vellocatus of Arausio at 0x8d00048 from script
+		Creating unit (Barbarian Warlord) at 0x8d00158
+		Creating unit (Warband) at 0x8d00370
+		Creating unit (Warband) at 0x8d00588
+		Creating unit (Warband) at 0x8d007a0
+		Creating unit (Forester Warband) at 0x8d009b8
+		Creating unit (Skirmisher Warband) at 0x8d00bd0
+	Creating army controlled by Berdic of Arausio at 0x8d01288 from script
+		Creating unit (Barbarian Warlord) at 0x8d01370
+	Creating army controlled by Dumnorix of Genava at 0x8d01a80 from script
+		Creating unit (Barbarian Warlord) at 0x8d01c48
+		Creating unit (Skirmisher Warband) at 0x8d01e60
+		Creating unit (Skirmisher Warband) at 0x8d02078
+		Creating unit (Skirmisher Warband) at 0x8d02290
+		Creating unit (Swordsmen) at 0x8d024a8
+		Creating unit (Swordsmen) at 0x8d026c0
+		Creating unit (Swordsmen) at 0x8d028d8
+		Creating unit (Swordsmen) at 0x8d02af0
+		Creating unit (Warband) at 0x8d02d08
+		Creating unit (Barbarian Cavalry) at 0x8d02f68
+		Creating unit (Barbarian Noble Cavalry) at 0x8d03180
+		Creating unit (Archer Warband) at 0x8d03398
+	Creating army controlled by Marsias of Dyrrachium at 0x8ca0c10 from script
+		Creating unit (General's Bodyguard) at 0x8ca0d20
+		Creating unit (Militia Hoplites) at 0x8d9c078
+		Creating unit (Militia Hoplites) at 0x8d9c290
+		Creating unit (Militia Hoplites) at 0x8d9c4a8
+	Creating army controlled by Phillipos of Dyrrachium at 0x8d9cbf8 from script
+		Creating unit (General's Bodyguard) at 0x8d9cd88
+		Creating unit (Militia Cavalry) at 0x8d9cfa0
+		Creating unit (Militia Cavalry) at 0x8d9d1b8
+		Creating unit (Militia Hoplites) at 0x8d9d3d0
+		Creating unit (Militia Hoplites) at 0x8d9d5e8
+		Creating unit (Militia Hoplites) at 0x8d9d800
+		Creating unit (Archers) at 0x8d9da18
+		Creating unit (Archers) at 0x8d9dc30
+		Creating unit (Archers) at 0x8d9de48
+		Creating unit (Peltasts) at 0x8d9e0a8
+	Creating army controlled by Admetos of Dyrrachium at 0x8d9e8b8 from script
+		Creating unit (General's Bodyguard) at 0x8d9ea70
+		Creating unit (Militia Cavalry) at 0x8d9ec88
+		Creating unit (Militia Hoplites) at 0x8d9eea0
+		Creating unit (Militia Hoplites) at 0x8d9f0b8
+		Creating unit (Archers) at 0x8d9f2d0
+		Creating unit (Peltasts) at 0x8d9f4e8
+		Creating unit (Peasants) at 0x8d9f700
+	Creating army controlled by Kalas of Dyrrachium at 0x8d9ff38 from script
+		Creating unit (General's Bodyguard) at 0x8da00f0
+		Creating unit (Militia Hoplites) at 0x8da0308
+		Creating unit (Militia Hoplites) at 0x8da0520
+		Creating unit (Militia Hoplites) at 0x8da0738
+	Creating army controlled by Perseas of Dyrrachium at 0x8da0f70 from script
+		Creating unit (General's Bodyguard) at 0x8da1128
+		Creating unit (Militia Hoplites) at 0x8da1340
+		Creating unit (Militia Hoplites) at 0x8da1558
+		Creating unit (Militia Hoplites) at 0x8da1770
+	Creating army controlled by Aegon of Dyrrachium at 0x8da1ee0 from script
+		Creating unit (Militia Hoplites) at 0x8da2098
+		Creating unit (General's Bodyguard) at 0x8da2368
+	Creating army controlled by Deopus at 0x8da37a0 from script
+		Creating unit (General's Bodyguard) at 0x8da38b0
+		Creating unit (Militia Hoplites) at 0x8da3ac8
+		Creating unit (Militia Hoplites) at 0x8da3ce0
+		Creating unit (Militia Hoplites) at 0x8da3ef8
+	Creating army controlled by Posthumus at 0x8da51f8 from script
+		Creating unit (Roman General) at 0x8da53c0
+		Creating unit (Cretan Archers) at 0x8da55d8
+		Creating unit (Mercenary Peltasts) at 0x8da57f0
+		Creating unit (Mercenary Samnite Warriors) at 0x8da5a08
+		Creating unit (Mercenary Samnite Warriors) at 0x8da5c20
+		Creating unit (Mercenary Samnite Warriors) at 0x8da5e38
+		Creating unit (Bastarnae Mercenaries) at 0x8da6050

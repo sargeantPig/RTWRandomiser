@@ -1,0 +1,4 @@
+Loading from file data/world/maps/battle/custom/rome_sarctic_a06/descr_battle.txt
+Load finished **************************
+
+

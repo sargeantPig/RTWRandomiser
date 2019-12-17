@@ -1,0 +1,638 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+	label_unit 0 0 0	GAUL_PELTAST1
+	label_unit 0 0 1	GAUL_PELTAST2
+	label_unit 0 0 2	GAUL_CAVALRY1
+	label_unit 0 0 3	GAUL_CAVALRY2
+	label_unit 0 0 4	GAUL_GENERAL
+	label_unit 0 0 5	GAUL_SWORDSMEN1
+	label_unit 0 0 6	GAUL_SWORDSMEN2
+	label_unit 0 0 7	GAUL_SWORDSMEN3
+	label_unit 0 0 8	GAUL_WARDOGS1
+	label_unit 0 0 9	GAUL_WARDOGS2
+	label_unit 0 0 10	GAUL_SWORDSMEN4
+	label_unit 0 0 11	GAUL_SWORDSMEN5
+	label_unit 0 0 12	GAUL_SWORDSMEN6
+
+	label_unit 1 0 0	ROMAN_ARCHER1
+	label_unit 1 0 1	ROMAN_ARCHER2
+	label_unit 1 0 2	ROMAN_ARCHER3	
+	label_unit 1 0 3	ROMAN_CAVALRY1
+	label_unit 1 0 4	ROMAN_CAVALRY2
+	label_unit 1 0 5	ROMAN_GENERAL
+	label_unit 1 0 6	ROMAN_HASTATI1
+	label_unit 1 0 7	ROMAN_HASTATI2
+	label_unit 1 0 8	ROMAN_HASTATI3
+	label_unit 1 0 9	ROMAN_TRIARII1
+	label_unit 1 0 10	ROMAN_TRIARII2
+	label_unit 1 0 11	ROMAN_TRIARII3
+
+	label_unit 1 1 0	ROMAN_VELITE1
+	label_unit 1 1 1	ROMAN_VELITE2
+	label_unit 1 1 2	ROMAN_HASTATI4	
+	label_unit 1 1 3	ROMAN_HASTATI5
+	label_unit 1 1 4	ROMAN_HASTATI6
+	label_unit 1 1 5	ROMAN_PRINCEPS1
+	label_unit 1 1 6	ROMAN_PRINCEPS2
+	label_unit 1 1 7	ROMAN_TRIARII4
+	label_unit 1 1 8	ROMAN_TRIARII5
+	label_unit 1 1 9	ROMAN_TRIARII6
+	label_unit 1 1 10	ROMAN_GENERAL2
+	label_unit 1 1 11	ROMAN_CAVALRY3
+	label_unit 1 1 12	ROMAN_CAVALRY4
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_control
+	declare_counter player_has_escaped
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+;BATTLE SCRIPT
+
+	while ! I_BattleStarted					; WAIT FOR DEPLOYMENT
+	end_while
+
+	ai_active_set off
+
+	camera_default_mode_set tw
+
+	battle_default_camera
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+			set_camera_bookmark 1, -411.053, 115.246, -403.124 -420.299, 117.197, -406.192		;sun glint
+			camera_position_at_bookmark 1
+			set_counter battle_start 1
+		terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+; *********************************************************************************************
+; ********************* BEGINNING INTRO SEQUENCE MONITOR **************************************
+; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   groups
+
+			define_unit_group GRP_GAUL_ARMY GAUL_PELTAST1 GAUL_PELTAST2 GAUL_CAVALRY1 GAUL_CAVALRY2 GAUL_GENERAL GAUL_SWORDSMEN1 GAUL_SWORDSMEN2 GAUL_SWORDSMEN3 GAUL_WARDOGS1 GAUL_WARDOGS2 GAUL_SWORDSMEN4 GAUL_SWORDSMEN5 GAUL_SWORDSMEN6
+
+			define_unit_group GRP_ROMAN_ARMY ROMAN_ARCHER1 ROMAN_ARCHER2 ROMAN_ARCHER3 ROMAN_CAVALRY1 ROMAN_CAVALRY2 ROMAN_GENERAL ROMAN_HASTATI1 ROMAN_HASTATI2 ROMAN_HASTATI3 ROMAN_TRIARII1 ROMAN_TRIARII2 ROMAN_TRIARII3
+		
+			define_unit_group GRP_ROMAN_ARMY2 ROMAN_VELITE1 ROMAN_VELITE2 ROMAN_HASTATI4 ROMAN_HASTATI5 ROMAN_HASTATI6 ROMAN_PRINCEPS1 ROMAN_PRINCEPS2 ROMAN_TRIARII4 ROMAN_TRIARII5 ROMAN_TRIARII6 ROMAN_GENERAL2 ROMAN_CAVALRY3 ROMAN_CAVALRY4
+
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   x value   y value  z value
+
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   camera settings
+
+
+			set_camera_bookmark 1, 257.72, 48.2404, 255.43 249.857, 48.5705, 261.589	;R1 cav
+			set_camera_bookmark 2, 230.094, 49.7925, 254.872 229.307, 49.8256, 255.488	;R1 cav2
+			set_camera_bookmark 3, 212.875, 51.9202, 253.041 208.721, 49.2462, 261.482	;R1 pan
+			set_camera_bookmark 4, 200.522, 55.8805, 294.447 196.367, 53.2066, 302.887	;R1 pan2
+			set_camera_bookmark 5, 204.172, 53.3346, 298.092 199.065, 56.5415, 289.817	;R1 to Gaul
+			set_camera_bookmark 6, 197.97, 68.3382, 202.828 197.719, 67.8889, 192.832	;pan to Gaul
+			set_camera_bookmark 7, 234.071, 18.3712, -87.1251 224.448, 20.7541, -89.3201	;Gaul1
+			set_camera_bookmark 8, 233.656, 18.8623, -80.9449 232.708, 19.097, -81.1611	;Gaul2
+			set_camera_bookmark 9, 180.805, 25.477, -110.754 184.82, 24.6067, -101.604	;Gaul to R1
+			set_camera_bookmark 10, 196.844, 24.7897, -101.941 197.193, 23.9194, -91.955	;Gaul to R12
+			set_camera_bookmark 11, 179.023, 44.9714, 180.798 180.579, 44.6404, 190.627	;R1 velites
+			set_camera_bookmark 12, 190.245, 45.6725, 163.034 194.075, 43.6357, 172.182	;R1 velites2
+			set_camera_bookmark 13, 196.234, 50.1538, 223.576 196.134, 48.117, 213.659	;R1 to Gaul2
+			set_camera_bookmark 14, 194.066, 38.9505, 8.38098 193.972, 34.6608, -0.935286	;Gaul
+			set_camera_bookmark 15, 64.8577, 130.601, -368.833 -36.1474, 127.583, -622.661	;Gaul to R2
+			set_camera_bookmark 16, -15.6537, 119.771, -429.377 -25.0038, 115.808, -428.264	;Gaul to R22
+			set_camera_bookmark 17, -153.055, 43.8327, -420.19 -161.575, 39.6259, -416.252	;R2
+			set_camera_bookmark 18, -184.981, 55.3338, -422.539 -130.109, 26.9251, -372.97	;R2 to Gaul
+			set_camera_bookmark 19, 174.494, 32.3291, 24.3927 174.74, 31.8114, 34.3255	;Gaul
+			set_camera_bookmark 20, 211.27, 35.255, 23.4819 209.542, 32.4281, 33.096	;Gaul2
+			set_camera_bookmark 21, -75.8754, 64.4201, -352.778 -83.0442, 61.1448, -358.505	;R2
+
+			; *********************************************************************************************
+			;	Start sequence
+			; *********************************************************************************************
+		
+	
+			camera_restrictions_set off
+
+			hide_ui
+
+			;beginning of battle, Roman Army 1
+
+			camera_position_at_bookmark 1	
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_00 tag = TELAMON_SPEECH_00
+
+			camera_zoom_to_bookmark 2 2	
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+			camera_position_at_bookmark 3	
+
+			play_sound_event TELAMON_SPEECH_02 tag = TELAMON_SPEECH_02
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 4 10
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_group_order_relative_move_formed GRP_ROMAN_ARMY 0 80
+
+			battle_wait 2
+	
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_03 tag = TELAMON_SPEECH_03
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 5
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 6 10
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_04 tag = TELAMON_SPEECH_04
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;Gaul army	
+
+			unit_group_order_relative_move_formed GRP_GAUL_ARMY 0 125
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 7	
+
+			play_sound_event TELAMON_SPEECH_05 tag = TELAMON_SPEECH_05
+
+			battle_wait 1.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 8 1
+	
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 9 
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 10 2
+	
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;R1 velites
+
+			camera_position_at_bookmark 11	
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 12 2
+
+			play_sound_event TELAMON_SPEECH_06 tag = TELAMON_SPEECH_06
+
+			battle_wait 8.5
+	
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_07 tag = TELAMON_SPEECH_07
+
+			camera_zoom_to_bookmark 10 2	
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 13	
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 14 10
+
+			battle_wait 3.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_08 tag = TELAMON_SPEECH_08
+
+			camera_zoom_to_bookmark 14 20
+
+			battle_wait 3.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 30
+	
+			battle_wait 2.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 50
+
+			battle_wait 2.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 16 80
+		
+			unit_group_order_relative_move_formed GRP_ROMAN_ARMY2 0 400
+
+			play_sound_event TELAMON_SPEECH_09 tag = TELAMON_SPEECH_09
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;Roman Army 2
+
+			camera_position_at_bookmark 17 
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_10 tag = TELAMON_SPEECH_10
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 18 25
+
+			battle_wait 4
+	
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_11 tag = TELAMON_SPEECH_11
+
+			battle_wait 6
+	
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 19
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_12 tag = TELAMON_SPEECH_12
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 20 25
+
+			battle_wait 6
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_13 tag = TELAMON_SPEECH_13
+
+			camera_position_at_bookmark 21
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   camera settings
+
+
+			set_camera_bookmark 1, 230.293, 36.6147, 54.7448 229.557, 36.2786, 54.157	;Gaul to R2
+			set_camera_bookmark 2, 188.615, 41.5711, -33.0332 188.444, 40.4848, -23.1861	;Player control
+
+			;R2 to Gaul
+
+			camera_zoom_to_bookmark 1 1
+			
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 2
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 4
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 8
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 16
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 32
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 64
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 1 128
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event TELAMON_SPEECH_14 tag = TELAMON_SPEECH_14
+
+			battle_wait 6
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;Player Control
+
+			camera_zoom_to_bookmark 2
+
+			battle_wait 6			
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			undefine_unit_group GRP_GAUL_ARMY
+			undefine_unit_group GRP_ROMAN_ARMY
+			undefine_unit_group GRP_ROMAN_ARMY2
+
+			set_counter player_control 1 
+
+		terminate_monitor
+	end_monitor
+
+; *********************************************************************************************
+; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+; *********************************************************************************************
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Start of battle - BATTLESTART MONITORS
+; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+			undefine_unit_group GRP_GAUL_ARMY
+			undefine_unit_group GRP_ROMAN_ARMY
+			undefine_unit_group GRP_ROMAN_ARMY2
+
+			stop_sound_event TELAMON_SPEECH_00 
+			stop_sound_event TELAMON_SPEECH_02
+			stop_sound_event TELAMON_SPEECH_03
+			stop_sound_event TELAMON_SPEECH_04
+			stop_sound_event TELAMON_SPEECH_05
+			stop_sound_event TELAMON_SPEECH_06
+			stop_sound_event TELAMON_SPEECH_07
+			stop_sound_event TELAMON_SPEECH_08
+			stop_sound_event TELAMON_SPEECH_09
+			stop_sound_event TELAMON_SPEECH_10
+			stop_sound_event TELAMON_SPEECH_11
+			stop_sound_event TELAMON_SPEECH_12
+			stop_sound_event TELAMON_SPEECH_13
+			stop_sound_event TELAMON_SPEECH_14
+
+			unit_immediate_place GAUL_PELTAST1 156.433056, 52.917468, 0
+			unit_immediate_place GAUL_PELTAST2 199.30888, 53.579308, 0
+			unit_immediate_place GAUL_CAVALRY1 66.776724, 38.737132, 0
+			unit_immediate_place GAUL_CAVALRY2 292.467232, 34.537484, 0
+			unit_immediate_place GAUL_GENERAL 180.50472, 12.567398, 0
+			unit_immediate_place GAUL_SWORDSMEN1 177.462608, 36.004528, 0
+			unit_immediate_place GAUL_SWORDSMEN2 191.677424, 35.93456, 0
+			unit_immediate_place GAUL_SWORDSMEN3 206.824672, 36.25318, 0
+			unit_immediate_place GAUL_WARDOGS1 118.601472, 25.68512, 0
+			unit_immediate_place GAUL_WARDOGS2 259.097504, 25.083498, 0
+			unit_immediate_place GAUL_SWORDSMEN4 163.458784, 36.234484, 0
+			unit_immediate_place GAUL_SWORDSMEN5 149.69824, 36.338352, 0
+			unit_immediate_place GAUL_SWORDSMEN6 222.027696, 36.203796, 0
+
+			unit_immediate_place ROMAN_ARCHER1 240.381264, 161.152512, -180.0
+			unit_immediate_place ROMAN_ARCHER2 207.478736, 160.889312, -180.0
+			unit_immediate_place ROMAN_ARCHER3 167.844704, 160.262816, -180.0	
+			unit_immediate_place ROMAN_CAVALRY1 256.761536, 178.959248, -180.0
+			unit_immediate_place ROMAN_CAVALRY2 150.18776, 177.88288, -180.0
+			unit_immediate_place ROMAN_GENERAL 199.625184, 218.736624, -180.0
+			unit_immediate_place ROMAN_HASTATI1 215.241168, 177.46312, -180.0
+			unit_immediate_place ROMAN_HASTATI2 197.155328, 176.504672, -180.0
+			unit_immediate_place ROMAN_HASTATI3 177.118944, 176.878848, -180.0
+			unit_immediate_place ROMAN_TRIARII1 208.694496, 200.411696, -180.0
+			unit_immediate_place ROMAN_TRIARII2 188.718288, 199.749648, -180.0
+			unit_immediate_place ROMAN_TRIARII3 167.282944, 199.009936, -180.0
+
+			unit_immediate_place ROMAN_VELITE1 -103.154552, -346.439168, 67.362672
+			unit_immediate_place ROMAN_VELITE2 -93.833856, -375.570432, 67.362672
+			unit_immediate_place ROMAN_HASTATI4 -111.201008, -358.820384, 67.362672
+			unit_immediate_place ROMAN_HASTATI5 -104.758952, -373.497568, 67.362672
+			unit_immediate_place ROMAN_HASTATI6 -97.709216, -386.56464, 67.362672
+			unit_immediate_place ROMAN_PRINCEPS1 -125.0654, -370.624384, 67.362672
+			unit_immediate_place ROMAN_PRINCEPS2 -117.429464, -384.61296, 67.362672
+			unit_immediate_place ROMAN_TRIARII4 -147.553392, -365.892288, 67.362672
+			unit_immediate_place ROMAN_TRIARII5 -141.888176, -383.19136, 67.362672
+			unit_immediate_place ROMAN_TRIARII6 -137.7168, -401.693696, 67.362672
+			unit_immediate_place ROMAN_GENERAL2 -71.341144, -359.903008, 67.1704
+			unit_immediate_place ROMAN_CAVALRY3 -116.285832, -313.64112, 68.433832
+			unit_immediate_place ROMAN_CAVALRY4 -70.699168, -412.694048, 67.1704
+
+			battle_wait 1
+
+			play_sound_event TELAMON_SPEECH_11
+
+			set_camera_bookmark 1, -470.482, 82.7589, -560.987 -471.041, 80.8483, -570.863	;Tuscan coast
+
+			camera_zoom_to_bookmark 1 25
+
+			battle_wait 6
+
+			set_counter player_control 1
+
+		terminate_monitor
+	end_monitor
+
+
+
+			; *********************************************************************************************
+			;	unit settings
+			; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter player_control = 1
+
+			set_camera_bookmark 2, 188.615, 41.5711, -33.0332 188.444, 40.4848, -23.1861	;Player control
+
+			camera_position_at_bookmark 2
+
+			camera_restrictions_set on
+
+			show_ui
+
+			enable_cursor						;prevent the player clicking
+			disable_shortcuts false		
+			enable_entire_ui
+			inhibit_camera_input false
+
+			battle_wait 1
+
+			steal_esc_key off
+
+			camera_default_mode_set user_pref
+
+			pause_battle
+
+			suspend_unscripted_advice false
+
+			battle_wait 1
+
+			ai_active_set on
+
+		terminate_monitor
+	end_monitor
+
+
+
+	while I_InBattle
+	end_while
+
+	end_script

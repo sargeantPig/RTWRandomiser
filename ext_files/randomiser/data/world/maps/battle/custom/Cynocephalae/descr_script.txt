@@ -1,0 +1,1117 @@
+script
+	prepare_for_battle
+	heed_pause on
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	label our units
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	label_unit 0 0 0	PLAYER_GENERAL
+	label_unit 0 0 1	PLAYER_HASTATI1
+	label_unit 0 0 2	PLAYER_HASTATI2
+	label_unit 0 0 3	PLAYER_PRINCIPES1
+	label_unit 0 0 4	PLAYER_TRIARII1
+	label_unit 0 0 5	PLAYER_HASTATI3
+	label_unit 0 0 6	PLAYER_TRIARII2
+	label_unit 0 0 7	PLAYER_TRIARII3
+  	label_unit 0 0 8	PLAYER_HASTATI4
+	label_unit 0 0 9	PLAYER_ELEPHANTS1
+	label_unit 0 0 10	PLAYER_HOPLITES1
+	label_unit 0 0 11	PLAYER_HOPLITES2
+	label_unit 0 0 12	PLAYER_PELTASTS1
+	label_unit 0 0 13	PLAYER_CAVALRY1
+	label_unit 0 0 14	PLAYER_VELITES1
+
+
+	label_unit 1 0 0	AI_GENERAL
+	label_unit 1 0 1	AI_PIKEMEN1
+	label_unit 1 0 2	AI_PIKEMEN2
+	label_unit 1 0 3	AI_PIKEMEN3
+	label_unit 1 0 4	AI_PIKEMEN4
+	label_unit 1 0 7	AI_PIKEMEN5
+	label_unit 1 0 5	AI_PELTASTS1
+  	label_unit 1 0 6	AI_ILLYRIANS1
+   	label_unit 1 0 8	AI_PIKEMEN6
+	label_unit 1 0 9	AI_PIKEMEN7
+	label_unit 1 0 10	AI_PIKEMEN8
+	label_unit 1 0 11	AI_PELTASTS2
+	label_unit 1 0 12	AI_THRACIANS1
+	label_unit 1 0 13	AI_CAVALRY1
+   	label_unit 1 0 14	AI_PELTASTS3
+   	label_unit 1 0 15	AI_CAVALRY2
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	disable the UI, AI, and wait for deployment to finish
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	disable_cursor
+	suspend_unscripted_advice true
+	disable_shortcuts true
+	disable_entire_ui
+	inhibit_camera_input true
+	camera_restrictions_set off
+	camera_default_mode_set tw
+	hide_ui
+	ai_active_set off
+
+	while ! I_BattleStarted
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	set the music and the camera
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	battle_default_camera
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	define the unit groups, and suppress morale/unit behaviour
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 	
+	define_unit_group GRP_PLAYER_LEFT_FLANK PLAYER_GENERAL PLAYER_HASTATI1 PLAYER_HASTATI2 PLAYER_PRINCIPES1 PLAYER_TRIARII1 PLAYER_HASTATI3 PLAYER_PELTASTS1
+	define_unit_group GRP_PLAYER_RIGHT_FLANK PLAYER_TRIARII2 PLAYER_TRIARII3 PLAYER_HASTATI4 PLAYER_ELEPHANTS1 PLAYER_HOPLITES1 PLAYER_HOPLITES2
+	define_unit_group GRP_PLAYER_SCOUT PLAYER_CAVALRY1 PLAYER_VELITES1
+	define_unit_group GRP_AI_RIGHT_FLANK AI_GENERAL AI_PIKEMEN1 AI_PIKEMEN2 AI_PIKEMEN3 AI_PIKEMEN4 AI_PIKEMEN5 AI_PELTASTS1 AI_ILLYRIANS1
+	define_unit_group GRP_AI_LEFT_FLANK AI_PIKEMEN6 AI_PIKEMEN7 AI_PIKEMEN8 AI_PELTASTS2 AI_THRACIANS1 AI_CAVALRY1
+	define_unit_group GRP_AI_SCOUT AI_PELTASTS3 AI_CAVALRY2
+
+	unit_group_set_morale		GRP_PLAYER_LEFT_FLANK		high
+	unit_group_set_morale		GRP_PLAYER_RIGHT_FLANK		high
+	unit_group_set_morale		GRP_PLAYER_SCOUT		high
+	unit_group_set_morale		GRP_AI_LEFT_FLANK		high
+	unit_group_set_morale		GRP_AI_RIGHT_FLANK		high
+	unit_group_set_morale		GRP_AI_SCOUT			high
+
+	unit_set_skirmish_mode		PLAYER_VELITES1			off
+	unit_set_skirmish_mode		AI_PELTASTS3			off
+	unit_set_skirmish_mode		AI_PELTASTS1			off
+	unit_set_skirmish_mode		AI_ILLYRIANS1			off
+
+	unit_set_fire_at_will_mode	PLAYER_VELITES1			off
+	unit_set_fire_at_will_mode	AI_PELTASTS3			off
+	unit_set_fire_at_will_mode	AI_PELTASTS1			off
+	unit_set_fire_at_will_mode	AI_ILLYRIANS1			off
+	unit_set_fire_at_will_mode	PLAYER_CAVALRY1			off
+	unit_set_fire_at_will_mode	AI_CAVALRY2			off
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	Set up global counters and monitors
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	steal_esc_key
+	declare_counter have_macedonians_formed_up
+	declare_counter go_to_end_phase
+
+	monitor_event EscPressed TrueCondition
+		set_counter go_to_end_phase 1
+	end_monitor
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	End phase of battle
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	monitor_conditions I_CompareCounter go_to_end_phase > 0
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Stop sounds
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		stop_sound_event CYNOSCEPHALAE_SPEECH_01
+		stop_sound_event CYNOSCEPHALAE_SPEECH_02
+		stop_sound_event CYNOSCEPHALAE_SPEECH_03
+		stop_sound_event CYNOSCEPHALAE_SPEECH_04
+		stop_sound_event CYNOSCEPHALAE_SPEECH_05
+		stop_sound_event CYNOSCEPHALAE_SPEECH_06
+		stop_sound_event CYNOSCEPHALAE_SPEECH_07
+		stop_sound_event CYNOSCEPHALAE_SPEECH_08
+		stop_sound_event CYNOSCEPHALAE_SPEECH_09
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Place all units. Only move the Macedonian
+		;;;	right if it wasn't there already
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		battle_wait 0.1
+
+		;place Roman units
+		unit_group_immediate_place GRP_PLAYER_LEFT_FLANK -40.37, 408.27 150
+		unit_group_immediate_place GRP_PLAYER_RIGHT_FLANK -218, 408 205
+		unit_immediate_place PLAYER_GENERAL -123, 390.23 190
+
+		camera_position 4.42376, 491.367, 431.617 -132.517, 457.977, 409.953
+
+		battle_wait 0.1
+
+		camera_zoom_to -141.128, 494.142, 437.761 -140.667, 479.968, 405.282 40
+
+		if I_CompareCounter have_macedonians_formed_up = 0
+			unit_immediate_place PLAYER_VELITES1 89.17, -14.57 0
+			unit_immediate_place PLAYER_CAVALRY1 79.22, -28.3 0
+			kill_unit PLAYER_VELITES1
+			kill_unit PLAYER_CAVALRY1
+
+			unit_immediate_place AI_PIKEMEN1 4.237, 230.780 -25
+			unit_immediate_place AI_PIKEMEN2 23.789, 239.760 -26
+			unit_immediate_place AI_PIKEMEN3 43.221, 249.312 -26
+			unit_immediate_place AI_PIKEMEN4 63.343, 259.376 -27
+			unit_immediate_place AI_PIKEMEN5 81.642, 268.865 -28
+			unit_immediate_place AI_PIKEMEN6 100.543, 278.793 -30
+			unit_immediate_place AI_GENERAL -40.539, 218.789 -7
+			unit_immediate_place AI_CAVALRY2 -12.853, 222.989 -15
+			unit_immediate_place AI_PELTASTS3 52.595, 242.934 -26
+			unit_immediate_place AI_PELTASTS1 90.938, 262.537 -30
+			unit_immediate_place AI_ILLYRIANS1 119.670, 290.162 -49
+			unit_immediate_place AI_PELTASTS2 13.179, 223.868 -26
+
+			battle_wait 0.1
+
+			unit_order_change_formation AI_PIKEMEN1 phalanx
+			unit_order_change_formation AI_PIKEMEN2 phalanx
+			unit_order_change_formation AI_PIKEMEN3 phalanx
+			unit_order_change_formation AI_PIKEMEN4 phalanx
+			unit_order_change_formation AI_PIKEMEN5 phalanx
+			unit_order_change_formation AI_PIKEMEN6 phalanx
+		end_if
+
+		unit_immediate_place AI_CAVALRY1 -350, 325 25
+		unit_immediate_place AI_PIKEMEN8 -330, 302 23
+		unit_immediate_place AI_PIKEMEN7 -332, 256 23
+		unit_immediate_place AI_THRACIANS1 -386, 278 21
+
+		battle_wait 0.1
+
+		unit_group_order_halt GRP_PLAYER_LEFT_FLANK
+		unit_group_order_halt GRP_PLAYER_RIGHT_FLANK
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Unsuppress morale and other unit behaviours
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+		unit_group_unset_morale		GRP_PLAYER_LEFT_FLANK
+		unit_group_unset_morale		GRP_PLAYER_RIGHT_FLANK
+		unit_group_unset_morale		GRP_PLAYER_SCOUT
+		unit_group_unset_morale		GRP_AI_LEFT_FLANK
+		unit_group_unset_morale		GRP_AI_RIGHT_FLANK
+		unit_group_unset_morale		GRP_AI_SCOUT
+
+		unit_set_skirmish_mode		PLAYER_VELITES1			on
+		unit_set_skirmish_mode		AI_PELTASTS3			on
+		unit_set_skirmish_mode		AI_PELTASTS1			on
+		unit_set_skirmish_mode		AI_ILLYRIANS1			on
+
+		unit_set_fire_at_will_mode	PLAYER_VELITES1			on
+		
+							unit_set_fire_at_will_mode	AI_PELTASTS3			on
+		unit_set_fire_at_will_mode	AI_PELTASTS1			on
+		unit_set_fire_at_will_mode	AI_ILLYRIANS1			on
+		unit_set_fire_at_will_mode	PLAYER_CAVALRY1			on
+		unit_set_fire_at_will_mode	AI_CAVALRY2			on
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Ungroup the groups
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		undefine_unit_group		GRP_PLAYER_LEFT_FLANK
+		undefine_unit_group		GRP_PLAYER_RIGHT_FLANK
+		undefine_unit_group		GRP_PLAYER_SCOUT
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Wait a bit, then re-enable the UI
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		battle_wait 7
+
+		camera_default_mode_set user_pref
+		enable_cursor
+		suspend_unscripted_advice false
+		disable_shortcuts false
+		inhibit_camera_input false
+		show_ui
+		enable_entire_ui
+		camera_restrictions_set on
+
+		battle_wait 1.5
+
+		pause_battle
+
+		release_unit AI_PIKEMEN1
+		release_unit AI_PIKEMEN2
+		release_unit AI_PIKEMEN3
+		release_unit AI_PIKEMEN4
+		release_unit AI_PIKEMEN5
+		release_unit AI_PIKEMEN6
+		release_unit AI_GENERAL
+		release_unit AI_CAVALRY2
+		release_unit AI_PELTASTS3
+		release_unit AI_PELTASTS1
+		release_unit AI_ILLYRIANS1
+		release_unit AI_PELTASTS2
+
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+		;;;	Macedonian left flank forms up, then attacks
+		;;;	the Roman army. After a minute and a half, 
+		;;;	return control to the AI
+		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+		unit_order_attack_closest_unit AI_PIKEMEN7 180
+		unit_order_attack_closest_unit AI_PIKEMEN8 180
+		unit_order_attack_closest_unit AI_THRACIANS1 180
+		unit_order_attack_closest_unit AI_CAVALRY1 180
+
+		declare_timer re_eval_targets
+		declare_counter give_back_control
+
+		while I_CompareCounter give_back_control < 18
+			if I_TimerElapsed re_eval_targets < 5000
+				unit_order_attack_closest_unit AI_PIKEMEN7 180
+				unit_order_attack_closest_unit AI_PIKEMEN8 180
+				unit_order_attack_closest_unit AI_THRACIANS1 180
+				unit_order_attack_closest_unit AI_CAVALRY1 180
+			end_if
+			if I_TimerElapsed re_eval_targets > 5000
+				inc_counter give_back_control 1
+				restart_timer re_eval_targets
+			end_if
+		end_while
+
+		release_unit AI_PIKEMEN7
+		release_unit AI_PIKEMEN8
+		release_unit AI_THRACIANS1
+		release_unit AI_CAVALRY1
+
+		while I_InBattle
+		end_while
+	end_monitor
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	Scripted behaviour starts here
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;set_music_state custom CYNO_INTRO_MUSIC
+	
+	unit_group_immediate_place GRP_AI_RIGHT_FLANK 700, -300 0
+	unit_group_immediate_place GRP_AI_LEFT_FLANK 700, -500 0
+	unit_group_immediate_place GRP_AI_SCOUT 700, -400 0
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Opening shot along ridge
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	camera_position -207.653, 632.538, 193.798 -207.194, 631.555, 184.019
+
+	battle_wait 1
+
+	camera_zoom_to -101.3, 629.603, 198.785 -96.8712, 628.619, 190.054 10
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_01 tag = CYNOSCEPHALAE_SPEECH_01
+
+	battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_group_order_relative_move_unformed GRP_PLAYER_LEFT_FLANK 0 12
+	unit_group_order_relative_move_unformed GRP_PLAYER_RIGHT_FLANK 0 12
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Opening shot looking down at Romans
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	camera_position 397.782, 651.476, 121.899 388.18, 649.405, 124.236
+
+	battle_wait 0.1
+
+	camera_zoom_to 288.417, 639.445, 201.721 281.534, 636.076, 208.369 5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	battle_wait 4
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Close up of Roman army
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position -191.603, 447.603, 622.798 -121.296, 440.422, 688.982
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_02 tag = CYNOSCEPHALAE_SPEECH_02
+
+	battle_wait 0.1
+
+	camera_zoom_to -108.663, 446.129, 622.485 -130.301, 441.418, 685.363 4
+
+	battle_wait 4.5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position -156.012, 444.398, 697.104 -121.491, 437.749, 613.656
+
+	battle_wait 0.1
+
+	camera_zoom_to -93.4714, 446.428, 711.723 -68.9983, 439.778, 624.797 6
+
+	battle_wait 4
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Shot from ridge looking back at Romans
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 105.409, 562.137, 191.467 101.569, 559.947, 200.497
+	unit_group_immediate_place GRP_PLAYER_SCOUT 100.67, 207.95 180
+
+	battle_wait 0.1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_group_order_relative_move_unformed GRP_PLAYER_SCOUT 0, 200
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_03 tag = CYNOSCEPHALAE_SPEECH_03
+	
+	battle_wait 1
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Camera lowers to scout group in foreground
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;camera_zoom_to 107.19, 528.3, 189.28 103.35, 526.105, 196.31 10
+	camera_zoom_to 107.19, 528.3, 189.28 103.35, 516.105, 196.31 10
+
+	battle_wait 6
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Looking down pass with scout group underneath
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move_relative PLAYER_CAVALRY1 20 100
+	camera_position 100.13, 526.78, 204.73 100.08, 526.57, 203.76
+
+	battle_wait 0.1
+
+	camera_zoom_to 100.42, 526.47, 209.74 99.4, 522.19, 189.95 1
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_04 tag = CYNOSCEPHALAE_SPEECH_04
+
+	battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move_relative PLAYER_CAVALRY1 20 100
+
+	battle_wait 4
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Zooming across Velites
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 117.937, 533.314, 177.539 110.558, 529.528, 193.26
+
+	battle_wait 0.1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 98.3183, 531.88, 170.621 92.2695, 527.516, 189.704 2
+
+	unit_immediate_place PLAYER_CAVALRY1 54.77, 123.96 180
+	
+	battle_wait 0.1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move_relative PLAYER_CAVALRY1 0 100
+
+	battle_wait 4
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Facing down valley, cavalry cutting across camera
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 38.8548, 529.043, 118.787 43.2825, 528.252, 109.824
+	unit_immediate_place PLAYER_VELITES1 122.05, 121.21 180
+
+	battle_wait 1.5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move_relative PLAYER_VELITES1 0 100
+	play_sound_event CYNOSCEPHALAE_SPEECH_05 tag = CYNOSCEPHALAE_SPEECH_05
+
+	battle_wait 2.5
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Shot across valley, Velites in foreground
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 124.8, 530.33, 111.44 115.05, 529.33, 109.95
+
+	battle_wait 4
+
+	; MOVED FROM BELOW (STILL THERE BUT COMMENTED OUT)
+	unit_immediate_place PLAYER_CAVALRY1 47.74, 46.98 180
+	unit_order_move_relative PLAYER_CAVALRY1 0 30
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	High above ambush
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;camera_position -16.29, 562.12, 54.7 -7.41, 560.35, 58.67
+	camera_position -16.3, 559.95, 52.7 47.74, 511.41, 48.97
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_06 tag = CYNOSCEPHALAE_SPEECH_06
+	;unit_immediate_place AI_PELTASTS3 -11.47, 57.63 79
+	unit_immediate_place AI_PELTASTS3 -9.17, 57.63 79
+
+
+	unit_immediate_place AI_CAVALRY2 -23.43, 16.03 68
+
+	;battle_wait 2
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Low above ambush
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;camera_zoom_to -16.3, 554.81, 52.7 -11.31, 555.21, 55.97 5
+	;camera_zoom_to -16.3, 556.81, 52.7 -11.31, 555.21, 55.97 5
+	 ;camera_zoom_to -16.3, 559.95, 52.7 47.74, 511.41, 48.97 5
+
+	;battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;unit_immediate_place PLAYER_CAVALRY1 47.74, 46.98 180
+	unit_order_attack_unit AI_PELTASTS3 PLAYER_CAVALRY1
+	;THIS ATTACK SHOULD BE AUTOMATIC IN FIRE AT WILL
+
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;unit_order_move_relative PLAYER_CAVALRY1 0 30
+
+	battle_wait 1
+	;was 4
+
+	camera_zoom_to -12.4407, 557.68, 35.4437 -0.175018, 551.647, 36.3381 0.7 [MOVED FROM BELOW]
+
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Looking uphill, towards javelins coming down		SEGMENT REMOVED [COMMENTED OUT]
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	;camera_position 57.6562, 528.92, 34.2183 55.6045, 529.336, 34.3808
+
+	;battle_wait 0.1
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	;camera_zoom_to 54.3713, 530.107, 34.4784 52.3196, 530.522, 34.6409 0.5
+
+	;battle_wait 3.5
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	;while ! I_IsUnitUnderFire PLAYER_CAVALRY1
+	;end_while
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	;battle_wait 0.5
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	;make player's cavalry briefly thrash around as they are hit
+	unit_order_turn PLAYER_CAVALRY1 85 relative
+
+	battle_wait 0.5
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	unit_order_attack_unit PLAYER_CAVALRY1 AI_CAVALRY2
+	unit_order_attack_unit PLAYER_VELITES1 AI_CAVALRY2
+
+	battle_wait 1.5
+
+	;while I_CompareCounter go_to_end_phase = 1
+	;end_while
+
+	unit_order_attack_unit AI_CAVALRY2 PLAYER_CAVALRY1 run
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Right side of enemy Peltasts, cavalry charging
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	;camera_position -12.4407, 557.68, 35.4437 -0.175018, 551.647, 36.3381
+
+	battle_wait 2
+
+	camera_zoom_to -9.07501, 556.413, 18.2897 -7.95048, 555.851, 18.5104 15
+
+	;stop too many of the player's cavalry dying here
+	unit_set_weapon_upgrade AI_PELTASTS3 0
+	unit_set_armour_upgrade PLAYER_CAVALRY1 3
+
+	battle_wait 2.5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_attack_unit PLAYER_CAVALRY1 AI_CAVALRY2 run
+
+	camera_zoom_to 15.3514, 546.571, 13.2068 31.6729, 535.511, 34.7905 8
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move PLAYER_VELITES1 45.8, 28 run
+	unit_order_move AI_PELTASTS3 -29.87, 47.33
+
+	battle_wait 3
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Focus on Cavalry Battle
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 34.0259, 537.503, 10.8224 27.7318, 537.018, 18.526
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+	
+	unit_order_move AI_CAVALRY2 28.13, -2.47 run
+	unit_set_formation_spacing PLAYER_CAVALRY1 loose
+	unit_order_move PLAYER_CAVALRY1 0, 29 run
+	
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 57.1942, 534.11, -16.892 -10.4054, 543.027, 20.9284 10
+	unit_order_move PLAYER_VELITES1 49.36, -28.09 run
+	unit_order_move AI_CAVALRY2 110.73, -58.92 run
+
+	while I_UnitDistanceFromUnit AI_CAVALRY2 PLAYER_CAVALRY1 < 4
+	end_while
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_set_formation_spacing PLAYER_CAVALRY1 tight
+	unit_order_move PLAYER_CAVALRY1 79.22, -28.3 run
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move PLAYER_VELITES1 75 -11.11 run
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Wide shot of pursuit. wait until the Romans are
+	;;;	near the camera before continuing
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 84.5, 525.29, -32.71 76.80, 524.82, -26.72
+	unit_order_move PLAYER_VELITES1 96.99, -16.79 run
+
+	battle_wait 5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move AI_PELTASTS3 51.17 -0.59 run
+
+	declare_timer wait_period
+
+	while I_UnitDistanceFromPosition PLAYER_CAVALRY1 79.22, -28.3 > 5
+				and I_TimerElapsed wait_period < 8000
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Player's cavalry slowing to a halt
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 81.37, 523.7, -29.3 73.69, 523.17, -21.42 2
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move AI_CAVALRY2 117.25, -45.89
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_turn AI_CAVALRY2 340 absolute
+
+	;place Macedonian army
+	unit_immediate_place AI_PIKEMEN1 85.62, -87.54 -7
+	unit_immediate_place AI_PIKEMEN2 108.57, -85.06 -25
+	unit_immediate_place AI_PIKEMEN3 128.89, -75.59 -54
+	unit_immediate_place AI_PIKEMEN4 141.85, -58.1 -62
+	unit_immediate_place AI_PELTASTS1 167.57, 13.51 -78
+	unit_immediate_place AI_ILLYRIANS1 161.51, -12.55 -79
+	unit_immediate_place AI_PIKEMEN5 151.24, -36.34 -62
+	unit_immediate_place AI_GENERAL 54.1, -81.66 16
+
+	battle_wait 1
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Roman-perspective shot of Macedonian army
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 85.91, 525.63, -21.28 86.89, 525.5, -23.14
+
+	battle_wait 0.1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 80.1, 525.47, -15.64 92.96, 524.63, -37.72 1
+
+	battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_move AI_PELTASTS3 51.17 -0.59
+
+	battle_wait 2
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Shot of Macedonian army as spears lower
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 169.922, 548.879, -18.8814 117.967, 532.348, -36.7317 
+
+	battle_wait 0.1
+
+	camera_zoom_to 153.495, 541.442, -65.7214 101.54, 524.911, -83.5717 5
+
+	unit_order_change_formation AI_PIKEMEN5 phalanx
+
+	battle_wait 0.7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_change_formation AI_PIKEMEN4 phalanx
+
+	battle_wait 0.7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_change_formation AI_PIKEMEN3 phalanx
+
+	battle_wait 0.7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_change_formation AI_PIKEMEN2 phalanx
+
+	battle_wait 0.7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Cut to Pikemen/General
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	unit_order_change_formation AI_PIKEMEN1 phalanx
+
+	battle_wait 0.7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 73.9493, 522.577, -81.5569 105.139, 525.467, -88.13
+
+	battle_wait 0.1
+
+	camera_zoom_to 47.4996, 521.97, -76.1889 57.134, 523.041, -78.2309 6
+
+	battle_wait 3.5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_attack_unit AI_PIKEMEN1 PLAYER_VELITES1
+	unit_order_attack_unit AI_PIKEMEN2 PLAYER_VELITES1
+	unit_order_attack_unit AI_PIKEMEN3 PLAYER_VELITES1
+	unit_order_attack_unit AI_PIKEMEN4 PLAYER_VELITES1
+	unit_order_attack_unit AI_PIKEMEN5 PLAYER_VELITES1
+	unit_order_attack_unit AI_PELTASTS1 PLAYER_VELITES1
+	unit_order_attack_unit AI_ILLYRIANS1 PLAYER_VELITES1
+	unit_order_attack_unit AI_GENERAL PLAYER_VELITES1
+
+	battle_wait 3
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Look at Romans from AI General's perspective
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 49.6784, 525.114, -81.5978 56.5549, 525.011, -74.3625 2
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_attack_unit AI_GENERAL PLAYER_VELITES1 run
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_attack_unit PLAYER_CAVALRY1 AI_CAVALRY2 run
+	unit_order_attack_unit AI_CAVALRY2 PLAYER_CAVALRY1 run
+	unit_order_attack_unit PLAYER_VELITES1 AI_CAVALRY2 run
+	unit_order_attack_unit AI_GENERAL PLAYER_CAVALRY1 run
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 75.6964, 527.88, -31.7174 85.6021, 527.727, -30.6634 8
+
+	battle_wait 5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	kill_unit PLAYER_CAVALRY1
+	unit_order_attack_unit AI_CAVALRY2 PLAYER_VELITES1 run
+	unit_order_attack_unit AI_GENERAL PLAYER_VELITES1 run
+
+	battle_wait 2
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Scene fades up valley
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	camera_position 43.2645, 546.792, 4.35148 51.4681, 542.8, -0.27457
+
+	battle_wait 0.1
+	unit_group_immediate_place GRP_PLAYER_LEFT_FLANK -40.37, 408.27 150
+	unit_group_immediate_place GRP_PLAYER_RIGHT_FLANK -218, 408 205
+	unit_immediate_place PLAYER_GENERAL -123, 390.23 190
+	camera_zoom_to -16.0122, 571.537, 33.2797 -7.80851, 567.545, 28.6537 20
+
+	battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_change_formation AI_PIKEMEN1 square
+	unit_order_change_formation AI_PIKEMEN2 square
+	unit_order_change_formation AI_PIKEMEN3 square
+	unit_order_change_formation AI_PIKEMEN4 square
+	unit_order_change_formation AI_PIKEMEN5 square
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	kill_unit PLAYER_VELITES1
+	unit_order_move AI_PIKEMEN1 90, 200
+	unit_order_move AI_PIKEMEN2 90, 200
+	unit_order_move AI_PIKEMEN3 90, 200
+	unit_order_move AI_PIKEMEN4 90, 200
+	unit_order_move AI_PIKEMEN5 90, 200
+	unit_order_move AI_PELTASTS1 90, 200
+	unit_order_move AI_ILLYRIANS1 90, 200
+	unit_order_move AI_GENERAL 90, 200
+	unit_order_move AI_CAVALRY2 90, 200
+	unit_order_move AI_PELTASTS3 90, 200
+
+	battle_wait 3
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Show army group progressing up valley
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	camera_position 98.1642, 531.188, 47.5778 131.844, 391.002, -639.588
+
+	battle_wait 0.1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 101.755, 533.102, -25.6782 135.435, 392.916, -712.844 4
+
+	battle_wait 5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 92.6413, 537.862, -45.7631 88.1264, 397.676, 642.212
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 92.6884, 525.229, -52.9397 88.1735, 385.043, 635.036 5
+
+	battle_wait 7
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Macedonians line up across the top of the ridge
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_position 132.285, 520.003, 312.378 124.167, 517.151, 317.107
+
+	unit_immediate_place AI_PIKEMEN1 4.237, 230.780 -25
+	unit_immediate_place AI_PIKEMEN2 23.789, 239.760 -26
+	unit_immediate_place AI_PIKEMEN3 43.221, 249.312 -26
+	unit_immediate_place AI_PIKEMEN4 63.343, 259.376 -27
+	unit_immediate_place AI_PIKEMEN5 81.642, 268.865 -28
+	unit_immediate_place AI_PIKEMEN6 100.543, 278.793 -30
+	unit_immediate_place AI_GENERAL -40.539, 218.789 -7
+	unit_immediate_place AI_CAVALRY2 -12.853, 222.989 -15
+	unit_immediate_place AI_PELTASTS3 52.595, 242.934 -26
+	unit_immediate_place AI_PELTASTS1 90.938, 262.537 -30
+	unit_immediate_place AI_ILLYRIANS1 119.670, 290.162 -49
+	unit_immediate_place AI_PELTASTS2 13.179, 223.868 -26
+
+	unit_order_change_formation AI_PIKEMEN1 phalanx
+	unit_order_change_formation AI_PIKEMEN2 phalanx
+	unit_order_change_formation AI_PIKEMEN3 phalanx
+	unit_order_change_formation AI_PIKEMEN4 phalanx
+	unit_order_change_formation AI_PIKEMEN5 phalanx
+	unit_order_change_formation AI_PIKEMEN6 phalanx
+	set_counter have_macedonians_formed_up 1
+
+	battle_wait 1
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to 132.328, 524.586, 308.484 124.283, 522.563, 303.321 2
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_taunt AI_PELTASTS1
+	unit_taunt AI_PELTASTS2
+	unit_taunt AI_PIKEMEN1
+	unit_taunt AI_PIKEMEN2
+	unit_taunt AI_PIKEMEN3
+	unit_taunt AI_PIKEMEN4
+	unit_taunt AI_PIKEMEN5
+	unit_taunt AI_PIKEMEN6
+	unit_taunt AI_GENERAL
+	unit_taunt AI_CAVALRY2
+	unit_taunt AI_PELTASTS3
+	unit_taunt AI_ILLYRIANS1
+	play_sound_event CYNOSCEPHALAE_SPEECH_07 tag = CYNOSCEPHALAE_SPEECH_07
+
+	battle_wait 7
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Shot of pikemen taunting
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_08 tag = CYNOSCEPHALAE_SPEECH_08
+	camera_position -4.30663, 510.826, 240.276 5.55054, 511.089, 239.023
+
+	unit_immediate_place AI_CAVALRY1 -350, 325 25
+	unit_immediate_place AI_PIKEMEN8 -330, 302 23
+	unit_immediate_place AI_PIKEMEN7 -332, 256 23
+	unit_immediate_place AI_THRACIANS1 -386, 278 21
+
+	battle_wait 3.5
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Panning away from main engagement
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	camera_zoom_to -46.154, 530.239, 493.383 51.362, 400.303, 193.781 120
+
+	unit_order_move_relative AI_CAVALRY1 0 100
+	unit_order_move_relative AI_PIKEMEN7 0 100
+	unit_order_move_relative AI_PIKEMEN8 0 100
+	unit_order_move_relative AI_THRACIANS1 0 100
+
+	battle_wait 4
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to -60.8804, 530.7, 488.994 -69.1006, 528.085, 483.699 50
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	camera_zoom_to -266.764, 543.616, 366.74 -393.615, 454.12, 190.672 150
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_09 tag = CYNOSCEPHALAE_SPEECH_09
+
+	battle_wait 7
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;	Camera zooms down to Roman right
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	camera_zoom_to -273.912, 497.317, 433.049 -198.216, 473.114, 421.069 80
+
+	battle_wait 2
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	unit_order_halt AI_CAVALRY1
+	unit_order_halt AI_PIKEMEN7
+	unit_order_halt AI_PIKEMEN8
+	unit_order_halt AI_THRACIANS1
+
+	battle_wait 4
+
+	while I_CompareCounter go_to_end_phase = 1
+	end_while
+
+	play_sound_event CYNOSCEPHALAE_SPEECH_10 tag = CYNOSCEPHALAE_SPEECH_10
+
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;;
+	;;;	Scripted sequence has finished, manually trigger the end phase
+	;;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	set_counter go_to_end_phase 2
+
+	while I_CompareCounter go_to_end_phase = 2
+	end_while

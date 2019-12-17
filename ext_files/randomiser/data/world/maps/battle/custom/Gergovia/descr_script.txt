@@ -1,0 +1,1115 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+
+
+	label_unit 0 0 0	PLAYER_GENERAL
+	label_unit 0 0 1	PLAYER_HAS1
+	label_unit 0 0 2	PLAYER_HAS2
+	label_unit 0 0 3	PLAYER_HAS3
+	label_unit 0 0 4	PLAYER_HAS4
+	label_unit 0 0 5	PLAYER_LEG1
+	label_unit 0 0 6	PLAYER_LEG2
+	label_unit 0 0 7	PLAYER_LEG3
+  	label_unit 0 0 8	PLAYER_TRI1
+	label_unit 0 0 9	PLAYER_TRI2
+	label_unit 0 0 10	PLAYER_TRI3
+	label_unit 0 0 11	PLAYER_CAV1
+	label_unit 0 0 12	PLAYER_CAV2
+	label_unit 0 0 13	PLAYER_ARC1
+	label_unit 0 0 14	PLAYER_LEG4
+	label_unit 0 0 15	PLAYER_ARC2
+	label_unit 0 0 16	PLAYER_RAM
+
+	label_unit 1 0 0	GAUL_GENERAL
+	label_unit 1 0 1	GAUL_INF1
+	label_unit 1 0 2	GAUL_INF6
+	label_unit 1 0 3	GAUL_INF3
+	label_unit 1 0 4	GAUL_INF7
+	label_unit 1 0 5	GAUL_INF8
+  	label_unit 1 0 6	GAUL_DOGS
+	label_unit 1 0 7	GAUL_CAV2
+   	label_unit 1 0 8	GAUL_CAV1
+	label_unit 1 0 9	GAUL_CAV3
+	label_unit 1 0 10	GAUL_CAV4
+	label_unit 1 0 11	GAUL_AMB1
+	label_unit 1 0 12	GAUL_AMB2
+	label_unit 1 0 13	GAUL_INF5
+   	label_unit 1 0 14	GAUL_PEL1
+	label_unit 1 0 15	GAUL_PEL2
+	label_unit 1 0 16	GAUL_INF4
+	label_unit 1 0 17	GAUL_INF2
+	label_unit 1 0 18	GAUL_INF9
+	label_unit 1 0 19	GAUL_INF10
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_control
+	declare_counter player_has_escaped
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+;BATTLE SCRIPT
+
+	while ! I_BattleStarted					; WAIT FOR DEPLOYMENT
+	end_while
+
+	ai_active_set off
+
+	camera_default_mode_set tw
+
+	battle_default_camera
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+
+			set_counter battle_start 1
+		terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+; *********************************************************************************************
+; ********************* BEGINNING INTRO SEQUENCE MONITOR **************************************
+; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;	groups
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAS1 PLAYER_HAS2 PLAYER_HAS3 PLAYER_HAS4 PLAYER_LEG1 PLAYER_LEG2 PLAYER_LEG3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_TRI3 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_RAM
+
+			define_unit_group GRP_GAUL_ARMY1 GAUL_INF1 GAUL_INF2 GAUL_INF3 GAUL_INF6 GAUL_INF7 GAUL_PEL1 GAUL_DOGS GAUL_CAV1 GAUL_CAV2
+
+			define_unit_group GRP_GAUL_ARMY2 GAUL_INF4 GAUL_INF5 GAUL_INF8 GAUL_INF9 GAUL_INF10 GAUL_PEL2 GAUL_CAV3 GAUL_CAV4
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   	x value   y value  z value
+
+			set_camera_bookmark 1, -373.395, 406.872, 416.044 -383.354, 408.192, 415.962		;Intro1 - gate
+			set_camera_bookmark 2, -372.524, 411.601, 396.153 -405.475, 416.435, 411.771		;Intro2 - gate upper
+			set_camera_bookmark 3, 198.004, 431.355, 393.617 198.274, 431.056, 394.532		;Caesar - Upper
+			set_camera_bookmark 4, 195.498, 430.378, 395.033 203.638, 430.604, 400.839		;Caesar - Lower
+			set_camera_bookmark 5, 195.701, 431.721, 404.785 199.253, 429.741, 395.789		;army1 - Caesar to Army
+			set_camera_bookmark 6, 188.036, 420.447, 319.472 193.076, 416.922, 312.03		;march1
+			set_camera_bookmark 7, 148.901, 407.702, 259.933 157.034, 408.853, 265.731		;march2
+			set_camera_bookmark 8, 134.443, 403.879, 302.751 139.11, 402.002, 293.992		;marchram1
+			set_camera_bookmark 9, 106.063, 399.244, 309.821 113.294, 397.275, 303.03		;marchram2
+ 			set_camera_bookmark 10, -292.929, 406.501, 475.05 -298.23, 404.85, 466.597		;Vercingetorix
+			set_camera_bookmark 11,	-294.852, 406.296, 475.879 -294.261, 406.314, 475.073		;Vercingetorix to Romans
+			set_camera_bookmark 12, -297.081, 402.823, 358.676 -307.072, 403.893, 358.787		;Gaul taunt 1
+			set_camera_bookmark 13, -301.525, 407.13, 302.896 -306.317, 404.095, 311.467		;Gaul Army
+			set_camera_bookmark 14, 123.152, 402.972, 280.571 115.281, 399.61, 286.053		;Romans from rear for Leg4
+			set_camera_bookmark 15, 155.95, 457.979, 217.852 148.079, 454.617, 223.334		;Leg4 sweep1
+ 			set_camera_bookmark 16, 142.96, 406.456, 253.81 142.701, 406.255, 254.754		;Caesar army pan2
+			set_camera_bookmark 17, -297.24, 406.901, 345.362 -305.801, 404.204, 345.478		;Gaul taunt 2
+			set_camera_bookmark 18, 2.87858, 442.387, -335.596 -6.11353, 437.938, -333.891		;Leg4 sweep2
+			set_camera_bookmark 19, -60.4918, 381.62, -325.228 -146.757, 359.914, -321		;Leg4 sweep3
+			set_camera_bookmark 20, -289.726, 404.607, 324.87 -299.538, 402.71, 323.349		;Gaul move1
+			set_camera_bookmark 21, -281.477, 405.072, 302.09 -312.223, 372.449, 174.961		;Gaul move2
+
+
+			; *********************************************************************************************
+			;	unit settings
+			; *********************************************************************************************
+
+
+			unit_set_fire_at_will_mode PLAYER_ARC1 off
+			unit_set_fire_at_will_mode PLAYER_ARC2 off
+
+			unit_set_skirmish_mode PLAYER_ARC1 off
+			unit_set_skirmish_mode PLAYER_ARC2 off
+
+			camera_restrictions_set off
+
+			hide_ui
+
+		;Start
+
+			hiding_enabled_set true
+	
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 135
+
+		;Intro
+
+			camera_position_at_bookmark 1
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_00 tag = GERGOVIA_SPEECH_00
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Caesar
+
+			camera_position_at_bookmark 4
+		
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 5
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Roman army marching pan
+
+			camera_zoom_to_bookmark 6 75
+
+			play_sound_event GERGOVIA_SPEECH_01 tag = GERGOVIA_SPEECH_01
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 7 5
+
+			battle_wait 6
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Ram passing camera
+
+			camera_position_at_bookmark 8 
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_02 tag = GERGOVIA_SPEECH_02
+
+			battle_wait 1.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 9 2
+
+			battle_wait 8.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Vercingetorix
+
+			camera_position_at_bookmark 10
+
+			play_sound_event GERGOVIA_SPEECH_04 tag = GERGOVIA_SPEECH_04
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul army pan
+
+			unit_taunt GAUL_INF1
+			unit_taunt GAUL_INF2
+			unit_taunt GAUL_INF3
+			unit_taunt GAUL_INF4
+			unit_taunt GAUL_INF5
+			unit_taunt GAUL_INF6
+			unit_taunt GAUL_INF7
+			unit_taunt GAUL_INF8
+			unit_taunt GAUL_INF9
+			unit_taunt GAUL_INF10
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 12
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_05 tag = GERGOVIA_SPEECH_05
+
+			camera_zoom_to_bookmark 17 1
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_taunt GAUL_INF1
+			unit_taunt GAUL_INF2
+			unit_taunt GAUL_INF3
+			unit_taunt GAUL_INF4
+			unit_taunt GAUL_INF5
+			unit_taunt GAUL_INF6
+			unit_taunt GAUL_INF7
+			unit_taunt GAUL_INF8
+			unit_taunt GAUL_INF9
+			unit_taunt GAUL_INF10
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 13
+
+			unit_taunt GAUL_INF1
+			unit_taunt GAUL_INF2
+			unit_taunt GAUL_INF3
+			unit_taunt GAUL_INF4
+			unit_taunt GAUL_INF5
+			unit_taunt GAUL_INF6
+			unit_taunt GAUL_INF7
+			unit_taunt GAUL_INF8
+			unit_taunt GAUL_INF9
+			unit_taunt GAUL_INF10
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_06 tag = GERGOVIA_SPEECH_06
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_taunt GAUL_INF1
+			unit_taunt GAUL_INF2
+			unit_taunt GAUL_INF3
+			unit_taunt GAUL_INF4
+			unit_taunt GAUL_INF5
+			unit_taunt GAUL_INF6
+			unit_taunt GAUL_INF7
+			unit_taunt GAUL_INF8
+			unit_taunt GAUL_INF9
+			unit_taunt GAUL_INF10
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;Vercingetorix to Romans
+
+			camera_position_at_bookmark 11
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_07 tag = GERGOVIA_SPEECH_07
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Legion moves
+
+			unit_order_move_relative PLAYER_LEG4 0 75
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 14
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 32
+	
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 32
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 32
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 32
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 32
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 18 32
+	
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 18 64
+
+			battle_wait 0.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 18 128
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_08 tag = GERGOVIA_SPEECH_08
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 19 128
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul army moves
+
+			unit_group_order_relative_move_unformed GRP_GAUL_ARMY2 70 5 run
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_position_at_bookmark 20
+
+			play_sound_event GERGOVIA_SPEECH_09 tag = GERGOVIA_SPEECH_09
+
+		;unhide ambush
+
+			hiding_enabled_set false
+
+		;Gaul army moves2
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 21 7
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Vercingetorix teleports to forest
+
+			unit_immediate_place GAUL_GENERAL -326 34 135
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   	x value   y value  z value
+
+			set_camera_bookmark 1, -60.4918, 381.62, -325.228 -146.757, 359.914, -321		;Leg4 approaches ambush
+			set_camera_bookmark 2, -325.502, 412.785, 44.8406 -322.136, 409.445, 36.3276		;Vercingetorix watches ambush
+			set_camera_bookmark 3, -254.98, 390.169, -300.79 -245.286, 388.334, -301.573		;Amb pan up valley
+			set_camera_bookmark 4, -197.944, 377.09, -353.877 -200.556, 377.803, -363.466		;Amb2 SB
+			set_camera_bookmark 5, -186.824, 379.654, -359.283 -193.83, 378.993, -366.326		;Amb3 SB1
+			set_camera_bookmark 6, -155.986, 379.618, -248.449 -156.812, 378.845, -260.032		;Amb4 cav
+			set_camera_bookmark 7, -199.896, 382.641, -364.103 -193.835, 378.879, -356.808		;Amb5 Inf to Leg4
+			set_camera_bookmark 8, -133.3, 373.576, -321.059 -60.25, 344.316, -320.956		;Amb6 front of Leg4
+			set_camera_bookmark 9, -114.999, 375.309, -327.588 -115.784, 374.937, -327.091		;Amb7 back of Leg4
+			set_camera_bookmark 10, -372.279, 413.294, 373.547 -396.964, 407.913, 376.602		;Empty fort
+			set_camera_bookmark 11, -46.2166, 400.734, 298.254 -53.9903, 395.987, 300.244		;Romans approach fort
+			set_camera_bookmark 12, -92.6139, 422.985, 311.019 -101.296, 419.395, 313.242		;Romans approach fort2
+			set_camera_bookmark 13, -276.297, 418.488, 85.6701 -273.694, 414.304, 105.692		;Gauls counter2
+			set_camera_bookmark 14, -144.825, 401.265, 276.896 -149.271, 397.21, 285.267		;Army charge1
+			set_camera_bookmark 15, -156.92, 394.452, 290.147 -218.307, 363.384, 372.71		;Army charge2
+			set_camera_bookmark 16, -290.597, 415.473, 67.0406 -262.194, 410.38, 81.6072		;Gauls counter1
+			set_camera_bookmark 17, -129.99, 400.315, 248.964 -134.436, 396.259, 257.336		;Caesar retreats
+			set_camera_bookmark 18, -91.5013, 411.28, 390.368 -457.339, 301.507, 136.463		;Roman army pan
+			set_camera_bookmark 19, -141.991, 426.305, 236.503 -335.54, 316.532, 637.556		;Roman army pan2
+			set_camera_bookmark 20, -216.03, 392.703, 343.249 -211.54, 389.37, 334.635		;Ram
+			set_camera_bookmark 21, -110.687, 377.687, -330.316 -118.031, 371.929, -325.67		;Ambush collide2
+
+		;Legion ambush
+
+			camera_position_at_bookmark 1
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul inf hiding
+
+			camera_zoom_to_bookmark 4 50
+
+			battle_wait 6.5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 5 2
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul cav hiding
+
+			camera_position_at_bookmark 6
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul inf charge
+
+			unit_order_attack_unit GAUL_AMB1 PLAYER_LEG4 run
+
+			camera_position_at_bookmark 7
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 8 15
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_10 tag = GERGOVIA_SPEECH_10
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_attack_unit GAUL_AMB2 PLAYER_LEG4 run
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 9
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 21 15
+
+			battle_wait 7
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			hiding_enabled_set true
+
+		;Gaul army right flank teleport
+
+			unit_group_immediate_place GRP_GAUL_ARMY2 -225 80 0
+
+			undefine_unit_group GRP_GAUL_ARMY2
+
+			define_unit_group GRP_GAUL_ARMY2 GAUL_INF4 GAUL_INF5 GAUL_INF8 GAUL_INF9 GAUL_INF10 GAUL_PEL2 GAUL_CAV3 GAUL_CAV4
+
+			;Gaul army left flank teleport
+
+			unit_group_immediate_place GRP_GAUL_ARMY1 -190 500 180
+
+			undefine_unit_group GRP_GAUL_ARMY1
+
+			define_unit_group GRP_GAUL_ARMY1 GAUL_INF1 GAUL_INF2 GAUL_INF3 GAUL_INF6 GAUL_INF7 GAUL_PEL1 GAUL_DOGS GAUL_CAV1 GAUL_CAV2
+
+		;Teleport Roman army
+
+			unit_group_immediate_place GRP_PLAYER_ARMY -145 320 -75
+
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			define_unit_group GRP_PLAYER_ARMY PLAYER_HAS1 PLAYER_HAS2 PLAYER_HAS3 PLAYER_HAS4 PLAYER_LEG1 PLAYER_LEG2 PLAYER_LEG3 PLAYER_TRI1 PLAYER_TRI2 PLAYER_TRI3 PLAYER_CAV1 PLAYER_CAV2 PLAYER_ARC1 PLAYER_ARC2 PLAYER_RAM
+
+			unit_immediate_place PLAYER_GENERAL -85 245 -75
+
+		;Caesar forward
+
+			camera_position_at_bookmark 11
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 200
+
+			play_sound_event GERGOVIA_SPEECH_11 tag = GERGOVIA_SPEECH_11
+
+			battle_wait 1
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_move_relative PLAYER_GENERAL 0 125
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 12 15
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Gaul return
+
+			hiding_enabled_set false
+
+			camera_position_at_bookmark 2
+
+			unit_order_move_relative GAUL_GENERAL -50 -10 run
+	
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_12 tag = GERGOVIA_SPEECH_12
+
+			battle_wait 2
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_group_order_relative_move_formed GRP_GAUL_ARMY2 0 100 run
+
+			camera_zoom_to_bookmark 16 15
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 13 15
+
+			battle_wait 6
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Caesar retreats
+
+			camera_position_at_bookmark 17
+
+			play_sound_event GERGOVIA_SPEECH_13 tag = GERGOVIA_SPEECH_13
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			unit_order_move_relative PLAYER_GENERAL 40 -40 run
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 14 10
+
+			battle_wait 5
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+		;Romans charge
+
+			play_sound_event GERGOVIA_SPEECH_14 tag = GERGOVIA_SPEECH_14
+
+			unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 60 run
+
+			battle_wait 4
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 15 15
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_15 tag = GERGOVIA_SPEECH_15
+
+		;Gaul charge
+
+			unit_order_move_relative GAUL_GENERAL -10 130 run
+
+			battle_wait 4 
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_16 tag = GERGOVIA_SPEECH_16
+
+			camera_position_at_bookmark 18
+
+			battle_wait 3
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			camera_zoom_to_bookmark 19 25	
+
+			battle_wait 7
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+
+			play_sound_event GERGOVIA_SPEECH_17 tag = GERGOVIA_SPEECH_17
+
+			camera_position_at_bookmark 20
+
+		;Bring up Caesar
+
+			unit_order_move_relative PLAYER_GENERAL -40 -40 run
+
+			battle_wait 8
+
+			while I_CompareCounter battle_start = 1		; ESC DUMP
+				terminate_monitor
+			end_while					; ESC DUMP
+	
+			unit_immediate_place GAUL_AMB1 -225 80 0
+			unit_immediate_place GAUL_AMB2 -225 80 0
+
+			undefine_unit_group GRP_GAUL_ARMY1
+			undefine_unit_group GRP_GAUL_ARMY2
+			undefine_unit_group GRP_PLAYER_ARMY
+
+		;Kill Leg4
+
+			kill_unit PLAYER_LEG4 100
+
+			set_counter player_control 1 
+
+		terminate_monitor
+	end_monitor
+
+; *********************************************************************************************
+; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+; *********************************************************************************************
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Start of battle - BATTLESTART MONITORS
+; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+			steal_esc_key off
+
+			set_camera_bookmark 1, -373.395, 406.872, 416.044 -383.354, 408.192, 415.962		;Intro1 - gate
+			camera_position_at_bookmark 1
+
+			battle_wait 0.5
+
+			kill_unit PLAYER_LEG4
+
+			;unit_order_halt LEG4
+			;unit_order_halt AMB1
+			;unit_order_halt AMB2
+
+			undefine_unit_group GRP_GAUL_ARMY1
+			undefine_unit_group GRP_GAUL_ARMY2	
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			battle_wait 0.5
+
+			stop_sound_event GERGOVIA_SPEECH_00
+			stop_sound_event GERGOVIA_SPEECH_01
+			stop_sound_event GERGOVIA_SPEECH_02
+			stop_sound_event GERGOVIA_SPEECH_04
+			stop_sound_event GERGOVIA_SPEECH_05
+			stop_sound_event GERGOVIA_SPEECH_06
+			stop_sound_event GERGOVIA_SPEECH_07
+			stop_sound_event GERGOVIA_SPEECH_08
+			stop_sound_event GERGOVIA_SPEECH_09
+			stop_sound_event GERGOVIA_SPEECH_10
+			stop_sound_event GERGOVIA_SPEECH_11
+			stop_sound_event GERGOVIA_SPEECH_12
+			stop_sound_event GERGOVIA_SPEECH_13
+			stop_sound_event GERGOVIA_SPEECH_14
+			stop_sound_event GERGOVIA_SPEECH_15
+			stop_sound_event GERGOVIA_SPEECH_16
+			stop_sound_event GERGOVIA_SPEECH_17
+			stop_sound_event GERGOVIA_SPEECH_18
+
+			hiding_enabled_set false
+
+			battle_wait 1
+
+			play_sound_event GERGOVIA_SPEECH_17
+
+			set_camera_bookmark 1, -372.524, 411.601, 396.153 -405.475, 416.435, 411.771		;Intro2 - gate upper
+
+			battle_wait 0.5
+
+			camera_zoom_to_bookmark 1 5
+
+			unit_immediate_place GAUL_GENERAL -240.138688, 192.208144, 31.404418
+			unit_immediate_place GAUL_INF1 -201.331696, 510.484928, -174.968256
+			unit_immediate_place GAUL_INF6 -200.706352, 517.349248, -174.968256
+			unit_immediate_place GAUL_INF3 -240.50152, 512.672, -174.968256
+			unit_immediate_place GAUL_INF7 -219.921104, 520.874944, -174.968256
+			unit_immediate_place GAUL_INF8 -312.109824, 165.6908, 5.031739
+  			unit_immediate_place GAUL_DOGS -136.148256, 540.31712, -174.968256
+			unit_immediate_place GAUL_CAV2 -158.843216, 527.397472, -174.968256
+   			unit_immediate_place GAUL_CAV1 -160.419472, 510.862688, -174.968256
+			unit_immediate_place GAUL_CAV3 -246.821664, 166.885248, 5.031739
+			unit_immediate_place GAUL_CAV4 -183.252816, 161.674336, 5.031739
+			unit_immediate_place GAUL_AMB1 -225.27696, 79.849144, 0
+			unit_immediate_place GAUL_AMB2 -224.986352, 80.099704, 0
+			unit_immediate_place GAUL_INF5 -270.497536, 168.03528, 5.031739
+   			unit_immediate_place GAUL_PEL1 -219.593088, 500.686112, -174.968256
+			unit_immediate_place GAUL_PEL2 -292.965504, 179.143488, 5.031739
+			unit_immediate_place GAUL_INF4 -289.8824, 170.248416, 5.031739
+			unit_immediate_place GAUL_INF2 -220.80672, 510.896672, -174.968256
+			unit_immediate_place GAUL_INF9 -291.398144, 161.161808, 5.031739
+			unit_immediate_place GAUL_INF10 -271.464288, 158.724128, 5.031739
+
+			unit_immediate_place PLAYER_GENERAL -144.944432, 301.258624, -75.421136
+			unit_immediate_place PLAYER_HAS1 -229.40008, 288.764416, -71.96044
+			unit_immediate_place PLAYER_HAS2 -223.05144, 317.93024, -71.96044
+			unit_immediate_place PLAYER_HAS3 -212.12128, 350.24336, -71.96044
+			unit_immediate_place PLAYER_HAS4 -203.267632, 379.205568, -71.96044
+			unit_immediate_place PLAYER_LEG1 -207.943216, 296.73632, -71.96044
+			unit_immediate_place PLAYER_LEG2 -198.148032, 328.02416, -71.96044
+			unit_immediate_place PLAYER_LEG3 -187.484976, 359.579648, -71.96044
+  			unit_immediate_place PLAYER_TRI1 -186.79872, 305.530016, -71.96044
+			unit_immediate_place PLAYER_TRI2 -174.13208, 336.952096, -71.96044
+			unit_immediate_place PLAYER_TRI3 -161.754848, 366.249056, -71.96044
+			unit_immediate_place PLAYER_CAV1 -239.063216, 254.41632, -71.96044
+			unit_immediate_place PLAYER_CAV2 -196.297728, 397.311424, -71.96044
+			unit_immediate_place PLAYER_ARC1 -252.115776, 301.218464, -71.96044
+			;unit_immediate_place PLAYER_LEG4 -120 -320 -85
+			unit_immediate_place PLAYER_ARC2 -235.954304, 361.684064, -71.96044
+			unit_immediate_place PLAYER_RAM -261.62872, 349.205536, -71.96044
+
+			battle_wait 4.5
+
+			set_counter player_control 1
+
+		terminate_monitor
+	end_monitor
+
+
+			; *********************************************************************************************
+			;	unit settings
+			; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter player_control = 1
+
+			steal_esc_key off
+
+			unit_set_fire_at_will_mode PLAYER_ARC1 on
+			unit_set_fire_at_will_mode PLAYER_ARC2 on
+
+			unit_set_skirmish_mode PLAYER_ARC1 on
+			unit_set_skirmish_mode PLAYER_ARC2 on
+
+			set_camera_bookmark 1, -84.3565, 419.661, 312.17 -539.061, 303.713, 390.189		;Player control
+			camera_position_at_bookmark 1
+
+			play_sound_event GERGOVIA_SPEECH_18
+
+			battle_wait 5
+
+			show_ui
+
+			enable_cursor
+			disable_shortcuts false		
+			enable_entire_ui
+			inhibit_camera_input false
+
+			camera_restrictions_set on
+
+			camera_default_mode_set user_pref
+
+			pause_battle
+
+			suspend_unscripted_advice false
+
+			battle_wait 2
+
+			unit_taunt GAUL_INF1
+			unit_taunt GAUL_INF2
+			unit_taunt GAUL_INF3
+			unit_taunt GAUL_INF4
+			unit_taunt GAUL_INF5
+			unit_taunt GAUL_INF6
+			unit_taunt GAUL_INF7
+			unit_taunt GAUL_INF8
+			unit_taunt GAUL_INF9
+			unit_taunt GAUL_INF10
+
+			battle_wait 5
+
+			unit_order_attack_unit GAUL_INF1 PLAYER_LEG3 run
+			unit_order_attack_unit GAUL_INF6 PLAYER_LEG3 run
+			unit_order_attack_unit GAUL_INF3 PLAYER_HAS4 run
+			unit_order_attack_unit GAUL_INF7 PLAYER_HAS4 run
+			unit_order_attack_unit GAUL_INF8 PLAYER_HAS1 run
+			unit_order_attack_unit GAUL_DOGS PLAYER_GENERAL run
+			unit_order_attack_unit GAUL_CAV2 PLAYER_TRI3 run
+			unit_order_attack_unit GAUL_CAV1 PLAYER_TRI3 run
+			unit_order_attack_unit GAUL_CAV3 PLAYER_TRI1 run
+			unit_order_attack_unit GAUL_CAV4 PLAYER_HAS1 run
+			unit_order_attack_unit GAUL_AMB1 PLAYER_TRI2 run
+			unit_order_attack_unit GAUL_AMB2 PLAYER_ARC1 run
+			unit_order_attack_unit GAUL_INF5 PLAYER_LEG1 run
+			unit_order_attack_unit GAUL_PEL1 PLAYER_RAM run
+			unit_order_attack_unit GAUL_PEL2 PLAYER_RAM run
+			unit_order_attack_unit GAUL_INF4 PLAYER_HAS1 run
+			unit_order_attack_unit GAUL_INF2 PLAYER_LEG3 run
+			unit_order_attack_unit GAUL_INF9 PLAYER_LEG1 run
+			unit_order_attack_unit GAUL_INF10 PLAYER_TRI1 run
+
+			unit_order_move_relative GAUL_GENERAL 0 50 run
+
+			monitor_conditions I_IsUnitEngaged GAUL_GENERAL
+					release_unit GAUL_GENERAL
+				terminate_monitor
+			end_monitor		
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF1
+					release_unit GAUL_INF1
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF6
+					release_unit GAUL_INF6
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF3
+					release_unit GAUL_INF3
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF7
+					release_unit GAUL_INF7
+				terminate_monitor
+			end_monitor	
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF8
+					release_unit GAUL_INF8
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_DOGS
+					release_unit GAUL_DOGS
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_CAV2
+					release_unit GAUL_CAV2
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_CAV1
+					release_unit GAUL_CAV1
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_CAV3
+					release_unit GAUL_CAV3
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_CAV4
+					release_unit GAUL_CAV4
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_AMB1
+					release_unit GAUL_AMB1
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_AMB2
+					release_unit GAUL_AMB2
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF5
+					release_unit GAUL_INF5
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_PEL1
+					release_unit GAUL_PEL1
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_PEL2
+					release_unit GAUL_PEL2
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF4
+					release_unit GAUL_INF4
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF2
+					release_unit GAUL_INF2
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF9
+					release_unit GAUL_INF9
+				terminate_monitor
+			end_monitor
+
+			monitor_conditions I_IsUnitEngaged GAUL_INF10
+					release_unit GAUL_INF10
+				terminate_monitor
+			end_monitor
+
+			battle_wait 45
+
+			ai_active_set on
+
+		terminate_monitor
+	end_monitor
+
+	while I_InBattle
+	end_while
+
+	end_script

@@ -1,0 +1,88 @@
+Loading from file data/world/maps/battle/custom/Historical_Asculum_35/descr_battle.txt
+Created faction romans_julii from file
+	Creating army controlled by Quintus Aemilius at 0x67cbff8 from script
+		Creating unit (Velites) at 0x67648c0
+		Creating unit (Hastati) at 0x67ed530
+		Creating unit (Princeps) at 0x67eada8
+		Creating unit (Roman General) at 0x67eafd0
+		Creating unit (Triarii) at 0x67eb460
+		Creating unit (Heavy Cavalry Ala) at 0x67ede20
+Created faction romans_senate from file
+	Creating army controlled by Amulius Fabricius at 0x67c99d8 from script
+		Creating unit (Velites) at 0x67ee260
+		Creating unit (Hastati) at 0x67eeff8
+		Creating unit (Princeps) at 0x67ef220
+		Creating unit (Triarii) at 0x67ef448
+		Creating unit (Town Watch) at 0x67efd88
+		Creating unit (Hastati) at 0x67effb0
+		Creating unit (Hastati) at 0x67f18a8
+		Creating unit (Princeps) at 0x67f1ad0
+		Creating unit (Princeps) at 0x67f1cf8
+		Creating unit (Triarii) at 0x67f2d00
+		Creating unit (Triarii) at 0x67f2f28
+		Creating unit (Roman General) at 0x67f3150
+		Creating unit (Equites) at 0x67f4c50
+Created faction seleucid from file
+	Creating army controlled by Philip at 0x67c9280 from script
+		Creating unit (Citizen Hoplites) at 0x67f5ee0
+		Creating unit (Peltasts) at 0x67f6108
+		Creating unit (Peltasts) at 0x67f6330
+		Creating unit (Slingers) at 0x67f6558
+		Creating unit (Greek War Elephants) at 0x67f6e98
+		Creating unit (Archers) at 0x67f70c0
+		Creating unit (Citizen Hoplites) at 0x67f72e8
+		Creating unit (Citizen Hoplites) at 0x67f8e00
+		Creating unit (Greek General) at 0x67f9028
+		Creating unit (Greek Cavalry) at 0x67fa258
+		Creating unit (Greek Cavalry) at 0x67fa6e8
+		Creating unit (Archers) at 0x67fb278
+		Creating unit (Citizen Hoplites) at 0x67fb4c8
+		Creating unit (Warband) at 0x67fb718
+Adding unit (Velites) at 0x67648c0 to deployment area at 0x287d5d0
+Adding unit (Hastati) at 0x67ed530 to deployment area at 0x287d5d0
+Adding unit (Princeps) at 0x67eada8 to deployment area at 0x287d5d0
+Adding unit (Roman General) at 0x67eafd0 to deployment area at 0x287d5d0
+Adding unit (Triarii) at 0x67eb460 to deployment area at 0x287d5d0
+Adding unit (Heavy Cavalry Ala) at 0x67ede20 to deployment area at 0x287d5d0
+Adding unit (Velites) at 0x67ee260 to deployment area at 0x287d60c
+Adding unit (Hastati) at 0x67eeff8 to deployment area at 0x287d60c
+Adding unit (Princeps) at 0x67ef220 to deployment area at 0x287d60c
+Adding unit (Triarii) at 0x67ef448 to deployment area at 0x287d60c
+Adding unit (Town Watch) at 0x67efd88 to deployment area at 0x287d60c
+Adding unit (Hastati) at 0x67effb0 to deployment area at 0x287d60c
+Adding unit (Hastati) at 0x67f18a8 to deployment area at 0x287d60c
+Adding unit (Princeps) at 0x67f1ad0 to deployment area at 0x287d60c
+Adding unit (Princeps) at 0x67f1cf8 to deployment area at 0x287d60c
+Adding unit (Triarii) at 0x67f2d00 to deployment area at 0x287d60c
+Adding unit (Triarii) at 0x67f2f28 to deployment area at 0x287d60c
+Adding unit (Roman General) at 0x67f3150 to deployment area at 0x287d648
+Adding unit (Equites) at 0x67f4c50 to deployment area at 0x287d648
+Adding unit (Citizen Hoplites) at 0x67f5ee0 to deployment area at 0x287d684
+Adding unit (Peltasts) at 0x67f6108 to deployment area at 0x287d684
+Adding unit (Peltasts) at 0x67f6330 to deployment area at 0x287d684
+Adding unit (Slingers) at 0x67f6558 to deployment area at 0x287d684
+Adding unit (Greek War Elephants) at 0x67f6e98 to deployment area at 0x287d684
+Adding unit (Archers) at 0x67f70c0 to deployment area at 0x287d684
+Adding unit (Citizen Hoplites) at 0x67f72e8 to deployment area at 0x287d684
+Adding unit (Citizen Hoplites) at 0x67f8e00 to deployment area at 0x287d684
+Adding unit (Greek General) at 0x67f9028 to deployment area at 0x287d684
+Adding unit (Greek Cavalry) at 0x67fa258 to deployment area at 0x287d684
+Adding unit (Greek Cavalry) at 0x67fa6e8 to deployment area at 0x287d684
+Adding unit (Archers) at 0x67fb278 to deployment area at 0x287d684
+Adding unit (Citizen Hoplites) at 0x67fb4c8 to deployment area at 0x287d684
+Adding unit (Warband) at 0x67fb718 to deployment area at 0x287d684
+Load finished **************************
+
+
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67ef448 from (231.870208, -145.004448) to (257.114384, -9.004074)
+	 with rotation -1.570796 and width 16.255 - now residing in deployment area at 0x287d60c
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67f2f28 from (245.76272, -139.064784) to (267.5196, -16.750854)
+	 with rotation -1.570796 and width 20.238 - now residing in deployment area at 0x287d60c
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67f2d00 from (243.721472, -113.424856) to (264.457616, -89.798816)
+	 with rotation -1.570796 and width 19.479 - now residing in deployment area at 0x287d60c
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67f2d00 from (264.200464, -86.415904) to (255.513312, -47.880028)
+	 with rotation -1.570796 and width 19.479 - now residing in deployment area at 0x287d60c
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67ef448 from (256.965264, -9.369554) to (255.711952, -17.072114)
+	 with rotation -1.58163 and width 17.34158 - now residing in deployment area at 0x287d60c
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_senate:Triarii) at 0x67f2f28 from (267.301216, -15.18502) to (256.727536, -79.348776)
+	 with rotation -1.570796 and width 20.238 - now residing in deployment area at 0x287d60c

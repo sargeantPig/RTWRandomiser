@@ -1,0 +1,1158 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+	label_unit 0 0 0	PLAYER_GENERAL
+	label_unit 0 0 1	PLAYER_CAV1
+	label_unit 0 0 2	PLAYER_CAV2
+	label_unit 0 0 3	PLAYER_PHAL1
+	label_unit 0 0 4	PLAYER_PHAL2
+	label_unit 0 0 5	PLAYER_PHAL3
+	label_unit 0 0 6	PLAYER_PHAL4
+	label_unit 0 0 7	PLAYER_PHAL5
+  	label_unit 0 0 8	PLAYER_PHAL6
+	label_unit 0 0 9	PLAYER_PHAL7
+	label_unit 0 0 10	PLAYER_PHAL8
+	label_unit 0 0 11	PLAYER_ELE1
+	label_unit 0 0 12	PLAYER_ELE2
+	label_unit 0 0 13	PLAYER_CAV3
+	label_unit 0 0 14	PLAYER_CAV4
+	label_unit 0 0 15	PLAYER_CAV5
+	label_unit 0 0 16	PLAYER_CAV6
+	label_unit 0 0 17	PLAYER_PEL1
+	label_unit 0 0 18	PLAYER_PEL2
+	label_unit 0 0 19	PLAYER_PEL3
+
+
+	label_unit 1 0 0	EGYPT_GENERAL
+	label_unit 1 0 1	EGYPT_CAV1
+	label_unit 1 0 2	EGYPT_CAV2
+	label_unit 1 0 3	EGYPT_PHAL1
+	label_unit 1 0 4	EGYPT_PHAL2
+	label_unit 1 0 5	EGYPT_PHAL3
+  	label_unit 1 0 6	EGYPT_PHAL4
+	label_unit 1 0 7	EGYPT_INF1
+   	label_unit 1 0 8	EGYPT_INF2
+	label_unit 1 0 9	EGYPT_INF3
+	label_unit 1 0 10	EGYPT_INF4
+	label_unit 1 0 11	EGYPT_CHAR
+	label_unit 1 0 12	EGYPT_CAV3
+	label_unit 1 0 13	EGYPT_CAV4
+   	label_unit 1 0 14	EGYPT_CAM
+	label_unit 1 0 15	EGYPT_ARC1
+	label_unit 1 0 16	EGYPT_ARC2
+	label_unit 1 0 17	EGYPT_ARC3
+	label_unit 1 0 18	EGYPT_ARC4
+	label_unit 1 0 19	EGYPT_CAV5
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_not_escape
+	declare_counter player_has_escaped
+	declare_counter cav_clash
+	
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+;BATTLE SCRIPT
+
+	while ! I_BattleStarted					; WAIT FOR DEPLOYMENT
+	end_while
+
+	ai_active_set off
+
+	camera_restrictions_set off
+
+	camera_default_mode_set tw
+
+	battle_default_camera
+
+	hide_ui
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+
+		set_counter battle_start 1
+	terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+	; *********************************************************************************************
+	; ********************* BEGINNING INTRO SEQUENCE MONITOR **************************************
+	; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   Groups
+
+	define_unit_group GRP_EGYPT_ARMY EGYPT_GENERAL EGYPT_PHAL1 EGYPT_PHAL2 EGYPT_PHAL3 EGYPT_PHAL4 EGYPT_INF1 EGYPT_INF2 EGYPT_INF3 EGYPT_INF4 EGYPT_CHAR EGYPT_CAV3 EGYPT_CAV4 EGYPT_CAM EGYPT_ARC1 EGYPT_ARC2 EGYPT_ARC3 EGYPT_ARC4 EGYPT_CAV5
+
+	define_unit_group GRP_PLAYER_ARMY PLAYER_PHAL1 PLAYER_PHAL2 PLAYER_PHAL3 PLAYER_PHAL4 PLAYER_PHAL5 PLAYER_PHAL6 PLAYER_PHAL7 PLAYER_PHAL8 PLAYER_CAV3 PLAYER_CAV4 PLAYER_CAV5 PLAYER_CAV6 PLAYER_PEL1 PLAYER_PEL2 PLAYER_PEL3
+
+	define_unit_group GRP_PLAYER_GENERAL PLAYER_GENERAL PLAYER_CAV1 PLAYER_CAV2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   x value   y value  z value
+
+	set_camera_bookmark 1, 236.245, 106.968, 224.018 246.177, 108.813, 223.8		;tomb inner
+	set_camera_bookmark 2, 136.76, 106.452, 226.031 178.308, 113.581, 225.122		;tomb outer1
+	set_camera_bookmark 3, 113.322, 102.321, 173.199 122.039, 104.55, 177.745		;tomb outer2
+	set_camera_bookmark 4, -298.103, 74.9109, -326.744 -299.001, 73.6388, -336.673		;Egypt Cav
+	set_camera_bookmark 5, -305.822, 74.2128, -327.695 -304.615, 73.4018, -333.935		;Ptolemy
+	set_camera_bookmark 6, -309.364, 78.2049, -343.255 -309.891, 76.4683, -333.588		;Ptolemy rear
+	set_camera_bookmark 7, -282.77, 80.5814, -337.056 -282.52, 79.4213, -327.239		;Ptolemy rear 2
+	set_camera_bookmark 8, -226.855, 79.4965, -320.998 -236.293, 75.6859, -319.503		;Chariots
+	set_camera_bookmark 9, -286.985, 71.8233, -269.292 -294.057, 67.7719, -275.581		;Egypt bowmen
+	set_camera_bookmark 10, -613.531, 44.869, 316.043 -619.15, 43.6922, 331.76		;Antiochus
+	set_camera_bookmark 11, -632.814, 44.4073, 298.109 -621.872, 43.4543, 306.047		;Antiochus2
+	set_camera_bookmark 12, -221.258, 61.6204, 347.271 -231.148, 61.5054, 348.602		;sel ele pan
+	set_camera_bookmark 13, -222, 64.8702, 341.755 -231.94, 63.2737, 341.617		;sel ele pan2
+	set_camera_bookmark 14, -343.365, 48.0158, 306.046 -346.368, 42.9033, 359.356		;sel army pan
+	set_camera_bookmark 15, -294.241, 51.6885, 308.541 -295.513, 49.5225, 331.127		;sel army pan2
+	set_camera_bookmark 16, -313.812, 48.6216, 330.398 -320.145, 43.968, 282.21		;sel army pan3
+	set_camera_bookmark 17, -228.86, 73.2422, -273.731 -236.339, 72.0595, -280.142		;egypt chariots
+	set_camera_bookmark 18, -286.575, 66.2377, -238.923 -288.936, 65.4211, -248.373		;egypt archers
+	set_camera_bookmark 19, -298.499, 66.156, -239.272 -298.022, 65.3394, -249.002		;egypt archers2
+	set_camera_bookmark 20, -279.106, 51.1961, 292.585 -279.08, 51.3805, 293.568		;phalanx
+	set_camera_bookmark 21, -270.729, 52.1504, 293.536 -278.798, 53.0709, 299.243		;phalanx2
+
+
+; *********************************************************************************************
+;	Start sequence
+
+
+;tomb inner
+
+	camera_position_at_bookmark 1
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_00 tag = RAPHIA_SPEECH_00
+
+	camera_zoom_to_bookmark 2 5
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 6
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 8
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 11
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 15
+
+	play_sound_event RAPHIA_SPEECH_01 tag = RAPHIA_SPEECH_01
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 20
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3 26
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 6
+
+;Ptolemy
+
+	camera_position_at_bookmark 4
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 1
+
+	camera_zoom_to_bookmark 5 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_02 tag = RAPHIA_SPEECH_02
+
+	battle_wait 7
+
+;behind Ptolemy
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 6
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_03 tag = RAPHIA_SPEECH_03
+
+	unit_group_order_relative_move_formed GRP_EGYPT_ARMY 0 50
+
+	camera_zoom_to_bookmark 7 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 5
+
+;Egypt chariots
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 8
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_04 tag = RAPHIA_SPEECH_04
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 2
+
+;Egypt army
+
+	camera_position_at_bookmark 9
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 5
+
+;Seleucid army move
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 75
+
+	unit_order_move_relative PLAYER_ELE1 0 75
+
+	unit_order_move_relative PLAYER_ELE2 0 75
+
+;Antiochus
+
+	camera_position_at_bookmark 10
+
+	battle_wait 2.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 11 3
+
+	play_sound_event RAPHIA_SPEECH_05 tag = RAPHIA_SPEECH_05
+
+	unit_group_order_relative_move_formed GRP_PLAYER_GENERAL 0 30
+
+	battle_wait 7.5
+
+;Seleucid Elephants
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 12
+
+	battle_wait 2.5
+
+	camera_zoom_to_bookmark 13 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_08 tag = RAPHIA_SPEECH_08
+
+	battle_wait 7.5
+
+;seleucid army pan
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 14
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 15 5
+
+	play_sound_event RAPHIA_SPEECH_06 tag = RAPHIA_SPEECH_06
+
+	battle_wait 8
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 16
+
+	play_sound_event RAPHIA_SPEECH_09 tag = RAPHIA_SPEECH_09
+
+	battle_wait 3
+
+;Egyptian chariots
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_taunt EGYPT_CHAR
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 17
+
+	battle_wait 1.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_10 tag = RAPHIA_SPEECH_10
+
+	battle_wait 3
+
+;Egyptian bowmen
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 18
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 19 1
+
+	battle_wait 6	
+
+;Seleucid phalanx
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 20
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL7 phalanx
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 21 2
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_11 tag = RAPHIA_SPEECH_11
+	
+	unit_order_change_formation PLAYER_PHAL1 phalanx
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL2 phalanx
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL3 phalanx
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL4 phalanx
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL5 phalanx
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL6 phalanx
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_change_formation PLAYER_PHAL8 phalanx
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 75
+
+	unit_order_move_relative PLAYER_ELE1 0 75
+
+	unit_order_move_relative PLAYER_ELE2 0 75
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;   x value   y value  z value
+
+	set_camera_bookmark 1, -272.579, 51.7316, 307.335 -277.04, 51.6308, 298.394		;Sel army rear
+	set_camera_bookmark 2, -275.419, 53.8459, 288.646 -280.254, 52.2237, 282.816		;sel army rear2
+	set_camera_bookmark 3, -700.364, 39.7986, 129.328 -709.742, 40.0033, 125.865		;Egypt cav
+	set_camera_bookmark 4, -616.912, 44.8753, 288.278 -626.486, 43.954, 291.122		;Antiochus
+	set_camera_bookmark 5, -662.292, 44.3333, 149.372 -671.411, 40.7778, 152.402		;cav clash
+	set_camera_bookmark 6, -688.545, 41.3912, 159.444 -1106.64, -82.385, 264.836		;egypt cav run away
+	set_camera_bookmark 7, -664.515, 47.8823, 161.261 -671.811, 45.3523, 155.131		;Antiochus gives chase
+	set_camera_bookmark 8, -263.739, 69.6324, -243.216 -429.995, -1.44858, -282.898		;Egypt spots
+	set_camera_bookmark 9, -376.897, 72.0752, -262.554 -746.747, -61.8521, -179.363		;Egypt moves to intercept
+	set_camera_bookmark 10, -691.57, 66.565, -69.3575 -977.591, -5.06438, 76.4421		;Zoom to Antiochus
+;	set_camera_bookmark 11, -767.422, 38.1225, -31.865 -766.522, 39.013, -41.7258		;Antiochus b4 player control
+	set_camera_bookmark 12, -209.882, 74.4504, 237.103 -216.124, 70.6073, 229.954		;Player control
+	set_camera_bookmark 13, -267.943, 57.7831, 245.957 -279.995, 54.739, 244.188		;Antiochus from army
+	set_camera_bookmark 14, -620.076, 61.3859, -190.763 -884.137, -18.8608, 53.4215		;Egypt cav to Antiochus
+	set_camera_bookmark 15, -698.846, 53.9032, -140.061 -706.838, 51.438, -134.426		;Egypt cav2
+
+;Sel army rear
+
+	camera_zoom_to_bookmark 1 1
+
+	battle_wait 3
+
+;Sel army rear2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 2 1
+
+	battle_wait 1
+
+;Egypt cavalry charge
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_move_relative EGYPT_CAV1 0 80 run
+
+	unit_order_move_relative EGYPT_CAV2 0 80 run
+
+	battle_wait 6
+
+;Egypt cav
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 3
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_07 tag = RAPHIA_SPEECH_07
+
+	battle_wait 5
+
+;Antiochus charge
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 4
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_attack_unit PLAYER_CAV1 EGYPT_CAV2 run
+
+	unit_order_attack_unit PLAYER_CAV2 EGYPT_CAV2 run
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_attack_unit PLAYER_GENERAL EGYPT_CAV1 run
+
+;Antiochus from army
+
+	camera_zoom_to_bookmark 13 1
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 2
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 4
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 8
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 16
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 32
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 64
+
+	battle_wait 0.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 13 128
+
+	battle_wait 6.375
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 5
+
+	play_sound_event RAPHIA_SPEECH_12 tag = RAPHIA_SPEECH_12
+
+;egypt charge
+
+	unit_order_attack_unit EGYPT_CAV2 PLAYER_CAV1 run
+
+	unit_order_move_relative EGYPT_CAV1 0 200 run
+
+	set_counter cav_clash 1
+
+	battle_wait 3
+
+;Egypt cav runs
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_move_relative EGYPT_CAV1 50 -350 run
+
+	battle_wait 1
+
+;Antiochus gives chase
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 6 4
+
+	battle_wait 7.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 7
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+;Move Egypt Army
+
+	unit_group_order_relative_move_formed GRP_EGYPT_ARMY 0 30
+
+;Egypt cav breaks off to intercept Antiochus
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 8
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_14 tag = RAPHIA_SPEECH_14
+
+	camera_zoom_to_bookmark 9 11
+
+	unit_order_move_relative EGYPT_CAV3 -75 50 run
+
+	unit_order_move_relative EGYPT_CAV4 -75 50 run
+
+	battle_wait 9
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	play_sound_event RAPHIA_SPEECH_13 tag = RAPHIA_SPEECH_13
+
+;Zoom to Antiochus
+
+	camera_zoom_to_bookmark 10 100
+
+	battle_wait 4
+
+;Teleport Egypt cavalry
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_immediate_place EGYPT_CAV3 -640 -197 315
+
+	unit_immediate_place EGYPT_CAV4 -640 -197 315
+
+	battle_wait 1.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_position_at_bookmark 14
+
+	battle_wait 1.5
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	unit_order_move_relative EGYPT_CAV3 -10 45 run
+
+	unit_order_move_relative EGYPT_CAV4 -10 45 run
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	camera_zoom_to_bookmark 15 10
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+	end_while					; ESC DUMP
+
+	;Halt Armies
+
+		unit_order_halt PLAYER_PHAL1
+		unit_order_halt PLAYER_PHAL2
+		unit_order_halt PLAYER_PHAL3
+		unit_order_halt PLAYER_PHAL4
+		unit_order_halt PLAYER_PHAL5
+		unit_order_halt PLAYER_PHAL6
+		unit_order_halt PLAYER_PHAL7
+  		unit_order_halt PLAYER_PHAL8
+		unit_order_halt PLAYER_ELE1
+		unit_order_halt PLAYER_ELE2
+		unit_order_halt PLAYER_CAV3
+		unit_order_halt PLAYER_CAV4
+		unit_order_halt PLAYER_CAV5
+		unit_order_halt PLAYER_CAV6
+		unit_order_halt PLAYER_PEL1
+		unit_order_halt PLAYER_PEL2
+		unit_order_halt PLAYER_PEL3
+
+		unit_order_halt EGYPT_GENERAL
+		unit_order_halt EGYPT_PHAL1
+		unit_order_halt EGYPT_PHAL2 
+		unit_order_halt EGYPT_PHAL3 
+  		unit_order_halt EGYPT_PHAL4 
+		unit_order_halt EGYPT_INF1 
+   		unit_order_halt EGYPT_INF2 
+		unit_order_halt EGYPT_INF3
+		unit_order_halt EGYPT_INF4
+		unit_order_halt EGYPT_CHAR
+   		unit_order_halt EGYPT_CAM 
+		unit_order_halt EGYPT_ARC1
+		unit_order_halt EGYPT_ARC2
+		unit_order_halt EGYPT_ARC3
+		unit_order_halt EGYPT_ARC4
+		unit_order_halt EGYPT_CAV5
+
+	;Teleport armies
+
+		undefine_unit_group GRP_EGYPT_ARMY
+		undefine_unit_group GRP_PLAYER_ARMY
+		undefine_unit_group GRP_PLAYER_GENERAL
+
+		unit_immediate_place PLAYER_PHAL1  -285.014944, 179.205776, 177.604976
+		unit_immediate_place PLAYER_PHAL2 -294.957152, 179.942048, 177.604976
+		unit_immediate_place PLAYER_PHAL3 -304.909408, 180.819632, 177.604976
+		unit_immediate_place PLAYER_PHAL4 -314.899712, 180.816016, 177.604976
+		unit_immediate_place PLAYER_PHAL5 -324.876704, 180.448528, 177.604976
+		unit_immediate_place PLAYER_PHAL6 -334.877952, 180.157488, 177.604976
+		unit_immediate_place PLAYER_PHAL7 -274.971424, 181.005632, 177.604976
+  		unit_immediate_place PLAYER_PHAL8 -344.864288, 179.974608, 177.604976
+		unit_immediate_place PLAYER_ELE1 -225.111264, 175.741264, 179.972512
+		unit_immediate_place PLAYER_ELE2 -370.448064, 175.534096, -179.81872
+		unit_immediate_place PLAYER_CAV3 -247.24728, 212.439392, 177.604976
+		unit_immediate_place PLAYER_CAV4 -392.0656, 206.417312, 177.604976
+		unit_immediate_place PLAYER_CAV5 -207.25176, 214.061504, 177.604976
+		unit_immediate_place PLAYER_CAV6 -352.141024, 208.042432, 177.604976
+		unit_immediate_place PLAYER_PEL1 -268.543488, 156.719888, 177.604976
+		unit_immediate_place PLAYER_PEL2 -298.521024, 155.514192, 177.604976
+		unit_immediate_place PLAYER_PEL3 -328.493504, 154.239472, 177.604976
+
+		unit_immediate_place EGYPT_GENERAL -308.872768, -201.387264, 0
+		unit_immediate_place EGYPT_PHAL1 -321.53248, -176.06488, 0
+		unit_immediate_place EGYPT_PHAL2 -311.728448, -176.074608, 0
+		unit_immediate_place EGYPT_PHAL3 -302.0616, -175.847776, 0
+  		unit_immediate_place EGYPT_PHAL4 -292.128128, -176.080528, 0
+		unit_immediate_place EGYPT_INF1 -345.165696, -176.515568, 0
+   		unit_immediate_place EGYPT_INF2 -333.334848, -176.511904, 0
+		unit_immediate_place EGYPT_INF3 -282.507968, -176.56272, 0
+		unit_immediate_place EGYPT_INF4 -270.539968, -176.537216, 0
+		unit_immediate_place EGYPT_CHAR -256.61576, -238.828864, 0
+   		unit_immediate_place EGYPT_CAM -401.91728, -201.65448, 0
+		unit_immediate_place EGYPT_ARC1 -384.255552, -167.06728, 0
+		unit_immediate_place EGYPT_ARC2 -343.233088, -167.062032, 0
+		unit_immediate_place EGYPT_ARC3 -302.253248, -167.08904, 0
+		unit_immediate_place EGYPT_ARC4 -260.643712, -167.02592, 0
+		unit_immediate_place EGYPT_CAV5 -289.19312, -201.52328, 0
+
+		define_unit_group GRP_EGYPT_ARMY EGYPT_GENERAL EGYPT_PHAL1 EGYPT_PHAL2 EGYPT_PHAL3 EGYPT_PHAL4 EGYPT_INF1 EGYPT_INF2 EGYPT_INF3 EGYPT_INF4 EGYPT_CHAR EGYPT_CAV3 EGYPT_CAV4 EGYPT_CAM EGYPT_ARC1 EGYPT_ARC2 EGYPT_ARC3 EGYPT_ARC4 EGYPT_CAV5
+
+		define_unit_group GRP_PLAYER_ARMY PLAYER_PHAL1 PLAYER_PHAL2 PLAYER_PHAL3 PLAYER_PHAL4 PLAYER_PHAL5 PLAYER_PHAL6 PLAYER_PHAL7 PLAYER_PHAL8 PLAYER_CAV3 PLAYER_CAV4 PLAYER_CAV5 PLAYER_CAV6 PLAYER_PEL1 PLAYER_PEL2 PLAYER_PEL3
+
+		set_counter player_has_escaped 1
+
+	;Zoom to Seleucid army
+
+		while I_CompareCounter battle_start = 1		; ESC DUMP
+			terminate_monitor
+		end_while					; ESC DUMP
+
+		undefine_unit_group GRP_EGYPT_ARMY
+		undefine_unit_group GRP_PLAYER_ARMY
+
+	;Kill units
+
+		kill_unit PLAYER_CAV1
+		kill_unit PLAYER_CAV2
+		kill_unit EGYPT_CAV2
+ 
+	;End
+
+		play_sound_event RAPHIA_SPEECH_15 tag = RAPHIA_SPEECH_15
+	
+		camera_zoom_to_bookmark 12
+
+		battle_wait 9
+	
+		set_counter battle_start 1	  
+
+	terminate_monitor
+	end_monitor
+
+; *********************************************************************************************
+; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+; *********************************************************************************************
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Esc Dump
+; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter player_has_escaped = 0
+		and I_CompareCounter battle_start = 1
+
+			steal_esc_key off
+
+			set_camera_bookmark 1, 113.322, 102.321, 173.199 122.039, 104.55, 177.745 ;tomb outer2
+			camera_position_at_bookmark 1
+
+			stop_sound_event RAPHIA_SPEECH_00
+			stop_sound_event RAPHIA_SPEECH_01
+			stop_sound_event RAPHIA_SPEECH_02
+			stop_sound_event RAPHIA_SPEECH_03
+			stop_sound_event RAPHIA_SPEECH_04
+			stop_sound_event RAPHIA_SPEECH_05
+			stop_sound_event RAPHIA_SPEECH_06
+			stop_sound_event RAPHIA_SPEECH_07
+			stop_sound_event RAPHIA_SPEECH_08
+			stop_sound_event RAPHIA_SPEECH_09
+			stop_sound_event RAPHIA_SPEECH_10
+			stop_sound_event RAPHIA_SPEECH_11
+			stop_sound_event RAPHIA_SPEECH_12
+			stop_sound_event RAPHIA_SPEECH_13
+			stop_sound_event RAPHIA_SPEECH_14
+			stop_sound_event RAPHIA_SPEECH_15
+
+			undefine_unit_group GRP_PLAYER_GENERAL
+
+			unit_order_halt PLAYER_CAV1
+			unit_order_halt PLAYER_CAV2
+			unit_order_halt EGYPT_CAV2
+			unit_order_halt PLAYER_GENERAL
+
+		if I_CompareCounter cav_clash = 1
+
+			kill_unit PLAYER_CAV1
+			kill_unit EGYPT_CAV2
+			kill_unit PLAYER_CAV2
+
+		end_if
+			
+			unit_immediate_place PLAYER_GENERAL -776.58016, -34.652084, 189.580078
+			unit_order_move_relative PLAYER_GENERAL -25 25 run
+
+		if I_CompareCounter cav_clash = 0
+
+			unit_immediate_place PLAYER_CAV1 -690, 150, 0
+
+			unit_order_move_relative PLAYER_CAV1 0 20 run
+
+			unit_immediate_place PLAYER_CAV2 -690, 150, 0
+
+			unit_order_move_relative PLAYER_CAV2 -15 -25 run
+
+			unit_immediate_place EGYPT_CAV2 -690, 150, 0
+
+			unit_order_move_relative EGYPT_CAV2 65 45 run
+
+			battle_wait 1
+
+			unit_set_formation_spacing PLAYER_CAV1 loose
+	
+			unit_set_formation_spacing PLAYER_CAV2 loose
+	
+			unit_set_formation_spacing EGYPT_CAV2 loose
+
+			battle_wait 1
+
+			play_sound_event RAPHIA_SPEECH_15
+
+			kill_unit PLAYER_CAV1
+			kill_unit EGYPT_CAV2
+			kill_unit PLAYER_CAV2
+
+		end_if
+
+			play_sound_event RAPHIA_SPEECH_15
+
+			battle_wait 1
+
+			undefine_unit_group GRP_EGYPT_ARMY
+			undefine_unit_group GRP_PLAYER_ARMY
+
+			battle_wait 1
+
+			unit_order_halt PLAYER_PHAL1
+			unit_order_halt PLAYER_PHAL2 
+			unit_order_halt PLAYER_PHAL3 
+			unit_order_halt PLAYER_PHAL4
+			unit_order_halt PLAYER_PHAL5
+			unit_order_halt PLAYER_PHAL6 
+			unit_order_halt PLAYER_PHAL7
+  			unit_order_halt PLAYER_PHAL8
+			unit_order_halt PLAYER_ELE1
+			unit_order_halt PLAYER_ELE2
+			unit_order_halt PLAYER_CAV3
+			unit_order_halt PLAYER_CAV4
+			unit_order_halt PLAYER_CAV5 
+			unit_order_halt PLAYER_CAV6
+			unit_order_halt PLAYER_PEL1
+			unit_order_halt PLAYER_PEL2
+			unit_order_halt PLAYER_PEL3
+
+			unit_order_halt EGYPT_GENERAL
+			unit_order_halt EGYPT_CAV1 
+			unit_order_halt EGYPT_PHAL1
+			unit_order_halt EGYPT_PHAL2
+			unit_order_halt EGYPT_PHAL3
+  			unit_order_halt EGYPT_PHAL4
+			unit_order_halt EGYPT_INF1
+   			unit_order_halt EGYPT_INF2
+			unit_order_halt EGYPT_INF3
+			unit_order_halt EGYPT_INF4
+			unit_order_halt EGYPT_CHAR
+			unit_order_halt EGYPT_CAV3
+			unit_order_halt EGYPT_CAV4
+ 		  	unit_order_halt EGYPT_CAM
+			unit_order_halt EGYPT_ARC1
+			unit_order_halt EGYPT_ARC2
+			unit_order_halt EGYPT_ARC3
+			unit_order_halt EGYPT_ARC4
+			unit_order_halt EGYPT_CAV5
+
+			battle_wait 1
+
+			unit_immediate_place PLAYER_PHAL1  -285.014944, 179.205776, 177.604976
+			unit_immediate_place PLAYER_PHAL2 -294.957152, 179.942048, 177.604976
+			unit_immediate_place PLAYER_PHAL3 -304.909408, 180.819632, 177.604976
+			unit_immediate_place PLAYER_PHAL4 -314.899712, 180.816016, 177.604976
+			unit_immediate_place PLAYER_PHAL5 -324.876704, 180.448528, 177.604976
+			unit_immediate_place PLAYER_PHAL6 -334.877952, 180.157488, 177.604976
+			unit_immediate_place PLAYER_PHAL7 -274.971424, 181.005632, 177.604976
+  			unit_immediate_place PLAYER_PHAL8 -344.864288, 179.974608, 177.604976
+			unit_immediate_place PLAYER_ELE1 -225.111264, 175.741264, 179.972512
+			unit_immediate_place PLAYER_ELE2 -370.448064, 175.534096, -179.81872
+			unit_immediate_place PLAYER_CAV3 -247.24728, 212.439392, 177.604976
+			unit_immediate_place PLAYER_CAV4 -392.0656, 206.417312, 177.604976
+			unit_immediate_place PLAYER_CAV5 -207.25176, 214.061504, 177.604976
+			unit_immediate_place PLAYER_CAV6 -352.141024, 208.042432, 177.604976
+			unit_immediate_place PLAYER_PEL1 -268.543488, 156.719888, 177.604976
+			unit_immediate_place PLAYER_PEL2 -298.521024, 155.514192, 177.604976
+			unit_immediate_place PLAYER_PEL3 -328.493504, 154.239472, 177.604976
+
+			unit_immediate_place EGYPT_GENERAL -308.872768, -201.387264, 0
+			unit_immediate_place EGYPT_CAV1 -850.129472, -168.471888, 19.006348
+			unit_immediate_place EGYPT_PHAL1 -321.53248, -176.06488, 0
+			unit_immediate_place EGYPT_PHAL2 -311.728448, -176.074608, 0
+			unit_immediate_place EGYPT_PHAL3 -302.0616, -175.847776, 0
+  			unit_immediate_place EGYPT_PHAL4 -292.128128, -176.080528, 0
+			unit_immediate_place EGYPT_INF1 -345.165696, -176.515568, 0
+   			unit_immediate_place EGYPT_INF2 -333.334848, -176.511904, 0
+			unit_immediate_place EGYPT_INF3 -282.507968, -176.56272, 0
+			unit_immediate_place EGYPT_INF4 -270.539968, -176.537216, 0
+			unit_immediate_place EGYPT_CHAR -256.61576, -238.828864, 0
+			unit_immediate_place EGYPT_CAV3 -677.202624, -170.23368, 315
+			unit_immediate_place EGYPT_CAV4 -678.902144, -165.482704, 315
+ 		  	unit_immediate_place EGYPT_CAM -401.91728, -201.65448, 0
+			unit_immediate_place EGYPT_ARC1 -384.255552, -167.06728, 0
+			unit_immediate_place EGYPT_ARC2 -343.233088, -167.062032, 0
+			unit_immediate_place EGYPT_ARC3 -302.253248, -167.08904, 0
+			unit_immediate_place EGYPT_ARC4 -260.643712, -167.02592, 0
+			unit_immediate_place EGYPT_CAV5 -289.19312, -201.52328, 0
+
+			battle_wait 1
+
+			set_counter player_has_escaped 1			
+			
+		terminate_monitor
+	end_monitor
+
+
+; *********************************************************************************************
+; *********************************************************************************************
+;	Start of battle - BATTLESTART MONITORS
+; *********************************************************************************************
+
+	monitor_conditions I_CompareCounter battle_start = 1
+		and I_CompareCounter player_has_escaped = 1
+
+		steal_esc_key off
+
+		;Halt Antiochus
+
+		unit_order_halt PLAYER_GENERAL
+
+		set_camera_bookmark 1, -209.882, 74.4504, 237.103 -216.124, 70.6073, 229.954		;Player control
+		camera_position_at_bookmark 1
+
+		camera_default_mode_set user_pref
+
+		camera_restrictions_set on
+
+		show_ui
+
+		enable_cursor						;prevent the player clicking
+		disable_shortcuts false		
+		enable_entire_ui
+		inhibit_camera_input false
+
+		pause_battle
+
+		suspend_unscripted_advice false
+
+		;Order Egypt Cav to attack Antiochus
+
+		unit_order_attack_unit EGYPT_CAV1 PLAYER_GENERAL run
+		unit_order_attack_unit EGYPT_CAV3 PLAYER_GENERAL run
+		unit_order_attack_unit EGYPT_CAV4 PLAYER_GENERAL run
+
+		battle_wait 20
+
+		ai_active_set on
+
+		terminate_monitor
+	end_monitor
+
+
+
+
+	; *********************************************************************************************
+	; ********************* END OF BATTLE START MONITOR *******************************************
+	; *********************************************************************************************
+
+
+	while I_InBattle
+	end_while
+
+	end_script

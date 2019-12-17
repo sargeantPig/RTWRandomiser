@@ -1,0 +1,5136 @@
+;Bookmarks (search for these in the text):
+
+;Start_of_first_turn
+;Start_of_first_battle
+;End_of_first_battle
+
+;Tarquinii_captured
+;End of turn: Tarquinii captured
+;NB: MONITORING what the player builds once he has Tarquinii
+
+;Bovianum_captured
+;Start_of_second_battle
+;End_of_second_battle
+;Tarentum_captured
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; script starts here ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; script ;apparently not required anymore. Speak to GUY if it causes problems
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Start OF TURN 1 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Declaring Counters at 0	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; we use these to tick off what has been done and what still needs to be done
+
+;;;;*************************************************************************************************
+;;;;	player attacks Rome
+;;;;*************************************************************************************************
+
+	declare_counter PlayerAttacksRome
+
+;;;;*************************************************************************************************
+;;;;	player does something wrong
+;;;;*************************************************************************************************
+
+	declare_counter ResetMove
+
+;;;;*************************************************************************************************
+;;;;	Tutorial progress
+;;;;*************************************************************************************************
+	declare_prologue				;;;; ensures only prologue related stuff happens
+
+	suspend_during_battle on
+
+	declare_counter TutorialStepForward
+
+	declare_counter	CameraControlExplained
+
+	declare_counter FirstSenateMission
+
+	declare_counter Construction_and_Recruitment_Tutorial
+
+	declare_counter Completed_Camera_Moves
+
+	declare_counter LOSING_MONEY
+
+	declare_counter TARQUINII_UNDER_SEIGE
+
+	declare_counter BATTLE_FOR_TARQUINII
+
+	declare_counter SEIGE_ADVICE
+
+	declare_counter WAIT_FOR_STUFF_TO_COMPLETE
+
+	declare_counter HUD_lesson
+
+	declare_counter READY_TO_CONTINUE
+
+	declare_counter BOVIANUM_SENATE_MISSION
+
+	declare_counter UNIT_BUILT
+
+	declare_counter ROADS_BUILT 
+
+	declare_counter Town_Watch_Built
+
+	declare_counter Town_Watch_2_Built
+
+	declare_counter Town_Watch_3_Built
+
+	declare_counter Town_Watch_4_Built
+
+	declare_counter Circle_advisor_ok_button_switch
+
+	declare_counter CONSTRUCTED_TEMPLES_AND_SHRINES
+
+;;;;*************************************************************************************************
+;;;;	button use
+;;;;*************************************************************************************************
+
+	declare_counter UIButtonUsed
+			
+	declare_counter PressEndTurn
+
+	declare_counter OptionButtonUsed
+
+	declare_counter OPTIONS_BUTTON
+
+	declare_counter ConstructionButtonUsed
+
+	declare_counter Construction_Button_Pressed
+
+	declare_counter RecruitmentButtonUsed
+
+	declare_counter SenateButtonUsed
+
+	declare_counter FactionButtonUsed
+
+	declare_counter SelectedItemButtonUsed
+
+	declare_counter StratPreviousUsed
+
+	declare_counter StratNextUsed
+
+	declare_counter DiplomacyOverviewButtonUsed
+
+	declare_counter A_PANEL_IS_OPEN_WAIT
+
+;;;;*************************************************************************************************
+;;;;	character selection and movement
+;;;;*************************************************************************************************
+
+	declare_counter GaiusJuliusSelected
+
+	declare_counter AgentSelected
+
+	declare_counter DiplomatSelected
+
+	declare_counter DiplomatCreated
+
+	declare_counter DIPLOMAT_RECRUITED
+
+	declare_counter PlayerSelectedArmyUnprompted
+
+	declare_counter MOVE_YOUR_ARMY 
+
+;;;;*************************************************************************************************
+;;;;	Settlements Captured
+;;;;*************************************************************************************************
+
+	declare_counter citiescaptured
+
+	declare_counter TarquiniiCaptured
+
+	declare_counter TarquiniiNotCaptured
+
+	declare_counter BovianumCaptured
+
+	declare_counter TarentumCaptured
+		
+	declare_counter RavennaCaptured
+
+	declare_counter AriminumCaptured
+
+	declare_counter SalonaCaptured
+
+	declare_counter DyrrhachiumCaptured
+
+	declare_counter ApolloniaCaptured
+
+	declare_counter AnconaCaptured
+
+	declare_counter CrotonCaptured
+
+	declare_counter MessanaCaptured
+
+;;;;*************************************************************************************************
+;;;;	Battles fought
+;;;;*************************************************************************************************
+
+	declare_counter Trigger_Battle_2
+
+;;;;*************************************************************************************************
+;;;;	FIRST BATTLE COUNTERS
+;;;;*************************************************************************************************
+
+	declare_counter SELECT_GENERAL_REQUEST
+
+	declare_counter GENERAL_SELECTED 
+
+	declare_counter GENERAL_MOVING_WALK
+
+	declare_counter GENERAL_MOVING_FAST 
+
+	declare_counter already_learnt_to_move
+
+	declare_counter RIGHT_CLICK
+
+	declare_counter already_learnt_to_double_click
+
+	declare_counter learning_to_double_click
+
+	declare_counter ready_for_attack
+
+	declare_counter cavalry_charge_to_bridge
+
+	declare_counter battle_has_begun
+
+	declare_counter Dont_use_unimportant_monitors
+
+	declare_counter triarii_attack_cavalry
+
+	declare_counter archers_firing_at_cavalry
+
+	declare_counter protecting_archers
+
+	declare_counter cavalry_now_attack_Triarii
+
+	declare_counter SELECT_ALL_LESSON
+
+	declare_counter FIRE_PAUSE_BUTTON
+
+	declare_counter START_PAUSE_BUTTON_LESSON
+
+	declare_counter ATTACK
+
+	declare_counter IN_RANGE
+	
+	declare_counter TRIARII_UNIT_SELECTED
+
+	declare_counter ARCHERS_ATTACKED_ALARM
+
+	declare_counter BARB_ARCHER_READY_TO_ROUT
+
+	declare_counter BARB_CAVALRY_READY_TO_ROUT
+
+	declare_counter BARB_UNITS_BUGGER_OFF
+
+	declare_counter WRONG_WAY_YOU_WALLY
+
+	declare_counter FATIGUE_WARNING
+
+	declare_counter Player_At_The_Crossroads
+
+	declare_counter CROSSING_THE_BRIDGE
+
+	declare_counter Delete_Key_Explained_Switch
+
+	declare_counter go_to_end_phase
+
+	declare_counter TELEPORT_FINISHED
+
+;;;;*************************************************************************************************
+;;;; BATTLE OF ASCULUM COUNTERS
+;;;;*************************************************************************************************
+
+	declare_counter SELEUCID_CAV_9_ROUTING
+
+	declare_counter SELEUCID_CAV_10_ROUTING
+
+;;;;*************************************************************************************************
+;;; DECLARE TIMERS 
+;;;;*************************************************************************************************
+
+	declare_timer Camera_Movement_Timer
+	declare_timer Campaign_Map_Timer
+	declare_timer Tutorial_Step_Timer
+	declare_timer Slowcoach_Player_Timer
+	declare_timer Prompt_Timer
+	declare_timer Clear_Advice_Bubble
+
+;;;;*************************************************************************************************
+;;;	EVENTS WE'RE LOOKING FOR
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;	Checking to see if the player has captured settlements
+;;;;*************************************************************************************************
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Tarquinii
+
+		set_counter TarquiniiCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Bovianum
+
+		set_counter BovianumCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Tarentum
+
+		set_counter TarentumCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Ravenna
+
+		set_counter RavennaCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Ariminum
+
+		set_counter AriminumCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Salona
+
+		set_counter SalonaCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Dyrrhachium
+
+		set_counter DyrrhachiumCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Apollonia
+
+		set_counter ApolloniaCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Ancona
+
+		set_counter AnconaCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Croton
+
+		set_counter CrotonCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event GeneralCaptureSettlement FactionType romans_julii
+		and SettlementName Messana
+
+		set_counter MessanaCaptured 1
+		inc_counter citiescaptured 1
+
+		terminate_monitor
+	end_monitor	
+
+
+
+;;;;*************************************************************************************************
+;;;; 	Detecting a button press on Faction_Button
+;;;;*************************************************************************************************
+
+;	monitor_event ButtonPressed ButtonPressed faction_button 
+
+		;;;;NB Create a thread telling the player to look to the help button for more information
+;		ui_flash_stop
+
+;		terminate_monitor
+;	end_monitor
+
+;;;;*************************************************************************************************
+;;;; ACTUAL TUTORIAL NOW STARTS
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;; Player enters map. 	
+;;; We start the camera where we want. 	
+;;; The camera moves over to Rome. 	
+;;; Advice "Welcome to Rome Total War" etc
+;;;;*************************************************************************************************
+
+;Start_of_first_turn
+
+	disable_cursor														;prevent the player clicking
+	disable_shortcuts true
+	inhibit_camera_input true
+	disable_shortcuts advisor_portrait_button false
+	suspend_unscripted_advice true
+
+	filter_all_ui_commands off													
+
+	restart_timer Camera_Movement_Timer
+
+	while I_TimerElapsed Camera_Movement_Timer < 500					;Do nothing for a bit 
+    end_while															;once the time is up stop the timer
+
+	snap_strat_camera 30, 41											;toe of italy
+	zoom_strat_camera 0.8	
+
+	enable_cursor	;enables the cursor
+
+	disable_entire_ui
+
+	disable_shortcuts options_button false	;to allow the player to escape from the game
+
+	disable_shortcuts advisor_dismiss_button false
+	disable_shortcuts dismiss_advice false
+	disable_shortcuts advisor_portrait_button false
+
+	hide_ui																;hides the UI for movie sequence
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_Welcome_First_Turn_Thread			;Advice: Welcome to Rome Total War! #5000#
+
+	restart_timer Campaign_Map_Timer
+
+	while I_AdvisorVisible												;Indicate advisor
+
+		monitor_conditions I_TimerElapsed Campaign_Map_Timer > 5000
+	
+			ui_flash_start advisor_dismiss_button
+
+			terminate_monitor
+		end_monitor	
+
+	end_while
+
+	ui_flash_stop
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	zoom_strat_camera 0.5												;zoom in a bit
+	move_strat_camera 21, 50											;centre of italy
+
+	inhibit_camera_input false
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread 	Prologue_ROME_ITALY_MUST_BE_UNIFIED_Thread	; The Sons of Mars  #6270#
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	inhibit_camera_input true
+
+	campaign_wait 2
+
+	move_strat_camera 21, 50											;centre of italy
+	zoom_strat_camera 0.1												;zoom in a bit	
+
+	inhibit_camera_input false
+
+	point_at_settlement Rome											;flash rome
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_This_is_Rome_Thread					;The Sons of Mars  #6280# This is rome...Rome, the factions, fog of war was Advice: 
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_Welcome_First_Turn_Thread_5			;The Sons of Mars #6290# This is Gaius Julius etc
+
+	point_at_character Gaius Julius
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	ui_flash_stop 
+
+	while I_AdvisorVisible
+	end_while
+	
+;	console_command toggle_tow
+					
+	advance_advice_thread Prologue_Rome_Under_Attack_Thread				;Rome is under threat! #5010# 
+
+	move Captain Dumnorix, 19, 50
+
+	campaign_wait 1
+
+	move Captain Decius, 19, 49
+
+	campaign_wait 1
+
+	move Gaius Julius, 20, 50
+
+	campaign_wait 10
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice	
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_Prepare_for_Battle 					;Prepare for battle #5240#
+
+	set_music_state custom Prologue_Campaign_Battle_Music
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	while not I_FactionNearTile romans_julii 1, 20 50
+		and not I_FactionNearTile romans_senate 1, 19 49
+		and not I_FactionNearTile gauls 1, 19 50
+	end_while
+
+	enable_entire_ui
+	disable_shortcuts false		
+	inhibit_camera_input false
+	enable_cursor
+
+	suspend_unscripted_advice false
+
+;;;;**********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; THE FIRST BATTLE SETUP
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;**********************************************************************************************
+;;;;**********************************************************************************************
+;;;;	SPAWN THE BATTLE FROM THE CAMPAIGN MAP
+;;;;**********************************************************************************************
+
+;Start_of_first_battle
+	spawn_battle campaign\sons_of_mars\Prologue_Battle_1
+
+;;;; init
+
+	prepare_for_battle
+
+	label_unit 0 0 0 player_general
+	label_unit 0 0 1 player_triarii
+	label_unit 0 0 2 player_archer
+
+	label_unit 1 1 0 barb_archer
+	label_unit 1 1 1 barb_peasants
+	label_unit 1 1 2 barb_general
+
+	label_unit 0 1 0 roman_general
+	label_unit 0 1 1 roman_velite_1
+	label_unit 0 1 2 roman_velite_2
+	label_unit 0 1 3 roman_velite_3
+	label_unit 0 1 4 roman_hastati_1
+	label_unit 0 1 5 roman_hastati_2
+	label_unit 0 1 6 roman_hastati_3
+	label_unit 0 1 7 roman_princeps_1
+	label_unit 0 1 8 roman_princeps_2
+	label_unit 0 1 9 roman_princeps_3
+	label_unit 0 1 10 roman_heavy_cavalry
+	label_unit 0 1 11 roman_medium_cavalry
+
+	label_unit 1 0 0 barb_chieftain
+	label_unit 1 0 1 barb_peltast_1
+	label_unit 1 0 2 barb_peltast_2
+	label_unit 1 0 3 barb_peltast_3
+	label_unit 1 0 4 barb_axe
+	label_unit 1 0 5 barb_dhaxe_1
+	label_unit 1 0 6 barb_dhaxe_2
+	label_unit 1 0 7 barb_dhaxe_3
+	label_unit 1 0 8 barb_infantry
+	label_unit 1 0 9 barb_cavalry
+	label_unit 1 0 10 barb_noble_cavalry
+	label_unit 1 0 11 barb_archer
+
+
+;	Labeling of locations on the Battlemap for crossing lines
+
+;	This first set of labels are the one for the general being moved
+
+				   ;EAst North
+	label_location 520, -385 GeneralPoint_A
+	label_location 531, 839 GeneralPoint_B
+
+;	This set of labels are for any player units getting across to the battle
+
+	label_location 42, -299 BattleTriggerPoint_A
+	label_location 48, 660 BattleTriggerPoint_B
+
+
+;;;;**********************************************************************************************
+;;;;	wait for end deployement
+;;;;**********************************************************************************************
+
+	while ! I_BattleStarted
+	end_while
+
+
+;;;;**********************************************************************************************
+;;;; SETTING CAMERA BOOKMARKS FOR THE BATTLE
+;;;;**********************************************************************************************
+							;;	POSITION				;; TARGET
+
+							;;X;;	 ;;Y		 ;;Z	;;X;;	;;Y		;;Z	
+
+							;;EAST	 ;;UP	  ;;NORTH
+	set_camera_bookmark 1, -50.1599, 250.451, -658.576 -42.3368, 227.816, -583.774		;Start position on the map
+
+	set_camera_bookmark 2, -309.738, 226.929, -260.24 -258.295, 210.295, -315.104		;Captain decius old pos for ref: -309.595, 248.88, -259.801 -303.257, 246.096, -267.208
+
+	set_camera_bookmark 3, -321.935, 233.738, -291.11 -314.388, 229.463, -285.604		;Roman Army Marches
+
+	set_camera_bookmark 4, -219.528, 236.022, 123.647 -219.634, 229.084, 136.925		;Gauls Charge out of woods
+
+	set_camera_bookmark 5, 23.056, 292.987, -298.118 387.723, 202.912, -146.338			;Camera position looking at player units
+
+	set_camera_bookmark 7, -334.964, 248.807, 117.089 -327.684, 244.532, 122.945		;1st hilltop shot Gauls Commander
+
+	set_camera_bookmark 8, -220.325, 234.532, 46.0247 -221.2, 230.257, 36.7236			;CAMERA BEHIND GAUL AXEMEN AS THEY RUN UNDER CAMERA
+
+	set_camera_bookmark 9, -271.035, 234.032, -13.377 -261.699, 229.757, -13.7407		;Skirmishers run past
+
+	set_camera_bookmark 10, -221.643, 233.597, -75.3937 -222.849, 230.45, -86.5936		;Looking at gauls throwing javelins at velites as romans approach
+
+	set_camera_bookmark 11, -228.906, 232.39, -138.92 -230.531, 229.174, -148.055		;PAN CAMERA TO VIEW SENATE VELITES BEING HIT BY JAVELINS AND RETURNING FIRE
+
+	set_camera_bookmark 12, -313.518, 242.241, -120.131 -287.725, 227.709, -121.686		;Exchange of Skirmish fire
+
+	set_camera_bookmark 13, 769.124, 261.77, -40.1881 1017.01, 171.696, 267.332			;GAIUS JULIUS - PLAYER GENERAL
+
+	set_camera_bookmark 14, 797.757, 291.667, -31.8553 788.245, 287.521, -32.1986		;NOT USED
+
+	set_camera_bookmark 15, 819.562, 303.188, -30.9325, 810.803, 299.169, -31.2487		;NOT USED
+
+	set_camera_bookmark 16, 561.899, 249.32, -88.7363 552.989, 244.072, -86.9652		;SNAP CAMERA BACK TO BEHIND TRIARI UNIT
+
+	set_camera_bookmark 17, 575.352, 283.283, -90.8698 66.349, 279.781, -91.4862		;NOT USED
+
+	set_camera_bookmark 18, -328.061, 250.241, 139.37 -321.738, 245.966, 132.492		;2nd hilltop panorama shot
+
+	set_camera_bookmark 19, -43.939, 251.977, -39.7397 -52.447, 248.424, -42.6941		;View of Barbarian Cavalry attack beginning
+
+	;define_unit_group player_units player_general player_triarii player_archer
+
+	define_unit_group senate_armyform roman_general roman_velite_1 roman_velite_2 roman_velite_3 roman_hastati_1 roman_hastati_2 roman_hastati_3 roman_princeps_1 roman_princeps_2 roman_princeps_3 roman_heavy_cavalry roman_medium_cavalry
+
+	define_unit_group barb_armyform barb_chieftain barb_peltast_1 barb_peltast_2 barb_peltast_3 barb_axe barb_dhaxe_1 barb_dhaxe_2 barb_dhaxe_3 barb_infantry barb_cavalry barb_noble_cavalry barb_archer
+
+	unit_set_morale	roman_general firm
+	unit_set_morale	roman_velite_1 firm
+	unit_set_morale	roman_velite_2 firm
+	unit_set_morale	roman_velite_3 firm
+	unit_set_morale	roman_hastati_1 firm
+	unit_set_morale	roman_hastati_2 firm
+	unit_set_morale	roman_hastati_3 firm
+	unit_set_morale	roman_princeps_1 firm
+	unit_set_morale	roman_princeps_2 firm									;MAKE ALL UNITS HAVE PERMANENTLY HIGH MORALE TO FORCE ATTRITION
+	unit_set_morale	roman_princeps_3 firm
+	unit_set_morale	roman_heavy_cavalry firm
+	unit_set_morale	roman_medium_cavalry firm
+
+	unit_set_morale	barb_chieftain impetuous
+
+	unit_set_morale	barb_peltast_1 high
+
+	unit_set_morale	barb_peltast_2 high
+
+	unit_set_morale	barb_peltast_3 high
+
+	unit_set_morale	barb_axe high
+	unit_set_morale	barb_dhaxe_1 high
+	unit_set_morale	barb_dhaxe_2 high
+	unit_set_morale	barb_dhaxe_3 high
+	unit_set_morale	barb_infantry high
+	unit_set_morale	barb_cavalry high
+	unit_set_morale	barb_noble_cavalry high
+	unit_set_morale	barb_archer high
+
+	unit_set_morale	player_archer high
+
+;;;;stops units running back and forth like fools - new additions 6/04/04 @ pm
+
+	unit_set_skirmish_mode roman_velite_1 off
+	unit_set_skirmish_mode roman_velite_2 off 
+	unit_set_skirmish_mode roman_velite_3 off 
+	unit_set_skirmish_mode barb_peltast_1 off
+	unit_set_skirmish_mode barb_peltast_2 off
+	unit_set_skirmish_mode barb_peltast_3 off
+
+	console_command invulnerable_general "Gaius Julius"						;PREVENTS THE PLAYER GETTING HIS GENERAL KILLED
+	console_command invulnerable_general "Captain Decius"					;PREVENTS THE Senate general GETTING KILLED so that we can move him out of the way after the battle
+
+	suspend_unscripted_advice true
+
+;;;;**********************************************************************************************
+;;;;	NB
+;;;;	THE AI IS TURNED OFF. REMEMBER TO TURN ON AGAIN WHEN YOU ARE READY FOR IT 
+;;;;**********************************************************************************************
+
+	ai_active_set off						
+
+;*********************************************************************************************
+;*********************************************************************************************
+;
+;;;;;;;;;;;;; CINEMATIC FIRST BATTLE START ::: THIS IS WHERE THE ACTUAL ACTION STARTS
+;
+;*********************************************************************************************
+;*********************************************************************************************
+
+;*********************************************************************************************
+;	STOPPING THE PLAYER FROM DOING STUFF WHILE WE ARE TELLING THEM SOMETHING
+;*********************************************************************************************
+
+;****TEMPORARILY DISABLED TO ALLOW CAMERA EDITING ETC****
+	filter_all_ui_commands off			;TURNS OFF THE UI COMMANDS 
+
+	filter_unit_selection_commands off	;TURNS OFF THE UNIT SELECTION 
+	filter_unit_commands off			;TURNS OFF THE UNIT COMMANDS 
+	filter_unit_group_commands off		;TURNS OFF THE GROUP COMMANDS 
+
+	set_music_state tension 
+
+	battle_default_camera
+	camera_restrictions_set 	off
+	camera_position 			-45.866, 303.729, -700.577 0 50 700			;CAMERA START POSITION
+	camera_default_mode_set		tw
+
+	hide_ui
+
+;;;;**********************************************************************************************
+;;;; Allow player to esc key jump to main tutorial section of battle
+;;;; CREATE MONITOR FOR OPENING SECTION
+;;;; The whole opening sequence should be placed in monitor scope
+;;;;**********************************************************************************************
+
+	steal_esc_key on									;set esc key to allow player to jump frwds
+
+	monitor_event EscPressed TrueCondition			;monitoring player press esc to jump forwards
+		set_counter go_to_end_phase 1
+		steal_esc_key off
+	end_monitor
+
+	battle_wait 1
+
+	disable_entire_ui								
+	inhibit_camera_input 		true										;Stopping player interaction with the game
+	disable_shortcuts 			true
+
+	disable_shortcuts advisor_dismiss_button false
+	disable_shortcuts dismiss_advice false
+	disable_shortcuts advisor_portrait_button false
+
+;*********************************************************************************************
+
+	monitor_conditions I_CompareCounter go_to_end_phase = 1
+		and I_CompareCounter TELEPORT_FINISHED = 0	
+
+		dismiss_advice
+
+		remove_battle_map_arrow
+
+		camera_position_at_bookmark	13
+
+;		unit_immediate_place	player_general			770.989248, -36.577404, -91.999512	;Julius
+;		unit_immediate_place	player_triarii			538.41664, -94.203736, -89.000248	;Triarii
+;		unit_immediate_place	player_archer			473.522464, -99.041176, -53.997804	;Archers
+			 
+		unit_immediate_place	roman_general			-306.55776, -147.055104, 6.987305	;SPQR
+		unit_immediate_place	roman_velite_1			-288.303104, -142.306272, 4.987793 	
+		unit_immediate_place	roman_velite_2			-248.95112, -146.11192, 4.987793 
+		unit_immediate_place	roman_velite_3			-212.333392, -150.01104, 4.987793 
+		unit_immediate_place	roman_hastati_1			-283.100192, -159.60408, 4.987793 
+		unit_immediate_place	roman_hastati_2			-246.465456, -161.848528, 4.987793 
+		unit_immediate_place	roman_hastati_3			-213.110816, -164.561344, 4.987793 
+		unit_immediate_place	roman_princeps_1		-280.429632, -175.390976, 3.999024 
+		unit_immediate_place	roman_princeps_2		-246.966416, -178.967584, 4.987793 
+		unit_immediate_place	roman_princeps_3		-218.667952, -180.492432, 5.998535 
+		unit_immediate_place	roman_heavy_cavalry		-314.290976, -160.308464, 4.987793
+		unit_immediate_place	roman_medium_cavalry	-172.029568, -168.40064, 1.999512
+			 
+		unit_immediate_place	barb_chieftain			-317.241888, -1.223091, -179.011232	;GAULS
+		unit_immediate_place	barb_peltast_1			-194.982704, -83.608112, -180.0	
+		unit_immediate_place	barb_peltast_2			-223.268704, -82.136, -179.011232
+		unit_immediate_place	barb_peltast_3			-255.126, -79.962648, -177.011712
+		unit_immediate_place	barb_axe				-152.58208, -43.555, -178.000496
+		unit_immediate_place	barb_dhaxe_1			-187.842432, -41.66962, -175.012208
+		unit_immediate_place	barb_dhaxe_2			-221.89256, -42.738768, -177.011712
+		unit_immediate_place	barb_dhaxe_3			-252.741488, -41.777032, -175.012208
+		unit_immediate_place	barb_infantry			-283.414016, -42.637176, -178.000496
+		unit_immediate_place	barb_cavalry			-89.892952, -51.784584, -179.011232
+		unit_immediate_place	barb_noble_cavalry		-309.69664, -51.23386, -177.011712
+		unit_immediate_place	barb_archer				-277.452768, 25.604754, -177.011712	
+		
+		set_counter TELEPORT_FINISHED 1	
+
+		hiding_enabled_set false
+
+	;*********************************************************************************************
+	;;;;;;;;; ZOOM TO PLAYER GENERAL
+	;*********************************************************************************************
+	
+		battle_wait 6
+		
+		unit_order_move barb_peltast_1 -180, -9.284  run					;run peltasts behind barb army
+		unit_order_move barb_peltast_2 -211.600, -7.681 run					;run peltasts behind barb army
+		unit_order_move barb_peltast_3 -249.466, -2.214 run					;run peltasts behind barb army
+	
+		unit_order_move roman_velite_1 -270.701, -234.692					;run velites behind roman army
+		unit_order_move roman_velite_2 -232.506, -226.665					;run velites behind roman army
+		unit_order_move roman_velite_3 -178.896, -223.367					;run velites behind roman army		
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter go_to_end_phase = 0
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+;;;;**********************************************************************************************
+;;;; POINTING NORTH OVERLOOKING WHOLE BATTLE FIELD
+;;;;**********************************************************************************************
+
+		; "As this is your first battle I will show you how easy it is to command..."
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_battlefield_overview_01_Thread	;ADVICE Prepare for battle!  #10020#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		camera_zoom_to_bookmark 1
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+	;;;;**********************************************************************************************
+	;;;; POINTING AT THE PLAYER POSITION east of the river
+	;;;;**********************************************************************************************
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		; "When you enter a battlefield, the camera faces north..."
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_battlefield_overview_02_Thread	;ADVICE  #10030#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+			
+		point_at_unit_pos player_triarii circle 60
+
+		camera_zoom_to_bookmark 5
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+	
+
+	;;;;**********************************************************************************************
+	;;;; POINTING AT THE SPQR POSITION
+	;;;;**********************************************************************************************
+	
+		; "The Senate army joined the battle from west of the river..."
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_battlefield_overview_03_Thread	;ADVICE  #10040#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while	
+
+		point_at_unit_pos roman_general circle 60
+	
+		camera_look_at_unit roman_general
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;; POINTING AT THE GAUL POSITION in the trees
+	;;;;**********************************************************************************************
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+	
+		; "The invading Gaul army also started west of the river..."
+	
+		advance_advice_thread Prologue_battle_1_battlefield_overview_04_Thread	;ADVICE  #10050#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		point_at_unit_pos barb_chieftain circle 60
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		camera_look_at_unit barb_chieftain
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while	
+
+	;;;;**********************************************************************************************
+	;;;;"It looks like the Gauls are beginning the attack..."
+	;;;;**********************************************************************************************
+
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+	
+		; "It looks like the Gauls are beginning the attack..."
+	
+		advance_advice_thread Prologue_battle_1_battlefield_overview_05_Thread	;ADVICE Prepare for battle! #10060#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		remove_battle_map_arrow
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;; ZOOM AND LOOKING AT THE SPQR GENERAL 
+	;;;;**********************************************************************************************
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		camera_zoom_to_bookmark 2												;MOVE CAMERA TO SENATE GENERAL 
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		declare_timer Esc_Key_Pressed_Timer									; NB: Trying to catch the weird camera problems when esc key is pressed
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 6000					;used to be - battle_wait 6
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+	
+		;;;battle_wait 6
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		; "This is the leader of the Senate army, Captain..."
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_senate_overview_01_Thread		;ADVICE  Senate army #10080#
+	
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		unit_group_order_relative_move_formed senate_armyform 0 117				;SENATE ARMY MOVES FORWARD 115m
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 9000					;used to be - battle_wait 10
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;battle_wait 10
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+	;;;;**********************************************************************************************
+	;;;;	MOVE CAMERA TO WATCH SPQR ARMY MARCH BY
+	;;;;**********************************************************************************************
+	
+		camera_zoom_to_bookmark 3							
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		; "A Roman army's strength lies in its disciplined legions..."	
+		advance_advice_thread Prologue_battle_1_senate_overview_02_Thread		;ADVICE  #10090#
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 12000					;used to be - battle_wait 12
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;battle_wait 12
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;;	MOVE CAMERA TO WATCH BARB ARMY RUN IN
+	;;;;**********************************************************************************************
+	
+		camera_zoom_to_bookmark 4												;PAN CAMERA TO GAUL SKIRMISHERS
+	
+		; "A Gaul army's strength lies in its hardiness..."
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_gauls_overview_01_Thread		;ADVICE 10100
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		unit_group_order_relative_move_formed barb_armyform 0 248 run			;GAUL ARMY RUNS FORWARD 246m
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 11000					;used to be - battle_wait 11
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;;battle_wait 11
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;;	SET CAMERA TO VIEW GAUL NOBLE CAVALRY ON HILL
+	;;;;**********************************************************************************************
+	
+		camera_position_at_bookmark 7	
+
+		battle_wait 3
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+								
+		; "The Senate has promised a reward to the man who brings back the head of the Gaul leader..."
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		advance_advice_thread Prologue_battle_1_gauls_overview_02_Thread		;ADVICE 10110
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 4000					;used to be - battle_wait 5
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;battle_wait 5																	;WAIT FOR 5 SECONDS
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;;	PAN CAMERA TO 2ND GAUL NOBLE CAVALRY ON HILL SHOT
+	;;;;**********************************************************************************************
+	
+		camera_zoom_to_bookmark 18							
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 5000					;used to be - battle_wait 5
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;battle_wait 5												;WAIT FOR 4 SECONDS
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+	;;;;**********************************************************************************************
+	;;;;	PAN CAMERA TO FACE SENATE ARMY WHILE GAULS RUN UNDERNEATH
+	;;;;**********************************************************************************************
+	
+		camera_zoom_to_bookmark 8							;PAN CAMERA TO FACE SENATE ARMY WHILE GAULS RUN UNDERNEATH
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		dismiss_advice
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 8000					;used to be - battle_wait 8
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;battle_wait 8												;WAIT FOR 8 SECONDS
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		camera_zoom_to_bookmark 9							;PAN CAMERA LOW AS GAUL SKIRMISHERS RUN PAST
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 9000					;used to be - battle_wait 9
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;battle_wait 9
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+		camera_zoom_to_bookmark 10							;PAN CAMERA ABOVE GAUL ARMY WHILE THEY THROW JAVELINS
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 8200					;used to be - battle_wait 8.2
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		;;;;battle_wait 8.2
+	
+		camera_zoom_to_bookmark 11							;PAN CAMERA TO VIEW SENATE VELITES BEING HIT BY JAVELINS AND RETURNING FIRE
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 8000					;used to be - battle_wait 8
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+	
+		;;;;battle_wait 8
+	
+		camera_zoom_to_bookmark 12							;PAN CAMERA TO VIEW EXCHANGE OF SKIRMISH FIRE
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 2000					;used to be - battle_wait 8
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+		
+		;;;;battle_wait 2
+	
+		dismiss_advice
+	
+		while I_AdvisorVisible
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+	
+	;;;;"It looks like the two armies are going to exchange missile fire for a while..."
+		advance_advice_thread Prologue_battle_1_battlefield_overview_06_Thread	;ADVICE	#10070#
+	
+		restart_timer Esc_Key_Pressed_Timer
+
+		while I_TimerElapsed Esc_Key_Pressed_Timer < 10000					;used to be - battle_wait 10
+			and I_CompareCounter go_to_end_phase = 0
+		end_while
+
+		while I_CompareCounter go_to_end_phase = 1
+		end_while
+
+		;;;;battle_wait 10
+
+		set_counter go_to_end_phase 2
+
+		unit_order_move barb_peltast_1 -180, -9.284  run					;run peltasts behind barb army
+		unit_order_move barb_peltast_2 -211.600, -7.681 run					;run peltasts behind barb army
+		unit_order_move barb_peltast_3 -249.466, -2.214 run					;run peltasts behind barb army
+	
+		unit_order_move roman_velite_1 -270.701, -234.692					;run velites behind roman army
+		unit_order_move roman_velite_2 -232.506, -226.665					;run velites behind roman army
+		unit_order_move roman_velite_3 -178.896, -223.367					;run velites behind roman army
+
+	;*********************************************************************************************
+	;;;;;;;;; ZOOM TO PLAYER GENERAL
+	;*********************************************************************************************
+	
+		camera_zoom_to_bookmark	13							
+	
+		battle_wait 5																; it takes this time to get to the general
+
+		set_counter TELEPORT_FINISHED 1
+	
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter go_to_end_phase = 0
+	end_while
+
+	steal_esc_key off
+
+;*********************************************************************************************
+;*********************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;	PLAYER HANDS ON BATTLE TUTORIAL START	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;*********************************************************************************************
+;*********************************************************************************************
+
+;;;;;;;;; Absolute timer for triggering the main event if the player doesnt do anything about it
+;;;;;;;;; Just in case we need it
+
+	declare_timer FIRST_BATTLE_ABSOLUTE_TIMER
+	restart_timer FIRST_BATTLE_ABSOLUTE_TIMER
+
+	while I_CompareCounter TELEPORT_FINISHED = 0
+	end_while
+;*********************************************************************************************
+;	TALK ABOUT THE GENERAL
+;*********************************************************************************************
+
+;;;;ADVICE Your general #10120# "This is your General..."
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	battle_wait 1
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_battle_1_your_general_01_Thread		;Advice: Your general #10120#
+
+
+;*********************************************************************************************
+;;;;WAIT FOR PLAYER Focus on general
+;*********************************************************************************************	
+	
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+;;;;*************************************************************************************************
+;;;; CAMERA RESTRICTIONS SWITCHED ON
+;;;;*************************************************************************************************
+
+	show_ui						;brings back the UI for player
+
+	camera_default_mode_set		rts		
+	camera_restrictions_set 	on
+
+;*********************************************************************************************
+;;;;	TEACH THE PLAYER TO MOVE THE CAMERA	
+;;;;	Stop inhibition of Camera view
+;;;;	GIVE BACK CONTROL OF THE KEYBOARD and UI TO THE PLAYER 
+;;;;	ADVICE learn how to view the battlefield. The cursor keys move the camera etc
+;*********************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_battle_1_move_cam_01_Thread			;ADVICE Moving the Camera #11150#
+
+;*********************************************************************************************
+;;;;	STOP INHIBITING PLAYER INPUT
+;*********************************************************************************************
+
+	inhibit_camera_input false
+	enable_entire_ui
+	disable_shortcuts false
+
+	;;;;;MORE STUFF WE DO TO STOP PLAYERS BREAKING THE PROLOGUE
+
+
+	disable_shortcuts order_withdraw true
+	disable_ui order_withdraw true
+
+
+;*********************************************************************************************
+; MONITOR PLAYER USE OF CAMERA MOVES & WAIT FOR PLAYER TO REMOVE ADVISOR TO CONTINUE
+;*********************************************************************************************
+
+	while I_AdvisorVisible												
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_l
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera rot_l
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_r
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera rot_r
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_fwd
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_bck
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+
+		monitor_conditions I_CompareCounter Completed_Camera_Moves >= 4
+		
+			while I_AdvisorSpeechPlaying 
+				and I_AdvisorVisible
+			end_while			
+
+			battle_wait 3
+			
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	end_while
+
+	advance_advice_thread Prologue_battle_1_move_cam_02_Thread			;ADVICE: Moving the Camera #11160#
+
+;*******************************************************************************************
+;	TELL THE PLAYER TO SELECT AND MOVE A UNIT
+;	ADVICE "Left click on your General unit..."
+;*******************************************************************************************
+
+	restart_timer Tutorial_Step_Timer
+
+	while I_AdvisorVisible
+		and not I_UnitSelected player_general
+		and I_TimerElapsed Tutorial_Step_Timer < 35000		;;;so that the player can read the extra info on cameras
+	end_while
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_battle_1_left_click_01_Thread		;ADVICE: left click to select#10140#
+
+	set_counter SELECT_GENERAL_REQUEST 1
+
+;*******************************************************************************************
+;Indicates to select the unit
+;*******************************************************************************************
+
+	point_at_unit_card player_general 
+
+	filter_unit_selection_commands on player_general			;TURNS ON THE UNIT SELECTION 
+
+	filter_unit_commands on player_general								;allowing the player to use the general
+
+	declare_counter GENERAL_IS_ON_HIS_WAY
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+;*******************************************************************************************
+;	Monitoring the occurence of movement for the player general
+;	If selected dismiss advice and carry on
+;*******************************************************************************************
+
+	monitor_conditions I_IsUnitMoveFastSet player_general 
+		and I_CompareCounter GENERAL_SELECTED = 0
+
+		set_counter GENERAL_SELECTED 1
+		dismiss_advice
+
+		ui_flash_stop 
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitMoving player_general 
+		and I_CompareCounter GENERAL_SELECTED = 0
+
+		set_counter GENERAL_SELECTED 1
+		dismiss_advice
+
+		ui_flash_stop 
+
+		terminate_monitor
+	end_monitor
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+;*******************************************************************************************
+;	PLAYER HAS SELECTED the general unit 
+;	and is now told to move it
+;*******************************************************************************************
+
+	battle_wait 3
+
+	ui_flash_stop 	
+
+	set_counter Dont_use_unimportant_monitors 2
+
+	;*******************************************************************************************
+	;;;; right click on the battlefield.."
+	;*******************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_battle_1_right_click_01_Thread		;ADVICE Right click to move #10150#
+
+	;*******************************************************************************************
+	;;;; removes the previous arrow before starting next one
+	;*******************************************************************************************
+
+	remove_battle_map_arrow												
+
+	ui_flash_stop
+
+	;*******************************************************************************************
+	;;;; POINTS AT AREA ON BATTLEMAP
+	;*******************************************************************************************
+
+	point_at_location 524.63, 42.69 
+
+	set_counter RIGHT_CLICK 1
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	declare_counter IS_THE_PLAYER_A_GOLDFISH_BRAIN						;declared here to ensure that it only happens after this point
+	set_counter IS_THE_PLAYER_A_GOLDFISH_BRAIN 1						;This is a check for stupid idiot players
+							
+;*******************************************************************************************
+;Reminds the player they do have to select the general if they want to play the game.
+;*******************************************************************************************
+
+;;;fires a message once every 30 seconds for slow players
+
+	restart_timer Prompt_Timer
+
+	while not I_UnitSelected player_general
+		and I_CompareCounter IS_THE_PLAYER_A_GOLDFISH_BRAIN = 1
+
+		if I_TimerElapsed Prompt_Timer = 10000
+			and I_CompareCounter GENERAL_SELECTED = 0
+
+			point_at_unit_card player_general 
+
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_battle_1_left_click_01_Thread	;ADVICE: Double left click #10140# as a reminder
+
+		end_if
+
+		if I_TimerElapsed Prompt_Timer = 25000
+			and I_CompareCounter  GENERAL_SELECTED = 0
+
+			point_at_unit_card player_general 
+
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_battle_1_left_click_01_Thread	;ADVICE: Double left click #10140# as a reminder
+
+		end_if
+
+	end_while
+
+	monitor_conditions I_UnitDistanceFromLine player_general GeneralPoint_A GeneralPoint_B < 30	
+			set_counter GENERAL_IS_ON_HIS_WAY 1
+		terminate_monitor
+	end_monitor
+
+;*******************************************************************************************
+;	WAIT before moving on
+;*******************************************************************************************
+
+	while I_CompareCounter Dont_use_unimportant_monitors = 0			
+	end_while
+
+;*******************************************************************************************
+;;	TEST TO SEE IF PLAYER HAS SINGLE RIGHT-CLICKED 
+;;	Detecting the player changing to walk
+;*******************************************************************************************
+
+	monitor_conditions I_IsUnitMoving player_general
+		and not I_IsUnitMoveFastSet player_general
+		and I_CompareCounter GENERAL_IS_ON_HIS_WAY = 0
+
+		ui_flash_stop
+
+		set_counter GENERAL_MOVING_WALK 1
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_right_click_02_Thread		;ADVICE: Toggle selected unit movement #10151#
+
+		ui_flash_start toggle_run
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		set_counter RIGHT_CLICK 2
+
+	;;;;if the last advisory is still there show which button they need to click
+					
+		restart_timer Prompt_Timer
+
+		while I_AdvisorVisible
+			and I_TimerElapsed Prompt_Timer < 9000
+		end_while
+
+	;;;; stop any existing flashes
+
+		ui_flash_stop
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_move_cam_03_Thread		;Following a unit #11170#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		restart_timer Prompt_Timer
+
+		while I_AdvisorVisible
+			and I_TimerElapsed Prompt_Timer < 3000
+		end_while
+
+		dismiss_advice
+
+		set_counter Delete_Key_Explained_Switch 1
+
+		terminate_monitor
+	end_monitor
+
+
+;*******************************************************************************************
+;;;;	PLAYER HAS STARTED RUN
+;*******************************************************************************************
+
+	monitor_conditions I_IsUnitMoveFastSet player_general 
+		and I_CompareCounter Dont_use_unimportant_monitors = 2
+		and I_CompareCounter GENERAL_IS_ON_HIS_WAY = 0
+
+		set_counter GENERAL_MOVING_FAST 1
+
+		while I_AdvisorSpeechPlaying 
+		end_while
+
+		dismiss_advice
+
+		;while I_AdvisorVisible
+		;end_while	
+
+		;advance_advice_thread Prologue_battle_1_right_click_03_Thread		;ADVICE: Unit Speed Changed#10152#
+
+		;while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		;	and I_AdvisorVisible
+		;end_while
+
+		;while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		;	and I_AdvisorVisible
+		;end_while
+
+		;dismiss_advice
+
+	;******************************************************
+	;;;; stop any existing flashes
+	;******************************************************
+
+		ui_flash_stop
+
+	;;;;inform the player of DEL KEY camera lock on to unit
+
+		if I_UnitDistanceFromPosition player_general 524.63, 42.69 > 65
+			and I_UnitDistanceFromPosition player_general 524.63, 42.69 < 100
+			and I_CompareCounter Delete_Key_Explained_Switch = 0
+
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_battle_1_move_cam_03_Thread		;Following a unit #11170#
+
+			while not I_AdvisorSpeechPlaying
+				and I_AdvisorVisible
+			end_while
+
+			while I_AdvisorSpeechPlaying 
+				and I_AdvisorVisible
+			end_while
+
+			battle_wait 4
+
+			dismiss_advice
+
+			set_counter Delete_Key_Explained_Switch 1
+
+		end_if
+
+		terminate_monitor
+	end_monitor
+
+
+;*******************************************************************************************
+;;;	CHECKS THAT THE PLAYER GENERAL HAS MOVED THE UNIT TO THE POINT WE TOLD THEM
+;*******************************************************************************************
+;*******************************************************************************************
+;	CHECKS THAT THE PLAYER HAS MOVED THE GENERAL UNIT 
+;	EVEN IF IT ISNT WERE WE TOLD THEM TO GO
+;*******************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromLine player_general GeneralPoint_A GeneralPoint_B < 30	
+			set_counter GENERAL_IS_ON_HIS_WAY 1
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter GENERAL_IS_ON_HIS_WAY = 0
+	end_while
+
+;*******************************************************************************************
+;The player might try and break things by rushing their CAVALRY GENERAL ACROSS
+;This monitors that and reacts if so
+;*******************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_general 240.900 -33.183 < 50
+	
+		set_counter Player_At_The_Crossroads 1
+
+		filter_unit_commands on player_archer
+		filter_unit_commands on player_triarii
+		filter_unit_group_commands on 
+		filter_unit_selection_commands on
+
+		terminate_monitor
+	end_monitor	
+
+	disable_shortcuts order_withdraw true
+
+	disable_ui order_withdraw true
+	;*************************************************************************************************
+	;BARBARIAN ARCHERS MOVE TO ATTACK PLAYER'S TRIARII COS IT TAKES ALONG TIME FOR THEM TO GET THERE
+	;*************************************************************************************************
+
+	unit_order_move_to_missile_range barb_archer player_triarii walk
+
+	;*******************************************************************************************
+	;	Removes the on screen detritus to allow a nice view of the screen
+	;*******************************************************************************************
+
+	remove_battle_map_arrow
+
+	;*******************************************************************************************
+	;	TEACH THE PLAYER TO DOUBLE-CLICK A UNIT CARD ICON - the triarii
+	;*******************************************************************************************
+
+	;"Now double click on the unit card icon with the arrow...
+
+	filter_unit_commands on player_triarii 
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	point_at_unit_card player_triarii									;POINT AT TRIARII UNIT CARD
+
+	advance_advice_thread Prologue_battle_1_zoom_to_unit_01_Thread		;ADVICE to Zoom to Triarii Unit #10170#
+
+	set_counter learning_to_double_click 1								;MAKE learning to double-click = 1
+
+	set_counter Dont_use_unimportant_monitors 3
+
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	;*******************************************************************************************
+	;>	 MONITOR TO CHECK WHETHER PLAYER SELECTS THE TRIARI UNIT CARD 
+	;*******************************************************************************************
+	
+	;TRIARI UNIT HAS BEEN SELECTED AFTER THEY HAVE MOVED THE GENERAL
+	
+	monitor_conditions I_IsCameraZoomingToUnit player_triarii	;CAMERA IS ZOOMING TO TRIARII - CHECK IN NEXT BUILD
+		and I_CompareCounter Dont_use_unimportant_monitors = 3
+
+		set_counter Dont_use_unimportant_monitors 4
+
+		set_counter already_learnt_to_double_click 1						;MAKE already_learnt_to_double-click = 1
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_zoom_to_unit_02_Thread		;Selecting units and changing views #10180#
+
+		remove_battle_map_arrow									;removes the previous arrow before starting next one
+															
+		ui_flash_stop
+
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		set_counter TRIARII_UNIT_SELECTED 1
+
+		battle_wait 8
+
+		dismiss_advice
+
+		set_counter already_learnt_to_move 1					;MAKE already_learnt_to_move = 1
+
+		unit_order_move_to_missile_range barb_archer player_triarii run
+
+		set_counter cavalry_charge_to_bridge 1								;increment the counter to 1 to set off the next monitor
+
+		disable_shortcuts order_withdraw true
+
+		disable_ui order_withdraw true
+
+		terminate_monitor
+	end_monitor
+
+	while I_AdvisorSpeechPlaying 
+		and I_AdvisorVisible
+	end_while
+
+	while I_CompareCounter Dont_use_unimportant_monitors < 3
+	end_while
+
+;;;;*************************************************************************************************
+;;;;	FOR WHATEVER REASON THE PLAYER HAS IGNORED OUR INSTRUCTION TO DOUBLE LEFT CLICK
+;;;;	WE remind them about double click
+;;;;*************************************************************************************************
+
+	battle_wait 2
+
+	declare_timer Triarii_Double_Clicked
+
+	monitor_conditions I_UnitSelected player_triarii
+		and I_CompareCounter Dont_use_unimportant_monitors < 4		
+		and not I_IsCameraZoomingToUnit player_triarii
+		and I_CompareCounter learning_to_double_click = 1
+		and I_CompareCounter already_learnt_to_double_click = 0
+		and I_CompareCounter TRIARII_UNIT_SELECTED = 0
+
+		restart_timer Triarii_Double_Clicked
+
+		if I_CompareCounter Dont_use_unimportant_monitors = 4			;prevents duplication of messages or wrong message
+			terminate_monitor
+		end_if
+	
+		monitor_conditions I_TimerElapsed Triarii_Double_Clicked > 3000
+			and I_CompareCounter TRIARII_UNIT_SELECTED = 0			
+			and I_UnitSelected player_triarii
+			and not I_IsCameraZoomingToUnit player_triarii
+			and I_CompareCounter Dont_use_unimportant_monitors >= 2
+			and I_CompareCounter Dont_use_unimportant_monitors < 4	
+			and I_CompareCounter learning_to_double_click = 1
+
+			unit_order_move barb_archer 191.892, -31.295 run
+	
+			dismiss_advice
+	
+			while I_AdvisorVisible
+			end_while
+	
+			advance_advice_thread Prologue_battle_1_sel_unit_01_Thread		;ADVICE Double Left Click #11050#
+
+			while not I_AdvisorSpeechPlaying
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying 
+				and I_AdvisorVisible
+			end_while
+	
+			dismiss_advice
+	
+			set_counter TRIARII_UNIT_SELECTED 1
+
+			terminate_monitor
+		end_monitor
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter TRIARII_UNIT_SELECTED = 0
+		and I_CompareCounter Player_At_The_Crossroads = 0
+	end_while
+
+	unit_order_move_to_missile_range barb_archer player_triarii run
+
+	set_counter cavalry_charge_to_bridge 1								;increment the counter to 1 to set off the next monitor
+
+;*******************************************************************************************
+;	BARBARIAN CAVALRY ATTACK
+;*******************************************************************************************
+;	MOVIE SEQUENCE OF BARBARIAN CAVALRY CHARGING TOWARDS THE BRIDGE
+;*******************************************************************************************
+
+	monitor_conditions I_CompareCounter cavalry_charge_to_bridge = 1
+
+		set_counter cavalry_charge_to_bridge 2
+
+		;***********************************************************************************
+		;ADVICE:The enemy have spotted us! #11370# 
+		;***********************************************************************************
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_generic_03_Thread		;ADVICE #11370#
+		
+		hide_ui
+
+		battle_wait 1
+		
+		;***********************************************************************************
+		;BARBARIAN CAVALRY TO ATTACK PLAYER'S TRIARII ;;;;;AND TELL BARB ARCHERS TO RUN
+		;***********************************************************************************
+
+
+		;***********************************************************************************
+		;RESTRICTIONS ON PLAYER TO STOP THEM SCREWING UP
+		;***********************************************************************************
+
+		camera_restrictions_set 	off
+		inhibit_camera_input 	true
+		disable_entire_ui
+		disable_shortcuts 		true
+		disable_cursor
+
+		;***********************************************************************************	
+		;	MOVIE SEQUENCE 
+		;***********************************************************************************	
+		camera_default_mode_set	tw
+
+		disable_shortcuts order_withdraw true
+		disable_ui order_withdraw true
+
+		camera_position_at_bookmark 19							;SNAP CAMERA TO VIEW CHARGING BARBARIAN CAVALRY
+
+		unit_order_attack_unit barb_cavalry player_triarii run	
+				
+		;unit_order_move_to_missile_range barb_archer player_triarii run
+
+		battle_wait 4  												; 5 seconds
+
+		camera_track_unit barb_cavalry back 20 7				;TRACK THE CHARGING BARBARIAN CAVALRY
+
+		battle_wait 4  												; 5 seconds
+
+		camera_zoom_to_bookmark 16								;SNAP CAMERA BACK TO BEHIND TRIARI UNIT
+
+		;***********************************************************************************
+		;REMOVE RESTRICTIONS ON PLAYER 
+		;***********************************************************************************
+
+		battle_wait 5
+
+        ;;;;ADVICE: "Your lightly armoured archers are vulnerable etc...
+
+		inhibit_camera_input 	false
+		enable_entire_ui
+		disable_shortcuts 		false
+		enable_cursor
+		camera_restrictions_set 	on
+		camera_default_mode_set	rts
+		show_ui
+
+		dismiss_advice	
+
+;REMOVED FOR DEMO
+		disable_shortcuts order_withdraw true
+		disable_ui order_withdraw true
+		
+		while I_AdvisorVisible
+		end_while
+			 
+		advance_advice_thread Prologue_battle_1_generic_10_Thread			;ADVICE: Archers need protection #11440#
+
+		filter_unit_commands on player_archer
+		filter_unit_group_commands on player_archer
+		filter_unit_selection_commands on player_archer
+
+		point_at_location 444.141, -79.423 circle 30						;POINTS AT AREA IN FRONT OF ARCHERS ON BATTLEMAP
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		set_counter protecting_archers 1
+		
+		dismiss_advice			
+
+		terminate_monitor
+	end_monitor
+
+;*************************************************************************************************	
+;;;; CHECK FOR PLAYER UNITS POSITION WHEN ACROSS THE BRIDGE
+;;;; TRIP THE BATTLE START SWITCH = set_counter battle_has_begun 1
+;*************************************************************************************************
+
+;;;;distance from general
+;;;;position: coming up the road
+
+	monitor_conditions I_UnitDistanceFromLine player_general BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor		
+		 
+
+	monitor_conditions I_UnitDistanceFromLine player_triarii BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor	
+	
+	monitor_conditions I_UnitDistanceFromLine player_archer BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor			
+
+;Ensuring that barbarian skirmish units not engaged but out of ammo get in to the fight
+
+	monitor_conditions I_UnitPercentageAmmoLeft barb_peltast_3 = 0
+			unit_order_attack_unit barb_peltast_3 player_general run			
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft barb_peltast_2 = 0
+			unit_order_attack_unit barb_peltast_2 player_general run			
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitPercentageAmmoLeft barb_peltast_1 = 0
+			unit_order_attack_unit barb_peltast_1 player_triarii run		
+		terminate_monitor
+	end_monitor
+
+
+;;;;***********************************************************************************************
+;;;;		THE MAIN BATTLE BETWEEN THE SENATE AND BARBARIANS HAS BEGUN 
+;;;;***********************************************************************************************
+
+	monitor_conditions I_CompareCounter battle_has_begun = 1
+		
+		unit_order_attack_unit barb_axe roman_medium_cavalry run
+		unit_order_attack_unit barb_dhaxe_1 roman_hastati_3 run
+		unit_order_attack_unit barb_dhaxe_2 roman_hastati_2 run
+		unit_order_attack_unit barb_dhaxe_3 roman_hastati_1 run
+		unit_order_attack_unit barb_infantry roman_general run
+
+		battle_wait 10
+
+		unit_order_attack_unit barb_noble_cavalry roman_heavy_cavalry run
+		unit_order_attack_unit roman_heavy_cavalry barb_noble_cavalry run
+		unit_order_attack_unit barb_chieftain roman_general run
+		unit_order_attack_unit roman_medium_cavalry barb_axe run
+
+		set_camera_bookmark 1,  -117.565, 265.168, -5.27447 -176.692, 222.779, -74.4334			;SETS THE NEW CAMERA BOOKMARKS
+		set_camera_bookmark 2, -234.391, 265.557, -27.6101 -242.999, 223.168, -118.191
+		set_camera_bookmark 3, -182.04, 270.632, -61.3155 -213.873, 252.633, -88.4394
+
+		hide_ui
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_engage_barb_army_02_Thread		;ADVICE #10760# Engage the Barbarian Army 
+
+		battle_wait 2
+
+		camera_restrictions_set 	off
+
+		camera_default_mode_set tw
+
+		inhibit_camera_input 	true
+		disable_shortcuts 		true
+
+		disable_entire_ui
+		disable_cursor
+
+;*************************************************************************************************
+;		CUT SCENE AT BEGINNING OF ACTUAL SENATE V GAUL BATTLE
+;*************************************************************************************************
+													
+		camera_zoom_to_bookmark 2
+
+		battle_wait 5
+
+		camera_zoom_to_unit player_general    ;used to be camera_zoom_to_unit but this didnt really work
+
+		battle_wait 5 
+
+		camera_default_mode_set rts
+
+		camera_restrictions_set 	on
+
+		inhibit_camera_input 		false
+		disable_shortcuts 			false
+
+		enable_entire_ui
+		enable_cursor
+
+		dismiss_advice
+
+		show_ui
+
+		set_counter battle_has_begun 2
+
+		terminate_monitor
+	end_monitor
+
+
+
+;*******************************************************************************************
+;	This is to remove the advisor bubble when the player has done the right thing. 
+;	And advance the next advice
+;*******************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_triarii 444.141, -79.423 < 50
+
+		;;ADVICE: "The Triarii unit's spears best weapons against cav
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_fighting_triarii_03_Thread				;Fighting with Triarii #10520#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		filter_unit_commands on player_archer
+		filter_unit_selection_commands on
+		filter_unit_group_commands on
+
+		battle_wait 5
+
+		terminate_monitor
+	end_monitor
+
+
+;-----------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------
+
+
+
+;****************************************************************************************
+;	CHECK PLAYER HAS MOVED TRIARII TO CORRECT LOCATION IF SO ATTACK THEM WITH CAVALRY
+;****************************************************************************************
+;****************************************************************************************
+;	Player Triarii in position
+;****************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_triarii 444.141, -79.423 < 30	; Player has paid attention and not missed a chunk	
+
+		set_counter IN_RANGE 1
+
+		remove_battle_map_arrow
+
+		filter_all_ui_commands on				;TURNS ON THE UI COMMANDS
+		filter_unit_selection_commands on		;TURNS ON THE UNIT SELECTION 
+		filter_unit_commands on					;TURNS ON THE UNIT COMMANDS 
+		filter_unit_group_commands on			;TURNS ON THE UNIT GROUP COMMANDS
+
+		terminate_monitor
+	end_monitor
+
+;****************************************************************************************
+;;;	Player Triarii engaged with the Barb Cavalry check
+;****************************************************************************************
+
+	monitor_conditions I_IsUnitEngagedWithUnit player_triarii barb_cavalry
+		and I_CompareCounter IN_RANGE = 0
+
+		set_counter IN_RANGE 2
+		
+		remove_battle_map_arrow	
+
+	; i do this in case they have missed a chunk of the tutorial
+
+		unit_order_move_to_missile_range barb_archer player_triarii run
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_IsUnitEngagedWithUnit player_triarii barb_cavalry
+		and I_CompareCounter IN_RANGE = 1	
+
+		dismiss_advice	
+
+		set_counter IN_RANGE 2
+		
+		remove_battle_map_arrow	
+	
+	; i do this in case they have missed a chunk of the tutorial
+		
+		unit_order_move_to_missile_range barb_archer player_triarii run
+
+		terminate_monitor
+	end_monitor
+
+;****************************************************************************************
+;	Congrats to player for doing as they are told and engageing barbs with triarii
+;	advance advice
+;	remove any indicator arrows
+;	wait while the advisor from the last thing is visible
+;	set a counter for the barb cavalry attacking the triarii
+;	order the barbs to attack the player triarii
+; 	set a counter
+; 	wait 15 seconds before continuing
+;****************************************************************************************
+
+	monitor_conditions I_CompareCounter IN_RANGE = 1
+
+		remove_battle_map_arrow
+
+		;;;;increased a counter for a cavalry attack
+
+		set_counter cavalry_now_attack_Triarii 1	
+
+		;;;;BARBARIAN CAVALRY TO ATTACK PLAYER'S TRIARII
+									
+		unit_order_attack_unit barb_cavalry player_triarii run	
+								
+		set_counter IN_RANGE 2
+
+		filter_unit_commands on player_archer							
+			
+		disable_shortcuts order_withdraw true
+		disable_ui order_withdraw true
+
+		battle_wait 15
+
+		unit_order_move_to_missile_range barb_archer player_triarii run
+
+		terminate_monitor
+	end_monitor
+
+;;;;**************************************************************************************
+;;;; IF BARBARIAN CAVALRY MANAGE TO GET WITHIN 20M OF THE PLAYER'S ARCHERS, 
+;;;; THEY WILL ATTACK THEM INSTEAD OF THE TRIARII 
+;;;; IF the player didnt do the right thing.
+;;;; We then pause the game and tell the player where they are going wrong 
+;;;; And how useful pause is.
+;;;;**************************************************************************************
+
+;;;;**************************************************************************************
+;;;;MONITORS TO SEE IF BARBARIAN CAVALRY ARE WITHIN 20M OF PLAYER ARCHERS
+;;;;and that the player hasnt already engaged with triarii
+;;;;**************************************************************************************
+
+	monitor_conditions I_CompareCounter IN_RANGE = 0
+
+		if I_UnitDistanceFromUnit barb_cavalry player_archer < 20															
+
+			;;;;BARBARIAN CAVALRY ATTACKS PLAYER'S ARCHERS
+
+			filter_unit_commands on player_archer
+
+			unit_order_attack_unit barb_cavalry player_archer run
+
+			unit_order_move_to_missile_range barb_archer player_triarii run
+										
+			set_counter ARCHERS_ATTACKED_ALARM 1
+								
+		end_if
+
+;*****************************************************************************************
+;	PAUSE THE GAME TO GIVE PLAYER TIME TO DO STUFF
+;*****************************************************************************************
+
+		if I_CompareCounter ARCHERS_ATTACKED_ALARM = 1
+			and I_CompareCounter battle_has_begun < 1	
+
+			;;;;Advice:Paused the game so you can do stuff. Use triarii
+
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_battle_1_pause_01_Thread							;ADVICE: Pause #10350# 
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+
+			set_counter FIRE_PAUSE_BUTTON 1
+
+		end_if
+
+		if I_CompareCounter FIRE_PAUSE_BUTTON = 1
+			and I_CompareCounter battle_has_begun < 1
+				
+			pause_battle
+			
+			while I_AdvisorSpeechPlaying 
+				and I_AdvisorVisible
+			end_while
+
+			dismiss_advice
+
+			advance_advice_thread Prologue_battle_1_pause_02_Thread							;ADVICE - Pause #10360#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+		end_if
+
+	end_monitor
+
+;****************************************************************************************
+;	Warn player of impending Barb Archer attack 
+;	To be used if player archers are still alive
+;****************************************************************************************
+
+	monitor_conditions I_CompareCounter IN_RANGE = 2
+
+		if I_UnitDistanceFromPosition barb_archer 351.900 -33.183 < 70
+
+			filter_unit_commands on player_archer
+
+			battle_wait 2
+
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			;ADVICE: "select your archers and right-click on the enemy archer unit."
+			advance_advice_thread Prologue_battle_1_spare_02_Thread							;ADVICE: Beware #10960#	
+			
+			;Indicates how to select the unit
+
+			point_at_unit_card player_archer 			
+
+			point_at_unit_pos barb_archer circle											;POINTS TO BARBARIAN ARCHER UNIT ON BATTLEFIELD
+
+			unit_set_skirmish_mode barb_archer on
+
+			unit_order_attack_unit barb_archer player_triarii run							;BARBARIAN ARCHERS MOVE TO ATTACK PLAYER'S TRIARII
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			battle_wait 4
+
+			set_counter IN_RANGE 3
+
+			ui_flash_stop
+
+		end_if
+
+	end_monitor
+
+;;;;**************************************************************************************
+;;;;	CHECKs IF PLAYER ARCHERS ARE DEAD. 
+;;;;	AND THEY HAVENT ATTACKED BARB ARCHERS
+;;;;	IF SO THEY ARE TOLD TO USE GENERALS CAVALRY TO WIPE BARB ARCHERS OUT
+;;;;**************************************************************************************
+
+	monitor_conditions I_UnitDestroyed player_archer
+		and I_CompareCounter IN_RANGE = 1
+
+		set_counter IN_RANGE 3	
+
+		terminate_monitor
+	end_monitor
+
+
+	monitor_conditions I_UnitDestroyed player_archer
+		and I_CompareCounter IN_RANGE = 2
+
+		set_counter IN_RANGE 3	
+
+		terminate_monitor
+	end_monitor
+
+;;;;**************************************************************************************
+;;;;	We tell the player to use his general as cavalry to kill off the archers
+;;;;**************************************************************************************
+
+	monitor_conditions I_CompareCounter IN_RANGE = 3
+
+		;ADVICE: Now select your General's unit and double right-click etc
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_spare_03_Thread			;ADVICE Cavalry against Archers #10970#
+									
+		point_at_unit_card player_general
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 4
+
+		ui_flash_stop
+
+		dismiss_advice
+
+		remove_battle_map_arrow
+	
+		terminate_monitor
+	end_monitor
+
+;;;;**************************************************************************************
+;;;;	Checks the player has inflicted enough casualties 
+;;;;	before starting to talk about the next lesson
+;;;;	AND 
+;;;;	Checks the casualties of these two units 
+;;;;	and then tells units to bugger off if they have taken a kicking
+;;;;**************************************************************************************
+
+	monitor_conditions I_PercentageUnitKilled barb_archer > 70
+		set_counter BARB_ARCHER_READY_TO_ROUT 1
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_PercentageUnitKilled barb_cavalry > 70
+		set_counter BARB_CAVALRY_READY_TO_ROUT 1
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter BARB_ARCHER_READY_TO_ROUT = 1
+
+		unit_set_morale barb_archer routing
+
+		terminate_monitor
+	end_monitor
+		
+	monitor_conditions I_CompareCounter BARB_CAVALRY_READY_TO_ROUT = 1
+
+		unit_set_morale barb_cavalry routing
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_fight_cav_01_Thread			;ADVICE Fleeing Cavalry #10400#
+
+		ui_flash_start order_halt
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 4
+
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor	
+
+;;;;*************************************************************************************************
+;;;; When both unts have routed
+;;;;*************************************************************************************************
+	monitor_conditions I_CompareCounter BARB_ARCHER_READY_TO_ROUT = 1
+		and I_CompareCounter BARB_CAVALRY_READY_TO_ROUT = 1
+
+		set_counter BARB_UNITS_BUGGER_OFF 2
+
+		unit_set_morale barb_archer routing
+		unit_set_morale barb_cavalry routing
+
+		terminate_monitor
+	end_monitor	
+
+	battle_wait 10
+	
+	monitor_conditions I_CompareCounter BARB_UNITS_BUGGER_OFF = 2
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_fighting_against_archers_01_Thread			;ADVICE Dealing with the enemy #10450#
+
+		ui_flash_start order_halt
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 4
+
+		ui_flash_stop
+
+		set_counter SELECT_ALL_LESSON 1
+
+		terminate_monitor
+	end_monitor	
+
+;;*********************************************************************************************
+;;	The player has passed the crossroads 
+;;	Player told to defend the bridge
+;;	More units are told to attack so that the fight on the bridge is exciting
+;;	Player will hold it if they have triarii at the front
+;;*********************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_general 240.900 -33.183 < 40
+		and I_CompareCounter CROSSING_THE_BRIDGE = 0
+		and I_CompareCounter Player_At_The_Crossroads = 0
+
+		set_counter Player_At_The_Crossroads 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromPosition player_triarii 240.900 -33.183 < 40
+		and I_CompareCounter CROSSING_THE_BRIDGE = 0
+		and I_CompareCounter Player_At_The_Crossroads = 0
+
+		set_counter Player_At_The_Crossroads 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromPosition player_archer 240.900 -33.183 < 40
+		and I_CompareCounter CROSSING_THE_BRIDGE = 0
+		and I_CompareCounter Player_At_The_Crossroads = 0
+
+		set_counter Player_At_The_Crossroads 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_CompareCounter Player_At_The_Crossroads = 1
+		and I_CompareCounter CROSSING_THE_BRIDGE < 1
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_teach_player_to_fight_04_Thread		;ADVICE: #10880#
+
+		unit_order_attack_unit barb_peltast_1 player_triarii run
+
+		point_at_location 191.892, -31.295									; foot of bridge
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 3
+
+		remove_battle_map_arrow	
+		
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDestroyed barb_peltast_1 
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_teach_player_to_fight_05_Thread		;ADVICE:#10890# Now get across the bridge 
+
+		set_counter Dont_use_unimportant_monitors 4
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+			
+		terminate_monitor
+	end_monitor
+
+
+;*********************************************************************************************
+;	The player is at the middle of The Bridge (ANY UNIT IT DOESNT MATTER)
+;*********************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_general 157.982 -31.114 < 10
+		and I_CompareCounter CROSSING_THE_BRIDGE < 1
+
+		set_counter CROSSING_THE_BRIDGE 1
+
+		set_counter Dont_use_unimportant_monitors 4
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+		
+		dismiss_advice	
+
+		while I_AdvisorVisible
+		end_while
+
+		;;The best way to cross a river is with one unit at a time...
+		advance_advice_thread Prologue_battle_1_teach_player_to_fight_06_Thread		;ADVICE #10900# 
+
+		unit_set_skirmish_mode barb_peltast_2 off
+
+		unit_order_attack_unit barb_peltast_2 player_general run
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromPosition player_triarii 157.982 -31.114 < 10
+		and I_CompareCounter CROSSING_THE_BRIDGE < 1
+
+		set_counter Dont_use_unimportant_monitors 4
+		
+		set_counter CROSSING_THE_BRIDGE 1
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+		
+		dismiss_advice	
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_teach_player_to_fight_06_Thread		;ADVICE #10900#
+
+		unit_set_skirmish_mode barb_peltast_2 off
+
+		unit_order_attack_unit barb_peltast_2 player_triarii run
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 1
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromPosition player_archer 157.982 -31.114 < 10
+		and I_CompareCounter CROSSING_THE_BRIDGE < 1
+
+		set_counter Dont_use_unimportant_monitors 4
+
+		unit_set_skirmish_mode barb_peltast_2 off
+
+		unit_order_attack_unit barb_peltast_2 player_triarii run
+
+		set_counter CROSSING_THE_BRIDGE 1
+
+		terminate_monitor
+	end_monitor	
+
+;-------------------------------------------------------------------------------------------------------
+
+
+;;;;******************************************************************************************
+;;;;******************************************************************************************
+;;;;	THIS STOPS ANY MORE MONITORS UNDER THIS POINT OCCURING UNTIL THE ABOVE MONITOR IS DONE
+;;;;******************************************************************************************
+;;;;******************************************************************************************
+
+	while I_CompareCounter Dont_use_unimportant_monitors < 4
+		and I_CompareCounter CROSSING_THE_BRIDGE < 1
+	end_while
+
+	battle_wait 5
+
+;;;;******************************************************************************************
+;;;;	Explaining multiple unit selection for armies
+;;;;******************************************************************************************
+;;;;*******************************************************************************************
+;;;;	Step 1 Begin Lesson on how to select more than one unit 
+;;;;	once enemy units are dealt with
+;;;;*******************************************************************************************
+
+	monitor_conditions I_CompareCounter SELECT_ALL_LESSON = 1
+		and not I_MultipleUnitsSelected
+		and I_CompareCounter battle_has_begun < 1					;PLAYER HAS CHARGED ACROSS THE BRIDGE EARLY - this only gets set later normally
+
+		if I_CompareCounter battle_has_begun = 1
+			terminate_monitor
+			set_counter START_PAUSE_BUTTON_LESSON 3
+		end_if
+
+		restart_timer Clear_Advice_Bubble
+
+		while I_TimerElapsed Clear_Advice_Bubble < 5000
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_grouping_units_01_Thread					;ADVICE #10550# Lessons about unit grouping		
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		set_counter SELECT_ALL_LESSON 2
+
+		terminate_monitor
+	end_monitor	
+
+;;;;*******************************************************************************************
+;;;;	Step 3 Detecting the players selection of more than one unit at a time
+;;;;*******************************************************************************************
+
+	monitor_conditions I_MultipleUnitsSelected
+		and I_CompareCounter SELECT_ALL_LESSON = 2
+
+		battle_wait 2
+
+		dismiss_advice
+
+		if I_CompareCounter battle_has_begun = 1
+			set_counter START_PAUSE_BUTTON_LESSON 3
+			terminate_monitor
+		end_if
+
+		set_counter SELECT_ALL_LESSON 3
+
+		battle_wait 15
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_MultipleUnitsSelected
+		and I_CompareCounter battle_has_begun = 1
+
+		dismiss_advice
+
+		set_counter START_PAUSE_BUTTON_LESSON 3
+
+		terminate_monitor
+	end_monitor
+
+
+
+;*********************************************************************************************
+;	Step 3a Drag select units
+;*********************************************************************************************
+
+	monitor_conditions I_CompareCounter SELECT_ALL_LESSON = 3
+
+		battle_wait 3
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		;Drag select units by left clicking on the terrain and then dragging and releasing the mouse button
+
+		advance_advice_thread Prologue_battle_1_drag_box_sel_01_Thread						;Advice #10250#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 8	
+
+		set_counter START_PAUSE_BUTTON_LESSON 1
+
+		terminate_monitor
+	end_monitor
+
+
+;*********************************************************************************************
+;	EXPLAIN PAUSE FEATURE
+;*********************************************************************************************
+
+	monitor_conditions I_CompareCounter START_PAUSE_BUTTON_LESSON = 1
+		and I_CompareCounter SELECT_ALL_LESSON = 3
+
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		ui_flash_start play_button
+
+		advance_advice_thread Prologue_battle_1_generic_05_Thread				;ADVICE: Pause #11390#	
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 1
+
+		pause_battle															;PAUSE THE BATTLE and wait for the player to unpause. Seems to work poorly
+
+		ui_flash_stop 	
+
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 2
+		
+		dismiss_advice	
+
+		set_counter START_PAUSE_BUTTON_LESSON 3
+
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter battle_has_begun = 0
+		and I_CompareCounter START_PAUSE_BUTTON_LESSON < 3
+	end_while
+
+
+;*********************************************************************************************
+;		TELL PLAYER TO GET ON DOWN TO THE FIGHT
+;*********************************************************************************************
+
+	battle_wait 10
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_battle_1_engage_barb_army_01_Thread		;ADVICE Engage the Barbarian Army #10750#
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+	
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	dismiss_advice
+
+	set_counter START_PAUSE_BUTTON_LESSON 4
+
+;*********************************************************************************************
+;	Explain Fatigue
+;*********************************************************************************************
+
+	while I_CompareCounter START_PAUSE_BUTTON_LESSON < 4			;pauses script here with a loop that goes when everything above is done
+		and I_AdvisorVisible
+		and I_CompareCounter battle_has_begun = 0
+	end_while
+
+	monitor_conditions I_IsUnitMoveFastSet player_triarii
+		and not I_IsUnitEngaged player_triarii
+		and I_CompareCounter START_PAUSE_BUTTON_LESSON > 3
+
+		set_counter FATIGUE_WARNING 1
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_CompareCounter FATIGUE_WARNING = 1
+		and I_IsUnitMoveFastSet player_triarii
+		and not I_IsUnitEngaged player_triarii
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_battle_1_single_right_click_unit_01_Thread		;ADVICE Don’t tire your troops #11250#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+;;;;***********************************************************************************************
+;;;;	Any of these MONITORS WILL ACTIVATE THE BATTLE BETWEEN SENATE AND GAULS 
+;;;;	When player is just west of the bridge
+;;;;	This is triggered by any one of the players units
+;;;;***********************************************************************************************
+
+	monitor_conditions I_UnitDistanceFromPosition player_general 0.334 -29.221 < 30			;;JUST crossed bridge
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if 
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitDistanceFromPosition player_triarii 0.334 -29.221 < 30			;;JUST crossed bridge
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if 
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_UnitDistanceFromPosition player_archer 0.334 -29.221 < 30				;;JUST crossed bridge
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if 
+
+		terminate_monitor
+	end_monitor
+
+;*************************************************************************************************	
+;;;; CHECK FOR PLAYER UNITS POSITION WHEN ACROSS THE BRIDGE
+;;;; TRIP THE BATTLE START SWITCH = set_counter battle_has_begun 1
+;*************************************************************************************************
+
+;;;;distance from general
+;;;;position: coming up the road
+
+	monitor_conditions I_UnitDistanceFromLine player_general BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor		
+		 
+
+	monitor_conditions I_UnitDistanceFromLine player_triarii BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor	
+	
+	monitor_conditions I_UnitDistanceFromLine player_archer BattleTriggerPoint_A BattleTriggerPoint_B < 20
+		and I_CompareCounter battle_has_begun = 0
+
+		unit_order_attack_unit barb_peltast_3 player_general run			;order barb_peltast_3 to attack 
+
+		unit_set_skirmish_mode barb_peltast_3 off
+
+		if I_CompareCounter battle_has_begun = 0
+			set_counter battle_has_begun 1
+		end_if
+
+		terminate_monitor
+	end_monitor			
+
+;---------------------------------------------------------------------------------------------------
+
+;*************************************************************************************************
+;;;; Don't do the rest until the above is finished
+;*************************************************************************************************
+
+	while I_CompareCounter battle_has_begun < 2
+	end_while
+
+;;;;**********************************************************************************************
+;;;;	 SCRIPT THE ORDER OF SENATE ARMY MELEE
+;;;;	WHEN HASTATI UNIT IS AT x%, THE PRINCEP UNIT BEHIND IT WILL BEGIN TO ATTACK 
+;;;;	 BY THROWING PILUMS
+;;;;	WHEN THAT HASTATI UNIT IS AT x% CASUALTIES, IT WILL ROUT 
+;;;;**********************************************************************************************
+
+;;;;**********************************************************************************************
+;;;;	make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+;;;;**********************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_1 > 70			
+			unit_order_attack_unit roman_princeps_1 barb_dhaxe_3 run
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;order the hastati to rout at 75% casualties
+;*************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_1 > 70			
+			unit_set_morale roman_hastati_1 routing
+			unit_order_attack_unit roman_velite_1 barb_dhaxe_3 run
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+;*************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_2 > 70			
+			unit_order_attack_unit roman_princeps_2 barb_dhaxe_2 run
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;order the hastati to rout at 75% casualties
+;*************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_2 > 70			
+			unit_set_morale roman_hastati_2 routing
+			unit_order_attack_unit roman_velite_2 barb_dhaxe_2 run
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;make the princeps behind the hastati begin attack (throw pilums) after 50% hastati casualties
+;*************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_3 > 70			
+			unit_order_attack_unit roman_princeps_3 barb_dhaxe_1 run
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;order the hastati to rout at 75% casualties
+;*************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_hastati_3 > 70			
+			unit_set_morale roman_hastati_3 routing
+			unit_order_attack_unit roman_velite_3 barb_dhaxe_1 run
+			terminate_monitor
+		end_monitor
+
+;;************************************************************************************************
+;	Make remaining Senate units rout at 50% casualties
+;************************************************************************************************
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_1 > 70
+			unit_set_morale roman_princeps_1 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_2 > 70
+			unit_set_morale roman_princeps_2 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_2 > 70
+			unit_set_morale roman_princeps_2 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_princeps_3 > 70
+			unit_set_morale roman_princeps_3 routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_heavy_cavalry > 70
+			unit_set_morale roman_heavy_cavalry routing
+		end_monitor
+
+		monitor_conditions I_PercentageUnitKilled roman_medium_cavalry > 70
+			unit_set_morale roman_medium_cavalry routing
+		end_monitor
+
+
+;;;;**********************************************************************************************
+;*************************************************************************************************
+;;;; 	BARBARIANS ARMY BEHAVIOUR
+;*************************************************************************************************
+;;;;**********************************************************************************************
+
+;;;;**********************************************************************************************
+;;;;**********************************************************************************************
+;;;;	IF PLAYER'S GENERAL UNIT ENGAGES IN COMBAT WITH ANY ENEMY UNIT, THAT UNIT WILL
+;;;;	ROUTE AFTER 15% CASUALTIES
+;;;;**********************************************************************************************
+;;;;**********************************************************************************************
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_peltast_1 		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_1 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_1 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_peltast_2		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_2 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_2 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_peltast_3		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_peltast_3 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_peltast_3 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_axe			;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_axe > 30						;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_axe routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_dhaxe_1		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_1 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_1 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_dhaxe_2		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_2 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_2 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_dhaxe_3		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_dhaxe_3 > 30					;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_dhaxe_3 routing					;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_IsUnitEngagedWithUnit player_general barb_noble_cavalry 		;CHECKS FOR PROXIMITY TO PLAYER GENERAL
+		and I_PercentageUnitKilled barb_noble_cavalry > 30				;AND MORE THAN 15% CASUALTIES
+			unit_set_morale barb_noble_cavalry routing				;ROUT THAT UNIT
+			terminate_monitor
+		end_monitor
+
+;*************************************************************************************************
+;*************************************************************************************************
+; 	Make everyone attack if the SPQR or Barbarians have suffered 60% casualties
+;*************************************************************************************************
+;*************************************************************************************************
+
+	monitor_conditions I_PercentageUnitGroupKilled senate_armyform > 60
+		and I_CompareCounter ATTACK = 0
+
+		;unit_group_unset_morale senate_armyform
+		unit_group_unset_morale barb_armyform
+
+		;undefine_unit_group senate_armyform
+		;undefine_unit_group barb_armyform
+
+		release_unit roman_general
+		release_unit roman_velite_1
+		release_unit roman_velite_2
+		release_unit roman_velite_3
+		release_unit roman_hastati_1
+		release_unit roman_hastati_2
+		release_unit roman_hastati_3
+		release_unit roman_princeps_1
+		release_unit roman_princeps_2
+		release_unit roman_princeps_3 
+		release_unit roman_heavy_cavalry
+		release_unit roman_medium_cavalry
+
+		set_counter ATTACK 1
+
+		terminate_monitor
+	end_monitor
+
+	suspend_unscripted_advice false
+
+;;;;********************************************************************************************
+;;;;	Order gauls to re-acquire targets every 5s. After 3 minutes, have any Gauls that are
+;;;;  left rush the player General
+;;;;********************************************************************************************
+
+	declare_timer re_eval_targets
+	declare_counter number_of_loops
+
+	while I_InBattle
+		if I_TimerElapsed re_eval_targets > 10000
+					and I_CompareCounter number_of_loops < 15
+
+			unit_order_move barb_axe -186, -158
+			unit_order_move barb_dhaxe_1 -186, -158
+			unit_order_move barb_dhaxe_2 -186, -158
+			unit_order_move barb_dhaxe_3 -186, -158
+			unit_order_move barb_infantry -186, -158
+			unit_order_move barb_noble_cavalry -186, -158
+			unit_order_move barb_chieftain -186, -158
+			
+			battle_wait 4
+
+			unit_order_attack_closest_unit barb_axe 180 run
+			unit_order_attack_closest_unit barb_dhaxe_1 180 run
+			unit_order_attack_closest_unit barb_dhaxe_2 180 run
+			unit_order_attack_closest_unit barb_dhaxe_3 180 run
+			unit_order_attack_closest_unit barb_infantry 180 run
+			unit_order_attack_closest_unit barb_noble_cavalry 180 run
+			unit_order_attack_closest_unit barb_chieftain 180 run
+		
+			restart_timer re_eval_targets
+			inc_counter number_of_loops 1
+		end_if
+
+		if I_CompareCounter number_of_loops = 15
+			unit_order_attack_unit barb_axe player_general run
+			unit_order_attack_unit barb_dhaxe_1 player_general run
+			unit_order_attack_unit barb_dhaxe_2 player_general run
+			unit_order_attack_unit barb_dhaxe_3 player_general run
+			unit_order_attack_unit barb_infantry player_general run
+			unit_order_attack_unit barb_noble_cavalry player_general run
+			unit_order_attack_unit barb_chieftain player_general run
+
+			inc_counter number_of_loops 1
+		end_if
+	end_while
+
+;;;;********************************************************************************************
+;;;;	Tidy up at the end of the battle
+;;;;********************************************************************************************
+;;;;********************************************************************************************
+;;;;	WE FINISH THE BATTLE
+;;;;********************************************************************************************
+
+	set_counter Completed_Camera_Moves 0
+
+    end_battle
+
+
+;;;;*******************************************************************************************
+;;--------------------------------------------------------------------------------------------
+;END OF FIRST BATTLE
+;End_of_first_battle 
+;;--------------------------------------------------------------------------------------------
+;;;;*******************************************************************************************
+
+
+;;;;*******************************************************************************************
+;;;;	AI TURNED OFF TO ALLOW NEWBIE PLAYERS A CHANCE TO GET IT RIGHT
+;;;;	stops the AI from doing anything without our say so
+;;;;	This is so that the player has a good chance of doing what we want
+;;;;	
+;;;;*******************************************************************************************
+
+;;;;*******************************************************************************************
+;;;;	Precautions
+;;;;*******************************************************************************************
+
+	console_command disable_ai						;stops the AI from doing anything without our say so
+
+	filter_all_ui_commands off					;;;;player not allowed to move until we tell them to move
+
+	set_cards_selectable false
+
+;;;;*******************************************************************************************
+;;;;*******************************************************************************************
+; 	RETURN TO CAMPAIGN MAP AFTER FIRST BATTLE
+;;;;*******************************************************************************************
+;;;;*******************************************************************************************
+
+;;;;____________________________________________________________________________________________________
+;;;;*************************************************************************************************
+;;;;	Checks to see if player has gone walk about or is on target to places we have sent them
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter TarquiniiNotCaptured = 0
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player has got anywhere near bovianum 40, 43
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 40, 43
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Bovianum_01_Thread					; ADVICE BOVIANUM #6310# You're going the wrong way
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near Picenum 28,59
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+	;;;;*************************************************************************************************
+	;;;;	Tell them to go back as this isnt any good to them. 
+	;;;;	It's already a Roman protectorate etc
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 28,59
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Picenum_01_Thread					;Advice Tarquinii is your target #6340#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near east pass to Picenum 28, 49
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 28, 49
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_East_Pass_To_Picenum_02_Thread		;Advice Entering the province of Umbria #6390#	
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near to Ravenna in Gallia Cispadana 5,79
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 5,79
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Gallia_Cispadana_01_Thread			;Approaching Ravenna #6370#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near pass to Gallia Cispadana 9,70
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 9,70
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Pass_To_Gallia_Cispadana_01_Thread	;ADVICE 
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+				
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near Ariminum, Umbria 16, 80
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 6 16, 80
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Umbria_01_Thread						;ADVICE
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near south pass to Bovianum and Tarentum 29, 41
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+;
+;		monitor_conditions I_FactionNearTile romans_julii 6 29, 41
+;
+;			while I_AdvisorVisible												;Indicate advisor
+;			end_while
+;
+;			advance_advice_thread Prologue_South_Pass_01_Thread					;ADVICE
+;
+;			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+;				and I_AdvisorVisible
+;			end_while
+;	
+;			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+;				and I_AdvisorVisible
+;			end_while
+;
+;			dismiss_advice
+;		
+;			terminate_monitor
+;		end_monitor
+;
+	;;;;*************************************************************************************************
+	;;;;	Check to see if the player is near Vesuvius, Bovianum and Tarentum 36, 32
+	;;;;	But they havent done what they were told to do
+	;;;;	We tell them to go and do what they were asked
+	;;;;*************************************************************************************************
+
+		monitor_conditions I_FactionNearTile romans_julii 5 36, 32
+
+			while I_AdvisorVisible												;Indicate advisor
+			end_while
+
+			advance_advice_thread Prologue_Near_Vesuvius_01_Thread				;ADVICE Vesuvius
+			
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 3
+
+			dismiss_advice
+				
+			terminate_monitor
+		end_monitor
+
+		while I_CompareCounter TarquiniiCaptured = 0
+		end_while
+
+		set_counter TarquiniiNotCaptured 1
+
+		terminate_monitor
+
+	end_monitor
+
+;;;;____________________________________________________________________________________________________
+;;;;____________________________________________________________________________________________________
+;;;;	End of walkabout checks for capture of Tarquinii
+;;;;____________________________________________________________________________________________________
+;;;;____________________________________________________________________________________________________
+
+;;;;*************************************************************************************************
+;;;; 	A SCROLL IS OPENED OR CLOSED
+;;;;	This checks player behaviour on scrolls 
+;;;;	so we can make sure that the prologue doesnt clash with it 
+;;;;	and cause problems
+;;;;*************************************************************************************************
+
+	declare_counter	SCROLL_OPEN
+
+	monitor_event ScrollOpened TrueCondition
+ 		
+		set_counter SCROLL_OPEN 1
+
+	end_monitor
+
+	monitor_event ScrollClosed TrueCondition
+ 		
+		set_counter SCROLL_OPEN 0
+
+	end_monitor
+
+
+;;;;*******************************************************************************************
+;;;;	Replenishing the players units 
+;;;;	to ensure that they can continue
+;;;;	and adding extra units so that they can win fights
+;;;;*******************************************************************************************
+		
+	campaign_wait 1	; give time to come back to campaign map
+
+	replenish_units Gaius Julius								
+
+	console_command create_unit "Gaius Julius" "roman velite" 2 							;gifting the player with units to ensure advancement in game
+	console_command create_unit "Gaius Julius" "roman hastati" 2
+	console_command create_unit "Gaius Julius" "roman princeps" 2
+	console_command create_unit "Gaius Julius" "roman onager" 1
+	console_command create_unit "Gaius Julius" "roman triarii" 2
+
+	console_command add_money 3000
+
+	monitor_conditions I_LosingMoney romans_julii
+		and I_TurnNumber = 3
+
+			console_command add_money 3000
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_LosingMoney romans_julii
+		and I_TurnNumber = 5
+
+			console_command add_money 3000
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_LosingMoney romans_julii
+		and I_TurnNumber = 7
+
+			console_command add_money 3000
+
+		terminate_monitor
+	end_monitor
+
+
+	replenish_action_points Gaius Julius
+	replenish_action_points Captain Decius
+
+;;;;*************************************************************************************************
+;;;;	MOVE THE SENATE ARMY OFF THE BRIDGE AND OUT OF HARMS WAY
+;;;;*************************************************************************************************
+
+	suspend_unscripted_advice true			
+
+	snap_strat_camera 21, 54
+
+	reveal_tile 8, 57
+
+	while not I_WonBattle romans_julii			;;;;NB: Checks to see if the player has lost the battle against the barbs. If they have lost then the game will end
+	end_while
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;
+	end_while
+
+	advance_advice_thread Prologue_Barbarians_Destroyed_Thread			;ADVICE #5020#
+
+	move Captain Decius, 21, 48	
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;
+	end_while
+
+	advance_advice_thread Prologue_Notify_New_Troops_Prologue_Thread
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	set_counter WAIT_FOR_STUFF_TO_COMPLETE 1
+
+;;;;***********************************************************************************************
+;;;;	CAMERA LESSON
+;;;;	Teach player about control of the camera view for the campaign map
+;;;;	WHILE Waiting for the for the player general to be selected
+;;;;***********************************************************************************************
+
+	set_counter Completed_Camera_Moves 0
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;
+	end_while
+
+	advance_advice_thread Prologue_Camera_Control_Explained_Thread					;ADVICE: Camera Control #6230#
+
+;;;;*************************************************************************************************
+;;;;	CHECKS CAMERA MOVES
+;;;;*************************************************************************************************
+	;;;;*********************************************************************************************
+	;;;;	Monitoring the player control of the camera view 
+	;;;;*********************************************************************************************
+
+
+	while I_AdvisorVisible
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera  rot_l ;step_l  22/07/04 These have changed 3 times now changed back again to rot_l
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera  rot_r ;step_r 22/07/04 These have changed 3 times now changed back again to rot_r
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_fwd
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_event ShortcutTriggered ShortcutTriggered camera step_bck
+			inc_counter Completed_Camera_Moves 1
+			terminate_monitor
+		end_monitor
+
+		monitor_conditions I_CompareCounter Completed_Camera_Moves >= 4
+
+			campaign_wait 2
+
+			dismiss_advice
+
+			terminate_monitor
+		end_monitor
+
+	end_while
+
+;;;;***********************************************************************************************
+;;;;	END OF CAMERA LESSON
+;;;;***********************************************************************************************
+
+	filter_all_ui_commands on					;;;;ALLOWS the player to move their character now
+
+	disable_ui end_turn								;disable the end turn button to prevent the player racing ahead of the script
+
+	advance_advice_thread Prologue_Player_Camera_Moves_Completed_Thread			;Campaign map basics #6231# advice about exploring 
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+		
+	campaign_wait 1
+
+;;;;*************************************************************************************************
+;;;;	SELECTING AN ARMY LESSON
+;;;;	Prompting player to select their army
+;;;;	checking to see if the player has selected the army, 
+;;;;	been told about camera movement 
+;;;;*************************************************************************************************
+
+	point_at_character Gaius Julius												;pointing at the character
+
+	character_flash_start Gaius Julius											;flashing tile of character
+
+	dismiss_advice																;dismiss advice #6231#
+
+	while I_AdvisorVisible														;waiting for advice #6231# to go
+	end_while
+
+	advance_advice_thread Prologue_First_Turn_Select_Army_Advice_Thread			;Advice #5040# 
+
+;;;;*************************************************************************************************
+;;;		IS ARMY SELECTED ?
+;;;;	Set counters when Player has selected army
+;;;;	When Gaius julius is selected
+;;;;	switching off the show mouse button 
+;;;;	suspending unscripted advice etc
+;;;;*************************************************************************************************
+
+	while not I_CharacterSelected Gaius Julius				; waiting for the player to select their character
+	end_while
+
+	ui_flash_stop
+
+	character_flash_stop Gaius Julius		
+
+	set_counter TutorialStepForward 1						; Changes the tutorial counter incremented to 1
+
+	set_counter PlayerSelectedArmyUnprompted 1
+										
+;;;;****************************************************************************************
+;;;;	We give Congrats to player for selecting army and tell them how to move it
+;;;;	We use a timer to ensure that things move on  
+;;;;	if the player has not dismissed the advice bubble that says well done
+;;;;****************************************************************************************
+
+	dismiss_advice																;dismiss advice #5040#
+
+	while I_AdvisorVisible														;waiting for advice to go
+	end_while
+
+	advance_advice_thread Prologue_First_Turn_Well_Done_Army_Selected_Thread	;ADVICE Army Selected  #6250#
+
+	restart_timer Tutorial_Step_Timer
+
+	;;;;;if the player doesnt dismiss dull advice not required we remove it for them
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	dismiss_advice																;dismiss advice #6250#
+
+	while I_AdvisorVisible												
+	end_while
+
+	advance_advice_thread Prologue_Campaign_First_Use_Right_Click_Move_Thread	;Right Click to Move #6300#
+
+	point_at_strat_position 13, 53
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	while I_CharacterCanMove Gaius Julius
+		and I_AdvisorVisible
+
+		monitor_conditions I_FactionNearTile romans_julii 13, 53 3
+				dismiss_advice														;dismiss 6300
+				ui_flash_stop														;stop pointing at campaign map
+			terminate_monitor
+		end_monitor	
+
+	end_while
+
+	dismiss_advice																;dismiss advice #6250#
+
+	while I_AdvisorVisible												
+	end_while
+													
+	advance_advice_thread Prologue_First_Turn_Keep_Units_Grouped_Thread			;ADVICE #6260# KEEP UNITS GROUPED TOGETHER
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+;;;;*************************************************************************************************
+;;;;	WAIT FOR THE PLAYER TO MOVE ALL MP'S
+;;;;	WARN PLAYER TO KEEP FORCES TOGETHER
+;;;;	Then we start indicating some of the HUD UI buttons and briefly explain their use
+;;;;	We use counters to ensure that the advice is spaced out but still reacts to player behaviour
+;;;;	Indicating the campaign hud and brief lesson
+;;;;	on HUD and on radar map
+;;;;	on selected_item_button
+;;;;	on the faction_button
+;;;;	on the season_icon
+;;;;*************************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible	
+	end_while
+
+	advance_advice_thread Prologue_HUD_Intro_Thread						;Controlling your empire #5250# HUD INTRO
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	set_counter TutorialStepForward 2									;incremented tutorial counter to 2
+
+	set_counter OPTIONS_BUTTON 1
+
+;;;;*************************************************************************************************
+;;;		Trigger further explanation of the HUD 			
+;;;		Indicating the options button as the player has completed a turn
+;;;;*************************************************************************************************
+
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+;;;;*************************************************************************************************
+;;;;Monitoring HUD button activity
+;;;;*************************************************************************************************
+
+;;;; Options/Esc Panel Button
+
+	monitor_event ScrollOpened ScrollOpened campaign_options_scroll
+
+		if I_AdvisorVisible
+			dismiss_advice
+		end_if
+		
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_Options_Button_Pressed_Thread		;ADVICE:  Options #6170#
+
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying 
+			and I_AdvisorVisible
+		end_while
+	
+		if I_AdvisorVisible
+			dismiss_advice
+		end_if
+
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+;;;;*************************************************************************************************
+;;;;	Indicating the Campaign Radar map
+;;;;*************************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;wait for any player generated advice to bog off
+	end_while
+
+	advance_advice_thread Prologue_HUD_Radar_Intro_Thread				;ADVICE About radar: Campaign Map Overview #5270#
+
+	ui_flash_start radar
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop
+
+	set_counter TutorialStepForward 3									; TutorialStepForward incremented to 3
+
+
+;;;;*************************************************************************************************	
+;;;;	Indicating the Selected item button
+;;;;*************************************************************************************************
+
+	while I_CompareCounter TutorialStepForward < 3	;
+	end_while
+
+	dismiss_advice
+
+	while I_AdvisorVisible													;wait for advice to be dismissed
+	end_while
+
+	advance_advice_thread Prologue_HUD_Selected_Item_Button_IntroV2_Thread	;ADVICE 5451
+
+	ui_flash_start hud_select_prev_item_cycle		;doesn't work???
+	;;;ui_flash_start faction_turn_display		;;; a bodge put in place until more apropriate label is available
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+	set_counter TutorialStepForward 4										; TutorialStepForward to 4
+
+;;;;*************************************************************************************************
+;;;;	Indicating the Faction button
+;;;;*************************************************************************************************	
+
+	while I_CompareCounter TutorialStepForward < 4						;
+	end_while
+
+	dismiss_advice
+
+	while I_AdvisorVisible												
+	end_while
+
+	advance_advice_thread Prologue_HUD_Faction_Button_IntroV2_Thread		;Advice #5301#
+
+	ui_flash_start faction_button
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+	set_counter TutorialStepForward 5									; TutorialStepForward set to 5
+
+;;;;*************************************************************************************************
+;;;	Detecting player use of the faction button and scroll
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;	Indicating the season icon
+;;;;	And Waiting for player input
+;;;;*************************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible												; wait for advisor
+	end_while
+
+	advance_advice_thread Prologue_HUD_Season_Icon_Intro_Thread			;The Seasons #5330#
+
+	ui_flash_start season_icon
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+	set_counter TutorialStepForward 6									; TutorialStepForward incremented to 6
+
+;;;;*************************************************************************************************
+;;;;   Indicating the end turn button if they have moved enough
+;;;;*************************************************************************************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible												; wait for advisor
+	end_while
+
+	enable_ui end_turn		;enabling the end turn UI button to allow the player to do as they are told
+
+	advance_advice_thread Prologue_HUD_End_Turn_Intro_Thread			;End Turn #5340#
+
+	ui_flash_start end_turn
+													
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	set_counter TutorialStepForward 7									; TutorialStepForward incremented to 7
+
+	while I_TurnNumber = 0								
+	end_while
+
+;;;;*************************************************************************************************			
+;;;;	END OF FIRST CAMPAIGN TURN
+;;;;*************************************************************************************************
+;;;;*************************************************************************************************
+;;;;	END OF TURN 0
+;;;;*************************************************************************************************
+
+
+;;---------------------------------------------------------------------------------------------------
+
+
+;;;;*************************************************************************************************
+;;; 	TURN 1: THE SECOND TURN
+;;;--------------------------------------------------------------------------------------------------
+;;; 	TURN 1
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;		TELLING THE PLAYER TO GO TO Tarquinii
+;;;;*************************************************************************************************
+
+	ui_flash_stop
+
+	dismiss_advice
+
+	suspend_unscripted_advice true
+
+	filter_all_ui_commands off					;;;;player not allowed to move until we tell them to move
+
+	while I_AdvisorVisible												
+	end_while
+
+	advance_advice_thread Prologue_Second_Turn_Thread					; ADVICE: 5130  
+
+	ui_flash_start faction_turn_display ;;;;NEED A BETTER LABEL THIS LABEL INDICATES THE WRONG SECTION OF THE DISPLAY									;
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop
+	dismiss_advice
+
+	while I_AdvisorVisible												
+	end_while
+
+	advance_advice_thread Prologue_HUD_Finances_Button_Intro_Thread		;ADVICE Finances #5290#
+
+	ui_flash_start faction_button
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	ui_flash_stop 
+
+;;;;*************************************************************************************************
+;;;;	Firing the Senate mission to take Tarquinii
+;;;;	Set senate mission for Tarquinii and reward
+;;;;	begin Monitoring player opening a senate mission
+;;;;*************************************************************************************************
+
+	inc_counter FirstSenateMission 1												; FirstSenateMission incremented to 1
+
+;;;;*************************************************************************************************
+;;;;	Issue senate mission
+;;;;*************************************************************************************************
+
+	senate_mission_take_city major_reward, Tarquinii							; Mission to take Tarquinii
+
+	campaign_wait 3
+
+	;points at the message box numbered that slides down the side, apparently cant id specific messages 
+
+	point_at_message senate_mission_issued										;senate mission pointed at
+												
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_This_Is_An_Event_Message_Thread				;Advice: Event Messages #5440#
+
+	while not I_AdvisorSpeechPlaying									; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	while I_AdvisorSpeechPlaying										; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+;;;;*************************************************************************************************
+;;;;	Show player Tarquinii
+;;;;*************************************************************************************************
+
+	disable_cursor													;prevent the player clicking
+	disable_shortcuts true
+	disable_shortcuts advisor_portrait_button false
+	inhibit_camera_input true
+
+	zoom_strat_camera 0.2											;
+
+	move_strat_camera 8, 57											;Move the camera to settlement Tarquini
+
+;;;;*************************************************************************************************
+;;;; Telling the player about need to capture Tarquinii
+;;;;*************************************************************************************************
+
+	campaign_wait 2
+
+	enable_cursor	
+	disable_shortcuts false
+	inhibit_camera_input false
+
+	dismiss_advice														;Dismissing any previous advice
+
+	while I_AdvisorVisible												;Wait for advice to dismiss
+	end_while
+
+	advance_advice_thread Prologue_Capture_First_Settlement_Thread		;Help our Etruscan friends #5030#
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while														;
+
+	campaign_wait 2
+										
+	set_counter GaiusJuliusSelected 2									;#mike not used GaiusJuliusSelected incremented to 2
+
+	ui_flash_stop														;stop the circle on the event message
+
+
+	;**********************NEED TO EXPLAIN TO THE PLAYER HOW TO ATTACK TARQUINII**********************************
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;wait for the advice to go
+	end_while
+
+	advance_advice_thread Prologue_How_To_Attack_01_Thread				;ADVICE: How to attack a settlement #5131#
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 5									
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while	
+
+	filter_all_ui_commands on											; NB player allowed to move now
+
+	set_cards_selectable true
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	set_counter TutorialStepForward 8
+
+	suspend_unscripted_advice false									
+
+;;;;*************************************************************************************************
+;;;; Making sure the player getts advice about attacking a City
+;;;;*************************************************************************************************
+
+	monitor_event ScrollOpened ScrollOpened seige_scroll
+
+		set_counter TARQUINII_UNDER_SEIGE 1
+
+		dismiss_advice
+
+		while I_AdvisorVisible											;wait for dismissal of advice
+		end_while
+
+		advance_advice_thread Prologue_How_To_Attack_02_Thread			; #5132#_advice true
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+	monitor_event ScrollOpened ScrollOpened prebattle_scroll
+
+		dismiss_advice
+
+		advance_advice_thread Prologue_Prompt_Autoresolve_Seige_Thread			; #5190#_advice true
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+	while I_CompareCounter SCROLL_OPEN = 1								; check for a scroll being open while we tell the player stuff
+	end_while
+
+;;;;*************************************************************************************************
+;;;	Start a timer to catch player lazyness
+;;;;*************************************************************************************************
+
+	restart_timer Prompt_Timer
+
+;;;;*************************************************************************************************
+;;;;	Checking to see if the player hasn't reached Tarquinii after a long wait
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter TarquiniiCaptured < 1
+		and I_CompareCounter TARQUINII_UNDER_SEIGE < 1
+		and I_TimerElapsed Prompt_Timer = 60000
+		and not I_CharacterTypeNearTile romans_julii named_character, 2 8,57
+		and I_CompareCounter BATTLE_FOR_TARQUINII = 0
+
+		restart_timer Prompt_Timer
+
+		dismiss_advice
+
+		while I_AdvisorVisible												;wait for dismissed advice
+		end_while
+
+		advance_advice_thread Prologue_Go_To_Tarquinii_Thread 				;Advice:#5400# Go take tarquinii
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+;		terminate_monitor	
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;	Player close enough for a seige on Tarquinii 
+;;;;	prompt to auto resolve
+;;;;*************************************************************************************************
+
+	while not I_CharacterTypeNearTile romans_julii named_character, 2 8,57
+		monitor_conditions I_CharacterTypeNearTile romans_julii named_character, 8 8,57
+			and I_CompareCounter BATTLE_FOR_TARQUINII = 0	
+			and I_TimerElapsed Prompt_Timer = 120000
+			and I_CompareCounter TARQUINII_UNDER_SEIGE < 1	
+				
+			dismiss_advice
+		
+			while I_AdvisorVisible														;wait for dismissed advice
+			end_while
+		
+			advance_advice_thread Prologue_Take_Tarquinii_You_Outnumber_Enemy_Thread		;Seige! #5410#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 2
+
+			dismiss_advice
+				
+			set_counter TARQUINII_UNDER_SEIGE 2
+			 
+			terminate_monitor
+		end_monitor	
+	end_while
+
+
+	restart_timer Prompt_Timer
+
+	monitor_conditions I_CompareCounter BATTLE_FOR_TARQUINII = 0
+		and I_TimerElapsed Prompt_Timer = 1800000
+		and I_CharacterTypeNearTile romans_julii named_character, 2 8,57
+		and I_CompareCounter TARQUINII_UNDER_SEIGE < 1
+
+		dismiss_advice
+
+		while I_AdvisorVisible														;wait for dismissed advice
+		end_while
+
+		advance_advice_thread Prologue_Player_Not_Attacking_Tarquinii		;ADVICE Take Tarquinii #5140#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+		terminate_monitor	
+	end_monitor
+
+
+;;;;*************************************************************************************************
+;;;; Assuring the player getting advice during a battle they have triggered
+;;;;*************************************************************************************************
+
+	monitor_conditions I_BattleStarted
+		and I_CompareCounter BATTLE_FOR_TARQUINII = 0
+
+			set_counter BATTLE_FOR_TARQUINII 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_event ScrollOpened ScrollOpened loot_settlement_scroll
+
+			if I_CompareCounter BATTLE_FOR_TARQUINII = 1	
+				set_counter BATTLE_FOR_TARQUINII 2
+			end_if
+
+		dismiss_advice
+
+		advance_advice_thread Prologue_Captured_Tarquinii_Thread			;Congratulations! #5200#_advice true
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor	
+
+	while I_SettlementOwner Tarquinii = greek_cities
+	end_while
+
+	set_counter TarquiniiNotCaptured 1								; because tarquiniii is captured
+
+	set_counter BATTLE_FOR_TARQUINII 3
+
+	while I_AdvisorVisible												;wait for dismissed advice
+	end_while
+
+;;;;*************************************************************************************************
+;;;;	- Lessons about settlement management when Tarquinii is captured
+;;;;	- Triggering explanation of Construction	
+;;;;	and Recruitment buttons and panels
+;;;;	- Triggering HUD_Construction_Button_Intro
+;;;;	After giving some advice threads to the player on how they need to develop the settlement before countinuing
+;;;;	TELL PLAYER HOW TO MOVE TROOPS FROM HIS SETTLEMENT, 
+;;;;	AND WARN ABOUT LEAVING A GARRISON
+;;;;	NEW STUFF HERE ABOUT LEAVING PLAYER TO DO STUFF FOR A BIT WE'LL BE BACK
+;;;;*************************************************************************************************
+
+	suspend_unscripted_advice true
+
+;;;;	Tarquinii_captured
+
+	campaign_wait 1
+
+	console_command create_building Tarquinii militia_barracks 			
+	set_counter Construction_and_Recruitment_Tutorial 1
+
+	restart_timer Campaign_Map_Timer
+
+	while I_AdvisorVisible
+		and I_TimerElapsed Campaign_Map_Timer < 30000
+	end_while
+
+	advance_advice_thread Prologue_Settlement_Construction_1_Thread		;Construction Basics  #6010# tell player to look at construction button
+
+	ui_flash_start construction_button									;indicate construction button
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	suspend_unscripted_advice false
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	ui_flash_stop 
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_Settlement_Garrisons_1_Thread			;ADVICE: Settlements and Garrisons: Part 1 #6040# what to build
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	while I_CompareCounter SCROLL_OPEN = 1
+	end_while
+
+	set_counter Construction_and_Recruitment_Tutorial 3
+
+;;;;*************************************************************************************************
+;;;		A) The Prologue_HUD_Recruitment_Button_Intro
+;;;;	B) CHECK FOR THE PLAYER OPENING THE RECRUITMENT PANEL
+;;;		C) Checking to see if the player has closed the recruitment scroll
+;;;;*************************************************************************************************
+
+;;;; A) The Prologue_HUD_Recruitment_Button_Intro
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;check presence of advisor
+	end_while
+
+	advance_advice_thread Prologue_HUD_Recruitment_Button_Intro_Thread	;ADVICE 5320
+				
+	ui_flash_start recruitment_button
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 3
+
+	ui_flash_stop
+
+	dismiss_advice
+
+	set_counter Construction_and_Recruitment_Tutorial 4
+
+
+;;;;*************************************************************************************************
+;;;; 	Settlement Scrolls Closed
+;;;;*************************************************************************************************
+
+	while I_CompareCounter SCROLL_OPEN = 0
+		and I_CompareCounter Construction_and_Recruitment_Tutorial = 4
+	end_while
+
+;	restart_timer Prompt_Timer
+
+;	monitor_conditions I_TimerElapsed Prompt_Timer >= 60000
+
+;		dismiss_advice
+
+;		while I_AdvisorVisible
+;		end_while
+;
+;		advance_advice_thread Prologue_First_Turn_Completed_Thread				;ADVICE End Turn #5110#: ignore the label it just tells the player to end turn when ready
+
+;		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+;			and I_AdvisorVisible
+;		end_while
+	
+;		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+;			and I_AdvisorVisible
+;		end_while
+	
+;		dismiss_advice
+	
+;		terminate_monitor
+;	end_monitor
+
+
+;;;;*************************************************************************************************
+;;;;	NB: MONITORING what the player builds once he has Tarquinii
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;	HAS THE PLAYER BUILT A Shrine of Jupiter???
+;;;;*************************************************************************************************
+
+	monitor_event BuildingCompleted SettlementBuildingExists = temple_of_leadership_shrine
+		and I_LocalFaction romans_julii
+
+		set_counter CONSTRUCTED_TEMPLES_AND_SHRINES 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter CONSTRUCTED_TEMPLES_AND_SHRINES = 1
+
+			campaign_wait 2
+			
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_Settlement_Garrisons_3_Thread	;ADVICE Settlements and Garrisons: Part 3 #6042#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 2
+		
+		terminate_monitor
+	end_monitor
+
+
+;;;;*************************************************************************************************
+;;;;	HAS THE PLAYER BUILT TEMPLE??
+;;;;*************************************************************************************************
+
+	monitor_event BuildingCompleted SettlementBuildingFinished = temple_of_leadership_temple
+		and I_LocalFaction romans_julii
+		and I_CompareCounter CONSTRUCTED_TEMPLES_AND_SHRINES = 0
+
+		set_counter CONSTRUCTED_TEMPLES_AND_SHRINES 2
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter CONSTRUCTED_TEMPLES_AND_SHRINES = 2
+	
+			campaign_wait 3	
+			
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_Settlement_Garrisons_3_Thread	;ADVICE Settlements and Garrisons: Part 3 #6042#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 2
+		
+		terminate_monitor
+	end_monitor
+
+
+;;;;*************************************************************************************************
+;;;;	HAS THE PLAYER BUILT Roads??
+;;;;*************************************************************************************************
+
+;;;;Test for roads being built
+
+	monitor_event BuildingCompleted SettlementBuildingFinished = paved_roads
+		and I_LocalFaction romans_julii
+
+		set_counter ROADS_BUILT 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter ROADS_BUILT = 1
+
+			campaign_wait 1
+			
+			dismiss_advice
+
+			while I_AdvisorVisible
+			end_while
+
+			advance_advice_thread Prologue_Settlement_Garrisons_4_Thread	;ADVICE Settlements and Garrisons: Part 4 #6043#
+
+			while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+			end_while
+
+			campaign_wait 2
+
+		terminate_monitor
+	end_monitor
+
+
+;;;;*************************************************************************************************
+;;;;	HAS THE PLAYER BUILT militia or other military units??
+;;;;	Test for units being built and how many player needs 4 militia
+;;;;*************************************************************************************************
+
+;;;; Give it a dry run. Should work with text added
+
+	monitor_conditions I_NumberUnitsInSettlement Tarquinii roman_city_militia = 1
+		and I_CompareCounter Town_Watch_Built = 0
+
+		campaign_wait 3
+
+		dismiss_advice
+
+		while I_AdvisorVisible
+		end_while
+
+		advance_advice_thread Prologue_Garrisons_03_Thread			;ADVICE: Garrisons #5233#
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		inc_counter Town_Watch_Built 1
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;*************************************************************************************************
+;;;; 	When Tarquinii is safe and developing
+;;;;	Trigger a war against the Samnites
+;;;;*************************************************************************************************
+;;;;*************************************************************************************************
+
+
+;;;;NEED COUNTER OF PLAYER HAVING BUILT ENOUGH UNITS AND SHRINE AND ROADS 
+
+	while I_TurnNumber < 7
+		and I_CompareCounter Town_Watch_Built = 0
+	end_while
+
+	senate_mission_take_city major_reward, Bovianum
+
+	campaign_wait 3
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_War_Samnites_1_Thread				;Advice 6060
+
+	set_counter BOVIANUM_SENATE_MISSION 1
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_Prod_The_Player_To_Select_01_Thread    ;ADVICE 5061 How to remove troops from a city
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	restart_timer Tutorial_Step_Timer						;this starts the Tutorial_Step_Timer timer
+
+	while I_TimerElapsed Tutorial_Step_Timer < 35000			;Do nothing for a few seconds 
+    end_while
+
+	dismiss_advice
+
+	while I_AdvisorVisible
+	end_while
+
+	advance_advice_thread Prologue_END_Thread			;What now? #6420#
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	console_command run_ai				; start the AI up again
+
+;;;;*************************************************************************************************
+;;;;	Tell player to wait before attacking Bovianum 
+;;;;	So that they have plenty of Action points to build seige weapons
+;;;;*************************************************************************************************
+
+	monitor_conditions I_FactionNearTile romans_julii 6 40, 43
+
+		dismiss_advice
+
+		while I_AdvisorVisible												;Indicate advisor
+		end_while
+
+		advance_advice_thread Prologue_Bovianum_02_Thread					; ADVICE BOVIANUM #6320# Get ready to beseige Bovianum	
+
+		while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 2
+
+		dismiss_advice
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;	Tell the player to take out Tarentum
+;;;;	This happens after capture of Bovianum
+;;;;	We delay so that the player has time to settle Bovianum
+;;;;*************************************************************************************************
+
+;Bovianum_captured
+
+	while I_CompareCounter BovianumCaptured = 0
+	end_while
+
+	monitor_event ButtonPressed ButtonPressed end_turn
+		set_counter	PressEndTurn 1
+		terminate_monitor
+	end_monitor
+
+	while I_CompareCounter PressEndTurn = 0
+	end_while
+
+	restart_timer Campaign_Map_Timer
+
+	while I_TimerElapsed Campaign_Map_Timer < 3000
+	end_while
+
+	suspend_unscripted_advice true
+
+	dismiss_advice
+
+	while I_AdvisorVisible												;
+	end_while
+
+	advance_advice_thread Prologue_Tarentum_Hostile_To_Rome_Thread		;ADVICE 6110
+
+	senate_mission_take_city major_reward, Tarentum
+
+	while not I_AdvisorSpeechPlaying							; waiting for the speech to start and advisor to be visible
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying								; waiting for speech to stop or be dismissed
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 2
+
+	dismiss_advice
+
+	declare_counter PROLOGUE_SCRIPT_OVER
+
+	inc_counter PROLOGUE_SCRIPT_OVER 1
+
+	while I_CompareCounter PROLOGUE_SCRIPT_OVER = 0
+	end_while
+
+	terminate_prologue			;; The easy bit is over let the game commence
+
+	terminate_script			;; no more scripty bits, just pure game
+	
+	;;;;No more script
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;									THE END OF THE SCRIPT
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

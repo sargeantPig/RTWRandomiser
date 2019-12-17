@@ -1,0 +1,1876 @@
+script
+
+; init
+	prepare_for_battle
+
+	;label_unit  ALLIANCE  ARMY  UNIT
+
+
+
+	label_unit 0 0 0	PLAYER_GENERAL
+	label_unit 0 0 1	PLAYER_LEGION1
+	label_unit 0 0 2	PLAYER_LEGION2
+	label_unit 0 0 3	PLAYER_ARCHER
+	label_unit 0 0 4	PLAYER_ONAGER1
+	label_unit 0 0 5	PLAYER_ONAGER2
+	label_unit 0 0 6	PLAYER_INF_AUX
+	label_unit 0 0 7	PLAYER_TRIARII
+  	label_unit 0 0 8	PLAYER_PRINCEPS
+	label_unit 0 0 9	PLAYER_HEAVY_CAVALRY
+	label_unit 0 0 10	PLAYER_PRAETORIAN_COHORT
+	label_unit 0 0 11	PLAYER_PRAETORIAN_COHORT_URBAN
+
+
+	label_unit 1 0 0	GERMAN_CAVALRY
+	label_unit 1 0 1	GERMAN_WARDOGS1
+	label_unit 1 0 2	GERMAN_AXEMEN1
+	label_unit 1 0 3	GERMAN_INFANTRY
+	label_unit 1 0 4	GERMAN_BERSERKERS
+	label_unit 1 0 5	GERMAN_WARDOGS2
+  	label_unit 1 0 6	GERMAN_ARCHER1
+	label_unit 1 0 7	GERMAN_ARCHER2
+   	label_unit 1 0 8	GERMAN_CHIEFTAIN
+	label_unit 1 0 9	GERMAN_WARGUARD
+	label_unit 1 0 10	GERMAN_CHOSEN_AXEMEN
+	label_unit 1 0 11	GERMAN_AXEMEN2
+	label_unit 1 0 12	GERMAN_AXEMEN3
+	label_unit 1 0 13	GERMAN_PELTASTS1
+   	label_unit 1 0 14	GERMAN_PELTASTS2
+
+	label_unit 1 1 0	GERMAN2_CHIEFTAIN
+	label_unit 1 1 1	GERMAN2_NOBLE_CAVALRY
+	label_unit 1 1 2	GERMAN2_CHOSEN_AXEMEN1
+	label_unit 1 1 3	GERMAN2_WARDOGS
+	label_unit 1 1 4	GERMAN2_PELTASTS
+	label_unit 1 1 5	GERMAN2_AXEMEN1
+  	label_unit 1 1 6	GERMAN2_AXEMEN2
+	label_unit 1 1 7	GERMAN2_ARCHER1
+   	label_unit 1 1 8	GERMAN2_ARCHER2
+	label_unit 1 1 9	GERMAN2_CHOSEN_AXEMEN2
+
+	declare_counter battle_start
+	declare_counter intro_sequence
+	declare_counter player_not_escape
+	declare_counter cancel_radius_monitors
+	declare_counter general_radius_monitor
+
+	camera_default_mode_set tw
+
+	define_unit_group GRP_PLAYER_ARMY PLAYER_LEGION1 PLAYER_LEGION2 PLAYER_ARCHER PLAYER_ONAGER1 PLAYER_ONAGER2 PLAYER_INF_AUX PLAYER_TRIARII PLAYER_PRINCEPS PLAYER_HEAVY_CAVALRY PLAYER_PRAETORIAN_COHORT PLAYER_PRAETORIAN_COHORT_URBAN
+		
+	define_unit_group GRP_GERMAN_ARMY GERMAN_CAVALRY GERMAN_WARDOGS1 GERMAN_AXEMEN1 GERMAN_INFANTRY GERMAN_BERSERKERS GERMAN_WARDOGS2 GERMAN_ARCHER1 GERMAN_ARCHER2 GERMAN_CHIEFTAIN GERMAN_WARGUARD GERMAN_CHOSEN_AXEMEN GERMAN_AXEMEN2 GERMAN_AXEMEN3 GERMAN_PELTASTS1 GERMAN_PELTASTS2
+
+
+
+
+
+;-----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------------
+
+;			OPEN SCRIPT SECTION
+
+;-----------------------------------------------------------------------------------------------------------
+;-----------------------------------------------------------------------------------------------------------
+
+	camera_default_mode_set tw
+
+	disable_cursor						;prevent the player clicking
+	suspend_unscripted_advice true
+	disable_shortcuts true		
+	disable_entire_ui
+	inhibit_camera_input true
+
+	ai_active_set off
+
+	set_counter intro_sequence 1	;	kicks off intro sequence
+
+	while ! I_BattleStarted					; battle_wait FOR DEPLOYMENT
+	end_while
+
+	hide_ui
+
+ 	camera_restrictions_set off
+
+
+;-----------------------------------------------------------------------------------------------------------
+	steal_esc_key
+
+	monitor_event EscPressed TrueCondition
+		set_counter battle_start 1
+	terminate_monitor
+	end_monitor
+;-----------------------------------------------------------------------------------------------------------
+
+
+
+
+
+;**********************************************************************************************************
+;**********************************************************************************************************
+;************************************** BATTLE MONITORS ****************************************************
+;**********************************************************************************************************
+;**********************************************************************************************************
+
+
+;-----------------------------------------------------------------
+;-------------- defining scripted ambush 2 etc -------------------
+;-----------------------------------------------------------------
+
+label_location 328.788 -332.350 ambush2_coord1
+label_location -91.723 96.89 ambush2_coord2
+
+declare_counter ambush2
+
+
+	monitor_conditions I_UnitEnemyUnitInRadius GERMAN_ARCHER2 170
+		release_unit GERMAN_ARCHER2
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_GENERAL ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_LEGION1 ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_LEGION2 ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ARCHER ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ONAGER1 ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ONAGER2 ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_INF_AUX ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_TRIARII ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_PRINCEPS ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_HEAVY_CAVALRY ambush2_coord1 ambush2_coord2 < 20
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_PRAETORIAN_COHORT ambush2_coord1 ambush2_coord2 < 10
+	and I_CompareCounter ambush2 = 0
+
+		unit_order_attack_closest_unit GERMAN_INFANTRY 179 run
+		unit_order_attack_closest_unit GERMAN_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN_AXEMEN3 179 run
+		unit_order_attack_closest_unit GERMAN_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN_CHIEFTAIN 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN_INFANTRY
+		release_unit GERMAN_ARCHER2
+		release_unit GERMAN_AXEMEN2
+		release_unit GERMAN_AXEMEN3
+		release_unit GERMAN_CAVALRY
+		release_unit GERMAN_CHIEFTAIN
+
+		set_counter ambush2 1
+	terminate_monitor
+	end_monitor	
+
+
+;-----------------------------------------------------------------
+;-------------- end of scripted ambush 2 --------------------
+;-----------------------------------------------------------------
+
+;-----------------------------------------------------------------
+;-------------- defining scripted ambush 3 etc -------------------
+;-----------------------------------------------------------------
+
+label_location -186.914 -788.926 ambush3_coord1
+label_location -303.038 -117.348 ambush3_coord2
+
+declare_counter ambush3
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_GENERAL ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_LEGION1 ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_LEGION2 ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ARCHER ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ONAGER1 ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_ONAGER2 ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_INF_AUX ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_TRIARII ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_PRINCEPS ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_HEAVY_CAVALRY ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+	
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_PRAETORIAN_COHORT ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+
+	monitor_conditions I_UnitDistanceFromLine PLAYER_PRAETORIAN_COHORT_URBAN ambush3_coord1 ambush3_coord2 < 20
+	and I_CompareCounter ambush3 = 0
+
+		unit_order_attack_closest_unit GERMAN2_CHIEFTAIN 179 run
+		unit_order_attack_closest_unit GERMAN2_NOBLE_CAVALRY 179 run
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_WARDOGS 179 run
+		unit_order_attack_closest_unit GERMAN2_PELTASTS 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN1 179 run
+		unit_order_attack_closest_unit GERMAN2_AXEMEN2 179 run
+		unit_order_attack_closest_unit GERMAN2_ARCHER1 179
+		unit_order_attack_closest_unit GERMAN2_ARCHER2 179
+		unit_order_attack_closest_unit GERMAN2_CHOSEN_AXEMEN2 179 run
+
+		battle_wait 40
+
+		release_unit GERMAN2_CHIEFTAIN
+		release_unit GERMAN2_NOBLE_CAVALRY
+		release_unit GERMAN2_CHOSEN_AXEMEN1
+		release_unit GERMAN2_WARDOGS
+		release_unit GERMAN2_PELTASTS
+		release_unit GERMAN2_AXEMEN1
+		release_unit GERMAN2_AXEMEN2
+		release_unit GERMAN2_ARCHER1
+		release_unit GERMAN2_ARCHER2
+		release_unit GERMAN2_CHOSEN_AXEMEN2
+
+		set_counter ambush3 1
+	terminate_monitor
+	end_monitor	
+
+;-------------------------- END OF AMBUSH MONITORS -----------------------------------
+
+
+
+	; *********************************************************************************************
+	; *********************************************************************************************
+	;	Start of battle - BATTLESTART MONITOR
+	; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter battle_start = 1
+
+	if I_CompareCounter player_not_escape = 0
+
+	stop_sound_event teuto_SPEECH_00
+	stop_sound_event teuto_SPEECH_01
+	stop_sound_event teuto_SPEECH_02
+	stop_sound_event teuto_SPEECH_03
+	stop_sound_event teuto_SPEECH_04
+	stop_sound_event teuto_SPEECH_05
+	stop_sound_event teuto_SPEECH_06
+	stop_sound_event teuto_SPEECH_07
+	stop_sound_event teuto_SPEECH_08
+	stop_sound_event teuto_SPEECH_09
+	stop_sound_event teuto_SPEECH_10
+
+	hiding_enabled_set true
+
+	set_camera_bookmark 8, -828.477, 499.774, -826.176 -774.271, 469.828, -783.464	; 
+	camera_position_at_bookmark 8
+
+	steal_esc_key off
+
+	battle_wait 1
+
+	set_camera_bookmark 9, -98.682, 735.935, -262.287 -91.8148, 732.141, -256.876	; 
+	camera_zoom_to_bookmark 9 80
+
+;	undefine_unit_group GRP_PLAYER_ARMY
+;	undefine_unit_group GRP_GERMAN_ARMY
+
+	unit_immediate_place PLAYER_GENERAL 357.250368, 163.055792, 179.98848
+	unit_immediate_place PLAYER_LEGION1 358.94096, 275.206496, 178.989264
+	unit_immediate_place PLAYER_LEGION2 358.81808, 70.091584, 176.00096
+	unit_immediate_place PLAYER_ARCHER 354.774112, 87.078656, 178.000496
+	unit_immediate_place PLAYER_ONAGER1 356.950656, 132.614288, -179.011232
+	unit_immediate_place PLAYER_ONAGER2 359.905792, 150.935456, 179.86816
+	unit_immediate_place PLAYER_INF_AUX 361.17216, 183.033456, 178.989264
+	unit_immediate_place PLAYER_TRIARII 360.183072, 211.0184, 179.86816
+	unit_immediate_place PLAYER_PRINCEPS 359.903488, 243.204368, 178.989264
+	unit_immediate_place PLAYER_HEAVY_CAVALRY 358.681152, 105.03248, 179.9176
+	unit_immediate_place PLAYER_PRAETORIAN_COHORT 357.02912, 345.185344, 178.000496
+	unit_immediate_place PLAYER_PRAETORIAN_COHORT_URBAN 358.331296, 307.68896, 178.000496
+
+	unit_immediate_place GERMAN_CAVALRY 118.965424, -394.063168, .999756
+;	unit_immediate_place GERMAN_WARDOGS1 433.386944, 295.867424, -135.285648
+	unit_immediate_place GERMAN_AXEMEN1 296.58944, 160.448768, 95.130616
+	unit_immediate_place GERMAN_INFANTRY 35.196, -16.657, 109
+	unit_immediate_place GERMAN_BERSERKERS 403.730752, 141.699776, -84.325552
+	unit_immediate_place GERMAN_WARDOGS2 445.524512, 185.407824, -86.286624
+	unit_immediate_place GERMAN_ARCHER1 445.979872, 74.23756, -68.999632
+	unit_immediate_place GERMAN_ARCHER2 192.772432, -198.714304, 45.0
+	unit_immediate_place GERMAN_CHIEFTAIN 121.327352, -417.449984, 7.998047
+	unit_immediate_place GERMAN_WARGUARD 393.353248, 182.11048, -94.443968
+	unit_immediate_place GERMAN_CHOSEN_AXEMEN 282.269216, 201.691408, 95.685424
+	unit_immediate_place GERMAN_AXEMEN2 72.038288, 7.398176, 161.998896
+	unit_immediate_place GERMAN_AXEMEN3 58.947532, -20.768344, 125.002432
+	unit_immediate_place GERMAN_PELTASTS1 282.379808, 169.674528, 97.069704
+	unit_immediate_place GERMAN_PELTASTS2 401.077408, 215.0584, -100.640248
+
+	unit_immediate_place GERMAN2_CHIEFTAIN -282.492, -538.108, -153.81408
+
+;	unit_immediate_place GERMAN2_CHIEFTAIN -47.219304, -115.643064, -153.81408
+	unit_immediate_place GERMAN2_NOBLE_CAVALRY -295.277984, -541.848576, 68.999632
+	unit_immediate_place GERMAN2_CHOSEN_AXEMEN1 -301.162208, -588.151936, 77.99744
+	unit_immediate_place GERMAN2_WARDOGS -587.711, -181.701, 8.997804
+	unit_immediate_place GERMAN2_PELTASTS -232.206816, -382.77792, 30.997922
+	unit_immediate_place GERMAN2_AXEMEN1 -578.160, -166.015, 174.001472
+	unit_immediate_place GERMAN2_AXEMEN2 -296.143, -528.794, 45
+	unit_immediate_place GERMAN2_ARCHER1 -362.850912, -281.190048, 88.00048
+	unit_immediate_place GERMAN2_ARCHER2 -264.199936, -756.217216, 37.001952
+	unit_immediate_place GERMAN2_CHOSEN_AXEMEN2 -225.596336, -782.348352, -26.998902
+
+
+	battle_wait 1
+
+;	play_sound_event TEUTOBURG_SPEECH_09		;
+
+	battle_wait 3
+
+;	play_sound_event TEUTOBURG_SPEECH_10		;
+
+	set_camera_bookmark 10, 355.62, 401.646, 45.8335 354.398, 30.7014, 1197.62
+ 	camera_zoom_to_bookmark 10
+
+	battle_wait 9
+
+	end_if
+
+	hiding_enabled_set true
+
+	show_ui
+
+	enable_cursor						;enable player to click
+	disable_shortcuts false	
+	inhibit_camera_input false
+	enable_entire_ui
+
+	advance_advice_thread Teutoburgerwald_intro_Thread		;;;	"Get 100 men to fort"
+
+	camera_restrictions_set on
+
+	camera_default_mode_set user_pref
+
+	undefine_unit_group GRP_PLAYER_ARMY
+	undefine_unit_group GRP_GERMAN_ARMY
+
+	pause_battle
+
+	suspend_unscripted_advice false
+
+
+;--------------------------------- attack orders -------------------------------
+	unit_order_attack_unit GERMAN_ARCHER1 PLAYER_ARCHER run
+
+	unit_order_attack_unit GERMAN_BERSERKERS PLAYER_HEAVY_CAVALRY run
+
+	unit_order_attack_unit GERMAN_WARDOGS2 PLAYER_ONAGER2 run
+
+	unit_order_attack_unit GERMAN_WARGUARD PLAYER_INF_AUX run
+
+	unit_order_attack_unit GERMAN_PELTASTS2 PLAYER_TRIARII run
+
+	unit_order_attack_unit GERMAN_WARDOGS1 PLAYER_PRINCEPS run
+
+	unit_order_attack_unit GERMAN_AXEMEN1 PLAYER_HEAVY_CAVALRY run
+	unit_order_attack_unit GERMAN_PELTASTS1 PLAYER_ONAGER2 run
+	unit_order_attack_unit GERMAN_CHOSEN_AXEMEN PLAYER_INF_AUX run
+;---------------------------------------------------------------------------------
+
+	set_music_state battle
+
+	battle_wait 20
+
+; -------- releasing German army to ai control -------------
+
+
+;	release_unit GERMAN_WARGUARD
+;	release_unit GERMAN_CHOSEN_AXEMEN
+;	release_unit GERMAN_PELTASTS1
+;	release_unit GERMAN_PELTASTS2
+
+release_unit	GERMAN_WARDOGS1
+release_unit	GERMAN_AXEMEN1
+release_unit	GERMAN_BERSERKERS
+release_unit	GERMAN_WARDOGS2
+release_unit	GERMAN_ARCHER1
+release_unit	GERMAN_WARGUARD
+release_unit	GERMAN_CHOSEN_AXEMEN
+release_unit	GERMAN_PELTASTS1
+release_unit	GERMAN_PELTASTS2
+
+
+	terminate_monitor
+	end_monitor	
+
+
+; *********************************************************************************************
+; ********************* END OF BATTLE START MONITOR *******************************************
+; *********************************************************************************************
+
+
+
+
+
+
+
+
+
+; *********************************************************************************************
+; *********************************************************************************************
+;			Intro sequence - INTRO MONITOR
+; *********************************************************************************************
+; *********************************************************************************************
+
+
+	monitor_conditions I_CompareCounter intro_sequence = 1
+
+
+; ----------------- set intro sequence bookmarks -------------------------------------------------------
+;						   x value   y value  z value
+
+set_camera_bookmark 1, 742.944, 565.846, 814.606 742.691, 565.763, 804.614	;distance shot
+	
+;set_camera_bookmark 2, 366.798, 387.578, 832.29 357.462, 387.853, 828.714	;zoom to Varus
+set_camera_bookmark 2, 365.643, 388.465, 834.803 351.255, 385.5, 816.729	;zoom to Varus
+	
+set_camera_bookmark 3, 326.255, 385.241, 817.023 318.85, 383.302, 810.455	;cut to Arminius
+
+set_camera_bookmark 4, 366.368, 387.715, 832.397 356.756, 387.483, 829.816	;cut back to Varus
+
+set_camera_bookmark 5, 334.513, 385.789, 819.312 308.135, 376.884, 785.961	;pull back from Arminius
+
+set_camera_bookmark 6, 362.126, 389.755, 840.371 357.711, 387.627, 831.547	;pan slowly around varus
+
+set_camera_bookmark 7, 366.368, 387.715, 832.397 361.396, 387.483, 823.775
+	
+set_camera_bookmark 8, 394.168, 379.435, 759.063 384.784, 381.469, 762.167	; 
+
+set_camera_bookmark 9, 372.57, 378.077, 743.612 351.216, 384.271, 745.674	; 
+
+;set_camera_bookmark 10, 345.903, 376.208, 688.567 347.237, 376.841, 698.477	; 
+;set_camera_bookmark 10, 362.838, 379.352, 722.831 354.902, 378.683, 728.845	; 
+
+set_camera_bookmark 10, 365.109, 380.916, 722.927 357.139, 381.235, 728.967
+
+set_camera_bookmark 11, 315.447, 373.05, 623.694 319.717, 371.77, 632.558	; 
+
+;set_camera_bookmark 12, 349.229, 376.682, 592.653 349.588, 377.516, 582.66	; 
+set_camera_bookmark 12, 349.004, 375.161, 600.495 348.882, 374.612, 590.579	; 
+
+set_camera_bookmark 13, 349.229, 405.162, 592.653 349.588, 405.996, 582.66	; 
+
+set_camera_bookmark 14, 462.196, 388.875, 221.916 459.331, 387.766, 229.01	; 
+
+set_camera_bookmark 15, 465.821, 389.908, 213.272 457.7, 388.868, 218.828	; 
+
+set_camera_bookmark 16, 331.944, 373.359, 640.29 322.557, 375.237, 637.035
+
+;set_camera_bookmark 17, 368.142, 376.053, 654.749 358.701, 375.96, 651.475
+
+set_camera_bookmark 17, 363.518, 376.252, 620.534 -59.3998, 347.536, 541.823
+
+;set_camera_bookmark 18, 208.564, 577.728, 69.1884 202, 576.621, 61.8156	; cut to fort
+;set_camera_bookmark 19, 502.802, 631.983, 850 500.951, 629.972, 840.29	; 
+
+set_camera_bookmark 18, 293.772, 647.123, 278.107 288.158, 646.248, 269.855	; cut to fort
+
+set_camera_bookmark 19, 426.217, 638.558, 472.801 420.604, 637.684, 464.549	; 
+
+set_camera_bookmark 20, 353.139, 378.407, 501.176 350.608, 380.303, 491.544	; 
+
+set_camera_bookmark 21, 364.59, 383.216, 790.199 358.043, 383.107, 782.65	; 
+
+
+
+	unit_set_morale		PLAYER_GENERAL			high
+	unit_set_morale		PLAYER_LEGION1			high
+	unit_set_morale		PLAYER_LEGION2			high
+	unit_set_morale		PLAYER_ARCHER			high
+	unit_set_morale		PLAYER_ONAGER1			high
+	unit_set_morale		PLAYER_ONAGER2			high
+	unit_set_morale 	PLAYER_INF_AUX			high
+	unit_set_morale 	PLAYER_TRIARII			high
+	unit_set_morale 	PLAYER_PRINCEPS			high
+	unit_set_morale 	PLAYER_HEAVY_CAVALRY		high
+	unit_set_morale 	PLAYER_PRAETORIAN_COHORT	high
+	unit_set_morale 	PLAYER_PRAETORIAN_COHORT_URBAN	high
+   					
+;	unit_set_morale		GERMAN_CAVALRY		   	high
+;	unit_set_morale		GERMAN_WARDOGS1		  	high
+;	unit_set_morale		GERMAN_AXEMEN1        		high
+;	unit_set_morale		GERMAN_INFANTRY			high
+;	unit_set_morale		GERMAN_BERSERKERS     		high
+;	unit_set_morale		GERMAN_WARDOGS2     		high
+;	unit_set_morale		GERMAN_ARCHER1        		high
+;	unit_set_morale		GERMAN_ARCHER2        		high
+;	unit_set_morale		GERMAN_CHIEFTAIN      		high
+;	unit_set_morale		GERMAN_WARGUARD			high
+;	unit_set_morale		GERMAN_CHOSEN_AXEMEN  		high
+;	unit_set_morale		GERMAN_AXEMEN2      		high
+;	unit_set_morale		GERMAN_AXEMEN3      		high
+;	unit_set_morale	  	GERMAN_PELTASTS1		high
+;	unit_set_morale	  	GERMAN_PELTASTS2		high
+						
+
+
+	; *********************************************************************************************
+	;	Player unit settings
+	; *********************************************************************************************
+
+
+	unit_set_fire_at_will_mode PLAYER_ARCHER off
+	unit_set_fire_at_will_mode GERMAN_ARCHER1 off
+	unit_set_fire_at_will_mode GERMAN_ARCHER2 off
+
+
+	; *********************************************************************************************
+	;	Start sequence
+	; *********************************************************************************************
+
+
+	; this will tell music tracker to play the specified custom music event
+	set_music_state custom TEUTOBURG_INTRO_MUSIC
+
+	battle_default_camera
+
+ 	camera_restrictions_set off
+
+	hide_ui
+
+	hiding_enabled_set true
+
+	camera_position_at_bookmark 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	; trigger prebattle speech
+	play_sound_event TEUTOBURG_SPEECH_00 tag = teuto_SPEECH_00
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_01 tag = teuto_SPEECH_01
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_group_order_relative_move_formed GRP_PLAYER_ARMY 0 300
+
+	battle_wait 2.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 2			; zoom down to varus
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_02 tag = teuto_SPEECH_02
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 6 2			; pan around Varus
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;; barb chieftain moves and talks to player general then runs off ;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+	unit_order_move GERMAN2_CHIEFTAIN 359.432, 820.581	;just in front of start pos for player general
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_03 tag = teuto_SPEECH_03
+
+
+
+	camera_position_at_bookmark 3			; close-up Arminius
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 5 1.2			; pan back from Arminius
+
+	battle_wait 2.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 4			; cut to Varus
+
+
+	unit_order_move GERMAN2_CHIEFTAIN 311.698, 671.994 run	;just SW of river
+;	unit_order_move GERMAN2_CHIEFTAIN 356.431 692.633 run	;just SW of river
+;	unit_order_move GERMAN2_CHIEFTAIN 356.431 694.633 run	;just SW of river
+;	unit_order_move GERMAN2_CHIEFTAIN 350.431 694.633 run	;just SW of river
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; player army moves ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move PLAYER_GENERAL 335.698, 580.994 run	; just South-West of river crossing
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 7			; pan to view Varus gallop off
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	set_camera_bookmark 4, 366.968, 384.655, 806.563 357.009, 384.941, 807.433
+	camera_position_at_bookmark 4			; cheeky steal
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 21			; cut to Arminius gallopinging into river
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 8			; cut to Arminius and Varus galloping in river
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 9 6			; pan forward to Arminius galloping across river
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 10			; cut to Arminius galloping out of river
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move GERMAN2_CHIEFTAIN -304.749 -634.947 run	; back to guard camp
+
+	play_sound_event TEUTOBURG_SPEECH_04 tag = teuto_SPEECH_04		;THANKS TO ARMINIUS
+
+	battle_wait 1.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move PLAYER_GENERAL 335.698, 580.994	; WALK VARUS
+
+	camera_position_at_bookmark 12			;cut to behind roman army
+
+;	unit_order_move GERMAN2_CHIEFTAIN -304.749 -634.947 run	; back to guard camp
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 13 1			; pan slowly behind roman army
+
+	hiding_enabled_set false
+
+	battle_default_camera
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 14			; cut to barbs in trees
+
+	battle_wait 0.1
+	unit_order_move PLAYER_GENERAL 335.698, 580.994 run	; GALLOP VARUS TO FRONT OF COLUMN
+
+	camera_zoom_to_bookmark 15 1			; pan left behind barbs in trees
+
+	battle_wait 6
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 16	; Arminius gallops past camera
+
+	play_sound_event TEUTOBURG_SPEECH_05 tag = teuto_SPEECH_05		; AS THE DANGER BECOMES OBVIOUS ....
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 17 15	; pan towards Varus
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+;	camera_position_at_bookmark 11			; VARUS GALLOPS BY
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	hiding_enabled_set true
+
+	camera_position_at_bookmark 18	; cut to fort
+
+	play_sound_event TEUTOBURG_SPEECH_06 tag = teuto_SPEECH_06		; MUST GET TO THE FORT
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 19 15	; zoom back from fort
+
+	battle_wait 7
+
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 20	; move down to behind army
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_07 tag = teuto_SPEECH_07		;
+
+	battle_wait 6
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+
+	battle_wait 3
+
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;; NEW BOOKMARKS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;						   x value   y value  z value
+
+set_camera_bookmark 1, 246.218, 403.218, 177.151 237.003, 405.445, 173.666
+	
+set_camera_bookmark 2, 249.865, 403.058, 157.805 240.215, 404.4, 155.945
+
+set_camera_bookmark 3, 241.605, 404.968, 160.147 248.041, 403.387, 167.437
+
+set_camera_bookmark 4, 352.145, 375.278, 558.415 351.277, 375.023, 568.328
+
+;set_camera_bookmark 5, 351.522, 376.925, 457.683 350.924, 378.081, 467.086	; close to legion
+;set_camera_bookmark 6, 352.006, 377.25, 450.066 351.757, 377.731, 453.98	; pan back from legion
+
+;set_camera_bookmark 5, 352.373, 378.573, 428.216 351.748, 376.782, 438.112	; close to legion
+;set_camera_bookmark 6, 352.993, 378.916, 418.414 352.367, 377.125, 428.309	; pan back from legion
+
+set_camera_bookmark 5, 366.809, 379.723, 365.757 361.436, 380.545, 374.045	; close to legion
+
+set_camera_bookmark 6, 366.101, 380.069, 359.583 360.664, 380.917, 367.969	; pan back from legion
+
+set_camera_bookmark 7, 352.145, 375.278, 558.415 351.277, 375.023, 568.328
+
+;set_camera_bookmark 8, 573.339, 566.52, 4.69172 514.274, 547.11, 3.17219
+
+set_camera_bookmark 9, -254.098, 573.653, -416.007 -246.503, 571.604, -410.023
+
+set_camera_bookmark 8, -828.477, 499.774, -826.176 -774.271, 469.828, -783.464
+
+;set_camera_bookmark 9, -98.682, 735.935, -262.287 -91.8148, 732.141, -256.876
+
+;set_camera_bookmark 10, 362.794, 380.874, 200.351 149.109, 387.097, 383.513
+
+set_camera_bookmark 10, 355.62, 401.646, 45.8335 354.398, 30.7014, 1197.62
+
+set_camera_bookmark 11, 436.002, 407.865, 296.26 431.624, 406.223, 307.229
+
+set_camera_bookmark 12, 434.975, 408.759, 300.453 337.536, 366.948, 459.74
+
+;set_camera_bookmark 13, 350.594, 381.561, 234.477 360.566, 380.84, 233.759
+
+set_camera_bookmark 13, 344.732, 382.375, 237.71 354.69, 382.498, 238.028
+
+set_camera_bookmark 14, 485.352, 399.899, 135.489 476.92, 399.041, 140.623
+
+set_camera_bookmark 15, 464.562, 391.378, 258.048 454.723, 390.386, 257.607
+
+set_camera_bookmark 16, 454.039, 390.315, 262.577 452.131, 389.843, 258.307
+
+set_camera_bookmark 17, 361.672, 380.393, 197.199 251.75, 386.52, 160.592
+;set_camera_bookmark 17, 363.305, 380.558, 190.128 355.588, 381.092, 183.772
+
+;set_camera_bookmark 18, 337.127, 383.681, 168.181 342.383, 383.859, 176.682
+set_camera_bookmark 18, 338.795, 380.652, 173.345 342.975, 382.464, 182.368
+
+;set_camera_bookmark 19, 244.418, 404.996, 136.297 251.028, 401.453, 143.369
+;set_camera_bookmark 19, 242.029, 405.002, 157.393 251.26, 402.462, 160.802
+set_camera_bookmark 19, 240.56, 406.771, 157.212 245.384, 405.509, 158.77
+
+set_camera_bookmark 20, 246.133, 404.671, 154.804 433.646, 355.206, 220.612
+;set_camera_bookmark 20, 434.451, 384.28, 225.861 444.163, 384.93, 223.778
+
+;set_camera_bookmark 21, 422.874, 390.092, 137.673 432.807, 390.742, 137.774
+
+;set_camera_bookmark 21, 440.576, 393.75, 127.061 440.336, 394.528, 136.943
+set_camera_bookmark 21, 439.934, 394.63, 124.19 439.692, 393.8, 134.181
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+	camera_position_at_bookmark 5	; level with legionnaries
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 6 1	; panning alongside legionnaries
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_08 tag = teuto_SPEECH_08		;
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position 353.325, 388.462, 200.35 353.446, 387.083, 210.17
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position -740.608, 568.182, -811.069 -734.763, 565.66, -803.54
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_09 tag = teuto_SPEECH_09		; THE CAMP IS IN SITE ***********
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 10	; zoom down to front of roman army
+
+	hiding_enabled_set false
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	play_sound_event TEUTOBURG_SPEECH_10 tag = teuto_SPEECH_10		;
+
+	battle_wait 6
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 3	; cut to behind Barbs in forest
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 1	; Barbs in forest frontview
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 2 1	; pan across front of barbs in forest
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 11	; cut to wardogs
+
+	battle_wait 0.1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 12 1	; pan up from wardogs
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 13	; cut to legion with barbs behind
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 14	; behind berserkers
+
+	battle_wait 0.1
+
+	camera_zoom_to_bookmark 15 15	; pan over berserkers to GERMAN_PELTASTS2
+
+	battle_wait 10
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move_relative GERMAN_PELTASTS2 0 20
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 16	; look left from GERMAN_PELTASTS2
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move_relative GERMAN_WARGUARD 0 20
+	unit_order_move_relative GERMAN_WARDOGS2 0 20
+	unit_order_move_relative GERMAN_BERSERKERS 0 20
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	set_music_state custom TEUTOBURG_BATTLE_MUSIC
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 17	; alongside the horses
+
+	battle_wait 7
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 18	; in front of horses
+
+	battle_wait 5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 19	; behind barbs in trees
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_move_relative GERMAN_AXEMEN1 0 20
+;	unit_order_move_relative GERMAN_PELTASTS1 0 20
+;	unit_order_move_relative GERMAN_CHOSEN_AXEMEN 0 20
+
+	unit_order_move PLAYER_GENERAL 322.439 344.856 run	; alongside army
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 20 1	; zoom across axemen
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_taunt GERMAN_BERSERKERS
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 21	; berserkers taunt
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_taunt GERMAN_WARGUARD
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+;;;;;;;;;;;;;;;;;;;;;;;;; NEW BOOKMARKS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;						   x value   y value  z value
+
+
+set_camera_bookmark 1, 432.299, 384.736, 227.949 438.462, 385.605, 220.193
+	
+set_camera_bookmark 2, 435.187, 387.52, 263.66 440.177, 386.303, 255.023
+
+set_camera_bookmark 3, 452.263, 397.94, 73.9032 445.136, 396.299, 80.5856
+
+;set_camera_bookmark 4, 358.188, 382.815, 124.498 349.649, 382.261, 129.539
+set_camera_bookmark 4, 362.287, 383.881, 141.717 269.997, 377.855, 196.282
+
+set_camera_bookmark 5, 284.624, 392.878, 141.245 278.439, 395.104, 148.964
+
+set_camera_bookmark 6, 433.998, 395.091, 126.521 430.273, 394.671, 135.795
+
+set_camera_bookmark 7, 271.14, 398.332, 164.527 263.178, 398.404, 170.542
+
+set_camera_bookmark 8, 275.351, 395.652, 161.298 284.931, 393.608, 161.918
+
+;set_camera_bookmark 9, 331.93, 380.272, 350.743 325.705, 380.743, 358.509
+
+set_camera_bookmark 9, 331.555, 380.241, 341.012 324.384, 379.615, 347.98
+
+set_camera_bookmark 10, 329.776, 382.517, 353.99 326.544, 382.512, 344.539
+
+set_camera_bookmark 11, 291.288, 389.907, 335.053 299.529, 389.552, 329.401
+
+set_camera_bookmark 12, 418.759, 385.686, 172.093 423.096, 387.103, 181.057
+
+set_camera_bookmark 13, 416.947, 387.674, 215.295 414.921, 387.236, 205.573
+
+set_camera_bookmark 14, 370.696, 428.473, -1.56128 369.953, 425.291, 8.04706
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+
+
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 1	; german warguard taunt
+
+	unit_taunt GERMAN_PELTASTS2
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+;	unit_taunt GERMAN_PELTASTS2
+
+	unit_order_attack_unit GERMAN_ARCHER1 PLAYER_HEAVY_CAVALRY
+
+	battle_wait 1
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 2	; german peltasts taunt
+
+;	unit_order_attack_unit GERMAN_ARCHER1 PLAYER_HEAVY_CAVALRY
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 3	; barb archers fire
+
+	battle_wait 4.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 4	; follow arrows
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_turn PLAYER_HEAVY_CAVALRY -90 relative
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 9	; player general
+
+	unit_order_move PLAYER_GENERAL 322.439 144.856 run	; to front of column
+
+	battle_wait 2.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_attack_unit GERMAN_AXEMEN1 PLAYER_HEAVY_CAVALRY run
+	unit_order_attack_unit GERMAN_PELTASTS1 PLAYER_ONAGER2 run
+	unit_order_attack_unit GERMAN_CHOSEN_AXEMEN PLAYER_INF_AUX run
+
+
+	camera_position_at_bookmark 10	; player from behind
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 11	; player from angle
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 5	; charging barbs
+
+	unit_order_move PLAYER_GENERAL 346.753 102.542 run	; to front of column
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_zoom_to_bookmark 7 4	; pan in front of barbs
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 8 	; barbs charge under camera
+
+
+;;;;; ATTACK ORDERS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+	unit_order_attack_unit GERMAN_ARCHER1 PLAYER_ARCHER run
+
+	unit_order_attack_unit GERMAN_BERSERKERS PLAYER_HEAVY_CAVALRY run
+
+	unit_order_attack_unit GERMAN_WARDOGS2 PLAYER_ONAGER2 run
+
+	unit_order_attack_unit GERMAN_WARGUARD PLAYER_INF_AUX run
+
+	unit_order_attack_unit GERMAN_PELTASTS2 PLAYER_TRIARII run
+
+	unit_order_attack_unit GERMAN_WARDOGS1 PLAYER_PRINCEPS run
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 6 	; charging berserkers
+
+	unit_order_move_relative GERMAN_AXEMEN1 0 -10
+	unit_order_move_relative GERMAN_PELTASTS1 0 -10
+	unit_order_move_relative GERMAN_CHOSEN_AXEMEN 0 -10 
+
+	battle_wait 2
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 12 	; charging wardogs
+
+;--------------------------------------------------------------------
+
+;	unit_immediate_place PLAYER_HEAVY_CAVALRY 358.681152, 105.03248, 179.9176
+;	unit_immediate_place PLAYER_GENERAL 357.250368, 163.055792, 179.98848
+
+	unit_immediate_place GERMAN2_AXEMEN1 -578.160, -166.015, 174.001472
+	unit_immediate_place GERMAN2_WARDOGS -587.711, -181.701, 8.997804
+	unit_immediate_place GERMAN2_AXEMEN2 -296.143, -528.794, 45
+
+	unit_immediate_place PLAYER_GENERAL 357.250368, 163.055792, 179.98848
+	unit_immediate_place PLAYER_LEGION1 358.94096, 275.206496, 178.989264
+	unit_immediate_place PLAYER_LEGION2 358.81808, 70.091584, 176.00096
+	unit_immediate_place PLAYER_ARCHER 354.774112, 87.078656, 178.000496
+	unit_immediate_place PLAYER_ONAGER1 356.950656, 132.614288, -179.011232
+	unit_immediate_place PLAYER_ONAGER2 359.905792, 150.935456, 179.86816
+	unit_immediate_place PLAYER_INF_AUX 361.17216, 183.033456, 178.989264
+	unit_immediate_place PLAYER_TRIARII 360.183072, 211.0184, 179.86816
+	unit_immediate_place PLAYER_PRINCEPS 359.903488, 243.204368, 178.989264
+	unit_immediate_place PLAYER_HEAVY_CAVALRY 358.681152, 105.03248, 179.9176
+	unit_immediate_place PLAYER_PRAETORIAN_COHORT 357.02912, 345.185344, 178.000496
+	unit_immediate_place PLAYER_PRAETORIAN_COHORT_URBAN 358.331296, 307.68896, 178.000496
+
+;--------------------------------------------------------------------
+
+;	battle_wait 2
+
+	battle_wait 0.5
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	camera_position_at_bookmark 13 	; charging berserkers
+
+	battle_wait 3
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	unit_order_attack_unit GERMAN_AXEMEN1 PLAYER_HEAVY_CAVALRY run
+	unit_order_attack_unit GERMAN_PELTASTS1 PLAYER_ONAGER2 run
+	unit_order_attack_unit GERMAN_CHOSEN_AXEMEN PLAYER_INF_AUX run
+
+;	camera_zoom_to_bookmark 14 	; distance
+
+	set_camera_bookmark 10, 355.62, 401.646, 45.8335 354.398, 30.7014, 1197.62
+ 	camera_zoom_to_bookmark 10
+
+	battle_wait 4
+
+	while I_CompareCounter battle_start = 1		; PLAYER CAN ESCAPE
+	end_while					; PLAYER CAN ESCAPE
+
+	set_counter player_not_escape 1	  
+	set_counter battle_start 1	  
+
+	terminate_monitor
+	end_monitor
+
+
+
+	; *********************************************************************************************
+	; ********************* END OF INTRO SEQUENCE MONITOR *******************************************
+	; *********************************************************************************************
+
+
+	while I_InBattle
+	end_while
+
+	end_script
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1466 @@
+;	
+;	This file is a template for how a world specification file is laid out. The world specification is one
+;	of the more complex script files used by Romans - it basically initialises the world into a given 
+;	state by adding first independent items such as the date, buildings and roads, then starts adding 
+;	factions and within each faction adds armys and within each army adds units. 
+;
+;	At the bottom of the world specification, a section called 'battle' can be placed, in which a battle 
+;	can be specified, which will commence immediately when the game starts running. This is the way to 
+;	create a very limited world spec for a given historical battle.
+;	
+;
+;	;						indicates a comment ;-)
+;
+;	>>>> start of global items section <<<<
+;
+;	landmarks				landmark type, strat map position
+;							Mausoleum at Halicarnassus
+;							Temple of Artemis at Ephesus
+;							Statue of Zeus at Olympia
+;							Pharos at Alexandria
+;							Pyramids of Giza
+;							Sphinx		
+;
+;	resources				resource type, level, strat map position
+;							gold, silver, copper, tin, iron, marble
+;
+;
+;	date					starting data, stored as a year since the founding of Rome and 
+;								either 'summer' or 'winter'
+;
+;							from the founding of Rome ( c.753 BC)... the main campaign will 
+;							start about 300 BC, which is year 453 AUC in the Roman calender, 
+;							and the finishing date for the campaign would be about 25 BC, 
+;							which is year 728 AUC. This equates to 550 turns.
+;
+;
+;	>>>> start of factions section <<<<
+;
+;	faction					adds a new faction to the world, valid factions are:
+;
+;							denari
+;							poll_tax
+;
+;								romans julii, romans brutii, romans scipii, macedon, 
+;								egypt, seleucid, carthage, parthia, pontus, gauls,  
+;								germans, britons, armenia, dacia, illyria, numidia,  
+;								scythia, spain, thrace, slave
+;
+;	NB. when a faction is created it must have a faction head named character to exist
+;
+;   settlement				beginning 'settlement', with a brace-delimited section (each brace on its own line)
+;							parsed as specified by settlement_db:
+;				settlement
+;				{
+;(required:)
+;					level city
+;					next_building_id 1
+;					fortification 0
+;					population 1000
+;					settlement_tax 5
+;					plan_set <plan_set_id>
+;					tile	x z
+;					name	i
+;(optional:)
+;					position_offset x z         (metres offset of plan from tile centre, defaults to 0,0 - rounded to terrain tile corner)
+;					faction_creator roman_julii (faction that created the settlement at its current level, 
+;												 defaults to the current owner's faction if not present.  Dictates plan used.)
+;
+;(optional, but once one building seen, only buildings allowed for rest of settlement section:)
+;					building
+;					{
+;						; Format as specified in building_db parsing.  
+;	(required:)
+;						type roman_strongroom strongroom  - Building tech tree type, then level
+;	(optional, in any order:)
+;						health 100%					- Can be given as percentage OR as explicit value (clamped to max health for building), defaults to max health
+;						position_offset x z			- Positioning is metres offset from plan centre, and acts only as a guide - the 
+;													- building will be placed in the nearest free position.  Position values are optional, 
+;													- defaults to 0,0. 
+;						plugin tax_collector senior_tax_collector                          
+;					}
+;				}
+;
+;
+;	character				adds a new character to the current faction, must be followed by:
+;								- a name id (0 for no name, +ve for predefined, -ve for user defined), 
+;								- character type, level, experience, age and an x,z coordinate on the strategy map; valid character
+;								types are defined in descr_character.txt
+;
+;	army					adds a new army to the current character (and faction)
+;
+;	unit					adds a new unit to the current army, valid unit types are 
+;								defined in descr_unit.txt
+;
+;	>>>> start of roads section <<<<
+;
+;	road					road followed by start map starting position and strat map ending position
+;
+;
+;
+;	>>>> start of battle section <<<<
+;
+;	battle					battle specification start, followed by x,z world location of battle
+;
+;	time					time of start of battle, as int and float (day into season and time in hours past midnight)
+;
+;	army					army taking part in the battle, followed by faction name and 
+;								army index in the lists above
+;
+;
+;	deployment_area_point	x,z coordinates of point in shape of deployment area
+;
+;								there can be several deployment areas for each army, each of which 
+;								consists of a series of deployment_area_points (which make up an 
+;								n-sided shape defining the deployment area) followed by a number of 
+;								units to be placed into the area
+;
+;	unit					used to indicate a unit present within this deployment area, must 
+;								be followed by unit index within army description, then x,z position
+;								on battlefield (this must be inside the deployment area above), then 
+;								a rotation in degrees
+;
+;	>>>> Start of objectives section
+;
+;	objectives				objectives specification start
+;
+;	faction					<name>	specify the faction that this applies to
+;	time					floating point time limit for objectives to be completed (in days) 
+;
+;	condition				add a new condition.  
+;								Can be of form `condition <condition_type> <condition args>' or
+;								`condition <condition 1> <or/and> <condition 2>
+;								The second method links two previously created conditions together with a logical operator
+;								Conditions can then be linked together (or not) into an objectives list  (of 1 or more conditions)
+;								Operator binding is from right to left so A & B or C is equivelant to A & (B or C)
+;
+;							valid condition types are:
+;								destroy_unit, capture_unit, arrive_location, capture_location, destroy_building, capture_building, 
+;								destroy_character, capture_character, destroy_faction, sight_faction, sight_unit
+;
+;							condition args are:
+;								for unit related: <faction> <army> <unit>
+;
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;The imperial campaign
+
+;map						imperial_campaign
+
+;start_date				453, summer
+;end_date				728, summer
+
+;default starting camera position
+camera_position 280, 226
+
+
+;placement of landmarks
+; coords are measured in photoshop from Bottom left (i.e. x, 800-y), then halved.
+
+;sphinx
+; photoshop coords 724, 643, therefore flipped coords are 724, 157, therefore halved coords are 362,78
+; pyramid is here, so use next tile across.
+landmark				sphinx, 364, 78
+
+
+;great pyramid
+; photoshop coords 724, 643, therefore flipped coords are 724, 157, therefore halved coords are 362,78
+landmark				pyramid, 362, 78
+
+
+;pharos
+; photoshop coords 708, 601, therefore flipped coords are 708, 199, therefore halved coords are 354, 100
+landmark				pharos, 354, 100
+
+
+;colossus
+; photoshop coords 656,491, therefore flipped coords are 656,309, therefore halved coords are 328,154
+landmark				colossus, 328, 154 
+
+
+; temple to artemis
+; photoshop coords 635,462,  therefore flipped coords are 635,338, therefore halved coords are 317,169
+landmark				temple, 317,169
+
+
+; mausoleum at Halicarnassus
+; photoshop coords 639,480, therefore flipped coords are 639,320, therefore halved coords are 320,160
+landmark				mausoleum, 320,160
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;placement of resources
+
+resource		gold			0, 281, 231
+resource		gold			2, 278, 228
+resource		gold			1, 279, 229
+resource		iron			2, 275, 225
+resource		marble			2, 272, 224
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; >>>> start of factions section <<<<
+
+faction			romans julii
+denari	10000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level city
+	year_founded 300
+	fortification 0
+	population 0
+	settlement_tax 4
+	tile	275 235
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level village
+	name	CATANA
+	year_founded 300
+	fortification 0
+	population 200
+	settlement_tax 2
+	tile	272 232
+	plan_set default_set
+}
+
+settlement
+{
+	level town
+	year_founded 300
+	fortification 0
+	population 500
+	settlement_tax 3
+	tile	287 225
+	plan_set default_set
+}
+
+
+settlement
+{
+	level bigcity capital
+	founding_faction romans brutii
+	name FANUM FORTUNAE
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	272 227
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level village
+	founding_faction romans scipii
+	name	FORUM CORNELLII
+	year_founded 300
+	fortification 0
+	population 200
+	settlement_tax 2
+	tile	245 197
+	plan_set default_set
+}
+				
+character				JULIUS, named character, leader, level 0, exp 7, dig 30, drd 40, age 80, x 242, y 206
+attributes				military 6, administrative 4, diplomatic 6, subterfuge 2
+skills					siege 3, civil 2, logistics 7, night_raid 3, financier 6, builder_military 4
+skills					builder_religious 5, builder_normal 6, rhetoric 4, bluster 3
+skills					bribery 1, flattery 2
+army						
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary first cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary first cohort I
+unit					legionary cohort I
+unit					carthaginian light cavalry archers
+unit					carthaginian light elephant cavalry
+unit					carthaginian light cavalry
+;unit					syrian archers
+;unit					british celt marauders
+;unit					german barbarians
+;unit					gaul barbarians
+unit					carthaginian chariots
+
+character				BECKHAM, admiral, level 0, exp 1, dig 30, drd 40, age 59, x 242, y 205
+attributes				military 4, administrative 4, diplomatic 2, subterfuge 1
+skills					scout 3			
+army
+unit					roman flagship						
+unit					roman heavy naval
+unit					roman heavy naval
+unit					roman heavy naval
+unit					roman heavy naval
+unit					roman transport ship
+unit					roman transport ship
+
+character				PONTIUS, named character, heir, level 0, exp 1, dig 30, drd 40, age 59, x 277, y 231
+attributes				military 4, administrative 4, diplomatic 2, subterfuge 1
+skills					rhetoric 4, bluster 5, bribery 6, flattery 7				
+
+character				BOB, named character, level 1, exp 4, dig 30, drd 40, age 57, x 277, y 230
+attributes				military 2, administrative 4, diplomatic 2, subterfuge 5
+skills					heroism 4, ambush 3, logistics 5, scout 5										
+army						
+unit					legionary cohort I
+unit					legionary cohort I
+
+character				PHIL, admiral, level 2, exp 3, dig 30, drd 40, age 25, x 237, y 206
+attributes				military 4, administrative 2, diplomatic 1, subterfuge 1
+skills					heroism 2, ambush 3, logistics 1, leadership 3															
+army						
+unit					roman flagship						
+unit					roman heavy naval
+unit					roman heavy naval
+
+character				AL, general, level 3, exp 5, dig 30, drd 40, age 39, x 279, y 230
+attributes				military 4, administrative 2, diplomatic 1, subterfuge 1
+skills					heroism 2, ambush 2, logistics 1, leadership 3, night_raid 6																				
+army						
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary first cohort I
+unit					legionary cohort I
+;unit					roman light infantry
+
+
+character				STAN, named character, level 1, exp 4, dig 30, drd 40, age 51, x 269, y 231
+attributes				military 4, administrative 5, diplomatic 1, subterfuge 3
+skills					rhetoric 4, bluster 5, bribery 6, flattery 7, leadership 4, assassin 3				
+
+character				EMINEM, named character, governor, level 1, exp 2, dig 30, drd 40, age 22, x 272, y 227
+attributes				military 5, administrative 3, diplomatic 5, subterfuge 1
+skills					rhetoric 2, bluster 1, bribery 5, flattery 6, leadership 1, financier 2			
+					
+character				MOTHER, named character, level 1, exp 0, dig 30, drd 40, age 21, x 268, y 228
+attributes				military 2, administrative 1, diplomatic 1, subterfuge 2					
+skills					rhetoric 2, bluster 1, bribery 5, flattery 6, financier 2, builder_military 1, assassin 4			
+					
+character				LEE, spy, level 0, exp 1, dig 30, drd 40, age 26, x 270, y 226
+attributes				military 0, administrative 2, diplomatic 1, subterfuge 15
+skills					spying 15, counterspy 5, infiltration 2, insurrection 1, bribery 5, kidnap 6, financier 2, sabotage 1			
+
+character				LEE, spy, level 0, exp 1, dig 30, drd 40, age 26, x 269, y 226
+attributes				military 0, administrative 2, diplomatic 1, subterfuge 15
+skills					spying 15, counterspy 5, infiltration 2, insurrection 1, bribery 5, kidnap 6, financier 2, sabotage 1			
+
+character				TOM, assassin, level 0, exp 1, dig 30, drd 40, age 28, x 277, y 224
+attributes				military 0, administrative 0, diplomatic 0, subterfuge 6
+skills					assassin 6			
+
+character				JEROME, diplomat, level 0, exp 1, dig 30, drd 40, age 28, x 288, y 224
+attributes				military 1, administrative 2, diplomatic 5, subterfuge 1
+skills					rhetoric 2, bluster 1, bribery 5, flattery 6, leadership 3, financier 2			
+
+character				CHARLIE, named character, level 1, exp 0, dig 30, drd 40, age 19, x 267, y 226
+attributes				military 1, administrative 1, diplomatic 1, subterfuge 1
+skills					rhetoric 2, bluster 2, bribery 5, flattery 3, financier 2, kidnap 1			
+
+character				KEVIN, named character, level 1, exp 3, dig 30, drd 40, age 35, x 275, y 239
+attributes				military 3, administrative 6, diplomatic 4, subterfuge 0
+skills					rhetoric 2, bluster 1, bribery 5, flattery 4, leadership 3			
+
+;other armies
+garrisoned_army			x 272, y 232
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+garrisoned_army			x 272, y 227
+unit					legionary cohort I
+unit					legionary cohort I
+
+;other_records			character, gender, experience, age, living?
+
+character_record		JOSS,		male,	exp 5, dig 30, drd 40, age 94,	dead,	past_leader
+character_record		GWENDOLENE, female, exp 0, dig 30, drd 40, age 71,	dead,	never_a_leader
+character_record		MADONNA,	female, exp 0, dig 30, drd 40, age 57,	alive,	never_a_leader
+character_record		KATE,		female, exp 0, dig 20, drd 60, age 50,	alive,	never_a_leader
+character_record		BETH,		female, exp 0, dig 20, drd 30, age 31,	alive,	never_a_leader
+character_record		JANET,		female, exp 0, dig 5,  drd 2, age 25,	alive,	never_a_leader
+character_record		REBECCA,	female, exp 0, dig 0,  drd 0, age 5,	alive,	never_a_leader
+character_record		CLINT BASS,	male,	exp 0, dig 0,  drd 0, age 15,	alive,	never_a_leader
+character_record		MARY,		female, exp 0, dig 0,  drd 0, age 26,	alive,	never_a_leader
+character_record		PAM,		female, exp 0, dig 0,  drd 0, age 11,	alive,	never_a_leader
+
+;relationships			character,	spouse,		child_1,	child_2,	child_3,	child_4		
+relative				JOSS		GWENDOLENE,	JULIUS,		end
+relative				JULIUS,		MADONNA,	PONTIUS,	BOB,		STAN,		end
+relative				PONTIUS,	BETH,		KEVIN,		MARY,		end
+relative				BOB,		KATE,		EMINEM,		MOTHER,		end
+relative				STAN,		JANET,		CHARLIE,	CLINT BASS,	PAM,		REBECCA,	end
+
+;;;;;;;;;; I`ve put code in to link these the other way - having to set up the relationships in both directions is plain confusing!  Tom
+;relative				EMINEM,		none,		end
+;relative				MOTHER,		none,		end
+;relative				CHARLIE,	none,		end
+;relative				GWENDOLENE,	JOSS,		JULIUS,		end
+;relative				MADONNA,	JULIUS,		KEVIN,		BOB,		STAN,		end
+;relative				KATE,		BOB,		EMINEM,		MOTHER,		end
+;relative				BETH,		PONTIUS,	CHARLIE,	end
+;relative				JANET,		STAN,		REBECCA,	end
+;relative				REBECCA,	none,		end
+			
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+						
+faction					romans brutii
+denari	1000
+poll_tax 5
+dignitas 100
+dread	150	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	250 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					romans scipii
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 200
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	255 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					germans
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	name	NUREMBERG
+	year_founded 150
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	260 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					macedon	
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 300
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	265 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					egypt
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 200
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	270 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					seleucid
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 300
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	275 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					gauls
+denari	1000
+poll_tax 3
+dignitas 200
+dread	270	
+
+settlement
+{
+	level city
+	year_founded 100
+	fortification 0
+	population 1000
+	settlement_tax 2
+	tile	284 218
+	plan_set default_set
+}
+
+settlement
+{
+	level village
+	name AQUAE SEXTIAE
+	year_founded 300
+	fortification 0
+	population 400
+	settlement_tax 1
+	tile	240 208
+	plan_set default_set
+}
+
+settlement
+{
+	level bigcity
+	year_founded 300
+	fortification 0
+	population 1000
+	settlement_tax 1
+	tile	280 221
+	plan_set default_set
+}
+
+settlement
+{
+	level town
+	year_founded 300
+	fortification 0
+	population 400
+	settlement_tax 1
+	tile	290 219
+	plan_set default_set
+}
+
+settlement
+{
+	level fort
+	year_founded 400
+	fortification 0
+	population 0
+	settlement_tax 1
+	tile	290 215
+	plan_set default_set
+}
+
+
+character				ASTERIX, named character, leader, level 0, exp 3, dig 30, drd 40, age 62, x 282, y 228
+attributes				military 6, administrative 2, diplomatic 4, subterfuge 1						
+skills					civil 2, rhetoric 2, bluster 5, bribery 6, flattery 7, leadership 7, assassin 1, logistics 1			
+army						
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light elephant cavalry
+
+character				DOGMATIX, spy, level 1, exp 2, dig 30, drd 40, age 35, x 282, y 228
+attributes				military 0, administrative 0, diplomatic 0, subterfuge 5
+skills					spying 4, counterspy 2, infiltration 1, insurrection 2, bribery 5, kidnap 6, sabotage 1			
+
+character				DOGMATIX, spy, level 0, exp 2, dig 30, drd 40, age 35, x 273, y 228
+attributes				military 0, administrative 0, diplomatic 0, subterfuge 5
+skills					spying 6, counterspy 4, infiltration 2, insurrection 2, bribery 5, kidnap 6, sabotage 1			
+
+character				CACHONOFIX, general, level 0, exp 1, dig 30, drd 40, age 32, x 284, y 218
+attributes				military 4, administrative 1, diplomatic 1, subterfuge 1
+skills					siege 1, heroism 2, ambush 3, logistics 1, leadership 3, bribery 6, flattery 7, leadership 4, assassin 2				
+army						
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light elephant cavalry
+;unit					parthian archers
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian javelinmen
+unit					carthaginian javelinmen
+unit					poeni infantry
+unit					poeni infantry
+unit					poeni infantry
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light cavalry
+
+character				OBELIX, named character, heir, level 0, exp 1, dig 30, drd 40, age 38, x 283, y 228
+attributes				military 1, administrative 2, diplomatic 3, subterfuge 4
+skills					spying 6, counterspy 4, infiltration 2, insurrection 2, bribery 5, kidnap 6, sabotage 1			
+army						
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light elephant cavalry
+
+character				FIXMEUP, general, level 3, exp 3, dig 30, drd 40, age 34, x 285, y 218
+attributes				military 4, administrative 1, diplomatic 1, subterfuge 1
+skills					siege 1, heroism 2, ambush 3, logistics 1, leadership 3, bribery 6, flattery 7, leadership 4, assassin 2				
+army						
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light elephant cavalry
+
+character				MRFIXIT, admiral, level 0, exp 1, dig 30, drd 40, age 59, x 225, y 203
+attributes				military 4, administrative 4, diplomatic 2, subterfuge 1
+skills					scout 3			
+army						
+unit					roman flagship
+unit					roman light naval
+unit					roman transport ship
+					
+character				GETAFIX, diplomat, level 0, exp 1, dig 30, drd 40, age 39, x 289, y 229
+attributes				military 0, administrative 0, diplomatic 5, subterfuge 0
+skills					civil 2, rhetoric 2, bluster 5, bribery 6, flattery 7, leadership 7, assassin 1, logistics				
+						
+character				JIMILFIXIT, assassin, level 0, exp 1, dig 30, drd 40, age 44, x 287, y 213
+attributes				military 0, administrative 0, diplomatic 0, subterfuge 5
+skills					assassin 3						
+
+garrisoned_army			x 240, y 208
+unit					legionary cohort I
+unit					legionary cohort I
+unit					legionary cohort I
+
+;relationships			character,	spouse,		child_1,	child_2,	child_3,	child_4		
+relative				ASTERIX,	none,		OBELIX,		end
+
+;relative				OBELIX,		none,		end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					parthia
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	280 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					romans senate
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 0
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	285 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level city
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	285 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level town
+	year_founded 400
+	fortification 1
+	population 500
+	settlement_tax 4
+	tile	285 234
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level village
+	year_founded 400
+	fortification 1
+	population 400
+	settlement_tax 4
+	tile	285 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level fort
+	name BENEVENTUM
+	year_founded 400
+	fortification 1
+	population 0
+	settlement_tax 4
+	tile	285 228
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+character				CAESAR, named character, leader, level 0, exp 3, dig 30, drd 40, age 62, x 272, y 217
+attributes				military 6, administrative 2, diplomatic 4, subterfuge 1						
+skills					civil 2, rhetoric 2, bluster 5, bribery 6, flattery 7, leadership 7, assassin 1, logistics 1			
+army						
+unit					carthaginian city militia
+unit					carthaginian city militia
+unit					carthaginian light elephant cavalry
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					pontus
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	290 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level city
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	290 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level town
+	year_founded 400
+	fortification 1
+	population 400
+	settlement_tax 4
+	tile	290 234
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level village
+	year_founded 400
+	fortification 1
+	population 400
+	settlement_tax 4
+	tile	290 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level fort
+	year_founded 400
+	fortification 0
+	population 0
+	settlement_tax 4
+	tile	290 228
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+faction					carthage	
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	295 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level city
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	295 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level town
+	year_founded 400
+	fortification 0
+	population 600
+	settlement_tax 4
+	tile	295 234
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level village
+	year_founded 400
+	fortification 0
+	population 400
+	settlement_tax 4
+	tile	295 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					britons
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	300 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level city
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	300 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level town
+	year_founded 400
+	fortification 0
+	population 500
+	settlement_tax 4
+	tile	300 234
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level village
+	year_founded 400
+	fortification 0
+	population 400
+	settlement_tax 4
+	tile	300 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level fort
+	year_founded 400
+	fortification 0
+	population 0
+	settlement_tax 4
+	tile	300 228
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					armenia
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	305 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level city
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	305 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level village
+	year_founded 400
+	fortification 1
+	population 400
+	settlement_tax 4
+	tile	305 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level fort
+	year_founded 400	
+	fortification 0
+	population 0
+	settlement_tax 4
+	tile	305 228
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					dacia
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	310 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+settlement
+{
+	level city
+	year_founded 400
+	fortification 1
+	population 1000
+	settlement_tax 4
+	tile	310 237
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level town
+	year_founded 400
+	fortification 1
+	population 500
+	settlement_tax 4
+	tile	310 234
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level village
+	year_founded 400	
+	fortification 1
+	population 400
+	settlement_tax 4
+	tile	310 231
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+settlement
+{
+	level fort
+	year_founded 400
+	fortification 0
+	population 0
+	settlement_tax 4
+	tile	310 228
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+faction					illyria	
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400	
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	315 240
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					numidia
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	315 245
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+faction					scythia
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400	
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	310 245
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+faction					spain
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	305 245
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+faction					thrace	
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400	
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	300 245
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+faction					slave
+denari	1000
+poll_tax 5
+dignitas 300
+dread	250	
+
+settlement
+{
+	level bigcity
+	year_founded 400
+	fortification 0
+	population 1000
+	settlement_tax 4
+	tile	295 245
+	plan_set default_set
+	building
+	{
+		type financial strongroom
+	}
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;faction relationships
+
+;alliance romans julii romans senate
+;hostile roman julii carthage
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;roads
+;road with starting and ending strategy map positions
+
+road			275, 235, 284, 218;
+road			272, 227, 282, 225;
+road			293, 224, 281, 221;
+road			272, 232, 291, 229;
+
+;walls
+;walls with starting and ending strategy map positions
+
+wall			277, 223, 293, 222;
+wall			293, 222, 293, 213;
+wall			293, 213, 277, 211;
+wall			277, 211, 277, 223;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; >>>> start of battle section <<<<
+
+; the following tile values (e.g. 255,265) have to match the ones in the settlements at the top of template.txt
+; otherwise no settlement will be seen on the battlefield.
+
+;battle					255,265
+battle					275, 235
+;battle					189, 114
+
+time					14, 8
+
+army					romans julii,0,attacking
+
+deployment_area_point	600,0
+deployment_area_point	600,300
+deployment_area_point	900,300
+deployment_area_point	900,0
+
+unit					0, 600, 100, 45
+unit					1, 600, 50, 45
+unit					2, 350, 50, 45
+unit					3, 350, 80, 45
+unit					4, 550, 100, 45
+unit					5, 550, 50, 45
+unit					6, 500, 100, 45
+unit					7, 500, 50, 45
+unit					8, 450, 100, 45
+unit					9, 450, 50, 45
+unit					10, 400, 100, 45
+unit					11, 400, 50, 45
+unit					12, 350, 100, 45
+unit					13, 350, -200, 45
+unit					14, 300, -100, 45
+;unit					15, 325, -150, 0
+;unit					16, 500, 0, 22
+
+
+
+army					gauls,1,defending
+
+deployment_area_point	400, 400
+deployment_area_point	400, 850
+deployment_area_point	850, 850
+deployment_area_point	850, 400
+
+unit					0, 430, 430, -45
+unit					1, 470, 430, -45
+unit					2, 450, 470, -45
+unit					3, 410, 410, -45
+unit					4, 390, 430, -45
+unit					5, 330, 430, -45
+unit					6, 390, 360, -45
+unit					7, 330, 360, -45
+unit					8, 280, 430, -45
+unit					9, 280, 360, -45
+unit					10, 280, 470, -45
+unit					11, 280, 470, -45
+unit					12, 330, 470, -45
+;unit					13, 330, 410, -45
+
+reinforcement			romans julii,2
+
+faction_to_reinforce	romans julii
+reinforcement_time		2.0
+
+deployment_area_point	0,0
+deployment_area_point	0,100
+deployment_area_point	100,100
+deployment_area_point	100,0
+
+unit					0, 600, 100, 45
+unit					1, 600, 50, 45
+
+
+; >>>>>> Objectives <<<<<<<<<<<<<
+
+objectives
+
+faction	romans julii
+time	0
+
+condition destroy_unit  1, 0			; A				destroy unit 0 of army 1 in the battle
+condition destroy_unit  1, 1			; B				destroy unit 1 of army 1
+condition 0 or 1						; A or B		destroy unit 0 or 1 of army 1
+condition destroy_unit  1, 2			; C				destroy unit 2 of army 1
+condition 3 and 2						; C & (A or B)	destroy unit 2 & unit 0 or 1 of army 1
+condition destroy_unit  1, 3			; D				destroy unit 3 of army 1
+
+; Evaluates to 2 objectives
+;
+; 1: C & (A or B)
+; 2: D
+;
+; i.e. 
+; destroy unit 2 & unit 0 or unit 1 of faction 1 THEN destroy unit 3 of army 0 of faction 1

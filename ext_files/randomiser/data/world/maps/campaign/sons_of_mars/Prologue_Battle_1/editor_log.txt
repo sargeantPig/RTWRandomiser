@@ -1,0 +1,72 @@
+Loading from file data/world/maps/battle/custom/Prologue_Battle_1_25/descr_battle.txt
+Created faction romans_julii from file
+	Creating army controlled by Gaius Julius at 0x55f4bc0 from script
+		Creating unit (Roman General) at 0x558baa0
+		Creating unit (Triarii) at 0x5608a78
+		Creating unit (Archers) at 0x561a178
+Created faction romans_senate from file
+	Creating army controlled by Decius Brutus at 0x55ec618 from script
+		Creating unit (Roman General) at 0x5617ba0
+		Creating unit (Velites) at 0x5617dc8
+		Creating unit (Velites) at 0x5617ff0
+		Creating unit (Velites) at 0x5618218
+		Creating unit (Hastati) at 0x5618440
+		Creating unit (Hastati) at 0x561b0d0
+		Creating unit (Hastati) at 0x561b2f8
+		Creating unit (Princeps) at 0x561b520
+		Creating unit (Princeps) at 0x561cbf0
+		Creating unit (Princeps) at 0x561ce18
+		Creating unit (Heavy Cavalry Ala) at 0x561d040
+		Creating unit (Medium Cavalry Ala) at 0x561ea18
+Created faction gauls from file
+	Creating army controlled by Dumnorix of Genava at 0x55e5ab8 from script
+		Creating unit (Barbarian Warlord Early) at 0x5620088
+		Creating unit (Skirmisher Warband) at 0x5620518
+		Creating unit (Skirmisher Warband) at 0x5620740
+		Creating unit (Skirmisher Warband) at 0x5620968
+		Creating unit (Axemen) at 0x5620b90
+		Creating unit (Head Hurlers) at 0x56214d0
+		Creating unit (Chosen Axemen) at 0x56216f8
+		Creating unit (Warhounds) at 0x5621920
+		Creating unit (Warband) at 0x56232f8
+		Creating unit (Barbarian Cavalry) at 0x5624448
+		Creating unit (Barbarian Noble Cavalry) at 0x5624670
+		Creating unit (British Light Chariots) at 0x5624898
+Adding unit (Roman General) at 0x558baa0 to deployment area at 0x28cb5c0
+Adding unit (Triarii) at 0x5608a78 to deployment area at 0x28cb5c0
+Adding unit (Archers) at 0x561a178 to deployment area at 0x28cb5c0
+Adding unit (Roman General) at 0x5617ba0 to deployment area at 0x28cb5fc
+Adding unit (Velites) at 0x5617dc8 to deployment area at 0x28cb5fc
+Adding unit (Velites) at 0x5617ff0 to deployment area at 0x28cb5fc
+Adding unit (Velites) at 0x5618218 to deployment area at 0x28cb5fc
+Adding unit (Hastati) at 0x5618440 to deployment area at 0x28cb5fc
+Adding unit (Hastati) at 0x561b0d0 to deployment area at 0x28cb5fc
+Adding unit (Hastati) at 0x561b2f8 to deployment area at 0x28cb5fc
+Adding unit (Princeps) at 0x561b520 to deployment area at 0x28cb5fc
+Adding unit (Princeps) at 0x561cbf0 to deployment area at 0x28cb5fc
+Adding unit (Princeps) at 0x561ce18 to deployment area at 0x28cb5fc
+Adding unit (Heavy Cavalry Ala) at 0x561d040 to deployment area at 0x28cb5fc
+Adding unit (Medium Cavalry Ala) at 0x561ea18 to deployment area at 0x28cb5fc
+Adding unit (Barbarian Warlord Early) at 0x5620088 to deployment area at 0x28cb638
+Adding unit (Skirmisher Warband) at 0x5620518 to deployment area at 0x28cb638
+Adding unit (Skirmisher Warband) at 0x5620740 to deployment area at 0x28cb638
+Adding unit (Skirmisher Warband) at 0x5620968 to deployment area at 0x28cb638
+Adding unit (Axemen) at 0x5620b90 to deployment area at 0x28cb638
+Adding unit (Head Hurlers) at 0x56214d0 to deployment area at 0x28cb638
+Adding unit (Chosen Axemen) at 0x56216f8 to deployment area at 0x28cb638
+Adding unit (Warhounds) at 0x5621920 to deployment area at 0x28cb638
+Adding unit (Warband) at 0x56232f8 to deployment area at 0x28cb638
+Adding unit (Barbarian Cavalry) at 0x5624448 to deployment area at 0x28cb638
+Adding unit (Barbarian Noble Cavalry) at 0x5624670 to deployment area at 0x28cb638
+Adding unit (British Light Chariots) at 0x5624898 to deployment area at 0x28cb638
+Load finished **************************
+
+
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_julii:Triarii) at 0x5608a78 from (640.0, -66.339928) to (525.978464, -93.487208)
+	 with rotation -1.466102 and width 12.394 - now residing in deployment area at 0x28cb5c0
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_julii:Archers) at 0x561a178 from (656.569856, -82.036976) to (523.654176, -126.120656)
+	 with rotation 2.841891 and width 120.5916 - now residing in deployment area at 0x28cb5c0
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_julii:Archers) at 0x561a178 from (522.075808, -126.989016) to (514.140576, -119.422952)
+	 with rotation -.939467 and width 19.228072 - now residing in deployment area at 0x28cb5c0
+MOVE_UNIT_FUNCTION::do_func() - Moving unit (romans_julii:Triarii) at 0x5608a78 from (526.024608, -93.912864) to (538.734912, -93.926744)
+	 with rotation -1.550279 and width 10.383628 - now residing in deployment area at 0x28cb5c0
