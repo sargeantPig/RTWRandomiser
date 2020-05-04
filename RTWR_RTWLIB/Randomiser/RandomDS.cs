@@ -247,7 +247,7 @@ namespace RTWR_RTWLIB.Randomiser
 
                 foreach (DSCharacter character in f.characters)
                 {
-                    rndSize = TWRandom.rnd.Next(2, armySize / 2);
+                    rndSize = TWRandom.rnd.Next(2, (armySize + 2) / 2);
                     if (rndSize == 0)
                         rndSize = 1;
                     if (character.type == "general" || character.type == "named character")

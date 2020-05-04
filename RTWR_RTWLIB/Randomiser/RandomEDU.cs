@@ -10,11 +10,24 @@ using RTWLib.Objects;
 using RTWLib.Data;
 using RTWLib.Logger;
 using System.Threading;
+using RTWLib.Objects.Descr_strat;
 
 namespace RTWR_RTWLIB.Randomiser
 {
 	public class RandomEDU
 	{
+		public static void SetFactionUnitList(EDU edu)
+		{
+			foreach (Unit unit in edu.units)
+			{
+				foreach (Enum value in Enum.GetValues(unit.ownership.GetType()))
+				{
+					if(unit.ownership.HasFlag(value))
+						TWRandom.UnitByFaction.AddKV((FactionOwnership)value, unit.type);
+				}
+			}
+		}
+
 		public static void RandomSizes(EDU edu)
 		{
 
@@ -177,11 +190,12 @@ namespace RTWR_RTWLIB.Randomiser
 
 						unit.ownership |= fo;
 
-						TWRandom.UnitByFaction.AddKV(fo, unit.type);
+						//TWRandom.UnitByFaction.AddKV(fo, unit.type);
 
 					}
 
 				}
+
 			}
 
 			else

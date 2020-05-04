@@ -15,7 +15,7 @@ using RTWR_RTWLIB.Randomiser;
 using System.Threading;
 using System.Diagnostics;
 using RTWLib.Memory;
-using RTWR_RTWLIB.Tests;
+
 using RTWR_RTWLIB.Data;
 namespace RTWR_RTWLIB
 {
@@ -27,8 +27,6 @@ namespace RTWR_RTWLIB
         Dictionary<FileNames, IFile> vanfiles;
 
 		int seed;
-
-		TestStore tests = new TestStore();
 
 		public Form1()
 		{
@@ -53,20 +51,6 @@ namespace RTWR_RTWLIB
 				sr.Close();
 				lbl_seed.Text = "Randomiser Seed: " + line;
 				txt_seed.Text = line;
-			}
-
-
-			if (Directory.Exists(tests.DIRECTORY))
-			{
-				var files = Directory.GetFiles(tests.DIRECTORY);
-
-				foreach (var file in files)
-				{
-					tests.tests.Add(new Test().Parse(file));
-
-				}
-
-
 			}
 
 			if (File.Exists(@"randomiser\full_map.png"))
@@ -193,6 +177,7 @@ namespace RTWR_RTWLIB
        
 
 			R_EDU.RandomiseFile<RandomEDU, EDU>(grp_settings_units, lbl_progress, statusStrip1, pb_progress, new object[] {numUpDown_unit_attributes, numUpDown_unit_ownership });
+			RandomEDU.SetFactionUnitList(R_EDU);
 			R_EDB.SetRecruitment();
 			R_DS.RandomiseFile<RandomDS, Descr_Strat>(grp_settings_factions, lbl_progress, statusStrip1, pb_progress, new object[] {R_DR, numUpDown_faction_cities, R_EDU, R_N, R_EDB});
 
@@ -278,7 +263,6 @@ namespace RTWR_RTWLIB
 		private async void btn_play_Click(object sender, EventArgs e)
 		{
 			await Play();
-			StartTests();
 		}
 
 		private Task Play()
@@ -293,23 +277,10 @@ namespace RTWR_RTWLIB
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
 
-			if (chk_test.Checked)
-				args[0] += "-strat:imperial_campaign ";
-
 			RTWCore.core.StartProcess(args);
 
 			return Task.CompletedTask;
 		}
 
-		private async void StartTests()
-		{
-			if (chk_test.Checked)
-			{
-				Test test = tests.tests[0];
-
-				await RTWCore.core.TestLoop(test.iter, test.target, test.name, this.Play);
-
-			}
-		}
     }
 }
