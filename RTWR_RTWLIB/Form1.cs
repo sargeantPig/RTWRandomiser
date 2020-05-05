@@ -19,24 +19,16 @@ using RTWLib.Memory;
 using RTWR_RTWLIB.Data;
 namespace RTWR_RTWLIB
 {
-
-	
-
 	public partial class Form1 : Form
 	{
         Dictionary<FileNames, IFile> vanfiles;
-
 		int seed;
 
 		public Form1()
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
-
 			InitializeComponent();
-
-            
             Logger logger = new Logger();
-
             logger.CleanLog();
 
 			if (!logger.FileCheck(FilePaths.RTWEXE) || !logger.DirectoryCheck(FilePaths.MOD_FOLDER))
@@ -56,9 +48,7 @@ namespace RTWR_RTWLIB
 			if (File.Exists(@"randomiser\full_map.png"))
 			{
 				Image image = Image.FromFile(@"randomiser\full_map.png");
-
 				picBox_map.Image = image;
-
 			}
 
 			if (!logger.AdminCheck())
@@ -71,10 +61,9 @@ namespace RTWR_RTWLIB
 			{
 				chk_misc_unitInfo.Enabled = false;
 			}
-            
 		}
 
-		async private void btn_load_Click(object sender, EventArgs e)
+		private void btn_load_Click(object sender, EventArgs e)
 		{
             //start loading data
             vanfiles = new Dictionary<FileNames, IFile>(){
@@ -90,26 +79,23 @@ namespace RTWR_RTWLIB
 
             foreach (KeyValuePair<FileNames, IFile> file in vanfiles)
 			{
-				LoadAll(file.Value, (int)increment);	
+				LoadAll(file.Value);
+				pb_progress.Increment((int)increment);
 			}
 
 			lbl_progress.Text = "Files Loaded.";
 
 			pictureBox1.BackgroundImage = Properties.Resources.symbol48_romans_brutii;
-
 			pb_progress.Value = 100;
-
 			btn_load.Enabled = false;
 			btn_randomise.Enabled = true;
 		}
 
-		private void LoadAll(IFile file, int increment)
+		private void LoadAll(IFile file)
 		{
             lbl_progress.Text = file.Log("Loading " + file.Description);
 			statusStrip1.Refresh();
 		    file.Parse(FileDestinations.paths[file.Name]["load"]);
-			pb_progress.Increment(increment);
-			
 		}
 
 		private void btn_randomise_Click(object sender, EventArgs e)
