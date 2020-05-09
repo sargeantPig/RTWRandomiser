@@ -73,6 +73,14 @@
             this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
             this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eDBViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -84,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_unit_ownership)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_unit_attributes)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -98,7 +107,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btn_load);
             this.panel1.Controls.Add(this.grp_box_settings);
-            this.panel1.Location = new System.Drawing.Point(3, 4);
+            this.panel1.Location = new System.Drawing.Point(2, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
@@ -616,16 +625,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lbl_progress,
             this.pb_progress});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 395);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 405);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(734, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(724, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lbl_progress
             // 
             this.lbl_progress.Name = "lbl_progress";
-            this.lbl_progress.Size = new System.Drawing.Size(517, 17);
+            this.lbl_progress.Size = new System.Drawing.Size(507, 17);
             this.lbl_progress.Spring = true;
             this.lbl_progress.Text = "            ";
             // 
@@ -634,14 +643,78 @@
             this.pb_progress.Name = "pb_progress";
             this.pb_progress.Size = new System.Drawing.Size(200, 16);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(724, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewerToolStripMenuItem,
+            this.stratViewerToolStripMenuItem,
+            this.eDBViewerToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // viewerToolStripMenuItem
+            // 
+            this.viewerToolStripMenuItem.CheckOnClick = true;
+            this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
+            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewerToolStripMenuItem.Text = "EDU Viewer";
+            this.viewerToolStripMenuItem.Click += new System.EventHandler(this.viewerToolStripMenuItem_Click);
+            // 
+            // stratViewerToolStripMenuItem
+            // 
+            this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
+            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
+            // 
+            // eDBViewerToolStripMenuItem
+            // 
+            this.eDBViewerToolStripMenuItem.Name = "eDBViewerToolStripMenuItem";
+            this.eDBViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eDBViewerToolStripMenuItem.Text = "EDB Viewer";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-            this.ClientSize = new System.Drawing.Size(734, 417);
+            this.ClientSize = new System.Drawing.Size(724, 427);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Rome Total War Randomiser";
             this.panel1.ResumeLayout(false);
@@ -661,6 +734,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_unit_attributes)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -712,6 +787,14 @@
         private System.Windows.Forms.ToolTip tooltip;
         private System.Windows.Forms.CheckBox chk_faction_coreA_7;
         private System.Windows.Forms.CheckBox chk_total_war_8;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stratViewerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eDBViewerToolStripMenuItem;
     }
 }
 

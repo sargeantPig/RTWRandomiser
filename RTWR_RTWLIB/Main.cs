@@ -61,6 +61,39 @@ namespace RTWR_RTWLIB
 
         }
 
+        public void Load(ToolStripLabel lbl_progress, FileNames fileName)
+        {
+            try
+            {
+                if (fileName == FileNames.export_descr_unit)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDU(false) } };
+                else if (fileName == FileNames.export_descr_buildings)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDB(false) } };
+                else if (fileName == FileNames.descr_strat)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Strat() } };
+                else if (fileName == FileNames.descr_regions)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(false) } };
+                else if (fileName == FileNames.descr_sm_faction)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new SM_Factions() } };
+                else if (fileName == FileNames.names)
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new NamesFile(false) } };
+
+                lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
+                ss.Refresh();
+                files[fileName].Log("Loading " + files[fileName].Description);
+                files[fileName].Parse(FileDestinations.paths[files[fileName].Name]["load"]);
+                pb.Value = 100;
+                lbl_progress.Text = "Load Complete";
+                ss.Refresh();
+            }
+            catch(Exception ex)
+            {
+                this.PLog(ex.Message);
+                this.PLog(ex.InnerException.Message);
+                this.DisplayLogExit();
+            }
+        }
+
         public void Randomise(GroupBox units_group, NumericUpDown unit_attr, NumericUpDown num_ownership,
             GroupBox faction_group, NumericUpDown num_cities,ToolStripLabel lbl_progress,
             PictureBox pic_map, CheckBox chk_unitinfo)
@@ -153,7 +186,6 @@ namespace RTWR_RTWLIB
             }
         }
 
-
         private void FileWrite(IFile file)
 		{
 			StreamWriter sw = new StreamWriter(FileDestinations.paths[file.Name]["save"][0], false);
@@ -162,5 +194,12 @@ namespace RTWR_RTWLIB
 
 			sw.Close();
 		}
+
+        public IFile GetFile(FileNames file)
+        {
+            if (files.ContainsKey(file))
+                return files[file];
+            else return null;
+        }
     }
 }  
