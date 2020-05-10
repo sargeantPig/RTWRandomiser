@@ -25,17 +25,19 @@ namespace RTWR_RTWLIB
 
             lst_units.Items.AddRange(edu.GetUnitNameList());
             lst_units.SetSelected(1, true);
-            Unit unit = edu.FindUnit((string)lst_units.SelectedItem);
-            rtxt_unit.Text = unit.unitOutput();
+            lst_units.SelectedIndex = 1;
+
+            UpdateUnitTxt();
+            
             UpdateUnitLabel();
             cbx_faction_list.Items.AddRange(LookUpTables.dic_factions.Values.ToArray());
+            cbx_faction_list.SelectedIndex = 0;
+            chk_All.Checked = true;
         }
 
         private void lst_units_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Unit unit = edu.FindUnit((string)lst_units.SelectedItem);
-            rtxt_unit.Text = unit.unitOutput();
-            ChangeUnitPic();
+            UpdateUnitTxt();
         }
         private void ChangeUnitPic()
         {
@@ -44,7 +46,7 @@ namespace RTWR_RTWLIB
                 string unit = (string)lst_units.SelectedItem;
                 string name = "#" + unit + ".tga";
                 string fullpath = FilePaths.ASSETS + name;
-                if(File.Exists(fullpath))
+                if (File.Exists(fullpath))
                 {
                     MagickImage image = new MagickImage(fullpath);
                     image.Scale(new Percentage(200));
@@ -57,28 +59,65 @@ namespace RTWR_RTWLIB
                 pic_unit.Load(@"randomiser\error.png");
         }
 
-        private void rdb_all_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdb_all.Checked)
-            {
-                lst_units.Items.Clear();
-                lst_units.Items.AddRange(edu.GetUnitNameList());
-                UpdateUnitLabel();
-            }
-        }
-
-        private void rdb_faction_only_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdb_faction_only.Checked)
-            {
-                GetUnitsInFaction();
-            }
-        }
-
         private void GetUnitsInFaction()
         {
-            lst_units.Items.Clear();
+            /*lst_units.Items.Clear();
             List<Unit> units = edu.FindUnitsByFaction((string)cbx_faction_list.SelectedItem);
+            foreach (Unit unit in units)
+            {
+                lst_units.Items.Add(unit.dictionary);
+            }
+            UpdateUnitLabel();*/
+        }
+
+        private void cbx_faction_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (chk_FactionOnly.Checked)
+                ReloadUnitList();
+        }
+
+        private void UpdateUnitLabel()
+        {
+            lbl_units.Text = lst_units.Items.Count.ToString() + " units";
+        }
+
+        private void ReloadUnitList()
+        {
+            lst_units.Items.Clear();
+            List<string> args = new List<string>();
+            bool usefaction = chk_FactionOnly.Checked;
+            string faction = null;
+            if (usefaction)
+                faction = (string)cbx_faction_list.SelectedItem;
+            if (chk_infantry.Checked)
+                args.Add("infantry");
+            if (chk_cavalry.Checked)
+                args.Add("cavalry");
+            if (chk_light_infantry.Checked)
+                args.Add("light infantry");
+            if (chk_heavy_infantry.Checked)
+                args.Add("heavy infantry");
+            if (chk_light_cavalry.Checked)
+                args.Add("light cavalry");
+            if (chk_heavy_cavalry.Checked)
+                args.Add("heavy cavalry");
+            if (chk_artillery.Checked)
+                args.Add("siege");
+            if (chk_missile.Checked)
+                args.Add("missile");
+            if (chk_missile_cavalry.Checked)
+                args.Add("missile cavalry");
+            if (chk_missile_infantry.Checked)
+                args.Add("missile infantry");
+            if (chk_spearmen.Checked)
+                args.Add("spearmen");
+            if (chk_command.Checked)
+                args.Add("general");
+            if (chk_All.Checked)
+                args.Add("All");
+
+            List<Unit> units = edu.FindUnitsByArgAndFaction(args.ToArray(), faction, usefaction);
+
             foreach (Unit unit in units)
             {
                 lst_units.Items.Add(unit.dictionary);
@@ -86,15 +125,221 @@ namespace RTWR_RTWLIB
             UpdateUnitLabel();
         }
 
-        private void cbx_faction_list_SelectedIndexChanged(object sender, EventArgs e)
+        private void grp_show_clicked(object sender, EventArgs e)
         {
-            if(rdb_faction_only.Checked)
-                GetUnitsInFaction();
+            ReloadUnitList();
         }
 
-        private void UpdateUnitLabel()
+        private void chk_All_CheckedChanged(object sender, EventArgs e)
         {
-            lbl_units.Text = lst_units.Items.Count.ToString() + " units";
+            if (chk_All.Checked)
+            {
+                foreach (Control c in grp_show.Controls)
+                {
+                    if (c is CheckBox && c != (CheckBox)sender)
+                    {
+                        ((CheckBox)c).Checked = false;
+                    }
+                }
+            }
+
+            ReloadUnitList();
+
+        }
+
+        private void chk_infantry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_light_infantry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_heavy_infantry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_cavalry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_light_cavalry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_heavy_cavalry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_artillery_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_command_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_spearmen_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_missile_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_missile_infantry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_missile_cavalry_CheckedChanged(object sender, EventArgs e)
+        {
+            Uncheck_all(sender);
+            ReloadUnitList();
+        }
+
+        private void chk_FactionOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            ReloadUnitList();
+        }
+
+        private void Uncheck_all(object sender)
+        {
+            if (((CheckBox)sender).Checked)
+                chk_All.Checked = false;
+
+        }
+
+        private Dictionary<string, Color> GetHighlightArgs()
+        {
+            Dictionary<string, Color> items = new Dictionary<string, Color>();
+            foreach (Control ctrl in grp_highlights.Controls)
+            {
+                if (((CheckBox)ctrl).Checked)
+                    items.Add((string)((CheckBox)ctrl).Tag, ctrl.BackColor);
+            }
+            return items;
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == '\r')
+                UpdateUnitTxt(((TextBox)sender).Text);
+        }
+
+        private void UpdateUnitTxt(string command = null)
+        {
+            if (lst_units.SelectedItem == null)
+                lst_units.SelectedItem = lst_units.Items[0];
+            rtxt_unit.Clear();
+           
+            Unit unit = edu.FindUnit((string)lst_units.SelectedItem);
+            Dictionary<string, Color> highlights = GetHighlightArgs();
+
+            if (command != null)
+                highlights.Add(command, Color.DarkRed);
+
+            string text = unit.unitOutput();
+            string[] linedOutput = text.Split('\r');
+            Dictionary<int, Color> marked = new Dictionary<int, Color>();
+            foreach (string line in linedOutput)
+            {
+                foreach (KeyValuePair<string, Color> light in highlights)
+                {
+                    if (EDU.edu_scheme.Scheme.ContainsKey(Functions_General.GetFirstWord(line.Trim())))
+                    {
+                        Dictionary<string, int> components = EDU.edu_scheme.GetComponents(Functions_General.GetFirstWord(line.Trim()));
+                        if (components.ContainsKey(light.Key))
+                        {
+                            int highLightIndex = EDU.edu_scheme.GetComponentIndex(light.Key);
+                            marked.Add(highLightIndex, light.Value);
+                        }
+
+                        else
+                        {
+                            foreach (KeyValuePair<string, int> comp in components)
+                            {
+                                if (comp.Key.Contains(light.Key))
+                                {
+                                    int highLightIndex = EDU.edu_scheme.GetComponentIndex(comp.Key);
+                                    if(!marked.ContainsKey(highLightIndex))
+                                        marked.Add(highLightIndex, light.Value);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                if (marked.Count > 0)
+                {
+                    string space = spaces(Functions_General.GetFirstWord(line), 25);
+                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
+                    string firstRemoved = Functions_General.RemoveFirstWord(line);
+                    string[] split = firstRemoved.Split('\t', ' ', ',');
+
+                    split = split.CleanStringArray();
+
+                    for (int i = 0; i < split.Count(); i++)
+                    {
+                        if (i != 0)
+                            rtxt_unit.AppendText(", ");
+                        if (marked.ContainsKey(i))
+                            rtxt_unit.AppendText(split[i], marked[i]);
+                        else rtxt_unit.AppendText(split[i]);
+                    }
+
+                    rtxt_unit.AppendText("\r\n");
+                }
+                else
+                {
+                    string space = spaces(Functions_General.GetFirstWord(line), 25);
+                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
+                    rtxt_unit.AppendText(Functions_General.RemoveFirstWord(line) + "\r\n");
+
+                }
+
+                marked.Clear();
+            }
+
+
+            ChangeUnitPic();
+
+        }
+
+        private string spaces(string a, int target)
+        {
+            string b = "";
+            int lengthA = a.Length;
+            int spacesNeed = target - lengthA;
+
+            for (int i = 0; i < spacesNeed; i++)
+            {
+                b += " ";
+            }
+
+            return b;
         }
     }
+
 }

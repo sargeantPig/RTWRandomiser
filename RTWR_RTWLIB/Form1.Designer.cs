@@ -687,7 +687,6 @@
             // 
             // viewerToolStripMenuItem
             // 
-            this.viewerToolStripMenuItem.CheckOnClick = true;
             this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
             this.viewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewerToolStripMenuItem.Text = "EDU Viewer";

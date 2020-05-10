@@ -144,7 +144,7 @@ namespace RTWR_RTWLIB
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			main.Load(lbl_progress, FileNames.export_descr_unit);
+			main.Load(lbl_progress, FileNames.export_descr_unit, "save");
 			EDU_viewer edu_view = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit));
 			edu_view.Show();
 		}

@@ -61,7 +61,7 @@ namespace RTWR_RTWLIB
 
         }
 
-        public void Load(ToolStripLabel lbl_progress, FileNames fileName)
+        public void Load(ToolStripLabel lbl_progress, FileNames fileName, string loadsave)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace RTWR_RTWLIB
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
                 files[fileName].Log("Loading " + files[fileName].Description);
-                files[fileName].Parse(FileDestinations.paths[files[fileName].Name]["load"]);
+                files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave]);
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
                 ss.Refresh();
