@@ -18,6 +18,8 @@ namespace RTWR_RTWLIB
     public partial class EDU_viewer : Form
     {
         EDU edu;
+        StratViewer sv;
+        bool isUpdating = false;
         public EDU_viewer(EDU edu)
         {
             this.edu = edu;
@@ -37,7 +39,8 @@ namespace RTWR_RTWLIB
 
         private void lst_units_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateUnitTxt();
+            if(!isUpdating)
+                UpdateUnitTxt();
         }
         private void ChangeUnitPic()
         {
@@ -248,13 +251,31 @@ namespace RTWR_RTWLIB
                 UpdateUnitTxt(((TextBox)sender).Text);
         }
 
-        private void UpdateUnitTxt(string command = null)
+        public void UpdateUnitTxt(string command = null, string lookup = null)
         {
+            isUpdating = true;
+
+            if (lst_units.Items.Count == 0 || lookup != null)
+            {
+                chk_All.Checked = true;
+            }
+
+
             if (lst_units.SelectedItem == null)
                 lst_units.SelectedItem = lst_units.Items[0];
+
+            string search = (string)lst_units.SelectedItem;
+
+            if (lookup != null)
+            {
+                search = lookup;
+            }
             rtxt_unit.Clear();
            
-            Unit unit = edu.FindUnit((string)lst_units.SelectedItem);
+            Unit unit = edu.FindUnit(search);
+
+            lst_units.SelectedItem = unit.dictionary;
+
             Dictionary<string, Color> highlights = GetHighlightArgs();
 
             if (command != null)
@@ -324,7 +345,7 @@ namespace RTWR_RTWLIB
 
 
             ChangeUnitPic();
-
+            isUpdating = false;
         }
 
         private string spaces(string a, int target)
@@ -339,6 +360,18 @@ namespace RTWR_RTWLIB
             }
 
             return b;
+        }
+
+        public StratViewer StratViewer
+        { 
+            set { sv = value; }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if(sv != null)
+                sv.Edu_viewer = null;
+            base.OnClosing(e);
         }
     }
 

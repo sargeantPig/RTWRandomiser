@@ -24,6 +24,8 @@ namespace RTWR_RTWLIB
         Dictionary<FileNames, IFile> vanfiles;
 		int seed;
 		Main main;
+		EDU_viewer edu;
+		StratViewer strat;
 		public Form1()
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
@@ -145,8 +147,32 @@ namespace RTWR_RTWLIB
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			main.Load(lbl_progress, FileNames.export_descr_unit, "save");
-			EDU_viewer edu_view = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit));
-			edu_view.Show();
+			edu = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit));
+			if (strat != null)
+			{
+				strat.Edu_viewer = edu;
+				edu.StratViewer = strat;
+			}
+			edu.Show();
+		}
+
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			About about = new About();
+			about.Show();
+		}
+
+		private void stratViewerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			strat = new StratViewer(edu);
+			main.Load(lbl_progress, FileNames.descr_strat, "save");
+			strat.descr_strat = (Descr_Strat)main.GetFile(FileNames.descr_strat);
+			main.Load(lbl_progress, FileNames.descr_regions, "load");
+			strat.descr_region = (Descr_Region)main.GetFile(FileNames.descr_regions);
+			main.Load(lbl_progress, FileNames.descr_sm_faction, "load");
+			strat.sm_factions = (SM_Factions)main.GetFile(FileNames.descr_sm_faction);
+			strat.PopulateTree();
+			strat.Show();		
 		}
 	}
 }

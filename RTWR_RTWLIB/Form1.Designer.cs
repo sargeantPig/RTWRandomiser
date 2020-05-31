@@ -81,6 +81,8 @@
             this.viewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eDBViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -647,7 +649,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(724, 24);
@@ -688,7 +691,7 @@
             // viewerToolStripMenuItem
             // 
             this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
-            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.viewerToolStripMenuItem.Text = "EDU Viewer";
             this.viewerToolStripMenuItem.Click += new System.EventHandler(this.viewerToolStripMenuItem_Click);
             // 
@@ -697,12 +700,28 @@
             this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
             this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
+            this.stratViewerToolStripMenuItem.Click += new System.EventHandler(this.stratViewerToolStripMenuItem_Click);
             // 
             // eDBViewerToolStripMenuItem
             // 
             this.eDBViewerToolStripMenuItem.Name = "eDBViewerToolStripMenuItem";
-            this.eDBViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eDBViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.eDBViewerToolStripMenuItem.Text = "EDB Viewer";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -713,7 +732,9 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Rome Total War Randomiser";
             this.panel1.ResumeLayout(false);
@@ -794,6 +815,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stratViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eDBViewerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

@@ -65,6 +65,8 @@
             // 
             // lst_units
             // 
+            this.lst_units.BackColor = System.Drawing.Color.Black;
+            this.lst_units.ForeColor = System.Drawing.Color.White;
             this.lst_units.FormattingEnabled = true;
             this.lst_units.Location = new System.Drawing.Point(12, 25);
             this.lst_units.Name = "lst_units";
@@ -428,6 +430,8 @@
             this.Controls.Add(this.rtxt_unit);
             this.Controls.Add(this.pic_unit);
             this.Controls.Add(this.lst_units);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "EDU_viewer";
             this.Text = "RTWR EDU Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.pic_unit)).EndInit();
