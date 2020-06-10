@@ -230,12 +230,16 @@
             // chk_misc_unitInfo
             // 
             this.chk_misc_unitInfo.AutoSize = true;
-            this.chk_misc_unitInfo.ForeColor = System.Drawing.Color.DarkRed;
+            this.chk_misc_unitInfo.Checked = true;
+            this.chk_misc_unitInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_misc_unitInfo.ForeColor = System.Drawing.Color.Black;
             this.chk_misc_unitInfo.Location = new System.Drawing.Point(7, 263);
             this.chk_misc_unitInfo.Name = "chk_misc_unitInfo";
             this.chk_misc_unitInfo.Size = new System.Drawing.Size(82, 17);
             this.chk_misc_unitInfo.TabIndex = 1;
             this.chk_misc_unitInfo.Text = "Unit Info Fix";
+            this.tooltip.SetToolTip(this.chk_misc_unitInfo, "Fixes unit cards by applying the mercenary attribute to each unit. On by default." +
+        "");
             this.chk_misc_unitInfo.UseVisualStyleBackColor = true;
             // 
             // chk_misc_selectA
@@ -698,7 +702,7 @@
             // stratViewerToolStripMenuItem
             // 
             this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
-            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
             this.stratViewerToolStripMenuItem.Click += new System.EventHandler(this.stratViewerToolStripMenuItem_Click);
             // 
@@ -719,7 +723,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 

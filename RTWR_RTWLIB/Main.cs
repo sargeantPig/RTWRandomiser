@@ -98,7 +98,7 @@ namespace RTWR_RTWLIB
             GroupBox faction_group, NumericUpDown num_cities,ToolStripLabel lbl_progress,
             PictureBox pic_map, CheckBox chk_unitinfo)
         {
-            UnitInfo_dialog(chk_unitinfo);
+            //UnitInfo_dialog(chk_unitinfo);
 
             pb.Value = 0;
             lbl_progress.Text = "Starting...";
@@ -115,6 +115,9 @@ namespace RTWR_RTWLIB
             ((Descr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
             TWRandom.UnitByFaction.Clear();
+
+            if (chk_unitinfo.Checked)
+                ((EDU)files[FileNames.export_descr_unit]).ApplyUnitInfoFix();
 
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
@@ -173,7 +176,7 @@ namespace RTWR_RTWLIB
 
         private void UnitInfo_dialog(CheckBox chk_misc_unitInfo)
         {
-            if (chk_misc_unitInfo.Checked)
+            /*if (chk_misc_unitInfo.Checked)
             {
                 DialogResult dialogResult = MessageBox.Show("The option 'Unit Info Fix' fixes the ui pictures for unit_info and unit_cards.\n" +
                     "The fix will open in a cmd prompt. Please wait for it to finish (it will disappear once done).\nAre you sure you want to continue?\n", "Unit Info Fix", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -183,7 +186,7 @@ namespace RTWR_RTWLIB
                     chk_misc_unitInfo.Enabled = false;
                     Functions_General.ExecuteCommand(@"randomiser\data\ui\", "assets_do.bat");
                 }
-            }
+            }*/
         }
 
         private void FileWrite(IFile file)

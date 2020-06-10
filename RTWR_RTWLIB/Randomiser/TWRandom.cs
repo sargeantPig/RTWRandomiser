@@ -10,6 +10,7 @@ using RTWLib.Objects;
 using RTWLib.Data;
 using RTWLib.Logger;
 using System.Threading;
+using System.IO;
 
 namespace RTWR_RTWLIB.Randomiser
 {
@@ -148,6 +149,15 @@ namespace RTWR_RTWLIB.Randomiser
 
 			return Task.CompletedTask;
 		}
+
+		public static void ApplyUnitInfoFix(this EDU edu)
+		{
+			foreach (Unit unit in edu.units)
+			{
+				unit.attributes |= Attributes.mercenary_unit;
+			}
+		}
+
 
 	}
 

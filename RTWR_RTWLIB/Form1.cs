@@ -53,11 +53,11 @@ namespace RTWR_RTWLIB
 				picBox_map.Image = image;
 			}
 
-			if (!main.AdminCheck())
+			/*if (!main.AdminCheck())
 			{
 				chk_misc_unitInfo.Enabled = false;
 				main.DisplayLog();
-			}
+			}*/
 
 			if (Directory.Exists(@"randomiser\data\ui\unit_info\assets\"))
 			{
