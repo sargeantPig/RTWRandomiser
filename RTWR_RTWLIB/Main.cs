@@ -28,6 +28,7 @@ namespace RTWR_RTWLIB
         }
         public void Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
         {
+            
             try
             {
                 //start loading data
@@ -44,18 +45,18 @@ namespace RTWR_RTWLIB
 
                 foreach (KeyValuePair<FileNames, IFile> file in files)
                 {
+                    this.fileName = file.Value.Name.ToString();
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Description);
-                    file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"]);
+                    file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out this.lineNumber, out this.lineText);
                     pb.Increment((int)increment);
                 }
             }
 
             catch(Exception ex)
             {
-                this.PLog(ex.Message);
-                this.PLog(ex.InnerException.Message);
+                this.ExceptionLog(ex);
                 this.DisplayLogExit();
             }
 
@@ -63,6 +64,9 @@ namespace RTWR_RTWLIB
 
         public void Load(ToolStripLabel lbl_progress, FileNames fileName, string loadsave)
         {
+            string fileStr = "";
+            string currentLine = "";
+            int lineNumber = 0;
             try
             {
                 if (fileName == FileNames.export_descr_unit)
@@ -77,19 +81,18 @@ namespace RTWR_RTWLIB
                     files = new Dictionary<FileNames, IFile>() { { fileName, new SM_Factions() } };
                 else if (fileName == FileNames.names)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new NamesFile(false) } };
-
+                fileStr = files[fileName].Name.ToString();
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
                 files[fileName].Log("Loading " + files[fileName].Description);
-                files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave]);
+                files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine ) ;
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
                 ss.Refresh();
             }
             catch(Exception ex)
             {
-                this.PLog(ex.Message);
-                this.PLog(ex.InnerException.Message);
+                this.ExceptionLog(ex);
                 this.DisplayLogExit();
             }
         }

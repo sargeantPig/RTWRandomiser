@@ -124,10 +124,13 @@ namespace RTWR_RTWLIB
 
 		private async void btn_play_Click(object sender, EventArgs e)
 		{
-			await Play();
+			Play();
+
+			RTWCore.core.Watch();
+
 		}
 
-		private Task Play()
+		private void Play()
 		{
 			string[] args = new string[1];
 
@@ -141,7 +144,6 @@ namespace RTWR_RTWLIB
 
 			RTWCore.core.StartProcess(args);
 
-			return Task.CompletedTask;
 		}
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)

@@ -44,15 +44,15 @@ namespace RTWR_RTWLIB
         }
         private void ChangeUnitPic()
         {
-            if (Directory.Exists(@"randomiser\data\ui\units\assets\"))
+            if (Directory.Exists(FilePaths.ASSETS))
             {
                 string unit = (string)lst_units.SelectedItem;
-                string name = "#" + unit + ".tga";
+                string name = unit.ToUpper() + "_INFO.tga";
                 string fullpath = FilePaths.ASSETS + name;
                 if (File.Exists(fullpath))
                 {
                     MagickImage image = new MagickImage(fullpath);
-                    image.Scale(new Percentage(200));
+                    image.Scale(new Percentage(100));
                     pic_unit.Image = image.ToBitmap();
                 }
                 else pic_unit.Load(@"randomiser\error.png");
