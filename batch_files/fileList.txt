@@ -1,0 +1,2 @@
+C:\Repositories\RTWRandomiser\RTWR_RTWLIB\bin\Release\*.txt
+C:\Repositories\RTWRandomiser\RTWR_RTWLIB\bin\Release\*.exe

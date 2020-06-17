@@ -83,6 +83,7 @@
             this.eDBViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chk_preferences = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -218,6 +219,7 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.Controls.Add(this.chk_preferences);
             this.grp_settings_misc.Controls.Add(this.chk_misc_unitInfo);
             this.grp_settings_misc.Controls.Add(this.chk_misc_selectA);
             this.grp_settings_misc.Location = new System.Drawing.Point(283, 20);
@@ -673,13 +675,13 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolsToolStripMenuItem
@@ -695,21 +697,21 @@
             // viewerToolStripMenuItem
             // 
             this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
-            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewerToolStripMenuItem.Text = "EDU Viewer";
             this.viewerToolStripMenuItem.Click += new System.EventHandler(this.viewerToolStripMenuItem_Click);
             // 
             // stratViewerToolStripMenuItem
             // 
             this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
-            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
             this.stratViewerToolStripMenuItem.Click += new System.EventHandler(this.stratViewerToolStripMenuItem_Click);
             // 
             // eDBViewerToolStripMenuItem
             // 
             this.eDBViewerToolStripMenuItem.Name = "eDBViewerToolStripMenuItem";
-            this.eDBViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.eDBViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eDBViewerToolStripMenuItem.Text = "EDB Viewer";
             // 
             // helpToolStripMenuItem
@@ -723,9 +725,20 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // chk_preferences
+            // 
+            this.chk_preferences.AutoSize = true;
+            this.chk_preferences.Location = new System.Drawing.Point(7, 42);
+            this.chk_preferences.Name = "chk_preferences";
+            this.chk_preferences.Size = new System.Drawing.Size(115, 17);
+            this.chk_preferences.TabIndex = 2;
+            this.chk_preferences.Text = "Import Preferences";
+            this.tooltip.SetToolTip(this.chk_preferences, "Imports user settings from vanilla Rome.");
+            this.chk_preferences.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -821,6 +834,7 @@
         private System.Windows.Forms.ToolStripMenuItem eDBViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chk_preferences;
     }
 }
 
