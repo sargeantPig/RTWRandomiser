@@ -14,6 +14,7 @@ using ImageMagick;
 using RTWLib.Objects.Descr_strat;
 using RTWLib.Objects.Buildings;
 using System.IO;
+using RTWR_RTWLIB.Data;
 
 namespace RTWR_RTWLIB
 { 
@@ -28,7 +29,8 @@ namespace RTWR_RTWLIB
         string prevSelected ="";
         public StratViewer(EDU_viewer edu)
         {
-            map = new SelectMaps();
+            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
+            map = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.selectMapPaths[1]);
             eduViewer = edu;
             InitializeComponent();
         }

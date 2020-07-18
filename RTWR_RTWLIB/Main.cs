@@ -27,8 +27,7 @@ namespace RTWR_RTWLIB
             this.ss = ss;
         }
         public void Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
-        {
-            
+        {       
             try
             {
                 //start loading data
@@ -99,7 +98,7 @@ namespace RTWR_RTWLIB
 
         public void Randomise(GroupBox units_group, NumericUpDown unit_attr, NumericUpDown num_ownership,
             GroupBox faction_group, NumericUpDown num_cities,ToolStripLabel lbl_progress,
-            PictureBox pic_map, CheckBox chk_unitinfo)
+            PictureBox pic_map, bool chk_unitinfo, bool chk_prefs)
         {
             //UnitInfo_dialog(chk_unitinfo);
 
@@ -108,7 +107,7 @@ namespace RTWR_RTWLIB
             ss.Refresh();
 
             Misc_Data.RefreshRegionWater();
-            SelectMaps sm = new SelectMaps();
+            SelectMaps sm = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.selectMapPaths[1]);
          
             ((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
 
@@ -119,8 +118,11 @@ namespace RTWR_RTWLIB
 
             TWRandom.UnitByFaction.Clear();
 
-            if (chk_unitinfo.Checked)
+            if (chk_unitinfo)
                 ((EDU)files[FileNames.export_descr_unit]).ApplyUnitInfoFix();
+
+            if (chk_prefs)
+                new PreferencesFile().ImportPreferences(@"randomiser\preferences\preferences.txt");
 
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
@@ -138,9 +140,10 @@ namespace RTWR_RTWLIB
 
             Thread.Sleep(250);
 
-            FileWrite(files[FileNames.export_descr_unit] as IFile);
-            FileWrite(files[FileNames.export_descr_buildings] as IFile);
-            FileWrite(files[FileNames.descr_strat] as IFile);
+            files[FileNames.export_descr_unit].ToFile(FileDestinations.paths[FileNames.export_descr_unit]["save"][0]);
+            files[FileNames.export_descr_buildings].ToFile(FileDestinations.paths[FileNames.export_descr_buildings]["save"][0]);
+            files[FileNames.descr_strat].ToFile(FileDestinations.paths[FileNames.descr_strat]["save"][0]);
+
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");
             sw.Write(seed);

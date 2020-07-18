@@ -18,6 +18,7 @@ namespace RTWR_RTWLIB
         StratViewer sv;
         public MapViewer(TreeView ds, StratViewer sv)
         {
+            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
             this.ds = ds;
             this.sv = sv;
             InitializeComponent();

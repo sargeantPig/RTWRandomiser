@@ -21,8 +21,6 @@ namespace RTWR_RTWLIB
 {
 	public partial class Form1 : Form
 	{
-        Dictionary<FileNames, IFile> vanfiles;
-		int seed;
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
@@ -70,7 +68,7 @@ namespace RTWR_RTWLIB
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
 			main.Load(chk_LogAll, lbl_progress);
 			main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-				lbl_progress, picBox_map, chk_misc_unitInfo);
+				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
 		}
 
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
@@ -122,12 +120,9 @@ namespace RTWR_RTWLIB
 
 		}
 
-		private async void btn_play_Click(object sender, EventArgs e)
+		private void btn_play_Click(object sender, EventArgs e)
 		{
 			Play();
-
-			RTWCore.core.Watch();
-
 		}
 
 		private void Play()
@@ -143,7 +138,6 @@ namespace RTWR_RTWLIB
 				args[0] += "-ne ";
 
 			RTWCore.core.StartProcess(args);
-
 		}
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)

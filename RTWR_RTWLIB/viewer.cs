@@ -22,6 +22,7 @@ namespace RTWR_RTWLIB
         bool isUpdating = false;
         public EDU_viewer(EDU edu)
         {
+            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
             this.edu = edu;
             InitializeComponent();
 
