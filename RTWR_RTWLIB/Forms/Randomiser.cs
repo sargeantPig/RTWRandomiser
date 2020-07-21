@@ -19,19 +19,19 @@ using RTWLib.Memory;
 using RTWR_RTWLIB.Data;
 namespace RTWR_RTWLIB
 {
-	public partial class Form1 : Form
+	public partial class RandomiserForm : Form
 	{
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
-		public Form1()
+		public RandomiserForm()
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
 			main = new Main(pb_progress, statusStrip1);
             main.CleanLog();
 
-			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FilePaths.MOD_FOLDER))
+			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
 				main.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
 

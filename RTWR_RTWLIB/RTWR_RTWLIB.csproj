@@ -98,25 +98,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
+    <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
+    <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Files.cs" />
     <Compile Include="Data\Personalities.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Randomiser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\Randomiser.Designer.cs">
+      <DependentUpon>Randomiser.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs" />
-    <Compile Include="MapViewer.cs">
+    <Compile Include="Forms\MapViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MapViewer.Designer.cs">
+    <Compile Include="Forms\MapViewer.Designer.cs">
       <DependentUpon>MapViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -125,25 +125,25 @@
     <Compile Include="Randomiser\RandomEDB.cs" />
     <Compile Include="Randomiser\RandomEDU.cs" />
     <Compile Include="Randomiser\TWRandom.cs" />
-    <Compile Include="StratViewer.cs">
+    <Compile Include="Forms\StratViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StratViewer.Designer.cs">
+    <Compile Include="Forms\StratViewer.Designer.cs">
       <DependentUpon>StratViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="viewer.cs">
+    <Compile Include="Forms\viewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="viewer.Designer.cs">
+    <Compile Include="Forms\viewer.Designer.cs">
       <DependentUpon>viewer.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="About.resx">
+    <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Randomiser.resx">
+      <DependentUpon>Randomiser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MapViewer.resx">
+    <EmbeddedResource Include="Forms\MapViewer.resx">
       <DependentUpon>MapViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -156,10 +156,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="StratViewer.resx">
+    <EmbeddedResource Include="Forms\StratViewer.resx">
       <DependentUpon>StratViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="viewer.resx">
+    <EmbeddedResource Include="Forms\viewer.resx">
       <DependentUpon>viewer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

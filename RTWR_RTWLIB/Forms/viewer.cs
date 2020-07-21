@@ -12,6 +12,7 @@ using RTWLib.Objects;
 using RTWLib.Data;
 using ImageMagick;
 using System.IO;
+using RTWR_RTWLIB.Data;
 
 namespace RTWR_RTWLIB
 {
@@ -45,11 +46,11 @@ namespace RTWR_RTWLIB
         }
         private void ChangeUnitPic()
         {
-            if (Directory.Exists(FilePaths.ASSETS))
+            if (Directory.Exists(FileDestinations.ASSETS))
             {
                 string unit = (string)lst_units.SelectedItem;
                 string name = unit.ToUpper() + "_INFO.tga";
-                string fullpath = FilePaths.ASSETS + name;
+                string fullpath = FileDestinations.ASSETS + name;
                 if (File.Exists(fullpath))
                 {
                     MagickImage image = new MagickImage(fullpath);

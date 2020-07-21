@@ -9,7 +9,10 @@ namespace RTWR_RTWLIB.Data
 {
     static class FileDestinations
     {
-        public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" }; 
+        readonly public static string MOD_FOLDER = @"randomiser";
+        readonly public static string ROOT = @"randomiser\van_data";
+        readonly public static string ASSETS = @"randomiser\data\ui\unit_info\merc\";
+        readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" }; 
         public static Dictionary<FileNames, Dictionary<string, string[]>> paths = new Dictionary<FileNames, Dictionary<string, string[]>>
         {
             {

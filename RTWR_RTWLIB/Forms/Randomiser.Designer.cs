@@ -1,6 +1,6 @@
 ﻿namespace RTWR_RTWLIB
 {
-	partial class Form1
+	partial class RandomiserForm
 	{
 		/// <summary>
 		/// Required designer variable.
