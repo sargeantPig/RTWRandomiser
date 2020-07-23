@@ -17,6 +17,8 @@ using System.Diagnostics;
 using RTWLib.Memory;
 
 using RTWR_RTWLIB.Data;
+using RTWR_RTWLIB.Forms;
+
 namespace RTWR_RTWLIB
 {
 	public partial class RandomiserForm : Form
@@ -28,7 +30,7 @@ namespace RTWR_RTWLIB
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
-			main = new Main(pb_progress, statusStrip1);
+			main = new Main(pb_progress, statusStrip1, grp_box_settings);
             main.CleanLog();
 
 			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
@@ -61,6 +63,8 @@ namespace RTWR_RTWLIB
 			{
 				chk_misc_unitInfo.Enabled = false;
 			}
+
+			chk_dev_chosen.Checked = false;
 		}
 
 		private void btn_load_Click(object sender, EventArgs e)
@@ -169,6 +173,44 @@ namespace RTWR_RTWLIB
 			strat.sm_factions = (SM_Factions)main.GetFile(FileNames.descr_sm_faction);
 			strat.PopulateTree();
 			strat.Show();		
+		}
+
+		private void chk_dev_chosen_CheckedChanged(object sender, EventArgs e)
+		{
+			chk_units_sizes_1.Checked = false;
+			chk_unit_stats_2.Checked = false;
+			chk_unit_costs_3.Checked = false;
+			chk_unit_sounds_4.Checked = false;
+			chk_unit_training_5.Checked = true;
+			chk_unit_groundb_6.Checked = false;
+			chk_faction_rosters_7.Checked = true;
+			chk_unit_attributes_9.Checked = true;
+			numUpDown_unit_attributes.Value = 3;
+			numUpDown_unit_ownership.Value = 3;
+
+			chk_faction_treasury_1.Checked = true;
+			chk_faction_ai_2.Checked = true;
+			chk_misc_Ufactions_3.Checked = true;
+			chk_faction_settlements_4.Checked = false;
+			chk_faction_voronoi_4.Checked = true;
+			chk_faction_ragingRebels_5.Checked = false;
+			chk_faction_mempires_6.Checked = true;
+			chk_faction_coreA_7.Checked = true;
+			chk_total_war_8.Checked = false;
+
+		}
+
+		private void btn_advancedOptions_Click(object sender, EventArgs e)
+		{
+			AdvancedOptionsViewer advOpt = new AdvancedOptionsViewer(main.advancedOptions);
+			advOpt.Show();
+		}
+
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			main.options.Export(grp_box_settings);
+
+			base.OnClosing(e);
 		}
 	}
 }

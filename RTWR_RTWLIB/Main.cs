@@ -12,6 +12,7 @@ using RTWR_RTWLIB.Randomiser;
 using System.Drawing;
 using System.Threading;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace RTWR_RTWLIB
 {
@@ -19,15 +20,23 @@ namespace RTWR_RTWLIB
     {
         int seed;
         Dictionary<FileNames, IFile> files;
+        public AdvancedOptions advancedOptions;
+        public Options options;
         ToolStripProgressBar pb;
         StatusStrip ss;
-        public Main(ToolStripProgressBar pb, StatusStrip ss)
+        public Main(ToolStripProgressBar pb, StatusStrip ss, GroupBox settingsBox)
         {
             this.pb = pb;
             this.ss = ss;
+            options = new Options(settingsBox);
+            advancedOptions = new AdvancedOptions();
+            advancedOptions.Import();
         }
         public void Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
-        {       
+        {
+
+            advancedOptions.Export();
+
             try
             {
                 //start loading data
@@ -179,6 +188,8 @@ namespace RTWR_RTWLIB
             }
 
         }
+
+    
 
         private void UnitInfo_dialog(CheckBox chk_misc_unitInfo)
         {

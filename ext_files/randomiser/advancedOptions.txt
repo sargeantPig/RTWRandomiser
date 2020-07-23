@@ -1,0 +1,8 @@
+RagingRebels=5
+UnitAttributeRealism=1
+UnitAutoBalance=1
+UnitCostBalance=1
+UnitOwnershipReshuffle=0
+UnitSize=0
+UnitTraining=1
+VictoryCondition=0

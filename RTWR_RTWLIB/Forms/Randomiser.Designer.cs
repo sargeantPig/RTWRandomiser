@@ -40,6 +40,7 @@
             this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
+            this.chk_dev_chosen = new System.Windows.Forms.CheckBox();
             this.chk_preferences = new System.Windows.Forms.CheckBox();
             this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
             this.chk_misc_selectA = new System.Windows.Forms.CheckBox();
@@ -83,6 +84,7 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_advancedOptions = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -218,6 +220,8 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
+            this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
             this.grp_settings_misc.Controls.Add(this.chk_preferences);
             this.grp_settings_misc.Controls.Add(this.chk_misc_unitInfo);
             this.grp_settings_misc.Controls.Add(this.chk_misc_selectA);
@@ -228,10 +232,22 @@
             this.grp_settings_misc.TabStop = false;
             this.grp_settings_misc.Text = "Misc Settings";
             // 
+            // chk_dev_chosen
+            // 
+            this.chk_dev_chosen.AutoSize = true;
+            this.chk_dev_chosen.Location = new System.Drawing.Point(7, 42);
+            this.chk_dev_chosen.Name = "chk_dev_chosen";
+            this.chk_dev_chosen.Size = new System.Drawing.Size(115, 17);
+            this.chk_dev_chosen.TabIndex = 3;
+            this.chk_dev_chosen.Text = "Select dev chosen";
+            this.tooltip.SetToolTip(this.chk_dev_chosen, "Select recommended options from the developer");
+            this.chk_dev_chosen.UseVisualStyleBackColor = true;
+            this.chk_dev_chosen.CheckedChanged += new System.EventHandler(this.chk_dev_chosen_CheckedChanged);
+            // 
             // chk_preferences
             // 
             this.chk_preferences.AutoSize = true;
-            this.chk_preferences.Location = new System.Drawing.Point(7, 42);
+            this.chk_preferences.Location = new System.Drawing.Point(7, 65);
             this.chk_preferences.Name = "chk_preferences";
             this.chk_preferences.Size = new System.Drawing.Size(115, 17);
             this.chk_preferences.TabIndex = 2;
@@ -706,14 +722,14 @@
             // viewerToolStripMenuItem
             // 
             this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
-            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.viewerToolStripMenuItem.Text = "EDU Viewer";
             this.viewerToolStripMenuItem.Click += new System.EventHandler(this.viewerToolStripMenuItem_Click);
             // 
             // stratViewerToolStripMenuItem
             // 
             this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
-            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
             this.stratViewerToolStripMenuItem.Click += new System.EventHandler(this.stratViewerToolStripMenuItem_Click);
             // 
@@ -732,7 +748,19 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // Form1
+            // btn_advancedOptions
+            // 
+            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
+            this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
+            this.btn_advancedOptions.Name = "btn_advancedOptions";
+            this.btn_advancedOptions.Size = new System.Drawing.Size(112, 25);
+            this.btn_advancedOptions.TabIndex = 4;
+            this.btn_advancedOptions.Text = "Advanced Options";
+            this.btn_advancedOptions.UseVisualStyleBackColor = true;
+            this.btn_advancedOptions.Click += new System.EventHandler(this.btn_advancedOptions_Click);
+            // 
+            // RandomiserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -744,7 +772,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "RandomiserForm";
             this.Text = "Rome Total War Randomiser";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -826,6 +854,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.CheckBox chk_preferences;
+        private System.Windows.Forms.CheckBox chk_dev_chosen;
+        private System.Windows.Forms.Button btn_advancedOptions;
     }
 }
 

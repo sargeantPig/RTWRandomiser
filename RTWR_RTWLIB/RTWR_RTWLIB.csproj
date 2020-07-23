@@ -98,6 +98,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AdvancedOptions.cs" />
+    <Compile Include="Data\options.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +108,12 @@
     </Compile>
     <Compile Include="Data\Files.cs" />
     <Compile Include="Data\Personalities.cs" />
+    <Compile Include="Forms\AdvancedOptionsViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdvancedOptionsViewer.Designer.cs">
+      <DependentUpon>AdvancedOptionsViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Randomiser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +147,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdvancedOptionsViewer.resx">
+      <DependentUpon>AdvancedOptionsViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Randomiser.resx">
       <DependentUpon>Randomiser.cs</DependentUpon>
