@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Threading;
 using System.IO;
 using System.Text.RegularExpressions;
+using RTWR_RTWLIB.Forms;
 
 namespace RTWR_RTWLIB
 {
@@ -20,7 +21,7 @@ namespace RTWR_RTWLIB
     {
         int seed;
         Dictionary<FileNames, IFile> files;
-        public AdvancedOptions advancedOptions;
+        public AdvancedOptionsViewer advancedOptions;
         public Options options;
         ToolStripProgressBar pb;
         StatusStrip ss;
@@ -28,15 +29,14 @@ namespace RTWR_RTWLIB
         {
             this.pb = pb;
             this.ss = ss;
-            options = new Options(settingsBox);
-            advancedOptions = new AdvancedOptions();
-            advancedOptions.Import();
+            options = new Options(settingsBox, @"randomiser/options.txt", "options.txt");
+            advancedOptions = new AdvancedOptionsViewer(@"randomiser/advancedOptions.txt", "advancedOptions.txt");
+            TWRandom.advancedOptions = advancedOptions.Options;
         }
         public void Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
         {
-
-            advancedOptions.Export();
-
+            advancedOptions.SetUpOptions(advancedOptions.Options.filePath, advancedOptions.Options.fileName);
+            TWRandom.advancedOptions = advancedOptions.Options;
             try
             {
                 //start loading data

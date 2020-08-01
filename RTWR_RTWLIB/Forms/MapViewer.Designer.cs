@@ -47,6 +47,7 @@
             // btn_close
             // 
             this.btn_close.BackColor = System.Drawing.Color.Transparent;
+            this.btn_close.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
             this.btn_close.Location = new System.Drawing.Point(491, 349);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(140, 29);

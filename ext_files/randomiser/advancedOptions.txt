@@ -1,8 +1,8 @@
-RagingRebels=5
-UnitAttributeRealism=1
-UnitAutoBalance=1
-UnitCostBalance=1
-UnitOwnershipReshuffle=0
-UnitSize=0
-UnitTraining=1
-VictoryCondition=0
+chk_realisticAttributes=True
+rdb_randomShuffle=False
+rdb_balancedShuffle=False
+rdb_regionShuffling=False
+chk_balanceCosts=True
+chk_balanceUnitStats=True
+chk_usizeConstraints=True
+numUpDown_ragingRebelsVal=5

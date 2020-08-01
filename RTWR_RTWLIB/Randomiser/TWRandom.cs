@@ -11,6 +11,8 @@ using RTWLib.Data;
 using RTWLib.Logger;
 using System.Threading;
 using System.IO;
+using RTWR_RTWLIB.Forms;
+using RTWR_RTWLIB.Data;
 
 namespace RTWR_RTWLIB.Randomiser
 {
@@ -21,6 +23,8 @@ namespace RTWR_RTWLIB.Randomiser
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
 		public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
 		public static Dictionary<FactionOwnership, List<string>> UnitByFaction = new Dictionary<FactionOwnership, List<string>>();
+
+		public static Options advancedOptions { get; set; }
 
 		public static string GetRandomAIEconomy()
 		{
@@ -68,7 +72,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 	public static class Randomise
 	{
-		public static Task RandomiseFile<T, A>(this A file, GroupBox grp, ToolStripLabel label, StatusStrip ss, ToolStripProgressBar pb, object[] arguments)
+		public static void RandomiseFile<T, A>(this A file, GroupBox grp, ToolStripLabel label, StatusStrip ss, ToolStripProgressBar pb, object[] arguments)
 		{
 			Type t = typeof(T);
 			int increment = 100 / grp.Controls.Count;
@@ -146,8 +150,6 @@ namespace RTWR_RTWLIB.Randomiser
 				
 				}
 			}
-
-			return Task.CompletedTask;
 		}
 
 		public static void ApplyUnitInfoFix(this EDU edu)

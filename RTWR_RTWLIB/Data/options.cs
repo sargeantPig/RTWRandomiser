@@ -10,15 +10,16 @@ using System.Windows.Forms;
 
 namespace RTWR_RTWLIB.Data
 {
-    class Options : Logger
+    public class Options : Logger
     {
-        readonly string filePath = @"randomiser\options.txt";
+        public string filePath { get; set; } 
 
         public Dictionary<string, int> options;
 
-        public Options(GroupBox settingsBox)
+        public Options(GroupBox settingsBox, string filePath, string fileName)
         {
-            this.fileName = "options.txt";
+            this.filePath = filePath;
+            this.fileName = fileName;
             options = new Dictionary<string, int>();
             if (!File.Exists(filePath))
                 Export(settingsBox);
@@ -67,7 +68,6 @@ namespace RTWR_RTWLIB.Data
                 {
                     foreach (var opt in ((GroupBox)box).Controls)
                     {
-
                         if (opt is CheckBox)
                         {
                             CheckBox checkBox = (CheckBox)opt;
@@ -79,8 +79,33 @@ namespace RTWR_RTWLIB.Data
                             NumericUpDown numUpDown = (NumericUpDown)opt;
                             sw.WriteLine(numUpDown.Name + "=" + numUpDown.Value.ToString());
                         }
+
+                        if (opt is RadioButton)
+                        {
+                            RadioButton radioButton = (RadioButton)opt;
+                            sw.WriteLine(radioButton.Name + "=" + radioButton.Checked.ToString());
+                        }
                     }
                 }
+
+                if (box is CheckBox)
+                {
+                    CheckBox checkBox = (CheckBox)box;
+                    sw.WriteLine(checkBox.Name + "=" + checkBox.Checked.ToString());
+                }
+
+                if (box is NumericUpDown)
+                {
+                    NumericUpDown numUpDown = (NumericUpDown)box;
+                    sw.WriteLine(numUpDown.Name + "=" + numUpDown.Value.ToString());
+                }
+
+                if (box is RadioButton)
+                {
+                    RadioButton radioButton = (RadioButton)box;
+                    sw.WriteLine(radioButton.Name + "=" + radioButton.Checked.ToString());
+                }
+
             }
             
             sw.Close();

@@ -202,14 +202,13 @@ namespace RTWR_RTWLIB
 
 		private void btn_advancedOptions_Click(object sender, EventArgs e)
 		{
-			AdvancedOptionsViewer advOpt = new AdvancedOptionsViewer(main.advancedOptions);
-			advOpt.Show();
+			main.advancedOptions.Show();
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
 		{
 			main.options.Export(grp_box_settings);
-
+			main.advancedOptions.Export();
 			base.OnClosing(e);
 		}
 	}
