@@ -15,10 +15,3 @@ The randomiser has many options, some ridiculous but some that really do create 
 * Randomised faction rosters - This randomly assigns factions units that it can recruit, you'll never know what the enemy may have in their arsenal.
 * Voronoi Empires - Distributes settlements to factions randomly using a voronoi grid. 
 
-# Important Information
-## Unit Info Fix
-The option fixes the unit info page images, instead of defaulting to peasants it will be the correct unit. 
-This is a single use fix, you will not have to run the fix twice.
-The fix runs from a .bat file and requires the randomiser to be run as an administrator.
-It simply copies all the required unit_info and unit images into an assets folder, and then makes each faction folder a symlink to the assets folder.
-
