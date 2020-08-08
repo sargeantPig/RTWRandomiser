@@ -1,5 +1,6 @@
 ﻿using RTWLib.Data;
 using RTWLib.Functions;
+using RTWLib.Functions.EDU;
 using RTWLib.Objects;
 using RTWLib.Objects.Descr_strat;
 using System;

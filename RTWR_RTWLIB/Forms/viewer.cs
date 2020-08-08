@@ -13,7 +13,7 @@ using RTWLib.Data;
 using ImageMagick;
 using System.IO;
 using RTWR_RTWLIB.Data;
-
+using RTWLib.Functions.EDU;
 namespace RTWR_RTWLIB
 {
     public partial class EDU_viewer : Form

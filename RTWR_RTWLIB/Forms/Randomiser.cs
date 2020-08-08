@@ -18,6 +18,7 @@ using RTWLib.Memory;
 
 using RTWR_RTWLIB.Data;
 using RTWR_RTWLIB.Forms;
+using RTWLib.Functions.EDU;
 
 namespace RTWR_RTWLIB
 {

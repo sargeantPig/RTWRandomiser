@@ -1,5 +1,5 @@
 chk_realisticAttributes=True
-rdb_randomShuffle=False
+rdb_randomShuffle=True
 rdb_balancedShuffle=False
 rdb_regionShuffling=False
 chk_balanceCosts=True
