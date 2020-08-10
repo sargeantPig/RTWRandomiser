@@ -22,10 +22,10 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			foreach (Unit unit in edu.units)
 			{
-				foreach (Enum value in Enum.GetValues(unit.ownership.GetType()))
+				foreach (string value in TWRandom.factionList)
 				{
-					if(unit.ownership.HasFlag(value))
-						TWRandom.UnitByFaction.AddKV((FactionOwnership)value, unit.type);
+					if(unit.ownership.Contains(value))
+						TWRandom.UnitByFaction.AddKV(value, unit.type);
 				}
 			}
 		}

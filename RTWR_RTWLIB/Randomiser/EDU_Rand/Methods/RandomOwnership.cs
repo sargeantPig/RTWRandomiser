@@ -2,7 +2,9 @@
 using RTWLib.Functions;
 using RTWLib.Functions.EDU;
 using RTWLib.Objects;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RTWR_RTWLIB.Randomiser
 {
@@ -17,28 +19,20 @@ namespace RTWR_RTWLIB.Randomiser
 
 				foreach (Unit unit in edu.units)
 				{
-					unit.ownership = FactionOwnership.slave;
+					List<object> factions = new List<object>(TWRandom.factionList);
+					unit.ownership.Clear();
 
 					for (int i = 0; i < (int)maxO.Value - 1; i++)
 					{
-						FactionOwnership fo = FactionOwnership.slave;
-						bool dup = false;
+						string rndFaction = (string)factions.GetRandomItemFromList(TWRandom.rnd);
 
-						while ((fo = Functions_General.RandomFlag<FactionOwnership>(TWRandom.rnd)) == FactionOwnership.slave
-							|| (dup = FlagDuplicateCheck(fo, unit.ownership)) == true
-							|| (fo = Functions_General.RandomFlag<FactionOwnership>(TWRandom.rnd)) == FactionOwnership.none)
-						{
-
-						}
-
-						unit.ownership |= fo;
-
-						//TWRandom.UnitByFaction.AddKV(fo, unit.type);
-
+						unit.ownership.Add(rndFaction);
+						factions.Remove(rndFaction);
 					}
 
+					if (factions.Contains("slave"))
+						unit.ownership.Add("slave");
 				}
-
 			}
 
 			else
@@ -46,7 +40,6 @@ namespace RTWR_RTWLIB.Randomiser
 				edu.PLog("Error: wrong param type");
 				edu.DisplayLogExit();
 			}
-
 		}
 	}
 }

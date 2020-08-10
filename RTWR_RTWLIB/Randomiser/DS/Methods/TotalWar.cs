@@ -13,14 +13,14 @@ namespace RTWR_RTWLIB.Randomiser
             ds.factionRelationships.attitudes.Clear();
             ds.coreAttitudes.attitudes.Clear();
 
-            Dictionary<FactionOwnership, List<FactionOwnership>> completePairs = new Dictionary<FactionOwnership, List<FactionOwnership>>();
+            Dictionary<string, List<string>> completePairs = new Dictionary<string, List<string>>();
             LookUpTables lt = new LookUpTables();
             foreach (var faction in ds.factions)
             {
-                FactionOwnership first = lt.LookUpKey<FactionOwnership>(faction.name);
+                string first = faction.name;
                 foreach (var sec_faction in ds.factions)
                 {
-                    FactionOwnership second = lt.LookUpKey<FactionOwnership>(sec_faction.name);
+                    string second = sec_faction.name;
                     if (first != second)
                     {
                         //core values
@@ -30,12 +30,12 @@ namespace RTWR_RTWLIB.Randomiser
                             int ia = -1;
                             if (completePairs.ContainsKey(second))
                                 ia = completePairs[second].FindIndex(x => x == first);
-                            else completePairs.Add(second, new List<FactionOwnership>());
+                            else completePairs.Add(second, new List<string>());
                             if (i > -1 || ia > -1)
                                 continue;
                             else if (i == -1 && ia == -1 && !ds.coreAttitudes.attitudes.ContainsKey(first))
                             {
-                                ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<FactionOwnership>> { { 600, new List<FactionOwnership>() { second } } });
+                                ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
                             }
                             else if (i == -1 && ia == -1 && ds.coreAttitudes.attitudes.ContainsKey(first))
                             {
@@ -45,7 +45,7 @@ namespace RTWR_RTWLIB.Randomiser
                                 }
                                 else
                                 {
-                                    ds.coreAttitudes.attitudes[first].Add(600, new List<FactionOwnership> { second });
+                                    ds.coreAttitudes.attitudes[first].Add(600, new List<string> { second });
                                 }
 
                             }
@@ -56,15 +56,15 @@ namespace RTWR_RTWLIB.Randomiser
 
                         else
                         {
-                            ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<FactionOwnership>> { { 600, new List<FactionOwnership>() { second } } });
-                            completePairs.Add(first, new List<FactionOwnership> { second });
-                            completePairs.Add(second, new List<FactionOwnership> { first });
+                            ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
+                            completePairs.Add(first, new List<string> { second });
+                            completePairs.Add(second, new List<string> { first });
                         }
 
                         //do faction relationship vales
                         if (!ds.factionRelationships.attitudes.ContainsKey(first))
                         {
-                            ds.factionRelationships.attitudes.Add(first, new Dictionary<int, List<FactionOwnership>> { { 600, new List<FactionOwnership>() { second } } });
+                            ds.factionRelationships.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
                         }
                         else if (ds.factionRelationships.attitudes.ContainsKey(first))
                         {
@@ -74,7 +74,7 @@ namespace RTWR_RTWLIB.Randomiser
                             }
                             else
                             {
-                                ds.factionRelationships.attitudes[first].Add(600, new List<FactionOwnership> { second });
+                                ds.factionRelationships.attitudes[first].Add(600, new List<string> { second });
                             }
 
                         }

@@ -81,18 +81,18 @@ namespace RTWR_RTWLIB
                 dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes.Add("At War", "At War");
                 foreach (var fr in ds.factionRelationships.attitudes)
                 {
-                    if (lut.LookUpKey<FactionOwnership>(faction.name) == fr.Key)
+                    if (faction.name == fr.Key)
                     {
-                        foreach (KeyValuePair<int, List<FactionOwnership>> relation in fr.Value)
+                        foreach (KeyValuePair<int, List<string>> relation in fr.Value)
                         {
-                            foreach (FactionOwnership fo in relation.Value)
+                            foreach (string fo in relation.Value)
                             {
                                 int rvalue = relation.Key;
-                                if(rvalue < 100) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Allied"].Nodes.Add(lut.LookUpString<FactionOwnership>(fo));
-                                else if(rvalue < 200) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Suspicous"].Nodes.Add(lut.LookUpString<FactionOwnership>(fo));
-                                else if (rvalue < 400) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Neutral"].Nodes.Add(lut.LookUpString<FactionOwnership>(fo));
-                                else if (rvalue < 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Hostile"].Nodes.Add(lut.LookUpString<FactionOwnership>(fo));
-                                else if (rvalue >= 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["At War"].Nodes.Add(lut.LookUpString<FactionOwnership>(fo));
+                                if(rvalue < 100) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Allied"].Nodes.Add(fo);
+                                else if(rvalue < 200) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Suspicous"].Nodes.Add(fo);
+                                else if (rvalue < 400) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Neutral"].Nodes.Add(fo);
+                                else if (rvalue < 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Hostile"].Nodes.Add(fo);
+                                else if (rvalue >= 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["At War"].Nodes.Add(fo);
                             }
                         }
                     }

@@ -23,9 +23,10 @@ namespace RTWR_RTWLIB.Randomiser
 		public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
 		public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
-		public static Dictionary<FactionOwnership, List<string>> UnitByFaction = new Dictionary<FactionOwnership, List<string>>();
+		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
 
 		public static Options advancedOptions { get; set; }
+		public static string[] factionList { get; set; }
 
 		public static string GetRandomAIEconomy()
 		{
@@ -40,7 +41,7 @@ namespace RTWR_RTWLIB.Randomiser
 			return VoiceTypes[rnd.Next(0, VoiceTypes.Count())];
 		}
 
-		public static void AddKV(this Dictionary<FactionOwnership, List<string>> dic, FactionOwnership key, string unit)
+		public static void AddKV(this Dictionary<string, List<string>> dic, string key, string unit)
 		{
 			if (!dic.ContainsKey(key))
 			{
@@ -52,22 +53,20 @@ namespace RTWR_RTWLIB.Randomiser
 				dic[key].Add(unit);
 			}
 		}
-		public static List<string> GetFactions(this Dictionary<FactionOwnership, List<string>> dic, string unit)
+		public static List<string> GetFactions(this Dictionary<string, List<string>> dic, string unit)
 		{
 			LookUpTables lt = new LookUpTables();
 
 			List<string> fo = new List<string>();
 
-			foreach (KeyValuePair<FactionOwnership, List<string>> kv in dic)
+			foreach (KeyValuePair<string, List<string>> kv in dic)
 			{
 				if (kv.Value.Contains(unit))
 				{
-					fo.Add(lt.LookUpString(kv.Key));
+					fo.Add(kv.Key);
 				}
 			}
-
 			return fo;
-
 		}
 	}
 

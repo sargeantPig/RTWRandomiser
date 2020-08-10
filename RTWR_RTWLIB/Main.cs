@@ -61,6 +61,8 @@ namespace RTWR_RTWLIB
                     file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out this.lineNumber, out this.lineText);
                     pb.Increment((int)increment);
                 }
+
+                TWRandom.factionList = ((SM_Factions)files[FileNames.descr_sm_faction]).factionColours.Keys.ToArray();
             }
 
             catch(Exception ex)
@@ -118,9 +120,7 @@ namespace RTWR_RTWLIB
 
             Misc_Data.RefreshRegionWater();
             SelectMaps sm = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.selectMapPaths[1]);
-         
-            ((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
-
+            //((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
             ((EDU)files[FileNames.export_descr_unit]).RandomiseFile<RandomEDU, EDU>(units_group, lbl_progress, ss, pb, new object[] { unit_attr, num_ownership });
             RandomEDU.SetFactionUnitList(((EDU)files[FileNames.export_descr_unit]));
             ((EDB)files[FileNames.export_descr_buildings]).SetRecruitment();

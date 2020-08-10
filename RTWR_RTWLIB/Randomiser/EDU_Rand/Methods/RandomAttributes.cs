@@ -40,29 +40,30 @@ namespace RTWR_RTWLIB.Randomiser
 				edu.DisplayLogExit();
 			}
 
-			FactionOwnership fo = FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
-			| FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.britons | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.pontus | FactionOwnership.armenia | FactionOwnership.dacia | FactionOwnership.numidia | FactionOwnership.scythia |
-			FactionOwnership.spain | FactionOwnership.thrace | FactionOwnership.slave;
+			//set generals
+
+			List<string> factions = new List<string>(TWRandom.factionList);
+
 			edu.units.Shuffle(TWRandom.rnd);
 			foreach (Unit unit in edu.units)
 			{
-				if ((unit.ownership & fo) != 0 && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
+				string factionFound = "";
+				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
 				{
 					unit.attributes |= Attributes.general_unit;
-					fo = fo & ~unit.ownership;
+					factions.Remove(factionFound);
 				}
 			}
 
-			fo = FactionOwnership.romans_brutii | FactionOwnership.romans_scipii | FactionOwnership.romans_julii | FactionOwnership.seleucid | FactionOwnership.egypt | FactionOwnership.carthage | FactionOwnership.parthia
-			| FactionOwnership.gauls | FactionOwnership.germans | FactionOwnership.britons | FactionOwnership.greek_cities | FactionOwnership.macedon | FactionOwnership.pontus | FactionOwnership.armenia | FactionOwnership.dacia | FactionOwnership.numidia | FactionOwnership.scythia |
-			FactionOwnership.spain | FactionOwnership.thrace | FactionOwnership.slave;
-			edu.units.Shuffle(TWRandom.rnd);
+			factions = new List<string>(TWRandom.factionList);
+
 			foreach (Unit unit in edu.units)
 			{
-				if ((unit.ownership & fo) != 0 && !unit.attributes.HasFlag(Attributes.general_unit) && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
+				string factionFound = "";
+				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.attributes.HasFlag(Attributes.general_unit) && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
 				{
 					unit.attributes |= Attributes.general_unit_upgrade;
-					fo = fo & ~unit.ownership;
+					factions.Remove(factionFound);
 				}
 			}
 		}

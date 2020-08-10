@@ -18,8 +18,6 @@ namespace RTWR_RTWLIB.Randomiser
 
 	public static class RandomEDB
 	{
-		public static Options advancedOptions { get; set; }
-
 		public static void SetRecruitment(this EDB edb)
 		{
 			foreach (CoreBuilding cb in edb.buildingTrees)
