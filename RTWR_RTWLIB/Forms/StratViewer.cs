@@ -147,7 +147,7 @@ namespace RTWR_RTWLIB
                 string[] split = path.Split('\\');
                 if (split.Count() > 3)
                 {
-                    if (split[1] == "Characters" && eduViewer != null)
+                    if (split[1] == "Characters" && eduViewer.Controls.Count > 0)
                         eduViewer.UpdateUnitTxt(null, dsv_treeView.SelectedNode.Text);
 
 

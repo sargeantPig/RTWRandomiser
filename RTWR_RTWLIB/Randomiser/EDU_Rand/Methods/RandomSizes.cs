@@ -10,7 +10,7 @@ namespace RTWR_RTWLIB.Randomiser
         {
 
             foreach (Unit unit in edu.units)
-                unit.soldier.number = TWRandom.rnd.Next(15, 60 + 1);
+                unit.soldier.number = TWRandom.rnd.Next(15, 40 + 1);
         }
     }
 }

@@ -5,11 +5,25 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RTWR_RTWLIB.Data
 {
+
+    public enum advancedOptionKeys
+    {
+        chk_realisticAttributes,
+        rdb_randomShuffle,
+        rdb_balancedShuffle,
+        rdb_regionShuffling,
+        chk_balanceCosts,
+        chk_balanceUnitStats,
+        chk_usizeConstraints,
+        numUpDown_ragingRebelsVal,
+    }
+
     public class Options : Logger
     {
         public string filePath { get; set; } 
@@ -54,7 +68,9 @@ namespace RTWR_RTWLIB.Data
                 if (matches[0] is CheckBox)
                     ((CheckBox)matches[0]).Checked = Convert.ToBoolean(opt.Value);
                 if (matches[0] is NumericUpDown)
-                    ((NumericUpDown)matches[0]).Value = opt.Value; 
+                    ((NumericUpDown)matches[0]).Value = opt.Value;
+                if (matches[0] is RadioButton)
+                    ((RadioButton)matches[0]).Checked = Convert.ToBoolean(opt.Value);
             }
         }
 

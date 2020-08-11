@@ -41,7 +41,7 @@ namespace RTWR_RTWLIB.Randomiser
             fp.Remove("slave");
             foreach (var a in ds.factions)
             {
-                fp.Add(lt.LookUpKey<FactionOwnership>(a.name), Functions_General.RandomFlag<Personality>(TWRandom.rnd));
+                fp.Add(a.name, Functions_General.RandomFlag<Personality>(TWRandom.rnd));
             }
 
             ds.coreAttitudes.attitudes.Clear();

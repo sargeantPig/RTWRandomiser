@@ -1,8 +1,8 @@
-chk_realisticAttributes=True
-rdb_randomShuffle=True
+chk_realisticAttributes=False
+rdb_randomShuffle=False
 rdb_balancedShuffle=False
-rdb_regionShuffling=False
-chk_balanceCosts=True
-chk_balanceUnitStats=True
-chk_usizeConstraints=True
-numUpDown_ragingRebelsVal=5
+rdb_regionShuffling=True
+chk_balanceCosts=False
+chk_balanceUnitStats=False
+chk_usizeConstraints=False
+numUpDown_ragingRebelsVal=3

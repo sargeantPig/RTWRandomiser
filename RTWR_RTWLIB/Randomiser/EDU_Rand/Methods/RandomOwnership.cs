@@ -2,6 +2,7 @@
 using RTWLib.Functions;
 using RTWLib.Functions.EDU;
 using RTWLib.Objects;
+using RTWR_RTWLIB.Data;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -10,36 +11,58 @@ namespace RTWR_RTWLIB.Randomiser
 {
     public partial class RandomEDU
     {
-		public static void RandomOwnership(EDU edu, NumericUpDown maxOwnership)
+		public static void RandomOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
 		{
-			if (maxOwnership is NumericUpDown)
+			if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_randomShuffle.ToString()] == 1)
 			{
-				NumericUpDown maxO = new NumericUpDown();
-				maxO = maxOwnership as NumericUpDown;
+				SimpleOwnership(edu, maxOwnership);
+			}
+			else if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_regionShuffling.ToString()] == 1)
+			{
+				RegionBasedOwnership(edu, dr, maxOwnership);
+			}
 
-				foreach (Unit unit in edu.units)
+		}
+
+		public static void SimpleOwnership(EDU edu, NumericUpDown maxOwnership)
+		{
+			foreach (Unit unit in edu.units)
+			{
+				List<object> factions = new List<object>(TWRandom.factionList);
+				unit.ownership.Clear();
+
+				for (int i = 0; i < (int)maxOwnership.Value - 1; i++)
 				{
-					List<object> factions = new List<object>(TWRandom.factionList);
-					unit.ownership.Clear();
+					string rndFaction = (string)factions.GetRandomItemFromList(TWRandom.rnd);
 
-					for (int i = 0; i < (int)maxO.Value - 1; i++)
-					{
-						string rndFaction = (string)factions.GetRandomItemFromList(TWRandom.rnd);
-
-						unit.ownership.Add(rndFaction);
-						factions.Remove(rndFaction);
-					}
-
-					if (factions.Contains("slave"))
-						unit.ownership.Add("slave");
+					unit.ownership.Add(rndFaction);
+					factions.Remove(rndFaction);
 				}
+
+				if (factions.Contains("slave"))
+					unit.ownership.Add("slave");
 			}
 
-			else
-			{
-				edu.PLog("Error: wrong param type");
-				edu.DisplayLogExit();
-			}
+		}
+
+		public static void RegionBasedOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
+		{ 
+			//get cities and locations
+
+			//set up voronoi grid
+
+			//group cities into clusters near each point
+
+			//group units into list by unit type
+
+			//distribute units into the clusters 
+
+			//setup unit table for number of uses
+
+			//assign factions to clusters
+
+			//set ownership
+		
 		}
 	}
 }
