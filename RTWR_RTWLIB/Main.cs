@@ -34,7 +34,7 @@ namespace RTWR_RTWLIB
             advancedOptions = new AdvancedOptionsViewer(@"randomiser/advancedOptions.txt", "advancedOptions.txt");
             TWRandom.advancedOptions = advancedOptions.Options;
         }
-        public void Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
+        public bool Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
         {
             advancedOptions.SetUpOptions(advancedOptions.Options.filePath, advancedOptions.Options.fileName);
             TWRandom.advancedOptions = advancedOptions.Options;
@@ -57,24 +57,30 @@ namespace RTWR_RTWLIB
                     this.fileName = file.Value.Name.ToString();
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
-                    file.Value.Log("Loading " + file.Value.Description);
+                    file.Value.Log("Loading " + file.Value.Name);
                     file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out this.lineNumber, out this.lineText);
                     pb.Increment((int)increment);
                 }
 
                 TWRandom.factionList = ((SM_Factions)files[FileNames.descr_sm_faction]).factionColours.Keys.ToArray();
+
+                pb.Value = 100;
             }
 
             catch(Exception ex)
             {
                 this.ExceptionLog(ex);
-                this.DisplayLogExit();
+                this.DisplayLog();
+                return false;
             }
+
+            return true;
 
         }
 
         public void Load(ToolStripLabel lbl_progress, FileNames fileName, string loadsave)
         {
+            pb.Value = 0;
             string fileStr = "";
             string currentLine = "";
             int lineNumber = 0;
@@ -95,7 +101,7 @@ namespace RTWR_RTWLIB
                 fileStr = files[fileName].Name.ToString();
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
-                files[fileName].Log("Loading " + files[fileName].Description);
+                files[fileName].Log("Loading " + files[fileName].Name);
                 files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine ) ;
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
@@ -104,7 +110,7 @@ namespace RTWR_RTWLIB
             catch(Exception ex)
             {
                 this.ExceptionLog(ex);
-                this.DisplayLogExit();
+                this.DisplayLog();
             }
         }
 
@@ -147,6 +153,7 @@ namespace RTWR_RTWLIB
             pic_map.Refresh();
 
             sm.Save(@"randomiser\full_map.png");
+            
 
             Thread.Sleep(250);
 

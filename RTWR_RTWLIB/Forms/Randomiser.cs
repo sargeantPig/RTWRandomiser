@@ -71,11 +71,18 @@ namespace RTWR_RTWLIB
 		private void btn_load_Click(object sender, EventArgs e)
 		{
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
-			main.Load(chk_LogAll, lbl_progress);
-			main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+			if (main.Load(chk_LogAll, lbl_progress))
+			{
+				main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
 				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
-		}
 
+			}
+			else
+			{
+				main.PLog("Load failed - Check log for details.");
+				main.DisplayLog();
+			}
+		}
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
 		{
 			CheckBoxes(sender, grp_settings_factions);

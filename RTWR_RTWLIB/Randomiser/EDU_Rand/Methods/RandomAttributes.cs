@@ -36,8 +36,8 @@ namespace RTWR_RTWLIB.Randomiser
 
 			else
 			{
-				edu.PLog("Error: wrong param type");
-				edu.DisplayLogExit();
+				edu.PLog("Error: wrong param type in " + nameof(RandomEDU.RandomAttributes));
+				edu.DisplayLog();
 			}
 
 			//set generals

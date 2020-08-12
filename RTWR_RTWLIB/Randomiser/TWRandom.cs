@@ -146,6 +146,7 @@ namespace RTWR_RTWLIB.Randomiser
 				catch (Exception e)
 				{
 					Logger logger = new Logger();
+					logger.ExceptionLog(e);
 					logger.PLog("Exception: " + e.Message + " in " + e.TargetSite);
 				
 				}
