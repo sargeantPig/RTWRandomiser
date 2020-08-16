@@ -1,4 +1,6 @@
-﻿namespace RTWR_RTWLIB
+﻿using System.Reflection;
+
+namespace RTWR_RTWLIB
 {
     partial class About
     {
@@ -83,7 +85,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(229, 17);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "v1.8-alpha";
+            this.labelVersion.Text = typeof(About).Assembly.GetName().Version.ToString() + "-alpha";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
