@@ -27,13 +27,13 @@ namespace RTWR_RTWLIB
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
-		public RandomiserForm()
+		public RandomiserForm(string updateMessage)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
 			main = new Main(pb_progress, statusStrip1, grp_box_settings);
             main.CleanLog();
-
+			lbl_msg.Text = updateMessage;
 			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
 				main.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
@@ -53,12 +53,6 @@ namespace RTWR_RTWLIB
 				Image image = Image.FromFile(@"randomiser\full_map.png");
 				picBox_map.Image = image;
 			}
-
-			/*if (!main.AdminCheck())
-			{
-				chk_misc_unitInfo.Enabled = false;
-				main.DisplayLog();
-			}*/
 
 			if (Directory.Exists(@"randomiser\data\ui\unit_info\assets\"))
 			{
@@ -166,7 +160,7 @@ namespace RTWR_RTWLIB
 
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			About about = new About();
+			About about = new About(typeof(About).Assembly.GetName().Version.ToString() + "-alpha");
 			about.Show();
 		}
 

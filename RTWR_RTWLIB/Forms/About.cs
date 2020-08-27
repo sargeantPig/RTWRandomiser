@@ -11,9 +11,10 @@ namespace RTWR_RTWLIB
 {
     partial class About : Form
     {
-        public About()
+        public About(string version)
         {
             InitializeComponent();
+            this.labelVersion.Text = version;
         }
 
         private void okButton_Click(object sender, EventArgs e)

@@ -9,25 +9,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RTWR_RTWLIB.Data
+namespace RTWRandLib.Data
 {
-
-    public enum advancedOptionKeys
-    {
-        chk_realisticAttributes,
-        rdb_randomShuffle,
-        rdb_balancedShuffle,
-        rdb_regionShuffling,
-        chk_balanceCosts,
-        chk_balanceUnitStats,
-        chk_usizeConstraints,
-        numUpDown_ragingRebelsVal,
-    }
-
-    public class Options : Logger
+    public class Options
     {
         public string filePath { get; set; } 
-
+        public string fileName { get; set; }
         public Dictionary<string, int> options;
 
         public Options(GroupBox settingsBox, string filePath, string fileName)

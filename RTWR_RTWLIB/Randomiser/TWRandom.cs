@@ -14,6 +14,7 @@ using System.IO;
 using RTWR_RTWLIB.Forms;
 using RTWR_RTWLIB.Data;
 using RTWLib.Functions.EDU;
+using RTWRandLib.Data;
 
 namespace RTWR_RTWLIB.Randomiser
 {

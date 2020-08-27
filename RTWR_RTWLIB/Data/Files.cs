@@ -7,6 +7,19 @@ using RTWLib.Functions;
 using RTWLib.Data;
 namespace RTWR_RTWLIB.Data
 {
+
+    public enum advancedOptionKeys
+    {
+        chk_realisticAttributes,
+        rdb_randomShuffle,
+        rdb_balancedShuffle,
+        rdb_regionShuffling,
+        chk_balanceCosts,
+        chk_balanceUnitStats,
+        chk_usizeConstraints,
+        numUpDown_ragingRebelsVal,
+    }
+
     static class FileDestinations
     {
         readonly public static string MOD_FOLDER = @"randomiser";
@@ -73,8 +86,5 @@ namespace RTWR_RTWLIB.Data
            }
         };
     }
-
-
-
 
 }

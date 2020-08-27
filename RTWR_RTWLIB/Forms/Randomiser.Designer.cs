@@ -40,6 +40,7 @@
             this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
+            this.btn_advancedOptions = new System.Windows.Forms.Button();
             this.chk_dev_chosen = new System.Windows.Forms.CheckBox();
             this.chk_preferences = new System.Windows.Forms.CheckBox();
             this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
@@ -84,7 +85,7 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_advancedOptions = new System.Windows.Forms.Button();
+            this.lbl_msg = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -102,6 +103,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.lbl_msg);
             this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
             this.panel1.Controls.Add(this.chk_windowed);
@@ -176,7 +178,7 @@
             // 
             this.picBox_map.Location = new System.Drawing.Point(9, 74);
             this.picBox_map.Name = "picBox_map";
-            this.picBox_map.Size = new System.Drawing.Size(277, 235);
+            this.picBox_map.Size = new System.Drawing.Size(277, 196);
             this.picBox_map.TabIndex = 4;
             this.picBox_map.TabStop = false;
             this.tooltip.SetToolTip(this.picBox_map, "Preview of the faction positions on the map.");
@@ -231,6 +233,18 @@
             this.grp_settings_misc.TabIndex = 9;
             this.grp_settings_misc.TabStop = false;
             this.grp_settings_misc.Text = "Misc Settings";
+            // 
+            // btn_advancedOptions
+            // 
+            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
+            this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
+            this.btn_advancedOptions.Name = "btn_advancedOptions";
+            this.btn_advancedOptions.Size = new System.Drawing.Size(112, 25);
+            this.btn_advancedOptions.TabIndex = 4;
+            this.btn_advancedOptions.Text = "Advanced Options";
+            this.btn_advancedOptions.UseVisualStyleBackColor = true;
+            this.btn_advancedOptions.Click += new System.EventHandler(this.btn_advancedOptions_Click);
             // 
             // chk_dev_chosen
             // 
@@ -748,17 +762,14 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // btn_advancedOptions
+            // lbl_msg
             // 
-            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-            this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
-            this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
-            this.btn_advancedOptions.Name = "btn_advancedOptions";
-            this.btn_advancedOptions.Size = new System.Drawing.Size(112, 25);
-            this.btn_advancedOptions.TabIndex = 4;
-            this.btn_advancedOptions.Text = "Advanced Options";
-            this.btn_advancedOptions.UseVisualStyleBackColor = true;
-            this.btn_advancedOptions.Click += new System.EventHandler(this.btn_advancedOptions_Click);
+            this.lbl_msg.AutoSize = true;
+            this.lbl_msg.Location = new System.Drawing.Point(76, 8);
+            this.lbl_msg.Name = "lbl_msg";
+            this.lbl_msg.Size = new System.Drawing.Size(155, 13);
+            this.lbl_msg.TabIndex = 9;
+            this.lbl_msg.Text = "Randomiser has been updated!";
             // 
             // RandomiserForm
             // 
@@ -856,6 +867,7 @@
         private System.Windows.Forms.CheckBox chk_preferences;
         private System.Windows.Forms.CheckBox chk_dev_chosen;
         private System.Windows.Forms.Button btn_advancedOptions;
+        private System.Windows.Forms.Label lbl_msg;
     }
 }
 

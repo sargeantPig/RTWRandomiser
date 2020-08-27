@@ -85,7 +85,7 @@ namespace RTWR_RTWLIB
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(229, 17);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = typeof(About).Assembly.GetName().Version.ToString() + "-alpha";
+            this.labelVersion.Text = "-alpha";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
@@ -114,7 +114,7 @@ namespace RTWR_RTWLIB
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.BackColor = System.Drawing.SystemColors.Control;
+            this.textBoxDescription.BackColor = System.Drawing.Color.DarkGray;
             this.textBoxDescription.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxDescription.Location = new System.Drawing.Point(10, 107);
             this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);

@@ -102,6 +102,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|x86'">
     <OutputPath>bin\x86\Publish\</OutputPath>
@@ -113,6 +115,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
@@ -135,7 +140,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\options.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,6 +259,10 @@
       <Project>{e19ba4e2-2e33-461c-9698-40d6599a9226}</Project>
       <Name>RTWLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RTWRandLib\RTWRandLib.csproj">
+      <Project>{07296b7e-634e-429a-ac42-1f1259acdfab}</Project>
+      <Name>RTWRandLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\symbol48_romans_julii.ico" />
@@ -283,8 +291,8 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Publish ( 
-call $(TargetDir)move_compress.bat
-call $(TargetDir)publish_start.bat alpha $(TargetName).exe release.zip
+start /wait $(TargetDir)move_compress.bat
+start /wait call $(TargetDir)publish_start.bat alpha $(TargetName).exe release.zip
  )</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
