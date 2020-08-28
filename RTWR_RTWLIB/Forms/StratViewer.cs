@@ -83,11 +83,11 @@ namespace RTWR_RTWLIB
                 {
                     if (faction.name == fr.Key)
                     {
-                        foreach (KeyValuePair<int, List<string>> relation in fr.Value)
+                        foreach (KeyValuePair<object, List<string>> relation in fr.Value)
                         {
                             foreach (string fo in relation.Value)
                             {
-                                int rvalue = relation.Key;
+                                int rvalue = (int)relation.Key;
                                 if(rvalue < 100) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Allied"].Nodes.Add(fo);
                                 else if(rvalue < 200) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Suspicous"].Nodes.Add(fo);
                                 else if (rvalue < 400) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Neutral"].Nodes.Add(fo);

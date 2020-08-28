@@ -30,6 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_msg = new System.Windows.Forms.Label();
             this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
             this.chk_windowed = new System.Windows.Forms.CheckBox();
@@ -85,7 +86,6 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbl_msg = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -118,9 +118,20 @@
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
             // 
+            // lbl_msg
+            // 
+            this.lbl_msg.AutoSize = true;
+            this.lbl_msg.BackColor = System.Drawing.Color.LightGray;
+            this.lbl_msg.Location = new System.Drawing.Point(76, 8);
+            this.lbl_msg.Name = "lbl_msg";
+            this.lbl_msg.Size = new System.Drawing.Size(155, 13);
+            this.lbl_msg.TabIndex = 9;
+            this.lbl_msg.Text = "Randomiser has been updated!";
+            // 
             // chk_LogAll
             // 
             this.chk_LogAll.AutoSize = true;
+            this.chk_LogAll.BackColor = System.Drawing.Color.LightGray;
             this.chk_LogAll.Checked = true;
             this.chk_LogAll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chk_LogAll.Location = new System.Drawing.Point(168, 355);
@@ -130,29 +141,31 @@
             this.chk_LogAll.Text = "Log All?";
             this.tooltip.SetToolTip(this.chk_LogAll, "Create a detailed log file (turn this off for faster load times within the random" +
         "iser).");
-            this.chk_LogAll.UseVisualStyleBackColor = true;
+            this.chk_LogAll.UseVisualStyleBackColor = false;
             // 
             // chk_ai
             // 
             this.chk_ai.AutoSize = true;
+            this.chk_ai.BackColor = System.Drawing.Color.LightGray;
             this.chk_ai.Location = new System.Drawing.Point(9, 355);
             this.chk_ai.Name = "chk_ai";
             this.chk_ai.Size = new System.Drawing.Size(63, 17);
             this.chk_ai.TabIndex = 8;
             this.chk_ai.Text = "Ai only?";
             this.tooltip.SetToolTip(this.chk_ai, "Allows for ai campaigns.");
-            this.chk_ai.UseVisualStyleBackColor = true;
+            this.chk_ai.UseVisualStyleBackColor = false;
             // 
             // chk_windowed
             // 
             this.chk_windowed.AutoSize = true;
+            this.chk_windowed.BackColor = System.Drawing.Color.LightGray;
             this.chk_windowed.Location = new System.Drawing.Point(79, 355);
             this.chk_windowed.Name = "chk_windowed";
             this.chk_windowed.Size = new System.Drawing.Size(83, 17);
             this.chk_windowed.TabIndex = 7;
             this.chk_windowed.Text = "Windowed?";
             this.tooltip.SetToolTip(this.chk_windowed, "Puts the game in windowed mode.");
-            this.chk_windowed.UseVisualStyleBackColor = true;
+            this.chk_windowed.UseVisualStyleBackColor = false;
             // 
             // lbl_seed
             // 
@@ -208,6 +221,7 @@
             // 
             // grp_box_settings
             // 
+            this.grp_box_settings.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_box_settings.Controls.Add(this.grp_settings_misc);
             this.grp_box_settings.Controls.Add(this.grp_settings_factions);
             this.grp_box_settings.Controls.Add(this.grp_settings_units);
@@ -222,6 +236,7 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
             this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
             this.grp_settings_misc.Controls.Add(this.chk_preferences);
@@ -298,6 +313,7 @@
             // 
             // grp_settings_factions
             // 
+            this.grp_settings_factions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_factions.Controls.Add(this.chk_total_war_8);
             this.grp_settings_factions.Controls.Add(this.chk_faction_coreA_7);
             this.grp_settings_factions.Controls.Add(this.chk_faction_mempires_6);
@@ -465,6 +481,8 @@
             // 
             // grp_settings_units
             // 
+            this.grp_settings_units.BackColor = System.Drawing.Color.Transparent;
+            this.grp_settings_units.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_units.Controls.Add(this.label1);
             this.grp_settings_units.Controls.Add(this.numUpDown_unit_ownership);
             this.grp_settings_units.Controls.Add(this.lbl_unit_attributes);
@@ -659,13 +677,14 @@
             // chk_seed
             // 
             this.chk_seed.AutoSize = true;
+            this.chk_seed.BackColor = System.Drawing.Color.LightGray;
             this.chk_seed.Location = new System.Drawing.Point(138, 322);
             this.chk_seed.Name = "chk_seed";
             this.chk_seed.Size = new System.Drawing.Size(73, 17);
             this.chk_seed.TabIndex = 4;
             this.chk_seed.Text = "Use Seed";
             this.tooltip.SetToolTip(this.chk_seed, "Forces the randomiser to use your given seed.");
-            this.chk_seed.UseVisualStyleBackColor = true;
+            this.chk_seed.UseVisualStyleBackColor = false;
             // 
             // statusStrip1
             // 
@@ -761,15 +780,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // lbl_msg
-            // 
-            this.lbl_msg.AutoSize = true;
-            this.lbl_msg.Location = new System.Drawing.Point(76, 8);
-            this.lbl_msg.Name = "lbl_msg";
-            this.lbl_msg.Size = new System.Drawing.Size(155, 13);
-            this.lbl_msg.TabIndex = 9;
-            this.lbl_msg.Text = "Randomiser has been updated!";
             // 
             // RandomiserForm
             // 

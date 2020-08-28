@@ -27,14 +27,15 @@ namespace RTWR_RTWLIB
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
-		public RandomiserForm(string updateMessage)
+		public RandomiserForm(string updateMessage, bool isM2TW)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
-			main = new Main(pb_progress, statusStrip1, grp_box_settings);
+			this.BackgroundImage = Properties.Resources.M2TWBackdrop;
+			main = new Main(pb_progress, statusStrip1, grp_box_settings, isM2TW);
             main.CleanLog();
 			lbl_msg.Text = updateMessage;
-			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
+			if ((!main.FileCheck(FilePaths.RTWEXE) && !main.FileCheck("medieval2.exe")))
 				main.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
 
@@ -65,17 +66,32 @@ namespace RTWR_RTWLIB
 		private void btn_load_Click(object sender, EventArgs e)
 		{
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
-			if (main.Load(chk_LogAll, lbl_progress))
-			{
-				main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
 
-			}
-			else
+			if (main.isM2TW)
 			{
-				main.PLog("Load failed - Check log for details.");
-				main.DisplayLog();
+				if (main.M2TWLoad(chk_LogAll, lbl_progress))
+				{
+					main.M2TWRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+				}
+				else
+				{
+					main.PLog("Load failed - Check log for details.");
+					main.DisplayLog();
+				}
 			}
+			else 
+			{
+				if(main.Load(chk_LogAll, lbl_progress))
+					main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+				else
+				{
+					main.PLog("Load failed - Check log for details.");
+					main.DisplayLog();
+				}
+			}
+			
 		}
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
 		{
@@ -135,15 +151,18 @@ namespace RTWR_RTWLIB
 		{
 			string[] args = new string[1];
 
-			args[0] = "-mod:randomiser -show_err -nm ";
+			if (main.isM2TW)
+				args[0] = "--features.mod=mods/randomiser";
+			else args[0] = "-mod:randomiser -show_err -nm ";
 
 			if (chk_ai.Checked)
 				args[0] += "-ai ";
 
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
-
-			RTWCore.core.StartProcess(args);
+			if (main.isM2TW)
+				RTWCore.core.StartProcess(args, "medieval2.exe");
+			else RTWCore.core.StartProcess(args, "RomeTW.exe");
 		}
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)

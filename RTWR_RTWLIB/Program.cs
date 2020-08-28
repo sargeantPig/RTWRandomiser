@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RTWLib.Functions;
+using RTWLib.Logger;
+
 namespace RTWR_RTWLIB
 {
 	static class Program
@@ -24,25 +26,28 @@ namespace RTWR_RTWLIB
 
 			if (args.Count() > 0)
 			{
+				Logger log = new Logger();
+				bool isM2TW = log.FileCheck("medieval2.exe");
+
 				if (args[0] == "-u")
 				{
 					Application.EnableVisualStyles();
 					Application.SetCompatibleTextRenderingDefault(false);
-					Application.Run(new RandomiserForm("Randomiser has been updated!"));
+					Application.Run(new RandomiserForm("Randomiser has been updated!", isM2TW));
 				}
 
 				else if (args[0] == "-n")
 				{
 					Application.EnableVisualStyles();
 					Application.SetCompatibleTextRenderingDefault(false);
-					Application.Run(new RandomiserForm("Randomiser is fully updated."));
+					Application.Run(new RandomiserForm("Randomiser is fully updated.", isM2TW));
 				}
 
 				else if (args[0] == "-a")
 				{
 					Application.EnableVisualStyles();
 					Application.SetCompatibleTextRenderingDefault(false);
-					Application.Run(new RandomiserForm("Randomiser update is available!"));
+					Application.Run(new RandomiserForm("Randomiser update is available!", isM2TW));
 				}
 			}
 

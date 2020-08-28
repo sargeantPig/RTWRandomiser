@@ -25,7 +25,8 @@ namespace RTWR_RTWLIB.Data
         readonly public static string MOD_FOLDER = @"randomiser";
         readonly public static string ROOT = @"randomiser\van_data";
         readonly public static string ASSETS = @"randomiser\data\ui\unit_info\merc\";
-        readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" }; 
+        readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
+        readonly public static string[] M2TWselectMapPaths = new string[] { @"mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"mods\randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         public static Dictionary<FileNames, Dictionary<string, string[]>> paths = new Dictionary<FileNames, Dictionary<string, string[]>>
         {
             {
@@ -80,6 +81,65 @@ namespace RTWR_RTWLIB.Data
                new Dictionary<string, string[]>
                {
                    {"load", new string[] { "randomiser\\van_data\\descr_sm_factions.txt" } },
+                   {"save", new string[] { } }
+               }
+
+           }
+        };
+        public static Dictionary<FileNames, Dictionary<string, string[]>> M2TWpaths = new Dictionary<FileNames, Dictionary<string, string[]>>
+        {
+            {
+                FileNames.descr_strat,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] {"mods\\randomiser\\van_data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } },
+                    {"save", new string[] {"mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt"} }
+                }
+            },
+
+            {
+                FileNames.export_descr_unit,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] {"mods\\randomiser\\van_data\\export_descr_unit.txt" } },
+                    {"save", new string[] {"mods\\randomiser\\data\\export_descr_unit.txt" } }
+                }
+            },
+
+            {
+                FileNames.export_descr_buildings,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] {"mods\\randomiser\\van_data\\export_descr_buildings.txt" } },
+                    {"save", new string[] {"mods\\randomiser\\data\\export_descr_buildings.txt" } }
+                }
+            },
+
+           {
+               FileNames.descr_regions,
+               new Dictionary<string, string[]>
+               {
+                   {"load", new string[] { "mods\\randomiser\\van_data\\world\\maps\\base\\descr_regions.txt", "mods\\randomiser\\van_data\\world\\maps\\base\\map_regions.tga"  } },
+                   {"save", new string[] { } }
+               }
+
+           },
+
+           {
+               FileNames.names,
+               new Dictionary<string, string[]>
+               {
+                   {"load", new string[] { "mods\\randomiser\\van_data\\descr_names.txt" } },
+                   {"save", new string[] { } }
+               }
+
+           },
+
+            {
+               FileNames.descr_sm_faction,
+               new Dictionary<string, string[]>
+               {
+                   {"load", new string[] { "mods\\randomiser\\van_data\\descr_sm_factions.txt" } },
                    {"save", new string[] { } }
                }
 

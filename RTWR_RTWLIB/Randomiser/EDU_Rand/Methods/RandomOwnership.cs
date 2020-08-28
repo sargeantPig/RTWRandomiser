@@ -46,6 +46,14 @@ namespace RTWR_RTWLIB.Randomiser
 
 		}
 
+		public static void BalancedOwnership(EDU edu)
+		{ 
+			//distribute units into tiers (cavalry low, mid, high) based on points total etc
+
+			//factions take in turns to select one of each.
+		
+		}
+
 		public static void RegionBasedOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
 		{ 
 			//get cities and locations
