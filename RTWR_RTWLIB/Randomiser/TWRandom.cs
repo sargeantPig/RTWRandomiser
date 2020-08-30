@@ -25,6 +25,7 @@ namespace RTWR_RTWLIB.Randomiser
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
 		public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
 		public static string[] M2TWVoiceTypes = { "Light", "Heavy", "General" };
+		public static object[] SoundTypes = { SoundType.axe, SoundType.knife, SoundType.mace, SoundType.spear, SoundType.sword};
 		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
 
 		public static Options advancedOptions { get; set; }

@@ -210,9 +210,9 @@
             // btn_load
             // 
             this.btn_load.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-            this.btn_load.Location = new System.Drawing.Point(178, 315);
+            this.btn_load.Location = new System.Drawing.Point(168, 314);
             this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(108, 35);
+            this.btn_load.Size = new System.Drawing.Size(118, 35);
             this.btn_load.TabIndex = 2;
             this.btn_load.Text = "Randomise";
             this.tooltip.SetToolTip(this.btn_load, "Load data from RTW then randomise.");
@@ -236,7 +236,6 @@
             // 
             // grp_settings_misc
             // 
-            this.grp_settings_misc.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
             this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
             this.grp_settings_misc.Controls.Add(this.chk_preferences);
@@ -313,7 +312,6 @@
             // 
             // grp_settings_factions
             // 
-            this.grp_settings_factions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_factions.Controls.Add(this.chk_total_war_8);
             this.grp_settings_factions.Controls.Add(this.chk_faction_coreA_7);
             this.grp_settings_factions.Controls.Add(this.chk_faction_mempires_6);
@@ -482,7 +480,6 @@
             // grp_settings_units
             // 
             this.grp_settings_units.BackColor = System.Drawing.Color.Transparent;
-            this.grp_settings_units.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backdrop;
             this.grp_settings_units.Controls.Add(this.label1);
             this.grp_settings_units.Controls.Add(this.numUpDown_unit_ownership);
             this.grp_settings_units.Controls.Add(this.lbl_unit_attributes);

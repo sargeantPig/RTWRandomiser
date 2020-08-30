@@ -31,8 +31,18 @@ namespace RTWR_RTWLIB
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
-			this.BackgroundImage = Properties.Resources.M2TWBackdrop;
+
+			if (isM2TW)
+			{
+				this.Text = "Medieval 2 Randomiser";
+				this.BackgroundImage = Properties.Resources.M2TWBackdrop;
+				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
+				this.btn_load.BackgroundImage = Properties.Resources.backdrop;
+				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
+			}
 			main = new Main(pb_progress, statusStrip1, grp_box_settings, isM2TW);
+
+
             main.CleanLog();
 			lbl_msg.Text = updateMessage;
 			if ((!main.FileCheck(FilePaths.RTWEXE) && !main.FileCheck("medieval2.exe")))

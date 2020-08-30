@@ -29,6 +29,10 @@ namespace RTWR_RTWLIB
         public bool isM2TW { get; }
         public Main(ToolStripProgressBar pb, StatusStrip ss, GroupBox settingsBox, bool isM2TW)
         {
+            Logger.AssemblyPrefix = "RTWR";
+
+            Logger.AssemblyWatchList = new string[] { "RTWR_RTWLIB", "RTWLib" };
+
             this.pb = pb;
             this.ss = ss;
             this.isM2TW = isM2TW;
@@ -55,7 +59,7 @@ namespace RTWR_RTWLIB
             {
                 //start loading data
                 files = new Dictionary<FileNames, IFile>(){
-                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) },
+                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) },
                 {FileNames.descr_strat, new Descr_Strat()},
                 {FileNames.export_descr_buildings, new EDB(chk_LogAll.Checked)},
                 {FileNames.export_descr_unit, new EDU(chk_LogAll.Checked)},
@@ -71,7 +75,7 @@ namespace RTWR_RTWLIB
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Name);
-                    file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out this.lineNumber, out this.lineText);
+                    file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
 
@@ -151,7 +155,7 @@ namespace RTWR_RTWLIB
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Name);
-                    file.Value.Parse(FileDestinations.M2TWpaths[file.Value.Name]["load"], out this.lineNumber, out this.lineText);
+                    file.Value.Parse(FileDestinations.M2TWpaths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
 
