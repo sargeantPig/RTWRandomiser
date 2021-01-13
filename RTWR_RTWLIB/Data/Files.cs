@@ -143,6 +143,15 @@ namespace RTWR_RTWLIB.Data
                    {"save", new string[] { } }
                }
 
+           },
+           {
+               FileNames.battle_models,
+               new Dictionary<string, string[]>
+               {
+                   {"load", new string[] { "mods\\randomiser\\van_data\\unit_models\\battle_models.modeldb" } },
+                   {"save", new string[] { "mods\\randomiser\\data\\unit_models\\battle_models.modeldb"} }
+               }
+
            }
         };
     }

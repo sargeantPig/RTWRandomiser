@@ -144,7 +144,8 @@ namespace RTWR_RTWLIB
                 {FileNames.export_descr_buildings, new M2EDB(chk_LogAll.Checked)},
                 {FileNames.export_descr_unit, new M2EDU(chk_LogAll.Checked)},
                 {FileNames.descr_sm_faction, new SM_Factions()},
-                {FileNames.names, new NamesFile(chk_LogAll.Checked) }
+                {FileNames.names, new NamesFile(chk_LogAll.Checked) },
+                {FileNames.battle_models, new M2ModelBattle() }
                 };
 
                 float increment = 100 / files.Count();
@@ -316,7 +317,7 @@ namespace RTWR_RTWLIB
             files[FileNames.export_descr_unit].ToFile(FileDestinations.M2TWpaths[FileNames.export_descr_unit]["save"][0]);
             files[FileNames.export_descr_buildings].ToFile(FileDestinations.M2TWpaths[FileNames.export_descr_buildings]["save"][0]);
             files[FileNames.descr_strat].ToFile(FileDestinations.M2TWpaths[FileNames.descr_strat]["save"][0]);
-
+            files[FileNames.battle_models].ToFile(FileDestinations.M2TWpaths[FileNames.battle_models]["save"][0]);
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");
             sw.Write(seed);

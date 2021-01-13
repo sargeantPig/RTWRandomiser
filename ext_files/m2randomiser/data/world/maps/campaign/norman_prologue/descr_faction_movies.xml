@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<faction_movies>
+	<faction>
+		<name>scotland</name>
+		<intro>faction/minor_intro.bik</intro>
+		<victory>faction/minor_win.bik</victory>
+		<defeat>faction/minor_lose.bik</defeat>
+		<death>faction/minor_lose.bik</death>
+	</faction>
+
+	<faction>
+		<name>papal_states</name>
+		<intro>faction/minor_intro.bik</intro>
+		<victory>faction/minor_win.bik</victory>
+		<defeat>faction/minor_lose.bik</defeat>
+		<death>faction/minor_lose.bik</death>
+	</faction>
+
+	<faction>
+		<name>normans</name>
+		<intro></intro>
+		<victory>faction/prologue_win.bik</victory>
+		<defeat>faction/minor_lose.bik</defeat>
+		<death>faction/minor_lose.bik</death>
+	</faction>
+
+	<faction>
+		<name>saxons</name>
+		<intro>faction/minor_intro.bik</intro>
+		<victory>faction/minor_win.bik</victory>
+		<defeat>faction/minor_lose.bik</defeat>
+		<death>faction/minor_lose.bik</death>
+	</faction>
+
+	<faction>
+		<name>slave</name>
+		<intro>faction/minor_intro.bik</intro>
+		<victory>faction/minor_win.bik</victory>
+		<defeat>faction/minor_lose.bik</defeat>
+		<death>faction/minor_lose.bik</death>
+	</faction>
+</faction_movies>

@@ -1,0 +1,154 @@
+
+; historical events and when they occur
+;
+; Events are followed by a category, and a label
+; labels are used as lookups into historic_events.txt for title and body strings,
+; and also as image names for the event picture
+;
+; Currently supported categories are:
+; counter  - just increase a counter
+; historic - Just generates a message and increase a counter
+; volcano  - triggers a volcano if there is one on the map at the position specified
+; plague   - triggers a plague in settlements at the specified positions
+; emergent_faction - triggers the emergence of the given faction.  This faction must be marked
+;	as emergent in descr_strat.txt
+;
+; event descriptions are followed by a date (year as offset from starting date) or a date range
+; and either a list of positions, or list of regions.  Each position/region specification must appear on
+; a seperate line below the date
+
+;event	historic   mongols_invasion_warn
+;date	2 4
+
+;event	historic   mongols_invasion_warn
+;date	12 16
+
+;event	historic   timurids_invasion_warn
+;date	24 28
+
+;event	historic   gunpowder_discovered
+;date	6
+
+;event	historic   world_is_round
+;date	10
+
+;event histroic	king_william
+;date 4 8
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;event	volcano		eruption_at_etna
+;date	9
+;position	104, 49
+
+;event	plague		plague_in_macedonia
+;date	14
+;position	138, 67
+
+;event	historic	stoic_philosophy
+;date	14
+
+;event	historic	hand_pump_invented
+;date	14
+
+;event	historic	through_a_glass_clearly
+;date	34
+
+;event	historic	archimedes_screw
+;date	44
+
+;event	historic	greek_logic
+;date	54
+
+;event	historic	star_catalogue
+;date	64
+
+;event	plague		plague_in_alexandria
+;date	64
+;position	178, 19
+
+; event	historic	rites_of_bacchus_banned
+; date	78
+
+;event	historic	earthquake_in_pontus
+;date	84
+
+;event	historic	concrete_invented
+;date	94
+
+;event	volcano		eruption_at_vesuvius
+;date	99
+;position	103, 65
+
+;event	historic	philosophy_is_foppish
+;date	103
+
+;event	historic	astronomy_advances
+;date	114
+
+;event	historic	lex_aebutia
+;date	114
+
+;event	historic	roman_stoicism
+;date	120
+
+;event	historic	lex_papira
+;date	120
+
+;event	plague		plague_in_italy
+;date	144
+;position	96, 82
+;position	95, 71
+;position	102, 68
+;position	114, 63
+
+
+;event	historic	vestal_virgin_struck_down
+;date	150
+
+;event	historic	de_rerum_natura
+;date	166
+
+;event	plague		plague_in_asia_minor
+;date	173
+;position	192, 68
+;position	200, 55
+;position	190, 80
+
+;event	historic	lex_pompeia
+;date	175
+
+;event	historic	a_new_religion
+;date	194
+
+;event	plague		plague_in_italy
+;date	204
+;position	96, 82
+;position	95, 71
+;position	102, 68
+;position	114, 63
+
+;event	historic	de_materia_medica
+;date	214
+
+;event	historic	julian_calendar
+;date	218
+
+;event	historic	earthquake_in_iberia
+;date	258
+
+;event	historic	the_aeneid
+;date	269
+
+;event	historic	lex_adulteriis_coercendis
+;date	271
+
+;event	historic	trouble_in_judea
+;date	284
+
+;event	historic	lex_fufia_caninia
+;date	286

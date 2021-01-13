@@ -296,7 +296,6 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Publish ( 
-start /wait $(TargetDir)move_compress.bat
 start /wait call $(TargetDir)publish_start.bat alpha $(TargetName).exe release.zip
  )</PostBuildEvent>
   </PropertyGroup>

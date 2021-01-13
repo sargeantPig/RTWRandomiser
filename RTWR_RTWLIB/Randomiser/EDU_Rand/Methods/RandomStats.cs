@@ -11,13 +11,13 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			foreach (Unit unit in edu.units)
 			{
-				if (unit.primaryWeapon.WeaponFlags != WeaponType.WT_no)
+				if (unit.primaryWeapon.WeaponFlags != WeaponType.no)
 				{
 					unit.primaryWeapon.attack[0] = TWRandom.rnd.Next(1, 20); // attack factor
 					unit.primaryWeapon.attack[1] = TWRandom.rnd.Next(1, 20); // attack charging
 				}
 
-				if (unit.secondaryWeapon.WeaponFlags != WeaponType.WT_no)
+				if (unit.secondaryWeapon.WeaponFlags != WeaponType.no)
 				{
 					unit.secondaryWeapon.attack[0] = TWRandom.rnd.Next(1, 20); // attack factor
 					unit.secondaryWeapon.attack[1] = TWRandom.rnd.Next(1, 20); // attack charging

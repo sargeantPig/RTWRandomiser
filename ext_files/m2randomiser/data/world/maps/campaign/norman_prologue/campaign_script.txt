@@ -1,0 +1,2443 @@
+;
+; Prologue script
+;
+script
+
+	declare_prologue	;;;; ensures only prologue related stuff happens
+	
+	;cannot click anywhere in visible area yet
+	restrict_clickable_area Toledo_Province
+
+;;;;*************************************************************************************************
+;;;;		Tutorial Progress
+;;;;*************************************************************************************************
+
+	declare_counter Completed_Camera_Moves
+	declare_counter AssassinationSucceeded
+	declare_counter AssassinationFailed
+	declare_counter AssassinKilled
+	declare_counter RecruitedInLondon
+	declare_counter RecruitedInCaen
+	declare_counter UnitAddedLondon
+	declare_counter UnitAddedCaen
+	declare_counter ChurchAdded
+	declare_counter MonitorCamera
+	declare_counter ReadyToSiegeLondon
+	declare_counter ReadyToSiegeNottingham
+	declare_counter OpenedSummaryScroll
+	declare_counter PopeMissionSuccess
+	declare_counter london_battle
+	declare_counter nottingham_battle
+	declare_counter caen_battle
+	declare_counter Rufus_In_Caen
+	declare_counter assassin_scroll_open
+	declare_counter london_delay
+	declare_counter london_deployment
+	declare_counter london_breached
+	declare_counter nottingham_deployment
+	declare_counter nottingham_breached
+	declare_counter nottingham_plaza
+	declare_counter tutorial_lost
+	declare_counter recruit_advice
+	declare_counter rebel_assault
+	declare_counter move_camera_to_caen
+	
+;;;;*************************************************************************************************
+;;;;		Scrolls
+;;;;*************************************************************************************************
+
+	declare_counter Opened_Character_Scroll
+	declare_counter Opened_Siege_Scroll
+	declare_counter Opened_Loot_Scroll
+	declare_counter Opened_Settlement_Scroll
+	declare_counter Opened_Settlement_Details_Scroll
+	declare_counter Opened_Assassination_Scroll
+	declare_counter Opened_Faction_Overview_Scroll
+	declare_counter Opened_Faction_Finances_Scroll
+	declare_counter Opened_Diplomatic_Standing_Scroll
+	declare_counter Opened_Missions_Scroll
+	declare_counter Opened_Pope_Overview_Scroll
+	declare_counter Opened_Prebattle_Scroll
+ 	declare_counter Opened_Prisoner_Scroll
+	declare_counter Opened_Building_Browser_Scroll
+	declare_counter Recruitment_Tab_Open
+	declare_counter Retrain_Tab_Visible
+	declare_counter	SCROLL_OPEN
+	declare_counter Checkpoint
+	declare_counter MESSAGE_CLOSED
+	declare_counter MESSAGE_OPENED
+	declare_counter Opened_Quit_Scroll
+	declare_counter Opened_Unit_Info_Scroll
+	declare_counter check_char_scroll
+	
+;;;;*************************************************************************************************
+;;;;		Button Use
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;		Character Selection and Movement
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;		Settlements Captured
+;;;;*************************************************************************************************
+
+	declare_counter citiesCaptured
+	declare_counter LondonCaptured
+	declare_counter LondonNotCaptured
+	declare_counter NottinghamCaptured
+	declare_counter NottinghamNotCaptured
+	declare_counter LondonUnderSiege
+	declare_counter NottinghamUnderSiege
+
+;;;;*************************************************************************************************
+;;;;		Battles Fought
+;;;;*************************************************************************************************
+	
+;;;;*************************************************************************************************
+;;;;		London Battle Counters
+;;;;*************************************************************************************************
+
+	monitor_conditions I_SettlementUnderSiege London
+		set_counter london_battle 1
+		terminate_monitor
+	end_monitor
+	
+	monitor_event BattleDelayPhaseCommenced I_CompareCounter london_battle = 1
+		set_counter london_delay 1
+		terminate_monitor
+	end_monitor
+	
+	monitor_event BattleDeploymentPhaseCommenced I_CompareCounter london_battle = 1
+		set_counter london_deployment 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event BattleBattleGatesDestroyedByEngine I_CompareCounter london_battle = 1
+		set_counter london_breached 1
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;		Nottingham Battle Counters
+;;;;*************************************************************************************************
+
+	monitor_conditions I_SettlementUnderSiege Nottingham
+		set_counter nottingham_battle 1
+		set_counter london_battle 0
+		terminate_monitor
+	end_monitor
+
+	monitor_event BattleDeploymentPhaseCommenced I_CompareCounter nottingham_battle = 1
+ 		and I_BattleIsSiegeBattle
+		set_counter nottingham_deployment 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event BattleWallsBreachedByEngine I_CompareCounter nottingham_battle = 1
+ 		and I_BattleIsSiegeBattle
+		set_counter nottingham_breached 1
+		terminate_monitor
+	end_monitor
+	
+	monitor_event BattleWinningPlaza I_CompareCounter nottingham_battle = 1
+ 		and I_BattleIsSiegeBattle
+		set_counter nottingham_plaza 1
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;;		Caen Battle Counters
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;;		Checking to see if the player has captured settlements
+;;;;*************************************************************************************************
+
+	monitor_event GeneralCaptureSettlement FactionType normans
+		and SettlementName London
+
+		set_counter LondonCaptured 1
+		set_counter LondonUnderSiege 0
+		set_counter london_battle 0
+		inc_counter citiesCaptured 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_event GeneralCaptureSettlement FactionType normans
+		and SettlementName Nottingham
+
+		set_counter NottinghamCaptured 1
+		set_counter NottinghamUnderSiege 0
+		set_counter nottingham_battle 0
+		inc_counter citiesCaptured 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_event GeneralCaptureSettlement FactionType normans
+		and SettlementName Caen
+
+		set_counter caen_battle 1
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;		Monitor Camera
+;;;;*************************************************************************************************	
+	
+	monitor_event ShortcutTriggered ShortcutTriggered camera rot_l		;MOVE LEFT
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event ShortcutTriggered ShortcutTriggered camera rot_r		;MOVE RIGHT
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event ShortcutTriggered ShortcutTriggered camera step_fwd	;MOVE UP
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event ShortcutTriggered ShortcutTriggered camera step_bck	;MOVE DOWN
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event ShortcutTriggered ShortcutTriggered camera zoom_in	;ZOOM IN
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+
+	monitor_event ShortcutTriggered ShortcutTriggered camera zoom_out	;ZOOM OUT
+		and I_CompareCounter MonitorCamera = 1
+		inc_counter Completed_Camera_Moves 1
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; 	A SCROLL IS OPENED OR CLOSED
+;;;;	This checks player behaviour on scrolls 
+;;;;	so we can make sure that the prologue doesnt clash with it 
+;;;;	and cause problems
+;;;;*************************************************************************************************
+
+	;any scroll is open or closed
+	monitor_event ScrollOpened TrueCondition
+ 		set_counter SCROLL_OPEN 1
+	end_monitor
+
+	monitor_event ScrollClosed TrueCondition
+ 		set_counter SCROLL_OPEN 0
+	end_monitor
+
+	;character scroll is open or closed
+	monitor_event ScrollOpened ScrollOpened own_named_character_info_scroll
+		set_counter Opened_Character_Scroll 1
+		campaign_wait 0.1
+		disable_ui character_info_prev_item_cycle
+		disable_ui character_info_next_item_cycle
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed own_named_character_info_scroll
+		set_counter Opened_Character_Scroll 0
+	end_monitor
+
+	;siege scroll is opened or closed
+	monitor_event ScrollOpened ScrollOpened siege_scroll
+		set_counter Opened_Siege_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed siege_scroll
+		set_counter Opened_Siege_Scroll 0
+	end_monitor
+
+	;loot scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened loot_settlement_scroll
+		set_counter Opened_Loot_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed loot_settlement_scroll
+		set_counter Opened_Loot_Scroll 0
+	end_monitor
+
+	;settlement scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened own_settlement_info_scroll
+		set_counter Opened_Settlement_Scroll 1
+		campaign_wait 0.1
+		disable_ui show_construction_advice_button
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed own_settlement_info_scroll
+		set_counter Opened_Settlement_Scroll 0
+	end_monitor
+
+	;settlement details scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened advanced_settlement_info_scroll
+		set_counter Opened_Settlement_Details_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed advanced_settlement_info_scroll
+		set_counter Opened_Settlement_Details_Scroll 0
+	end_monitor
+
+	;assassination scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened assassin_target_listview
+		set_counter Opened_Assassination_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed assassin_target_listview
+		set_counter Opened_Assassination_Scroll 0
+	end_monitor
+
+	;faction summary scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened faction_summary_scroll
+		set_counter Opened_Faction_Overview_Scroll 1
+		set_counter OpenedSummaryScroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed faction_summary_scroll
+		set_counter Opened_Faction_Overview_Scroll 0
+	end_monitor
+
+	;faction economics scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened faction_economics_scroll
+		set_counter Opened_Faction_Finances_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed faction_economics_scroll
+		set_counter Opened_Faction_Finances_Scroll 0
+	end_monitor
+
+	;diplomacy overview scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened diplomacy_overview_scroll
+		set_counter Opened_Diplomatic_Standing_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed diplomacy_overview_scroll
+		set_counter Opened_Diplomatic_Standing_Scroll 0
+	end_monitor
+
+	;missions overview scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened missions_scroll
+		set_counter Opened_Missions_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed missions_scroll
+		set_counter Opened_Missions_Scroll 0
+	end_monitor	
+	
+	;pope overview scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened pope_overview_scroll
+		set_counter Opened_Pope_Overview_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed pope_overview_scroll
+		set_counter Opened_Pope_Overview_Scroll 0
+	end_monitor	
+	
+	;prebattle scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened prebattle_scroll
+;	monitor_event PreBattlePanelOpen
+		set_counter Opened_Prebattle_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed prebattle_scroll
+		set_counter Opened_Prebattle_Scroll 0
+	end_monitor
+
+	;prisoner ransom scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened captor_ransom_scroll
+		set_counter Opened_Prisoner_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed captor_ransom_scroll
+		set_counter Opened_Prisoner_Scroll 0
+	end_monitor
+
+	;building browser scroll opened or close
+	monitor_event ScrollOpened ScrollOpened building_browser_scroll
+		set_counter Opened_Building_Browser_Scroll 1
+	end_monitor
+	
+	monitor_event ScrollClosed ScrollClosed building_browser_scroll
+		set_counter Opened_Building_Browser_Scroll 0
+	end_monitor
+	
+	;unit_info_scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened unit_info_scroll
+		set_counter Opened_Unit_Info_Scroll 1
+		campaign_wait 0.1
+		disable_ui disband_unit_button
+	end_monitor
+	
+	monitor_event ScrollClosed ScrollClosed unit_info_scroll
+		set_counter Opened_Unit_Info_Scroll 0
+	end_monitor
+	
+	;any message has been closed
+	monitor_event MessageClosed TrueCondition
+		and I_TurnNumber > 0
+
+		set_counter MESSAGE_CLOSED 1
+		set_counter MESSAGE_OPENED 0
+	end_monitor
+	
+	;any message has been opened
+	monitor_event MessageOpened TrueCondition
+		set_counter MESSAGE_OPENED 1
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; 		TUTORIAL STARTS HERE
+;;;;*************************************************************************************************
+
+	freeze_faction_ai slave
+	freeze_faction_ai saxons
+	freeze_faction_ai scotland
+	freeze_faction_ai papal_states
+	disable_save
+	
+;;;;*************************************************************************************************
+;;; Player enters map. 	
+;;; We start the camera where we want. 	
+;;; The camera moves over to England. 	
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;; START OF FIRST TURN - TURN 0
+;;;;*************************************************************************************************
+;;;;*************************************************************************************************
+;;;; CAMPAIGN SETUP
+;;;;*************************************************************************************************
+
+	kill_character Harold Godwinson
+
+	inhibit_camera_input true
+	suspend_unscripted_advice true
+	hide_ui								;hides the UI for movie sequence
+	disable_entire_ui
+	disable_movie_view						;disables the black restriction bars
+
+	disable_shortcuts true
+
+	filter_all_ui_commands off
+
+	snap_strat_camera 104, 141					;hastings
+	zoom_strat_camera 0.8
+
+	restrict_strat_camera 95 135 110 165
+	
+	freeze_recruit_pool all true
+	
+;;;;*************************************************************************************************
+;;;; MEET THE ADVISOR
+;;;;*************************************************************************************************
+
+	campaign_wait 1
+
+	advance_advice_thread Prologue_Welcome_First_Turn_1_Thread	;Advice: Norman Conquest #10000#
+
+	campaign_wait 2
+	
+	if I_AdvisorSpeechPlaying and I_AdvisorVisible
+		campaign_wait 2
+	end_if
+	
+	if I_AdvisorSpeechPlaying and I_AdvisorVisible
+		campaign_wait 2
+	end_if
+
+	if I_AdvisorSpeechPlaying and I_AdvisorVisible
+		campaign_wait 2
+	end_if
+	
+	if I_AdvisorSpeechPlaying and I_AdvisorVisible						;Indicate advisor
+		ui_flash_start advisor_portrait_button
+	end_if
+
+	while I_AdvisorVisible
+	end_while
+	
+	ui_flash_stop
+	
+	zoom_strat_camera 0.5						;zoom in a bit
+	move_strat_camera 104, 143					;Rufus
+
+;;;;*************************************************************************************************
+;;;; ADVISOR BASICS		;;; advice incorrect for tutorial
+;;;;*************************************************************************************************
+
+; 	advance_advice_thread Prologue_Welcome_First_Turn_2_Thread	;Advice: Advisor Basics #10001#
+
+; 	while not I_AdvisorSpeechPlaying
+; 		and I_AdvisorVisible
+; 	end_while
+
+; 	while I_AdvisorSpeechPlaying
+; 		and I_AdvisorVisible
+; 	end_while
+
+; 	campaign_wait 1
+
+;;;;*************************************************************************************************
+;;;; CAMPAIGN MAP BASICS
+;;;;*************************************************************************************************
+
+	advance_advice_thread Prologue_Welcome_First_Turn_3_Thread	;Advice: The campaign map #10002#
+
+	campaign_wait 1
+	
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 1
+
+;;;;*************************************************************************************************
+;;;; CAMPAIGN CAMERA BASICS
+;;;;*************************************************************************************************
+
+	inhibit_camera_input false
+; 	disable_shortcuts false
+	disable_shortcuts camera false
+	enable_entire_ui
+	filter_all_ui_commands on
+
+	advance_advice_thread Prologue_Welcome_First_Turn_4_Thread	;Advice: Navigating the campaign map #10003#
+
+	;*********************************************************************************************
+	; MONITOR PLAYER USE OF CAMERA MOVES & WAIT FOR PLAYER TO REMOVE ADVISOR TO CONTINUE
+	;*********************************************************************************************
+
+	set_counter MonitorCamera 1
+	
+;;;;*************************************************************************************************
+;;;; THEY MOVED THE CAMERA
+;;;;*************************************************************************************************
+
+	while I_CompareCounter Completed_Camera_Moves < 2
+	end_while
+	
+	campaign_wait 1
+
+	advance_advice_thread Prologue_Welcome_First_Turn_5_Thread	;ADVICE: Navigating the campaign map #10004#
+
+	campaign_wait 1
+	
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 1
+	
+	set_counter MonitorCamera 0
+
+;;;;*************************************************************************************************
+;;;; TURN-BASED CAMPAIGN
+;;;;*************************************************************************************************
+	
+	advance_advice_thread Prologue_Campaign_Turns_Thread	;ADVICE: Campaign Turns #10210#
+
+	campaign_wait 1
+	
+	while not I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	while I_AdvisorSpeechPlaying
+		and I_AdvisorVisible
+	end_while
+
+	campaign_wait 1
+
+;;;;*************************************************************************************************
+;;;; MEET RUFUS
+;;;;*************************************************************************************************
+
+ 	zoom_strat_camera 0.1						;zoom in a bit
+	move_strat_camera 104, 148					;Rufus
+
+	point_at_character Rufus
+
+	character_flash_start Rufus
+
+	;allow them to select rufus, move to tile, move to boat
+	restrict_clickable_rect 106 141 107 142
+
+	advance_advice_thread Prologue_This_is_Rufus_Thread	;;Advice: Meet Rufus #10005#
+
+	while not I_CharacterSelected Rufus			; waiting for the player to select their character
+	end_while
+
+	ui_flash_stop
+
+	character_flash_stop Rufus
+
+	filter_all_ui_commands on
+
+;;;;*************************************************************************************************
+;;;; ARMY MOVEMENT
+;;;;*************************************************************************************************
+
+	if not I_CharacterTypeNearTile normans named_character, 0 106, 142
+
+		point_at_strat_position 106, 142
+	
+		advance_advice_thread Prologue_Moving_Armies_Thread		;Advice: Moving Armies #10006#
+
+	end_if
+
+;;;;*************************************************************************************************
+;;;; HUD OVERVIEW
+;;;;*************************************************************************************************
+	
+	monitor_conditions I_CharacterTypeNearTile normans named_character, 0 106, 142
+
+		ui_flash_stop
+	
+		show_ui
+		disable_ui finances_button
+		disable_ui mission_button
+		disable_ui faction_button
+		disable_ui hud_select_prev_item_cycle
+		disable_ui hud_select_next_item_cycle
+		disable_ui end_turn
+		
+		advance_advice_thread Prologue_Campaign_HUD_Thread				;ADVICE: Campaign UI #10007#
+
+		campaign_wait 1
+		ui_flash_start campaign_hud
+				
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible 
+			campaign_wait 2
+		end_if
+		
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible
+			campaign_wait 2
+		end_if
+				
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible
+			ui_flash_start construction_button
+			campaign_wait 2
+		end_if
+		
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible
+			ui_flash_start recruitment_button
+			campaign_wait 2
+		end_if
+		
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible
+			ui_flash_start end_turn
+			campaign_wait 2
+		end_if
+
+		if I_AdvisorSpeechPlaying and I_AdvisorVisible
+			ui_flash_start faction_button
+		end_if
+		
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		ui_flash_stop
+			
+		campaign_wait 1
+	
+	;;;;*************************************************************************************************
+	;;;; ARMIES AND CHARACTER CARD
+	;;;;*************************************************************************************************
+	
+		set_counter check_char_scroll 1
+	
+		advance_advice_thread Prologue_Rufus_Army_Basics_Thread				;ADVICE: Generals and Armies #10010#
+
+		if I_CharacterSelected Rufus
+			point_at_card unit Rufus
+		end_if
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; UNIT INFO SCROLL
+;;;;*************************************************************************************************
+
+; 	monitor_conditions I_CompareCounter Opened_Unit_Info_Scroll = 1
+; 	
+; 		;;; disable the disband unit button
+; 		disable_ui disband_unit_button
+
+; 		terminate_monitor
+; 	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; THEY OPENED THE CHARACTER SCROLL
+;;;;*************************************************************************************************
+
+; 	monitor_conditions I_CompareCounter Opened_Character_Scroll = 1
+; 	
+; 		disable_ui character_info_prev_item_cycle
+; 		disable_ui character_info_next_item_cycle
+
+; 		terminate_monitor
+; 	end_monitor
+
+	monitor_conditions I_CompareCounter Opened_Character_Scroll = 1
+		and I_CompareCounter check_char_scroll = 1
+		
+		ui_flash_stop
+	
+		advance_advice_thread Prologue_Rufus_Scroll_Basics_Thread	;Advice: Character Scroll #10011#
+
+		while I_CompareCounter Opened_Character_Scroll = 1
+		end_while
+
+		campaign_wait 1
+		
+		;;;;**********************************************************************************************
+		;;;; REBELS NEAR CAEN
+		;;;;**********************************************************************************************
+
+		move_strat_camera 108, 139					;rebel army
+
+		advance_advice_thread Prologue_Rebels_Near_Caen_Thread		;Advice: Rebels Near Caen #10024#		
+
+		character_flash_start Ambrose Adames	
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 1
+
+		ui_flash_stop
+		character_flash_stop Ambrose Adames
+
+	;;;;**********************************************************************************************
+	;;;; SEND RUFUS BACK TO CAEN
+	;;;;**********************************************************************************************
+
+		advance_advice_thread Prologue_Fortify_Caen_Thread		;Advice: Reinforce and Conquer #10025#
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 1
+
+	;;;;**********************************************************************************************
+	;;;; MOVE RUFUS ONTO FLEET
+	;;;;**********************************************************************************************
+
+		if not I_AtSea Rufus
+	
+			move_strat_camera 106, 148					;Rufus
+		
+			point_at_character Geoffrey
+			character_flash_start Rufus
+	
+			;allow them to select rufus, move to tile, move to boat
+			restrict_clickable_rect 105 141 107 142
+			
+			advance_advice_thread Prologue_Board_the_Fleet_Thread		;Advice: Board the Fleet #10026#
+	
+			while not I_CharacterSelected Rufus
+			end_while
+	
+			character_flash_stop Rufus
+
+		end_if
+
+		terminate_monitor
+	end_monitor
+
+;;;;**********************************************************************************************
+;;;; THEY MOVED ONTO THE FLEET
+;;;;**********************************************************************************************
+
+	monitor_conditions I_AtSea Rufus
+
+		character_flash_stop Geoffrey
+		ui_flash_stop
+
+		advance_advice_thread Prologue_Fleet_Basics_Thread		;Advice: Fleet Basics #10027#
+
+		campaign_wait 2
+		
+		if I_CharacterSelected Geoffrey
+			select_ui_element hud_show_units_tab
+			simulate_mouse_click lclick_down
+			point_at_card unit cog
+		end_if
+		
+		campaign_wait 3
+		ui_flash_stop
+		
+		if I_CharacterSelected Geoffrey
+			ui_flash_start hud_show_passengers_tab		
+		end_if
+					
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		ui_flash_stop
+		campaign_wait 1
+
+	;;;;**********************************************************************************************
+	;;;; FLEET MOVEMENT
+	;;;;**********************************************************************************************
+
+		if not I_CharacterTypeNearTile normans named_character, 0 106, 137	;Rufus landed on coast
+	
+			move_strat_camera 104, 143					;move to see destination
+			point_at_strat_position 106, 137	
+	
+			restrict_clickable_rect 103 133 108 142
+			
+			advance_advice_thread Prologue_Fleet_Movement_Thread		;Advice: Fleet Movement #10028#
+
+		end_if
+			
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; FLEET OUT OF MOVES BEFORE DISEMBARK
+;;;;*************************************************************************************************
+
+	monitor_conditions I_TurnNumber = 0
+		and I_RemainingArmyMPPercentage Geoffrey < 10
+		and I_CompareCounter Rufus_In_Caen = 0
+		
+		enable_ui end_turn
+		ui_flash_start end_turn
+		
+		terminate_monitor
+	end_monitor
+	
+;;;;**********************************************************************************************
+;;;; RUFUS LANDED ON NORMAN COAST
+;;;;**********************************************************************************************
+
+	monitor_conditions I_CharacterTypeNearTile normans named_character, 4 106, 137	;Rufus landed on coast
+		and not I_AtSea Rufus
+		
+		ui_flash_stop
+; 		replenish_action_points Rufus
+
+	;;;;**********************************************************************************************
+	;;;; MOVE RUFUS INTO CAEN
+	;;;;**********************************************************************************************
+
+		point_at_settlement Caen
+		character_flash_start Rufus
+
+		if not I_CharacterTypeNearTile normans named_character, 0 104, 134	;Rufus in Caen
+		
+			advance_advice_thread Prologue_Move_Army_Into_Normandy_Thread		;Advice: Fortify Caen #10029#
+		
+		end_if
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CharacterSelected Rufus
+
+		character_flash_stop Rufus
+
+	end_monitor
+
+;;;;**********************************************************************************************
+;;;; RUFUS MOVED INTO CAEN
+;;;;**********************************************************************************************
+
+	monitor_conditions I_CharacterTypeNearTile normans named_character, 0 104, 134	;Rufus in Caen
+	
+		set_counter Rufus_In_Caen 1
+		ui_flash_stop
+
+	;;;;**********************************************************************************************
+	;;;; SELECT WILLIAM AND ATTACK LONDON
+	;;;;**********************************************************************************************
+
+		move_strat_camera 106, 151					;William
+		reveal_tile 109, 147						;show London
+		point_at_settlement London
+		character_flash_start William
+
+		;;; make caen unclickable
+		restrict_clickable_rect
+		
+		;;; make london clickable
+		restrict_clickable_rect 107 143 109 147
+		
+		advance_advice_thread Prologue_Take_England_Thread		;Advice: Take England #10100#
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CharacterSelected William
+		
+		character_flash_stop William
+
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; RUFUS CAN'T REACH CAEN - END TURN
+;;;;*************************************************************************************************
+
+	monitor_conditions I_TurnNumber = 0
+		and I_CharacterExists Rufus
+		and I_RemainingArmyMPPercentage Rufus < 10
+		and I_CompareCounter Rufus_In_Caen = 0
+		
+		enable_ui end_turn
+		
+; 		replenish_action_points Rufus
+		advance_advice_thread Prologue_Rufus_Out_Of_Moves_Thread	;ADVICE: Out of Moves #10215#
+		
+		terminate_monitor
+	end_monitor
+	
+;;;;**********************************************************************************************
+;;;; LONDON UNDER SIEGE
+;;;;**********************************************************************************************
+
+	monitor_conditions I_SettlementUnderSiege London
+	
+		set_counter LondonUnderSiege 1
+	
+		terminate_monitor
+	end_monitor
+
+;;;;**********************************************************************************************
+;;;; SIEGE SCROLL OPENED
+;;;;**********************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Siege_Scroll = 1
+
+;  		disable_ui siege_end_button
+
+		;wait for general's speech
+		campaign_wait 2
+	
+		advance_advice_thread Prologue_Pre_Siege_Window_Thread		;Advice: Sieging a Settlement #10101#
+
+		campaign_wait 2
+
+		if I_CompareCounter Opened_Siege_Scroll = 1
+			highlight_siege_item ram
+		end_if
+		
+		campaign_wait 3
+		
+		if I_CompareCounter Opened_Siege_Scroll = 1
+			ui_flash_start siege_maintain_button
+		end_if
+			
+		while I_CompareCounter Opened_Siege_Scroll = 1			;dismiss advice when scroll is closed
+		end_while
+	
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; End Turn 0
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter LondonUnderSiege = 1
+		and I_CompareCounter SCROLL_OPEN = 0
+
+		;wait for general's speech
+		campaign_wait 3
+
+		ui_flash_start end_turn
+		enable_ui end_turn
+
+		;;; saves game before London battle
+		
+		enable_save		
+		advance_advice_thread Prologue_End_Turn_2_Thread		;ADVICE: End Turn #10102#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Campaign Turn 1
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;*************************************************************************************************
+
+	monitor_conditions I_TurnNumber = 1
+
+	;;;;**********************************************************************************************
+	;;;; NEW TURN
+	;;;;**********************************************************************************************
+
+		;stop the end turn button from flashing
+		disable_save
+		ui_flash_stop
+		disable_ui end_turn
+	
+		campaign_wait 2
+			
+		advance_advice_thread Prologue_New_Turn_Thread		;Advice: New Turn #10022# 
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+	;;;;**********************************************************************************************
+	;;;; INCOMING MESSAGE
+	;;;;**********************************************************************************************
+
+		if I_CompareCounter SCROLL_OPEN = 0
+			and I_CompareCounter MESSAGE_OPENED = 0
+			and I_CompareCounter MESSAGE_CLOSED = 0
+			point_at_message 0
+			
+			advance_advice_thread Prologue_Event_Message_Thread	;Advice: Event Message #10023# 
+
+		end_if
+
+		enable_ui end_turn
+		
+		terminate_monitor
+	end_monitor
+
+;;;;**********************************************************************************************
+;;;; OPENED THE MESSAGE
+;;;;**********************************************************************************************	
+
+	monitor_conditions I_CompareCounter MESSAGE_OPENED = 1
+		and I_TurnNumber = 1
+	
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor
+
+	monitor_event SiegeEquipmentCompleted SettlementName London
+
+		set_counter ReadyToSiegeLondon 1
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter MESSAGE_CLOSED = 1
+		and I_TurnNumber > 0
+		and I_CompareCounter LondonUnderSiege = 1
+		and I_CompareCounter ReadyToSiegeLondon = 1
+		and I_CompareCounter LondonCaptured = 0
+		and I_CompareCounter tutorial_lost = 0
+		
+	;;;;*************************************************************************************************
+	;;;; SIEGE EQUIPMENT READY
+	;;;;*************************************************************************************************
+
+		ui_flash_stop
+
+		campaign_wait 1
+			
+		move_strat_camera 109, 152					;William
+
+		advance_advice_thread Prologue_Ready_To_Siege_Thread		;ADVICE: Ready to Siege #10103#
+
+		while I_CompareCounter Opened_Siege_Scroll = 0
+		end_while
+	
+		ui_flash_start siege_assault_button
+;  		disable_ui siege_end_button
+		
+	;;;;**********************************************************************************************
+	;;;; PREBATTLE SCROLL OPENED
+	;;;;**********************************************************************************************
+
+		while I_CompareCounter Opened_Siege_Scroll = 1
+		end_while
+
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor
+	
+	monitor_conditions I_CompareCounter Opened_Prebattle_Scroll = 1
+
+; 		disable_ui prebattle_withdraw_button
+		
+		campaign_wait 1
+		advance_advice_thread Prologue_Prebattle_Thread				;Advice: Prepare for Battle #10104#
+
+		campaign_wait 5
+		
+		if I_CompareCounter Opened_Prebattle_Scroll = 1
+			ui_flash_start prebattle_fight_button
+		end_if
+		
+		while I_CompareCounter Opened_Prebattle_Scroll = 1			;dismiss advice when scroll is closed
+		end_while
+
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; LONDON SIEGE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;*************************************************************************************************
+	
+;;;;battle in London
+ 	monitor_conditions I_InBattle
+ 		and I_BattleIsSiegeBattle
+ 		and I_CompareCounter london_battle = 1
+
+		prepare_for_battle
+
+		suspend_unscripted_advice true
+		
+		label_unit 1 0 0	saxon_general
+		label_unit 1 0 1	saxon_huscarls
+		label_unit 1 0 2	saxon_theigns1
+		label_unit 1 0 3	saxon_theigns2
+		label_unit 1 0 4	saxon_peasants1
+		label_unit 1 0 5	saxon_peasants2
+		label_unit 1 0 6	saxon_peasants3
+		label_unit 1 0 7	saxon_peasants4
+
+		ai_active_set off
+		
+;;;;;	delay
+		while I_CompareCounter london_delay = 0
+		end_while
+		
+		advance_advice_thread Prologue_London_Start_Deployment_Intro_Thread
+	
+;;;;;	deployment
+		while I_CompareCounter london_deployment = 0
+		end_while
+		
+		advance_advice_thread Prologue_London_Intro_Thread
+		
+		battle_wait 1
+		
+		while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+			and not I_BattleStarted
+		end_while
+		
+		battle_wait 3
+		
+		if I_BattleAttackerNumSiegeEngines ram > 0
+			and not I_BattleStarted
+			
+			advance_advice_thread Prologue_London_Deployment_Thread
+			
+			battle_wait 1
+			
+			while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+	
+			battle_wait 2
+			point_at_location 9, -412
+				
+			while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+				and not I_BattleStarted
+			end_while
+			
+			if not I_BattleStarted
+				battle_wait 5
+			end_if
+		end_if
+
+		remove_battle_map_arrow		
+		
+		if not I_BattleStarted
+			advance_advice_thread Prologue_London_Deployment_3_Thread
+		end_if
+
+		;start battle
+		while not I_BattleStarted
+		end_while
+
+		unit_immediate_place saxon_general -41.5 -17.2 -180
+		unit_immediate_place saxon_huscarls -38.3 2.2 -180
+		unit_immediate_place saxon_theigns1 -19.9 -90.7 -180
+		unit_immediate_place saxon_theigns2 -57.2 -16.2 -180
+; 		unit_immediate_place saxon_peasants1 -33.3 -269.5 -180
+; 		unit_immediate_place saxon_peasants2 50.7 -270.5 -180
+		unit_immediate_place saxon_peasants1 169 -265 -180
+		unit_immediate_place saxon_peasants2 -86 -262 -180
+		unit_immediate_place saxon_peasants3 12.3 -190.5 -180
+		unit_immediate_place saxon_peasants4 -58.8 3.7 -180
+		
+		release_unit saxon_peasants1
+		release_unit saxon_peasants2
+		
+		if I_BattleAttackerNumSiegeEngines ram > 0
+			advance_advice_thread Prologue_London_Using_Ram_Thread
+		end_if
+
+;;;;;	gate breached
+		while I_CompareCounter london_breached = 0
+		end_while
+
+		release_unit saxon_peasants3
+				
+		battle_wait 10
+		
+		advance_advice_thread Prologue_London_Take_Plaza_Thread
+
+		battle_wait 1
+		
+		while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		battle_wait 10
+		
+		advance_advice_thread Prologue_London_Sieging_A_City_Thread
+
+		release_unit saxon_theigns1
+		
+		battle_wait 15
+		release_unit saxon_theigns2
+		release_unit saxon_general
+		release_unit saxon_huscarls
+		release_unit saxon_peasants4
+		
+		while I_InBattle
+		end_while
+ 		
+ 		terminate_monitor
+ 	end_monitor
+
+;;;;*************************************************************************************************
+;;;; CONFIRM QUIT SCROLL - LONDON
+;;;;*************************************************************************************************
+
+	;post battle scroll opened or closed
+	monitor_event ScrollOpened ScrollOpened confirm_quit_scroll
+		set_counter Opened_Quit_Scroll 1
+	end_monitor
+
+	monitor_event ScrollClosed ScrollClosed confirm_quit_scroll
+		set_counter Opened_Quit_Scroll 0
+	end_monitor
+
+	;when the confirm quit scroll is opened
+	monitor_conditions I_CompareCounter Opened_Quit_Scroll = 1
+		and I_CompareCounter london_battle = 1
+
+		advance_advice_thread Prologue_Hastings_Quitting_Thread			;ADVICE: Quitting the Tutorial #11051#
+
+		while I_CompareCounter Opened_Quit_Scroll = 1
+		end_while
+
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; LOOT SETTLEMENT SCROLL OPEN
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Loot_Scroll = 1
+
+		campaign_wait 1
+	
+		advance_advice_thread Prologue_Capturing_a_Settlement_Thread	;Advice: Capturing a Settlement #10110#
+
+		while I_CompareCounter Opened_Loot_Scroll = 1					;wait until they close the loot scroll
+		end_while
+
+;;;;*************************************************************************************************
+;;;; Open London
+;;;;*************************************************************************************************
+
+		advance_advice_thread Prologue_London_Captured_Thread	;Advice: London Captured #10111#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; LONDON BATTLE LOST
+;;;;*************************************************************************************************
+	
+	monitor_event PostBattle not I_WonBattle normans
+		and I_CompareCounter london_battle = 1
+		and I_CompareCounter caen_battle = 0
+	
+		set_counter tutorial_lost 1
+		
+		campaign_wait 3
+		
+		;;; you lost the London battle, load the save game or restart the tutorial
+		advance_advice_thread Prologue_London_Lost_Thread	;Advice: London Siege Lost! #10205#
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; LOCK OUT TUTORIAL
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter tutorial_lost = 1
+	
+		;restrict clickable area
+		restrict_clickable_rect
+		restrict_clickable_area
+		restrict_clickable_rect 100 100 102 102
+		restrict_clickable_area Toledo
+		
+		;lock UI
+		disable_entire_ui
+		disable_shortcuts true
+		disable_shortcuts camera false
+		
+		;no more advice to be given
+	
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; Put some units to recruit in London and Caen
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter LondonCaptured = 1
+
+		;set_recruit_pool region_name|region_id value unit_name
+		;inc_recruit_pool region_name|region_id value unit_name
+		set_recruit_pool London_Province 3 Spear Militia
+		set_recruit_pool London_Province 3 Town Militia
+		set_recruit_pool Caen_Province 3 Sergeant Spearmen
+		set_recruit_pool Caen_Province 3 Archer Militia
+		set_recruit_pool Caen_Province 3 Mailed Knights
+
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; SETTLEMENT SCROLL OPEN
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Settlement_Scroll = 1
+
+		disable_ui settlement_info_prev_item_cycle
+		disable_ui settlement_info_next_item_cycle
+		disable_ui building_browser_button
+		disable_ui show_construction_advice_button
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter Opened_Settlement_Scroll = 1
+		and I_SettlementSelected London
+
+		;; need to give them the pope mission after they take london and before they're told to build the church
+		advance_advice_thread Prologue_Settlement_Basics_Thread		;Advice: Settlement Basics #10112#
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 1
+		
+		if I_CompareCounter ChurchAdded = 1
+			set_counter PopeMissionSuccess 1
+		end_if
+		
+		if I_CompareCounter ChurchAdded = 0
+			;get a mission from the pope
+			create_mission city_small_church normans London
+	
+			campaign_wait 1
+			
+			advance_advice_thread Prologue_New_Mission_Thread		;Advice: New Mission #10117#
+			
+			while I_CompareCounter Opened_Settlement_Scroll = 1
+			end_while		
+	
+			while I_CompareCounter Opened_Settlement_Scroll = 0
+			end_while
+	
+			advance_advice_thread Prologue_Build_Church_Thread		;Advice: Build Church #10118#
+			
+			if I_CompareCounter Opened_Settlement_Scroll = 1
+				highlight_construction_item temple_catholic true
+			end_if
+		end_if
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; CHURCH ADDED TO CONSTRUCTION QUEUE
+;;;;*************************************************************************************************
+
+	monitor_event AddedToBuildingQueue BuildingName = small_church
+		and SettlementName London
+		
+		set_counter ChurchAdded 1
+	
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter ChurchAdded = 1
+	
+		ui_flash_stop		
+
+		if I_PlayerHasMission city_small_church
+			advance_advice_thread Prologue_Church_In_Queue_Thread		;Advice: Church Under Construction #10113#
+	
+			campaign_wait 1
+			
+			while not I_AdvisorSpeechPlaying
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying 
+				and I_AdvisorVisible
+			end_while
+		
+			ui_flash_stop
+		end_if
+		
+	;;;;*************************************************************************************************
+	;;;; CITY BASICS
+	;;;;*************************************************************************************************
+
+		advance_advice_thread Prologue_City_Basics_Thread	;Advice: City Basics #10114#
+
+		campaign_wait 3
+		
+		if I_CompareCounter Opened_Settlement_Scroll = 1
+			ui_flash_start settlement_stats_button
+		end_if
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; SETTLEMENT DETAILS
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Settlement_Details_Scroll = 1
+		and I_SettlementSelected London
+		and I_CompareCounter ChurchAdded = 1
+
+		ui_flash_stop
+
+		advance_advice_thread Prologue_City_Details_Thread						;Advice: City Details #10115#
+
+		while I_CompareCounter SCROLL_OPEN = 1
+		end_while
+
+		ui_flash_stop
+		
+		set_counter recruit_advice 1
+		
+		;click on the recruitment tab
+		advance_advice_thread Prologue_Recruitment_Basics_Thread				;ADVICE: Recruitment Basics #10121#
+
+		campaign_wait 3
+		
+		if I_CompareCounter Opened_Settlement_Scroll = 1
+			ui_flash_start settlement_info_recruitment_tab
+		end_if
+				
+		terminate_monitor
+	end_monitor
+
+	;;press the recruitment tab
+	monitor_event ButtonPressed ButtonPressed settlement_info_recruitment_tab 	;recruitment_button
+		and I_SettlementSelected London
+		and I_CompareCounter ChurchAdded = 1
+		and I_CompareCounter recruit_advice = 1
+
+		set_counter Recruitment_Tab_Open 1
+		ui_flash_stop
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter Recruitment_Tab_Open = 1
+
+		ui_flash_stop
+
+		;click on the units to add them to the queue
+		advance_advice_thread Prologue_Recruitment_Basics_2_Thread				;ADVICE: Recruitment Basics #10122#
+
+		terminate_monitor
+	end_monitor
+
+	;test if units are added to the queue in London
+	monitor_event AddedToTrainingQueue SettlementName London
+		
+		ui_flash_stop
+		set_counter UnitAddedLondon 1
+
+		terminate_monitor
+	end_monitor
+
+	;; a unit has been trained in London
+	monitor_event UnitTrained SettlementName London
+		and I_TurnNumber > 0
+	
+		set_counter RecruitedInLondon 1
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; RETRAINING UNITS
+;;;;*************************************************************************************************
+
+	monitor_conditions I_UnitsToRetrain London > 0
+		and I_SettlementSelected London
+		and I_CompareCounter UnitAddedLondon = 1
+
+		set_counter Retrain_Tab_Visible 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter Retrain_Tab_Visible = 1
+		and I_CompareCounter RecruitedInLondon = 0
+
+		ui_flash_stop
+		campaign_wait 2
+	
+		if I_CompareCounter Opened_Settlement_Scroll = 1
+			ui_flash_start settlement_info_retrain_tab
+		end_if
+			
+		advance_advice_thread Prologue_Retrain_Units_Thread		;ADVICE: Retraining Units #10123#
+
+		campaign_wait 2
+		
+		ui_flash_stop
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; RECRUIT IN CAEN
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter UnitAddedLondon = 1
+		and I_CompareCounter Opened_Settlement_Scroll = 0
+
+		ui_flash_stop
+		move_strat_camera 106, 141					;Caen		
+		restrict_clickable_rect 104 133 105 134
+		
+		advance_advice_thread Prologue_Recruit_Units_London_Thread	;ADVICE: Recruit Units in Caen #10124#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; THEY RECRUITED UNITS IN CAEN
+;;;;*************************************************************************************************
+
+	;test if units are added to the queue
+	monitor_event AddedToTrainingQueue SettlementName Caen
+		
+		set_counter UnitAddedCaen 1
+	
+		terminate_monitor
+	end_monitor
+
+	;; has a unit been recruited in caen
+	monitor_event UnitTrained SettlementName Caen
+		and I_TurnNumber > 0
+	
+		set_counter RecruitedInCaen 1
+		terminate_monitor
+	end_monitor
+
+;;;*************************************************************************************************
+;;;; END TURN 1 - while units are constructed
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter UnitAddedCaen = 1
+		and I_CompareCounter SCROLL_OPEN = 0
+		and I_TurnNumber > 0
+	
+		;end your turn to allows units to be recruited
+		enable_save
+		advance_advice_thread Prologue_End_Turn_3_Thread		;ADVICE: End Turn #10116#
+	
+		terminate_monitor
+	end_monitor
+
+;;;*************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Campaign Turn 2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;*************************************************************************************************
+;;;;*************************************************************************************************
+;;;; MOVE OUT OF LONDON
+;;;;*************************************************************************************************
+
+	monitor_event IncomingMessage IncomingMessageType mission_success
+
+		disable_save
+		disable_ui end_turn
+		campaign_wait 2
+		
+		advance_advice_thread Prologue_Build_Church_Completed_Thread
+
+		if I_CompareCounter SCROLL_OPEN = 0
+ 			point_at_message mission_success
+		end_if
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+		
+		campaign_wait 3
+		ui_flash_stop
+		enable_ui end_turn
+		
+		set_counter PopeMissionSuccess 1
+
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter RecruitedInLondon = 1
+; 		and I_CompareCounter RecruitedInCaen = 1
+		and I_CompareCounter PopeMissionSuccess = 1
+		and I_TurnNumber > 1
+
+		;wait if messages open
+		while I_CompareCounter MESSAGE_OPENED = 1
+		end_while
+		
+		;zoom to London
+		move_strat_camera 109, 153
+		
+		restrict_clickable_area London_Province
+		restrict_clickable_rect
+ 		restrict_clickable_rect 106 149 108 157
+		
+		advance_advice_thread Prologue_Move_Out_Of_London_Thread	;ADVICE: Move Out of London #10125#
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 7
+		
+		if not I_SettlementUnderSiege Nottingham
+
+			reveal_tile 107, 155						;show Nottingham
+			point_at_settlement Nottingham
+	
+			advance_advice_thread Prologue_Move_Out_Of_London_2_Thread	;ADVICE: Move Out of London #10126#
+
+		end_if
+			
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; WILLIAM CAN'T REACH NOTTINGHAM - END TURN
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Rufus_In_Caen = 1
+		and I_CharacterExists William
+		and I_CompareCounter LondonUnderSiege = 0
+		and I_RemainingArmyMPPercentage William < 10
+		
+; 		replenish_action_points William	
+		enable_ui end_turn
+		
+		advance_advice_thread Prologue_William_Out_Of_Moves_Thread	;ADVICE: Out of Moves #10220#
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter RecruitedInCaen = 1
+		and I_CharacterExists William
+		and I_CompareCounter RecruitedInLondon = 1
+		and I_CompareCounter PopeMissionSuccess = 1
+		and I_CompareCounter NottinghamUnderSiege = 0
+		and I_RemainingArmyMPPercentage William < 10
+		
+		enable_ui end_turn
+
+; 		replenish_action_points William	
+		advance_advice_thread Prologue_William_Out_Of_Moves_Thread	;ADVICE: Out of Moves #10220#
+		
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; NOTTINGHAM UNDER SIEGE
+;;;;*************************************************************************************************
+
+	monitor_conditions I_SettlementUnderSiege Nottingham
+		
+		set_counter NottinghamUnderSiege 1
+		ui_flash_stop
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter Opened_Siege_Scroll = 1
+		and I_CompareCounter LondonCaptured = 1
+
+;  		disable_ui siege_end_button
+		
+		campaign_wait 2
+		
+		advance_advice_thread Prologue_Pre_Siege_Nottingham_Thread	;ADVICE: Sieging a Settlement #10127#
+
+		while I_CompareCounter Opened_Siege_Scroll = 1
+		end_while
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; AGENT BASICS
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter NottinghamUnderSiege = 1
+		and I_CompareCounter SCROLL_OPEN = 0
+
+		campaign_wait 1
+		
+		move_strat_camera 103, 161					;Assassin
+		character_flash_start George
+		restrict_clickable_area London_Province Nottingham_Province
+
+		advance_advice_thread Prologue_Agent_Basics_Thread		;ADVICE: Agents #10128#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; ASSASSINS
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CharacterSelected George
+		and I_CompareCounter NottinghamUnderSiege = 1
+
+		character_flash_stop George
+		character_flash_start Angus Macdougall
+		
+		campaign_wait 1
+		
+		advance_advice_thread Prologue_Assassin_Basics_Thread		;ADVICE: Assassins #10129#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; ASSASSINATION
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Assassination_Scroll = 1
+
+		set_counter assassin_scroll_open 1
+		character_flash_stop Angus Macdougall
+		
+		campaign_wait 2
+		
+		advance_advice_thread Prologue_Assassination_Basics_Thread	;ADVICE: Assassination #10130#	
+
+		campaign_wait 2
+		
+		if I_CompareCounter Opened_Assassination_Scroll = 1
+			ui_flash_start perform_assassination_button
+		end_if
+		
+		terminate_monitor
+	end_monitor
+
+	;they closed the scroll without ordering the assassination
+	monitor_conditions I_CompareCounter assassin_scroll_open = 1
+		and I_CompareCounter Opened_Assassination_Scroll = 0
+		
+		campaign_wait 30
+		
+		if I_CompareCounter AssassinationSucceeded = 0
+			and I_CompareCounter AssassinationFailed = 0
+			and I_CharacterExists George
+		
+			advance_advice_thread Prologue_Assassination_Not_Ordered_Thread	;ADVICE: Assassination Order #10134#
+		end_if
+		
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; ASSASSINATION COMPLETED
+;;;;*************************************************************************************************
+
+	;success
+	monitor_event AssassinationMission MissionSucceeded
+		and I_CompareCounter AssassinationFailed = 0
+		and I_CompareCounter AssassinKilled = 0
+		
+		set_counter AssassinationSucceeded 1
+		terminate_monitor
+	end_monitor
+
+	;failure
+	monitor_event AssassinationMission not MissionSucceeded
+		and I_CompareCounter AssassinationSucceeded = 0
+		and I_CompareCounter AssassinKilled = 0
+
+		set_counter AssassinationFailed 1
+		terminate_monitor
+	end_monitor
+	
+	;failure
+	monitor_event ExecutesAnAssassinOnAMission I_CompareCounter AssassinationSucceeded = 0
+		and I_CompareCounter AssassinationFailed = 0
+
+		set_counter AssassinKilled 1
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; ASSASSINATION OUTCOME
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter AssassinationSucceeded = 1
+
+		ui_flash_stop
+
+		;need to tell them their assassin succeeded
+		advance_advice_thread Prologue_Assassination_Success_Thread		;ADVICE: Assassination Success #10131#
+		
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 1
+
+		set_counter rebel_assault 1
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter AssassinationFailed = 1
+	
+		ui_flash_stop
+
+		;need to tell them their assassin succeeded
+		advance_advice_thread Prologue_Assassination_Failed_Thread		;ADVICE: Escaped Assassination #10132#
+		
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		campaign_wait 1
+
+		set_counter rebel_assault 1
+		
+		terminate_monitor
+	end_monitor
+		
+	monitor_conditions I_CompareCounter AssassinKilled = 1
+	
+		ui_flash_stop
+		campaign_wait 1
+		
+		set_counter rebel_assault 1
+		
+		terminate_monitor
+	end_monitor	
+		
+	monitor_conditions I_CompareCounter rebel_assault = 1
+		
+	;;;;*************************************************************************************************
+	;;;; REBELS ATTACK CAEN
+	;;;;*************************************************************************************************
+		
+		move_strat_camera 104, 134
+
+		campaign_wait 1
+
+		;;; move ambrose
+		if not I_CharacterTypeNearTile normans named_character, 0 105, 135
+			move Ambrose Adames, 105, 135
+		end_if
+
+		;;; ambrose not in position
+		if not I_CharacterTypeNearTile slave named_character, 0 105, 135
+			set_counter caen_battle 0
+			campaign_wait 2
+			enable_save
+			advance_advice_thread Prologue_End_Turn_4_Thread	;ADVICE: End Turn #10133#
+		end_if
+
+		;;; ambrose in position
+		if I_CharacterTypeNearTile slave named_character, 0 105, 135
+		
+			if I_CharacterTypeNearTile normans named_character, 0 104, 134	;Rufus in Caen
+				siege_settlement Ambrose Adames, Caen, maintain
+
+				set_counter caen_battle 1
+				campaign_wait 3
+				restrict_clickable_area Caen_Province
+				
+				move_strat_camera 104, 134
+				advance_advice_thread Prologue_Caen_Under_Siege_Thread		;ADVICE: Caen Under Siege #10140#
+
+				set_counter move_camera_to_caen 1
+								
+				while I_CharacterTypeNearTile slave named_character, 1 105, 135
+				end_while
+
+				if I_CharacterExists Ambrose Adames
+					campaign_wait 3
+					enable_save
+					advance_advice_thread Prologue_End_Turn_4_Thread	;ADVICE: End Turn #10133#
+				end_if
+		
+			end_if
+			
+			if I_CharacterTypeNearTile normans named_character, 1 105, 135
+				and I_CompareCounter caen_battle = 0
+				and not I_AtSea Rufus
+
+				set_counter caen_battle 1
+				
+				move_strat_camera 105, 135
+				engage_armies Ambrose Adames, Rufus
+			end_if
+			
+		end_if
+		
+		restrict_clickable_area Caen_Province
+		set_counter caen_battle 0
+		set_counter move_camera_to_caen 0
+		
+		terminate_monitor
+	end_monitor
+
+	;;;;*************************************************************************************************
+	;;;; END TURN 2
+	;;;;*************************************************************************************************
+
+	monitor_conditions not I_CharacterExists Ambrose Adames
+		and I_TurnNumber > 1
+		and I_CompareCounter SCROLL_OPEN = 0
+
+		set_counter caen_battle 0
+		snap_strat_camera 104, 134
+		
+		campaign_wait 4
+		
+		enable_save
+		advance_advice_thread Prologue_End_Turn_4_Thread	;ADVICE: End Turn #10133#
+	
+		terminate_monitor
+	end_monitor	
+	
+	monitor_conditions I_CompareCounter move_camera_to_caen = 1
+	
+		while I_CompareCounter Opened_Prebattle_Scroll = 0
+		end_while
+
+		while I_CompareCounter Opened_Prebattle_Scroll = 1
+		end_while
+		
+		snap_strat_camera 104, 134
+	
+		terminate_monitor
+	end_monitor
+	
+;;;*************************************************************************************************
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; Campaign Turn 3
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;*************************************************************************************************
+
+;;;;*************************************************************************************************
+;;;; OPEN CAEN
+;;;;*************************************************************************************************
+
+	monitor_conditions not I_CharacterTypeNearTile slave named_character, 1 105, 135
+		and I_CompareCounter NottinghamUnderSiege = 1
+		and I_CompareCounter SCROLL_OPEN = 0
+		and I_TurnNumber > 2
+		
+		ui_flash_stop
+		disable_save
+						
+		;zoom camera to caen
+		move_strat_camera 105, 142
+		
+		advance_advice_thread Prologue_Open_Caen_Thread			;ADVICE: Castles #10145#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; CASTLE BASICS
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Settlement_Scroll = 1
+		and I_SettlementSelected Caen
+		and I_CompareCounter NottinghamUnderSiege = 1
+		and I_TurnNumber > 2
+
+		enable_ui building_browser_button
+		enable_ui settlement_info_prev_item_cycle
+		enable_ui settlement_info_next_item_cycle
+		enable_ui show_construction_advice_button
+		
+		advance_advice_thread Prologue_Castle_Basics_Thread		;ADVICE: Castle Basics #10143#
+
+		campaign_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		;campaign_wait 2
+
+	;;;;*************************************************************************************************
+	;;;; BUILDING BROWSER
+	;;;;*************************************************************************************************
+
+		if I_CompareCounter Opened_Settlement_Scroll = 1
+
+			ui_flash_start building_browser_button
+
+			advance_advice_thread Prologue_Building_Browser_Thread		;ADVICE: Building Browser #10144#
+
+			campaign_wait 1
+			
+			while not I_AdvisorSpeechPlaying
+				and I_AdvisorVisible
+			end_while
+
+			while I_AdvisorSpeechPlaying
+				and I_AdvisorVisible
+			end_while
+
+		end_if
+
+		while I_CompareCounter Opened_Building_Browser_Scroll = 1
+		end_while
+
+		ui_flash_stop
+		
+	;;;;*************************************************************************************************
+	;;;; FACTION SUMMARY
+	;;;;*************************************************************************************************
+
+		campaign_wait 1
+
+		enable_ui finances_button
+		enable_ui mission_button
+		enable_ui faction_button
+		disable_ui hud_select_prev_item_cycle
+		disable_ui hud_select_next_item_cycle
+		
+		ui_flash_start faction_button
+
+		advance_advice_thread Prologue_Faction_Summary_Thread		;ADVICE: Faction Summary #10150#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; FACTION OVERVIEW
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Faction_Overview_Scroll = 1	
+
+		ui_flash_stop
+
+		advance_advice_thread Prologue_Faction_Overview_Thread		;ADVICE: Faction Overview #10151#
+
+		ui_flash_stop
+		
+		while I_CompareCounter SCROLL_OPEN = 1
+		end_while
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; ATTACK NOTTINGHAM
+;;;;*************************************************************************************************
+
+	monitor_event SiegeEquipmentCompleted SettlementName Nottingham
+
+		set_counter ReadyToSiegeNottingham 1
+		
+		;add a couple of trebuchets to William's army
+		if not I_CharacterTypeNearTile normans named_character, 0 109, 147			;william not in london
+			and I_CharacterExists William
+			create_unit William, NE Catapult, num 4, exp 3, arm 0, wep 0
+		end_if
+		
+		terminate_monitor
+	end_monitor
+
+	monitor_conditions I_CompareCounter ReadyToSiegeNottingham = 1
+		and I_CompareCounter OpenedSummaryScroll = 1
+		and I_CompareCounter SCROLL_OPEN = 0
+		and not I_SettlementUnderSiege Caen
+		
+;		reveal_tile 107, 155						;show Nottingham		;can already see Nottingham
+;		point_at_settlement Nottingham
+		move_strat_camera 107, 160					;Nottingham
+
+		restrict_clickable_area London_Province Nottingham_Province Caen_Province
+		advance_advice_thread Prologue_Attack_Nottingham_Thread		;ADVICE: Attack Nottingham #10141#	
+		
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; BATTLE IN NOTTINGHAM
+;;;;*************************************************************************************************
+
+ 	monitor_conditions I_InBattle
+ 		and I_BattleIsSiegeBattle
+ 		and I_CompareCounter nottingham_battle = 1
+ 		
+		prepare_for_battle
+
+		suspend_unscripted_advice true
+
+;;;;;	deployment
+		while I_CompareCounter nottingham_deployment = 0
+		end_while
+		
+		advance_advice_thread Prologue_Nottingham_Intro_Thread
+		
+		battle_wait 1
+		
+		while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+			and I_AdvisorVisible
+		end_while
+	
+		while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+			and I_AdvisorVisible
+			and not I_BattleStarted
+		end_while
+		
+		if not I_BattleStarted
+			battle_wait 3
+		end_if
+		
+		if not I_BattleStarted
+			advance_advice_thread Prologue_Nottingham_Deployment_Thread
+	
+			battle_wait 1
+			
+			while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+				and not I_BattleStarted
+			end_while
+			
+		end_if
+		
+		;check if they have a ram
+		if I_BattleAttackerNumSiegeEngines ram > 0
+			and not I_BattleStarted
+
+			battle_wait 3
+		
+			point_at_location -58, -311
+			advance_advice_thread Prologue_Nottingham_Deployment1_Thread
+	
+			while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+				and not I_BattleStarted
+			end_while
+
+		end_if
+		
+		;check if they have a siege tower
+		if I_BattleAttackerNumSiegeEngines tower > 0
+			and not I_BattleStarted
+			
+			battle_wait 3
+			remove_battle_map_arrow
+		
+			point_at_location -107, -308
+			advance_advice_thread Prologue_Nottingham_Deployment2_Thread
+	
+			while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+				and not I_BattleStarted
+			end_while
+			
+		end_if
+		
+		;check if they have a ladder
+		if I_BattleAttackerNumSiegeEngines ladder > 0
+			and not I_BattleStarted
+
+			battle_wait 3
+			remove_battle_map_arrow
+		
+			point_at_location -127, -310
+			advance_advice_thread Prologue_Nottingham_Deployment3_Thread
+			
+			while not I_AdvisorSpeechPlaying					; waiting for the speech to start and advisor to be visible
+				and I_AdvisorVisible
+			end_while
+		
+			while I_AdvisorSpeechPlaying						; waiting for speech to stop or be dismissed
+				and I_AdvisorVisible
+				and not I_BattleStarted
+			end_while
+		
+		end_if
+
+		if not I_BattleStarted
+			battle_wait 3
+		end_if
+		
+		remove_battle_map_arrow
+ 		
+;;;;;	battle started		
+		while not I_BattleStarted
+		end_while
+
+		advance_advice_thread Prologue_Nottingham_Draw_Fire_Thread		;ADVICE: Breach the Wall #11220#
+		battle_wait 1
+		
+		while not I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+		end_while
+
+		while I_AdvisorSpeechPlaying
+			and I_AdvisorVisible
+			and I_CompareCounter nottingham_breached = 0
+		end_while
+		
+		if I_CompareCounter nottingham_breached = 0
+			battle_wait 5
+		end_if
+		
+		if I_BattlePlayerArmyNumberOfClassAndCategory missile siege > 0
+			and I_CompareCounter nottingham_breached = 0
+			advance_advice_thread Prologue_Nottingham_Catapult_Attack_Thread		;ADVICE: Breach the Wall #11220#
+		end_if
+
+;;;;; 	walls breached
+		while I_CompareCounter nottingham_breached = 0
+		end_while
+		
+		advance_advice_thread Prologue_Nottingham_Storm_Castle_Thread
+
+;;;;; 	plaza captured
+		while I_CompareCounter nottingham_plaza = 0
+		end_while
+				
+		advance_advice_thread Prologue_Nottingham_Dominate_The_Plaza_Thread
+
+; 		;;;;******************************
+; 		;;;;	wait for end battle
+; 		;;;;******************************
+
+		while I_InBattle
+		end_while
+ 		
+ 		terminate_monitor
+ 	end_monitor
+
+;;;;*************************************************************************************************
+;;;; FACTION FINANCES
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Faction_Finances_Scroll = 1
+		
+		advance_advice_thread Prologue_Faction_Finances_Thread		;ADVICE: Faction Finances #10152#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; DIPLOMATIC STANDING
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Diplomatic_Standing_Scroll = 1
+
+		advance_advice_thread Prologue_Diplomatic_Standing_Thread	;ADVICE: Diplomatic Standing #10153#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; MISSIONS SCROLL
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Missions_Scroll = 1
+		
+		advance_advice_thread Prologue_Missions_Scroll_Thread		;ADVICE: Missions #10154#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; POPE SCROLL
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Pope_Overview_Scroll = 1
+		
+		advance_advice_thread Prologue_Pope_Scroll_Thread		;ADVICE: The Pope #10155#
+
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; RANSOM SCROLL
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter Opened_Prisoner_Scroll = 1
+		
+		campaign_wait 2
+	
+		advance_advice_thread Prologue_Prisoners_Thread		;ADVICE: Prisoners of War #11052#
+
+		terminate_monitor
+	end_monitor
+	
+;;;;*************************************************************************************************
+;;;; NOTTINGHAM WON - YOU'RE A WINNER!
+;;;;*************************************************************************************************
+
+	monitor_conditions I_CompareCounter NottinghamCaptured = 1
+
+		campaign_wait 2
+	
+		advance_advice_thread Prologue_You_Win_Thread		;ADVICE: Nottingham Won #10200#
+
+		terminate_monitor
+	end_monitor
+
+;;;;*************************************************************************************************
+;;;; NOTTINGHAM LOST - TRY AGAIN
+;;;;*************************************************************************************************
+	
+	monitor_event PostBattle not I_WonBattle normans
+		and I_CompareCounter nottingham_battle = 1
+		and not I_SettlementUnderSiege Nottingham
+	
+		disable_save
+		campaign_wait 3
+		
+		;;; you lost the Nottingham battle, regroup and attack again
+ 		advance_advice_thread Prologue_Nottingham_Lost_Thread	;Advice: Nottingham Siege Lost! #10225#
+		
+		terminate_monitor
+	end_monitor
+
+;;;;**********************************************************************************************
+;;;; END OF PROLOGUE
+;;;;**********************************************************************************************
+
+	wait_monitors
+
+end_script
+
