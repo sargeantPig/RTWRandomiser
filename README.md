@@ -15,3 +15,8 @@ The randomiser has many options, some ridiculous but some that really do create 
 * Randomised faction rosters - This randomly assigns factions units that it can recruit, you'll never know what the enemy may have in their arsenal.
 * Voronoi Empires - Distributes settlements to factions randomly using a voronoi grid. 
 
+# Help and Support
+Join the Randomiser Discord server for help, discussion or leave some suggestions!
+[Invite to TWRandomiser Server](https://discord.gg/VYN48NNnuy)
+
+Alternatively if you've found a bug or have an issue please commit an issue here: [Issues](https://github.com/sargeantPig/RTWRandomiser/issues)
