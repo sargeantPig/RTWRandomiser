@@ -17,6 +17,6 @@ The randomiser has many options, some ridiculous but some that really do create 
 
 # Help and Support
 Join the Randomiser Discord server for help, discussion or leave some suggestions!
-[Invite to TWRandomiser Server](https://discord.gg/VYN48NNnuy)
+[Invite to TWRandomiser Server](https://discord.gg/H4k23fgTbB)
 
 Alternatively if you've found a bug or have an issue please commit an issue here: [Issues](https://github.com/sargeantPig/RTWRandomiser/issues)
