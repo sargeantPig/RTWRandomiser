@@ -86,6 +86,7 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chk_test = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,6 +104,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.chk_test);
             this.panel1.Controls.Add(this.lbl_msg);
             this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
@@ -229,7 +231,7 @@
             this.grp_box_settings.Controls.Add(this.chk_seed);
             this.grp_box_settings.Location = new System.Drawing.Point(292, 3);
             this.grp_box_settings.Name = "grp_box_settings";
-            this.grp_box_settings.Size = new System.Drawing.Size(414, 352);
+            this.grp_box_settings.Size = new System.Drawing.Size(414, 346);
             this.grp_box_settings.TabIndex = 0;
             this.grp_box_settings.TabStop = false;
             this.grp_box_settings.Text = "Settings";
@@ -746,7 +748,7 @@
             this.viewerToolStripMenuItem,
             this.stratViewerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // viewerToolStripMenuItem
@@ -777,6 +779,17 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // chk_test
+            // 
+            this.chk_test.AutoSize = true;
+            this.chk_test.Location = new System.Drawing.Point(239, 355);
+            this.chk_test.Name = "chk_test";
+            this.chk_test.Size = new System.Drawing.Size(78, 17);
+            this.chk_test.TabIndex = 10;
+            this.chk_test.Text = "Quick Test";
+            this.tooltip.SetToolTip(this.chk_test, "Skip menus and open campaign");
+            this.chk_test.UseVisualStyleBackColor = true;
             // 
             // RandomiserForm
             // 
@@ -875,6 +888,7 @@
         private System.Windows.Forms.CheckBox chk_dev_chosen;
         private System.Windows.Forms.Button btn_advancedOptions;
         private System.Windows.Forms.Label lbl_msg;
+        private System.Windows.Forms.CheckBox chk_test;
     }
 }
 

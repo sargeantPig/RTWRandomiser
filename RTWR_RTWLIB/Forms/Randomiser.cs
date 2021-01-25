@@ -162,14 +162,16 @@ namespace RTWR_RTWLIB
 			string[] args = new string[1];
 
 			if (main.isM2TW)
-				args[0] = "--features.mod=mods/randomiser";
+				args[0] = "--features.mod=mods/randomiser ";
 			else args[0] = "-mod:randomiser -show_err -nm ";
 
 			if (chk_ai.Checked)
 				args[0] += "-ai ";
-
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
+			if (chk_test.Checked)
+				args[0] += "-strat:imperial_campaign ";
+
 			if (main.isM2TW)
 				RTWCore.core.StartProcess(args, "medieval2.exe");
 			else RTWCore.core.StartProcess(args, "RomeTW.exe");
