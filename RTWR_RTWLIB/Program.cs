@@ -21,40 +21,34 @@ namespace RTWR_RTWLIB
 #if DEBUG
 			args = new string[] {"-n"};
 #endif
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
 
 			Functions_General.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
-
+			Logger log = new Logger();
+			bool isM2TW = log.FileCheck("medieval2.exe");
 			if (args.Count() > 0)
 			{
-				Logger log = new Logger();
-				bool isM2TW = log.FileCheck("medieval2.exe");
-
 				if (args[0] == "-u")
-				{
-					Application.EnableVisualStyles();
-					Application.SetCompatibleTextRenderingDefault(false);
 					Application.Run(new RandomiserForm("Randomiser has been updated!", isM2TW));
-				}
 
 				else if (args[0] == "-n")
-				{
-					Application.EnableVisualStyles();
-					Application.SetCompatibleTextRenderingDefault(false);
 					Application.Run(new RandomiserForm("Randomiser is fully updated.", isM2TW));
-				}
 
 				else if (args[0] == "-a")
-				{
-					Application.EnableVisualStyles();
-					Application.SetCompatibleTextRenderingDefault(false);
 					Application.Run(new RandomiserForm("Randomiser update is available!", isM2TW));
-				}
 			}
 
 			else
 			{
-				System.Diagnostics.Process.Start("RTWR_Updater.exe");
-				Environment.Exit(0);
+				bool updaterFound = log.FileCheck("RTWR_Updater.exe");
+				if (updaterFound)
+				{
+					System.Diagnostics.Process.Start("RTWR_Updater.exe");
+					Environment.Exit(0);
+				}
+				else
+					Application.Run(new RandomiserForm("Updater not found.", isM2TW));
 			}
 			
 		}
