@@ -79,27 +79,11 @@ namespace RTWR_RTWLIB
                 dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes.Add("Neutral", "Neutral");
                 dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes.Add("Hostile", "Hostile");
                 dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes.Add("At War", "At War");
-                foreach (var fr in ds.factionRelationships.attitudes)
-                {
-                    if (faction.name == fr.Key)
-                    {
-                        foreach (KeyValuePair<object, List<string>> relation in fr.Value)
-                        {
-                            foreach (string fo in relation.Value)
-                            {
-                                int rvalue = (int)relation.Key;
-                                if(rvalue < 100) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Allied"].Nodes.Add(fo);
-                                else if(rvalue < 200) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Suspicous"].Nodes.Add(fo);
-                                else if (rvalue < 400) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Neutral"].Nodes.Add(fo);
-                                else if (rvalue < 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["Hostile"].Nodes.Add(fo);
-                                else if (rvalue >= 600) dsv_treeView.Nodes[faction.name].Nodes["Relationships"].Nodes["At War"].Nodes.Add(fo);
-                            }
-                        }
-                    }
-                    
-                }
+           
             }
 
+            ds.factionRelationships.PopulateRelationTree(ref dsv_treeView);
+            
             mv = new MapViewer(dsv_treeView, this);
             UpdateScreens(dsv_treeView.Nodes[1].Text);
         }
@@ -149,8 +133,6 @@ namespace RTWR_RTWLIB
                 {
                     if (split[1] == "Characters" && eduViewer.Controls.Count > 0)
                         eduViewer.UpdateUnitTxt(null, dsv_treeView.SelectedNode.Text);
-
-
                 }
 
                 selected = split[0];

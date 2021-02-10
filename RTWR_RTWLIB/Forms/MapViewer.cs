@@ -48,7 +48,6 @@ namespace RTWR_RTWLIB
 
         public void SetData(string selectedfaction)
         {
-
             lbl_chosenfaction.Text = selectedfaction;
         }
 

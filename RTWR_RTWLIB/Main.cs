@@ -104,17 +104,17 @@ namespace RTWR_RTWLIB
             try
             {
                 if (fileName == FileNames.export_descr_unit)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDU(false) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDU(true) } };
                 else if (fileName == FileNames.export_descr_buildings)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDB(false) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new EDB(true) } };
                 else if (fileName == FileNames.descr_strat)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Strat() } };
                 else if (fileName == FileNames.descr_regions)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(false, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.paths[FileNames.descr_regions]["load"][0]) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.paths[FileNames.descr_regions]["load"][0]) } };
                 else if (fileName == FileNames.descr_sm_faction)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new SM_Factions() } };
                 else if (fileName == FileNames.names)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new NamesFile(false) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new NamesFile(true) } };
                 fileStr = files[fileName].Name.ToString();
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();

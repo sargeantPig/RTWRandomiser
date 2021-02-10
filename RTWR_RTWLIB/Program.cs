@@ -49,10 +49,7 @@ namespace RTWR_RTWLIB
 				}
 				else
 					Application.Run(new RandomiserForm("Updater not found.", isM2TW));
-			}
-			
+			}	
 		}
-
-
 	}
 }
