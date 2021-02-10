@@ -32,7 +32,7 @@ namespace RTWR_RTWLIB.Randomiser
 				List<object> factions = new List<object>(TWRandom.factionList);
 				unit.ownership.Clear();
 
-				for (int i = 0; i < (int)maxOwnership.Value - 1; i++)
+				for (int i = 0; i < (int)maxOwnership.Value; i++)
 				{
 					string rndFaction = (string)factions.GetRandomItemFromList(TWRandom.rnd);
 
