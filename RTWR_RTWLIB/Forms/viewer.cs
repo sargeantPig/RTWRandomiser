@@ -21,10 +21,21 @@ namespace RTWR_RTWLIB
         EDU edu;
         StratViewer sv;
         bool isUpdating = false;
-        public EDU_viewer(EDU edu)
+
+        string[] errorpic = new string[] { 
+            @"randomiser\error.png",
+            @"mods\mrandomiser\error.png"};
+
+        int errorAccess = 0;
+
+        public EDU_viewer(EDU edu, bool isM2tw)
         {
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
             this.edu = edu;
+
+            if (isM2tw)
+                errorAccess = 1;
+
             InitializeComponent();
 
             lst_units.Items.AddRange(edu.GetUnitNameList());
@@ -57,11 +68,11 @@ namespace RTWR_RTWLIB
                     image.Scale(new Percentage(100));
                     pic_unit.Image = image.ToBitmap();
                 }
-                else pic_unit.Load(@"randomiser\error.png");
+                else pic_unit.Load(errorpic[errorAccess]);
 
             }
             else
-                pic_unit.Load(@"randomiser\error.png");
+                pic_unit.Load(errorpic[errorAccess]);
         }
 
         private void GetUnitsInFaction()

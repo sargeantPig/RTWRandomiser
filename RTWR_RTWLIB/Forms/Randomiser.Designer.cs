@@ -30,6 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_test = new System.Windows.Forms.CheckBox();
             this.lbl_msg = new System.Windows.Forms.Label();
             this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
@@ -37,7 +38,6 @@
             this.lbl_seed = new System.Windows.Forms.Label();
             this.btn_play = new System.Windows.Forms.Button();
             this.picBox_map = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
@@ -86,10 +86,8 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chk_test = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grp_box_settings.SuspendLayout();
             this.grp_settings_misc.SuspendLayout();
             this.grp_settings_factions.SuspendLayout();
@@ -112,7 +110,6 @@
             this.panel1.Controls.Add(this.lbl_seed);
             this.panel1.Controls.Add(this.btn_play);
             this.panel1.Controls.Add(this.picBox_map);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btn_load);
             this.panel1.Controls.Add(this.grp_box_settings);
             this.panel1.Location = new System.Drawing.Point(2, 28);
@@ -120,11 +117,22 @@
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
             // 
+            // chk_test
+            // 
+            this.chk_test.AutoSize = true;
+            this.chk_test.Location = new System.Drawing.Point(239, 355);
+            this.chk_test.Name = "chk_test";
+            this.chk_test.Size = new System.Drawing.Size(78, 17);
+            this.chk_test.TabIndex = 10;
+            this.chk_test.Text = "Quick Test";
+            this.tooltip.SetToolTip(this.chk_test, "Skip menus and open campaign");
+            this.chk_test.UseVisualStyleBackColor = true;
+            // 
             // lbl_msg
             // 
             this.lbl_msg.AutoSize = true;
             this.lbl_msg.BackColor = System.Drawing.Color.LightGray;
-            this.lbl_msg.Location = new System.Drawing.Point(76, 8);
+            this.lbl_msg.Location = new System.Drawing.Point(53, 23);
             this.lbl_msg.Name = "lbl_msg";
             this.lbl_msg.Size = new System.Drawing.Size(155, 13);
             this.lbl_msg.TabIndex = 9;
@@ -197,17 +205,6 @@
             this.picBox_map.TabIndex = 4;
             this.picBox_map.TabStop = false;
             this.tooltip.SetToolTip(this.picBox_map, "Preview of the faction positions on the map.");
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.symbol48_romans_julii;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(61, 60);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // btn_load
             // 
@@ -780,17 +777,6 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // chk_test
-            // 
-            this.chk_test.AutoSize = true;
-            this.chk_test.Location = new System.Drawing.Point(239, 355);
-            this.chk_test.Name = "chk_test";
-            this.chk_test.Size = new System.Drawing.Size(78, 17);
-            this.chk_test.TabIndex = 10;
-            this.chk_test.Text = "Quick Test";
-            this.tooltip.SetToolTip(this.chk_test, "Skip menus and open campaign");
-            this.chk_test.UseVisualStyleBackColor = true;
-            // 
             // RandomiserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -808,7 +794,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grp_box_settings.ResumeLayout(false);
             this.grp_box_settings.PerformLayout();
             this.grp_settings_misc.ResumeLayout(false);
@@ -832,7 +817,6 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Button btn_load;
 		private System.Windows.Forms.GroupBox grp_box_settings;
 		private System.Windows.Forms.StatusStrip statusStrip1;

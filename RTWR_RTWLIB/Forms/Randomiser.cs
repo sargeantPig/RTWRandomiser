@@ -19,6 +19,7 @@ using RTWLib.Memory;
 using RTWR_RTWLIB.Data;
 using RTWR_RTWLIB.Forms;
 using RTWLib.Functions.EDU;
+using RTWLib.Medieval2;
 
 namespace RTWR_RTWLIB
 {
@@ -35,20 +36,17 @@ namespace RTWR_RTWLIB
 			if (isM2TW)
 			{
 				this.Text = "Medieval 2 Randomiser";
+				this.menuStrip1.Items[1].Enabled = false;
 				this.BackgroundImage = Properties.Resources.M2TWBackdrop;
 				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_load.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
 			}
 			main = new Main(pb_progress, statusStrip1, grp_box_settings, isM2TW);
-
-
             main.CleanLog();
 			lbl_msg.Text = updateMessage;
-			if ((!main.FileCheck(FilePaths.RTWEXE) && !main.FileCheck("medieval2.exe")))
-				main.DisplayLogExit();
-			else lbl_progress.Text = "RomeTW.exe Found.";
 
+			exeCheck();
 			//get current seed
 			if (File.Exists("randomiser_.txt"))
 			{
@@ -63,11 +61,6 @@ namespace RTWR_RTWLIB
 			{
 				Image image = Image.FromFile(@"randomiser\full_map.png");
 				picBox_map.Image = image;
-			}
-
-			if (Directory.Exists(@"randomiser\data\ui\unit_info\assets\"))
-			{
-				chk_misc_unitInfo.Enabled = false;
 			}
 
 			chk_dev_chosen.Checked = false;
@@ -179,8 +172,13 @@ namespace RTWR_RTWLIB
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			main.Load(lbl_progress, FileNames.export_descr_unit, "save");
-			edu = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit));
+
+			if (main.isM2TW)
+				main.M2TWLoad(lbl_progress, FileNames.export_descr_unit, "save");
+			else
+				main.Load(lbl_progress, FileNames.export_descr_unit, "save");
+
+			edu = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit), main.isM2TW);
 			if (strat != null)
 			{
 				strat.Edu_viewer = edu;
@@ -243,6 +241,25 @@ namespace RTWR_RTWLIB
 			main.options.Export(grp_box_settings);
 			main.advancedOptions.Export();
 			base.OnClosing(e);
+		}
+
+		private bool exeCheck()
+		{
+			if ((main.FileCheck(FilePaths.RTWEXE)))
+			{
+				lbl_progress.Text = "RomeTW.exe Found.";
+				return true;
+			}
+
+			if (!main.FileCheck("medieval2.exe"))
+				main.DisplayLogExit();
+			else
+			{
+				lbl_progress.Text = "medieval2.exe Found.";
+				return true;
+			}
+
+			return false;
 		}
 	}
 }
