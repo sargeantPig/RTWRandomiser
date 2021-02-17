@@ -20,6 +20,11 @@ namespace RTWR_RTWLIB.Randomiser
                 return;
             }
 
+            else RomeMightyEmpires(ds, edu, names, dr, edb);
+        }
+
+        public static void RomeMightyEmpires(Descr_Strat ds, EDU edu, NamesFile names, Descr_Region dr, EDB edb)
+        {
             foreach (Faction f in ds.factions)
             {
                 if (f.name == "slave") //  skip slave
@@ -182,7 +187,6 @@ namespace RTWR_RTWLIB.Randomiser
 
                 CharacterCoordinateFix(ds, dr);
             }
-
         }
 
         public static void M2TWMightyEmpires(Descr_Strat ds, EDU edu, NamesFile names, Descr_Region dr, EDB edb)
@@ -247,11 +251,6 @@ namespace RTWR_RTWLIB.Randomiser
                 }
 
                 LookUpTables lt = new LookUpTables();
-
-                Cultures culture = lt.LookUpKey<Cultures>(f.name);
-
-                if (culture == Cultures.barbarian)
-                    power = 4;
 
                 foreach (Settlement s in f.settlements)
                 {
