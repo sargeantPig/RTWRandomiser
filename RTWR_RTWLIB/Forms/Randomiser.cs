@@ -155,7 +155,7 @@ namespace RTWR_RTWLIB
 			string[] args = new string[1];
 
 			if (main.isM2TW)
-				args[0] = "--features.mod=mods/mrandomiser";
+				args[0] = "--features.mod=mods/randomiser";
 			else args[0] = "-mod:randomiser -show_err -nm ";
 
 			if (chk_ai.Checked)

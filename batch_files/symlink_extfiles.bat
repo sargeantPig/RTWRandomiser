@@ -1,4 +1,4 @@
-mklink /D "D:\Games\SteamLibrary\SteamApps\common\Medieval II Total War\mods\m2randomiser" "C:\Repositories\RomeModding\RTWRandomiser\ext_files\m2randomiser"
+mklink /D "C:\Repositories\RomeModding\RTWRandomiser\RTWR_RTWLIB\bin\Publish\mrandomiser" "C:\Repositories\RomeModding\RTWRandomiser\ext_files\mrandomiser"
 
 
 

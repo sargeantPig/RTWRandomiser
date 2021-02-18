@@ -39,11 +39,11 @@ namespace RTWR_RTWLIB
 
             if (isM2TW)
             {
-                options = new Options(settingsBox, @"mods/mrandomiser/options.txt", "options.txt");
-                advancedOptions = new AdvancedOptionsViewer(@"mods/mrandomiser/advancedOptions.txt", "advancedOptions.txt");
+                options = new Options(settingsBox, @"mods/randomiser/options.txt", "options.txt");
+                advancedOptions = new AdvancedOptionsViewer(@"mods/randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
-                FileDestinations.ROOT = @"mods\mrandomiser\van_data";
-                FileDestinations.MOD_FOLDER = @"mods\mrandomiser";
+                FileDestinations.ROOT = @"mods\randomiser\van_data";
+                FileDestinations.MOD_FOLDER = @"mods\randomiser";
             }
 
             else
