@@ -127,6 +127,8 @@ namespace RTWR_RTWLIB
                 args.Add("missile infantry");
             if (chk_spearmen.Checked)
                 args.Add("spearmen");
+            if (chk_ships.Checked)
+                args.Add("ship");
             if (chk_command.Checked)
                 args.Add("general");
             if (chk_All.Checked)

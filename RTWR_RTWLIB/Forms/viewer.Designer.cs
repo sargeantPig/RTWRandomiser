@@ -58,6 +58,7 @@
             this.chk_highlight_defence = new System.Windows.Forms.CheckBox();
             this.chk_highlight_attack = new System.Windows.Forms.CheckBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.chk_ships = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_unit)).BeginInit();
             this.grp_show.SuspendLayout();
             this.grp_highlights.SuspendLayout();
@@ -117,6 +118,7 @@
             // grp_show
             // 
             this.grp_show.BackColor = System.Drawing.Color.Transparent;
+            this.grp_show.Controls.Add(this.chk_ships);
             this.grp_show.Controls.Add(this.chk_missile_cavalry);
             this.grp_show.Controls.Add(this.chk_missile_infantry);
             this.grp_show.Controls.Add(this.chk_missile);
@@ -415,6 +417,16 @@
             this.textBox1.TabIndex = 9;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
+            // chk_ships
+            // 
+            this.chk_ships.AutoSize = true;
+            this.chk_ships.Location = new System.Drawing.Point(7, 318);
+            this.chk_ships.Name = "chk_ships";
+            this.chk_ships.Size = new System.Drawing.Size(52, 17);
+            this.chk_ships.TabIndex = 28;
+            this.chk_ships.Text = "Ships";
+            this.chk_ships.UseVisualStyleBackColor = true;
+            // 
             // EDU_viewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,5 +488,6 @@
         private System.Windows.Forms.CheckBox chk_highlight_recruitCost;
         private System.Windows.Forms.CheckBox chk_highlight_number;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox chk_ships;
     }
 }
