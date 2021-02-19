@@ -295,10 +295,6 @@ namespace RTWR_RTWLIB
 
             if (chk_unitinfo)
                 ((M2EDU)files[FileNames.export_descr_unit]).ApplyUnitInfoFix();
-
-            if (chk_prefs)
-                new PreferencesFile().ImportPreferences(@"randomiser\preferences\preferences.txt");
-
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
 
@@ -311,7 +307,7 @@ namespace RTWR_RTWLIB
 
             pic_map.Refresh();
 
-            sm.Save(@"randomiser\full_map.png");
+            sm.Save(@"mods\randomiser\full_map.png");
 
 
             Thread.Sleep(250);

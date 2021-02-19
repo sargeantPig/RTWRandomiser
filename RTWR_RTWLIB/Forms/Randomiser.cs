@@ -41,7 +41,22 @@ namespace RTWR_RTWLIB
 				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_load.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
+				if (File.Exists(@"mods\randomiser\full_map.png"))
+				{
+					Image image = Image.FromFile(@"mods\randomiser\full_map.png");
+					picBox_map.Image = image;
+				}
 			}
+
+			else
+			{
+				if (File.Exists(@"randomiser\full_map.png"))
+				{
+					Image image = Image.FromFile(@"randomiser\full_map.png");
+					picBox_map.Image = image;
+				}
+			}
+
 			main = new Main(pb_progress, statusStrip1, grp_box_settings, isM2TW);
             main.CleanLog();
 			lbl_msg.Text = updateMessage;
@@ -55,12 +70,6 @@ namespace RTWR_RTWLIB
 				sr.Close();
 				lbl_seed.Text = "Randomiser Seed: " + line;
 				txt_seed.Text = line;
-			}
-
-			if (File.Exists(@"randomiser\full_map.png"))
-			{
-				Image image = Image.FromFile(@"randomiser\full_map.png");
-				picBox_map.Image = image;
 			}
 
 			chk_dev_chosen.Checked = false;
