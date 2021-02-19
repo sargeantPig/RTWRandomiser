@@ -36,6 +36,10 @@ namespace RTWR_RTWLIB
 			if (isM2TW)
 			{
 				this.Text = "Medieval 2 Randomiser";
+				this.chk_preferences.Checked = false;
+				this.chk_preferences.Enabled = false;
+				this.chk_removeSPQR.Checked = false;
+				this.chk_removeSPQR.Enabled = false;
 				this.menuStrip1.Items[1].Enabled = false;
 				this.BackgroundImage = Properties.Resources.M2TWBackdrop;
 				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
@@ -96,7 +100,7 @@ namespace RTWR_RTWLIB
 			{
 				if(main.Load(chk_LogAll, lbl_progress))
 					main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked);
 				else
 				{
 					main.PLog("Load failed - Check log for details.");

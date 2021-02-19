@@ -86,6 +86,7 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chk_removeSPQR = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -235,6 +236,7 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.Controls.Add(this.chk_removeSPQR);
             this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
             this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
             this.grp_settings_misc.Controls.Add(this.chk_preferences);
@@ -777,6 +779,16 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // chk_removeSPQR
+            // 
+            this.chk_removeSPQR.AutoSize = true;
+            this.chk_removeSPQR.Location = new System.Drawing.Point(7, 89);
+            this.chk_removeSPQR.Name = "chk_removeSPQR";
+            this.chk_removeSPQR.Size = new System.Drawing.Size(99, 17);
+            this.chk_removeSPQR.TabIndex = 5;
+            this.chk_removeSPQR.Text = "Remove SPQR";
+            this.chk_removeSPQR.UseVisualStyleBackColor = true;
+            // 
             // RandomiserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -873,6 +885,7 @@
         private System.Windows.Forms.Button btn_advancedOptions;
         private System.Windows.Forms.Label lbl_msg;
         private System.Windows.Forms.CheckBox chk_test;
+        private System.Windows.Forms.CheckBox chk_removeSPQR;
     }
 }
 
