@@ -52,6 +52,11 @@
             this.numUpDown_ragingRebelsVal.Name = "numUpDown_ragingRebelsVal";
             this.numUpDown_ragingRebelsVal.Size = new System.Drawing.Size(30, 20);
             this.numUpDown_ragingRebelsVal.TabIndex = 0;
+            this.numUpDown_ragingRebelsVal.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // lbl_ragingRebels
             // 

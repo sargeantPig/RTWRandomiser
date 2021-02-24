@@ -2,6 +2,7 @@
 using RTWLib.Functions;
 using RTWLib.Functions.EDU;
 using RTWLib.Objects;
+using RTWLib.Objects.Descr_strat;
 using RTWR_RTWLIB.Data;
 using RTWRandLib.Data;
 using System.Collections.Generic;
@@ -16,18 +17,26 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
 		{
+			int ownershipPerUnit = (int)maxOwnership.Value;
+
+			ownershipPerUnit += 1; //account for slave always taking up a slot
+
+
 			if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_randomShuffle.ToString()] == 1)
 			{
-				SimpleOwnership(edu, maxOwnership);
+				SimpleOwnership(edu, ownershipPerUnit);
+			}
+			if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_balancedShuffle.ToString()] == 1)
+			{
+				BalancedOwnership(edu, ownershipPerUnit);
 			}
 			else if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_regionShuffling.ToString()] == 1)
 			{
-				RegionBasedOwnership(edu, dr, maxOwnership);
+				RegionBasedOwnership(edu, dr, ownershipPerUnit);
 			}
-
 		}
 
-		public static void SimpleOwnership(EDU edu, NumericUpDown maxOwnership)
+		public static void SimpleOwnership(EDU edu, int maxOwnership)
 		{
 			foreach (Unit unit in edu.units)
 			{
@@ -40,7 +49,7 @@ namespace RTWR_RTWLIB.Randomiser
 				if (faction == "slave")
 					continue;
 
-				List<Unit> units = GetRandomUnitList(edu, edu.units.Count / TWRandom.factionList.Count(), (int)maxOwnership.Value + 1, true);
+				List<Unit> units = GetRandomUnitList(edu, edu.units.Count / TWRandom.factionList.Count(), maxOwnership, true);
 
 				foreach (Unit unit in units)
 				{
@@ -58,36 +67,58 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 				}
 			}
-			
-			/*foreach (Unit unit in edu.units)
+		}
+
+		public static void BalancedOwnership(EDU edu, int maxOwnership)
+		{
+			float averagePoints = 0f;
+			float total = 0f;
+			float minPoints = 100000f;
+			float maxPoints = 0;
+			float lowerBoundary = 0f;
+			float upperBoundary = 0f;
+			foreach (Unit unit in edu.units)
 			{
-				List<object> factions = new List<object>(TWRandom.factionList);
+				unit.CalculatePointValue();
+				if (unit.pointValue > maxPoints)
+					maxPoints = unit.pointValue;
+				if (unit.pointValue < minPoints)
+					minPoints = unit.pointValue;
+
+				total += unit.pointValue;
 				unit.ownership.Clear();
+				unit.ownership.Add("slave");
+			}
 
-				for (int i = 0; i < (int)maxOwnership.Value; i++)
-				{
-					string rndFaction = (string)factions.GetRandomItemFromList(TWRandom.rnd);
-					unit.ownership.Add(rndFaction);
-					factions.Remove(rndFaction);
-				}
+			averagePoints = total / edu.units.Count;
 
-				if (factions.Contains("slave"))
-					unit.ownership.Add("slave");
-			}*/
+			List<Unit> lowTier = new List<Unit>();
+			List<Unit> midTier = new List<Unit>();
+			List<Unit> highTier = new List<Unit>();
+			
 
+			int midtierIndex = lowTier.Count - 1;
+			int hightierIndex = lowTier.Count + midTier.Count - 1;
 
+			lowerBoundary = (averagePoints - minPoints) / 2;
+			upperBoundary = (maxPoints - averagePoints) / 2;
 
+			foreach (Unit unit in edu.units)
+			{
+				if (unit.pointValue > averagePoints + upperBoundary)
+					highTier.Add(unit);
+				else if (unit.pointValue > averagePoints - lowerBoundary)
+					midTier.Add(unit);
+				else
+					lowTier.Add(unit);
+			}
+
+			DistributeUnitsFromTier(lowTier, maxOwnership);
+			DistributeUnitsFromTier(midTier, maxOwnership);
+			DistributeUnitsFromTier(highTier, maxOwnership);
 		}
 
-		public static void BalancedOwnership(EDU edu)
-		{ 
-			//distribute units into tiers (cavalry low, mid, high) based on points total etc
-
-			//factions take in turns to select one of each.
-		
-		}
-
-		public static void RegionBasedOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
+		public static void RegionBasedOwnership(EDU edu, Descr_Region dr, int maxOwnership)
 		{
 			//get cities and locations
 
@@ -105,6 +136,42 @@ namespace RTWR_RTWLIB.Randomiser
 
 			//set ownership
 
+		}
+
+		static void DistributeUnitsFromTier(List<Unit> tier, int maxOwnership)
+		{
+			Dictionary<int, int> unitUses = new Dictionary<int, int>();
+
+			for (int i = 0; i < tier.Count; i++)
+				unitUses.Add(i, 0);
+
+			while (tier.Count > 0)
+			{
+				foreach (string faction in TWRandom.factionList)
+				{
+					if(tier.Count == 0)
+						break;
+
+
+					if (faction == "slave")
+						continue;
+
+					int rnd = -1;
+					while(rnd >= tier.Count || rnd < 0)
+						rnd = TWRandom.rnd.Next(0, tier.Count);
+
+					if(tier[rnd].ownership.Contains(faction))
+						continue;
+
+					if (!tier[rnd].ownership.Contains(faction))
+						tier[rnd].ownership.Add(faction);
+
+					unitUses[rnd] += 1;
+
+					if (unitUses[rnd] >= maxOwnership)
+						tier.RemoveAt(rnd);
+				}
+			}
 		}
 
 		static List<Unit> GetRandomUnitListByType(EDU edu, int maxOwnership, string type, int maxToReturn, bool forceUnits = false)

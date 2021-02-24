@@ -18,7 +18,7 @@ namespace RTWR_RTWLIB.Randomiser
                 totalCost += unit.primaryArmour.stat_pri_armour[0] * 5;
                 totalCost += unit.primaryArmour.stat_pri_armour[1] * 3;
                 totalCost += unit.primaryArmour.stat_pri_armour[2] * 2;
-                totalCost += unit.heatlh[0] * 10;
+                totalCost += unit.health[0] * 10;
 
                 unit.cost[1] = totalCost + TWRandom.rnd.Next(-(totalCost / 10), (totalCost / 10) + 1); // cost to build 
                 unit.cost[2] = ((totalCost / 100) * unit.soldier.number); // cost to upkeep 
