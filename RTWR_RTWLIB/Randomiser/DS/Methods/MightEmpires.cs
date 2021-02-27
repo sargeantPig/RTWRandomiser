@@ -90,8 +90,8 @@ namespace RTWR_RTWLIB.Randomiser
 
                 Cultures culture = lt.LookUpKey<Cultures>(f.name);
 
-                if (culture == Cultures.barbarian)
-                    power = 4;
+                //if (culture == Cultures.barbarian)
+                 //   power = 4;
 
                 foreach (Settlement s in f.settlements)
                 {
@@ -113,8 +113,6 @@ namespace RTWR_RTWLIB.Randomiser
                         List<DSBuilding> dsbs = GetBuildings(levels, edb);
 
                         ChangeSettlement(levels, population, dsbs, 8);
-
-
                     }
 
                     else if (power > 16)

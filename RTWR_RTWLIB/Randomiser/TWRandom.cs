@@ -27,10 +27,8 @@ namespace RTWR_RTWLIB.Randomiser
 		public static string[] M2TWVoiceTypes = { "Light", "Heavy", "General" };
 		public static object[] SoundTypes = { SoundType.axe, SoundType.knife, SoundType.mace, SoundType.spear, SoundType.sword};
 		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
-
 		public static Options advancedOptions { get; set; }
 		public static string[] factionList { get; set; }
-
 		public static string GetRandomAIEconomy()
 		{
 			return AIEconomy[rnd.Next(0, AIEconomy.Count())];
@@ -43,7 +41,6 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			return VoiceTypes[rnd.Next(0, VoiceTypes.Count())];
 		}
-
 		public static void AddKV(this Dictionary<string, List<string>> dic, string key, string unit)
 		{
 			if (!dic.ContainsKey(key))
@@ -71,6 +68,7 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 			return fo;
 		}
+
 	}
 
 	public static class Randomise

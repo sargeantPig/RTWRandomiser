@@ -235,7 +235,8 @@ namespace RTWR_RTWLIB
             
             ((EDU)files[FileNames.export_descr_unit]).RandomiseFile<RandomEDU, EDU>(units_group, lbl_progress, ss, pb, new object[] { unit_attr, num_ownership });
             RandomEDU.SetFactionUnitList(((EDU)files[FileNames.export_descr_unit]));
-            ((EDB)files[FileNames.export_descr_buildings]).SetRecruitment();
+            ((EDB)files[FileNames.export_descr_buildings]).SetTieredRecruitment(((EDU)files[FileNames.export_descr_unit]));
+            ((EDB)files[FileNames.export_descr_buildings]).SetRecruitment(((EDU)files[FileNames.export_descr_unit]));
             ((Descr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
             TWRandom.UnitByFaction.Clear();
@@ -292,7 +293,7 @@ namespace RTWR_RTWLIB
             //((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
             ((M2EDU)files[FileNames.export_descr_unit]).RandomiseFile<RandomEDU, M2EDU>(units_group, lbl_progress, ss, pb, new object[] { unit_attr, num_ownership });
             RandomEDU.SetFactionUnitList(((EDU)files[FileNames.export_descr_unit]));
-            ((M2EDB)files[FileNames.export_descr_buildings]).SetRecruitment();
+            ((M2EDB)files[FileNames.export_descr_buildings]).SetRecruitment(((EDU)files[FileNames.export_descr_unit]));
             ((M2DS)files[FileNames.descr_strat]).RandomiseFile<RandomDS, M2DS>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
             TWRandom.UnitByFaction.Clear();

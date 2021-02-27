@@ -21,7 +21,6 @@ namespace RTWR_RTWLIB.Randomiser
 
 			ownershipPerUnit += 1; //account for slave always taking up a slot
 
-
 			if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_randomShuffle.ToString()] == 1)
 			{
 				SimpleOwnership(edu, ownershipPerUnit);
@@ -60,11 +59,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 				if (!hasBoats)
 				{
-					var boats = GetRandomUnitListByType(edu, TWRandom.factionList.Count() / 3, "ship", 5, true); 
-					foreach (Unit boat in boats)
-					{
-						boat.ownership.Add(faction);
-					}
+					GiveBoats(edu, faction);
 				}
 			}
 		}
@@ -96,10 +91,6 @@ namespace RTWR_RTWLIB.Randomiser
 			List<Unit> midTier = new List<Unit>();
 			List<Unit> highTier = new List<Unit>();
 			
-
-			int midtierIndex = lowTier.Count - 1;
-			int hightierIndex = lowTier.Count + midTier.Count - 1;
-
 			lowerBoundary = (averagePoints - minPoints) / 2;
 			upperBoundary = (maxPoints - averagePoints) / 2;
 
@@ -116,6 +107,14 @@ namespace RTWR_RTWLIB.Randomiser
 			DistributeUnitsFromTier(lowTier, maxOwnership);
 			DistributeUnitsFromTier(midTier, maxOwnership);
 			DistributeUnitsFromTier(highTier, maxOwnership);
+			//boats
+
+			foreach (string faction in TWRandom.factionList)
+			{
+				bool hasBoats = FactionHasBoats(edu, faction);
+				if (!hasBoats)
+					GiveBoats(edu, faction);
+			}
 		}
 
 		public static void RegionBasedOwnership(EDU edu, Descr_Region dr, int maxOwnership)
@@ -149,7 +148,7 @@ namespace RTWR_RTWLIB.Randomiser
 			{
 				foreach (string faction in TWRandom.factionList)
 				{
-					if(tier.Count == 0)
+					if (tier.Count == 0)
 						break;
 
 
@@ -157,10 +156,10 @@ namespace RTWR_RTWLIB.Randomiser
 						continue;
 
 					int rnd = -1;
-					while(rnd >= tier.Count || rnd < 0)
+					while (rnd >= tier.Count || rnd < 0)
 						rnd = TWRandom.rnd.Next(0, tier.Count);
 
-					if(tier[rnd].ownership.Contains(faction))
+					if (tier[rnd].ownership.Contains(faction))
 						continue;
 
 					if (!tier[rnd].ownership.Contains(faction))
@@ -173,7 +172,6 @@ namespace RTWR_RTWLIB.Randomiser
 				}
 			}
 		}
-
 		static List<Unit> GetRandomUnitListByType(EDU edu, int maxOwnership, string type, int maxToReturn, bool forceUnits = false)
 		{
 			List<Unit> units = edu.FindUnitsByArgAndFaction(new string[]{type});
@@ -236,6 +234,15 @@ namespace RTWR_RTWLIB.Randomiser
 			if (boatList.Count > 0)
 				return true;
 			else return false;
+		}
+
+		static void GiveBoats(EDU edu, string faction)
+		{
+			var boats = GetRandomUnitListByType(edu, TWRandom.factionList.Count() / 3, "ship", 5, true);
+			foreach (Unit boat in boats)
+			{
+					boat.ownership.Add(faction);
+			}
 		}
 	}
 }
