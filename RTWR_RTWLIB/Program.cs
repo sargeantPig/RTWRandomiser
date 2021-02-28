@@ -24,7 +24,7 @@ namespace RTWR_RTWLIB
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			Functions_General.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
+			LibFuncs.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
 			Logger log = new Logger();
 			bool isM2TW = log.FileCheck("medieval2.exe");
 			if (args.Count() > 0)

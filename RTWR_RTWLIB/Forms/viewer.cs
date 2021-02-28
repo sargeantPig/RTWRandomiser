@@ -138,7 +138,7 @@ namespace RTWR_RTWLIB
 
             foreach (Unit unit in units)
             {
-                lst_units.Items.Add(unit.dictionary);
+                lst_units.Items.Add(unit.dic);
             }
             UpdateUnitLabel();
         }
@@ -289,7 +289,7 @@ namespace RTWR_RTWLIB
            
             Unit unit = edu.FindUnit(search);
 
-            lst_units.SelectedItem = unit.dictionary;
+            lst_units.SelectedItem = unit.dic;
 
             Dictionary<string, Color> highlights = GetHighlightArgs();
 
@@ -303,9 +303,9 @@ namespace RTWR_RTWLIB
             {
                 foreach (KeyValuePair<string, Color> light in highlights)
                 {
-                    if (EDU.edu_scheme.Scheme.ContainsKey(Functions_General.GetFirstWord(line.Trim())))
+                    if (EDU.edu_scheme.Scheme.ContainsKey(LibFuncs.GetFirstWord(line.Trim())))
                     {
-                        Dictionary<string, int> components = EDU.edu_scheme.GetComponents(Functions_General.GetFirstWord(line.Trim()));
+                        Dictionary<string, int> components = EDU.edu_scheme.GetComponents(LibFuncs.GetFirstWord(line.Trim()));
                         if (components.ContainsKey(light.Key))
                         {
                             int highLightIndex = EDU.edu_scheme.GetComponentIndex(light.Key);
@@ -329,9 +329,9 @@ namespace RTWR_RTWLIB
                 }
                 if (marked.Count > 0)
                 {
-                    string space = spaces(Functions_General.GetFirstWord(line), 25);
-                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
-                    string firstRemoved = Functions_General.RemoveFirstWord(line);
+                    string space = spaces(LibFuncs.GetFirstWord(line), 25);
+                    rtxt_unit.AppendText(LibFuncs.GetFirstWord(line) + space);
+                    string firstRemoved = LibFuncs.RemoveFirstWord(line);
                     string[] split = firstRemoved.Split('\t', ' ', ',');
 
                     split = split.CleanStringArray();
@@ -349,9 +349,9 @@ namespace RTWR_RTWLIB
                 }
                 else
                 {
-                    string space = spaces(Functions_General.GetFirstWord(line), 25);
-                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
-                    rtxt_unit.AppendText(Functions_General.RemoveFirstWord(line) + "\r\n");
+                    string space = spaces(LibFuncs.GetFirstWord(line), 25);
+                    rtxt_unit.AppendText(LibFuncs.GetFirstWord(line) + space);
+                    rtxt_unit.AppendText(LibFuncs.RemoveFirstWord(line) + "\r\n");
 
                 }
 

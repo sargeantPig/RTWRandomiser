@@ -19,16 +19,19 @@ namespace RTWR_RTWLIB.Randomiser
 {
 	public static class RandomEDB
 	{
-		public static void SetRecruitment(this EDB edb, EDU edu)
+		public static void SetRecruitment(this EDB edb, EDU edu, bool ignoreIfAlreadySet = true, bool ignoreCore = true)
 		{
 			foreach (CoreBuilding cb in edb.buildingTrees)
 			{
+				if (cb.buildingType == "core_building" && ignoreCore)
+					continue;
 				foreach (Building b in cb.buildings)
 				{
 					foreach (Brecruit br in b.capability.canRecruit)
 					{
+						if (br.requiresFactions.Count > 0 && ignoreIfAlreadySet)
+							continue;
 						br.requiresFactions.Clear();
-
 						br.requiresFactions = new List<string>(edu.FindUnit(br.name).ownership);
 					}
 				}
@@ -41,7 +44,6 @@ namespace RTWR_RTWLIB.Randomiser
 				foreach (Building b in cb.buildings)
 				{
 					b.capability.canRecruit.Clear();
-
 				}
 
 			object[] unitSplit = new object[4]{
@@ -58,11 +60,14 @@ namespace RTWR_RTWLIB.Randomiser
 					unit.CalculatePointValue();
 				}
 
-				splitUnitsByBuilding(edb, (List<Unit>)o);
+				SplitUnitsByBuilding(edb, (List<Unit>)o);
 			}
+
+			CoreBuildingMiltias(edb, (List<Unit>)unitSplit[2]);
+
 		}
 
-		static void splitUnitsByBuilding(EDB edb, List<Unit> units)
+		static void SplitUnitsByBuilding(EDB edb, List<Unit> units)
 		{
 			Dictionary<UnitType, string> typeByBuildingTree = new Dictionary<UnitType, string>()
 			{
@@ -109,22 +114,32 @@ namespace RTWR_RTWLIB.Randomiser
 				if (tierCounter >= 1)
 				{
 					int increase = (int)Math.Floor(tierCounter);
-					int experience = buildingLevel;
-					int experienceDecrease = increase - (unitsPerBuilding*buildingLevel);
+					int experience = buildingLevel - 1;
+					int experienceDecrease = unitsPerBuilding;
 					int tracker = 1;
 					for (int i = 0; i < increase; i += 1)
 					{
-						buildingTree.buildings[bi].capability.canRecruit.Add(new Brecruit(sorted[i].type, experience >= 1 ? experience : 0));
-
-						foreach (string barb in barbFactionsList)
+						if (!buildingTree.buildings[bi].capability.ContainsUnit(sorted[i].type))
+							buildingTree.buildings[bi].capability.canRecruit.Add(new Brecruit(sorted[i].type, experience >= 1 ? experience : 0));
+						/*foreach (string barb in barbFactionsList)
 						{
 							if (sorted[i].ownership.Contains(barb) && buildingLevel >= 4)
 							{
 								int knockback = buildingLevel - 3;
 								int newBi = bi - knockback;
-								buildingTree.buildings[newBi].capability.canRecruit.Add(new Brecruit(sorted[i].type, experience >= 1 ? experience : 0));
-							}
-						}
+								if (!buildingTree.buildings[newBi].capability.ContainsUnit(sorted[i].type))
+								{
+									buildingTree.buildings[newBi].capability.canRecruit.Add(new Brecruit(sorted[i].type, experience >= 1 ? experience : 0));
+									buildingTree.buildings[newBi].capability.canRecruit.Last().requiresFactions.Add(barb);
+								}
+								else
+								{
+									int unitIndex = buildingTree.buildings[newBi].capability.GetIndexOfUnit(sorted[i].type);
+									if (!buildingTree.buildings[newBi].capability.canRecruit[unitIndex].requiresFactions.Contains(barb))
+										buildingTree.buildings[newBi].capability.canRecruit[unitIndex].requiresFactions.Add(barb);
+								}
+							}*/
+						//}
 
 						if (tracker > experienceDecrease)
 						{
@@ -135,20 +150,59 @@ namespace RTWR_RTWLIB.Randomiser
 						tracker++;
 					}
 				}
+			
 				tierCounter += unitsPerBuilding;
 				buildingLevel++;
 			}
 		}
 
+		static void CoreBuildingMiltias(EDB edb, List<Unit> units, int maxPoints = 50)
+		{
+			var buildingTree = edb.GetBuildingTree("core_building");
+			var sorted = units.ToArray();
+			Array.Sort(sorted, Unit.ComparePoints());
+			foreach (string faction in TWRandom.factionList)
+			{
+				bool unitChosen = false;
+				int rndChance = 50;
+				while (!unitChosen)
+				{
+					foreach (Unit u in sorted)
+					{
+						int rnd = TWRandom.rnd.Next(0, 101);
+						if (u.ownership.Contains(faction) && rnd > rndChance && u.pointValue < maxPoints)
+						{
+							int exp = 0;
+							
+							foreach (var building in buildingTree .buildings)
+							{
+								if (building.capability.ContainsUnit(u.type))
+									break;
+								building.capability.canRecruit.Add(new Brecruit(u.type, exp));
+								building.capability.canRecruit.Last().requiresFactions.Add(faction);
+								exp += 1;
+							}
+							unitChosen = true;
+						}
+						if (unitChosen)
+							break;
+
+					}
+					rndChance -= 1;
+					maxPoints += 2;
+				}
+			}
+		}
+
 		static UnitType GetUnitRealType(string uclass, string category)
 		{
-			Logger log = new Logger();
 			string realType = uclass.Capitalise() + category.Capitalise();
 			UnitType realEnumType = UnitType.LightNon_combatant;
 			try { realEnumType = (UnitType)Enum.Parse(typeof(UnitType), realType); }
 
 			catch (Exception ex)
 			{
+				Logger log = new Logger(); 
 				log.ExceptionLog(ex, false);
 				log.DisplayLogExit();
 			}

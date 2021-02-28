@@ -52,7 +52,7 @@ namespace RTWR_RTWLIB.Randomiser
                     int[] cityCoord = ((Descr_Region)dr).GetCityCoords(s.region);
                     foreach (KeyValuePair<int[], List<ISettlement>> kv in voronoiCoords)
                     {
-                        int tempDistance = (int)Functions_General.DistanceTo(cityCoord, kv.Key);
+                        int tempDistance = (int)LibFuncs.DistanceTo(cityCoord, kv.Key);
                         if (tempDistance < distance)
                         {
                             distance = tempDistance;

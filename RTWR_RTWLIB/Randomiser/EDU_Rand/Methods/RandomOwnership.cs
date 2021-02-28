@@ -91,8 +91,8 @@ namespace RTWR_RTWLIB.Randomiser
 			List<Unit> midTier = new List<Unit>();
 			List<Unit> highTier = new List<Unit>();
 			
-			lowerBoundary = (averagePoints - minPoints) / 2;
-			upperBoundary = (maxPoints - averagePoints) / 2;
+			lowerBoundary = (averagePoints - minPoints) / 4;
+			upperBoundary = (maxPoints - averagePoints) / 1.5f;
 
 			foreach (Unit unit in edu.units)
 			{
@@ -103,6 +103,7 @@ namespace RTWR_RTWLIB.Randomiser
 				else
 					lowTier.Add(unit);
 			}
+
 
 			DistributeUnitsFromTier(lowTier, maxOwnership);
 			DistributeUnitsFromTier(midTier, maxOwnership);

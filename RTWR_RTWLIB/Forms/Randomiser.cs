@@ -28,11 +28,12 @@ namespace RTWR_RTWLIB
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
+		
 		public RandomiserForm(string updateMessage, bool isM2TW)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
-
+			
 			if (isM2TW)
 			{
 				this.Text = "Medieval 2 Randomiser";
@@ -83,29 +84,38 @@ namespace RTWR_RTWLIB
 		{
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
 
-			if (main.isM2TW)
+			try
 			{
-				if (main.M2TWLoad(chk_LogAll, lbl_progress))
+				if (main.isM2TW)
 				{
-					main.M2TWRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+					if (main.M2TWLoad(chk_LogAll, lbl_progress))
+					{
+						main.M2TWRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+					lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+					}
+					else
+					{
+						main.PLog("Load failed - Check log for details.");
+						main.DisplayLog();
+					}
 				}
 				else
 				{
-					main.PLog("Load failed - Check log for details.");
-					main.DisplayLog();
+					if (main.Load(chk_LogAll, lbl_progress))
+						main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked);
+					else
+					{
+						main.PLog("Load failed - Check log for details.");
+						main.DisplayLog();
+					}
 				}
 			}
-			else 
+			catch (Exception ex)
 			{
-				if(main.Load(chk_LogAll, lbl_progress))
-					main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked);
-				else
-				{
-					main.PLog("Load failed - Check log for details.");
-					main.DisplayLog();
-				}
+				Logger log = new Logger();
+				log.ExceptionLog(ex, false);
+				log.DisplayLogExit();
 			}
 			
 		}

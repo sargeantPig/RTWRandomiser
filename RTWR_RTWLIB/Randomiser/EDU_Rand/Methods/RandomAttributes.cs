@@ -26,7 +26,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 					for (int i = 0; i < max; i++)
 					{
-						Attributes a = Functions_General.RandomFlag<Attributes>(TWRandom.rnd, 1, 17);
+						Attributes a = LibFuncs.RandomFlag<Attributes>(TWRandom.rnd, 1, 17);
 
 						if (!unit.attributes.HasFlag(a) && a != Attributes.general_unit && a != Attributes.general_unit_upgrade)
 							unit.attributes |= a;

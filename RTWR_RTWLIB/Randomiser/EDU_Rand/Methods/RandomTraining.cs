@@ -12,8 +12,8 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			foreach (Unit unit in edu.units)
 			{
-				unit.mental.training = Functions_General.RandomFlag<Statmental_training>(TWRandom.rnd);
-				unit.mental.discipline = Functions_General.RandomFlag<Statmental_discipline>(TWRandom.rnd);
+				unit.mental.training = LibFuncs.RandomFlag<Statmental_training>(TWRandom.rnd);
+				unit.mental.discipline = LibFuncs.RandomFlag<Statmental_discipline>(TWRandom.rnd);
 				unit.mental.morale = TWRandom.rnd.Next(0, 15);
 			}
 		}

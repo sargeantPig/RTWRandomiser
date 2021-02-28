@@ -97,7 +97,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 			}
 
-			checkBoxes.Sort(new Comparison<CheckBox>(Functions_General.CompareNameEnd));
+			checkBoxes.Sort(new Comparison<CheckBox>(LibFuncs.CompareNameEnd));
 
 			foreach (CheckBox cb in checkBoxes)
 			{

@@ -60,7 +60,7 @@ namespace RTWR_RTWLIB.Randomiser
                     foreach (Settlement s in tempSettlements)
                     {
                         int[] cityCoords = dr.GetCityCoords(s.region);
-                        double tempDis = Functions_General.DistanceTo(cityCoords, capitalCoords);
+                        double tempDis = LibFuncs.DistanceTo(cityCoords, capitalCoords);
 
                         if (tempDis < distance)
                         {

@@ -27,7 +27,7 @@ namespace RTWR_RTWLIB.Randomiser
                         string name = c.Value.name;
                         int[] coorda = { dr.rgbRegions[b.region].x, dr.rgbRegions[b.region].y };
                         int[] coordb = { c.Value.x, c.Value.y };
-                        double distance = Functions_General.DistanceTo(coorda, coordb);
+                        double distance = LibFuncs.DistanceTo(coorda, coordb);
                         if (!regionDistances.ContainsKey(b.region))
                             regionDistances.Add(b.region, new Dictionary<string, double> { { name, distance } });
                         else regionDistances[b.region].Add(name, distance);
@@ -41,7 +41,7 @@ namespace RTWR_RTWLIB.Randomiser
             fp.Remove("slave");
             foreach (var a in ds.factions)
             {
-                fp.Add(a.name, Functions_General.RandomFlag<Personality>(TWRandom.rnd));
+                fp.Add(a.name, LibFuncs.RandomFlag<Personality>(TWRandom.rnd));
             }
 
             ds.coreAttitudes.attitudes.Clear();

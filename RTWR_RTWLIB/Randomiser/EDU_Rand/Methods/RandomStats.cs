@@ -11,21 +11,30 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			foreach (Unit unit in edu.units)
 			{
-				if (unit.primaryWeapon.WeaponFlags != WeaponType.no)
+				int mina, minb, minc;
+				if (unit.priWep.WepFlags != WeaponType.no)
 				{
-					unit.primaryWeapon.attack[0] = TWRandom.rnd.Next(1, 20); // attack factor
-					unit.primaryWeapon.attack[1] = TWRandom.rnd.Next(1, 20); // attack charging
+					mina = (int)(LibFuncs.SafeDivide(1, unit.priWep.atk[0]) * 1000);
+					minb = (int)(LibFuncs.SafeDivide(1, unit.priWep.atk[1]) * 1000);
+					unit.priWep.atk[0] = (int)(unit.priWep.atk[0] * TWRandom.rnd.RandPercent(mina, 2000));// attack factor
+					unit.priWep.atk[1] = (int)(unit.priWep.atk[1] * TWRandom.rnd.RandPercent(minb, 2000)); // attack charging
 				}
 
-				if (unit.secondaryWeapon.WeaponFlags != WeaponType.no)
+				if (unit.secWep.WepFlags != WeaponType.no)
 				{
-					unit.secondaryWeapon.attack[0] = TWRandom.rnd.Next(1, 20); // attack factor
-					unit.secondaryWeapon.attack[1] = TWRandom.rnd.Next(1, 20); // attack charging
+					mina = (int)(LibFuncs.SafeDivide(1, unit.secWep.atk[0]) * 1000);
+					minb = (int)(LibFuncs.SafeDivide(1, unit.secWep.atk[1]) * 1000);
+					unit.secWep.atk[0] = 1 + (int)(unit.secWep.atk[0] * TWRandom.rnd.RandPercent(mina, 2000)); // attack factor
+					unit.secWep.atk[1] = 1 + (int)(unit.secWep.atk[1] * TWRandom.rnd.RandPercent(minb, 2000)); // attack charging
 				}
 
-				unit.primaryArmour.stat_pri_armour[0] = TWRandom.rnd.Next(0, 20);
-				unit.primaryArmour.stat_pri_armour[1] = TWRandom.rnd.Next(0, 10);
-				unit.primaryArmour.stat_pri_armour[2] = TWRandom.rnd.Next(0, 7);
+				mina = (int)(LibFuncs.SafeDivide(1, unit.priArm.priArm[0]) * 1000);
+				minb = (int)(LibFuncs.SafeDivide(1, unit.priArm.priArm[1]) * 1000);
+				minc = (int)(LibFuncs.SafeDivide(1, unit.priArm.priArm[2]) * 1000);
+
+				unit.priArm.priArm[0] = (int)(unit.priArm.priArm[0] * TWRandom.rnd.RandPercent(mina, 2000));
+				unit.priArm.priArm[1] = (int)(unit.priArm.priArm[1] * TWRandom.rnd.RandPercent(minb, 2000));
+				unit.priArm.priArm[2] = (int)(unit.priArm.priArm[2] * TWRandom.rnd.RandPercent(minc, 2000));
 			}
 
 		}
