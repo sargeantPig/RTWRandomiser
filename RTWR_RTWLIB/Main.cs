@@ -30,7 +30,6 @@ namespace RTWR_RTWLIB
         public Main(ToolStripProgressBar pb, StatusStrip ss, GroupBox settingsBox, bool isM2TW)
         {
             Logger.AssemblyPrefix = "RTWR";
-
             Logger.AssemblyWatchList = new string[] { "RTWR_RTWLIB", "RTWLib" };
 
             this.pb = pb;
@@ -51,6 +50,9 @@ namespace RTWR_RTWLIB
                 options = new Options(settingsBox, @"randomiser/options.txt", "options.txt");
                 advancedOptions = new AdvancedOptionsViewer(@"randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
+                SM_Factions factionFile = new SM_Factions();
+                factionFile.Parse(FileDestinations.paths[FileNames.descr_sm_faction]["load"], out Logger.lineNumber, out Logger.lineText);
+                ((ComboBox)settingsBox.Controls["grp_settings_misc"].Controls["cmb_factionSelect"]).DataSource = factionFile.factionColours.Keys.ToArray();
             }
         }
         public bool Load(CheckBox chk_LogAll, ToolStripLabel lbl_progress)
@@ -218,7 +220,8 @@ namespace RTWR_RTWLIB
 
         public void Randomise(GroupBox units_group, NumericUpDown unit_attr, NumericUpDown num_ownership,
             GroupBox faction_group, NumericUpDown num_cities,ToolStripLabel lbl_progress,
-            PictureBox pic_map, bool chk_unitinfo, bool chk_prefs, bool chk_removeSenate)
+            PictureBox pic_map, bool chk_unitinfo, bool chk_prefs, bool chk_removeSenate, 
+            bool chk_factionSelect, bool chk_randomStart, string factionSelected)
         {
             //UnitInfo_dialog(chk_unitinfo);
 
@@ -240,6 +243,9 @@ namespace RTWR_RTWLIB
             ((Descr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
             TWRandom.UnitByFaction.Clear();
+
+            if (chk_factionSelect)
+                ((Descr_Strat)files[FileNames.descr_strat]).MoveFactionToTopOfStrat(factionSelected);
 
             if (chk_unitinfo)
                 ((EDU)files[FileNames.export_descr_unit]).ApplyUnitInfoFix();
@@ -346,6 +352,7 @@ namespace RTWR_RTWLIB
                 seed = rseed;
                 lbl_seed.Text = "Randomiser Seed: " + rseed;
                 TWRandom.rnd = new Random(rseed);
+                TWRandom.seed = rseed;
             }
             else
             {
@@ -353,6 +360,7 @@ namespace RTWR_RTWLIB
                 seed = rnd;
                 lbl_seed.Text = "Current Randomiser Seed: " + rnd;
                 TWRandom.rnd = new Random(rnd);
+                TWRandom.seed = rnd;
             }
 
         }

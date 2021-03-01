@@ -11,6 +11,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomSounds(EDU edu)
 		{
+			TWRandom.RefreshRndSeed();
 			//gather sounds available
 			foreach (Unit unit in edu.units)
 			{

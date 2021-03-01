@@ -7,6 +7,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandomTreasury(Descr_Strat ds)
         {
+            TWRandom.RefreshRndSeed();
             foreach (Faction f in ds.factions)
             {
                 f.denari = TWRandom.rnd.Next(0, 6000 + 1);

@@ -9,6 +9,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomStats(EDU edu)
 		{
+			TWRandom.RefreshRndSeed();
 			foreach (Unit unit in edu.units)
 			{
 				int mina, minb, minc;
@@ -24,8 +25,8 @@ namespace RTWR_RTWLIB.Randomiser
 				{
 					mina = (int)(LibFuncs.SafeDivide(1, unit.secWep.atk[0]) * 1000);
 					minb = (int)(LibFuncs.SafeDivide(1, unit.secWep.atk[1]) * 1000);
-					unit.secWep.atk[0] = 1 + (int)(unit.secWep.atk[0] * TWRandom.rnd.RandPercent(mina, 2000)); // attack factor
-					unit.secWep.atk[1] = 1 + (int)(unit.secWep.atk[1] * TWRandom.rnd.RandPercent(minb, 2000)); // attack charging
+					unit.secWep.atk[0] = (int)(unit.secWep.atk[0] * TWRandom.rnd.RandPercent(mina, 2000)); // attack factor
+					unit.secWep.atk[1] = (int)(unit.secWep.atk[1] * TWRandom.rnd.RandPercent(minb, 2000)); // attack charging
 				}
 
 				mina = (int)(LibFuncs.SafeDivide(1, unit.priArm.priArm[0]) * 1000);

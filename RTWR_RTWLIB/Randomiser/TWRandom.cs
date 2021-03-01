@@ -20,6 +20,7 @@ namespace RTWR_RTWLIB.Randomiser
 {
 	public static class TWRandom
 	{
+		public static int seed;
 		public static Random rnd = new Random();
 		public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
@@ -29,6 +30,11 @@ namespace RTWR_RTWLIB.Randomiser
 		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
 		public static Options advancedOptions { get; set; }
 		public static string[] factionList { get; set; }
+
+		public static void RefreshRndSeed()
+		{
+			TWRandom.rnd = new Random(TWRandom.seed);
+		}
 		public static string GetRandomAIEconomy()
 		{
 			return AIEconomy[rnd.Next(0, AIEconomy.Count())];
@@ -163,8 +169,6 @@ namespace RTWR_RTWLIB.Randomiser
 				unit.attributes |= Attributes.mercenary_unit;
 			}
 		}
-
-
 	}
 
 }

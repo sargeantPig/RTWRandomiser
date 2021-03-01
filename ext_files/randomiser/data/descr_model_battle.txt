@@ -1,0 +1,3410 @@
+;	
+;	This file contains the model linkages for both strategy map and battlefield; it gets 
+;	parsed on application startup but is not otherwise referred to. The data format is thus:
+;
+;	;						indicates a comment ;-)
+;							
+;	type					indicates a new model type
+;
+;							must be followed by id name string
+;
+;	skeleton				indicates which skeletons should be used for these models
+;								must be followed by id name string (cf descr_skeleton.txt); the 
+;								first skeleton is used for the primary weapon (geometry marked in
+;								file as "primary weapon"), the second is used for the secondary
+;								weapon (which should be marked as "secondary weapon")
+;
+;	skeleton_horse			alternate skeletons can be provided for models that need to be able to work
+;	skeleton_elephant		in multiple units, i.e generals. If alternate skeletons are specified the normal skeleton
+;	skeleton_camel			(the one specified with the skeleton keyword) is the infantry skeleton.
+;	skeleton_chariot		For generals all alternate skeletons must be specified
+;
+;	scale					(optional) this indicates a global scaling factor to be applied to 
+;								the model - as always, it's your responsibility to make sure that 
+;								the size of the model and the size of its skeleton match!
+;
+;	indiv_range				indicates at what point we start rendering men individually even if 
+;								we can 'group render'
+;
+;								must be followed by an integer (whole number) range in metres
+;
+;								group render means the whole unit will be rendered using one 
+;								model, individual render means the soldiers will be	tested 
+;								individually for which model lod to use (slower) 
+;	
+;	(models)				there must be at least one; the model_ keywords indicate a new model in
+;								the lod series; each must be followed by a filename and either the
+;								lod range in metres or the word 'max' for maximum range... all lods
+;								must be in order, from shortest distance (highest detail) to furthest
+;								distance. The model_ keywords are:
+;
+;			model_flexi_m		essentially a flexi model but has a small number of weighted 
+;								vertices, such as Will's high-detail carthaginian infantryman 
+;								with the weighted shoulder verts 
+;			
+;			model_flexi_c		a flexi model which contains per-vertex colours, for example 
+;								for colouring the different Roman faction assassins
+;
+;			model_flexi			plain vanilla flexi model, which is a single-skinned mesh with 
+;								normals and texture coordinates
+;
+;	model_mesh				(optional) range only for using animated mesh frames for the model
+;
+;	model_sprite			(optional) sprite model for this model type 
+;
+;								if the first item is a distance (integer number in m), a new 
+;								sprite animation set will be generated for this model; if it is 
+;								anything else, it must be a type name from this file which has a 
+;								valid sprite entry *and* was processed before this type entry
+;
+;	model_tri				(optional) indicates that this model can be represented by a single 
+;								triangle
+;
+;								must be followed by a range (integer number in metres), and three 
+;								floating point numbers in the range 0.0f - 1.0f which indicate 
+;								colours Red,Green,Blue to use for the triangle
+;
+
+
+;							!!!	models are in aplhabetical order by model name    !!!
+; -------------------------------------------------------------------------------------------------------
+; KEEP THIS FILE IN ALPHABETICAL ORDER!!!! SOME MUCH EASIER WHEN cross referencing other lists!!! - Kevin
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;	FEMALE PEASANTS actually have no weapons
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+type				barb_female_peasant
+skeleton			fs_dagger
+indiv_range			40
+;model_flexi_m		data/models_unit/barb_female_peasant_300.cas, 8
+model_flexi			data/models_unit/barb_female_peasant_300.cas, 15
+model_flexi			data/models_unit/barb_female_peasant_200.cas, 30
+model_flexi			data/models_unit/barb_female_peasant_100.cas, 40
+model_flexi			data/models_unit/barb_female_peasant_70.cas, max
+model_sprite		60.0, data/sprites/barb_female_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+type				east_female_peasant
+skeleton			fs_dagger 
+indiv_range			40
+model_flexi			data/models_unit/east_female_peasant_300.cas, 8
+model_flexi			data/models_unit/east_female_peasant_300.cas, 15
+model_flexi			data/models_unit/east_female_peasant_200.cas, 30
+model_flexi			data/models_unit/east_female_peasant_100.cas, 40
+model_flexi			data/models_unit/east_female_peasant_70.cas, max
+model_sprite		60.0, data/sprites/east_female_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+type				egypt_female_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi			data/models_unit/egypt_female_peasant_300.cas, 8
+model_flexi			data/models_unit/egypt_female_peasant_300.cas, 15
+model_flexi			data/models_unit/egypt_female_peasant_200.cas, 30
+model_flexi			data/models_unit/egypt_female_peasant_100.cas, 40
+model_flexi			data/models_unit/egypt_female_peasant_70.cas, max
+model_sprite		60.0, data/sprites/egypt_female_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+type				greek_female_peasant
+skeleton			fs_dagger,
+indiv_range			40
+model_flexi_m		data/models_unit/greek_female_peasant_300.cas, 8
+model_flexi_m		data/models_unit/greek_female_peasant_300.cas, 15
+model_flexi			data/models_unit/greek_female_peasant_200.cas, 30
+model_flexi			data/models_unit/greek_female_peasant_100.cas, 40
+model_flexi			data/models_unit/greek_female_peasant_70.cas, max
+model_sprite		60.0, data/sprites/greek_female_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+type				roman_female_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi_m		data/models_unit/roman_female_peasant_300.cas, 8
+model_flexi_m		data/models_unit/roman_female_peasant_300.cas, 15
+model_flexi			data/models_unit/roman_female_peasant_200.cas, 30
+model_flexi			data/models_unit/roman_female_peasant_100.cas, 40
+model_flexi			data/models_unit/roman_female_peasant_70.cas, max
+model_sprite		60.0, data/sprites/roman_female_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_male_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi_m		data/models_unit/barb_male_peasant_high.cas, 8
+model_flexi_m		data/models_unit/barb_male_peasant_med.cas, 15
+model_flexi		data/models_unit/barb_male_peasant_low.cas, 30
+model_flexi		data/models_unit/barb_male_peasant_lowest.cas, max
+;model_sprite		60.0, data/sprites/barb_male_peasant_sprite.spr
+model_sprite		60.0, data/sprites/barb_male_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				eastern_male_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi_m		data/models_unit/eastern_male_peasant_high.cas, 8
+model_flexi_m		data/models_unit/eastern_male_peasant_med.cas, 15
+model_flexi		data/models_unit/eastern_male_peasant_low.cas, 30
+model_flexi		data/models_unit/eastern_male_peasant_lowest.cas, max
+;model_sprite		60.0, data/sprites/eastern_male_peasant_sprite.spr
+model_sprite		60.0, data/sprites/eastern_male_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_male_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi_m		data/models_unit/egyptian_male_peasant_high.cas, 8
+model_flexi_m		data/models_unit/egyptian_male_peasant_med.cas, 15
+model_flexi		data/models_unit/egyptian_male_peasant_low.cas, 30
+model_flexi		data/models_unit/egyptian_male_peasant_lowest.cas, max
+;model_sprite		60.0, data/sprites/egyptian_male_peasant_sprite.spr
+model_sprite		60.0, data/sprites/egyptian_male_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_male_peasant
+skeleton			fs_dagger
+indiv_range			40
+model_flexi_m		data/models_unit/roman_male_peasant_high.cas, 8
+model_flexi_m		data/models_unit/roman_male_peasant_med.cas, 15
+model_flexi		data/models_unit/roman_male_peasant_low.cas, 30
+model_flexi		data/models_unit/roman_male_peasant_lowest.cas, max
+;model_sprite		60.0, data/sprites/roman_male_peasant_sprite.spr
+model_sprite		60.0, data/sprites/roman_male_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;					
+;					MOUNTS AND ANIMALS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+type				camel
+skeleton			fs_camel
+scale				1.0
+indiv_range			40
+texture				numidia, data/models_unit/textures/camel_numidia.tga
+texture				egypt, data/models_unit/textures/camel_egypt.tga
+texture				merc, data/models_unit/textures/camel_mercenary.tga
+model_flexi			data/models_unit/mount_camel_high.cas, 15
+model_flexi			data/models_unit/mount_camel_med.cas, 30
+model_flexi			data/models_unit/mount_camel_low.cas, 60
+model_flexi			data/models_unit/mount_camel_lowest.cas, max
+model_sprite		100.0, data/sprites/camel_sprite.spr
+model_sprite		numidia, 100.0, data/sprites/numidia_camel_sprite.spr
+model_sprite		egypt, 100.0, data/sprites/egypt_camel_sprite.spr
+
+type				camel_cataphract
+skeleton			fs_camel
+scale				1.0
+indiv_range			40
+texture				parthia, data/models_unit/textures/camel_cataphract_parthia.tga
+model_flexi			data/models_unit/mount_camel_cataphract_high.cas, 20
+model_flexi			data/models_unit/mount_camel_cataphract_med.cas, 40
+model_flexi			data/models_unit/mount_camel_cataphract_low.cas, max
+model_sprite		parthia, 100.0, data/sprites/parthia_camel_cataphract_sprite.spr
+
+
+;	!!!	Bird skeleton not implemented yet	!!!
+
+
+;type				crow
+;skeleton			fs_bird
+;indiv_range		40
+;model_flexi		data/models_unit/animal_crow_200.cas, 6
+;model_flexi		data/models_unit/animal_crow_100.cas, max
+;model_sprite		60, data/sprites/arab_horse_sprite.spr
+
+
+;	!!!	deer skeleton not implemented yet	!!!
+
+
+;type				deer
+;skeleton			fs_deer
+;indiv_range		40
+;model_flexi		data/models_unit/deer_300.CAS, 15
+;model_flexi		data/models_unit/deer_200.CAS, 40
+;model_flexi		data/models_unit/deer_100.CAS, 60
+;model_flexi		data/models_unit/deer_70.CAS, max
+;model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+type				elephant_african
+skeleton			fs_indian_elephant				; indian is correct, african skeleton is only for cataphract
+indiv_range			40
+texture				carthage, data/models_unit/textures/mount_african_elephant.tga
+texture				seleucid, data/models_unit/textures/mount_african_elephant_seleucid.tga
+texture				parthia, data/models_unit/textures/mount_african_elephant_parthia.tga
+texture				merc, data/models_unit/textures/mount_african_elephant_mercenary.tga
+model_flexi			data/models_unit/mount_elephant_african_400.CAS, 15
+model_flexi			data/models_unit/mount_elephant_african_300.CAS, 30
+model_flexi			data/models_unit/mount_elephant_african_200.CAS, 60
+model_flexi			data/models_unit/mount_elephant_african_100.CAS, 80
+model_flexi			data/models_unit/mount_elephant_african_70.CAS, max
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+type				elephant_african_cataphract
+skeleton			fs_african_elephant
+indiv_range			40
+texture				carthage, data/models_unit/textures/mount_cataphract_elephant.tga
+texture				seleucid, data/models_unit/textures/mount_cataphract_elephant_seleucid.tga
+model_flexi			data/models_unit/mount_elephant_african_cataphract_400.CAS, 30
+model_flexi			data/models_unit/mount_elephant_african_cataphract_300.CAS, 60
+model_flexi			data/models_unit/mount_elephant_african_cataphract_200.CAS, 120
+model_flexi			data/models_unit/mount_elephant_african_cataphract_100.CAS, 240
+model_flexi			data/models_unit/mount_elephant_african_cataphract_70.CAS, max
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+type				elephant_forest
+skeleton			fs_forest_elephant
+indiv_range			40
+texture				carthage, data/models_unit/textures/mount_african_elephant.tga
+texture				seleucid, data/models_unit/textures/mount_african_elephant_seleucid.tga
+model_flexi			data/models_unit/mount_elephant_forest_400.CAS, 15
+model_flexi			data/models_unit/mount_elephant_forest_300.CAS, 30
+model_flexi			data/models_unit/mount_elephant_forest_200.CAS, 60
+model_flexi			data/models_unit/mount_elephant_forest_100.CAS, 80
+model_flexi			data/models_unit/mount_elephant_forest_70.CAS, max
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+type				elephant_indian
+skeleton			fs_indian_elephant
+indiv_range			40
+texture				carthage, data/models_unit/textures/mount_indian_elephant_carthage.tga
+texture				seleucid, data/models_unit/textures/mount_indian_elephant_seleucid.tga
+texture				parthia, data/models_unit/textures/mount_indian_elephant_parthia.tga
+texture				merc, data/models_unit/textures/mount_indian_elephant_mercenary.tga
+model_flexi			data/models_unit/mount_elephant_indian_400.CAS, 25
+model_flexi			data/models_unit/mount_elephant_indian_300.CAS, 40
+model_flexi			data/models_unit/mount_elephant_indian_200.CAS, 70
+model_flexi			data/models_unit/mount_elephant_indian_100.CAS, max
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+;cheat unit
+type				elephant_oliphant
+skeleton			fs_indian_giant_elephant				; indian is correct, african skeleton is only for cataphract
+scale				4
+indiv_range			40
+texture				merc, data/models_unit/textures/mount_african_elephant_mercenary.tga
+model_flexi			data/models_unit/oliphant_high.CAS, 25
+model_flexi			data/models_unit/oliphant_med.CAS, 40
+model_flexi			data/models_unit/oliphant_low.CAS, 70
+model_flexi			data/models_unit/oliphant_lowest.CAS, max
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+type				horse_light
+skeleton			fs_fast_horse
+scale				0.875
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/horse_light_julii.tga
+texture				armenia, data/models_unit/textures/horse_light_armenia.tga
+texture				britons, data/models_unit/textures/horse_light_briton.tga
+texture				romans_brutii, data/models_unit/textures/horse_light_brutii.tga
+texture				carthage, data/models_unit/textures/horse_light_carthage.tga
+texture				dacia, data/models_unit/textures/mount_horse_light_dacia.tga
+texture				egypt, data/models_unit/textures/horse_light_egypt.tga
+texture				gauls, data/models_unit/textures/mount_horse_light_gaul.tga
+texture				germans, data/models_unit/textures/mount_horse_light_german.tga
+texture				greek_cities, data/models_unit/textures/mount_horse_light_greece.tga
+texture				macedon, data/models_unit/textures/horse_light_macedon.tga
+texture				merc, data/models_unit/textures/mount_horse_light_mercenary.tga
+texture				numidia, data/models_unit/textures/mount_horse_light_numidia.tga
+texture				parthia, data/models_unit/textures/horse_light_parthia.tga
+texture				pontus, data/models_unit/textures/mount_horse_light_pontus.tga
+texture				romans_scipii, data/models_unit/textures/horse_light_scipii.tga
+texture				scythia, data/models_unit/textures/mount_horse_light_scythia.tga
+texture				seleucid, data/models_unit/textures/mount_horse_light_seleucid.tga
+texture				romans_senate, data/models_unit/textures/horse_light_senate.tga
+texture				slave, data/models_unit/textures/mount_horse_light_rebel.tga
+texture				spain, data/models_unit/textures/mount_horse_light_spain.tga
+texture				thrace, data/models_unit/textures/horse_light_thrace.tga
+model_flexi			data/models_unit/mount_horse_light_400.CAS, 15
+model_flexi			data/models_unit/mount_horse_light_300.CAS, 30
+model_flexi			data/models_unit/mount_horse_light_200.CAS, 60
+model_flexi			data/models_unit/mount_horse_light_100.CAS, 80
+model_flexi			data/models_unit/mount_horse_light_70.CAS, max
+model_sprite		100.0, data/sprites/horse_light_sprite.spr
+model_sprite		slave, 100.0, data/sprites/slave_horse_light_sprite.spr
+model_sprite		thrace, 100.0, data/sprites/thrace_horse_light_sprite.spr
+model_sprite		spain, 100.0, data/sprites/spain_horse_light_sprite.spr
+model_sprite		scythia, 100.0, data/sprites/scythia_horse_light_sprite.spr
+model_sprite		numidia, 100.0, data/sprites/numidia_horse_light_sprite.spr
+model_sprite		greek_cities, 100.0, data/sprites/greek_cities_horse_light_sprite.spr
+model_sprite		dacia, 100.0, data/sprites/dacia_horse_light_sprite.spr
+model_sprite		armenia, 100.0, data/sprites/armenia_horse_light_sprite.spr
+model_sprite		britons, 100.0, data/sprites/britons_horse_light_sprite.spr
+model_sprite		germans, 100.0, data/sprites/germans_horse_light_sprite.spr
+model_sprite		gauls, 100.0, data/sprites/gauls_horse_light_sprite.spr
+model_sprite		pontus, 100.0, data/sprites/pontus_horse_light_sprite.spr
+model_sprite		parthia, 100.0, data/sprites/parthia_horse_light_sprite.spr
+model_sprite		carthage, 100.0, data/sprites/carthage_horse_light_sprite.spr
+model_sprite		seleucid, 100.0, data/sprites/seleucid_horse_light_sprite.spr
+model_sprite		egypt, 100.0, data/sprites/egypt_horse_light_sprite.spr
+model_sprite		macedon, 100.0, data/sprites/macedon_horse_light_sprite.spr
+model_sprite		romans_senate, 100.0, data/sprites/romans_senate_horse_light_sprite.spr
+model_sprite		romans_scipii, 100.0, data/sprites/romans_scipii_horse_light_sprite.spr
+model_sprite		romans_brutii, 100.0, data/sprites/romans_brutii_horse_light_sprite.spr
+model_sprite		romans_julii, 100.0, data/sprites/romans_julii_horse_light_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+type				horse_medium
+skeleton			fs_medium_horse
+scale				0.875
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/horse_medium_julii.tga
+texture				armenia, data/models_unit/textures/horse_medium_armenia.tga
+texture				britons, data/models_unit/textures/horse_medium_briton.tga
+texture				romans_brutii, data/models_unit/textures/horse_medium_brutii.tga
+texture				carthage, data/models_unit/textures/horse_medium_carthage.tga
+texture				dacia, data/models_unit/textures/horse_medium_dacia.tga
+texture				egypt, data/models_unit/textures/horse_medium_egypt.tga
+texture				gauls, data/models_unit/textures/horse_medium_gaul.tga
+texture				germans, data/models_unit/textures/horse_medium_german.tga
+texture				greek_cities, data/models_unit/textures/horse_medium_greece.tga
+texture				macedon, data/models_unit/textures/horse_medium_macedon.tga
+texture				mercenary, data/models_unit/textures/horse_medium_mercenary.tga
+texture				numidia, data/models_unit/textures/horse_medium_numidia.tga
+texture				parthia, data/models_unit/textures/horse_medium_parthia.tga
+texture				pontus, data/models_unit/textures/horse_medium_pontus.tga
+texture				romans_scipii, data/models_unit/textures/horse_medium_scipii.tga
+texture				scythia, data/models_unit/textures/horse_medium_scythia.tga
+texture				seleucid, data/models_unit/textures/horse_medium_seleucid.tga
+texture				romans_senate, data/models_unit/textures/horse_medium_senate.tga
+texture				slave, data/models_unit/textures/horse_medium_rebel.tga
+texture				spain, data/models_unit/textures/horse_medium_spain.tga
+texture				thrace, data/models_unit/textures/horse_medium_thrace.tga
+model_flexi			data/models_unit/mount_horse_light_400.CAS, 15
+model_flexi			data/models_unit/mount_horse_light_300.CAS, 30
+model_flexi			data/models_unit/mount_horse_light_200.CAS, 60
+model_flexi			data/models_unit/mount_horse_light_100.CAS, 80
+model_flexi			data/models_unit/mount_horse_light_70.CAS, max
+model_sprite		100.0, data/sprites/horse_medium_sprite.spr
+model_sprite		slave, 100.0, data/sprites/slave_horse_medium_sprite.spr
+model_sprite		thrace, 100.0, data/sprites/thrace_horse_medium_sprite.spr
+model_sprite		spain, 100.0, data/sprites/spain_horse_medium_sprite.spr
+model_sprite		scythia, 100.0, data/sprites/scythia_horse_medium_sprite.spr
+model_sprite		numidia, 100.0, data/sprites/numidia_horse_medium_sprite.spr
+model_sprite		greek_cities, 100.0, data/sprites/greek_cities_horse_medium_sprite.spr
+model_sprite		dacia, 100.0, data/sprites/dacia_horse_medium_sprite.spr
+model_sprite		armenia, 100.0, data/sprites/armenia_horse_medium_sprite.spr
+model_sprite		britons, 100.0, data/sprites/britons_horse_medium_sprite.spr
+model_sprite		germans, 100.0, data/sprites/germans_horse_medium_sprite.spr
+model_sprite		gauls, 100.0, data/sprites/gauls_horse_medium_sprite.spr
+model_sprite		pontus, 100.0, data/sprites/pontus_horse_medium_sprite.spr
+model_sprite		parthia, 100.0, data/sprites/parthia_horse_medium_sprite.spr
+model_sprite		carthage, 100.0, data/sprites/carthage_horse_medium_sprite.spr
+model_sprite		seleucid, 100.0, data/sprites/seleucid_horse_medium_sprite.spr
+model_sprite		egypt, 100.0, data/sprites/egypt_horse_medium_sprite.spr
+model_sprite		macedon, 100.0, data/sprites/macedon_horse_medium_sprite.spr
+model_sprite		romans_senate, 100.0, data/sprites/romans_senate_horse_medium_sprite.spr
+model_sprite		romans_scipii, 100.0, data/sprites/romans_scipii_horse_medium_sprite.spr
+model_sprite		romans_brutii, 100.0, data/sprites/romans_brutii_horse_medium_sprite.spr
+model_sprite		romans_julii, 100.0, data/sprites/romans_julii_horse_medium_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+type				horse_heavy
+skeleton			fs_horse
+scale				0.875
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/horse_heavy_julii.tga
+texture				armenia, data/models_unit/textures/horse_heavy_armenia.tga
+texture				britons, data/models_unit/textures/horse_heavy_briton.tga
+texture				romans_brutii, data/models_unit/textures/horse_heavy_brutii.tga
+texture				carthage, data/models_unit/textures/horse_heavy_carthage.tga
+texture				dacia, data/models_unit/textures/horse_heavy_dacia.tga
+texture				egypt, data/models_unit/textures/horse_heavy_egypt.tga
+texture				gauls, data/models_unit/textures/horse_heavy_gaul.tga
+texture				germans, data/models_unit/textures/horse_heavy_german.tga
+texture				greek_cities, data/models_unit/textures/horse_heavy_greece.tga
+texture				macedon, data/models_unit/textures/horse_heavy_macedon.tga
+texture				numidia, data/models_unit/textures/horse_heavy_numidia.tga
+texture				parthia, data/models_unit/textures/horse_heavy_parthia.tga
+texture				pontus, data/models_unit/textures/horse_heavy_pontus.tga
+texture				romans_scipii, data/models_unit/textures/horse_heavy_scipii.tga
+texture				scythia, data/models_unit/textures/horse_heavy_scythia.tga
+texture				seleucid, data/models_unit/textures/horse_heavy_seleucid.tga
+texture				romans_senate, data/models_unit/textures/horse_heavy_senate.tga
+texture				spain, data/models_unit/textures/horse_heavy_spain.tga
+texture				thrace, data/models_unit/textures/horse_heavy_thrace.tga
+texture				slave, data/models_unit/textures/horse_heavy_rebel.tga
+texture				mercenary, data/models_unit/textures/horse_heavy_mercenary.tga
+model_flexi			data/models_unit/mount_horse_light_400.CAS, 15
+model_flexi			data/models_unit/mount_horse_light_300.CAS, 30
+model_flexi			data/models_unit/mount_horse_light_200.CAS, 60
+model_flexi			data/models_unit/mount_horse_light_100.CAS, 80
+model_flexi			data/models_unit/mount_horse_light_70.CAS, max
+model_sprite		100.0, data/sprites/horse_heavy_sprite.spr
+model_sprite		slave, 100.0, data/sprites/slave_horse_heavy_sprite.spr
+model_sprite		thrace, 100.0, data/sprites/thrace_horse_heavy_sprite.spr
+model_sprite		spain, 100.0, data/sprites/spain_horse_heavy_sprite.spr
+model_sprite		scythia, 100.0, data/sprites/scythia_horse_heavy_sprite.spr
+model_sprite		numidia, 100.0, data/sprites/numidia_horse_heavy_sprite.spr
+model_sprite		greek_cities, 100.0, data/sprites/greek_cities_horse_heavy_sprite.spr
+model_sprite		dacia, 100.0, data/sprites/dacia_horse_heavy_sprite.spr
+model_sprite		armenia, 100.0, data/sprites/armenia_horse_heavy_sprite.spr
+model_sprite		britons, 100.0, data/sprites/britons_horse_heavy_sprite.spr
+model_sprite		germans, 100.0, data/sprites/germans_horse_heavy_sprite.spr
+model_sprite		gauls, 100.0, data/sprites/gauls_horse_heavy_sprite.spr
+model_sprite		pontus, 100.0, data/sprites/pontus_horse_heavy_sprite.spr
+model_sprite		parthia, 100.0, data/sprites/parthia_horse_heavy_sprite.spr
+model_sprite		carthage, 100.0, data/sprites/carthage_horse_heavy_sprite.spr
+model_sprite		seleucid, 100.0, data/sprites/seleucid_horse_heavy_sprite.spr
+model_sprite		egypt, 100.0, data/sprites/egypt_horse_heavy_sprite.spr
+model_sprite		macedon, 100.0, data/sprites/macedon_horse_heavy_sprite.spr
+model_sprite		romans_senate, 100.0, data/sprites/romans_senate_horse_heavy_sprite.spr
+model_sprite		romans_scipii, 100.0, data/sprites/romans_scipii_horse_heavy_sprite.spr
+model_sprite		romans_brutii, 100.0, data/sprites/romans_brutii_horse_heavy_sprite.spr
+model_sprite		romans_julii, 100.0, data/sprites/romans_julii_horse_heavy_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+type				generals_horse
+skeleton			fs_medium_horse
+scale				0.875
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/horse_heavy_julii.tga
+texture				armenia, data/models_unit/textures/horse_heavy_armenia.tga
+texture				britons, data/models_unit/textures/horse_heavy_briton.tga
+texture				romans_brutii, data/models_unit/textures/horse_heavy_brutii.tga
+texture				carthage, data/models_unit/textures/horse_heavy_carthage.tga
+texture				dacia, data/models_unit/textures/horse_heavy_dacia.tga
+texture				egypt, data/models_unit/textures/horse_heavy_egypt.tga
+texture				gauls, data/models_unit/textures/horse_heavy_gaul.tga
+texture				germans, data/models_unit/textures/horse_heavy_german.tga
+texture				greek_cities, data/models_unit/textures/horse_heavy_greece.tga
+texture				macedon, data/models_unit/textures/horse_heavy_macedon.tga
+texture				numidia, data/models_unit/textures/horse_heavy_numidia.tga
+texture				parthia, data/models_unit/textures/horse_heavy_parthia.tga
+texture				pontus, data/models_unit/textures/horse_heavy_pontus.tga
+texture				romans_scipii, data/models_unit/textures/horse_heavy_scipii.tga
+texture				scythia, data/models_unit/textures/horse_heavy_scythia.tga
+texture				seleucid, data/models_unit/textures/horse_heavy_seleucid.tga
+texture				romans_senate, data/models_unit/textures/horse_heavy_senate.tga
+texture				spain, data/models_unit/textures/horse_heavy_spain.tga
+texture				thrace, data/models_unit/textures/horse_heavy_thrace.tga
+texture				slave, data/models_unit/textures/horse_heavy_rebel.tga
+texture				mercenary, data/models_unit/textures/horse_heavy_mercenary.tga
+model_flexi			data/models_unit/mount_horse_light_400.CAS, 15
+model_flexi			data/models_unit/mount_horse_light_300.CAS, 30
+model_flexi			data/models_unit/mount_horse_light_200.CAS, 60
+model_flexi			data/models_unit/mount_horse_light_100.CAS, 80
+model_flexi			data/models_unit/mount_horse_light_70.CAS, max
+model_sprite		slave, 100.0, data/sprites/slave_generals_horse_sprite.spr
+model_sprite		thrace, 100.0, data/sprites/thrace_generals_horse_sprite.spr
+model_sprite		spain, 100.0, data/sprites/spain_generals_horse_sprite.spr
+model_sprite		scythia, 100.0, data/sprites/scythia_generals_horse_sprite.spr
+model_sprite		numidia, 100.0, data/sprites/numidia_generals_horse_sprite.spr
+model_sprite		greek_cities, 100.0, data/sprites/greek_cities_generals_horse_sprite.spr
+model_sprite		dacia, 100.0, data/sprites/dacia_generals_horse_sprite.spr
+model_sprite		armenia, 100.0, data/sprites/armenia_generals_horse_sprite.spr
+model_sprite		britons, 100.0, data/sprites/britons_generals_horse_sprite.spr
+model_sprite		germans, 100.0, data/sprites/germans_generals_horse_sprite.spr
+model_sprite		gauls, 100.0, data/sprites/gauls_generals_horse_sprite.spr
+model_sprite		pontus, 100.0, data/sprites/pontus_generals_horse_sprite.spr
+model_sprite		parthia, 100.0, data/sprites/parthia_generals_horse_sprite.spr
+model_sprite		carthage, 100.0, data/sprites/carthage_generals_horse_sprite.spr
+model_sprite		seleucid, 100.0, data/sprites/seleucid_generals_horse_sprite.spr
+model_sprite		egypt, 100.0, data/sprites/egypt_generals_horse_sprite.spr
+model_sprite		macedon, 100.0, data/sprites/macedon_generals_horse_sprite.spr
+model_sprite		romans_senate, 100.0, data/sprites/romans_senate_generals_horse_sprite.spr
+model_sprite		romans_scipii, 100.0, data/sprites/romans_scipii_generals_horse_sprite.spr
+model_sprite		romans_brutii, 100.0, data/sprites/romans_brutii_generals_horse_sprite.spr
+model_sprite		romans_julii, 100.0, data/sprites/romans_julii_generals_horse_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+type				horse_cataphract
+skeleton			fs_cataphract_horse
+scale				0.875
+indiv_range			40
+texture				armenia, data/models_unit/textures/horse_cataphract_armenia.tga
+texture				pontus, data/models_unit/textures/mount_horse_cataphract_pontus.tga
+texture				parthia, data/models_unit/textures/horse_cataphract_parthia.tga
+texture				seleucid, data/models_unit/textures/mount_horse_cataphract_seleucid.tga
+texture				scythia, data/models_unit/textures/mount_horse_cataphract_scythia.tga
+model_flexi_m			data/models_unit/mount_horse_cataphract_high.CAS, 25
+model_flexi			data/models_unit/mount_horse_cataphract_med.CAS, 55
+model_flexi			data/models_unit/mount_horse_cataphract_low.CAS, 80
+model_flexi			data/models_unit/mount_horse_cataphract_lowest.CAS, max
+model_sprite		scythia, 100.0, data/sprites/scythia_horse_cataphract_sprite.spr
+model_sprite		armenia, 100.0, data/sprites/armenia_horse_cataphract_sprite.spr
+model_sprite		pontus, 100.0, data/sprites/pontus_horse_cataphract_sprite.spr
+model_sprite		parthia, 100.0, data/sprites/parthia_horse_cataphract_sprite.spr
+model_sprite		seleucid, 100.0, data/sprites/seleucid_horse_cataphract_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+;	!!!	Bird skeleton not implemented yet	!!!
+
+;type				seagull
+;skeleton			fs_bird
+;indiv_range		40
+;model_flexi		data/models_unit/animal_seagull_200.cas, 6
+;model_flexi		data/models_unit/animal_seagull_100.cas, 12
+;model_sprite		60, data/sprites/arab_horse_sprite.spr
+
+
+;	!!!	Bird skeleton not implemented yet	!!!
+
+;type				vulture
+;skeleton			fs_bird
+;indiv_range		40
+;model_flexi		data/models_unit/animal_vulture_200.cas, 6
+;model_flexi		data/models_unit/animal_vulture_100.cas, 12
+;model_sprite		60, data/sprites/arab_horse_sprite.spr
+
+
+type				wardog
+skeleton			fs_dog
+scale			0.8
+indiv_range			40
+model_flexi			data/models_unit/unit_wardog_high.CAS, 15
+model_flexi			data/models_unit/unit_wardog_med.CAS, 40
+model_flexi			data/models_unit/unit_wardog_low.CAS, max
+model_sprite		70.0, data/sprites/wardog_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+type				pig
+skeleton			fs_pig
+indiv_range			40
+model_flexi			data/models_unit/unit_pig_400.CAS, 15
+model_flexi			data/models_unit/unit_pig_300.CAS, 30
+model_flexi			data/models_unit/unit_pig_200.CAS, 50
+model_flexi			data/models_unit/unit_pig_100.CAS, 100
+model_flexi			data/models_unit/unit_pig_70.CAS, max
+model_sprite		120.0, data/sprites/pig_sprite.spr
+model_tri			700, 0.3f, 0.3f, 0.3f
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;		GENERALS, OFFICERS, MUSICIANS AND STANDARD BEARERS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+type				barb_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				gauls, data/models_unit/textures/officer_barb_standard_gaul.tga
+texture				britons, data/models_unit/textures/officer_barb_standard_briton.tga
+texture				germans, data/models_unit/textures/officer_barb_standard_german.tga
+texture				dacia, data/models_unit/textures/officer_barb_standard_dacia.tga
+texture				scythia, data/models_unit/textures/officer_barb_standard_scythia.tga
+model_flexi			data/models_unit/officer_barb_standard_400.cas, 8
+model_flexi			data/models_unit/officer_barb_standard_300.cas, 15
+model_flexi			data/models_unit/officer_barb_standard_200.cas, 30
+model_flexi			data/models_unit/officer_barb_standard_100.cas, 40
+model_flexi			data/models_unit/officer_barb_standard_70.cas, max
+model_sprite		60.0, data/sprites/warband_woad_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_warband_woad_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				celt_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				gauls, data/models_unit/textures/officer_barb_general_gaul.tga			
+texture				britons, data/models_unit/textures/officer_barb_general_briton.tga		
+;texture				spain, data/models_unit/textures/officer_celt_general_spain.tga			;SHOULD USE CARTHAGINIAN NOW?
+model_flexi		data/models_unit/officer_barb_general_high.CAS, 8
+model_flexi		data/models_unit/officer_barb_general_med.CAS, 15
+model_flexi			data/models_unit/officer_barb_general_low.CAS, 30
+model_flexi			data/models_unit/officer_barb_general_lowest.CAS, max
+model_sprite		60.0, data/sprites/celt_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				celt_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				gauls, data/models_unit/textures/officer_barb_lesser_general_gaul.tga			
+texture				britons, data/models_unit/textures/officer_barb_lesser_general_briton.tga	
+texture				spain, data/models_unit/textures/officer_barb_general_spain.tga		
+model_flexi		data/models_unit/officer_barb_lesser_general_high.CAS, 8
+model_flexi		data/models_unit/officer_barb_lesser_general_med.CAS, 15
+model_flexi		data/models_unit/officer_barb_lesser_general_low.CAS, 30
+model_flexi		data/models_unit/officer_barb_lesser_general_lowest.CAS, max
+model_sprite		60.0, data/sprites/celt_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				german_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				germans, data/models_unit/textures/officer_barb_general_german.tga		
+texture				dacia, data/models_unit/textures/officer_barb_general_dacian.tga			
+texture				scythia, data/models_unit/textures/officer_barb_general_scythian.tga			
+model_flexi		data/models_unit/officer_barb_general_high.CAS, 8
+model_flexi		data/models_unit/officer_barb_general_med.CAS, 15
+model_flexi		data/models_unit/officer_barb_general_low.CAS, 30
+model_flexi		data/models_unit/officer_barb_general_lowest.CAS, max
+model_sprite		60.0, data/sprites/german_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+;TEMP: USING FAMILY MEMBER AS LESSER GENERAL
+type				german_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				germans, data/models_unit/textures/officer_barb_lesser_general_german.tga		
+texture				dacia, data/models_unit/textures/officer_barb_lesser_general_dacian.tga			
+texture				scythia, data/models_unit/textures/officer_barb_lesser_general_scythian.tga			
+model_flexi		data/models_unit/officer_barb_lesser_general_high.CAS, 8
+model_flexi		data/models_unit/officer_barb_lesser_general_med.CAS, 15
+model_flexi		data/models_unit/officer_barb_lesser_general_low.CAS, 30
+model_flexi		data/models_unit/officer_barb_lesser_general_lowest.CAS, max
+model_sprite		60.0, data/sprites/german_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				carthaginian_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				carthage, data/models_unit/textures/officer_carthage_general_carthage.tga
+texture				slave, data/models_unit/textures/officer_carthage_general_rebel.tga
+texture				numidia, data/models_unit/textures/officer_carthaginian_general_numidia.tga
+texture				spain, data/models_unit/textures/officer_carthaginian_general_spain.tga
+model_flexi_m		data/models_unit/officer_carthage_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_carthage_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_carthage_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_carthage_general_lowest.cas, max
+model_sprite		60.0, data/sprites/carthaginian_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				carthaginian_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				carthage, data/models_unit/textures/officer_carthage_lesser_general_carthage.tga
+texture				slave, data/models_unit/textures/officer_carthage_lesser_general_rebel.tga
+texture				numidia, data/models_unit/textures/officer_carthaginian_lesser_general_numidia.tga
+texture				spain, data/models_unit/textures/officer_carthaginian_lesser_general_spain.tga
+model_flexi_m		data/models_unit/officer_carthage_lesser_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_carthage_lesser_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_carthage_lesser_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_carthage_lesser_general_lowest.cas, max
+model_sprite		60.0, data/sprites/carthaginian_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				carthaginian_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				carthage, data/models_unit/textures/officer_carthage_standard.tga
+texture				spain, data/models_unit/textures/officer_carthage_standard_spain.tga
+texture				numidia, data/models_unit/textures/officer_carthage_standard_numidia.tga
+;texture				slave, data/models_unit/textures/officer_carthage_standard_rebel.tga		;MISSING
+model_flexi		data/models_unit/officer_carthage_standard_high.cas, 15
+model_flexi		data/models_unit/officer_carthage_standard_med.cas, 30
+model_flexi		data/models_unit/officer_carthage_standard_low.cas, 40
+model_flexi		data/models_unit/officer_carthage_standard_lowest.cas, max
+model_sprite		60.0, data/sprites/roman_legionary_cohort_i_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_roman_legionary_cohort_i_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_legionary_cohort_i_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				armenia, data/models_unit/textures/officer_eastern_general_armenia.tga
+texture				parthia, data/models_unit/textures/officer_eastern_general_parthia.tga
+texture				pontus, data/models_unit/textures/officer_eastern_general_pontus.tga
+texture				slave, data/models_unit/textures/officer_eastern_general_rebel.tga
+model_flexi_m		data/models_unit/officer_eastern_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_eastern_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_eastern_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_eastern_general_lowest.cas, max
+model_sprite		60.0, data/sprites/east_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				armenia, data/models_unit/textures/officer_eastern_lesser_general_armenia.tga
+texture				parthia, data/models_unit/textures/officer_eastern_lesser_general_parthia.tga
+texture				pontus, data/models_unit/textures/officer_eastern_lesser_general_pontus.tga
+texture				slave, data/models_unit/textures/officer_eastern_lesser_general_rebel.tga
+model_flexi_m		data/models_unit/officer_eastern_lesser_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_eastern_lesser_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_eastern_lesser_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_eastern_lesser_general_lowest.cas, max
+model_sprite		60.0, data/sprites/east_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_musician
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_east_light_musician_parthia.tga
+texture				pontus, data/models_unit/textures/unit_east_light_musician_pontus.tga
+texture				armenia, data/models_unit/textures/unit_east_light_musician_armenia.tga
+model_flexi			data/models_unit/officer_east_musician_300.cas, 8
+model_flexi			data/models_unit/officer_east_musician_200.cas, 15
+model_flexi			data/models_unit/officer_east_musician_100.cas, 30
+model_flexi			data/models_unit/officer_east_musician_70.cas, max
+model_sprite		60.0, data/sprites/east_musician_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_east_light_standard_parthia.tga
+texture				pontus, data/models_unit/textures/unit_east_light_standard_pontus.tga
+texture				armenia, data/models_unit/textures/unit_east_light_standard_armenia.tga
+;texture				slave, data/models_unit/textures/unit_east_light_standard_rebel.tga		;MISSING
+model_flexi			data/models_unit/officer_east_standard_300.cas, 8
+model_flexi			data/models_unit/officer_east_standard_200.cas, 15
+model_flexi			data/models_unit/officer_east_standard_100.cas, 30
+model_flexi			data/models_unit/officer_east_standard_70.cas, max
+model_sprite		60.0, data/sprites/east_standard_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_heavy_musician
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_east_musician_parthia.tga
+texture				pontus, data/models_unit/textures/unit_east_musician_pontus.tga
+texture				armenia, data/models_unit/textures/unit_east_musician_armenia.tga
+model_flexi			data/models_unit/officer_east_heavy_musician_300.cas, 8
+model_flexi			data/models_unit/officer_east_heavy_musician_200.cas, 15
+model_flexi			data/models_unit/officer_east_heavy_musician_100.cas, 30
+model_flexi			data/models_unit/officer_east_heavy_musician_70.cas, max
+model_sprite		60.0, data/sprites/east_heavy_musician_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				east_heavy_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_east_standard_parthia.tga	
+texture				pontus, data/models_unit/textures/unit_east_standard_pontus.tga
+texture				armenia, data/models_unit/textures/unit_east_standard_armenia.tga
+model_flexi			data/models_unit/officer_east_heavy_standard_300.cas, 8
+model_flexi			data/models_unit/officer_east_heavy_standard_200.cas, 15
+model_flexi			data/models_unit/officer_east_heavy_standard_100.cas, 30
+model_flexi			data/models_unit/officer_east_heavy_standard_70.cas, max
+model_sprite		60.0, data/sprites/roman_legionary_cohort_i_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_roman_legionary_cohort_i_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_legionary_cohort_i_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				egyptian_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/officer_egyptian_general_egypt.tga
+model_flexi			data/models_unit/officer_egyptian_general_high.cas, 15
+model_flexi			data/models_unit/officer_egyptian_general_med.cas, 30
+model_flexi			data/models_unit/officer_egyptian_general_low.cas, 40
+model_flexi			data/models_unit/officer_egyptian_general_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				egyptian_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/officer_egyptian_general_egypt.tga
+model_flexi			data/models_unit/officer_egyptian_general_high.cas, 15
+model_flexi			data/models_unit/officer_egyptian_general_med.cas, 30
+model_flexi			data/models_unit/officer_egyptian_general_low.cas, 40
+model_flexi			data/models_unit/officer_egyptian_general_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+;Bob Standard bearer is pants, so use chariot crew as officer instead
+type				egyptian_standard
+;skeleton			fs_standard_bearer
+;indiv_range			40
+;texture				egypt, data/models_unit/textures/unit_egyptian_standard.tga
+;model_flexi			data/models_unit/officer_egyptian_standard_400.cas, 8
+;model_flexi			data/models_unit/officer_egyptian_standard_300.cas, 15
+;model_flexi			data/models_unit/officer_egyptian_standard_200.cas, 30
+;model_flexi			data/models_unit/officer_egyptian_standard_100.cas, 40
+;model_flexi			data/models_unit/officer_egyptian_standard_70.cas, max
+;model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_elite_guards_new_sprite.spr
+;model_tri			400, 0.5f, 0.5f, 0.5
+skeleton			fs_dagger
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_elite_guard.tga
+model_flexi			data/models_unit/egypt_chariot_crew_high.cas, 15
+model_flexi			data/models_unit/egypt_chariot_crew_med.cas, 30
+model_flexi			data/models_unit/egypt_chariot_crew_low.cas, 40
+model_flexi			data/models_unit/egypt_chariot_crew_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_elite_guards_new_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				greek_cities, data/models_unit/textures/officer_greek_general_greece.tga
+texture				seleucid, data/models_unit/textures/officer_greek_general_seleucid.tga
+texture				macedon, data/models_unit/textures/officer_greek_general_macedon.tga
+texture				thrace, data/models_unit/textures/officer_greek_general_thrace.tga
+model_flexi			data/models_unit/officer_greek_general_high.cas, 15
+model_flexi			data/models_unit/officer_greek_general_med.cas, 30
+model_flexi			data/models_unit/officer_greek_general_low.cas, 40
+model_flexi			data/models_unit/officer_greek_general_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				greek_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				greek_cities, data/models_unit/textures/officer_greek_lesser_general_greece.tga
+texture				seleucid, data/models_unit/textures/officer_greek_lesser_general_seleucid.tga
+texture				macedon, data/models_unit/textures/officer_greek_lesser_general_macedon.tga
+texture				thrace, data/models_unit/textures/officer_greek_lesser_general_thrace.tga
+model_flexi			data/models_unit/officer_greek_lesser_general_high.cas, 15
+model_flexi			data/models_unit/officer_greek_lesser_general_med.cas, 30
+model_flexi			data/models_unit/officer_greek_lesser_general_low.cas, 40
+model_flexi			data/models_unit/officer_greek_lesser_general_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				greek_officer
+skeleton			fs_dagger
+indiv_range			40
+texture				macedon, data/models_unit/textures/officer_greek_hoplite_macedon.tga
+texture				seleucid, data/models_unit/textures/officer_greek_hoplite_seleucid.tga
+;texture				greek_cities, data/models_unit/textures/officer_greek_hoplite_greece.tga ;MISSING
+texture				thrace, data/models_unit/textures/officer_greek_hoplite_thrace.tga
+;texture				slave, data/models_unit/textures/officer_greek_hoplite_rebel.tga		;MISSING
+model_flexi_m		data/models_unit/officer_greek_hoplite_400.cas, 8
+model_flexi_m		data/models_unit/officer_greek_hoplite_300.cas, 15
+model_flexi			data/models_unit/officer_greek_hoplite_200.cas, 30
+model_flexi			data/models_unit/officer_greek_hoplite_100.cas, 40
+model_flexi			data/models_unit/officer_greek_hoplite_70.cas, max
+model_sprite		60.0, data/sprites/greek_officer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.
+
+type				greek_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				macedon, data/models_unit/textures/officer_greek_standard_macedon.tga
+texture				seleucid, data/models_unit/textures/officer_greek_standard_seleucid.tga
+texture				greek_cities, data/models_unit/textures/officer_greek_standard_greece.tga
+texture				thrace, data/models_unit/textures/officer_greek_standard_thrace.tga
+;texture				slave, data/models_unit/textures/officer_greek_hoplite_rebel.tga	;MISSING
+model_flexi_m		data/models_unit/officer_greek_standard_400.cas, 8
+model_flexi_m		data/models_unit/officer_greek_standard_300.cas, 15
+model_flexi			data/models_unit/officer_greek_standard_200.cas, 30
+model_flexi			data/models_unit/officer_greek_standard_100.cas, 40
+model_flexi			data/models_unit/officer_greek_standard_70.cas, max
+model_sprite		60.0, data/sprites/roman_legionary_cohort_ii_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_legionary_cohort_ii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+
+type				roman_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/officer_roman_general_julii.tga
+texture				romans_brutii, data/models_unit/textures/officer_roman_general_brutii.tga
+texture				romans_scipii, data/models_unit/textures/officer_roman_general_scipii.tga
+texture				romans_senate, data/models_unit/textures/officer_roman_general_senate.tga
+;texture				slave, data/models_unit/textures/officer_roman_general_rebel.tga	;MISSING
+model_flexi_m		data/models_unit/officer_roman_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_roman_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_roman_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_roman_general_lowest.cas, max
+model_sprite		60.0, data/sprites/roman_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				roman_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/officer_roman_lesser_general_julii.tga
+texture				romans_brutii, data/models_unit/textures/officer_roman_lesser_general_brutii.tga
+texture				romans_scipii, data/models_unit/textures/officer_roman_lesser_general_scipii.tga
+texture				romans_senate, data/models_unit/textures/officer_roman_lesser_general_senate.tga
+;texture				slave_senate, data/models_unit/textures/officer_roman_lesser_general_rebel.tga	;MISSING
+model_flexi_m		data/models_unit/officer_roman_lesser_general_high.cas, 15
+model_flexi_m		data/models_unit/officer_roman_lesser_general_med.cas, 30
+model_flexi_m		data/models_unit/officer_roman_lesser_general_low.cas, 40
+model_flexi_m		data/models_unit/officer_roman_lesser_general_lowest.cas, max
+model_sprite		60.0, data/sprites/roman_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				roman_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_standard_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_standard_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_standard_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_standard_senate.tga
+model_flexi_m		data/models_unit/officer_roman_standard_400.cas, 8
+model_flexi_m		data/models_unit/officer_roman_standard_300.cas, 15
+model_flexi_m		data/models_unit/officer_roman_standard_200.cas, 30
+model_flexi_m		data/models_unit/officer_roman_standard_100.cas, 40
+model_flexi			data/models_unit/officer_roman_standard_70.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_praetorian_cohort_ii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				roman_centurion
+skeleton			fs_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/officer_roman_centurion_julii.tga
+texture				romans_brutii, data/models_unit/textures/officer_roman_centurion_brutii.tga
+texture				romans_scipii, data/models_unit/textures/officer_roman_centurion_scipii.tga
+texture				romans_senate, data/models_unit/textures/officer_roman_centurion_senate.tga
+model_flexi_m			data/models_unit/officer_roman_centurion_high.cas, 15
+model_flexi_m			data/models_unit/officer_roman_centurion_med.cas, 30
+model_flexi_m			data/models_unit/officer_roman_centurion_low.cas, 40
+model_flexi			data/models_unit/officer_roman_centurion_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_praetorian_cohort_ii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				roman_early_centurion
+skeleton			fs_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/officer_roman_early_centurion_julii.tga
+texture				romans_brutii, data/models_unit/textures/officer_roman_early_centurion_brutii.tga
+texture				romans_scipii, data/models_unit/textures/officer_roman_early_centurion_scipii.tga
+texture				romans_senate, data/models_unit/textures/officer_roman_early_centurion_senate.tga
+model_flexi_m			data/models_unit/officer_roman_early_centurion_high.cas, 15
+model_flexi_m			data/models_unit/officer_roman_early_centurion_med.cas, 30
+model_flexi_m			data/models_unit/officer_roman_early_centurion_low.cas, 40
+model_flexi			data/models_unit/officer_roman_early_centurion_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_triarii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_triarii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_triarii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_triarii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				roman_early_standard
+skeleton			fs_standard_bearer
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/officer_roman_early_standard_julii.tga
+texture				romans_brutii, data/models_unit/textures/officer_roman_early_standard_brutii.tga
+texture				romans_scipii, data/models_unit/textures/officer_roman_early_standard_scipii.tga
+texture				romans_senate, data/models_unit/textures/officer_roman_early_standard_senate.tga
+;texture				slave, data/models_unit/textures/officer_roman_early_standard_rebel.tga		;MISSING
+model_flexi_m		data/models_unit/officer_roman_early_standard_400.cas, 8
+model_flexi_m		data/models_unit/officer_roman_early_standard_300.cas, 15
+model_flexi_m		data/models_unit/officer_roman_early_standard_200.cas, 30
+model_flexi_m		data/models_unit/officer_roman_early_standard_100.cas, 40
+model_flexi			data/models_unit/officer_roman_early_standard_70.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_triarii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_triarii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_triarii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_triarii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				slave_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				slave, data/models_unit/textures/unit_rebel_greater_general.tga
+model_flexi_m		data/models_unit/unit_rebel_greater_general_high.cas, 15
+model_flexi_m		data/models_unit/unit_rebel_greater_general_med.cas, 30
+model_flexi_m		data/models_unit/unit_rebel_greater_general_low.cas, 40
+model_flexi_m		data/models_unit/unit_rebel_greater_general_lowest.cas, max
+model_sprite		60.0, data/sprites/slave_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+type				slave_lesser_general
+skeleton			fs_dagger
+skeleton_horse		fs_hc_swordsman	
+skeleton_elephant	fs_forest_elephant_rider
+skeleton_chariot	fs_chariot_sword
+skeleton_camel		fs_hc_swordsman
+indiv_range			40
+texture				slave, data/models_unit/textures/unit_rebel_lesser_general.tga
+model_flexi_m		data/models_unit/unit_rebel_lesser_general_high.cas, 15
+model_flexi_m		data/models_unit/unit_rebel_lesser_general_med.cas, 30
+model_flexi_m		data/models_unit/unit_rebel_lesser_general_low.cas, 40
+model_flexi_m		data/models_unit/unit_rebel_lesser_general_lowest.cas, max
+model_sprite		60.0, data/sprites/slave_lesser_general_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;			BARBARIANS
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+type				barb_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				dacia, data/models_unit/textures/unit_barb_warband_archer_dacia.tga
+texture				scythia, data/models_unit/textures/unit_barb_warband_archer_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_warband_archer_slave.tga
+model_flexi			data/models_unit/unit_warband_archer_high.cas, 8
+model_flexi			data/models_unit/unit_warband_archer_med.cas, 15
+model_flexi			data/models_unit/unit_warband_archer_low.cas, 30
+model_flexi			data/models_unit/unit_warband_archer_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_archer_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_archer_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_cavalry
+skeleton			fs_hc_spearman										; combat spear
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_warband_gaul_.tga
+texture				germans, data/models_unit/textures/unit_barb_warband_german_.tga
+texture				dacia, data/models_unit/textures/unit_barb_warband_dacia_.tga
+texture				scythia, data/models_unit/textures/unit_barb_warband_scythia_.tga
+texture				slave, data/models_unit/textures/unit_barb_warband_slave.tga
+model_flexi			data/models_unit/unit_barb_warband_cavalry_high.cas, 8
+model_flexi			data/models_unit/unit_barb_warband_cavalry_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_cavalry_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_cavalry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_cavalry_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_cavalry_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_cavalry_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_cavalry_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_crew
+skeleton			fs_dagger
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_infantry_gaul.tga
+texture				britons, data/models_unit/textures/unit_barb_infantry_briton.tga
+texture				germans, data/models_unit/textures/unit_barb_infantry_german.tga
+texture				dacia, data/models_unit/textures/unit_barb_infantry_dacia.tga
+texture				scythia, data/models_unit/textures/unit_barb_infantry_scythia.tga
+model_flexi			data/models_unit/unit_barb_peasant_high.cas, 8
+model_flexi			data/models_unit/unit_barb_peasant_med.cas, 15
+model_flexi			data/models_unit/unit_barb_peasant_low.cas, 30
+model_flexi			data/models_unit/unit_barb_peasant_lowest.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_crew_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_crew_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_crew_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_crew_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_handler
+skeleton			fs_semi_fast_dagger
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_infantry_gaul.tga
+texture				britons, data/models_unit/textures/unit_barb_infantry_briton.tga
+texture				germans, data/models_unit/textures/unit_barb_infantry_german.tga
+texture				dacia, data/models_unit/textures/unit_barb_infantry_dacia.tga
+texture				scythia, data/models_unit/textures/unit_barb_infantry_scythia.tga
+model_flexi			data/models_unit/unit_barb_peasant_high.cas, 8
+model_flexi			data/models_unit/unit_barb_peasant_med.cas, 15
+model_flexi			data/models_unit/unit_barb_peasant_low.cas, 30
+model_flexi			data/models_unit/unit_barb_peasant_lowest.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_handler_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_handler_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_handler_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_handler_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_handler_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_crew_heavy
+skeleton			fs_chariot_sword
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_heavy_crew_briton.tga
+texture				slave, data/models_unit/textures/unit_barb_heavy_crew_slave.tga
+model_flexi_m		data/models_unit/unit_barb_crew_heavy_400.cas, 8
+model_flexi_m		data/models_unit/unit_barb_crew_heavy_300.cas, 15
+model_flexi			data/models_unit/unit_barb_crew_heavy_200.cas, 30
+model_flexi			data/models_unit/unit_barb_crew_heavy_100.cas, 40
+model_flexi			data/models_unit/unit_barb_crew_heavy_70.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_crew_heavy_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_crew_heavy_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_infantry
+skeleton			fs_spearman,			; combat spear
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_infantry_briton.tga
+texture				scythia, data/models_unit/textures/unit_barb_infantry_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_infantry_slave.tga
+model_flexi			data/models_unit/unit_barb_infantry_high.cas, 8
+model_flexi			data/models_unit/unit_barb_infantry_med.cas, 15
+model_flexi			data/models_unit/unit_barb_infantry_low.cas, 30
+model_flexi			data/models_unit/unit_barb_infantry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_infantry_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_infantry_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_infantry_longshield
+skeleton			fs_spearman,			; combat spear
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_warband_longshield_gaul.tga
+texture				dacia, data/models_unit/textures/unit_barb_warband_longshield_dacia.tga
+model_flexi			data/models_unit/unit_barb_warband_longshield_high.CAS, 8
+model_flexi			data/models_unit/unit_barb_warband_longshield_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_longshield_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_longshield_lowest.cas, max
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_infantry_longshield_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_infantry_longshield_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_infantry_longshield_briton
+skeleton			fs_spearman,			; combat spear
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_warband_longshield_briton.tga
+model_flexi			data/models_unit/unit_barb_warband_longshield_briton_high.CAS, 8
+model_flexi			data/models_unit/unit_barb_warband_longshield_briton_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_longshield_briton_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_longshield_briton_lowest.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_barb_infantry_longshield_briton_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_noble_cavalry
+skeleton			fs_hc_spearman
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_noble_cavalry_gaul.tga
+texture				germans, data/models_unit/textures/unit_barb_noble_cavalry_german.tga
+texture				dacia, data/models_unit/textures/unit_barb_noble_cavalry_dacia.tga
+texture				thrace, data/models_unit/textures/unit_barb_noble_cavalry_thrace.tga
+texture				scythia, data/models_unit/textures/unit_barb_noble_cavalry_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_noble_cavalry_slave.tga
+model_flexi			data/models_unit/unit_barb_noble_cavalry_400.cas, 8
+model_flexi			data/models_unit/unit_barb_noble_cavalry_300.cas, 15
+model_flexi			data/models_unit/unit_barb_noble_cavalry_200.cas, 30
+model_flexi			data/models_unit/unit_barb_noble_cavalry_100.cas, 40
+model_flexi			data/models_unit/unit_barb_noble_cavalry_70.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_noble_cavalry_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_barb_noble_cavalry_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_noble_cavalry_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_noble_cavalry_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_noble_cavalry_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_noble_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_peasant
+skeleton			fs_dagger							
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_infantry_gaul.tga
+texture				britons, data/models_unit/textures/unit_barb_infantry_briton.tga
+texture				germans, data/models_unit/textures/unit_barb_infantry_german.tga
+texture				dacia, data/models_unit/textures/unit_barb_infantry_dacia.tga
+texture				scythia, data/models_unit/textures/unit_barb_infantry_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_infantry_slave.tga
+model_flexi			data/models_unit/unit_barb_peasant_high.cas, 8
+model_flexi			data/models_unit/unit_barb_peasant_med.cas, 15
+model_flexi			data/models_unit/unit_barb_peasant_low.cas, 30
+model_flexi			data/models_unit/unit_barb_peasant_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_peasant_sprite.spr
+model_sprite		slave, 60.0, data/sprites/slave_barb_peasant_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_peasant_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_peasant_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_peasant_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_peasant_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_peltast_gaul
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman								; throwing spear
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_warband_peltast_gaul.tga
+model_flexi			data/models_unit/unit_warband_peltast_gaul_high.cas, 8
+model_flexi			data/models_unit/unit_warband_peltast_gaul_med.cas, 15
+model_flexi			data/models_unit/unit_warband_peltast_gaul_low.cas, 30
+model_flexi			data/models_unit/unit_warband_peltast_gaul_lowest.cas, max
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_peltast_gaul_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_peltast_german
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_warband_peltast_german.tga
+model_flexi			data/models_unit/unit_warband_peltast_german_high.cas, 8
+model_flexi			data/models_unit/unit_warband_peltast_german_med.cas, 15
+model_flexi			data/models_unit/unit_warband_peltast_german_low.cas, 30
+model_flexi			data/models_unit/unit_warband_peltast_german_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_peltast_german_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_peltast_german_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_slinger
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_slinger_briton.tga
+model_flexi			data/models_unit/unit_barb_slinger_britton_high.cas, 8
+model_flexi			data/models_unit/unit_barb_slinger_britton_med.cas, 15
+model_flexi			data/models_unit/unit_barb_slinger_britton_low.cas, 30
+model_flexi			data/models_unit/unit_barb_slinger_britton_lowest.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_barb_slinger_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_archer
+skeleton			fs_archer, fs_dagger
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_barb_chosen_archer_german.tga
+texture				dacia, data/models_unit/textures/unit_barb_chosen_archer_dacia.tga
+texture				scythia, data/models_unit/textures/unit_barb_chosen_archer_scythia.tga
+texture				britons, data/models_unit/textures/unit_barb_chosen_archer_briton.tga
+model_flexi			data/models_unit/unit_barb_chosen_archers_400.cas, 8
+model_flexi			data/models_unit/unit_barb_chosen_archers_300.cas, 15
+model_flexi			data/models_unit/unit_barb_chosen_archers_200.cas, 30
+model_flexi			data/models_unit/unit_barb_chosen_archers_100.cas, 40
+model_flexi			data/models_unit/unit_barb_chosen_archers_70.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_warband_archer_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_warband_archer_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_warband_archer_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_warband_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_berserker
+skeleton			fs_2handed_berserker													; SPIKED CLUB!!!
+scale				1.2
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_barb_warband_beserker_german.tga
+model_flexi			data/models_unit/unit_barb_warband_beserker_400.cas, 8
+model_flexi			data/models_unit/unit_barb_warband_beserker_300.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_beserker_200.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_beserker_100.cas, 40
+model_flexi			data/models_unit/unit_barb_warband_beserker_70.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_barb_berserker_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_dhaxe
+skeleton			fs_2handed
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_barb_warband_dhaxe_german.tga
+model_flexi			data/models_unit/unit_barb_warband_dhaxe_german_high.cas, 8
+model_flexi			data/models_unit/unit_barb_warband_dhaxe_german_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_dhaxe_german_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_dhaxe_german_lowest.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_warband_dhaxe_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_falx
+skeleton			fs_2handed
+indiv_range			40
+texture				dacia, data/models_unit/textures/unit_barb_warband_falx_dacia.tga
+texture				thrace, data/models_unit/textures/unit_barb_warband_falx_thrace.tga
+model_flexi			data/models_unit/unit_warband_dacia_falx_high.cas, 8
+model_flexi			data/models_unit/unit_warband_dacia_falx_med.cas, 15
+model_flexi			data/models_unit/unit_warband_dacia_falx_low.cas, 30
+model_flexi			data/models_unit/unit_warband_dacia_falx_lowest.cas, max
+model_sprite		thrace, 60.0, data/sprites/thrace_warband_falx_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_warband_falx_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_huntsman
+skeleton			fs_semi_fast_archer, fs_semi_fast_spearman
+indiv_range			40
+texture				gauls, data/models_unit/textures/forester_warband_gaul.tga
+model_flexi			data/models_unit/unit_forester_warband_gaul_high.CAS, 8
+model_flexi			data/models_unit/unit_forester_warband_gaul_med.cas, 15
+model_flexi			data/models_unit/unit_forester_warband_gaul_low.cas, 30
+model_flexi			data/models_unit/unit_forester_warband_gaul_lowest.cas, max
+model_sprite		gauls, 60.0, data/sprites/gauls_warband_huntsman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_hurler
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_warband_hurler_briton.tga
+model_flexi_m		data/models_unit/unit_barb_warband_hurler_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_hurler_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_hurler_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_hurler_lowest.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_warband_hurler_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_woad
+skeleton			fs_semi_fast_swordsman
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_warband_briton_woad.tga
+model_flexi			data/models_unit/unit_barb_woad_warrior_high.CAS, 8
+model_flexi			data/models_unit/unit_barb_woad_warrior_med.cas, 15
+model_flexi			data/models_unit/unit_barb_woad_warrior_low.cas, 30
+model_flexi			data/models_unit/unit_barb_woad_warrior_lowest.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_warband_woad_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_warguard
+skeleton			fs_slow_swordsman
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_barb_warguard_gaul.tga
+texture				britons, data/models_unit/textures/unit_barb_warguard_briton.tga
+texture				dacia, data/models_unit/textures/unit_barb_warguard_dacia.tga
+model_flexi			data/models_unit/unit_barb_warguard_400.cas, 8
+model_flexi			data/models_unit/unit_barb_warguard_300.cas, 15
+model_flexi			data/models_unit/unit_barb_warguard_200.cas, 30
+model_flexi			data/models_unit/unit_barb_warguard_100.cas, 40
+model_flexi			data/models_unit/unit_barb_warguard_70.cas, max
+model_sprite		60.0, data/sprites/barb_warguard_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_warguard_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_warguard_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_warguard_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;Warband archer model with chariot fighting skeleton
+type				barb_chariot_archer
+skeleton			fs_chariot_archer, fs_chariot_sword
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_chosen_archer_briton.tga
+model_flexi			data/models_unit/unit_barb_chosen_archers_400.cas, 8
+model_flexi			data/models_unit/unit_barb_chosen_archers_300.cas, 15
+model_flexi			data/models_unit/unit_barb_chosen_archers_200.cas, 30
+model_flexi			data/models_unit/unit_barb_chosen_archers_100.cas, 40
+model_flexi			data/models_unit/unit_barb_chosen_archers_70.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_barb_chariot_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;; New barbarian units 3 Feb 2004 ;;;;
+
+type				barb_druid
+skeleton			fs_swordsman			; Really needs 1 handed axe skeleton
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_druid.tga
+texture				gauls, data/models_unit/textures/unit_gaul_druid.tga
+texture				slave, data/models_unit/textures/unit_slave_druid.tga
+model_flexi_m		data/models_unit/unit_barb_druid_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_druid_med.cas, 15
+model_flexi			data/models_unit/unit_barb_druid_low.cas, 30
+model_flexi			data/models_unit/unit_barb_druid_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_druid_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_barb_druid_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_druid_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_naked_fanatic
+skeleton			fs_swordsman
+indiv_range			40
+texture				spain, data/models_unit/textures/barb_gaestae_spain.tga
+texture				gauls, data/models_unit/textures/barb_gaestae_gaul.tga
+texture				germans, data/models_unit/textures/barb_gaestae_german.tga
+texture				dacia, data/models_unit/textures/barb_gaestae_dacia.tga
+texture				slave, data/models_unit/textures/barb_gaestae_slave.tga
+model_flexi			data/models_unit/unit_barb_gaestae_high.cas, 8
+model_flexi			data/models_unit/unit_barb_gaestae_med.cas, 15
+model_flexi			data/models_unit/unit_barb_gaestae_low.cas, 30
+model_flexi			data/models_unit/unit_barb_gaestae_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_naked_fanatic_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_barb_naked_fanatic_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_naked_fanatic_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_naked_fanatic_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_naked_fanatic_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_screeching_woman
+skeleton			fs_dagger			; Really needs 1 handed axe skeleton
+indiv_range			40
+texture				germans, data/models_unit/textures/barb_screeching_woman.tga
+model_flexi_m		data/models_unit/barb_screeching_woman_high.cas, 8
+model_flexi_m		data/models_unit/barb_screeching_woman_med.cas, 15
+model_flexi			data/models_unit/barb_screeching_woman_low.cas, 30
+model_flexi			data/models_unit/barb_screeching_woman_lowest.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_barb_screeching_woman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_gothic_cavalry
+skeleton			fs_hc_spearman
+indiv_range			40
+texture				gauls, data/models_unit/textures/unit_visigoth_cavalry_gaul.tga
+texture				germans, data/models_unit/textures/unit_visigoth_cavalry_german.tga
+texture				dacia, data/models_unit/textures/unit_visigoth_cavalry_dacia.tga
+texture				thrace, data/models_unit/textures/unit_visigoth_cavalry_thrace.tga
+model_flexi			data/models_unit/unit_visigoth_cavalry_400.cas, 8
+model_flexi			data/models_unit/unit_visigoth_cavalry_300.cas, 15
+model_flexi			data/models_unit/unit_visigoth_cavalry_200.cas, 30
+model_flexi			data/models_unit/unit_visigoth_cavalry_100.cas, 40
+model_flexi			data/models_unit/unit_visigoth_cavalry_70.cas, max
+model_sprite		thrace, 60.0, data/sprites/thrace_barb_gothic_cavalry_sprite.spr
+model_sprite		dacia, 60.0, data/sprites/dacia_barb_gothic_cavalry_sprite.spr
+model_sprite		germans, 60.0, data/sprites/germans_barb_gothic_cavalry_sprite.spr
+model_sprite		gauls, 60.0, data/sprites/gauls_barb_gothic_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_scythian_noble_cavalry
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				scythia, data/models_unit/textures/barb_scythian_noble_cav_scythia.tga	
+model_flexi		data/models_unit/unit_barb_scythian_noble_cavalry_high.cas, 8
+model_flexi		data/models_unit/unit_barb_scythian_noble_cavalry_med.cas, 15
+model_flexi			data/models_unit/unit_barb_scythian_noble_cavalry_low.cas, 30
+model_flexi			data/models_unit/unit_barb_scythian_noble_cavalry_lowest.cas, max
+;model_sprite		scythia, 60.0, data/sprites/scythia_barb_scythian_noble_cavalry_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_scythian_noble_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_headhunting_maiden
+skeleton			fs_hc_swordsman					;really needs axe skeleton
+indiv_range			40
+texture				scythia, data/models_unit/textures/barb_headhunting_maiden_scythia.tga
+model_flexi_m		data/models_unit/barb_headhunting_maiden_high.cas, 8
+model_flexi_m		data/models_unit/barb_headhunting_maiden_med.cas, 15
+model_flexi			data/models_unit/barb_headhunting_maiden_low.cas, 30
+model_flexi			data/models_unit/barb_headhunting_maiden_lowest.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_headhunting_maiden_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_scythian_lancer
+skeleton			fs_hc_spearman, fs_hc_swordsman					
+indiv_range			40
+texture				scythia, data/models_unit/textures/barb_scythian_lancer_scythia.tga
+texture				merc, data/models_unit/textures/barb_scythian_lancer_mercenary.tga
+model_flexi		data/models_unit/unit_barb_scythian_lancer_high.cas, 8
+model_flexi		data/models_unit/unit_barb_scythian_lancer_med.cas, 15
+model_flexi			data/models_unit/unit_barb_scythian_lancer_low.cas, 30
+model_flexi			data/models_unit/unit_barb_scythian_lancer_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_scythian_lancer_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_scythian_lancer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_scythian_noblewoman
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				scythia, data/models_unit/textures/barb_noblewoman_scythia.tga
+model_flexi_m		data/models_unit/barb_noblewoman_high.cas, 8
+model_flexi_m		data/models_unit/barb_noblewoman_med.cas, 15
+model_flexi			data/models_unit/barb_noblewoman_low.cas, 30
+model_flexi			data/models_unit/barb_noblewoman_lowest.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_scythian_noblewoman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;; Ranulfs new variants
+
+type				warband_sword_briton
+skeleton			fs_swordsman
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_warband_briton_.tga
+model_flexi_m		data/models_unit/unit_barb_warband_briton_sword_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_briton_sword_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_briton_sword_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_briton_sword_lowest.cas, max
+model_sprite		britons, 60.0, data/sprites/britons_warband_sword_briton_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_sword_gaul
+skeleton			fs_swordsman
+indiv_range			40
+texture				britons, data/models_unit/textures/unit_barb_warband_gaul_.tga
+model_flexi_m		data/models_unit/unit_barb_warband_gaul_sword_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_gaul_sword_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_gaul_sword_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_gaul_sword_lowest.cas, max
+model_sprite		60.0, data/sprites/warband_sword_gaul_sprite.spr
+model_sprite		britons, 60.0, data/sprites/britons_warband_sword_gaul_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_spearman_german
+skeleton			fs_spearman, fs_swordsman
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_barb_warband_german_.tga
+model_flexi_m		data/models_unit/unit_barb_warband_german_spear_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_german_spear_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_german_spear_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_german_spear_lowest.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_warband_spearman_german_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_axe
+skeleton			fs_swordsman							; axe has same anims as club, and shares some with sword
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_barb_warband_german_.tga
+model_flexi_m		data/models_unit/unit_barb_warband_german_axe_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_german_axe_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_german_axe_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_german_axe_lowest.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_warband_axe_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				warband_axe_scythia
+skeleton			fs_swordsman							; axe has same anims as club, and shares some with sword
+indiv_range			40
+texture				scythia, data/models_unit/textures/unit_barb_warband_scythia_.tga
+model_flexi_m		data/models_unit/unit_barb_warband_scythia_axe_high.cas, 8
+model_flexi_m		data/models_unit/unit_barb_warband_scythia_axe_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_scythia_axe_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_scythia_axe_lowest.cas, max
+model_sprite		scythia, 60.0, data/sprites/scythia_warband_axe_scythia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_night_raider
+skeleton			fs_semi_fast_swordsman
+indiv_range			40
+texture				germans, data/models_unit/textures/unit_nightraider_german.tga
+model_flexi			data/models_unit/unit_barb_night_raider_high.cas, 8
+model_flexi			data/models_unit/unit_barb_night_raider_med.cas, 15
+model_flexi			data/models_unit/unit_barb_night_raider_low.cas, 30
+model_flexi			data/models_unit/unit_barb_night_raider_lowest.cas, max
+model_sprite		germans, 60.0, data/sprites/germans_barb_night_raider_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_horse_archer
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				scythia, data/models_unit/textures/unit_barb_warband_archer_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_warband_archer_slave.tga
+model_flexi			data/models_unit/unit_warband_archer_high.cas, 8
+model_flexi			data/models_unit/unit_warband_archer_med.cas, 15
+model_flexi			data/models_unit/unit_warband_archer_low.cas, 30
+model_flexi			data/models_unit/unit_warband_archer_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_barb_horse_archer_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_horse_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;					CARTHAGINIANS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+type				carthaginian_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture			numidia, data/models_unit/textures/unit_carthage_light_archer_numidia.tga
+model_flexi		data/models_unit/unit_carthage_archer_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_archer_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_archer_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_archer_lowest.cas, max
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_crew
+skeleton			fs_dagger
+indiv_range			40
+texture			numidia, data/models_unit/textures/unit_carthage_crew_numidian.tga
+texture			spain, data/models_unit/textures/unit_carthage_crew_spain.tga
+texture			carthage, data/models_unit/textures/unit_carthage_crew.tga
+model_flexi		data/models_unit/unit_carthage_crew_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_crew_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_crew_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_crew_lowest.cas, max
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_crew_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_crew_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_handler
+skeleton			fs_semi_fast_dagger
+indiv_range			40
+texture			spain, data/models_unit/textures/unit_carthage_crew_spain.tga
+model_flexi		data/models_unit/unit_carthage_crew_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_crew_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_crew_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_crew_lowest.cas, max
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_handler_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_heavy_infantry												; combat spear
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_high.cas, 15
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_med.cas, 30
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_heavy_infantry_lowest.cas, max
+model_sprite		60.0, data/sprites/carthaginian_heavy_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_infantry											; combat spear
+skeleton			fs_swordsman
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_infantry.tga
+texture			spain, data/models_unit/textures/unit_carthage_infantry_spain.tga
+texture			slave, data/models_unit/textures/unit_carthage_infantry_rebel.tga
+model_flexi		data/models_unit/unit_carthage_infantry_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_infantry_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_infantry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_infantry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthaginian_infantry_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_infantry_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_cavalry
+skeleton			fs_hc_swordsman										; combat spear
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_infantry.tga
+texture			spain, data/models_unit/textures/unit_carthage_infantry_spain.tga
+texture			slave, data/models_unit/textures/unit_carthage_infantry_rebel.tga
+model_flexi		data/models_unit/unit_carthage_infantry_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_infantry_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_infantry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_infantry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthaginian_cavalry_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_cavalry_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_medium_cavalry											; combat spear
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_medium_infantry.tga
+texture			spain, data/models_unit/textures/unit_carthage_medium_infantry_spain.tga
+texture			numidia, data/models_unit/textures/unit_carthage_medium_infantry_numidia.tga
+texture			slave, data/models_unit/textures/unit_carthage_medium_infantry_slave.tga
+model_flexi		data/models_unit/unit_carthage_medium_infantry_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_medium_infantry_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_medium_infantry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_medium_infantry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthaginian_medium_cavalry_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_medium_cavalry_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_medium_cavalry_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_medium_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_peasant
+skeleton			fs_spearman
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_peasant.tga
+texture			spain, data/models_unit/textures/unit_carthage_peasant_spain.tga
+texture			numidia, data/models_unit/textures/unit_carthage_peasant_numidia.tga
+texture			slave, data/models_unit/textures/unit_carthage_peasant_slave.tga
+model_flexi		data/models_unit/unit_carthage_peasant_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_peasant_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_peasant_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthaginian_peasant_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_peasant_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_peasant_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_slinger
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				carthage, data/models_unit/textures/unit_roman_slinger_carthage.tga
+texture				spain, data/models_unit/textures/unit_roman_slinger_spain.tga
+texture				numidia, data/models_unit/textures/unit_roman_slinger_numidia.tga
+model_flexi			data/models_unit/unit_roman_slinger_high.cas, 8
+model_flexi			data/models_unit/unit_roman_slinger_med.cas, 15
+model_flexi			data/models_unit/unit_roman_slinger_low.cas, 30
+model_flexi			data/models_unit/unit_roman_slinger_lowest.cas, max
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_slinger_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_slinger_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_slinger_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_peltast
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_dagger								; throwing spear
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_peltast.tga
+texture			spain, data/models_unit/textures/unit_carthage_peltast_spain.tga
+texture			slave, data/models_unit/textures/unit_carthage_peltast_slave.tga
+model_flexi		data/models_unit/unit_carthage_peltast_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_peltast_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_peltast_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_peltast_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthaginian_peltast_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_peltast_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_peltast_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_royal_cavalry											; combat spear
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture			carthage, data/models_unit/textures/unit_carthage_royal_cavalry.tga
+texture			spain, data/models_unit/textures/unit_carthage_royal_cavalry_spain.tga
+texture			numidia, data/models_unit/textures/unit_carthage_royal_cavalry_numidia.tga
+model_flexi_m		data/models_unit/unit_carthage_royal_cavalry_high.cas, 15
+model_flexi_m		data/models_unit/unit_carthage_royal_cavalry_med.cas, 30
+model_flexi_m		data/models_unit/unit_carthage_royal_cavalry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_royal_cavalry_lowest.cas, max
+model_sprite		spain, 60.0, data/sprites/spain_carthaginian_royal_cavalry_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthaginian_royal_cavalry_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_royal_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;; New carthaginian models 3 Feb 2004
+
+type				carthage_scutarius
+skeleton			fs_javelinman, fs_swordsman
+indiv_range			40
+texture				spain, data/models_unit/textures/unit_carthage_scutarius_spain.tga
+texture				merc, data/models_unit/textures/unit_carthage_scutarius_mercenary.tga
+model_flexi_m		data/models_unit/unit_carthage_scutarius_high.cas, 8
+model_flexi_m		data/models_unit/unit_carthage_scutarius_med.cas, 15
+model_flexi			data/models_unit/unit_carthage_scutarius_low.cas, 30
+model_flexi			data/models_unit/unit_carthage_scutarius_lowest.cas, max
+model_sprite		60.0, data/sprites/carthage_scutarius_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthage_scutarius_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthage_numidian_javelinman
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman										
+indiv_range			40
+texture				numidia, data/models_unit/textures/unit_egyptian_numidian.tga
+texture				slave, data/models_unit/textures/unit_egyptian_numidian_slave.tga
+model_flexi			data/models_unit/unit_egyptian_numidian_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_numidian_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_numidian_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_numidian_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthage_numidian_javelinman_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthage_numidian_javelinman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthage_numidian_cavalry
+skeleton			fs_hc_javelinman, fs_hc_swordsman									; combat spear
+indiv_range			40
+texture				numidia, data/models_unit/textures/unit_egyptian_numidian.tga
+texture				slave, data/models_unit/textures/unit_egyptian_numidian_slave.tga
+model_flexi			data/models_unit/unit_egyptian_numidian_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_numidian_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_numidian_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_numidian_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthage_numidian_cavalry_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_carthage_numidian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				desert_infantry
+skeleton			fs_spearman		
+indiv_range			40
+texture				numidia, data/models_unit/textures/unit_arab_light_infantry_numidia.tga
+texture				slave, data/models_unit/textures/unit_arab_light_infantry_slave.tga
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_high.cas, 15
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_med.cas, 30
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_low.cas, 40
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_lowest.cas, MAX
+model_sprite		slave, 60.0, data/sprites/slave_desert_infantry_sprite.spr
+model_sprite		numidia, 60.0, data/sprites/numidia_desert_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				numidian_camel_rider
+skeleton			fs_hc_spearman		
+indiv_range			40
+texture				numidia, data/models_unit/textures/unit_arab_light_infantry_numidia.tga
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_high.cas, 15
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_med.cas, 30
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_low.cas, 40
+model_flexi			data/models_unit/unit_greek_arab_light_infantry_v2_lowest.cas, MAX
+model_sprite		numidia, 60.0, data/sprites/numidia_numidian_camel_rider_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_elephant_crew
+skeleton			fs_forest_elephant_rider
+indiv_range			40
+texture				carthage, data/models_unit/textures/unit_carthage_light_archer_carthage.tga
+model_flexi		data/models_unit/unit_carthage_archer_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_archer_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_archer_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_archer_lowest.cas, max
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_elephant_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_big_elephant_crew
+skeleton			fs_big_elephant_rider
+indiv_range			40
+texture				carthage, data/models_unit/textures/unit_carthage_light_archer_carthage.tga
+model_flexi		data/models_unit/unit_carthage_archer_high.cas, 15
+model_flexi		data/models_unit/unit_carthage_archer_med.cas, 30
+model_flexi		data/models_unit/unit_carthage_archer_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_archer_lowest.cas, max
+model_sprite		carthage, 60.0, data/sprites/carthage_carthaginian_big_elephant_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthage_town_militia
+skeleton			fs_spearman
+indiv_range			40
+texture				carthage, data/models_unit/textures/unit_carthage_town_militia_carthage.tga
+texture				spain, data/models_unit/textures/unit_carthage_town_militia_spain.tga
+texture				slave, data/models_unit/textures/unit_carthage_town_militia_rebel.tga
+model_flexi			data/models_unit/unit_carthage_town_militia_high.cas, 15
+model_flexi			data/models_unit/unit_carthage_town_militia_med.cas, 30
+model_flexi			data/models_unit/unit_carthage_town_militia_low.cas, 40
+model_flexi			data/models_unit/unit_carthage_town_militia_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_carthage_town_militia_sprite.spr
+model_sprite		spain, 60.0, data/sprites/spain_carthage_town_militia_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_carthage_town_militia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthage_bull_warrior
+skeleton			fs_semi_fast_javelinman, fs_swordsman
+indiv_range			40
+texture				spain, data/models_unit/textures/spanish_bull_warrior.tga
+model_flexi		data/models_unit/unit_spanish_bull_warrior_high.cas, 8
+model_flexi		data/models_unit/unit_spanish_bull_warrior_med.cas, 15
+model_flexi			data/models_unit/unit_spanish_bull_warrior_low.cas, 30
+model_flexi			data/models_unit/unit_spanish_bull_warrior_lowest.cas, max
+model_sprite		spain, 60.0, data/sprites/spain_carthage_bull_warrior_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;					EASTERNS				
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+type				east_bedouin_archer
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_east_bedouin_mercenary.tga
+model_flexi			data/models_unit/unit_east_bedouin_archer_300.cas, 8
+model_flexi			data/models_unit/unit_east_bedouin_archer_300.cas, 15
+model_flexi			data/models_unit/unit_east_bedouin_archer_200.cas, 30
+model_flexi			data/models_unit/unit_east_bedouin_archer_100.cas, 40
+model_flexi			data/models_unit/unit_east_bedouin_archer_70.cas, max
+model_sprite		60.0, data/sprites/east_bedouin_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_heavy_cataphract
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_east_heavy_cataphract_seleucid.tga
+texture				parthia, data/models_unit/textures/unit_east_heavy_cataphract_parthia.tga
+texture				armenia, data/models_unit/textures/unit_east_heavy_cataphract_armenia.tga
+model_flexi			data/models_unit/unit_east_heavy_cataphract_400.CAS, 8
+model_flexi			data/models_unit/unit_east_heavy_cataphract_300.cas, 15
+model_flexi			data/models_unit/unit_east_heavy_cataphract_200.cas, 30
+model_flexi			data/models_unit/unit_east_heavy_cataphract_100.cas, 40
+model_flexi			data/models_unit/unit_east_heavy_cataphract_70.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_east_heavy_cataphract_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_heavy_cataphract_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_east_heavy_cataphract_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_scythed_chariot_crew
+skeleton			fs_chariot_sword
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_east_heavy_cataphract_seleucid.tga
+texture				pontus, data/models_unit/textures/unit_east_heavy_cataphract_pontus.tga
+model_flexi			data/models_unit/unit_east_heavy_cataphract_400.cas, 8
+model_flexi			data/models_unit/unit_east_heavy_cataphract_300.cas, 15
+model_flexi			data/models_unit/unit_east_heavy_cataphract_200.cas, 30
+model_flexi			data/models_unit/unit_east_heavy_cataphract_100.cas, 40
+model_flexi			data/models_unit/unit_east_heavy_cataphract_70.cas, max
+model_sprite		pontus, 60.0, data/sprites/pontus_east_scythed_chariot_crew_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_east_scythed_chariot_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_chariot_archer
+skeleton			fs_chariot_archer, fs_chariot_sword
+indiv_range			40
+texture				pontus, data/models_unit/textures/unit_eastern_archer_pontus.tga
+model_flexi			data/models_unit/unit_eastern_archer_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_archer_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_archer_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_archer_lowest.cas, max
+model_sprite		pontus, 60.0, data/sprites/pontus_east_chariot_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_elephant_archer
+skeleton			fs_forest_elephant_rider
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_eastern_archer_parthia.tga
+model_flexi			data/models_unit/unit_eastern_archer_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_archer_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_archer_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_archer_lowest.cas, max
+model_sprite		parthia, 60.0, data/sprites/parthia_east_elephant_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_cataphract_archer
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_eastern_archer_parthia.tga
+texture				armenia, data/models_unit/textures/unit_eastern_archer_armenia.tga
+model_flexi			data/models_unit/unit_eastern_archer_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_archer_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_archer_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_archer_lowest.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_east_cataphract_archer_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_cataphract_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				persian_elite_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_persian_elite_archer_parthia.tga
+texture				pontus, data/models_unit/textures/unit_persian_elite_archer_pontus.tga
+texture				armenia, data/models_unit/textures/unit_persian_elite_archer_armenia.tga
+texture				slave, data/models_unit/textures/unit_persian_elite_archer_rebel.tga
+model_flexi			data/models_unit/unit_persian_elite_archer_high.cas, 15
+model_flexi			data/models_unit/unit_persian_elite_archer_med.cas, 30
+model_flexi			data/models_unit/unit_persian_elite_archer_low.cas, 40
+model_flexi			data/models_unit/unit_persian_elite_archer_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_persian_elite_archer_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_persian_elite_archer_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_persian_elite_archer_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_persian_elite_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_bedouin
+skeleton			fs_hc_swordsman		
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_arab_light_infantry_merc.tga
+model_flexi			data/models_unit/unit_eastern_bedouin_sword_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_bedouin_sword_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_bedouin_sword_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_bedouin_sword_lowest.cas, max
+model_sprite		60.0, data/sprites/east_bedouin_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_crew
+skeleton			fs_dagger
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_eastern_crew_parthia.tga
+texture				pontus, data/models_unit/textures/unit_eastern_crew_pontus.tga
+texture				armenia, data/models_unit/textures/unit_eastern_crew_armenia.tga
+model_flexi			data/models_unit/unit_eastern_crew_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_crew_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_crew_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_crew_lowest.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_east_crew_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_east_crew_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_heavy_infantry
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_eastern_heavy_infantry_armenia.tga
+model_flexi			data/models_unit/unit_eastern_heavy_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_heavy_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_heavy_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_heavy_infantry_lowest.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_east_heavy_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_heavy_cavalry
+skeleton			fs_hc_javelinman, fs_hc_swordsman
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_eastern_pontic_heavy_cavalry_armenia.tga
+texture				parthia, data/models_unit/textures/unit_eastern_pontic_heavy_cavalry_parthia.tga
+texture				pontus, data/models_unit/textures/unit_eastern_pontic_heavy_cavalry_pontus.tga
+texture				slave, data/models_unit/textures/unit_eastern_pontic_heavy_cavalry_slave.tga
+model_flexi			data/models_unit/unit_east_pontic_heavy_cav_high.cas, 15
+model_flexi			data/models_unit/unit_east_pontic_heavy_cav_med.cas, 30
+model_flexi			data/models_unit/unit_east_pontic_heavy_cav_low.cas, 40
+model_flexi			data/models_unit/unit_east_pontic_heavy_cav_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_east_heavy_cavalry_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_east_heavy_cavalry_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_east_heavy_cavalry_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_heavy_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_cavalry
+skeleton			fs_hc_javelinman, fs_hc_swordsman
+indiv_range			40
+texture				pontus, data/models_unit/textures/unit_eastern_peltast_pontus.tga
+model_flexi			data/models_unit/unit_eastern_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_peltast_lowest.cas, max
+model_sprite		pontus, 60.0, data/sprites/pontus_east_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_peasant
+skeleton			fs_spearman
+indiv_range			40
+texture				parthia, data/models_unit/textures/unit_eastern_peasant_parthia.tga
+texture				pontus, data/models_unit/textures/unit_eastern_peasant_pontus.tga
+texture				armenia, data/models_unit/textures/unit_eastern_peasant_armenia.tga
+texture				slave, data/models_unit/textures/unit_eastern_peasant_slave.tga
+model_flexi			data/models_unit/unit_eastern_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_eastern_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_eastern_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_eastern_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_east_peasant_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_east_peasant_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_east_peasant_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				persian_javelineer
+skeleton			fs_semi_fast_javelinman,  fs_semi_fast_swordsman						; throwing spear/javelin & short sword
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_persian_javelin_armenia.tga
+texture				pontus, data/models_unit/textures/unit_persian_javelin_pontus.tga
+model_flexi			data/models_unit/unit_persian_javelineer_high.cas, 8
+model_flexi			data/models_unit/unit_persian_javelineer_medium.cas, 15
+model_flexi			data/models_unit/unit_persian_javelineer_low.cas, 30
+model_flexi			data/models_unit/unit_persian_javelineer_lowest.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_persian_javelineer_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_persian_javelineer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				persian_slinger
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+;texture				parthia, data/models_unit/textures/unit_persian_javelineer_parthia.tga
+texture				parthia, data/models_unit/textures/unit_persian_slinger_parthia.tga
+model_flexi			data/models_unit/unit_persian_slinger_high.cas, 8
+model_flexi			data/models_unit/unit_persian_slinger_med.cas, 15
+model_flexi			data/models_unit/unit_persian_slinger_low.cas, 30
+model_flexi			data/models_unit/unit_persian_slinger_lowest.cas, max
+model_sprite		parthia, 60.0, data/sprites/parthia_persian_slinger_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				persian_sparabara
+skeleton			fs_spearman										; combat spear
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_persian_sparabara_armenia.tga
+texture				parthia, data/models_unit/textures/unit_persian_sparabara_parthia.tga
+texture				pontus, data/models_unit/textures/unit_persian_sparabara_pontus.tga
+texture				slave, data/models_unit/textures/unit_persian_sparabara_rebel.tga
+model_flexi_m		data/models_unit/unit_persian_sparabara_high.cas, 15
+model_flexi_m		data/models_unit/unit_persian_sparabara_med.cas, 30
+model_flexi_m		data/models_unit/unit_persian_sparabara_low.cas, 40
+model_flexi			data/models_unit/unit_persian_sparabara_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_persian_sparabara_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_persian_sparabara_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_persian_sparabara_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_persian_sparabara_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_hillmen
+skeleton			fs_semi_fast_spearman
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_eastern_hillmen_armenia.tga
+texture				parthia, data/models_unit/textures/unit_eastern_hillmen_parthia.tga
+texture				pontus, data/models_unit/textures/unit_eastern_hillmen_pontus.tga
+model_flexi			data/models_unit/unit_east_hillmen_high.cas, 15
+model_flexi			data/models_unit/unit_east_hillmen_med.cas, 30
+model_flexi			data/models_unit/unit_east_hillmen_low.cas, 40
+model_flexi			data/models_unit/unit_east_hillmen_lowest.cas, max
+model_sprite		armenia, 60.0, data/sprites/armenia_east_hillmen_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_east_hillmen_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_hillmen_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_cappodocian_cavalry
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				pontus, data/models_unit/textures/unit_eastern_cappodocean_cavalry_pontus.tga
+model_flexi_m		data/models_unit/unit_east_cappodocean_cav_high.cas, 15
+model_flexi_m		data/models_unit/unit_east_cappodocean_cav_med.cas, 30
+model_flexi_m		data/models_unit/unit_east_cappodocean_cav_low.cas, 40
+model_flexi			data/models_unit/unit_east_cappodocean_cav_lowest.cas, max
+model_sprite		pontus, 60.0, data/sprites/pontus_east_cappodocian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				east_horse_archer
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				armenia, data/models_unit/textures/unit_persian_archer_armenia.tga
+texture				parthia, data/models_unit/textures/unit_persian_archer_parthia.tga
+texture				slave, data/models_unit/textures/unit_persian_archer_slave.tga
+model_flexi			data/models_unit/unit_persian_archer_high.cas, 15
+model_flexi			data/models_unit/unit_persian_archer_medium.cas, 30
+model_flexi			data/models_unit/unit_persian_archer_low.cas, 40
+model_flexi			data/models_unit/unit_persian_archer_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_east_horse_archer_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_east_horse_archer_sprite.spr
+model_sprite		parthia, 60.0, data/sprites/parthia_east_horse_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_bronxe_shield
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				pontus, data/models_unit/textures/unit_eastern_bronze_shields_pontus.tga
+model_flexi_m			data/models_unit/unit_greek_argyraspides_v2_400.cas, 8
+model_flexi_m			data/models_unit/unit_greek_argyraspides_v2_300.cas, 15
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_200.cas, 30
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_100.cas, 40
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_70.cas, max
+model_sprite		pontus, 60.0, data/sprites/pontus_greek_bronxe_shield_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;		EGYPTIANS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+type				egyptian_peasant
+skeleton			fs_spearman													; pitchfork
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_slinger.tga
+texture				slave, data/models_unit/textures/unit_egyption_slinger_slave.tga
+model_flexi			data/models_unit/unit_egyptian_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_egyptian_peasant_sprite.spr
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_slinger
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+model_flexi			data/models_unit/unit_egyptian_slinger_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_slinger_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_slinger_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_slinger_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_slinger_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_archer.tga
+texture				slave, data/models_unit/textures/unit_egyption_archer_slave.tga
+model_flexi			data/models_unit/unit_egyption_archer_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_archer_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_archer_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_archer_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_egyptian_archer_sprite.spr
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_camel_archer
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_archer.tga
+model_flexi			data/models_unit/unit_egyption_archer_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_archer_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_archer_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_archer_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_camel_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_cleruch
+skeleton			fs_hc_spearman, fs_hc_swordsman								; combat spear
+indiv_range			40
+model_flexi			data/models_unit/unit_egyption_cleruch_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_cleruch_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_cleruch_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_cleruch_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_cleruch_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_crew
+skeleton			fs_dagger
+indiv_range			40
+model_flexi			data/models_unit/unit_egyption_crew_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_crew_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_crew_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_crew_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;type				egyptian_archer_elite
+;skeleton			fs_archer, fs_dagger
+;indiv_range			40
+;model_flexi			data/models_unit/unit_egyption_elite_archer_high.cas, 15
+;model_flexi			data/models_unit/unit_egyption_elite_archer_med.cas, 30
+;model_flexi			data/models_unit/unit_egyption_elite_archer_low.cas, 40
+;model_flexi			data/models_unit/unit_egyption_elite_archer_lowest.cas, max
+;model_sprite		60.0, data/sprites/egyptian_archer_elite_sprite.spr
+;model_tri			400, 0.5f, 0.5f, 0.5f
+
+;These are the new realistic looking ones. The cone heads are reserved for generals
+type				egyptian_archer_elite_new
+skeleton			fs_archer, fs_dagger
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyptian_elite_archer_new.tga
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_archer_elite_new_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_chariot_archer
+skeleton			fs_chariot_archer, fs_chariot_sword
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyptian_elite_archer_new.tga
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_elite_archer_new_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_chariot_archer_sprite.spr
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_chariot_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_chariot_crew
+skeleton			fs_chariot_sword
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyptian_chariot_crew.tga
+texture				slave, data/models_unit/textures/unit_egyptian_chariot_crew_slave.tga
+model_flexi			data/models_unit/egypt_chariot_crew_high.cas, 15
+model_flexi			data/models_unit/egypt_chariot_crew_med.cas, 30
+model_flexi			data/models_unit/egypt_chariot_crew_low.cas, 40
+model_flexi			data/models_unit/egypt_chariot_crew_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_egyptian_chariot_crew_sprite.spr
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_chariot_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_elite_guards
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_elite_guard.tga
+model_flexi			data/models_unit/unit_egyption_elite_guard_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_elite_guard_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_elite_guard_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_elite_guard_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_elite_guards_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;These are the new realistic looking ones. The cone heads are reserved for generals
+type				egyptian_elite_guards_new
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_elite_guard_new.tga
+model_flexi			data/models_unit/unit_egyption_elite_guard_new_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_elite_guard_new_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_elite_guard_new_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_elite_guard_new_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_elite_guards_new_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_infantry
+skeleton			fs_swordsman,										; blunt
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_infantry.tga
+model_flexi			data/models_unit/unit_egyption_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_infantry_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_spearman
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/nile_spearman.tga
+model_flexi			data/models_unit/unit_egyptian_nile_spear_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_nile_spear_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_nile_spear_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_nile_spear_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_spearman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_cavalry
+skeleton			fs_hc_swordsman										
+indiv_range			40
+model_flexi			data/models_unit/unit_egyption_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_infantry_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_peltast
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman										; throwing spear
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_peltast.tga
+texture				slave, data/models_unit/textures/unit_egyption_peltast_slave.tga
+model_flexi			data/models_unit/unit_egyption_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_peltast_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_egyptian_peltast_sprite.spr
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_peltast_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_nubian_infantry
+skeleton			fs_spearman, fs_swordsman
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_nubian_infantry.tga
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_nubian_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_nubian_cavalry
+skeleton			fs_hc_spearman, fs_hc_swordsman								; combat spear
+indiv_range			40
+texture				egypt, data/models_unit/textures/unit_egyption_nubian_infantry.tga
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_nubian_infantry_lowest.cas, max
+model_sprite		egypt, 60.0, data/sprites/egypt_egyptian_nubian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;					GREEKS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+type				greek_amazons
+skeleton			fs_chariot_archer, fs_chariot_sword
+indiv_range			40
+texture				slave, data/models_unit/textures/greek_amazon_rebel.tga
+model_flexi			data/models_unit/unit_greek_amazon_high.cas, 15
+model_flexi			data/models_unit/unit_greek_amazon_med.cas, 30
+model_flexi			data/models_unit/unit_greek_amazon_low.cas, 40
+model_flexi			data/models_unit/unit_greek_amazon_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_amazons_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_archer_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_archer_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_archer_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_archer_thrace.tga
+texture				merc, data/models_unit/textures/unit_greek_archer_mercs.tga
+model_flexi			data/models_unit/unit_greek_archer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_archer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_archer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_archer_lowest.cas, max
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_archer_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_archer_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_archer_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_elephant_archer
+skeleton			fs_forest_elephant_rider
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_greek_archer_seleucid.tga
+texture				merc, data/models_unit/textures/unit_greek_archer_mercs.tga
+model_flexi			data/models_unit/unit_greek_archer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_archer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_archer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_archer_lowest.cas, max
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_elephant_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_big_elephant_archer
+skeleton			fs_big_elephant_rider
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_greek_archer_seleucid.tga
+texture				merc, data/models_unit/textures/unit_greek_archer_mercs.tga
+model_flexi			data/models_unit/unit_greek_archer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_archer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_archer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_archer_lowest.cas, max
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_big_elephant_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_crew
+skeleton			fs_dagger
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_peasant_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_peasant_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_peasant_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_peasant_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_peasant_slave.tga
+model_flexi			data/models_unit/unit_roman_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_roman_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_roman_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_roman_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_crew_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_crew_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_crew_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_crew_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_handler
+skeleton			fs_semi_fast_dagger
+indiv_range			40
+texture				greek_cities, data/models_unit/textures/unit_greek_peasant_greek.tga
+model_flexi			data/models_unit/unit_roman_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_roman_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_roman_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_roman_peasant_lowest.cas, max
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_handler_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_heavy_cavalry	
+skeleton			fs_hc_spearman, fs_hc_swordsman								; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_heavy_cavalry_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_heavy_cavalry_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_heavy_cavalry_greek.tga
+model_flexi			data/models_unit/unit_greek_heavy_cavalry_high.cas, 15
+model_flexi			data/models_unit/unit_greek_heavy_cavalry_med.cas, 30
+model_flexi			data/models_unit/unit_greek_heavy_cavalry_low.cas, 40
+model_flexi			data/models_unit/unit_greek_heavy_cavalry_lowest.cas, max
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_heavy_cavalry_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_heavy_cavalry_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_heavy_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_medium_cavalry
+skeleton			fs_hc_spearman							; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_medium_cavalry_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_medium_cavalry_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_medium_cavalry_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_medium_cavalry_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_medium_cavalry_slave.tga
+model_flexi			data/models_unit/unit_greek_medium_cavalry_high.cas, 15
+model_flexi			data/models_unit/unit_greek_medium_cavalry_med.cas, 30
+model_flexi			data/models_unit/unit_greek_medium_cavalry_low.cas, 40
+model_flexi			data/models_unit/unit_greek_medium_cavalry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_medium_cavalry_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_medium_cavalry_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_medium_cavalry_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_medium_cavalry_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_medium_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_hoplite_militia
+skeleton			fs_spearman, fs_swordsman									; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_militia_hoplite_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_militia_hoplite_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_militia_hoplite_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_militia_hoplite_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_militia_hoplite_slave.tga
+model_flexi			data/models_unit/unit_greek_hoplite_militia_high.cas, 15
+model_flexi			data/models_unit/unit_greek_hoplite_militia_med.cas, 30
+model_flexi			data/models_unit/unit_greek_hoplite_militia_low.cas, 40
+model_flexi			data/models_unit/unit_greek_hoplite_militia_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_hoplite_militia_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_hoplite_militia_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_hoplite_militia_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_hoplite_militia_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_hoplite_militia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_hoplite
+skeleton			fs_spearman, fs_swordsman									; combat spear
+indiv_range			40
+texture				slave, data/models_unit/textures/unit_greek_hoplite_slave.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_hoplite_greek.tga
+model_flexi			data/models_unit/unit_greek_hoplite_high.cas, 15
+model_flexi			data/models_unit/unit_greek_hoplite_med.cas, 30
+model_flexi			data/models_unit/unit_greek_hoplite_low.cas, 40
+model_flexi			data/models_unit/unit_greek_hoplite_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_hoplite_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_hoplite_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_hoplite_spartan_pylos
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+;texture				greek_cities, data/models_unit/textures/greek_hoplite_spartan_pylos_greece.tga
+model_flexi_m			data/models_unit/unit_greek_spartan_hoplite_pylos_400.cas, 8
+model_flexi_m			data/models_unit/unit_greek_spartan_hoplite_pylos_300.cas, 15
+model_flexi_m			data/models_unit/unit_greek_spartan_hoplite_pylos_200.cas, 30
+model_flexi			data/models_unit/unit_greek_spartan_hoplite_pylos_100.cas, max
+model_sprite		60.0, data/sprites/greek_hoplite_spartan_pylos_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_peasant
+skeleton			fs_dagger
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_peasant_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_peasant_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_peasant_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_peasant_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_peasant_slave.tga
+model_flexi			data/models_unit/unit_roman_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_roman_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_roman_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_roman_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_peasant_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_peasant_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_peasant_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_peasant_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_royal_cavalry												; combat spear
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_royal_cavalry_macedon.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_royal_cavalry_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_royal_cavalry_macedon.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_royal_cavalry_greek.tga
+texture				seleucid, data/models_unit/textures/unit_greek_royal_cavalry_seleucid.tga
+model_flexi_m		data/models_unit/unit_greek_royal_cavalry_400.cas, 8
+model_flexi_m		data/models_unit/unit_greek_royal_cavalry_300.cas, 15
+model_flexi_m		data/models_unit/unit_greek_royal_cavalry_200.cas, 30
+model_flexi_m		data/models_unit/unit_greek_royal_cavalry_100.cas, 40
+model_flexi			data/models_unit/unit_greek_royal_cavalry_70.cas, max
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_royal_cavalry_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_royal_cavalry_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_royal_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_peltast
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman									; throwing spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_peltast_macedon.tga
+texture				seleucid, data/models_unit/textures/unit_greek_peltast_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_peltast_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_peltast_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_peltast_slave.tga
+model_flexi			data/models_unit/unit_greek_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_greek_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_greek_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_greek_peltast_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_peltast_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_peltast_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_peltast_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_peltast_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_peltast_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_javelin_cavalry
+skeleton			fs_hc_javelinman, fs_hc_swordsman
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_greek_peltast_seleucid.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_peltast_greek.tga
+texture				thrace, data/models_unit/textures/unit_greek_peltast_thrace.tga
+texture				slave, data/models_unit/textures/unit_greek_peltast_slave.tga
+model_flexi			data/models_unit/unit_greek_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_greek_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_greek_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_greek_peltast_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_javelin_cavalry_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_javelin_cavalry_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_javelin_cavalry_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_javelin_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;; New Greek units 3 Feb 2004
+
+type				greek_armoured_hoplite
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				carthage, data/models_unit/textures/unit_greek_elite_hoplite_carthage.tga
+texture				greek_cities, data/models_unit/textures/unit_greek_elite_hoplite_greek.tga
+model_flexi			data/models_unit/unit_greek_hoplite_elite_high.cas, 15
+model_flexi			data/models_unit/unit_greek_hoplite_elite_med.cas, 30
+model_flexi			data/models_unit/unit_greek_hoplite_elite_low.cas, 40
+model_flexi			data/models_unit/unit_greek_hoplite_elite_lowest.cas, max
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_armoured_hoplite_sprite.spr
+model_sprite		carthage, 60.0, data/sprites/carthage_greek_armoured_hoplite_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_pike_phalanx
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_pike_phalanx_macedon.tga
+texture				pontus, data/models_unit/textures/unit_greek_pike_phalanx_pontus.tga
+texture				seleucid, data/models_unit/textures/unit_greek_pike_phalanx_seleucid.tga
+texture				thrace, data/models_unit/textures/unit_greek_pike_phalanx_thrace.tga
+model_flexi_m			data/models_unit/unit_greek_pike_phalanx_400.cas, 8
+model_flexi_m			data/models_unit/unit_greek_pike_phalanx_300.cas, 15
+model_flexi			data/models_unit/unit_greek_pike_phalanx_200.cas, 30
+model_flexi			data/models_unit/unit_greek_pike_phalanx_100.cas, 40
+model_flexi			data/models_unit/unit_greek_pike_phalanx_70.cas, max
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_pike_phalanx_sprite.spr
+model_sprite		pontus, 60.0, data/sprites/pontus_greek_pike_phalanx_sprite.spr
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_pike_phalanx_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_pike_phalanx_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_levy_pikeman
+skeleton			fs_spearman, fs_swordsman									; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_macedon_levy_pikeman.tga
+texture				seleucid, data/models_unit/textures/unit_macedon_levy_pikeman_seleucid.tga
+model_flexi_m			data/models_unit/unit_greek_levy_pikeman_v2_400.cas, 8
+model_flexi_m			data/models_unit/unit_greek_levy_pikeman_v2_300.cas, 15
+model_flexi_m			data/models_unit/unit_greek_levy_pikeman_v2_200.cas, 30
+model_flexi			data/models_unit/unit_greek_levy_pikeman_v2_100.cas, max
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_levy_pikeman_sprite.spr
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_levy_pikeman_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_argyraspid
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				seleucid, data/models_unit/textures/unit_seleucid_argyraspides.tga
+model_flexi_m			data/models_unit/unit_greek_argyraspides_v2_400.cas, 8
+model_flexi_m			data/models_unit/unit_greek_argyraspides_v2_300.cas, 15
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_200.cas, 30
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_100.cas, 40
+model_flexi			data/models_unit/unit_greek_argyraspides_v2_70.cas, max
+model_sprite		seleucid, 60.0, data/sprites/seleucid_greek_argyraspid_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_hypaspist
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_macedon_hypastist.tga
+model_flexi_m			data/models_unit/unit_greek_hypastist_v2_400.cas, 15
+model_flexi_m			data/models_unit/unit_greek_hypastist_v2_300.cas, 30
+model_flexi			data/models_unit/unit_greek_hypastist_v2_200.cas, 40
+model_flexi			data/models_unit/unit_greek_hypastist_v2_100.cas, max
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_hypaspist_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_light_lancer
+skeleton			fs_hc_spearman, fs_hc_swordsman									; combat spear
+indiv_range			40
+texture				macedon, data/models_unit/textures/unit_greek_cavalry_macedon.tga
+model_flexi			data/models_unit/unit_greek_light_lancer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_light_lancer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_light_lancer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_light_lancer_lowest.cas, max
+model_sprite		macedon, 60.0, data/sprites/macedon_greek_light_lancer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_slinger
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				slave, data/models_unit/textures/unit_roman_slinger_rebel.tga
+model_flexi			data/models_unit/unit_roman_slinger_high.cas, 8
+model_flexi			data/models_unit/unit_roman_slinger_med.cas, 15
+model_flexi			data/models_unit/unit_roman_slinger_low.cas, 30
+model_flexi			data/models_unit/unit_roman_slinger_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_slinger_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_cilician_pirate
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman									; throwing spear
+indiv_range			40
+;texture				slave, data/models_unit/textures/unit_cilician_pirate.tga	;Only have one unit here, so can't have both a merc and slave version
+texture				merc, data/models_unit/textures/unit_cilician_pirate_merc.tga
+model_flexi			data/models_unit/unit_cilician_pirate_high.cas, 15
+model_flexi			data/models_unit/unit_cilician_pirate_med.cas, 30
+model_flexi			data/models_unit/unit_cilician_pirate_low.cas, 40
+model_flexi			data/models_unit/unit_cilician_pirate_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_cilician_pirate_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_thracoan
+skeleton			fs_semi_fast_swordsman
+indiv_range			40
+texture				thrace, data/models_unit/textures/unit_thracian_thrace.tga
+texture				merc, data/models_unit/textures/unit_thracian_mercs.tga
+model_flexi			data/models_unit/unit_roman_thracian_high.cas, 15
+model_flexi			data/models_unit/unit_roman_thracian_med.cas, 30
+model_flexi			data/models_unit/unit_roman_thracian_low.cas, 40
+model_flexi			data/models_unit/unit_roman_thracian_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_thracoan_sprite.spr
+model_sprite		thrace, 60.0, data/sprites/thrace_greek_thracoan_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_heavy_peltast
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman
+indiv_range			40
+texture				greek_cities, data/models_unit/textures/unit_greek_heavy_peltast_greek.tga
+texture				slave, data/models_unit/textures/unit_greek_heavy_peltast_slave.tga
+model_flexi			data/models_unit/greek_heavy_peltast_high.cas, 15
+model_flexi			data/models_unit/greek_heavy_peltast_med.cas, 30
+model_flexi			data/models_unit/greek_heavy_peltast_low.cas, 40
+model_flexi			data/models_unit/greek_heavy_peltast_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_greek_heavy_peltast_sprite.spr
+model_sprite		greek_cities, 60.0, data/sprites/greek_cities_greek_heavy_peltast_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+;					 ROMANS
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+type				roman_archer
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_archer_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_archer_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_archer_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_archer_senate.tga
+model_flexi			data/models_unit/unit_roman_archer_high.cas, 15
+model_flexi			data/models_unit/unit_roman_archer_med.cas, 30
+model_flexi			data/models_unit/unit_roman_archer_low.cas, 40
+model_flexi			data/models_unit/unit_roman_archer_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_archer_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_archer_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_archer_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_archer_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_archer_auxillia
+skeleton			fs_archer, fs_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_auxillia_archer_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_auxillia_archer_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_auxillia_archer_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_auxillia_archer_senate.tga
+model_flexi			data/models_unit/unit_roman_auxillia_archer_high.cas, 15
+model_flexi			data/models_unit/unit_roman_auxillia_archer_med.cas, 30
+model_flexi			data/models_unit/unit_roman_auxillia_archer_low.cas, 40
+model_flexi			data/models_unit/unit_roman_auxillia_archer_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_archer_auxillia_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_archer_auxillia_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_archer_auxillia_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_archer_auxillia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_peasant
+skeleton			fs_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_peasant_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_peasant_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_peasant_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_peasant_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_peasant_slave.tga
+model_flexi			data/models_unit/unit_roman_peasant_high.cas, 15
+model_flexi			data/models_unit/unit_roman_peasant_med.cas, 30
+model_flexi			data/models_unit/unit_roman_peasant_low.cas, 40
+model_flexi			data/models_unit/unit_roman_peasant_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_peasant_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_peasant_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_peasant_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_peasant_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_peasant_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_crew
+skeleton			fs_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_crew_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_crew_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_crew_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_crew_senate.tga
+model_flexi			data/models_unit/unit_roman_crew_high.cas, 15
+model_flexi			data/models_unit/unit_roman_crew_med.cas, 30
+model_flexi			data/models_unit/unit_roman_crew_low.cas, 40
+model_flexi			data/models_unit/unit_roman_crew_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_crew_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_crew_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_crew_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_crew_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_handler
+skeleton			fs_semi_fast_dagger
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_crew_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_crew_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_crew_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_crew_senate.tga
+model_flexi			data/models_unit/unit_roman_crew_high.cas, 15
+model_flexi			data/models_unit/unit_roman_crew_med.cas, 30
+model_flexi			data/models_unit/unit_roman_crew_low.cas, 40
+model_flexi			data/models_unit/unit_roman_crew_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_handler_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_handler_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_handler_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_handler_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_equites												; combat spear
+skeleton			fs_hc_spearman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_light_infantry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_light_infantry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_light_infantry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_light_infantry_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_light_infantry_slave.tga
+model_flexi			data/models_unit/unit_roman_light_infantry_high.cas, 15
+model_flexi			data/models_unit/unit_roman_light_infantry_med.cas, 30
+model_flexi			data/models_unit/unit_roman_light_infantry_low.cas, 40
+model_flexi			data/models_unit/unit_roman_light_infantry_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_equites_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_equites_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_equites_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_equites_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_equites_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_cavalry_auxillia
+skeleton			fs_hc_javelinman, fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_light_infantry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_light_infantry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_light_infantry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_light_infantry_senate.tga
+model_flexi			data/models_unit/roman_light_cavalry_high.cas, 15
+model_flexi			data/models_unit/roman_light_cavalry_med.cas, 30
+model_flexi			data/models_unit/roman_light_cavalry_low.cas, 40
+model_flexi			data/models_unit/roman_light_cavalry_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_cavalry_auxillia_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_cavalry_auxillia_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_cavalry_auxillia_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_cavalry_auxillia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_heavy_cavalry												; combat spear
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_heavy_cavalry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_heavy_cavalry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_heavy_cavalry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_heavy_cavalry_senate.tga
+model_flexi_m		data/models_unit/roman_heavy_cavalry_high.cas, 15
+model_flexi_m		data/models_unit/roman_heavy_cavalry_med.cas, 30
+model_flexi_m		data/models_unit/roman_heavy_cavalry_low.cas, 40
+model_flexi			data/models_unit/roman_heavy_cavalry_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_heavy_cavalry_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_heavy_cavalry_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_heavy_cavalry_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_heavy_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_medium_cavalry
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_auxillia_infantry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_auxillia_infantry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_auxillia_infantry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_auxillia_infantry_senate.tga
+model_flexi			data/models_unit/roman_auxillia_infantry_high.cas, 15
+model_flexi			data/models_unit/roman_auxillia_infantry_med.cas, 30
+model_flexi			data/models_unit/roman_auxillia_infantry_low.cas, 40
+model_flexi			data/models_unit/roman_auxillia_infantry_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_medium_cavalry_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_medium_cavalry_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_medium_cavalry_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_medium_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_hastati
+skeleton			fs_javelinman, fs_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_hastati_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_hastati_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_hastati_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_hastati_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_hastati_slave.tga
+model_flexi_m			data/models_unit/unit_roman_hastati_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_hastati_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_hastati_low.cas, 40
+model_flexi			data/models_unit/unit_roman_hastati_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_hastati_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_hastati_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_hastati_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_hastati_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_hastati_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_principes
+skeleton			fs_javelinman, fs_slow_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_principes_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_principes_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_principes_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_principes_senate.tga
+model_flexi_m			data/models_unit/unit_roman_hastati_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_hastati_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_hastati_low.cas, 40
+model_flexi			data/models_unit/unit_roman_hastati_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_principes_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_principes_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_principes_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_principes_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_infantry_auxillia
+skeleton			fs_spearman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_auxillia_infantry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_auxillia_infantry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_auxillia_infantry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_auxillia_infantry_senate.tga
+model_flexi			data/models_unit/roman_auxillia_infantry_high.cas, 15
+model_flexi			data/models_unit/roman_auxillia_infantry_med.cas, 30
+model_flexi			data/models_unit/roman_auxillia_infantry_low.cas, 40
+model_flexi			data/models_unit/roman_auxillia_infantry_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_infantry_auxillia_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_infantry_auxillia_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_infantry_auxillia_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_infantry_auxillia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_legionary_cohort_ii
+skeleton			fs_javelinman, fs_slow_swordsman											; throwing javelin
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_legionary_II_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_legionary_II_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_legionary_II_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_legionary_II_senate.tga
+texture				seleucid, data/models_unit/textures/unit_greek_legionary_seleucid.tga
+model_flexi_m			data/models_unit/unit_roman_legionary_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_legionary_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_legionary_low.cas, 40
+model_flexi			data/models_unit/unit_roman_legionary_lowest.cas, max
+model_sprite		seleucid, 60.0, data/sprites/seleucid_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_legionary_cohort_ii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_legionary_cohort_ii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_legionary_cohort_i
+skeleton			fs_javelinman, fs_slow_swordsman					; throwing javelin
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_legionary_I_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_legionary_I_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_legionary_I_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_legionary_I_senate.tga
+texture				armenia, data/models_unit/textures/unit_roman_legionary_I_armenia.tga
+texture				numidia, data/models_unit/textures/unit_roman_legionary_I_numidia.tga
+model_flexi_m			data/models_unit/unit_roman_legionary_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_legionary_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_legionary_low.cas, 40
+model_flexi			data/models_unit/unit_roman_legionary_lowest.cas, max
+model_sprite		numidia, 60.0, data/sprites/numidia_roman_legionary_cohort_i_sprite.spr
+model_sprite		armenia, 60.0, data/sprites/armenia_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_legionary_cohort_i_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_legionary_cohort_i_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;uses cavalry model as these have javelins
+type				roman_light_infantry						
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_light_infantry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_light_infantry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_light_infantry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_light_infantry_senate.tga
+model_flexi			data/models_unit/roman_light_cavalry_high.cas, 15
+model_flexi			data/models_unit/roman_light_cavalry_med.cas, 30
+model_flexi			data/models_unit/roman_light_cavalry_low.cas, 40
+model_flexi			data/models_unit/roman_light_cavalry_lowest.cas, max
+model_sprite		60.0, data/sprites/roman_light_infantry_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_light_infantry_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_light_infantry_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_light_infantry_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_light_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_mirmillo_gladiator
+skeleton			fs_spearman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_mirmillo_gladiator_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_mirmillo_gladiator_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_mirmillo_gladiator_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_mirmillo_gladiator_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_mirmillo_gladiator_rebel.tga
+model_flexi_m			data/models_unit/unit_roman_mirmillo_gladiator_400.cas, 8
+model_flexi_m			data/models_unit/unit_roman_mirmillo_gladiator_300.cas, 15
+model_flexi_m			data/models_unit/unit_roman_mirmillo_gladiator_200.cas, 30
+model_flexi_m			data/models_unit/unit_roman_mirmillo_gladiator_100.cas, 40
+model_flexi_m			data/models_unit/unit_roman_mirmillo_gladiator_70.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_mirmillo_gladiator_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_mirmillo_gladiator_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_mirmillo_gladiator_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_mirmillo_gladiator_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_mirmillo_gladiator_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_praetorian_cavalry
+skeleton			fs_hc_spearman, fs_hc_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_praetorian_cavalry_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_praetorian_cavalry_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_praetorian_cavalry_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_praetorian_cavalry_senate.tga
+model_flexi_m			data/models_unit/roman_praetorian_cavalry_high.cas, 15
+model_flexi_m			data/models_unit/roman_praetorian_cavalry_med.cas, 30
+model_flexi_m			data/models_unit/roman_praetorian_cavalry_low.cas, 40
+model_flexi			data/models_unit/roman_praetorian_cavalry_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_praetorian_cavalry_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_praetorian_cavalry_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_praetorian_cavalry_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_praetorian_cavalry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_praetorian_cohort_ii
+skeleton			fs_javelinman, fs_slow_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_praetorian_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_praetorian_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_praetorian_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_praetorian_senate.tga
+model_flexi_m			data/models_unit/unit_roman_praetorian_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_praetorian_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_praetorian_low.cas, 40
+model_flexi			data/models_unit/unit_roman_praetorian_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_praetorian_cohort_ii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_praetorian_cohort_ii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_praetorian_cohort_i
+skeleton			fs_javelinman, fs_slow_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_praetorian_old_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_praetorian_old_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_praetorian_old_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_praetorian_old_senate.tga
+model_flexi_m			data/models_unit/unit_roman_praetorian_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_praetorian_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_praetorian_low.cas, 40
+model_flexi			data/models_unit/unit_roman_praetorian_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_praetorian_cohort_i_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_praetorian_cohort_i_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_praetorian_cohort_i_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_praetorian_cohort_i_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_samnite_gladiator
+skeleton			fs_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_samnite_gladiator_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_samnite_gladiator_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_samnite_gladiator_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_samnite_gladiator_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_samnite_gladiator_slave.tga
+model_flexi_m			data/models_unit/unit_roman_samnite_gladiator_400.cas, 8
+model_flexi_m			data/models_unit/unit_roman_samnite_gladiator_300.cas, 15
+model_flexi_m			data/models_unit/unit_roman_samnite_gladiator_200.cas, 30
+model_flexi_m			data/models_unit/unit_roman_samnite_gladiator_100.cas, 40
+model_flexi_m			data/models_unit/unit_roman_samnite_gladiator_70.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_samnite_gladiator_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_samnite_gladiator_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_samnite_gladiator_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_samnite_gladiator_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_samnite_gladiator_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_triarii
+skeleton			fs_slow_spearman										; combat spear
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_triarii_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_triarii_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_triarii_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_triarii_senate.tga
+model_flexi_m			data/models_unit/unit_roman_triarii_high.cas, 15
+model_flexi_m			data/models_unit/unit_roman_triarii_med.cas, 30
+model_flexi_m			data/models_unit/unit_roman_triarii_low.cas, 40
+model_flexi			data/models_unit/unit_roman_triarii_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_triarii_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_triarii_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_triarii_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_triarii_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_velite
+skeleton			fs_semi_fast_javelinman,  fs_semi_fast_dagger						; throwing spear/javelin & short sword
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_peasant_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_peasant_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_peasant_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_peasant_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_peasant_slave.tga
+model_flexi			data/models_unit/unit_roman_velite_high.cas, 8
+model_flexi			data/models_unit/unit_roman_velite_med.cas, 15
+model_flexi			data/models_unit/unit_roman_velite_low.cas, 30
+model_flexi			data/models_unit/unit_roman_velite_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_velite_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_velite_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_velite_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_velite_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_velite_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_velite_gladiator
+skeleton			fs_semi_fast_spearman, fs_semi_fast_dagger												; combat spear
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_velite_gladiator_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_velite_gladiator_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_velite_gladiator_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_velite_gladiator_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_velite_gladiator_slave.tga
+model_flexi			data/models_unit/unit_roman_velite_gladiator_400.cas, 15
+model_flexi			data/models_unit/unit_roman_velite_gladiator_300.cas, 30
+model_flexi			data/models_unit/unit_roman_velite_gladiator_200.cas, 40
+model_flexi			data/models_unit/unit_roman_velite_gladiator_100.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_velite_gladiator_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_velite_gladiator_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_velite_gladiator_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_velite_gladiator_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_velite_gladiator_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_city_militia
+skeleton			fs_spearman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_city_militia_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_city_militia_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_city_militia_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_city_militia_senate.tga
+texture				slave, data/models_unit/textures/unit_roman_city_militia_rebel.tga
+model_flexi			data/models_unit/roman_city_militia_high.cas, 15
+model_flexi			data/models_unit/roman_city_militia_med.cas, 30
+model_flexi			data/models_unit/roman_city_militia_low.cas, 40
+model_flexi			data/models_unit/roman_city_militia_lowest.cas, max
+model_sprite		slave, 60.0, data/sprites/slave_roman_city_militia_sprite.spr
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_city_militia_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_city_militia_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_city_militia_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_city_militia_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_arcani
+skeleton			fs_semi_fast_swordsman
+indiv_range			40
+texture				romans_julii, data/models_unit/textures/unit_roman_arcanii_julii.tga
+texture				romans_brutii, data/models_unit/textures/unit_roman_arcanii_brutii.tga
+texture				romans_scipii, data/models_unit/textures/unit_roman_arcanii_scipii.tga
+texture				romans_senate, data/models_unit/textures/unit_roman_arcanii_senate.tga
+model_flexi			data/models_unit/unit_roman_arcanii_high.cas, 15
+model_flexi			data/models_unit/unit_roman_arcanii_med.cas, 30
+model_flexi			data/models_unit/unit_roman_arcanii_low.cas, 40
+model_flexi			data/models_unit/unit_roman_arcanii_lowest.cas, max
+model_sprite		romans_senate, 60.0, data/sprites/romans_senate_roman_arcani_sprite.spr
+model_sprite		romans_scipii, 60.0, data/sprites/romans_scipii_roman_arcani_sprite.spr
+model_sprite		romans_brutii, 60.0, data/sprites/romans_brutii_roman_arcani_sprite.spr
+model_sprite		romans_julii, 60.0, data/sprites/romans_julii_roman_arcani_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				roman_samnite_warrior
+skeleton			fs_spearman
+indiv_range			40
+;texture				slave, data/models_unit/textures/unit_roman_samnite_rebel.tga
+texture				merc, data/models_unit/textures/unit_roman_samnite_merc.tga
+model_flexi			data/models_unit/unit_roman_samnite_high.cas, 15
+model_flexi			data/models_unit/unit_roman_samnite_med.cas, 30
+model_flexi			data/models_unit/unit_roman_samnite_low.cas, 40
+model_flexi			data/models_unit/unit_roman_samnite_lowest.cas, max
+model_sprite		60.0, data/sprites/roman_samnite_warrior_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;; MERCENARIES ;;;;;;;;;;;;;;;;;;;
+
+;Special versions of some soldiers, that have both slave and mercenary versions
+;This is necessary to get correct sprites for the mercs
+
+type				barb_cavalry_merc
+skeleton			fs_hc_spearman										; combat spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_barb_warband_merc.tga
+model_flexi			data/models_unit/unit_barb_warband_cavalry_high.cas, 8
+model_flexi			data/models_unit/unit_barb_warband_cavalry_med.cas, 15
+model_flexi			data/models_unit/unit_barb_warband_cavalry_low.cas, 30
+model_flexi			data/models_unit/unit_barb_warband_cavalry_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_cavalry_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_infantry_merc
+skeleton			fs_spearman,			; combat spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_barb_infantry_merc.tga
+model_flexi			data/models_unit/unit_barb_infantry_high.cas, 8
+model_flexi			data/models_unit/unit_barb_infantry_med.cas, 15
+model_flexi			data/models_unit/unit_barb_infantry_low.cas, 30
+model_flexi			data/models_unit/unit_barb_infantry_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_infantry_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthage_numidian_cavalry_merc
+skeleton			fs_hc_javelinman, fs_hc_swordsman									; combat spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_egyptian_numidian_mercenary.tga
+model_flexi			data/models_unit/unit_egyptian_numidian_high.cas, 15
+model_flexi			data/models_unit/unit_egyptian_numidian_med.cas, 30
+model_flexi			data/models_unit/unit_egyptian_numidian_low.cas, 40
+model_flexi			data/models_unit/unit_egyptian_numidian_lowest.cas, max
+model_sprite		60.0, data/sprites/carthage_numidian_cavalry_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				persian_sparabara_merc
+skeleton			fs_spearman										; combat spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_persian_sparabara_merc.tga
+model_flexi_m		data/models_unit/unit_persian_sparabara_high.cas, 15
+model_flexi_m		data/models_unit/unit_persian_sparabara_med.cas, 30
+model_flexi_m		data/models_unit/unit_persian_sparabara_low.cas, 40
+model_flexi			data/models_unit/unit_persian_sparabara_lowest.cas, max
+model_sprite		60.0, data/sprites/persian_sparabara_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				egyptian_peltast_merc
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman										; throwing spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_egyption_peltast_merc.tga
+model_flexi			data/models_unit/unit_egyption_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_egyption_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_egyption_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_egyption_peltast_lowest.cas, max
+model_sprite		60.0, data/sprites/egyptian_peltast_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_hoplite_merc
+skeleton			fs_slow_spearman, fs_slow_swordsman									; combat spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_greek_hoplite_mercs.tga
+model_flexi			data/models_unit/unit_greek_hoplite_high.cas, 15
+model_flexi			data/models_unit/unit_greek_hoplite_med.cas, 30
+model_flexi			data/models_unit/unit_greek_hoplite_low.cas, 40
+model_flexi			data/models_unit/unit_greek_hoplite_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_hoplite_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_peltast_merc
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman									; throwing spear
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_greek_peltast_merc.tga
+model_flexi			data/models_unit/unit_greek_peltast_high.cas, 15
+model_flexi			data/models_unit/unit_greek_peltast_med.cas, 30
+model_flexi			data/models_unit/unit_greek_peltast_low.cas, 40
+model_flexi			data/models_unit/unit_greek_peltast_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_peltast_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_slinger_merc
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_roman_slinger_merc.tga
+model_flexi			data/models_unit/unit_roman_slinger_high.cas, 8
+model_flexi			data/models_unit/unit_roman_slinger_med.cas, 15
+model_flexi			data/models_unit/unit_roman_slinger_low.cas, 30
+model_flexi			data/models_unit/unit_roman_slinger_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_slinger_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				carthaginian_slinger_merc
+skeleton			fs_slinger_new, fs_slinger_new
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_roman_slinger_merc.tga
+model_flexi			data/models_unit/unit_roman_slinger_high.cas, 8
+model_flexi			data/models_unit/unit_roman_slinger_med.cas, 15
+model_flexi			data/models_unit/unit_roman_slinger_low.cas, 30
+model_flexi			data/models_unit/unit_roman_slinger_lowest.cas, max
+model_sprite		60.0, data/sprites/carthaginian_slinger_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_heavy_peltast_merc
+skeleton			fs_semi_fast_javelinman, fs_semi_fast_swordsman
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_greek_heavy_peltast_merc.tga
+model_flexi			data/models_unit/greek_heavy_peltast_high.cas, 15
+model_flexi			data/models_unit/greek_heavy_peltast_med.cas, 30
+model_flexi			data/models_unit/greek_heavy_peltast_low.cas, 40
+model_flexi			data/models_unit/greek_heavy_peltast_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_heavy_peltast_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				barb_horse_archer_merc
+skeleton			fs_hc_archer, fs_hc_swordsman
+indiv_range			40
+texture				scythia, data/models_unit/textures/unit_barb_warband_archer_scythia.tga
+texture				slave, data/models_unit/textures/unit_barb_warband_archer_slave.tga
+texture				mercs, data/models_unit/textures/unit_barb_warband_archer_merc.tga
+model_flexi			data/models_unit/unit_warband_archer_high.cas, 8
+model_flexi			data/models_unit/unit_warband_archer_med.cas, 15
+model_flexi			data/models_unit/unit_warband_archer_low.cas, 30
+model_flexi			data/models_unit/unit_warband_archer_lowest.cas, max
+model_sprite		60.0, data/sprites/barb_horse_archer_merc_sprite.spr
+model_sprite		slave, 60.0, data/sprites/slave_barb_horse_archer_merc_sprite.spr
+model_sprite		scythia, 60.0, data/sprites/scythia_barb_horse_archer_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_archer_merc
+skeleton			fs_semi_fast_archer, fs_semi_fast_dagger
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_greek_archer_mercs.tga
+model_flexi			data/models_unit/unit_greek_archer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_archer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_archer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_archer_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_archer_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+type				greek_elephant_crew_merc
+skeleton			fs_forest_elephant_rider
+indiv_range			40
+texture				merc, data/models_unit/textures/unit_greek_archer_mercs.tga
+model_flexi			data/models_unit/unit_greek_archer_high.cas, 15
+model_flexi			data/models_unit/unit_greek_archer_med.cas, 30
+model_flexi			data/models_unit/unit_greek_archer_low.cas, 40
+model_flexi			data/models_unit/unit_greek_archer_lowest.cas, max
+model_sprite		60.0, data/sprites/greek_elephant_crew_merc_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+;;;;;; TEMPORARY UNITS ;;;;;;;;;;;;;;;
+
+type				carthaginian_medium_infantry												; combat spear
+skeleton			fs_slow_spearman, fs_slow_swordsman
+indiv_range			40
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_high.cas, 15
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_med.cas, 30
+model_flexi_m		data/models_unit/unit_carthage_heavy_infantry_low.cas, 40
+model_flexi		data/models_unit/unit_carthage_heavy_infantry_lowest.cas, max
+model_sprite		60.0, data/sprites/carthaginian_medium_infantry_sprite.spr
+model_tri			400, 0.5f, 0.5f, 0.5f
+
+
+
+;MISSING Carthage_Royal_Cavalry			;Needs big round shield
+;MISSING Problem with visigoth cav secondary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

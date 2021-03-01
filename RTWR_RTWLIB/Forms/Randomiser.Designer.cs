@@ -41,6 +41,7 @@
             this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
+            this.chk_removeSPQR = new System.Windows.Forms.CheckBox();
             this.btn_advancedOptions = new System.Windows.Forms.Button();
             this.chk_dev_chosen = new System.Windows.Forms.CheckBox();
             this.chk_preferences = new System.Windows.Forms.CheckBox();
@@ -86,7 +87,8 @@
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chk_removeSPQR = new System.Windows.Forms.CheckBox();
+            this.chk_rndFationStart = new System.Windows.Forms.CheckBox();
+            this.cmb_factionSelect = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -103,7 +105,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.chk_test);
             this.panel1.Controls.Add(this.lbl_msg);
             this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
@@ -121,13 +122,14 @@
             // chk_test
             // 
             this.chk_test.AutoSize = true;
-            this.chk_test.Location = new System.Drawing.Point(239, 355);
+            this.chk_test.Location = new System.Drawing.Point(7, 180);
             this.chk_test.Name = "chk_test";
-            this.chk_test.Size = new System.Drawing.Size(78, 17);
+            this.chk_test.Size = new System.Drawing.Size(70, 17);
             this.chk_test.TabIndex = 10;
-            this.chk_test.Text = "Quick Test";
-            this.tooltip.SetToolTip(this.chk_test, "Skip menus and open campaign");
+            this.chk_test.Text = "Start with";
+            this.tooltip.SetToolTip(this.chk_test, "Skip menus and opens campaign with faction selected below");
             this.chk_test.UseVisualStyleBackColor = true;
+            this.chk_test.CheckedChanged += new System.EventHandler(this.chk_test_CheckedChanged);
             // 
             // lbl_msg
             // 
@@ -236,6 +238,9 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.Controls.Add(this.cmb_factionSelect);
+            this.grp_settings_misc.Controls.Add(this.chk_test);
+            this.grp_settings_misc.Controls.Add(this.chk_rndFationStart);
             this.grp_settings_misc.Controls.Add(this.chk_removeSPQR);
             this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
             this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
@@ -248,6 +253,16 @@
             this.grp_settings_misc.TabIndex = 9;
             this.grp_settings_misc.TabStop = false;
             this.grp_settings_misc.Text = "Misc Settings";
+            // 
+            // chk_removeSPQR
+            // 
+            this.chk_removeSPQR.AutoSize = true;
+            this.chk_removeSPQR.Location = new System.Drawing.Point(7, 88);
+            this.chk_removeSPQR.Name = "chk_removeSPQR";
+            this.chk_removeSPQR.Size = new System.Drawing.Size(99, 17);
+            this.chk_removeSPQR.TabIndex = 5;
+            this.chk_removeSPQR.Text = "Remove SPQR";
+            this.chk_removeSPQR.UseVisualStyleBackColor = true;
             // 
             // btn_advancedOptions
             // 
@@ -779,15 +794,25 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // chk_removeSPQR
+            // chk_rndFationStart
             // 
-            this.chk_removeSPQR.AutoSize = true;
-            this.chk_removeSPQR.Location = new System.Drawing.Point(7, 89);
-            this.chk_removeSPQR.Name = "chk_removeSPQR";
-            this.chk_removeSPQR.Size = new System.Drawing.Size(99, 17);
-            this.chk_removeSPQR.TabIndex = 5;
-            this.chk_removeSPQR.Text = "Remove SPQR";
-            this.chk_removeSPQR.UseVisualStyleBackColor = true;
+            this.chk_rndFationStart.AutoSize = true;
+            this.chk_rndFationStart.Location = new System.Drawing.Point(7, 111);
+            this.chk_rndFationStart.Name = "chk_rndFationStart";
+            this.chk_rndFationStart.Size = new System.Drawing.Size(102, 17);
+            this.chk_rndFationStart.TabIndex = 6;
+            this.chk_rndFationStart.Text = "Surprise Faction";
+            this.tooltip.SetToolTip(this.chk_rndFationStart, "Skips menus and launches the a campaign with a randomly chosen faction");
+            this.chk_rndFationStart.UseVisualStyleBackColor = true;
+            this.chk_rndFationStart.CheckedChanged += new System.EventHandler(this.chk_rndFationStart_CheckedChanged);
+            // 
+            // cmb_factionSelect
+            // 
+            this.cmb_factionSelect.FormattingEnabled = true;
+            this.cmb_factionSelect.Location = new System.Drawing.Point(7, 203);
+            this.cmb_factionSelect.Name = "cmb_factionSelect";
+            this.cmb_factionSelect.Size = new System.Drawing.Size(112, 21);
+            this.cmb_factionSelect.TabIndex = 11;
             // 
             // RandomiserForm
             // 
@@ -886,6 +911,8 @@
         private System.Windows.Forms.Label lbl_msg;
         private System.Windows.Forms.CheckBox chk_test;
         private System.Windows.Forms.CheckBox chk_removeSPQR;
+        private System.Windows.Forms.CheckBox chk_rndFationStart;
+        private System.Windows.Forms.ComboBox cmb_factionSelect;
     }
 }
 

@@ -12,6 +12,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomAttributes(EDU edu, NumericUpDown maxAttributes)
 		{
+			TWRandom.RefreshRndSeed();
 			if (maxAttributes is NumericUpDown)
 			{
 				NumericUpDown maxA = new NumericUpDown();

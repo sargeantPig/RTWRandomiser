@@ -11,6 +11,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void VoronoiSettlements(Descr_Strat ds, Descr_Region dr)
         {
+            TWRandom.RefreshRndSeed();
             Dictionary<int[], List<ISettlement>> voronoiCoords = new Dictionary<int[], List<ISettlement>>();
             List<Settlement> tempSettlements = new List<Settlement>();
 
@@ -68,8 +69,6 @@ namespace RTWR_RTWLIB.Randomiser
                     voronoiCoords.Clear();
                 }
             }
-
-
 
             //give factions settlements
             int counter = 0;

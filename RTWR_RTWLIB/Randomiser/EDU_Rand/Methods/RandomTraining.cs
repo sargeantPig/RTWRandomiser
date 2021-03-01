@@ -10,6 +10,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomTraining(EDU edu)
 		{
+			TWRandom.RefreshRndSeed();
 			foreach (Unit unit in edu.units)
 			{
 				unit.mental.training = LibFuncs.RandomFlag<Statmental_training>(TWRandom.rnd);

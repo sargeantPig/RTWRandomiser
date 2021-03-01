@@ -29,10 +29,9 @@ namespace RTWR_RTWLIB.Randomiser
 				{
 					foreach (Brecruit br in b.capability.canRecruit)
 					{
-						if (br.requiresFactions.Count > 0 && ignoreIfAlreadySet)
-							continue;
 						br.requiresFactions.Clear();
 						br.requiresFactions = new List<string>(edu.FindUnit(br.name).ownership);
+						br.requiresFactions = br.requiresFactions.RemoveDuplicates();
 					}
 				}
 			}
@@ -40,6 +39,7 @@ namespace RTWR_RTWLIB.Randomiser
 		}
 		public static void SetTieredRecruitment(this EDB edb, EDU edu)
 		{
+			TWRandom.RefreshRndSeed();
 			foreach (CoreBuilding cb in edb.buildingTrees) //clear units from recruitment table
 				foreach (Building b in cb.buildings)
 				{
@@ -48,8 +48,8 @@ namespace RTWR_RTWLIB.Randomiser
 
 			object[] unitSplit = new object[4]{
 				edu.FindUnitsByArgAndFaction(new string[] { "missile infantry", "siege"}),
-				edu.FindUnitsByArgAndFaction(new string[] { "light cavalry", "heavy cavalry" }),
-				edu.FindUnitsByArgAndFaction(new string[] { "light infantry", "heavy infantry", "spearmen" }),
+				edu.FindUnitsByArgAndFaction(new string[] { "light cavalry", "heavy cavalry", "missile cavalry"}),
+				edu.FindUnitsByArgAndFaction(new string[] { "light infantry", "heavy infantry", "spearmen", "handler" }),
 				edu.FindUnitsByArgAndFaction(new string[] { "ship" })
 			};
 
@@ -97,18 +97,20 @@ namespace RTWR_RTWLIB.Randomiser
 			if (units.Count > 0)
 				unitType = GetUnitRealType(units[0].uClass, units[0].category);
 
-
 			var buildingTree = edb.GetBuildingTree(typeByBuildingTree[unitType]);
-
 			int numberOfUnits = units.Count;
 			int numberOfBuildings = buildingTree.buildings.Count;
 			int unitsPerBuilding = numberOfUnits / numberOfBuildings;
-
-			float tierCounter = unitsPerBuilding;
+			float currPerChange = 0.1f;
+			
 			int buildingLevel = 1;
 
 			var barbFactionsStr = lt.LookUpString<Cultures>(Cultures.barbarian);
 			var barbFactionsList = barbFactionsStr.StringToArray();
+
+			var tierPct = UnitsPerTierInPct(0.3f, numberOfUnits, numberOfBuildings);
+			float tierCounter = tierPct[0] * numberOfUnits;
+			int tierIndex = 0;
 			for (int bi = 0; bi < buildingTree.buildings.Count; bi++)
 			{
 				if (tierCounter >= 1)
@@ -117,8 +119,10 @@ namespace RTWR_RTWLIB.Randomiser
 					int experience = buildingLevel - 1;
 					int experienceDecrease = unitsPerBuilding;
 					int tracker = 1;
+
 					for (int i = 0; i < increase; i += 1)
 					{
+
 						if (!buildingTree.buildings[bi].capability.ContainsUnit(sorted[i].type))
 							buildingTree.buildings[bi].capability.canRecruit.Add(new Brecruit(sorted[i].type, experience >= 1 ? experience : 0));
 						/*foreach (string barb in barbFactionsList)
@@ -150,8 +154,9 @@ namespace RTWR_RTWLIB.Randomiser
 						tracker++;
 					}
 				}
-			
-				tierCounter += unitsPerBuilding;
+				tierIndex++;
+				if(tierIndex < tierPct.Count)
+					tierCounter += tierPct[tierIndex] * numberOfUnits;
 				buildingLevel++;
 			}
 		}
@@ -174,7 +179,7 @@ namespace RTWR_RTWLIB.Randomiser
 						{
 							int exp = 0;
 							
-							foreach (var building in buildingTree .buildings)
+							foreach (var building in buildingTree.buildings)
 							{
 								if (building.capability.ContainsUnit(u.type))
 									break;
@@ -190,8 +195,41 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 					rndChance -= 1;
 					maxPoints += 2;
+
+					if (maxPoints > sorted.Last().pointValue * 2)
+					{
+						var unit = sorted[(int)(sorted.Count() / 2)];
+						unit.ownership.Add(faction);
+						int exp = 0;
+						foreach (var building in buildingTree.buildings)
+						{
+							if (building.capability.ContainsUnit(unit.type))
+								break;
+							building.capability.canRecruit.Add(new Brecruit(unit.type, exp));
+							building.capability.canRecruit.Last().requiresFactions.Add(faction);
+							exp += 1;
+						}
+						unitChosen = true;
+					}
+
 				}
 			}
+		}
+
+		static List<float> UnitsPerTierInPct(float largestPercent, int unitCount, int bCount)
+		{
+			List<float> percents = new List<float>();
+			percents.Add(largestPercent);
+			percents.Add(1f - largestPercent);
+			while (percents.Count < bCount)
+			{
+				float prevPerc = percents.Last();
+				percents.RemoveAt(percents.Count - 1);
+				percents.Add(prevPerc * 0.5f);
+				percents.Add(prevPerc * 0.5f);
+			}
+
+			return percents;
 		}
 
 		static UnitType GetUnitRealType(string uclass, string category)

@@ -14,6 +14,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void MightyEmpires(Descr_Strat ds, EDU edu, NamesFile names, Descr_Region dr, EDB edb)
         {
+            TWRandom.RefreshRndSeed();
             if (ds.GetType() == typeof(M2DS))
             {
                 M2TWMightyEmpires(ds, edu, names, dr, edb);
@@ -90,8 +91,8 @@ namespace RTWR_RTWLIB.Randomiser
 
                 Cultures culture = lt.LookUpKey<Cultures>(f.name);
 
-                //if (culture == Cultures.barbarian)
-                 //   power = 4;
+                if (culture == Cultures.barbarian)
+                    power = 4;
 
                 foreach (Settlement s in f.settlements)
                 {

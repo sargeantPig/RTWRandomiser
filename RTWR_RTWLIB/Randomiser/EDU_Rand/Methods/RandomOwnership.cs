@@ -18,9 +18,7 @@ namespace RTWR_RTWLIB.Randomiser
 		public static void RandomOwnership(EDU edu, Descr_Region dr, NumericUpDown maxOwnership)
 		{
 			int ownershipPerUnit = (int)maxOwnership.Value;
-
-			ownershipPerUnit += 1; //account for slave always taking up a slot
-
+			TWRandom.RefreshRndSeed();
 			if (TWRandom.advancedOptions.options[advancedOptionKeys.rdb_randomShuffle.ToString()] == 1)
 			{
 				SimpleOwnership(edu, ownershipPerUnit);
@@ -82,7 +80,6 @@ namespace RTWR_RTWLIB.Randomiser
 
 				total += unit.pointValue;
 				unit.ownership.Clear();
-				unit.ownership.Add("slave");
 			}
 
 			averagePoints = total / edu.units.Count;
@@ -115,6 +112,12 @@ namespace RTWR_RTWLIB.Randomiser
 				bool hasBoats = FactionHasBoats(edu, faction);
 				if (!hasBoats)
 					GiveBoats(edu, faction);
+			}
+
+			foreach (Unit u in edu.units)
+			{
+				u.ownership.Add("slave");
+				u.ownership = u.ownership.RemoveDuplicates();
 			}
 		}
 

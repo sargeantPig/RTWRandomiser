@@ -3153,7 +3153,7 @@ faction: macedon
 		Kypris
 		Lampito
 		Lasthena
-		Leucothoë
+		Leucotho
 		Maia
 		Megara
 		Melite
@@ -3176,7 +3176,7 @@ faction: macedon
 		Telephassa
 		Thelma
 		Theresa
-		Thoösa
+		Thoosa
 		Tyro
 		Zenobia
 		Achradina
@@ -3199,7 +3199,7 @@ faction: macedon
 		Clio
 		Creusa
 		Cymothoe
-		Danaë
+		Dana
 		Demetria
 		Dirce
 		Egeria
@@ -3216,8 +3216,8 @@ faction: macedon
 		Iphianassa
 		Iris
 		Kallixeina
-		Khlöe
-		Koré
+		Khloe
+		Kore
 		Kyra
 		Lanike
 		Latona
@@ -3303,11 +3303,11 @@ faction: macedon
 		Anysia
 		Ariadne
 		Artemisia
-		Atë
+		At
 		Axiothea
 		Briseis
 		Calypso
-		Chloë
+		Chlo
 		Cilla
 		Corythia
 		Cydippe
@@ -3355,12 +3355,12 @@ faction: macedon
 		Tecmessa
 		Thebe
 		Theophano
-		Thoë
+		Tho
 		Tryphosa
 		Xenophile
 		Ada
 		Aethre
-		Agathé
+		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -3424,7 +3424,7 @@ faction: macedon
 		Thisbe
 		Tryphena
 		Xene
-		Actë
+		Act
 		Aerope
 		Agarista
 		Aikaterine
@@ -4974,7 +4974,7 @@ faction: greek_cities
 		Kypris
 		Lampito
 		Lasthena
-		Leucothoë
+		Leucotho
 		Maia
 		Megara
 		Melite
@@ -4997,7 +4997,7 @@ faction: greek_cities
 		Telephassa
 		Thelma
 		Theresa
-		Thoösa
+		Thoosa
 		Tyro
 		Zenobia
 		Achradina
@@ -5020,7 +5020,7 @@ faction: greek_cities
 		Clio
 		Creusa
 		Cymothoe
-		Danaë
+		Dana
 		Demetria
 		Dirce
 		Egeria
@@ -5037,8 +5037,8 @@ faction: greek_cities
 		Iphianassa
 		Iris
 		Kallixeina
-		Khlöe
-		Koré
+		Khloe
+		Kore
 		Kyra
 		Lanike
 		Latona
@@ -5124,11 +5124,11 @@ faction: greek_cities
 		Anysia
 		Ariadne
 		Artemisia
-		Atë
+		At
 		Axiothea
 		Briseis
 		Calypso
-		Chloë
+		Chlo
 		Cilla
 		Corythia
 		Cydippe
@@ -5176,12 +5176,12 @@ faction: greek_cities
 		Tecmessa
 		Thebe
 		Theophano
-		Thoë
+		Tho
 		Tryphosa
 		Xenophile
 		Ada
 		Aethre
-		Agathé
+		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -5245,7 +5245,7 @@ faction: greek_cities
 		Thisbe
 		Tryphena
 		Xene
-		Actë
+		Act
 		Aerope
 		Agarista
 		Aikaterine
@@ -5635,7 +5635,7 @@ faction: seleucid
 		Kypris
 		Lampito
 		Lasthena
-		Leucothoë
+		Leucotho
 		Maia
 		Megara
 		Melite
@@ -5658,7 +5658,7 @@ faction: seleucid
 		Telephassa
 		Thelma
 		Theresa
-		Thoösa
+		Thoosa
 		Tyro
 		Zenobia
 		Achradina
@@ -5681,7 +5681,7 @@ faction: seleucid
 		Clio
 		Creusa
 		Cymothoe
-		Danaë
+		Dana
 		Demetria
 		Dirce
 		Egeria
@@ -5698,8 +5698,8 @@ faction: seleucid
 		Iphianassa
 		Iris
 		Kallixeina
-		Khlöe
-		Koré
+		Khloe
+		Kore
 		Kyra
 		Lanike
 		Latona
@@ -5785,11 +5785,11 @@ faction: seleucid
 		Anysia
 		Ariadne
 		Artemisia
-		Atë
+		At
 		Axiothea
 		Briseis
 		Calypso
-		Chloë
+		Chlo
 		Cilla
 		Corythia
 		Cydippe
@@ -5837,12 +5837,12 @@ faction: seleucid
 		Tecmessa
 		Thebe
 		Theophano
-		Thoë
+		Tho
 		Tryphosa
 		Xenophile
 		Ada
 		Aethre
-		Agathé
+		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -5906,7 +5906,7 @@ faction: seleucid
 		Thisbe
 		Tryphena
 		Xene
-		Actë
+		Act
 		Aerope
 		Agarista
 		Aikaterine
@@ -6656,7 +6656,7 @@ faction: thrace
 		Satres
 		Sautes
 		Skaris
-		Skílas
+		Skilas
 		Suratralis
 		Tarusinas
 		Ziles
@@ -6713,7 +6713,7 @@ faction: slave
 		Satres
 		Sautes
 		Skaris
-		Skílas
+		Skilas
 
 	women
 		Beth

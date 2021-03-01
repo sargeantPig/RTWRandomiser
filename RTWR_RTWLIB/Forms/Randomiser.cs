@@ -103,7 +103,8 @@ namespace RTWR_RTWLIB
 				{
 					if (main.Load(chk_LogAll, lbl_progress))
 						main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked);
+							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked,
+							chk_test.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
 					else
 					{
 						main.PLog("Load failed - Check log for details.");
@@ -185,7 +186,7 @@ namespace RTWR_RTWLIB
 				args[0] += "-ai ";
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
-			if (chk_test.Checked)
+			if (chk_test.Checked || chk_rndFationStart.Checked)
 				args[0] += "-strat:imperial_campaign ";
 
 			if (main.isM2TW)
@@ -283,6 +284,18 @@ namespace RTWR_RTWLIB
 			}
 
 			return false;
+		}
+
+		private void chk_rndFationStart_CheckedChanged(object sender, EventArgs e)
+		{
+
+			chk_test.Enabled = !chk_rndFationStart.Checked;
+			cmb_factionSelect.Enabled = !chk_rndFationStart.Checked;
+		}
+
+		private void chk_test_CheckedChanged(object sender, EventArgs e)
+		{
+			chk_rndFationStart.Checked = false;
 		}
 	}
 }

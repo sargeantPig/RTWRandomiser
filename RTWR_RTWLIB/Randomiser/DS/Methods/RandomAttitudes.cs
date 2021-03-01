@@ -10,6 +10,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandCoreAttitudes(Descr_Strat ds, Descr_Region dr)
         {
+            TWRandom.RefreshRndSeed();
             LookUpTables lt = new LookUpTables();
             /*  Allied = 0
                 Suspicious = 100

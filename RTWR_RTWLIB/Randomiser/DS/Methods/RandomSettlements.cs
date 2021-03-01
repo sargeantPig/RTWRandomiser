@@ -11,7 +11,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandomSettlements(Descr_Strat ds, Descr_Region dr, NumericUpDown maxSettlements)
         {
-
+            TWRandom.RefreshRndSeed();
             List<Settlement> tempSettlements = new List<Settlement>();
 
             Action<Faction> AddRSettlement = (f) =>

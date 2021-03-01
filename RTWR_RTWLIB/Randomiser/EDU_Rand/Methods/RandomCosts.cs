@@ -9,6 +9,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandomCosts(EDU edu)
         {
+            TWRandom.RefreshRndSeed();
             foreach (Unit unit in edu.units)
             {
                 int totalCost = 0;
