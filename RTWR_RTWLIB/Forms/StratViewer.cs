@@ -22,7 +22,7 @@ namespace RTWR_RTWLIB
     {
         Descr_Strat ds;
         Descr_Region dr;
-        SM_Factions smf;
+        SMFactions smf;
         SelectMaps map;
         MapViewer mv;
         EDU_viewer eduViewer;
@@ -52,7 +52,7 @@ namespace RTWR_RTWLIB
                     {
                         dsv_treeView.Nodes[faction.name].Nodes["Settlements"].Nodes[settlement.region].Nodes.Add(building.name);
                     }
-                    foreach (var resource in dr.rgbRegions[settlement.region].resources)
+                    foreach (var resource in dr.regions[settlement.region].resources)
                     {
                         dsv_treeView.Nodes[faction.name].Nodes["Settlements"].Nodes[settlement.region].Nodes["Resources"].Nodes.Add(resource, resource);
                     }
@@ -112,7 +112,7 @@ namespace RTWR_RTWLIB
         {
             set { dr = value; }
         }
-        public SM_Factions sm_factions
+        public SMFactions sm_factions
         {
             set { smf = value; }
         }
@@ -145,7 +145,7 @@ namespace RTWR_RTWLIB
             {
                 string path = dsv_treeView.SelectedNode.FullPath;
                 string[] split = path.Split('\\');
-                if (split.Count() > 3)
+                if (split.Count() > 3 && eduViewer != null)
                 {
                     if (split[1] == "Characters" && eduViewer.Controls.Count > 0)
                         eduViewer.UpdateUnitTxt(null, dsv_treeView.SelectedNode.Text);
