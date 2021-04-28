@@ -7,7 +7,7 @@ Head over to the release page and download the latest release!
 Then just extract all the files from the downloaded archive into the root Rome Total War directory (where the RomeTW.exe is). 
 
 # Showcase
-![Main Screen](https://media.discordapp.net/attachments/565196156221521940/823896338546294784/unknown.png)
+![Screenshot](https://i.imgur.com/NnHqeim.png "Randomiser Screenshot")
 
 The randomiser has many options, some ridiculous but some that really do create enjoyable scenarios. There's also many more more features planned!
  
@@ -15,8 +15,3 @@ The randomiser has many options, some ridiculous but some that really do create 
 * Randomised faction rosters - This randomly assigns factions units that it can recruit, you'll never know what the enemy may have in their arsenal.
 * Voronoi Empires - Distributes settlements to factions randomly using a voronoi grid. 
 
-# Help and Support
-Join the Randomiser Discord server for help, discussion or leave some suggestions!
-[Invite to TWRandomiser Server](https://discord.gg/H4k23fgTbB)
-
-Alternatively if you've found a bug or have an issue please commit an issue here: [Issues](https://github.com/sargeantPig/RTWRandomiser/issues)

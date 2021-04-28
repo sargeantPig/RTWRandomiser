@@ -1,4 +1,5 @@
 ﻿using RTWLib.Data;
+using RTWLib.Extensions;
 using RTWLib.Functions;
 using RTWLib.Objects.Descr_strat;
 using RTWR_RTWLIB.Data;
@@ -10,6 +11,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandCoreAttitudes(Descr_Strat ds, Descr_Region dr)
         {
+            TWRandom.RefreshRndSeed();
             LookUpTables lt = new LookUpTables();
             /*  Allied = 0
                 Suspicious = 100
@@ -22,12 +24,12 @@ namespace RTWR_RTWLIB.Randomiser
             {
                 foreach (var b in a.settlements)
                 {
-                    foreach (var c in dr.rgbRegions)
+                    foreach (var c in dr.regions)
                     {
                         string name = c.Value.name;
-                        int[] coorda = { dr.rgbRegions[b.region].x, dr.rgbRegions[b.region].y };
+                        int[] coorda = { dr.regions[b.region].x, dr.regions[b.region].y };
                         int[] coordb = { c.Value.x, c.Value.y };
-                        double distance = Functions_General.DistanceTo(coorda, coordb);
+                        double distance = coorda.DistanceTo(coordb);
                         if (!regionDistances.ContainsKey(b.region))
                             regionDistances.Add(b.region, new Dictionary<string, double> { { name, distance } });
                         else regionDistances[b.region].Add(name, distance);
@@ -41,7 +43,7 @@ namespace RTWR_RTWLIB.Randomiser
             fp.Remove("slave");
             foreach (var a in ds.factions)
             {
-                fp.Add(a.name, Functions_General.RandomFlag<Personality>(TWRandom.rnd));
+                fp.Add(a.name, ExtRandom.RandomFlag<Personality>(TWRandom.rnd));
             }
 
             ds.coreAttitudes.attitudes.Clear();
@@ -87,7 +89,7 @@ namespace RTWR_RTWLIB.Randomiser
                                 }
                                 else ds.factionRelationships.attitudes[f].Add(relationValue, new List<string>() { tempf });
                             }
-                            else ds.factionRelationships.attitudes.Add(f, new Dictionary<int, List<string>> { { relationValue, new List<string>() { tempf } } });
+                            else ds.factionRelationships.attitudes.Add(f, new Dictionary<object, List<string>> { { relationValue, new List<string>() { tempf } } });
 
 
                             if (completePairs.Contains(new KeyValuePair<string, string>(f, tempf)) ||
@@ -104,7 +106,7 @@ namespace RTWR_RTWLIB.Randomiser
                                         ds.coreAttitudes.attitudes[f][personalvalue].Add(tempf);
                                     else ds.coreAttitudes.attitudes[f].Add(personalvalue, new List<string>() { tempf });
                                 }
-                                else ds.coreAttitudes.attitudes.Add(f, new Dictionary<int, List<string>> { { personalvalue, new List<string>() { tempf } } });
+                                else ds.coreAttitudes.attitudes.Add(f, new Dictionary<object, List<string>> { { personalvalue, new List<string>() { tempf } } });
                                 completePairs.Add(new KeyValuePair<string, string>(f, tempf));
                                 completePairs.Add(new KeyValuePair<string, string>(tempf, f));
                             }

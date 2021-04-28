@@ -1,4 +1,5 @@
-﻿using RTWLib.Functions;
+﻿using RTWLib.Extensions;
+using RTWLib.Functions;
 using RTWLib.Objects.Descr_strat;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandomSettlements(Descr_Strat ds, Descr_Region dr, NumericUpDown maxSettlements)
         {
-
+            TWRandom.RefreshRndSeed();
             List<Settlement> tempSettlements = new List<Settlement>();
 
             Action<Faction> AddRSettlement = (f) =>
@@ -60,7 +61,7 @@ namespace RTWR_RTWLIB.Randomiser
                     foreach (Settlement s in tempSettlements)
                     {
                         int[] cityCoords = dr.GetCityCoords(s.region);
-                        double tempDis = Functions_General.DistanceTo(cityCoords, capitalCoords);
+                        double tempDis = cityCoords.DistanceTo(capitalCoords);
 
                         if (tempDis < distance)
                         {

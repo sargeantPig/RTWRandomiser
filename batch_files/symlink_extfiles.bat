@@ -1,3 +1,5 @@
-mklink /D "D:\Games\SteamLibrary\SteamApps\common\Rome Total War Gold\randomiser" "C:\Repositories\RomeModding\RTWRandomiser\ext_files\randomiser"
+mklink /D "C:\Repositories\RomeModding\RTWRandomiser\RTWR_RTWLIB\bin\Publish\mrandomiser" "C:\Repositories\RomeModding\RTWRandomiser\ext_files\mrandomiser"
+
+
 
 pause

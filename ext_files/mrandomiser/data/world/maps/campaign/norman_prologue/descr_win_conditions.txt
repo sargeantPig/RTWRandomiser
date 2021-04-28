@@ -1,0 +1,19 @@
+normans
+hold_regions Nottingham_Province London_Province Caen_Province
+take_regions 3
+
+scotland
+hold_regions Roman_Province Constantinople_Province Jerusalem_Province
+take_regions 45
+
+papal_states
+hold_regions Roman_Province Constantinople_Province Jerusalem_Province
+take_regions 45
+
+saxons
+hold_regions Roman_Province Constantinople_Province Jerusalem_Province
+take_regions 45
+
+slave
+hold_regions Roman_Province Constantinople_Province Jerusalem_Province
+take_regions 120

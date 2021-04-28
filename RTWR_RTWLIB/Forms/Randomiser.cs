@@ -15,10 +15,12 @@ using RTWR_RTWLIB.Randomiser;
 using System.Threading;
 using System.Diagnostics;
 using RTWLib.Memory;
-
 using RTWR_RTWLIB.Data;
 using RTWR_RTWLIB.Forms;
 using RTWLib.Functions.EDU;
+using RTWLib.Medieval2;
+using ImageMagick;
+using System.ComponentModel.Design;
 
 namespace RTWR_RTWLIB
 {
@@ -27,24 +29,62 @@ namespace RTWR_RTWLIB
 		Main main;
 		EDU_viewer edu;
 		StratViewer strat;
-		public RandomiserForm()
+		MapGeneratorForm mapGen;
+		public RandomiserForm(string updateMessage, bool isM2TW)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
-			main = new Main(pb_progress, statusStrip1, grp_box_settings);
+			picBox_map.SizeMode = PictureBoxSizeMode.Zoom;
+			if (isM2TW)
+			{
+				this.Text = "Medieval 2 Randomiser";
+				this.chk_preferences.Checked = false;
+				this.chk_preferences.Enabled = false;
+				this.chk_removeSPQR.Checked = false;
+				this.chk_removeSPQR.Enabled = false;
+				this.menuStrip1.Items[1].Enabled = false;
+				this.BackgroundImage = Properties.Resources.M2TWBackdrop;
+				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
+				this.btn_load.BackgroundImage = Properties.Resources.backdrop;
+				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
+				if (File.Exists(@"mods\randomiser\full_map.png"))
+				{
+					Image image = Image.FromFile(@"mods\randomiser\full_map.png");
+					picBox_map.Image = image;
+				}
+			}
+
+			else
+			{
+				if (File.Exists(@"randomiser\full_map.png"))
+				{
+					Image image = Image.FromFile(@"randomiser\full_map.png");
+					picBox_map.Image = image;
+				}
+			}
+
+		
+			main = new Main(pb_progress, statusStrip1, grp_box_settings, this, isM2TW);
             main.CleanLog();
 
 			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
 				main.DisplayLogExit();
 			else lbl_progress.Text = "RomeTW.exe Found.";
 
+			if (!main.AdminCheck())
+			{
+				main.PLog("Not running as Administrator.\r\n" +
+					"If you crash before battle, at end turn or when saving, consider running as admin.");
+				main.DisplayLog();
+			}
+			exeCheck();
 			//get current seed
 			if (File.Exists("randomiser_.txt"))
 			{
 				StreamReader sr = new StreamReader("randomiser_.txt");
 				string line = sr.ReadToEnd();
 				sr.Close();
-				lbl_seed.Text = "Randomiser Seed: " + line;
+				lbl_seed.Text = line;
 				txt_seed.Text = line;
 			}
 
@@ -74,8 +114,21 @@ namespace RTWR_RTWLIB
 			if (main.Load(chk_LogAll, lbl_progress))
 			{
 				main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
 
+				if (main.isM2TW)
+				{
+					if (main.M2TWLoad(chk_LogAll, lbl_progress))
+					{
+						main.M2TWRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+					lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+					}
+					else
+					{
+						main.PLog("Load failed - Check log for details.");
+						main.DisplayLog();
+					}
+				}
 			}
 			else
 			{
@@ -139,9 +192,23 @@ namespace RTWR_RTWLIB
 
 		private void Play()
 		{
+			Descr_Strat ds = new Descr_Strat();
+			ds.Parse(FileDestinations.paths[FileNames.descr_strat]["save"], out Logger.lineNumber, out Logger.lineText);
+			if (chk_startWith.Checked && chk_startWith.Enabled)
+				ds.MoveFactionToTopOfStrat((string)cmb_factionSelect.SelectedValue);
+			else if (chk_rndFationStart.Checked)
+				ds.MoveFactionToTopOfStrat(ds.playableFactions[TWRandom.rnd.Next(0, ds.playableFactions.Count())]);
+			ds.CleanUp();
+			ds.ToFile(FileDestinations.paths[FileNames.descr_strat]["save"][0]);
+			
 			string[] args = new string[1];
 
+
 			args[0] = "-mod:randomiser -show_err -nm ";
+
+			if (main.isM2TW)
+				args[0] = "--features.mod=mods/randomiser";
+			else args[0] = "-mod:randomiser -show_err -nm ";
 
 			if (chk_ai.Checked)
 				args[0] += "-ai ";
@@ -149,7 +216,10 @@ namespace RTWR_RTWLIB
 			if (chk_windowed.Checked)
 				args[0] += "-ne ";
 
-			RTWCore.core.StartProcess(args);
+			if (main.isM2TW)
+				RTWCore.core.StartProcess(args, "medieval2.exe");
+			else RTWCore.core.StartProcess(args, "RomeTW.exe");
+
 		}
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,7 +248,7 @@ namespace RTWR_RTWLIB
 			main.Load(lbl_progress, FileNames.descr_regions, "load");
 			strat.descr_region = (Descr_Region)main.GetFile(FileNames.descr_regions);
 			main.Load(lbl_progress, FileNames.descr_sm_faction, "load");
-			strat.sm_factions = (SM_Factions)main.GetFile(FileNames.descr_sm_faction);
+			strat.sm_factions = (SMFactions)main.GetFile(FileNames.descr_sm_faction);
 			strat.PopulateTree();
 			strat.Show();		
 		}
@@ -218,6 +288,65 @@ namespace RTWR_RTWLIB
 			main.options.Export(grp_box_settings);
 			main.advancedOptions.Export();
 			base.OnClosing(e);
+		}
+		private bool exeCheck()
+		{
+			if ((main.FileCheck(FilePaths.RTWEXE)))
+			{
+				lbl_progress.Text = "RomeTW.exe Found.";
+				return true;
+			}
+
+			if (!main.FileCheck("medieval2.exe"))
+				main.DisplayLogExit();
+			else
+			{
+				lbl_progress.Text = "medieval2.exe Found.";
+				return true;
+			}
+
+			return false;
+		}
+
+		private void chk_rndFationStart_CheckedChanged(object sender, EventArgs e)
+		{
+
+			chk_startWith.Enabled = !chk_rndFationStart.Checked;
+			cmb_factionSelect.Enabled = !chk_rndFationStart.Checked;
+		}
+
+		private void chk_test_CheckedChanged(object sender, EventArgs e)
+		{
+			chk_rndFationStart.Checked = false;
+		}
+
+		private void cmb_factionSelect_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			MagickImage image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+			Image bitmap = image.ToBitmap();
+			picBox_map.Image = bitmap;
+		}
+
+		private void btn_showAll_Click(object sender, EventArgs e)
+		{
+			if (File.Exists(@"randomiser\full_map.png"))
+			{
+				Image image = Image.FromFile(@"randomiser\full_map.png");
+				picBox_map.Image = image;
+			}
+		}
+
+		private void btn_showSelected_Click(object sender, EventArgs e)
+		{
+			MagickImage image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+			Image bitmap = image.ToBitmap();
+			picBox_map.Image = bitmap;
+		}
+
+		private void mapGeneratorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			mapGen = new MapGeneratorForm();
+			mapGen.Show();
 		}
 	}
 }

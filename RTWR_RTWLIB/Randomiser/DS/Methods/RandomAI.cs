@@ -7,6 +7,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void RandomAI(Descr_Strat ds)
         {
+            TWRandom.RefreshRndSeed();
             foreach (Faction f in ds.factions)
             {
                 f.ai[0] = TWRandom.GetRandomAIEconomy();

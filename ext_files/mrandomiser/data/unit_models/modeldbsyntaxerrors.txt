@@ -1,0 +1,6 @@
+Unit count at top of file       = 701
+Number of processed unit models = 701
+It is advisable that these two numbers should match.
+Total errors:               0
+String  count errors:       0
+Faction count errors:       0

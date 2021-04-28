@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.numUpDown_ragingRebelsVal = new System.Windows.Forms.NumericUpDown();
             this.lbl_ragingRebels = new System.Windows.Forms.Label();
             this.grp_advancedSettings = new System.Windows.Forms.GroupBox();
@@ -38,11 +39,17 @@
             this.rdb_balancedShuffle = new System.Windows.Forms.RadioButton();
             this.rdb_regionShuffling = new System.Windows.Forms.RadioButton();
             this.chk_balanceCosts = new System.Windows.Forms.CheckBox();
-            this.chk_balanceUnitStats = new System.Windows.Forms.CheckBox();
-            this.chk_usizeConstraints = new System.Windows.Forms.CheckBox();
+            this.chk_rndFarmlvl = new System.Windows.Forms.CheckBox();
+            this.chk_rndResources = new System.Windows.Forms.CheckBox();
+            this.grp_advRegionModifiers = new System.Windows.Forms.GroupBox();
+            this.advToolTips = new System.Windows.Forms.ToolTip(this.components);
+            this.chk_equalFarms = new System.Windows.Forms.CheckBox();
+            this.grp_unitModifiers = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_ragingRebelsVal)).BeginInit();
             this.grp_advancedSettings.SuspendLayout();
             this.grp_rdb_ownership_algos.SuspendLayout();
+            this.grp_advRegionModifiers.SuspendLayout();
+            this.grp_unitModifiers.SuspendLayout();
             this.SuspendLayout();
             // 
             // numUpDown_ragingRebelsVal
@@ -66,12 +73,10 @@
             // grp_advancedSettings
             // 
             this.grp_advancedSettings.BackColor = System.Drawing.Color.Transparent;
+            this.grp_advancedSettings.Controls.Add(this.grp_unitModifiers);
+            this.grp_advancedSettings.Controls.Add(this.grp_advRegionModifiers);
             this.grp_advancedSettings.Controls.Add(this.btn_hideAdvancedOptions);
-            this.grp_advancedSettings.Controls.Add(this.chk_realisticAttributes);
             this.grp_advancedSettings.Controls.Add(this.grp_rdb_ownership_algos);
-            this.grp_advancedSettings.Controls.Add(this.chk_balanceCosts);
-            this.grp_advancedSettings.Controls.Add(this.chk_balanceUnitStats);
-            this.grp_advancedSettings.Controls.Add(this.chk_usizeConstraints);
             this.grp_advancedSettings.Controls.Add(this.lbl_ragingRebels);
             this.grp_advancedSettings.Controls.Add(this.numUpDown_ragingRebelsVal);
             this.grp_advancedSettings.Location = new System.Drawing.Point(12, 12);
@@ -95,7 +100,7 @@
             // chk_realisticAttributes
             // 
             this.chk_realisticAttributes.AutoSize = true;
-            this.chk_realisticAttributes.Location = new System.Drawing.Point(9, 218);
+            this.chk_realisticAttributes.Location = new System.Drawing.Point(10, 42);
             this.chk_realisticAttributes.Name = "chk_realisticAttributes";
             this.chk_realisticAttributes.Size = new System.Drawing.Size(138, 17);
             this.chk_realisticAttributes.TabIndex = 7;
@@ -149,32 +154,68 @@
             // chk_balanceCosts
             // 
             this.chk_balanceCosts.AutoSize = true;
-            this.chk_balanceCosts.Location = new System.Drawing.Point(9, 195);
+            this.chk_balanceCosts.Location = new System.Drawing.Point(10, 19);
             this.chk_balanceCosts.Name = "chk_balanceCosts";
             this.chk_balanceCosts.Size = new System.Drawing.Size(119, 17);
             this.chk_balanceCosts.TabIndex = 4;
             this.chk_balanceCosts.Text = "Balance unit costs?";
             this.chk_balanceCosts.UseVisualStyleBackColor = true;
             // 
-            // chk_balanceUnitStats
+            // chk_rndFarmlvl
             // 
-            this.chk_balanceUnitStats.AutoSize = true;
-            this.chk_balanceUnitStats.Location = new System.Drawing.Point(9, 172);
-            this.chk_balanceUnitStats.Name = "chk_balanceUnitStats";
-            this.chk_balanceUnitStats.Size = new System.Drawing.Size(116, 17);
-            this.chk_balanceUnitStats.TabIndex = 3;
-            this.chk_balanceUnitStats.Text = "Balance unit stats?";
-            this.chk_balanceUnitStats.UseVisualStyleBackColor = true;
+            this.chk_rndFarmlvl.AutoSize = true;
+            this.chk_rndFarmlvl.Location = new System.Drawing.Point(6, 19);
+            this.chk_rndFarmlvl.Name = "chk_rndFarmlvl";
+            this.chk_rndFarmlvl.Size = new System.Drawing.Size(121, 17);
+            this.chk_rndFarmlvl.TabIndex = 9;
+            this.chk_rndFarmlvl.Text = "Random Farm Level";
+            this.advToolTips.SetToolTip(this.chk_rndFarmlvl, "The amount of growth/money a region recieves from farms");
+            this.chk_rndFarmlvl.UseVisualStyleBackColor = true;
             // 
-            // chk_usizeConstraints
+            // chk_rndResources
             // 
-            this.chk_usizeConstraints.AutoSize = true;
-            this.chk_usizeConstraints.Location = new System.Drawing.Point(9, 241);
-            this.chk_usizeConstraints.Name = "chk_usizeConstraints";
-            this.chk_usizeConstraints.Size = new System.Drawing.Size(183, 17);
-            this.chk_usizeConstraints.TabIndex = 2;
-            this.chk_usizeConstraints.Text = "Use custom unit size constraints?";
-            this.chk_usizeConstraints.UseVisualStyleBackColor = true;
+            this.chk_rndResources.AutoSize = true;
+            this.chk_rndResources.Location = new System.Drawing.Point(6, 66);
+            this.chk_rndResources.Name = "chk_rndResources";
+            this.chk_rndResources.Size = new System.Drawing.Size(120, 17);
+            this.chk_rndResources.TabIndex = 10;
+            this.chk_rndResources.Text = "Random Resources";
+            this.advToolTips.SetToolTip(this.chk_rndResources, "Randomly distribute resources across the map");
+            this.chk_rndResources.UseVisualStyleBackColor = true;
+            // 
+            // grp_advRegionModifiers
+            // 
+            this.grp_advRegionModifiers.Controls.Add(this.chk_equalFarms);
+            this.grp_advRegionModifiers.Controls.Add(this.chk_rndFarmlvl);
+            this.grp_advRegionModifiers.Controls.Add(this.chk_rndResources);
+            this.grp_advRegionModifiers.Location = new System.Drawing.Point(9, 255);
+            this.grp_advRegionModifiers.Name = "grp_advRegionModifiers";
+            this.grp_advRegionModifiers.Size = new System.Drawing.Size(172, 93);
+            this.grp_advRegionModifiers.TabIndex = 11;
+            this.grp_advRegionModifiers.TabStop = false;
+            this.grp_advRegionModifiers.Text = "Region Modifiers";
+            // 
+            // chk_equalFarms
+            // 
+            this.chk_equalFarms.AutoSize = true;
+            this.chk_equalFarms.Location = new System.Drawing.Point(6, 43);
+            this.chk_equalFarms.Name = "chk_equalFarms";
+            this.chk_equalFarms.Size = new System.Drawing.Size(126, 17);
+            this.chk_equalFarms.TabIndex = 11;
+            this.chk_equalFarms.Text = "Equalise Farm Levels";
+            this.advToolTips.SetToolTip(this.chk_equalFarms, "Force all regions to have the same farm level");
+            this.chk_equalFarms.UseVisualStyleBackColor = true;
+            // 
+            // grp_unitModifiers
+            // 
+            this.grp_unitModifiers.Controls.Add(this.chk_balanceCosts);
+            this.grp_unitModifiers.Controls.Add(this.chk_realisticAttributes);
+            this.grp_unitModifiers.Location = new System.Drawing.Point(9, 166);
+            this.grp_unitModifiers.Name = "grp_unitModifiers";
+            this.grp_unitModifiers.Size = new System.Drawing.Size(172, 83);
+            this.grp_unitModifiers.TabIndex = 12;
+            this.grp_unitModifiers.TabStop = false;
+            this.grp_unitModifiers.Text = "Unit Modifiers";
             // 
             // AdvancedOptionsViewer
             // 
@@ -194,6 +235,10 @@
             this.grp_advancedSettings.PerformLayout();
             this.grp_rdb_ownership_algos.ResumeLayout(false);
             this.grp_rdb_ownership_algos.PerformLayout();
+            this.grp_advRegionModifiers.ResumeLayout(false);
+            this.grp_advRegionModifiers.PerformLayout();
+            this.grp_unitModifiers.ResumeLayout(false);
+            this.grp_unitModifiers.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -209,8 +254,12 @@
         private System.Windows.Forms.RadioButton rdb_balancedShuffle;
         private System.Windows.Forms.RadioButton rdb_regionShuffling;
         private System.Windows.Forms.CheckBox chk_balanceCosts;
-        private System.Windows.Forms.CheckBox chk_balanceUnitStats;
-        private System.Windows.Forms.CheckBox chk_usizeConstraints;
         private System.Windows.Forms.Button btn_hideAdvancedOptions;
+        private System.Windows.Forms.GroupBox grp_advRegionModifiers;
+        private System.Windows.Forms.CheckBox chk_rndFarmlvl;
+        private System.Windows.Forms.CheckBox chk_rndResources;
+        private System.Windows.Forms.ToolTip advToolTips;
+        private System.Windows.Forms.GroupBox grp_unitModifiers;
+        private System.Windows.Forms.CheckBox chk_equalFarms;
     }
 }

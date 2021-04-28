@@ -7,6 +7,7 @@ namespace RTWR_RTWLIB.Randomiser
     {
 		public static void RandomGBonus(EDU edu)
 		{
+			TWRandom.RefreshRndSeed();
 			foreach (Unit unit in edu.units)
 			{
 				unit.ground[0] = TWRandom.rnd.Next(-6, 7);

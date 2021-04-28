@@ -14,6 +14,8 @@ using ImageMagick;
 using System.IO;
 using RTWR_RTWLIB.Data;
 using RTWLib.Functions.EDU;
+using RTWLib.Extensions;
+
 namespace RTWR_RTWLIB
 {
     public partial class EDU_viewer : Form
@@ -37,6 +39,12 @@ namespace RTWR_RTWLIB
             cbx_faction_list.Items.AddRange(LookUpTables.dic_factions.Values.ToArray());
             cbx_faction_list.SelectedIndex = 0;
             chk_All.Checked = true;
+
+            foreach (var ctrl in grp_highlights.Controls)
+            {
+                ((CheckBox)ctrl).CheckedChanged += new EventHandler(HightlightsChanged);
+            }
+
         }
 
         private void lst_units_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,7 +133,7 @@ namespace RTWR_RTWLIB
 
             foreach (Unit unit in units)
             {
-                lst_units.Items.Add(unit.dictionary);
+                lst_units.Items.Add(unit.dic);
             }
             UpdateUnitLabel();
         }
@@ -262,7 +270,6 @@ namespace RTWR_RTWLIB
                 chk_All.Checked = true;
             }
 
-
             if (lst_units.SelectedItem == null)
                 lst_units.SelectedItem = lst_units.Items[0];
 
@@ -276,7 +283,7 @@ namespace RTWR_RTWLIB
            
             Unit unit = edu.FindUnit(search);
 
-            lst_units.SelectedItem = unit.dictionary;
+            lst_units.SelectedItem = unit.dic;
 
             Dictionary<string, Color> highlights = GetHighlightArgs();
 
@@ -290,9 +297,9 @@ namespace RTWR_RTWLIB
             {
                 foreach (KeyValuePair<string, Color> light in highlights)
                 {
-                    if (EDU.edu_scheme.Scheme.ContainsKey(Functions_General.GetFirstWord(line.Trim())))
+                    if (EDU.edu_scheme.Scheme.ContainsKey(line.Trim().GetFirstWord()))
                     {
-                        Dictionary<string, int> components = EDU.edu_scheme.GetComponents(Functions_General.GetFirstWord(line.Trim()));
+                        Dictionary<string, int> components = EDU.edu_scheme.GetComponents(line.Trim().GetFirstWord());
                         if (components.ContainsKey(light.Key))
                         {
                             int highLightIndex = EDU.edu_scheme.GetComponentIndex(light.Key);
@@ -316,13 +323,16 @@ namespace RTWR_RTWLIB
                 }
                 if (marked.Count > 0)
                 {
-                    string space = spaces(Functions_General.GetFirstWord(line), 25);
-                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
-                    string firstRemoved = Functions_General.RemoveFirstWord(line);
+
+                    string space = spaces(line.GetFirstWord(), 25);
+                    rtxt_unit.AppendText(line.GetFirstWord() + space);
+                    string firstRemoved = line.RemoveFirstWord();
+
+
                     string[] split = firstRemoved.Split('\t', ' ', ',');
-
-                    split = split.CleanStringArray();
-
+                    string whiteSpace;
+                    split = split.RemoveThenOutWhiteSpace(out whiteSpace);
+                    rtxt_unit.AppendText(line.GetFirstWord() + whiteSpace);
                     for (int i = 0; i < split.Count(); i++)
                     {
                         if (i != 0)
@@ -336,9 +346,10 @@ namespace RTWR_RTWLIB
                 }
                 else
                 {
-                    string space = spaces(Functions_General.GetFirstWord(line), 25);
-                    rtxt_unit.AppendText(Functions_General.GetFirstWord(line) + space);
-                    rtxt_unit.AppendText(Functions_General.RemoveFirstWord(line) + "\r\n");
+
+                    string space = spaces(line.GetFirstWord(), 30);
+                    rtxt_unit.AppendText(line.GetFirstWord());
+                    rtxt_unit.AppendText(line.RemoveFirstWord() + "\r\n");
 
                 }
 
@@ -349,6 +360,10 @@ namespace RTWR_RTWLIB
             ChangeUnitPic();
             isUpdating = false;
         }
+
+
+        private void HightlightsChanged(object sender, EventArgs e)
+        { UpdateUnitTxt(); }
 
         private string spaces(string a, int target)
         {

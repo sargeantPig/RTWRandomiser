@@ -34,6 +34,7 @@
             this.lbl_units = new System.Windows.Forms.Label();
             this.cbx_faction_list = new System.Windows.Forms.ComboBox();
             this.grp_show = new System.Windows.Forms.GroupBox();
+            this.chk_ships = new System.Windows.Forms.CheckBox();
             this.chk_missile_cavalry = new System.Windows.Forms.CheckBox();
             this.chk_missile_infantry = new System.Windows.Forms.CheckBox();
             this.chk_missile = new System.Windows.Forms.CheckBox();
@@ -137,6 +138,16 @@
             this.grp_show.TabStop = false;
             this.grp_show.Text = "Show";
             this.grp_show.Click += new System.EventHandler(this.grp_show_clicked);
+            // 
+            // chk_ships
+            // 
+            this.chk_ships.AutoSize = true;
+            this.chk_ships.Location = new System.Drawing.Point(7, 318);
+            this.chk_ships.Name = "chk_ships";
+            this.chk_ships.Size = new System.Drawing.Size(52, 17);
+            this.chk_ships.TabIndex = 28;
+            this.chk_ships.Text = "Ships";
+            this.chk_ships.UseVisualStyleBackColor = true;
             // 
             // chk_missile_cavalry
             // 
@@ -475,6 +486,7 @@
         private System.Windows.Forms.CheckBox chk_hightlight_ammo;
         private System.Windows.Forms.CheckBox chk_highlight_recruitCost;
         private System.Windows.Forms.CheckBox chk_highlight_number;
+        private System.Windows.Forms.CheckBox chk_ships;
         private System.Windows.Forms.TextBox textBox1;
     }
 }

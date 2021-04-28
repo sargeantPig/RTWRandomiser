@@ -150,6 +150,12 @@
     <Compile Include="Forms\AdvancedOptionsViewer.Designer.cs">
       <DependentUpon>AdvancedOptionsViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MapGeneratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MapGeneratorForm.Designer.cs">
+      <DependentUpon>MapGeneratorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Randomiser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomiser\DR\Methods\FarmLevels.cs" />
+    <Compile Include="Randomiser\DR\Methods\RandomResources.cs" />
+    <Compile Include="Randomiser\DR\RandomDR.cs" />
+    <Compile Include="Randomiser\DSMF\RandomSMF.cs" />
     <Compile Include="Randomiser\DS\Methods\MightEmpires.cs" />
     <Compile Include="Randomiser\DS\Methods\RagingRebels.cs" />
     <Compile Include="Randomiser\DS\Methods\RandomAI.cs" />
@@ -203,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedOptionsViewer.resx">
       <DependentUpon>AdvancedOptionsViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MapGeneratorForm.resx">
+      <DependentUpon>MapGeneratorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Randomiser.resx">
       <DependentUpon>Randomiser.cs</DependentUpon>

@@ -35,7 +35,7 @@ namespace RTWR_RTWLIB.Randomiser
                                 continue;
                             else if (i == -1 && ia == -1 && !ds.coreAttitudes.attitudes.ContainsKey(first))
                             {
-                                ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
+                                ds.coreAttitudes.attitudes.Add(first, new Dictionary<object, List<string>> { { 600, new List<string>() { second } } });
                             }
                             else if (i == -1 && ia == -1 && ds.coreAttitudes.attitudes.ContainsKey(first))
                             {
@@ -56,7 +56,7 @@ namespace RTWR_RTWLIB.Randomiser
 
                         else
                         {
-                            ds.coreAttitudes.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
+                            ds.coreAttitudes.attitudes.Add(first, new Dictionary<object, List<string>> { { 600, new List<string>() { second } } });
                             completePairs.Add(first, new List<string> { second });
                             completePairs.Add(second, new List<string> { first });
                         }
@@ -64,7 +64,7 @@ namespace RTWR_RTWLIB.Randomiser
                         //do faction relationship vales
                         if (!ds.factionRelationships.attitudes.ContainsKey(first))
                         {
-                            ds.factionRelationships.attitudes.Add(first, new Dictionary<int, List<string>> { { 600, new List<string>() { second } } });
+                            ds.factionRelationships.attitudes.Add(first, new Dictionary<object, List<string>> { { 600, new List<string>() { second } } });
                         }
                         else if (ds.factionRelationships.attitudes.ContainsKey(first))
                         {

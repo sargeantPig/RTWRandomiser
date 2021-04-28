@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWR_RTWLIB", "RTWR_RTWLIB\RTWR_RTWLIB.csproj", "{F6C27841-4403-4F64-BDF2-D22AF4D3591B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWR", "RTWR_RTWLIB\RTWR.csproj", "{F6C27841-4403-4F64-BDF2-D22AF4D3591B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWLib", "..\RTWLib\RTWLib\RTWLib.csproj", "{E19BA4E2-2E33-461C-9698-40D6599A9226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTWRandLib", "RTWRandLib\RTWRandLib.csproj", "{07296B7E-634E-429A-AC42-1F1259ACDFAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,24 @@ Global
 		{E19BA4E2-2E33-461C-9698-40D6599A9226}.Release|x64.Build.0 = Release|Any CPU
 		{E19BA4E2-2E33-461C-9698-40D6599A9226}.Release|x86.ActiveCfg = Release|x86
 		{E19BA4E2-2E33-461C-9698-40D6599A9226}.Release|x86.Build.0 = Release|x86
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Debug|x86.Build.0 = Debug|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|Any CPU.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|Any CPU.Build.0 = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|x64.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|x64.Build.0 = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|x86.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Publish|x86.Build.0 = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|x64.Build.0 = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{07296B7E-634E-429A-AC42-1F1259ACDFAB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

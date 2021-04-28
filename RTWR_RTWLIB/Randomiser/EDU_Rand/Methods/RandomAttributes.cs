@@ -5,13 +5,14 @@ using RTWLib.Objects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
+using RTWLib.Extensions;
 namespace RTWR_RTWLIB.Randomiser
 {
     public partial class RandomEDU
     {
 		public static void RandomAttributes(EDU edu, NumericUpDown maxAttributes)
 		{
+			TWRandom.RefreshRndSeed();
 			if (maxAttributes is NumericUpDown)
 			{
 				NumericUpDown maxA = new NumericUpDown();
@@ -26,7 +27,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 					for (int i = 0; i < max; i++)
 					{
-						Attributes a = Functions_General.RandomFlag<Attributes>(TWRandom.rnd, 1, 17);
+						Attributes a = ExtRandom.RandomFlag<Attributes>(TWRandom.rnd, 1, 17);
 
 						if (!unit.attributes.HasFlag(a) && a != Attributes.general_unit && a != Attributes.general_unit_upgrade)
 							unit.attributes |= a;

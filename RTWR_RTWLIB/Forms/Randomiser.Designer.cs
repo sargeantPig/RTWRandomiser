@@ -30,16 +30,24 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_showSelected = new System.Windows.Forms.Button();
+            this.btn_showAll = new System.Windows.Forms.Button();
+            this.chk_rndFationStart = new System.Windows.Forms.CheckBox();
+            this.cmb_factionSelect = new System.Windows.Forms.ComboBox();
+            this.lbl_msg = new System.Windows.Forms.Label();
+            this.chk_startWith = new System.Windows.Forms.CheckBox();
             this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
             this.chk_windowed = new System.Windows.Forms.CheckBox();
             this.lbl_seed = new System.Windows.Forms.Label();
             this.btn_play = new System.Windows.Forms.Button();
             this.picBox_map = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
+            this.chk_wipeDS = new System.Windows.Forms.CheckBox();
+            this.chk_removeSPQR = new System.Windows.Forms.CheckBox();
+            this.btn_advancedOptions = new System.Windows.Forms.Button();
             this.chk_dev_chosen = new System.Windows.Forms.CheckBox();
             this.chk_preferences = new System.Windows.Forms.CheckBox();
             this.chk_misc_unitInfo = new System.Windows.Forms.CheckBox();
@@ -82,12 +90,11 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stratViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_advancedOptions = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grp_box_settings.SuspendLayout();
             this.grp_settings_misc.SuspendLayout();
             this.grp_settings_factions.SuspendLayout();
@@ -102,19 +109,91 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.btn_showSelected);
+            this.panel1.Controls.Add(this.btn_showAll);
+            this.panel1.Controls.Add(this.chk_rndFationStart);
+            this.panel1.Controls.Add(this.cmb_factionSelect);
+            this.panel1.Controls.Add(this.lbl_msg);
+            this.panel1.Controls.Add(this.chk_startWith);
             this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
             this.panel1.Controls.Add(this.chk_windowed);
             this.panel1.Controls.Add(this.lbl_seed);
             this.panel1.Controls.Add(this.btn_play);
             this.panel1.Controls.Add(this.picBox_map);
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.btn_load);
             this.panel1.Controls.Add(this.grp_box_settings);
             this.panel1.Location = new System.Drawing.Point(2, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_showSelected
+            // 
+            this.btn_showSelected.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_showSelected.Location = new System.Drawing.Point(90, 240);
+            this.btn_showSelected.Name = "btn_showSelected";
+            this.btn_showSelected.Size = new System.Drawing.Size(97, 23);
+            this.btn_showSelected.TabIndex = 13;
+            this.btn_showSelected.Text = "Show Selected";
+            this.btn_showSelected.UseVisualStyleBackColor = true;
+            this.btn_showSelected.Click += new System.EventHandler(this.btn_showSelected_Click);
+            // 
+            // btn_showAll
+            // 
+            this.btn_showAll.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_showAll.Location = new System.Drawing.Point(9, 240);
+            this.btn_showAll.Name = "btn_showAll";
+            this.btn_showAll.Size = new System.Drawing.Size(75, 23);
+            this.btn_showAll.TabIndex = 12;
+            this.btn_showAll.Text = "Show All";
+            this.btn_showAll.UseVisualStyleBackColor = true;
+            this.btn_showAll.Click += new System.EventHandler(this.btn_showAll_Click);
+            // 
+            // chk_rndFationStart
+            // 
+            this.chk_rndFationStart.AutoSize = true;
+            this.chk_rndFationStart.BackColor = System.Drawing.Color.LightGray;
+            this.chk_rndFationStart.Location = new System.Drawing.Point(9, 269);
+            this.chk_rndFationStart.Name = "chk_rndFationStart";
+            this.chk_rndFationStart.Size = new System.Drawing.Size(102, 17);
+            this.chk_rndFationStart.TabIndex = 6;
+            this.chk_rndFationStart.Text = "Surprise Faction";
+            this.tooltip.SetToolTip(this.chk_rndFationStart, "Skips menus and launches the a campaign with a randomly chosen faction");
+            this.chk_rndFationStart.UseVisualStyleBackColor = false;
+            this.chk_rndFationStart.CheckedChanged += new System.EventHandler(this.chk_rndFationStart_CheckedChanged);
+            // 
+            // cmb_factionSelect
+            // 
+            this.cmb_factionSelect.FormattingEnabled = true;
+            this.cmb_factionSelect.Location = new System.Drawing.Point(168, 287);
+            this.cmb_factionSelect.Name = "cmb_factionSelect";
+            this.cmb_factionSelect.Size = new System.Drawing.Size(115, 21);
+            this.cmb_factionSelect.TabIndex = 11;
+            this.cmb_factionSelect.SelectedIndexChanged += new System.EventHandler(this.cmb_factionSelect_SelectedIndexChanged);
+            // 
+            // lbl_msg
+            // 
+            this.lbl_msg.AutoSize = true;
+            this.lbl_msg.BackColor = System.Drawing.Color.LightGray;
+            this.lbl_msg.Location = new System.Drawing.Point(6, 12);
+            this.lbl_msg.Name = "lbl_msg";
+            this.lbl_msg.Size = new System.Drawing.Size(155, 13);
+            this.lbl_msg.TabIndex = 9;
+            this.lbl_msg.Text = "Randomiser has been updated!";
+            // 
+            // chk_startWith
+            // 
+            this.chk_startWith.AutoSize = true;
+            this.chk_startWith.BackColor = System.Drawing.Color.LightGray;
+            this.chk_startWith.Location = new System.Drawing.Point(9, 292);
+            this.chk_startWith.Name = "chk_startWith";
+            this.chk_startWith.Size = new System.Drawing.Size(153, 17);
+            this.chk_startWith.TabIndex = 10;
+            this.chk_startWith.Text = "Start with faction ------------->";
+            this.tooltip.SetToolTip(this.chk_startWith, "Skip menus and opens campaign with faction selected below");
+            this.chk_startWith.UseVisualStyleBackColor = false;
+            this.chk_startWith.CheckedChanged += new System.EventHandler(this.chk_test_CheckedChanged);
             // 
             // chk_LogAll
             // 
@@ -155,10 +234,12 @@
             // lbl_seed
             // 
             this.lbl_seed.AutoSize = true;
-            this.lbl_seed.Location = new System.Drawing.Point(76, 55);
+            this.lbl_seed.BackColor = System.Drawing.Color.LightGray;
+            this.lbl_seed.Location = new System.Drawing.Point(10, 226);
             this.lbl_seed.Name = "lbl_seed";
-            this.lbl_seed.Size = new System.Drawing.Size(0, 13);
+            this.lbl_seed.Size = new System.Drawing.Size(30, 13);
             this.lbl_seed.TabIndex = 6;
+            this.lbl_seed.Text = "seed";
             // 
             // btn_play
             // 
@@ -174,23 +255,12 @@
             // 
             // picBox_map
             // 
-            this.picBox_map.Location = new System.Drawing.Point(9, 74);
+            this.picBox_map.Location = new System.Drawing.Point(9, 43);
             this.picBox_map.Name = "picBox_map";
-            this.picBox_map.Size = new System.Drawing.Size(277, 235);
+            this.picBox_map.Size = new System.Drawing.Size(277, 180);
             this.picBox_map.TabIndex = 4;
             this.picBox_map.TabStop = false;
             this.tooltip.SetToolTip(this.picBox_map, "Preview of the faction positions on the map.");
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.symbol48_romans_julii;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(61, 60);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
             // 
             // btn_load
             // 
@@ -220,6 +290,8 @@
             // 
             // grp_settings_misc
             // 
+            this.grp_settings_misc.Controls.Add(this.chk_wipeDS);
+            this.grp_settings_misc.Controls.Add(this.chk_removeSPQR);
             this.grp_settings_misc.Controls.Add(this.btn_advancedOptions);
             this.grp_settings_misc.Controls.Add(this.chk_dev_chosen);
             this.grp_settings_misc.Controls.Add(this.chk_preferences);
@@ -231,6 +303,38 @@
             this.grp_settings_misc.TabIndex = 9;
             this.grp_settings_misc.TabStop = false;
             this.grp_settings_misc.Text = "Misc Settings";
+            // 
+            // chk_wipeDS
+            // 
+            this.chk_wipeDS.AutoSize = true;
+            this.chk_wipeDS.Location = new System.Drawing.Point(7, 111);
+            this.chk_wipeDS.Name = "chk_wipeDS";
+            this.chk_wipeDS.Size = new System.Drawing.Size(79, 17);
+            this.chk_wipeDS.TabIndex = 6;
+            this.chk_wipeDS.Text = "Wipe Cities";
+            this.chk_wipeDS.UseVisualStyleBackColor = true;
+            // 
+            // chk_removeSPQR
+            // 
+            this.chk_removeSPQR.AutoSize = true;
+            this.chk_removeSPQR.Location = new System.Drawing.Point(7, 88);
+            this.chk_removeSPQR.Name = "chk_removeSPQR";
+            this.chk_removeSPQR.Size = new System.Drawing.Size(99, 17);
+            this.chk_removeSPQR.TabIndex = 5;
+            this.chk_removeSPQR.Text = "Remove SPQR";
+            this.chk_removeSPQR.UseVisualStyleBackColor = true;
+            // 
+            // btn_advancedOptions
+            // 
+            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
+            this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
+            this.btn_advancedOptions.Name = "btn_advancedOptions";
+            this.btn_advancedOptions.Size = new System.Drawing.Size(112, 25);
+            this.btn_advancedOptions.TabIndex = 4;
+            this.btn_advancedOptions.Text = "Advanced Options";
+            this.btn_advancedOptions.UseVisualStyleBackColor = true;
+            this.btn_advancedOptions.Click += new System.EventHandler(this.btn_advancedOptions_Click);
             // 
             // chk_dev_chosen
             // 
@@ -311,7 +415,7 @@
             this.chk_total_war_8.TabIndex = 10;
             this.chk_total_war_8.Tag = "TotalWar";
             this.chk_total_war_8.Text = "Total War!";
-            this.tooltip.SetToolTip(this.chk_total_war_8, "Makes all factions to be at war wirh eachother.");
+            this.tooltip.SetToolTip(this.chk_total_war_8, "Makes all factions to be at war with eachother.");
             this.chk_total_war_8.UseVisualStyleBackColor = true;
             // 
             // chk_faction_coreA_7
@@ -714,24 +818,32 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.viewerToolStripMenuItem,
-            this.stratViewerToolStripMenuItem});
+            this.stratViewerToolStripMenuItem,
+            this.mapGeneratorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // viewerToolStripMenuItem
             // 
             this.viewerToolStripMenuItem.Name = "viewerToolStripMenuItem";
-            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.viewerToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.viewerToolStripMenuItem.Text = "EDU Viewer";
             this.viewerToolStripMenuItem.Click += new System.EventHandler(this.viewerToolStripMenuItem_Click);
             // 
             // stratViewerToolStripMenuItem
             // 
             this.stratViewerToolStripMenuItem.Name = "stratViewerToolStripMenuItem";
-            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.stratViewerToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.stratViewerToolStripMenuItem.Text = "Strat Viewer";
             this.stratViewerToolStripMenuItem.Click += new System.EventHandler(this.stratViewerToolStripMenuItem_Click);
+            // 
+            // mapGeneratorToolStripMenuItem
+            // 
+            this.mapGeneratorToolStripMenuItem.Name = "mapGeneratorToolStripMenuItem";
+            this.mapGeneratorToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.mapGeneratorToolStripMenuItem.Text = "Map Generator";
+            this.mapGeneratorToolStripMenuItem.Click += new System.EventHandler(this.mapGeneratorToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -747,18 +859,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // btn_advancedOptions
-            // 
-            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
-            this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
-            this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
-            this.btn_advancedOptions.Name = "btn_advancedOptions";
-            this.btn_advancedOptions.Size = new System.Drawing.Size(112, 25);
-            this.btn_advancedOptions.TabIndex = 4;
-            this.btn_advancedOptions.Text = "Advanced Options";
-            this.btn_advancedOptions.UseVisualStyleBackColor = true;
-            this.btn_advancedOptions.Click += new System.EventHandler(this.btn_advancedOptions_Click);
             // 
             // RandomiserForm
             // 
@@ -777,7 +877,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.grp_box_settings.ResumeLayout(false);
             this.grp_box_settings.PerformLayout();
             this.grp_settings_misc.ResumeLayout(false);
@@ -801,7 +900,6 @@
 		#endregion
 
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Button btn_load;
 		private System.Windows.Forms.GroupBox grp_box_settings;
 		private System.Windows.Forms.StatusStrip statusStrip1;
@@ -856,6 +954,15 @@
         private System.Windows.Forms.CheckBox chk_preferences;
         private System.Windows.Forms.CheckBox chk_dev_chosen;
         private System.Windows.Forms.Button btn_advancedOptions;
+        private System.Windows.Forms.Label lbl_msg;
+        private System.Windows.Forms.CheckBox chk_startWith;
+        private System.Windows.Forms.CheckBox chk_removeSPQR;
+        private System.Windows.Forms.CheckBox chk_rndFationStart;
+        private System.Windows.Forms.ComboBox cmb_factionSelect;
+        private System.Windows.Forms.Button btn_showSelected;
+        private System.Windows.Forms.Button btn_showAll;
+        private System.Windows.Forms.CheckBox chk_wipeDS;
+        private System.Windows.Forms.ToolStripMenuItem mapGeneratorToolStripMenuItem;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using RTWLib.Functions;
+﻿using RTWLib.Extensions;
+using RTWLib.Functions;
 using RTWLib.Objects.Descr_strat;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace RTWR_RTWLIB.Randomiser
     {
         public static void VoronoiSettlements(Descr_Strat ds, Descr_Region dr)
         {
-            Dictionary<int[], List<Settlement>> voronoiCoords = new Dictionary<int[], List<Settlement>>();
+            TWRandom.RefreshRndSeed();
+            Dictionary<int[], List<ISettlement>> voronoiCoords = new Dictionary<int[], List<ISettlement>>();
             List<Settlement> tempSettlements = new List<Settlement>();
 
             ds.ShuffleFactions(TWRandom.rnd);
@@ -41,7 +43,7 @@ namespace RTWR_RTWLIB.Randomiser
                         x = TWRandom.rnd.Next(20, 231);
                         y = TWRandom.rnd.Next(20, 131);
                     }
-                    voronoiCoords.Add(new int[] { x, y }, new List<Settlement>());
+                    voronoiCoords.Add(new int[] { x, y }, new List<ISettlement>());
                 }
 
                 //assign each settlement to closest voronoi point
@@ -50,9 +52,9 @@ namespace RTWR_RTWLIB.Randomiser
                     int[] closestPoint = new int[2];
                     int distance = 10000;
                     int[] cityCoord = ((Descr_Region)dr).GetCityCoords(s.region);
-                    foreach (KeyValuePair<int[], List<Settlement>> kv in voronoiCoords)
+                    foreach (KeyValuePair<int[], List<ISettlement>> kv in voronoiCoords)
                     {
-                        int tempDistance = (int)Functions_General.DistanceTo(cityCoord, kv.Key);
+                        int tempDistance = (int)cityCoord.DistanceTo(kv.Key);
                         if (tempDistance < distance)
                         {
                             distance = tempDistance;
@@ -69,21 +71,19 @@ namespace RTWR_RTWLIB.Randomiser
                 }
             }
 
-
-
             //give factions settlements
             int counter = 0;
-            foreach (KeyValuePair<int[], List<Settlement>> kv in voronoiCoords)
+            foreach (KeyValuePair<int[], List<ISettlement>> kv in voronoiCoords)
             {
-                ds.factions[counter].settlements = new List<Settlement>(kv.Value);
+                 ds.factions[counter].settlements = new List<ISettlement>(kv.Value);
                 counter++;
             }
 
             CharacterCoordinateFix(ds, dr);
         }
-        private static bool CheckVoronoiPoints(Dictionary<int[], List<Settlement>> dic)
+        private static bool CheckVoronoiPoints(Dictionary<int[], List<ISettlement>> dic)
         {
-            foreach (KeyValuePair<int[], List<Settlement>> kv in dic)
+            foreach (KeyValuePair<int[], List<ISettlement>> kv in dic)
             {
                 if (kv.Value.Count == 0)
                     return false;

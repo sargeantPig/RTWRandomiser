@@ -39,11 +39,11 @@ namespace RTWR_RTWLIB.Randomiser
         }
         private static List<Settlement> CreateMissingSettlements(List<Settlement> settlements, Descr_Region dr)
         {
-            foreach (KeyValuePair<string, Region> kv in dr.rgbRegions)
+            foreach (KeyValuePair<string, Region> kv in dr.regions)
             {
                 int index = settlements.FindIndex(x => x.region == kv.Key);
                 if (index == -1)
-                    settlements.Add(new Settlement("village", kv.Value.name, kv.Value.faction_creator, new List<DSBuilding>(), 0, 500));
+                    settlements.Add(new Settlement("village", kv.Value.name, kv.Value.factionCreator, new List<DSBuilding>(), 0, 500));
             }
 
             return new List<Settlement>(settlements);

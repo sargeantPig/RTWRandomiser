@@ -14,20 +14,27 @@ using System.IO;
 using RTWR_RTWLIB.Forms;
 using RTWR_RTWLIB.Data;
 using RTWLib.Functions.EDU;
-
+using RTWRandLib.Data;
+using RTWLib.Extensions;
 namespace RTWR_RTWLIB.Randomiser
 {
 	public static class TWRandom
 	{
+		public static int seed;
 		public static Random rnd = new Random();
 		public static string[] AIMilitary = { "napoleon", "caesar", "genghis", "mao", "stalin", "smith", "henry" };
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
 		public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
+		public static string[] M2TWVoiceTypes = { "Light", "Heavy", "General" };
+		public static object[] SoundTypes = { SoundType.axe, SoundType.knife, SoundType.mace, SoundType.spear, SoundType.sword};
 		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
-
 		public static Options advancedOptions { get; set; }
 		public static string[] factionList { get; set; }
 
+		public static void RefreshRndSeed()
+		{
+			TWRandom.rnd = new Random(TWRandom.seed);
+		}
 		public static string GetRandomAIEconomy()
 		{
 			return AIEconomy[rnd.Next(0, AIEconomy.Count())];
@@ -40,7 +47,6 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			return VoiceTypes[rnd.Next(0, VoiceTypes.Count())];
 		}
-
 		public static void AddKV(this Dictionary<string, List<string>> dic, string key, string unit)
 		{
 			if (!dic.ContainsKey(key))
@@ -68,6 +74,7 @@ namespace RTWR_RTWLIB.Randomiser
 			}
 			return fo;
 		}
+
 	}
 
 	public static class Randomise
@@ -96,7 +103,7 @@ namespace RTWR_RTWLIB.Randomiser
 
 			}
 
-			checkBoxes.Sort(new Comparison<CheckBox>(Functions_General.CompareNameEnd));
+			checkBoxes.Sort(new Comparison<CheckBox>(Comparisons.CompareNameEnd));
 
 			foreach (CheckBox cb in checkBoxes)
 			{
@@ -130,6 +137,8 @@ namespace RTWR_RTWLIB.Randomiser
 									parameters[index] = o;
 								}
 							}
+							else if(o.GetType().BaseType == type && type != typeof(NumericUpDown))
+								parameters[index] = o;
 						}
 
 						index++;
@@ -160,8 +169,6 @@ namespace RTWR_RTWLIB.Randomiser
 				unit.attributes |= Attributes.mercenary_unit;
 			}
 		}
-
-
 	}
 
 }

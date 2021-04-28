@@ -1,0 +1,24 @@
+;; This file should be used to set the date format string for any given country
+;; 
+;; The format string uses the following paramaters.  Any extra character will be printed as is!
+;;
+;; %D day name
+;; %d day number
+;; %M month name
+;; %m month number
+;; %Y 4 digit year
+;; %y 2 digit year
+;; %H hour of 24 hour clock
+;; %h hour of 12 hour clock
+;; %S minute
+;; %s second
+;; %A AM
+;; %a am
+;; %P PM
+;; %p pm
+
+time: %02H:%02S.%02s
+date: %03M %02d 20%02y
+
+;; The above format is for UK format.  Time is 24 hour clock Hours:Mins.Sec, date is eg. Jan 01 2004 (not 3k compliant) ;)
+;; The %0x pads numbers to have leading zero's if number of digits is less than x. 
