@@ -24,12 +24,9 @@ namespace RTWR_RTWLIB
             {
                 //start loading data
                 files = new Dictionary<FileNames, IFile>(){
-                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) },
-                {FileNames.descr_strat, new Descr_Strat()},
-                {FileNames.export_descr_buildings, new EDB(chk_LogAll.Checked)},
-                {FileNames.export_descr_unit, new EDU(chk_LogAll.Checked)},
+                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.RemasterPaths[FileNames.descr_regions]["load"][1], FileDestinations.RemasterPaths[FileNames.descr_regions]["load"][0]) },
+                {FileNames.descr_strat, new RemasterDescr_Strat()},
                 {FileNames.descr_sm_faction, new SMFactions()},
-                {FileNames.names, new NamesFile(chk_LogAll.Checked) }
                 };
 
                 float increment = 100 / files.Count();
@@ -43,8 +40,6 @@ namespace RTWR_RTWLIB
                     file.Value.Parse(FileDestinations.RemasterPaths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
-
-                TWRandom.factionList = ((SMFactions)files[FileNames.descr_sm_faction]).facDetails.Keys.ToArray();
 
                 pb.Value = 100;
             }
@@ -73,7 +68,7 @@ namespace RTWR_RTWLIB
                 else if (fileName == FileNames.export_descr_buildings)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new EDB(true) } };
                 else if (fileName == FileNames.descr_strat)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Strat() } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new RemasterDescr_Strat() } };
                 else if (fileName == FileNames.descr_regions)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.paths[FileNames.descr_regions]["load"][0]) } };
                 else if (fileName == FileNames.descr_sm_faction)
@@ -112,16 +107,13 @@ namespace RTWR_RTWLIB
             ss.Refresh();
 
             Misc_Data.RefreshRegionWater();
-            SelectMaps sm = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.RemasterPaths[FileNames.radar_map1]["load"][0]);
+            SelectMaps sm = new SelectMaps(FileDestinations.remasterSelectMaps[0], FileDestinations.RemasterPaths[FileNames.radar_map1]["load"][0]);
 
-            ((Descr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
+            //((RemasterDescr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
-            TWRandom.UnitByFaction.Clear();
+            RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
 
-            if (chk_factionSelect)
-                ((Descr_Strat)files[FileNames.descr_strat]).MoveFactionToTopOfStrat(factionSelected);
-
-
+           TWRandom.UnitByFaction.Clear();
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
 
@@ -139,7 +131,7 @@ namespace RTWR_RTWLIB
 
             Thread.Sleep(250);
 
-            files[FileNames.descr_strat].ToFile(FileDestinations.paths[FileNames.descr_strat]["save"][0]);
+            files[FileNames.descr_strat].ToFile(FileDestinations.RemasterPaths[FileNames.descr_strat]["save"][0]);
 
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");
