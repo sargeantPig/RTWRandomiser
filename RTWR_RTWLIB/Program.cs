@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using RTWLib.Functions;
 using RTWLib.Logger;
 using RTWLib.Extensions;
+using RTWLib.Data;
+
 namespace RTWR_RTWLIB
 {
 	static class Program
@@ -26,17 +28,32 @@ namespace RTWR_RTWLIB
 
 			FileHelper.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
 			Logger log = new Logger();
-			bool isM2TW = log.FileCheck("medieval2.exe");
+
+			Game game = Game.Missing;
+
+			if (log.FileCheck("medieval2.exe"))
+				game = Game.MED2;
+			else if (log.FileCheck("Application.lnk"))
+				game = Game.REMASTER;
+			if (log.FileCheck("RomeTW.exe"))
+				game = Game.OGRome;
+
+			if (game == Game.Missing)
+			{
+				log.PLog("Cannot find compaitable Total War, is the randomiser in the right folder?");
+				log.DisplayLogExit();
+			}
+
 			if (args.Count() > 0)
 			{
 				if (args[0] == "-u")
-					Application.Run(new RandomiserForm("Randomiser has been updated!", isM2TW));
+					Application.Run(new RandomiserForm("Randomiser has been updated!", game));
 
 				else if (args[0] == "-n")
-					Application.Run(new RandomiserForm("Randomiser is fully updated.", isM2TW));
+					Application.Run(new RandomiserForm("Randomiser is fully updated.", game));
 
 				else if (args[0] == "-a")
-					Application.Run(new RandomiserForm("Randomiser update is available!", isM2TW));
+					Application.Run(new RandomiserForm("Randomiser update is available!", game));
 			}
 
 			else
@@ -48,7 +65,7 @@ namespace RTWR_RTWLIB
 					Environment.Exit(0);
 				}
 				else
-					Application.Run(new RandomiserForm("Updater not found.", isM2TW));
+					Application.Run(new RandomiserForm("Updater not found.", game));
 			}	
 		}
 	}

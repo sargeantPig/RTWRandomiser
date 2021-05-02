@@ -30,12 +30,12 @@ namespace RTWR_RTWLIB
 		EDU_viewer edu;
 		StratViewer strat;
 		MapGeneratorForm mapGen;
-		public RandomiserForm(string updateMessage, bool isM2TW)
+		public RandomiserForm(string updateMessage, Game game)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
 			InitializeComponent();
 			picBox_map.SizeMode = PictureBoxSizeMode.Zoom;
-			if (isM2TW)
+			if (game == Game.MED2)
 			{
 				this.Text = "Medieval 2 Randomiser";
 				this.chk_preferences.Checked = false;
@@ -64,12 +64,8 @@ namespace RTWR_RTWLIB
 			}
 
 		
-			main = new Main(pb_progress, statusStrip1, grp_box_settings, this, isM2TW);
+			main = new Main(pb_progress, statusStrip1, grp_box_settings, this, game);
             main.CleanLog();
-
-			if (!main.FileCheck(FilePaths.RTWEXE) || !main.DirectoryCheck(FileDestinations.MOD_FOLDER))
-				main.DisplayLogExit();
-			else lbl_progress.Text = "RomeTW.exe Found.";
 
 			if (!main.AdminCheck())
 			{
@@ -77,7 +73,6 @@ namespace RTWR_RTWLIB
 					"If you crash before battle, at end turn or when saving, consider running as admin.");
 				main.DisplayLog();
 			}
-			exeCheck();
 			//get current seed
 			if (File.Exists("randomiser_.txt"))
 			{
@@ -111,30 +106,36 @@ namespace RTWR_RTWLIB
 		private void btn_load_Click(object sender, EventArgs e)
 		{
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
-			if (main.Load(chk_LogAll, lbl_progress))
-			{
-				main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-				lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
 
-				if (main.isM2TW)
-				{
+
+			switch (main.ActiveGame)
+			{
+				case Game.OGRome:
+					if (main.Load(chk_LogAll, lbl_progress))
+					{
+						main.Randomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
+					}
+					else main.LoadError();
+					break;
+				case Game.MED2:
 					if (main.M2TWLoad(chk_LogAll, lbl_progress))
 					{
 						main.M2TWRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-					lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
+						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked);
 					}
-					else
+					else main.LoadError();
+					break;
+				case Game.REMASTER:
+					if (main.RemasterLoad(chk_LogAll, lbl_progress))
 					{
-						main.PLog("Load failed - Check log for details.");
-						main.DisplayLog();
+						main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
 					}
-				}
+					else main.LoadError();
+					break;
 			}
-			else
-			{
-				main.PLog("Load failed - Check log for details.");
-				main.DisplayLog();
-			}
+
 		}
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
 		{
@@ -206,25 +207,43 @@ namespace RTWR_RTWLIB
 
 			args[0] = "-mod:randomiser -show_err -nm ";
 
-			if (main.isM2TW)
-				args[0] = "--features.mod=mods/randomiser";
-			else args[0] = "-mod:randomiser -show_err -nm ";
-
-			if (chk_ai.Checked)
-				args[0] += "-ai ";
-
-			if (chk_windowed.Checked)
-				args[0] += "-ne ";
-
-			if (main.isM2TW)
-				RTWCore.core.StartProcess(args, "medieval2.exe");
-			else RTWCore.core.StartProcess(args, "RomeTW.exe");
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					args[0] = "--features.mod=mods/randomiser";
+					RTWCore.core.StartProcess(args, "medieval2.exe");
+					break;
+				case Game.OGRome:
+					args[0] = "-mod:randomiser -show_err -nm ";
+					if (chk_ai.Checked)
+						args[0] += "-ai ";
+					if (chk_windowed.Checked)
+						args[0] += "-ne ";
+					RTWCore.core.StartProcess(args, "RomeTW.exe");
+					break;
+				case Game.REMASTER:
+					args[0] = "-show_err -nm ";
+					RTWCore.core.StartProcess(args, "Application.ink");
+					break;
+			}
 
 		}
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			main.Load(lbl_progress, FileNames.export_descr_unit, "save");
+
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					main.M2TWLoad(lbl_progress, FileNames.export_descr_unit, "save");
+					break;
+				case Game.OGRome:
+					main.Load(lbl_progress, FileNames.export_descr_unit, "save");
+					break;
+				case Game.REMASTER:
+					main.RemasterLoad(lbl_progress, FileNames.export_descr_unit, "save");
+					break;
+			}
 			edu = new EDU_viewer((EDU)main.GetFile(FileNames.export_descr_unit));
 			if (strat != null)
 			{

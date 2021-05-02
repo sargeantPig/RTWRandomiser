@@ -166,7 +166,7 @@
     <Compile Include="Forms\Randomiser.Designer.cs">
       <DependentUpon>Randomiser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs" />
+    <Compile Include="Randomiser\Main.cs" />
     <Compile Include="Forms\MapViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +195,9 @@
     <Compile Include="Randomiser\EDU_Rand\Methods\RandomStats.cs" />
     <Compile Include="Randomiser\EDU_Rand\Methods\RandomTraining.cs" />
     <Compile Include="Randomiser\EDU_Rand\RandomEDU.cs" />
+    <Compile Include="Randomiser\Medieval2Main.cs" />
+    <Compile Include="Randomiser\RemasterMain.cs" />
+    <Compile Include="Randomiser\RomeMain.cs" />
     <Compile Include="Randomiser\TWRandom.cs" />
     <Compile Include="Forms\StratViewer.cs">
       <SubType>Form</SubType>
