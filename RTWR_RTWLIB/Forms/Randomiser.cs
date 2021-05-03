@@ -54,6 +54,46 @@ namespace RTWR_RTWLIB
 				}
 			}
 
+			else if (game == Game.REMASTER)
+			{ 
+				foreach (Control ctrl in grp_settings_units.Controls)
+				{
+					ctrl.Enabled = false;
+
+					if (ctrl.GetType() == typeof(CheckBox))
+					{
+						((CheckBox)ctrl).Checked = false;
+					}
+
+				}
+
+				foreach (Control ctrl in grp_settings_misc.Controls)
+				{
+					ctrl.Enabled = false;
+
+					if (ctrl.GetType() == typeof(CheckBox))
+					{
+						((CheckBox)ctrl).Checked = false;
+					}
+				}
+
+				foreach (Control ctrl in grp_settings_factions.Controls)
+				{
+					ctrl.Enabled = false;
+
+					if (ctrl.GetType() == typeof(CheckBox))
+					{
+						((CheckBox)ctrl).Checked = false;
+					}
+
+				}
+
+				chk_wipeDS.Enabled = true;
+				chk_faction_voronoi_4.Enabled = true;
+				chk_faction_settlements_4.Enabled = true;
+				numUpDown_faction_cities.Enabled = true;
+
+			}
 			else
 			{
 				if (File.Exists(@"randomiser\full_map.png"))

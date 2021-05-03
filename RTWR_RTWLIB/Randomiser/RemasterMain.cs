@@ -111,8 +111,20 @@ namespace RTWR_RTWLIB
 
             //((RemasterDescr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
 
-            RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
+            foreach (Control control in faction_group.Controls)
+            {
+                switch (control.Name)
+                {
+                    case "chk_faction_voronoi_4":
+                        RandomDS.VoronoiSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions]);
+                        break;
+                    case "chk_faction_settlements_4":
+                        RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
+                        break;
+                }
+            }
 
+            
            TWRandom.UnitByFaction.Clear();
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();

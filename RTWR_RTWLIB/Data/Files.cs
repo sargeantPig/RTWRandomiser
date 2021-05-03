@@ -25,9 +25,9 @@ namespace RTWR_RTWLIB.Data
         public static string MOD_FOLDER = @"randomiser";
         public static string ROOT = @"randomiser\van_data";
         readonly public static string ASSETS = @"randomiser\data\ui\unit_info\merc\";
-        readonly public static string RemasterRoot = @"Mods\Local Mods\";
+        readonly public static string RemasterRoot = @"Mods\My Mods\";
         readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
-        readonly public static string[] remasterSelectMaps = new string[] { @"Mods\Local Mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"Mods\Local Mods\randomiser\data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
+        readonly public static string[] remasterSelectMaps = new string[] { @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         readonly public static string[] M2TWselectMapPaths = new string[] { @"mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"mods\randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         public static Dictionary<FileNames, Dictionary<string, string[]>> paths = new Dictionary<FileNames, Dictionary<string, string[]>>
         {
@@ -164,8 +164,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.descr_strat,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } },
-                    {"save", new string[] { "Mods\\Local Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } }
+                    {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } },
+                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } }
                 }
             },
 
@@ -173,8 +173,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.export_descr_unit,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\export_descr_unit.txt" } },
-                    {"save", new string[] { "Mods\\Local Mods\\randomiser\\data\\export_descr_unit.txt" } }
+                    {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_unit.txt" } },
+                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_unit.txt" } }
                 }
             },
 
@@ -182,8 +182,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.export_descr_buildings,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\export_descr_buildings.txt" } },
-                    {"save", new string[] { "Mods\\Local Mods\\randomiser\\data\\export_descr_buildings.txt" } }
+                    {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_buildings.txt" } },
+                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_buildings.txt" } }
                 }
             },
 
@@ -191,7 +191,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.descr_regions,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\world\\maps\\base\\descr_regions.txt", "Mods\\Local Mods\\randomiser\\data\\world\\maps\\base\\map_regions.tga" } },
+                   {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\base\\descr_regions.txt", "Mods\\My Mods\\randomiser\\data\\world\\maps\\base\\map_regions.tga" } },
                    {"save", new string[] { } }
                }
 
@@ -201,7 +201,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.names,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\descr_names.txt" } },
+                   {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\descr_names.txt" } },
                    {"save", new string[] { } }
                }
 
@@ -211,7 +211,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.descr_sm_faction,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\descr_sm_factions.txt" } },
+                   {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\descr_sm_factions.txt" } },
                    {"save", new string[] { } }
                }
 
@@ -221,8 +221,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.radar_map1,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\Local Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } },
-                    {"save", new string[] { "Mods\\Local Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } }
+                    {"load", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } },
+                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } }
                 }
             },
         };
