@@ -116,10 +116,12 @@ namespace RTWR_RTWLIB
                 switch (control.Name)
                 {
                     case "chk_faction_voronoi_4":
-                        RandomDS.VoronoiSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions]);
+                        if(((CheckBox)control).Checked)
+                            RandomDS.VoronoiSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions]);
                         break;
                     case "chk_faction_settlements_4":
-                        RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
+                        if (((CheckBox)control).Checked)
+                            RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
                         break;
                 }
             }
@@ -138,7 +140,7 @@ namespace RTWR_RTWLIB
 
             pic_map.Refresh();
 
-            sm.Save(@"randomiser\full_map.png");
+            sm.Save(@"Mods\My Mods\randomiser\full_map.png");
 
 
             Thread.Sleep(250);

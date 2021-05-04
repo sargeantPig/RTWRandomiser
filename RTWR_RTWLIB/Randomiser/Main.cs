@@ -21,7 +21,6 @@ namespace RTWR_RTWLIB
         public Options options;
         ToolStripProgressBar pb;
         StatusStrip ss;
-        internal readonly bool isM2TW;
 
         public Game ActiveGame { get; }
 
@@ -50,6 +49,9 @@ namespace RTWR_RTWLIB
                 TWRandom.advancedOptions = advancedOptions.Options;
                 FileDestinations.ROOT = @"mods\randomiser\van_data";
                 FileDestinations.MOD_FOLDER = @"mods\randomiser";
+                SMFactions factionFile = new SMFactions();
+                factionFile.Parse(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["load"], out Logger.lineNumber, out Logger.lineText);
+                ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = factionFile.facDetails.Keys.ToArray();
             }
 
             else

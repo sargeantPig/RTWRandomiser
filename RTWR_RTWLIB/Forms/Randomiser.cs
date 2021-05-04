@@ -92,6 +92,15 @@ namespace RTWR_RTWLIB
 				chk_faction_voronoi_4.Enabled = true;
 				chk_faction_settlements_4.Enabled = true;
 				numUpDown_faction_cities.Enabled = true;
+				menuStrip1.Enabled = false;
+				chk_windowed.Enabled = false;
+
+				if (File.Exists(@"Mods\My Mods\randomiser\full_map.png"))
+				{
+					Image image = Image.FromFile(@"Mods\My Mods\randomiser\full_map.png");
+					picBox_map.Image = image;
+				}
+
 
 			}
 			else
@@ -233,20 +242,13 @@ namespace RTWR_RTWLIB
 
 		private void Play()
 		{
-			Descr_Strat ds = new Descr_Strat();
-			ds.Parse(FileDestinations.paths[FileNames.descr_strat]["save"], out Logger.lineNumber, out Logger.lineText);
-			if (chk_startWith.Checked && chk_startWith.Enabled)
-				ds.MoveFactionToTopOfStrat((string)cmb_factionSelect.SelectedValue);
-			else if (chk_rndFationStart.Checked)
-				ds.MoveFactionToTopOfStrat(ds.playableFactions[TWRandom.rnd.Next(0, ds.playableFactions.Count())]);
-			ds.CleanUp();
-			ds.ToFile(FileDestinations.paths[FileNames.descr_strat]["save"][0]);
-			
 			string[] args = new string[1];
 
-
-			args[0] = "-mod:randomiser -show_err -nm ";
-
+			if (chk_startWith.Checked || chk_rndFationStart.Checked)
+			{
+				args[0] = "-strat:imperial_campaign ";
+				SetFactionChosen();
+			}
 			switch (main.ActiveGame)
 			{
 				case Game.MED2:
@@ -254,20 +256,57 @@ namespace RTWR_RTWLIB
 					RTWCore.core.StartProcess(args, "medieval2.exe");
 					break;
 				case Game.OGRome:
-					args[0] = "-mod:randomiser -show_err -nm ";
+					args[0] += "-mod:randomiser -show_err -nm ";
 					if (chk_ai.Checked)
 						args[0] += "-ai ";
 					if (chk_windowed.Checked)
 						args[0] += "-ne ";
-					RTWCore.core.StartProcess(args, "RomeTW.exe");
+					RTWCore.core.StartProcess(args, "RomeTW.exe", true);
 					break;
 				case Game.REMASTER:
-					args[0] = "-show_err -nm ";
-					RTWCore.core.StartProcess(args, "Application.ink");
+					if (chk_ai.Checked)
+						args[0] += "-ai ";
+					args[0] += " -show_err -nm ";
+					RTWCore.core.StartProcess(args, "Application.lnk");
 					break;
 			}
 
 		}
+
+		private void SetFactionChosen()
+		{
+			IDescrStrat ds = null;
+			string[] path = new string[2];
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					ds = new M2DS();
+					path = FileDestinations.M2TWpaths[FileNames.descr_strat]["save"];
+					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
+					break;
+				case Game.OGRome:
+					ds = new Descr_Strat();
+					path = FileDestinations.paths[FileNames.descr_strat]["save"];
+					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
+					break;
+				case Game.REMASTER:
+					ds = new RemasterDescr_Strat();
+					path = FileDestinations.RemasterPaths[FileNames.descr_strat]["save"];
+					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
+					break;
+			}
+
+			if (chk_startWith.Checked && chk_startWith.Enabled)
+				ds.MoveFactionToTopOfStrat((string)cmb_factionSelect.SelectedValue);
+			else if (chk_rndFationStart.Checked)
+			{
+				var playable = ds.GetAllPlayableFactions;
+				ds.MoveFactionToTopOfStrat(playable[TWRandom.rnd.Next(0, playable.Count())]);
+			} 
+			ds.CleanUp();
+			ds.ToFile(path[0]);
+		}
+
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -381,23 +420,75 @@ namespace RTWR_RTWLIB
 
 		private void cmb_factionSelect_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			MagickImage image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+			MagickImage image = null;
+
+			if (main == null)
+				return;
+
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					image = new MagickImage(String.Format(@"mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+				case Game.OGRome:
+					image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+
+				case Game.REMASTER:
+					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+			}
+			
 			Image bitmap = image.ToBitmap();
 			picBox_map.Image = bitmap;
 		}
 
 		private void btn_showAll_Click(object sender, EventArgs e)
 		{
-			if (File.Exists(@"randomiser\full_map.png"))
+			MagickImage image = null;
+
+			if (main == null)
+				return;
+
+			switch (main.ActiveGame)
 			{
-				Image image = Image.FromFile(@"randomiser\full_map.png");
-				picBox_map.Image = image;
+				case Game.MED2:
+					image = new MagickImage(String.Format(@"mods\randomiser\full_map.png", cmb_factionSelect.SelectedValue));
+					break;
+				case Game.OGRome:
+					image = new MagickImage(String.Format(@"randomiser\full_map.png", cmb_factionSelect.SelectedValue));
+					break;
+
+				case Game.REMASTER:
+					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\full_map.png", cmb_factionSelect.SelectedValue));
+					break;
 			}
+
+			Image bitmap = image.ToBitmap();
+			picBox_map.Image = bitmap;
 		}
 
 		private void btn_showSelected_Click(object sender, EventArgs e)
 		{
-			MagickImage image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+			MagickImage image = null;
+
+			if (main == null)
+				return;
+
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					image = new MagickImage(String.Format(@"mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+				case Game.OGRome:
+					image = new MagickImage(String.Format(@"randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+
+				case Game.REMASTER:
+					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					break;
+			}
+
 			Image bitmap = image.ToBitmap();
 			picBox_map.Image = bitmap;
 		}
