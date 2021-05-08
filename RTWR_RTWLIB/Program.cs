@@ -26,17 +26,28 @@ namespace RTWR_RTWLIB
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			FileHelper.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
+			//FileHelper.RenameFile("new_RTWR_Updater.exe", "RTWR_Updater.exe");
 			Logger log = new Logger();
 
 			Game game = Game.Missing;
 
+			string modeText = "";
+
 			if (log.FileCheck("medieval2.exe"))
+			{
 				game = Game.MED2;
+				modeText = "Medieval 2 Detected";
+			}
 			else if (log.FileCheck("Application.lnk"))
+			{
+				modeText = "Rome Remaster Detected";
 				game = Game.REMASTER;
+			}
 			if (log.FileCheck("RomeTW.exe"))
+			{
+				modeText = "Rome TW Detected";
 				game = Game.OGRome;
+			}
 
 			if (game == Game.Missing)
 			{
@@ -44,7 +55,9 @@ namespace RTWR_RTWLIB
 				log.DisplayLogExit();
 			}
 
-			if (args.Count() > 0)
+			Application.Run(new RandomiserForm(modeText, game));
+
+			/*if (args.Count() > 0)
 			{
 				if (args[0] == "-u")
 					Application.Run(new RandomiserForm("Randomiser has been updated!", game));
@@ -66,7 +79,7 @@ namespace RTWR_RTWLIB
 				}
 				else
 					Application.Run(new RandomiserForm("Updater not found.", game));
-			}	
+			}	*/
 		}
 	}
 }

@@ -63,6 +63,16 @@ namespace RTWR_RTWLIB.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap backcol {
+            get {
+                object obj = ResourceManager.GetObject("backcol", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap backdrop {
             get {
                 object obj = ResourceManager.GetObject("backdrop", resourceCulture);

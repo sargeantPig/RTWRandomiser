@@ -59,16 +59,24 @@ namespace RTWR_RTWLIB.Randomiser
                     foreach (var c in regionDistances[b.region])
                     {
                         string tempf = "";
-                        if (c.Value < 25 && c.Value != 0)
+                        if (c.Value < 15 && c.Value != 0)
                         {
                             foreach (var ab in ds.factions)
+                            {
                                 foreach (var ba in ab.settlements)
                                 {
                                     if (ba.region == c.Key)
                                     {
                                         tempf = ab.name;
+                                        break;
                                     }
                                 }
+                                if (tempf == ab.name)
+                                    break;
+                            }
+
+                            if (tempf == "")
+                                continue;
 
                             int personalvalue = fp[f].Compare(fp[tempf]) * 100;
                             int relationValue = personalvalue + 100;

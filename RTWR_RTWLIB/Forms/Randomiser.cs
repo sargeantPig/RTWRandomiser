@@ -32,8 +32,9 @@ namespace RTWR_RTWLIB
 		MapGeneratorForm mapGen;
 		public RandomiserForm(string updateMessage, Game game)
 		{
-            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
+            this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;	
 			InitializeComponent();
+			this.lbl_mode.Text = updateMessage;
 			picBox_map.SizeMode = PictureBoxSizeMode.Zoom;
 			if (game == Game.MED2)
 			{
@@ -92,8 +93,10 @@ namespace RTWR_RTWLIB
 				chk_faction_voronoi_4.Enabled = true;
 				chk_faction_settlements_4.Enabled = true;
 				numUpDown_faction_cities.Enabled = true;
-				menuStrip1.Enabled = false;
+				chk_faction_coreA_7.Enabled = true;
+				menuStrip1.Enabled = true;
 				chk_windowed.Enabled = false;
+				chk_removeSPQR.Enabled = true;
 
 				if (File.Exists(@"Mods\My Mods\randomiser\full_map.png"))
 				{
@@ -310,6 +313,8 @@ namespace RTWR_RTWLIB
 
 		private void viewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (main.ActiveGame == Game.REMASTER)
+				return;
 
 			switch (main.ActiveGame)
 			{
@@ -340,6 +345,9 @@ namespace RTWR_RTWLIB
 
 		private void stratViewerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (main.ActiveGame == Game.REMASTER)
+				return;
+
 			strat = new StratViewer(edu);
 			main.Load(lbl_progress, FileNames.descr_strat, "save");
 			strat.descr_strat = (Descr_Strat)main.GetFile(FileNames.descr_strat);
@@ -495,6 +503,9 @@ namespace RTWR_RTWLIB
 
 		private void mapGeneratorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (main.ActiveGame == Game.REMASTER)
+				return;
+
 			mapGen = new MapGeneratorForm();
 			mapGen.Show();
 		}

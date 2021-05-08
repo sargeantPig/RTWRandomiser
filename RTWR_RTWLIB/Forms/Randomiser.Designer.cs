@@ -34,7 +34,6 @@
             this.btn_showAll = new System.Windows.Forms.Button();
             this.chk_rndFationStart = new System.Windows.Forms.CheckBox();
             this.cmb_factionSelect = new System.Windows.Forms.ComboBox();
-            this.lbl_msg = new System.Windows.Forms.Label();
             this.chk_startWith = new System.Windows.Forms.CheckBox();
             this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
@@ -93,6 +92,7 @@
             this.mapGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_mode = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -109,11 +109,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.lbl_mode);
             this.panel1.Controls.Add(this.btn_showSelected);
             this.panel1.Controls.Add(this.btn_showAll);
             this.panel1.Controls.Add(this.chk_rndFationStart);
             this.panel1.Controls.Add(this.cmb_factionSelect);
-            this.panel1.Controls.Add(this.lbl_msg);
             this.panel1.Controls.Add(this.chk_startWith);
             this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
@@ -130,7 +130,7 @@
             // 
             // btn_showSelected
             // 
-            this.btn_showSelected.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_showSelected.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.btn_showSelected.Location = new System.Drawing.Point(90, 240);
             this.btn_showSelected.Name = "btn_showSelected";
             this.btn_showSelected.Size = new System.Drawing.Size(97, 23);
@@ -141,7 +141,7 @@
             // 
             // btn_showAll
             // 
-            this.btn_showAll.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_showAll.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.btn_showAll.Location = new System.Drawing.Point(9, 240);
             this.btn_showAll.Name = "btn_showAll";
             this.btn_showAll.Size = new System.Drawing.Size(75, 23);
@@ -171,16 +171,6 @@
             this.cmb_factionSelect.Size = new System.Drawing.Size(115, 21);
             this.cmb_factionSelect.TabIndex = 11;
             this.cmb_factionSelect.SelectedIndexChanged += new System.EventHandler(this.cmb_factionSelect_SelectedIndexChanged);
-            // 
-            // lbl_msg
-            // 
-            this.lbl_msg.AutoSize = true;
-            this.lbl_msg.BackColor = System.Drawing.Color.LightGray;
-            this.lbl_msg.Location = new System.Drawing.Point(6, 12);
-            this.lbl_msg.Name = "lbl_msg";
-            this.lbl_msg.Size = new System.Drawing.Size(155, 13);
-            this.lbl_msg.TabIndex = 9;
-            this.lbl_msg.Text = "Randomiser has been updated!";
             // 
             // chk_startWith
             // 
@@ -235,7 +225,7 @@
             // 
             this.lbl_seed.AutoSize = true;
             this.lbl_seed.BackColor = System.Drawing.Color.LightGray;
-            this.lbl_seed.Location = new System.Drawing.Point(10, 226);
+            this.lbl_seed.Location = new System.Drawing.Point(10, 210);
             this.lbl_seed.Name = "lbl_seed";
             this.lbl_seed.Size = new System.Drawing.Size(30, 13);
             this.lbl_seed.TabIndex = 6;
@@ -243,7 +233,7 @@
             // 
             // btn_play
             // 
-            this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.btn_play.Location = new System.Drawing.Point(9, 315);
             this.btn_play.Name = "btn_play";
             this.btn_play.Size = new System.Drawing.Size(153, 34);
@@ -255,7 +245,7 @@
             // 
             // picBox_map
             // 
-            this.picBox_map.Location = new System.Drawing.Point(9, 43);
+            this.picBox_map.Location = new System.Drawing.Point(10, 27);
             this.picBox_map.Name = "picBox_map";
             this.picBox_map.Size = new System.Drawing.Size(277, 180);
             this.picBox_map.TabIndex = 4;
@@ -264,7 +254,7 @@
             // 
             // btn_load
             // 
-            this.btn_load.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_load.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.btn_load.Location = new System.Drawing.Point(178, 315);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(108, 35);
@@ -326,7 +316,7 @@
             // 
             // btn_advancedOptions
             // 
-            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.btn_advancedOptions.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.btn_advancedOptions.ForeColor = System.Drawing.Color.Black;
             this.btn_advancedOptions.Location = new System.Drawing.Point(7, 232);
             this.btn_advancedOptions.Name = "btn_advancedOptions";
@@ -860,11 +850,21 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // lbl_mode
+            // 
+            this.lbl_mode.AutoSize = true;
+            this.lbl_mode.Location = new System.Drawing.Point(10, 3);
+            this.lbl_mode.Name = "lbl_mode";
+            this.lbl_mode.Size = new System.Drawing.Size(35, 13);
+            this.lbl_mode.TabIndex = 14;
+            this.lbl_mode.Text = "label3";
+            // 
             // RandomiserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.BackColor = System.Drawing.Color.Wheat;
+            this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.ClientSize = new System.Drawing.Size(724, 427);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -954,7 +954,6 @@
         private System.Windows.Forms.CheckBox chk_preferences;
         private System.Windows.Forms.CheckBox chk_dev_chosen;
         private System.Windows.Forms.Button btn_advancedOptions;
-        private System.Windows.Forms.Label lbl_msg;
         private System.Windows.Forms.CheckBox chk_startWith;
         private System.Windows.Forms.CheckBox chk_removeSPQR;
         private System.Windows.Forms.CheckBox chk_rndFationStart;
@@ -963,6 +962,7 @@
         private System.Windows.Forms.Button btn_showAll;
         private System.Windows.Forms.CheckBox chk_wipeDS;
         private System.Windows.Forms.ToolStripMenuItem mapGeneratorToolStripMenuItem;
+        private System.Windows.Forms.Label lbl_mode;
     }
 }
 

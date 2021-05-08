@@ -11,6 +11,7 @@ using System.IO;
 using RTWLib.Functions.EDU;
 using System.Drawing;
 using System.Threading;
+using RTWLib.Extensions;
 
 namespace RTWR_RTWLIB
 {
@@ -110,22 +111,31 @@ namespace RTWR_RTWLIB
             SelectMaps sm = new SelectMaps(FileDestinations.remasterSelectMaps[0], FileDestinations.RemasterPaths[FileNames.radar_map1]["load"][0]);
 
             //((RemasterDescr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
-
-            foreach (Control control in faction_group.Controls)
+            var chkBoxes = faction_group.Controls.ToList();
+            chkBoxes.Sort(new Comparison<Control>(Comparisons.CompareNameEnd));
+            var ds = (Descr_Strat)files[FileNames.descr_strat];
+            var dr = (Descr_Region)files[FileNames.descr_regions];
+            foreach (Control control in chkBoxes)
             {
                 switch (control.Name)
                 {
                     case "chk_faction_voronoi_4":
                         if(((CheckBox)control).Checked)
-                            RandomDS.VoronoiSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions]);
+                            RandomDS.VoronoiSettlements(ds, dr);
                         break;
                     case "chk_faction_settlements_4":
                         if (((CheckBox)control).Checked)
-                            RandomDS.RandomSettlements((Descr_Strat)files[FileNames.descr_strat], (Descr_Region)files[FileNames.descr_regions], num_cities);
+                            RandomDS.RandomSettlements(ds,dr, num_cities);
+                        break;
+                    case "chk_faction_coreA_7":
+                        if (((CheckBox)control).Checked)
+                            RandomDS.RandCoreAttitudes(ds, dr);
                         break;
                 }
             }
 
+            if (chk_removeSenate)
+                ds.RemoveSPQR();
             
            TWRandom.UnitByFaction.Clear();
             lbl_progress.Text = "Creating preview map...";
