@@ -85,8 +85,8 @@ namespace RTWR_RTWLIB
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(229, 17);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = typeof(About).Assembly.GetName().Version.ToString() + "-alpha";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelVersion.Text = typeof(About).Assembly.GetName().Version.ToString() + "-alpha";
             // 
             // labelCopyright
             // 
@@ -142,7 +142,7 @@ namespace RTWR_RTWLIB
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.marble;
+            this.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
             this.ClientSize = new System.Drawing.Size(260, 283);
             this.Controls.Add(this.tableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

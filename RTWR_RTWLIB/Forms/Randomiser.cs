@@ -48,9 +48,9 @@ namespace RTWR_RTWLIB
 				this.btn_play.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_load.BackgroundImage = Properties.Resources.backdrop;
 				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
-				if (File.Exists(@"mods\randomiser\full_map.png"))
+				if (File.Exists(@"mods\randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"mods\randomiser\full_map.png");
+					Image image = Image.FromFile(@"mods\randomiser\previewimage.png");
 					picBox_map.Image = image;
 				}
 			}
@@ -97,10 +97,11 @@ namespace RTWR_RTWLIB
 				menuStrip1.Enabled = true;
 				chk_windowed.Enabled = false;
 				chk_removeSPQR.Enabled = true;
+				chk_total_war_8.Enabled = true;
 
-				if (File.Exists(@"Mods\My Mods\randomiser\full_map.png"))
+				if (File.Exists(@"Mods\My Mods\randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"Mods\My Mods\randomiser\full_map.png");
+					Image image = Image.FromFile(@"Mods\My Mods\randomiser\previewimage.png");
 					picBox_map.Image = image;
 				}
 
@@ -108,9 +109,9 @@ namespace RTWR_RTWLIB
 			}
 			else
 			{
-				if (File.Exists(@"randomiser\full_map.png"))
+				if (File.Exists(@"randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"randomiser\full_map.png");
+					Image image = Image.FromFile(@"randomiser\previewimage.png");
 					picBox_map.Image = image;
 				}
 			}
@@ -135,9 +136,9 @@ namespace RTWR_RTWLIB
 				txt_seed.Text = line;
 			}
 
-			if (File.Exists(@"randomiser\full_map.png"))
+			if (File.Exists(@"randomiser\previewimage.png"))
 			{
-				Image image = Image.FromFile(@"randomiser\full_map.png");
+				Image image = Image.FromFile(@"randomiser\previewimage.png");
 				picBox_map.Image = image;
 			}
 

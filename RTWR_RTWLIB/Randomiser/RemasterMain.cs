@@ -131,6 +131,11 @@ namespace RTWR_RTWLIB
                         if (((CheckBox)control).Checked)
                             RandomDS.RandCoreAttitudes(ds, dr);
                         break;
+                    case "chk_total_war_8":
+                        if (((CheckBox)control).Checked)
+                            RandomDS.TotalWar(ds);
+                        break;
+                        
                 }
             }
 
@@ -150,7 +155,7 @@ namespace RTWR_RTWLIB
 
             pic_map.Refresh();
 
-            sm.Save(@"Mods\My Mods\randomiser\full_map.png");
+            sm.Save(@"Mods\My Mods\randomiser\previewimage.png");
 
 
             Thread.Sleep(250);

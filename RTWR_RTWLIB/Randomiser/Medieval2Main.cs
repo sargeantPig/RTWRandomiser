@@ -133,7 +133,7 @@ namespace RTWR_RTWLIB
 
             pic_map.Refresh();
 
-            sm.Save(@"mods\randomiser\full_map.png");
+            sm.Save(@"mods\randomiser\previewimage.png");
 
 
             Thread.Sleep(250);
