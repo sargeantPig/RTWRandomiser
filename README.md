@@ -1,7 +1,7 @@
 # RTWRandomiser
 RTWRandomiser aims to randomise all feasible things within the game 'Rome Total War'.
 
-#Remaster Install Instructions
+# Remaster Install Instructions
 https://github.com/sargeantPig/RTWRandomiser/wiki/Installation-Rome-Remaster
 
 
