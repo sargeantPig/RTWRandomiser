@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using RTWLib.Logger;
 using RTWLib.Data;
 using RTWLib.Functions;
 using RTWR_RTWLIB.Randomiser;
-using System.Threading;
-using System.Diagnostics;
 using RTWLib.Memory;
 using RTWR_RTWLIB.Data;
 using RTWR_RTWLIB.Forms;
 using RTWLib.Functions.EDU;
 using RTWLib.Medieval2;
 using ImageMagick;
-using System.ComponentModel.Design;
+using Microsoft.VisualBasic;
+using System.Text;
+using Microsoft.VisualBasic.Devices;
+using RTWLib.Extensions;
 
 namespace RTWR_RTWLIB
 {
@@ -509,6 +506,43 @@ namespace RTWR_RTWLIB
 
 			mapGen = new MapGeneratorForm();
 			mapGen.Show();
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string name = lbl_seed.Text;
+			if (Directory.Exists(FileDestinations.RemasterCustom + @"\" + name))
+			{
+				main.PLog("Cant save, randomisation with that seed already exists.");
+				main.DisplayLog();
+				return;
+			}
+			new Computer().FileSystem.CopyDirectory(FileDestinations.RemasterCampaign, FileDestinations.RemasterCustom + @"\" + name);
+			FileBase file = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
+			FileBase descr = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
+			int lineno;
+			string line;
+			string descriptionpath = FileDestinations.RemasterPaths[FileNames.campaign_descr]["save"][0].Replace(".txt", "");
+			file.data.dataTags = new char[] { '{' };
+			file.data.commentTag = '¬';
+			file.Parse(new string[] { FileDestinations.RemasterPaths[FileNames.campaign_descr]["save"][0] }, out lineno, out line);
+			file.data.Format = "{{{0}}}{1}";
+			file.data.FormulateAttributes(new char[] { '}' }, '{', '}');
+			file.data.AddAttribute(name + "_TITLE", "Randomised with seed: " + name + ".................");
+			file.data.AddAttribute(name + "_DESCR", "randomised: DISPLAY OPTIONS HERE");
+
+
+			descr.data.dataTags = new char[] { '{' };
+			descr.data.commentTag = '¬';
+			descr.data = new DataString(file.data._ConsoleOutputAttribute(name + "_DESCR"), descr.data);
+			descr.ToFile(FileDestinations.RemasterCustom + name + @"\description.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + ".txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_de.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_es.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_fr.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_it.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_ru.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_zh_cn.txt", Encoding.Unicode);
 		}
 	}
 }

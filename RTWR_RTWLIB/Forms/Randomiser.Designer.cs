@@ -30,6 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_mode = new System.Windows.Forms.Label();
             this.btn_showSelected = new System.Windows.Forms.Button();
             this.btn_showAll = new System.Windows.Forms.Button();
             this.chk_rndFationStart = new System.Windows.Forms.CheckBox();
@@ -92,7 +93,6 @@
             this.mapGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbl_mode = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -127,6 +127,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
+            // 
+            // lbl_mode
+            // 
+            this.lbl_mode.AutoSize = true;
+            this.lbl_mode.Location = new System.Drawing.Point(10, 3);
+            this.lbl_mode.Name = "lbl_mode";
+            this.lbl_mode.Size = new System.Drawing.Size(35, 13);
+            this.lbl_mode.TabIndex = 14;
+            this.lbl_mode.Text = "label3";
             // 
             // btn_showSelected
             // 
@@ -795,13 +804,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolsToolStripMenuItem
@@ -849,15 +859,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // lbl_mode
-            // 
-            this.lbl_mode.AutoSize = true;
-            this.lbl_mode.Location = new System.Drawing.Point(10, 3);
-            this.lbl_mode.Name = "lbl_mode";
-            this.lbl_mode.Size = new System.Drawing.Size(35, 13);
-            this.lbl_mode.TabIndex = 14;
-            this.lbl_mode.Text = "label3";
             // 
             // RandomiserForm
             // 

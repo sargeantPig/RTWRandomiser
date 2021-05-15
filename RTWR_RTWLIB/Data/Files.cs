@@ -26,6 +26,8 @@ namespace RTWR_RTWLIB.Data
         public static string ROOT = @"randomiser\van_data";
         readonly public static string ASSETS = @"randomiser\data\ui\unit_info\merc\";
         readonly public static string RemasterRoot = @"Mods\My Mods\";
+        readonly public static string RemasterCustom = @"Mods\My Mods\randomiser\data\world\maps\campaign\custom\";
+        readonly public static string RemasterCampaign = @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\";
         readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         readonly public static string[] remasterSelectMaps = new string[] { @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         readonly public static string[] M2TWselectMapPaths = new string[] { @"mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"mods\randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
@@ -225,6 +227,16 @@ namespace RTWR_RTWLIB.Data
                     {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } }
                 }
             },
+
+             {
+                FileNames.campaign_descr,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\text\\campaign_descriptions.txt" } },
+                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\text\\campaign_descriptions.txt" } }
+                }
+            }
+
         };
     }
 

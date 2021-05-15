@@ -79,7 +79,7 @@ namespace RTWR_RTWLIB
                     rseed = txt_seed.Text.GetHashCode();
                 }
                 seed = rseed;
-                lbl_seed.Text = "Randomiser Seed: " + rseed;
+                lbl_seed.Text = rseed.ToString();
                 TWRandom.rnd = new Random(rseed);
                 TWRandom.seed = rseed;
             }
@@ -87,7 +87,7 @@ namespace RTWR_RTWLIB
             {
                 int rnd = TWRandom.rnd.Next(int.MaxValue);
                 seed = rnd;
-                lbl_seed.Text = "Current Randomiser Seed: " + rnd;
+                lbl_seed.Text = rnd.ToString();
                 TWRandom.rnd = new Random(rnd);
                 TWRandom.seed = rnd;
             }
