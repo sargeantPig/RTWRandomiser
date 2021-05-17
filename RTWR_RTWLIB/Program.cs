@@ -8,6 +8,7 @@ using RTWLib.Functions;
 using RTWLib.Logger;
 using RTWLib.Extensions;
 using RTWLib.Data;
+using RTWLib;
 
 namespace RTWR_RTWLIB
 {
@@ -37,16 +38,19 @@ namespace RTWR_RTWLIB
 			{
 				game = Game.MED2;
 				modeText = "Medieval 2 Detected";
+				RTWLIB.Folders.MODFOLDER = @"m2randomiser\";
 			}
 			else if (log.FileCheck("Application.lnk"))
 			{
 				modeText = "Rome Remaster Detected";
 				game = Game.REMASTER;
+				RTWLIB.Folders.MODFOLDER = @"randomiser\";
 			}
 			if (log.FileCheck("RomeTW.exe"))
 			{
 				modeText = "Rome TW Detected";
 				game = Game.OGRome;
+				RTWLIB.Folders.MODFOLDER = @"randomiser\";
 			}
 
 			if (game == Game.Missing)

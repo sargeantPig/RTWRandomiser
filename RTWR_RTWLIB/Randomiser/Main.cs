@@ -10,6 +10,7 @@ using RTWR_RTWLIB.Randomiser;
 using RTWR_RTWLIB.Forms;
 using RTWRandLib.Data;
 using System.IO;
+using RTWLib;
 
 namespace RTWR_RTWLIB
 {
@@ -28,7 +29,7 @@ namespace RTWR_RTWLIB
         {
             Logger.AssemblyPrefix = "RTWR";
             Logger.AssemblyWatchList = new string[] { "RTWR_RTWLIB", "RTWLib" };
-
+            RTWLib.RTWLIB.Folders.MODFOLDER = "randomiser";
             this.pb = pb;
             this.ss = ss;
             this.ActiveGame = game;
@@ -44,7 +45,7 @@ namespace RTWR_RTWLIB
 
             else if (game == Game.REMASTER)
             {
-                options = new Options(settingsBox, FileDestinations.RemasterRoot + @"randomiser/options.txt", "options.txt");
+                options = new Options(settingsBox, RTWLIB.Folders.ConstructPath(Game.REMASTER,  "options.txt"), "options.txt");
                 advancedOptions = new AdvancedOptionsViewer(FileDestinations.RemasterRoot + @"randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
                 FileDestinations.ROOT = @"mods\randomiser\van_data";

@@ -28,6 +28,7 @@ namespace RTWR_RTWLIB
                 {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.RemasterPaths[FileNames.descr_regions]["load"][1], FileDestinations.RemasterPaths[FileNames.descr_regions]["load"][0]) },
                 {FileNames.descr_strat, new RemasterDescr_Strat()},
                 {FileNames.descr_sm_faction, new SMFactions()},
+                {FileNames.override_descr_strat, new RemasterDescr_Strat()}
                 };
 
                 float increment = 100 / files.Count();
@@ -38,7 +39,9 @@ namespace RTWR_RTWLIB
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Name);
-                    file.Value.Parse(FileDestinations.RemasterPaths[file.Value.Name]["load"], out lineNumber, out lineText);
+                    if(file.Key.ToString().Contains("override", "feral"))
+                        file.Value.Parse(FileDestinations.RemasterOverrides[file.Value.Name]["load"], out lineNumber, out lineText);
+                    else file.Value.Parse(FileDestinations.RemasterPaths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
 
@@ -115,25 +118,38 @@ namespace RTWR_RTWLIB
             chkBoxes.Sort(new Comparison<Control>(Comparisons.CompareNameEnd));
             var ds = (Descr_Strat)files[FileNames.descr_strat];
             var dr = (Descr_Region)files[FileNames.descr_regions];
+            var ods = (Descr_Strat)files[FileNames.override_descr_strat];
             foreach (Control control in chkBoxes)
             {
                 switch (control.Name)
                 {
                     case "chk_faction_voronoi_4":
-                        if(((CheckBox)control).Checked)
+                        if (((CheckBox)control).Checked)
+                        {
                             RandomDS.VoronoiSettlements(ds, dr);
+                            RandomDS.VoronoiSettlements(ods, dr);
+                        }
                         break;
                     case "chk_faction_settlements_4":
                         if (((CheckBox)control).Checked)
-                            RandomDS.RandomSettlements(ds,dr, num_cities);
+                        {
+                            RandomDS.RandomSettlements(ds, dr, num_cities);
+                            RandomDS.RandomSettlements(ods, dr, num_cities);
+                        }
                         break;
                     case "chk_faction_coreA_7":
                         if (((CheckBox)control).Checked)
+                        {
                             RandomDS.RandCoreAttitudes(ds, dr);
+                            RandomDS.RandCoreAttitudes(ods, dr);
+                        }
                         break;
                     case "chk_total_war_8":
                         if (((CheckBox)control).Checked)
+                        {
                             RandomDS.TotalWar(ds);
+                            RandomDS.TotalWar(ods);
+                        }
                         break;
                         
                 }
@@ -160,8 +176,8 @@ namespace RTWR_RTWLIB
 
             Thread.Sleep(250);
 
-            files[FileNames.descr_strat].ToFile(FileDestinations.RemasterPaths[FileNames.descr_strat]["save"][0]);
-
+            ds.ToFile(FileDestinations.RemasterPaths[FileNames.descr_strat]["save"][0]);
+            ods.ToFile(FileDestinations.RemasterOverrides[FileNames.descr_strat]["save"][0]);
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");
             sw.Write(seed);

@@ -49,7 +49,7 @@ namespace RTWR_RTWLIB.Randomiser
 			foreach (Unit unit in edu.units)
 			{
 				string factionFound = "";
-				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
+				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.type.Contains("peasant", "navy", "boat"))
 				{
 					unit.attributes |= Attributes.general_unit;
 					factions.Remove(factionFound);
@@ -61,7 +61,7 @@ namespace RTWR_RTWLIB.Randomiser
 			foreach (Unit unit in edu.units)
 			{
 				string factionFound = "";
-				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.attributes.HasFlag(Attributes.general_unit) && !unit.type.Contains(new List<string> { "peasant", "navy", "boat" }))
+				if (factions.ContainsMatch(unit.ownership, out factionFound) && !unit.attributes.HasFlag(Attributes.general_unit) && !unit.type.Contains("peasant", "navy", "boat"))
 				{
 					unit.attributes |= Attributes.general_unit_upgrade;
 					factions.Remove(factionFound);

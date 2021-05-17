@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RTWLib.Functions;
 using RTWLib.Data;
+using RTWLib;
+
 namespace RTWR_RTWLIB.Data
 {
 
@@ -158,16 +160,14 @@ namespace RTWR_RTWLIB.Data
 
            }
         };
-
-
         public static Dictionary<FileNames, Dictionary<string, string[]>> RemasterPaths = new Dictionary<FileNames, Dictionary<string, string[]>>
         {
              {
                 FileNames.descr_strat,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } },
-                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\descr_strat.txt" } }
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER,  @"vanilla\world\maps\campaign\imperial_campaign\descr_strat.txt") } },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\world\maps\campaign\imperial_campaign\descr_strat.txt") } }
                 }
             },
 
@@ -175,8 +175,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.export_descr_unit,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\export_descr_unit.txt" } },
-                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_unit.txt" } }
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"vanilla\export_descr_unit.txt") } },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\export_descr_unit.txt") } }
                 }
             },
 
@@ -184,8 +184,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.export_descr_buildings,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\export_descr_buildings.txt" } },
-                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\export_descr_buildings.txt" } }
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"vanilla\export_descr_buildings.txt")} },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\export_descr_buildings.txt") } }
                 }
             },
 
@@ -193,7 +193,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.descr_regions,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\world\\maps\\base\\descr_regions.txt", "Mods\\My Mods\\randomiser\\vanilla\\world\\maps\\base\\map_regions.tga" } },
+                   {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\world\\maps\\base\\descr_regions.txt"), RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\world\\maps\\base\\map_regions.tga") } },
                    {"save", new string[] { } }
                }
 
@@ -203,7 +203,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.names,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\descr_names.txt" } },
+                   {"load", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\descr_names.txt" )} },
                    {"save", new string[] { } }
                }
 
@@ -213,7 +213,7 @@ namespace RTWR_RTWLIB.Data
                FileNames.descr_sm_faction,
                new Dictionary<string, string[]>
                {
-                   {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\descr_sm_factions.txt" } },
+                   {"load", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\descr_sm_factions.txt" )} },
                    {"save", new string[] { } }
                }
 
@@ -223,8 +223,8 @@ namespace RTWR_RTWLIB.Data
                 FileNames.radar_map1,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } },
-                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga" } }
+                    {"load", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga") } },
+                    {"save", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "data\\world\\maps\\campaign\\imperial_campaign\\radar_map1.tga") } }
                 }
             },
 
@@ -232,11 +232,40 @@ namespace RTWR_RTWLIB.Data
                 FileNames.campaign_descr,
                 new Dictionary<string, string[]>
                 {
-                    {"load", new string[] { "Mods\\My Mods\\randomiser\\vanilla\\text\\campaign_descriptions.txt" } },
-                    {"save", new string[] { "Mods\\My Mods\\randomiser\\data\\text\\campaign_descriptions.txt" } }
+                    {"load", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\text\\campaign_descriptions.txt") } },
+                    {"save", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "data\\text\\campaign_descriptions.txt" )} }
                 }
             }
 
+        };
+        public static Dictionary<FileNames, Dictionary<string, string[]>> RemasterOverrides = new Dictionary<FileNames, Dictionary<string, string[]>>
+        {
+             {
+                FileNames.descr_strat,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"vanilla\original_overrides\resource_quantity\world\maps\campaign\imperial_campaign\descr_strat.txt") } },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\original_overrides\resource_quantity\world\maps\campaign\imperial_campaign\descr_strat.txt") } }
+                }
+            },
+
+             {
+                FileNames.export_descr_unit,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"vanilla\original_overrides\export_descr_unit.txt") } },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\original_overrides\export_descr_unit.txt") } }
+                }
+            },
+
+            {
+                FileNames.export_descr_buildings,
+                new Dictionary<string, string[]>
+                {
+                    {"load", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"vanilla\original_overrides\merchants\export_descr_buildings.txt") } },
+                    {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, @"data\original_overrides\merchants\export_descr_buildings.txt") } }
+                }
+            }
         };
     }
 
