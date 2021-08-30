@@ -27,7 +27,7 @@ namespace RTWR_RTWLIB.Randomiser
                 }
             }
 
-            tempSettlements = CreateMissingSettlements(tempSettlements, (Descr_Region)dr);
+            tempSettlements = CreateMissingSettlements(tempSettlements, dr);
 
             while (!CheckVoronoiPoints(voronoiCoords))
             {
@@ -51,7 +51,7 @@ namespace RTWR_RTWLIB.Randomiser
                 {
                     int[] closestPoint = new int[2];
                     int distance = 10000;
-                    int[] cityCoord = ((Descr_Region)dr).GetCityCoords(s.region);
+                    int[] cityCoord = dr.GetCityCoords(s.region);
                     foreach (KeyValuePair<int[], List<ISettlement>> kv in voronoiCoords)
                     {
                         int tempDistance = (int)cityCoord.DistanceTo(kv.Key);

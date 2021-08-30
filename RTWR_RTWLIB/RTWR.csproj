@@ -161,6 +161,12 @@
     <Compile Include="Forms\MapGeneratorForm.Designer.cs">
       <DependentUpon>MapGeneratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PickGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PickGame.Designer.cs">
+      <DependentUpon>PickGame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Randomiser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MapGeneratorForm.resx">
       <DependentUpon>MapGeneratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PickGame.resx">
+      <DependentUpon>PickGame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Randomiser.resx">
       <DependentUpon>Randomiser.cs</DependentUpon>

@@ -30,19 +30,19 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chk_nomovies = new System.Windows.Forms.CheckBox();
+            this.chk_showerr = new System.Windows.Forms.CheckBox();
             this.lbl_mode = new System.Windows.Forms.Label();
             this.btn_showSelected = new System.Windows.Forms.Button();
             this.btn_showAll = new System.Windows.Forms.Button();
             this.chk_rndFationStart = new System.Windows.Forms.CheckBox();
             this.cmb_factionSelect = new System.Windows.Forms.ComboBox();
             this.chk_startWith = new System.Windows.Forms.CheckBox();
-            this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.chk_ai = new System.Windows.Forms.CheckBox();
             this.chk_windowed = new System.Windows.Forms.CheckBox();
             this.lbl_seed = new System.Windows.Forms.Label();
             this.btn_play = new System.Windows.Forms.Button();
             this.picBox_map = new System.Windows.Forms.PictureBox();
-            this.btn_load = new System.Windows.Forms.Button();
             this.grp_box_settings = new System.Windows.Forms.GroupBox();
             this.grp_settings_misc = new System.Windows.Forms.GroupBox();
             this.chk_wipeDS = new System.Windows.Forms.CheckBox();
@@ -79,6 +79,8 @@
             this.chk_units_sizes_1 = new System.Windows.Forms.CheckBox();
             this.txt_seed = new System.Windows.Forms.TextBox();
             this.chk_seed = new System.Windows.Forms.CheckBox();
+            this.btn_load = new System.Windows.Forms.Button();
+            this.chk_LogAll = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lbl_progress = new System.Windows.Forms.ToolStripStatusLabel();
             this.pb_progress = new System.Windows.Forms.ToolStripProgressBar();
@@ -93,6 +95,7 @@
             this.mapGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_game = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -109,24 +112,47 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.lbl_game);
+            this.panel1.Controls.Add(this.chk_nomovies);
+            this.panel1.Controls.Add(this.chk_showerr);
             this.panel1.Controls.Add(this.lbl_mode);
             this.panel1.Controls.Add(this.btn_showSelected);
             this.panel1.Controls.Add(this.btn_showAll);
             this.panel1.Controls.Add(this.chk_rndFationStart);
             this.panel1.Controls.Add(this.cmb_factionSelect);
             this.panel1.Controls.Add(this.chk_startWith);
-            this.panel1.Controls.Add(this.chk_LogAll);
             this.panel1.Controls.Add(this.chk_ai);
             this.panel1.Controls.Add(this.chk_windowed);
             this.panel1.Controls.Add(this.lbl_seed);
             this.panel1.Controls.Add(this.btn_play);
             this.panel1.Controls.Add(this.picBox_map);
-            this.panel1.Controls.Add(this.btn_load);
             this.panel1.Controls.Add(this.grp_box_settings);
             this.panel1.Location = new System.Drawing.Point(2, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
+            // 
+            // chk_nomovies
+            // 
+            this.chk_nomovies.AutoSize = true;
+            this.chk_nomovies.Location = new System.Drawing.Point(99, 326);
+            this.chk_nomovies.Name = "chk_nomovies";
+            this.chk_nomovies.Size = new System.Drawing.Size(77, 17);
+            this.chk_nomovies.TabIndex = 16;
+            this.chk_nomovies.Text = "No Movies";
+            this.tooltip.SetToolTip(this.chk_nomovies, "Disable intros and opening logos.");
+            this.chk_nomovies.UseVisualStyleBackColor = true;
+            // 
+            // chk_showerr
+            // 
+            this.chk_showerr.AutoSize = true;
+            this.chk_showerr.Location = new System.Drawing.Point(99, 349);
+            this.chk_showerr.Name = "chk_showerr";
+            this.chk_showerr.Size = new System.Drawing.Size(77, 17);
+            this.chk_showerr.TabIndex = 15;
+            this.chk_showerr.Text = "Show_err?";
+            this.tooltip.SetToolTip(this.chk_showerr, "Display any errors on exit or crash.");
+            this.chk_showerr.UseVisualStyleBackColor = true;
             // 
             // lbl_mode
             // 
@@ -140,7 +166,7 @@
             // btn_showSelected
             // 
             this.btn_showSelected.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
-            this.btn_showSelected.Location = new System.Drawing.Point(90, 240);
+            this.btn_showSelected.Location = new System.Drawing.Point(189, 205);
             this.btn_showSelected.Name = "btn_showSelected";
             this.btn_showSelected.Size = new System.Drawing.Size(97, 23);
             this.btn_showSelected.TabIndex = 13;
@@ -151,7 +177,7 @@
             // btn_showAll
             // 
             this.btn_showAll.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
-            this.btn_showAll.Location = new System.Drawing.Point(9, 240);
+            this.btn_showAll.Location = new System.Drawing.Point(108, 206);
             this.btn_showAll.Name = "btn_showAll";
             this.btn_showAll.Size = new System.Drawing.Size(75, 23);
             this.btn_showAll.TabIndex = 12;
@@ -163,7 +189,7 @@
             // 
             this.chk_rndFationStart.AutoSize = true;
             this.chk_rndFationStart.BackColor = System.Drawing.Color.LightGray;
-            this.chk_rndFationStart.Location = new System.Drawing.Point(9, 269);
+            this.chk_rndFationStart.Location = new System.Drawing.Point(10, 235);
             this.chk_rndFationStart.Name = "chk_rndFationStart";
             this.chk_rndFationStart.Size = new System.Drawing.Size(102, 17);
             this.chk_rndFationStart.TabIndex = 6;
@@ -175,9 +201,9 @@
             // cmb_factionSelect
             // 
             this.cmb_factionSelect.FormattingEnabled = true;
-            this.cmb_factionSelect.Location = new System.Drawing.Point(168, 287);
+            this.cmb_factionSelect.Location = new System.Drawing.Point(169, 259);
             this.cmb_factionSelect.Name = "cmb_factionSelect";
-            this.cmb_factionSelect.Size = new System.Drawing.Size(115, 21);
+            this.cmb_factionSelect.Size = new System.Drawing.Size(83, 21);
             this.cmb_factionSelect.TabIndex = 11;
             this.cmb_factionSelect.SelectedIndexChanged += new System.EventHandler(this.cmb_factionSelect_SelectedIndexChanged);
             // 
@@ -185,7 +211,7 @@
             // 
             this.chk_startWith.AutoSize = true;
             this.chk_startWith.BackColor = System.Drawing.Color.LightGray;
-            this.chk_startWith.Location = new System.Drawing.Point(9, 292);
+            this.chk_startWith.Location = new System.Drawing.Point(10, 263);
             this.chk_startWith.Name = "chk_startWith";
             this.chk_startWith.Size = new System.Drawing.Size(153, 17);
             this.chk_startWith.TabIndex = 10;
@@ -194,24 +220,10 @@
             this.chk_startWith.UseVisualStyleBackColor = false;
             this.chk_startWith.CheckedChanged += new System.EventHandler(this.chk_test_CheckedChanged);
             // 
-            // chk_LogAll
-            // 
-            this.chk_LogAll.AutoSize = true;
-            this.chk_LogAll.Checked = true;
-            this.chk_LogAll.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk_LogAll.Location = new System.Drawing.Point(168, 355);
-            this.chk_LogAll.Name = "chk_LogAll";
-            this.chk_LogAll.Size = new System.Drawing.Size(64, 17);
-            this.chk_LogAll.TabIndex = 2;
-            this.chk_LogAll.Text = "Log All?";
-            this.tooltip.SetToolTip(this.chk_LogAll, "Create a detailed log file (turn this off for faster load times within the random" +
-        "iser).");
-            this.chk_LogAll.UseVisualStyleBackColor = true;
-            // 
             // chk_ai
             // 
             this.chk_ai.AutoSize = true;
-            this.chk_ai.Location = new System.Drawing.Point(9, 355);
+            this.chk_ai.Location = new System.Drawing.Point(10, 326);
             this.chk_ai.Name = "chk_ai";
             this.chk_ai.Size = new System.Drawing.Size(63, 17);
             this.chk_ai.TabIndex = 8;
@@ -222,7 +234,7 @@
             // chk_windowed
             // 
             this.chk_windowed.AutoSize = true;
-            this.chk_windowed.Location = new System.Drawing.Point(79, 355);
+            this.chk_windowed.Location = new System.Drawing.Point(10, 349);
             this.chk_windowed.Name = "chk_windowed";
             this.chk_windowed.Size = new System.Drawing.Size(83, 17);
             this.chk_windowed.TabIndex = 7;
@@ -232,20 +244,19 @@
             // 
             // lbl_seed
             // 
-            this.lbl_seed.AutoSize = true;
             this.lbl_seed.BackColor = System.Drawing.Color.LightGray;
             this.lbl_seed.Location = new System.Drawing.Point(10, 210);
             this.lbl_seed.Name = "lbl_seed";
-            this.lbl_seed.Size = new System.Drawing.Size(30, 13);
+            this.lbl_seed.Size = new System.Drawing.Size(92, 17);
             this.lbl_seed.TabIndex = 6;
             this.lbl_seed.Text = "seed";
             // 
             // btn_play
             // 
             this.btn_play.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
-            this.btn_play.Location = new System.Drawing.Point(9, 315);
+            this.btn_play.Location = new System.Drawing.Point(10, 286);
             this.btn_play.Name = "btn_play";
-            this.btn_play.Size = new System.Drawing.Size(153, 34);
+            this.btn_play.Size = new System.Drawing.Size(166, 34);
             this.btn_play.TabIndex = 5;
             this.btn_play.Text = "Play";
             this.tooltip.SetToolTip(this.btn_play, "Play the game!");
@@ -254,24 +265,12 @@
             // 
             // picBox_map
             // 
-            this.picBox_map.Location = new System.Drawing.Point(10, 27);
+            this.picBox_map.Location = new System.Drawing.Point(10, 19);
             this.picBox_map.Name = "picBox_map";
             this.picBox_map.Size = new System.Drawing.Size(277, 180);
             this.picBox_map.TabIndex = 4;
             this.picBox_map.TabStop = false;
             this.tooltip.SetToolTip(this.picBox_map, "Preview of the faction positions on the map.");
-            // 
-            // btn_load
-            // 
-            this.btn_load.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
-            this.btn_load.Location = new System.Drawing.Point(178, 315);
-            this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(108, 35);
-            this.btn_load.TabIndex = 2;
-            this.btn_load.Text = "Randomise";
-            this.tooltip.SetToolTip(this.btn_load, "Load data from RTW then randomise.");
-            this.btn_load.UseVisualStyleBackColor = true;
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
             // 
             // grp_box_settings
             // 
@@ -280,9 +279,11 @@
             this.grp_box_settings.Controls.Add(this.grp_settings_units);
             this.grp_box_settings.Controls.Add(this.txt_seed);
             this.grp_box_settings.Controls.Add(this.chk_seed);
+            this.grp_box_settings.Controls.Add(this.btn_load);
+            this.grp_box_settings.Controls.Add(this.chk_LogAll);
             this.grp_box_settings.Location = new System.Drawing.Point(292, 3);
             this.grp_box_settings.Name = "grp_box_settings";
-            this.grp_box_settings.Size = new System.Drawing.Size(414, 352);
+            this.grp_box_settings.Size = new System.Drawing.Size(414, 369);
             this.grp_box_settings.TabIndex = 0;
             this.grp_box_settings.TabStop = false;
             this.grp_box_settings.Text = "Settings";
@@ -738,7 +739,7 @@
             // 
             // txt_seed
             // 
-            this.txt_seed.Location = new System.Drawing.Point(13, 320);
+            this.txt_seed.Location = new System.Drawing.Point(204, 322);
             this.txt_seed.Name = "txt_seed";
             this.txt_seed.Size = new System.Drawing.Size(119, 20);
             this.txt_seed.TabIndex = 5;
@@ -748,13 +749,39 @@
             // chk_seed
             // 
             this.chk_seed.AutoSize = true;
-            this.chk_seed.Location = new System.Drawing.Point(138, 322);
+            this.chk_seed.Location = new System.Drawing.Point(329, 324);
             this.chk_seed.Name = "chk_seed";
             this.chk_seed.Size = new System.Drawing.Size(73, 17);
             this.chk_seed.TabIndex = 4;
             this.chk_seed.Text = "Use Seed";
             this.tooltip.SetToolTip(this.chk_seed, "Forces the randomiser to use your given seed.");
             this.chk_seed.UseVisualStyleBackColor = true;
+            // 
+            // btn_load
+            // 
+            this.btn_load.BackgroundImage = global::RTWR_RTWLIB.Properties.Resources.backcol;
+            this.btn_load.Location = new System.Drawing.Point(13, 311);
+            this.btn_load.Name = "btn_load";
+            this.btn_load.Size = new System.Drawing.Size(185, 35);
+            this.btn_load.TabIndex = 2;
+            this.btn_load.Text = "Randomise";
+            this.tooltip.SetToolTip(this.btn_load, "Load data from RTW then randomise.");
+            this.btn_load.UseVisualStyleBackColor = true;
+            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
+            // 
+            // chk_LogAll
+            // 
+            this.chk_LogAll.AutoSize = true;
+            this.chk_LogAll.Checked = true;
+            this.chk_LogAll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chk_LogAll.Location = new System.Drawing.Point(13, 352);
+            this.chk_LogAll.Name = "chk_LogAll";
+            this.chk_LogAll.Size = new System.Drawing.Size(64, 17);
+            this.chk_LogAll.TabIndex = 2;
+            this.chk_LogAll.Text = "Log All?";
+            this.tooltip.SetToolTip(this.chk_LogAll, "Create a detailed log file (turn this off for faster load times within the random" +
+        "iser).");
+            this.chk_LogAll.UseVisualStyleBackColor = true;
             // 
             // statusStrip1
             // 
@@ -804,14 +831,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // toolsToolStripMenuItem
@@ -859,6 +886,16 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // lbl_game
+            // 
+            this.lbl_game.AutoSize = true;
+            this.lbl_game.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_game.Location = new System.Drawing.Point(182, 288);
+            this.lbl_game.Name = "lbl_game";
+            this.lbl_game.Size = new System.Drawing.Size(70, 25);
+            this.lbl_game.TabIndex = 17;
+            this.lbl_game.Text = "label3";
             // 
             // RandomiserForm
             // 
@@ -964,6 +1001,9 @@
         private System.Windows.Forms.CheckBox chk_wipeDS;
         private System.Windows.Forms.ToolStripMenuItem mapGeneratorToolStripMenuItem;
         private System.Windows.Forms.Label lbl_mode;
+        private System.Windows.Forms.CheckBox chk_nomovies;
+        private System.Windows.Forms.CheckBox chk_showerr;
+        private System.Windows.Forms.Label lbl_game;
     }
 }
 

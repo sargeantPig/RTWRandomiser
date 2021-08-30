@@ -18,6 +18,7 @@ using Microsoft.VisualBasic;
 using System.Text;
 using Microsoft.VisualBasic.Devices;
 using RTWLib.Extensions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RTWR_RTWLIB
 {
@@ -27,12 +28,18 @@ namespace RTWR_RTWLIB
 		EDU_viewer edu;
 		StratViewer strat;
 		MapGeneratorForm mapGen;
+		SubGame subGame;
+
+
 		public RandomiserForm(string updateMessage, Game game)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;	
 			InitializeComponent();
 			this.lbl_mode.Text = updateMessage;
 			picBox_map.SizeMode = PictureBoxSizeMode.Zoom;
+			ConstructGameLbl(game.ToString());
+
+
 			if (game == Game.MED2)
 			{
 				this.Text = "Medieval 2 Randomiser";
@@ -53,7 +60,14 @@ namespace RTWR_RTWLIB
 			}
 
 			else if (game == Game.REMASTER)
-			{ 
+			{
+				if (FileHelper.FolderExists(FileDestinations.RemasterBiData))
+					subGame = SubGame.Rome;
+				if (FileHelper.FolderExists(FileDestinations.RemasterRomeData))
+					subGame = SubGame.Bi;
+
+				ConstructGameLbl(subGame.ToString());
+
 				foreach (Control ctrl in grp_settings_units.Controls)
 				{
 					ctrl.Enabled = false;
@@ -157,6 +171,15 @@ namespace RTWR_RTWLIB
 		{
 			main.SetUp_seed(chk_seed, txt_seed, lbl_seed);
 
+			if(main.ActiveGame == Game.REMASTER)
+			using (PickGame pickGame = new PickGame())
+			{
+				pickGame.ShowDialog();
+				subGame = pickGame.SubGame;
+
+			}
+
+			switch_expansion(subGame);
 
 			switch (main.ActiveGame)
 			{
@@ -177,16 +200,53 @@ namespace RTWR_RTWLIB
 					else main.LoadError();
 					break;
 				case Game.REMASTER:
-					if (main.RemasterLoad(chk_LogAll, lbl_progress))
+					if (subGame == SubGame.Rome)
 					{
-						main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
-						lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue);
+						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDestinations.RemasterPaths, FileDestinations.RemasterOverrides))
+						{
+							main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue, subGame);
+						}
 					}
+					else if(subGame == SubGame.Bi)
+					{
+						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDestinations.RemasterBIPaths, FileDestinations.RemasterBIOverrides, subGame))
+						{
+							main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
+							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue, subGame);
+						}
+
+					}
+
 					else main.LoadError();
 					break;
 			}
 
 		}
+
+		private void switch_expansion(SubGame sub)
+		{
+			switch (sub)
+			{
+				case SubGame.Bi:
+					if (FileHelper.FolderExists(FileDestinations.RemasterBiData))
+					{
+						FileHelper.RenameDirectory(FileDestinations.RemasterData, FileDestinations.RemasterRomeData);
+						FileHelper.RenameDirectory(FileDestinations.RemasterBiData, FileDestinations.RemasterData);
+					}
+					break;
+				case SubGame.Rome:
+					if (FileHelper.FolderExists(FileDestinations.RemasterRomeData))
+					{
+						FileHelper.RenameDirectory(FileDestinations.RemasterData, FileDestinations.RemasterBiData);
+						FileHelper.RenameDirectory(FileDestinations.RemasterRomeData, FileDestinations.RemasterData);
+					}
+					break;
+			}
+
+			ConstructGameLbl(subGame.ToString());
+		}
+
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
 		{
 			CheckBoxes(sender, grp_settings_factions);
@@ -466,7 +526,7 @@ namespace RTWR_RTWLIB
 					break;
 
 				case Game.REMASTER:
-					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\full_map.png", cmb_factionSelect.SelectedValue));
+					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\previewimage.png", cmb_factionSelect.SelectedValue));
 					break;
 			}
 
@@ -517,7 +577,7 @@ namespace RTWR_RTWLIB
 				main.DisplayLog();
 				return;
 			}
-			new Computer().FileSystem.CopyDirectory(FileDestinations.RemasterCampaign, FileDestinations.RemasterCustom + @"\" + name);
+			/*new Computer().FileSystem.CopyDirectory(FileDestinations.RemasterCampaign, FileDestinations.RemasterCustom + @"\" + name);
 			FileBase file = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
 			FileBase descr = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
 			int lineno;
@@ -542,7 +602,13 @@ namespace RTWR_RTWLIB
 			file.ToFile(descriptionpath + "_mac_fr.txt", Encoding.Unicode);
 			file.ToFile(descriptionpath + "_mac_it.txt", Encoding.Unicode);
 			file.ToFile(descriptionpath + "_mac_ru.txt", Encoding.Unicode);
-			file.ToFile(descriptionpath + "_mac_zh_cn.txt", Encoding.Unicode);
+			file.ToFile(descriptionpath + "_mac_zh_cn.txt", Encoding.Unicode);*/
 		}
+
+		private void ConstructGameLbl(string game)
+		{
+			lbl_game.Text = string.Format("Using{0}{1}{2}Data Folder", EString.CRL(), game, EString.CRL());
+		}
+
 	}
 }
