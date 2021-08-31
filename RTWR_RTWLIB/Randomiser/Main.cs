@@ -11,6 +11,7 @@ using RTWR_RTWLIB.Forms;
 using RTWRandLib.Data;
 using System.IO;
 using RTWLib;
+using RTWLib.Extensions;
 
 namespace RTWR_RTWLIB
 {
@@ -50,9 +51,9 @@ namespace RTWR_RTWLIB
                 TWRandom.advancedOptions = advancedOptions.Options;
                 FileDestinations.ROOT = @"mods\randomiser\van_data";
                 FileDestinations.MOD_FOLDER = @"mods\randomiser";
-                SMFactions factionFile = new SMFactions();
-                factionFile.Parse(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["load"], out Logger.lineNumber, out Logger.lineText);
-                ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = factionFile.facDetails.Keys.ToArray();
+
+                FileBase file = GenericFile.CreateSMF(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["save"][0]);
+                ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = file.data.attributes.Keys.ToArray();
             }
 
             else

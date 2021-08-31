@@ -217,10 +217,9 @@ namespace RTWR_RTWLIB
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
 
-            Image oldImage = pic_map.Image;
+            pic_map.Image.Dispose();
+
             pic_map.Image = null;
-            if (oldImage != null)
-                oldImage.Dispose();
 
             if (sub == SubGame.Rome)
                 pic_map.Image = sm.CreateCompleteMap(ds, (Descr_Region)dr, smf);
@@ -229,7 +228,6 @@ namespace RTWR_RTWLIB
             pic_map.Refresh();
 
             sm.Save(@"Mods\My Mods\randomiser\previewimage.png");
-
 
             Thread.Sleep(250);
             if (sub == SubGame.Rome)

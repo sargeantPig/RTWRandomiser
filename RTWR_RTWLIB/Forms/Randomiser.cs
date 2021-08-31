@@ -30,7 +30,6 @@ namespace RTWR_RTWLIB
 		MapGeneratorForm mapGen;
 		SubGame subGame;
 
-
 		public RandomiserForm(string updateMessage, Game game)
 		{
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;	
@@ -54,8 +53,9 @@ namespace RTWR_RTWLIB
 				this.btn_advancedOptions.BackgroundImage = Properties.Resources.backdrop;
 				if (File.Exists(@"mods\randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"mods\randomiser\previewimage.png");
-					picBox_map.Image = image;
+					
+					picBox_map.Image = Image.FromFile(@"mods\randomiser\previewimage.png");
+
 				}
 			}
 
@@ -97,7 +97,6 @@ namespace RTWR_RTWLIB
 					{
 						((CheckBox)ctrl).Checked = false;
 					}
-
 				}
 
 				chk_wipeDS.Enabled = true;
@@ -112,18 +111,16 @@ namespace RTWR_RTWLIB
 
 				if (File.Exists(@"Mods\My Mods\randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"Mods\My Mods\randomiser\previewimage.png");
-					picBox_map.Image = image;
+
+					picBox_map.Image = ExtMagick.LoadBitmap(@"Mods\My Mods\randomiser\previewimage.png");
+					
 				}
-
-
 			}
 			else
 			{
 				if (File.Exists(@"randomiser\previewimage.png"))
 				{
-					Image image = Image.FromFile(@"randomiser\previewimage.png");
-					picBox_map.Image = image;
+					picBox_map.Image = Image.FromFile(@"randomiser\previewimage.png");
 				}
 			}
 
@@ -145,12 +142,6 @@ namespace RTWR_RTWLIB
 				sr.Close();
 				lbl_seed.Text = line;
 				txt_seed.Text = line;
-			}
-
-			if (File.Exists(@"randomiser\previewimage.png"))
-			{
-				Image image = Image.FromFile(@"randomiser\previewimage.png");
-				picBox_map.Image = image;
 			}
 
 			/*if (!main.AdminCheck())
@@ -245,6 +236,26 @@ namespace RTWR_RTWLIB
 			}
 
 			ConstructGameLbl(subGame.ToString());
+			ReloadFactionList();
+		}
+
+		private void ReloadFactionList()
+		{
+			FileBase file = new FileBase(FileNames.none, null, null);
+			switch (main.ActiveGame)
+			{
+				case Game.REMASTER:
+					file = GenericFile.CreateSMF(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["save"][0]);
+					break;
+				case Game.MED2:
+					file = GenericFile.CreateSMF(FileDestinations.M2TWpaths[FileNames.descr_sm_faction]["save"][0]);
+					break;
+				case Game.OGRome:
+					file = GenericFile.CreateSMF(FileDestinations.paths[FileNames.descr_sm_faction]["save"][0]);
+					break;
+
+			}
+			cmb_factionSelect.DataSource = file.data.attributes.Keys.ToArray();
 		}
 
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
@@ -501,7 +512,9 @@ namespace RTWR_RTWLIB
 					break;
 
 				case Game.REMASTER:
-					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					if(subGame == SubGame.Rome)
+						image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					else image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\barbarian_invasion\map_{0}.tga", cmb_factionSelect.SelectedValue));
 					break;
 			}
 			
@@ -551,7 +564,9 @@ namespace RTWR_RTWLIB
 					break;
 
 				case Game.REMASTER:
-					image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					if (subGame == SubGame.Rome)
+						image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\map_{0}.tga", cmb_factionSelect.SelectedValue));
+					else image = new MagickImage(String.Format(@"Mods\My Mods\randomiser\data\world\maps\campaign\barbarian_invasion\map_{0}.tga", cmb_factionSelect.SelectedValue));
 					break;
 			}
 

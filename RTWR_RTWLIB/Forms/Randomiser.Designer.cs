@@ -30,6 +30,7 @@
 		{
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_game = new System.Windows.Forms.Label();
             this.chk_nomovies = new System.Windows.Forms.CheckBox();
             this.chk_showerr = new System.Windows.Forms.CheckBox();
             this.lbl_mode = new System.Windows.Forms.Label();
@@ -95,7 +96,6 @@
             this.mapGeneratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbl_game = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_map)).BeginInit();
             this.grp_box_settings.SuspendLayout();
@@ -131,6 +131,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(719, 375);
             this.panel1.TabIndex = 0;
+            // 
+            // lbl_game
+            // 
+            this.lbl_game.AutoSize = true;
+            this.lbl_game.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_game.Location = new System.Drawing.Point(182, 288);
+            this.lbl_game.Name = "lbl_game";
+            this.lbl_game.Size = new System.Drawing.Size(51, 20);
+            this.lbl_game.TabIndex = 17;
+            this.lbl_game.Text = "label3";
             // 
             // chk_nomovies
             // 
@@ -886,16 +896,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // lbl_game
-            // 
-            this.lbl_game.AutoSize = true;
-            this.lbl_game.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_game.Location = new System.Drawing.Point(182, 288);
-            this.lbl_game.Name = "lbl_game";
-            this.lbl_game.Size = new System.Drawing.Size(70, 25);
-            this.lbl_game.TabIndex = 17;
-            this.lbl_game.Text = "label3";
             // 
             // RandomiserForm
             // 

@@ -91,7 +91,7 @@ namespace RTWR_RTWLIB.Data
                new Dictionary<string, string[]>
                {
                    {"load", new string[] { "randomiser\\van_data\\descr_sm_factions.txt" } },
-                   {"save", new string[] { } }
+                   {"save", new string[] { "randomiser\\data\\descr_sm_factions.txt" } }
                }
 
            }
@@ -150,7 +150,7 @@ namespace RTWR_RTWLIB.Data
                new Dictionary<string, string[]>
                {
                    {"load", new string[] { "mods\\randomiser\\van_data\\descr_sm_factions.txt" } },
-                   {"save", new string[] { } }
+                   {"save", new string[] { "mods\\randomiser\\data\\descr_sm_factions.txt" } }
                }
 
            },
@@ -218,7 +218,7 @@ namespace RTWR_RTWLIB.Data
                new Dictionary<string, string[]>
                {
                    {"load", new string[] {  RTWLIB.Folders.ConstructPath(Game.REMASTER, "vanilla\\descr_sm_factions.txt" )} },
-                   {"save", new string[] { } }
+                   {"save", new string[] { RTWLIB.Folders.ConstructPath(Game.REMASTER, "data\\descr_sm_factions.txt") } }
                }
 
            },
