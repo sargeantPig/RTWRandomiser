@@ -3217,7 +3217,6 @@ faction: macedon
 		Iris
 		Kallixeina
 		Khloe
-		Kore
 		Kyra
 		Lanike
 		Latona
@@ -3360,7 +3359,6 @@ faction: macedon
 		Xenophile
 		Ada
 		Aethre
-		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -3775,7 +3773,6 @@ faction: carthage
 faction: germans
 
 	characters
-		Adalbert 
 		Adalgard
 		Adalwolf
 		Adalberina
@@ -5038,7 +5035,6 @@ faction: greek_cities
 		Iris
 		Kallixeina
 		Khloe
-		Kore
 		Kyra
 		Lanike
 		Latona
@@ -5181,7 +5177,6 @@ faction: greek_cities
 		Xenophile
 		Ada
 		Aethre
-		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -5699,7 +5694,6 @@ faction: seleucid
 		Iris
 		Kallixeina
 		Khloe
-		Kore
 		Kyra
 		Lanike
 		Latona
@@ -5842,7 +5836,6 @@ faction: seleucid
 		Xenophile
 		Ada
 		Aethre
-		Agathe
 		Aithra
 		Alcyone
 		Amarhyllis
@@ -5996,7 +5989,6 @@ faction: parthia
 		Cambyses
 		Caspar
 		Cincixri
-		Cisantaxma.
 		Cishpi
 		Cyaxares
 		Cyrus

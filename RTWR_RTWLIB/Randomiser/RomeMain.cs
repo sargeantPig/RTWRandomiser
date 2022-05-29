@@ -24,7 +24,7 @@ namespace RTWR_RTWLIB
             {
                 //start loading data
                 files = new Dictionary<FileNames, IFile>(){
-                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) },
+                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDest.paths[FileNames.descr_regions]["load"][1], FileDest.M2TWpaths[FileNames.descr_regions]["load"][0]) },
                 {FileNames.descr_strat, new Descr_Strat()},
                 {FileNames.export_descr_buildings, new EDB(chk_LogAll.Checked)},
                 {FileNames.export_descr_unit, new EDU(chk_LogAll.Checked)},
@@ -40,7 +40,7 @@ namespace RTWR_RTWLIB
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Name);
-                    file.Value.Parse(FileDestinations.paths[file.Value.Name]["load"], out lineNumber, out lineText);
+                    file.Value.Parse(FileDest.paths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
 
@@ -75,7 +75,7 @@ namespace RTWR_RTWLIB
                 else if (fileName == FileNames.descr_strat)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Strat() } };
                 else if (fileName == FileNames.descr_regions)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.paths[FileNames.descr_regions]["load"][0]) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDest.paths[FileNames.descr_regions]["load"][1], FileDest.paths[FileNames.descr_regions]["load"][0]) } };
                 else if (fileName == FileNames.descr_sm_faction)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new SMFactions() } };
                 else if (fileName == FileNames.names)
@@ -84,7 +84,7 @@ namespace RTWR_RTWLIB
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
                 files[fileName].Log("Loading " + files[fileName].Name);
-                files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
+                files[fileName].Parse(FileDest.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
                 ss.Refresh();
@@ -112,7 +112,7 @@ namespace RTWR_RTWLIB
             ss.Refresh();
 
             Misc_Data.RefreshRegionWater();
-            SelectMaps sm = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.selectMapPaths[1]);
+            SelectMaps sm = new SelectMaps(FileDest.selectMapPaths[0], FileDest.selectMapPaths[1]);
 
             if (chk_removeSenate)
                 ((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
@@ -152,9 +152,9 @@ namespace RTWR_RTWLIB
 
             Thread.Sleep(250);
 
-            files[FileNames.export_descr_unit].ToFile(FileDestinations.paths[FileNames.export_descr_unit]["save"][0]);
-            files[FileNames.export_descr_buildings].ToFile(FileDestinations.paths[FileNames.export_descr_buildings]["save"][0]);
-            files[FileNames.descr_strat].ToFile(FileDestinations.paths[FileNames.descr_strat]["save"][0]);
+            files[FileNames.export_descr_unit].ToFile(FileDest.paths[FileNames.export_descr_unit]["save"][0]);
+            files[FileNames.export_descr_buildings].ToFile(FileDest.paths[FileNames.export_descr_buildings]["save"][0]);
+            files[FileNames.descr_strat].ToFile(FileDest.paths[FileNames.descr_strat]["save"][0]);
 
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");

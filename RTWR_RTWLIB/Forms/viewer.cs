@@ -54,11 +54,11 @@ namespace RTWR_RTWLIB
         }
         private void ChangeUnitPic()
         {
-            if (Directory.Exists(FileDestinations.ASSETS))
+            if (Directory.Exists(FileDest.ASSETS))
             {
                 string unit = (string)lst_units.SelectedItem;
                 string name = unit.ToUpper() + "_INFO.tga";
-                string fullpath = FileDestinations.ASSETS + name;
+                string fullpath = FileDest.ASSETS + name;
                 if (File.Exists(fullpath))
                 {
                     MagickImage image = new MagickImage(fullpath);

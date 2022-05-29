@@ -34,6 +34,10 @@
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_previous = new System.Windows.Forms.Button();
             this.grp_GenOptions = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numupdown_offset = new System.Windows.Forms.NumericUpDown();
+            this.lbl_tilt = new System.Windows.Forms.Label();
+            this.numupdown_tilt = new System.Windows.Forms.NumericUpDown();
             this.lbl_threads = new System.Windows.Forms.Label();
             this.numUpD_Threads = new System.Windows.Forms.NumericUpDown();
             this.lbl_elevation = new System.Windows.Forms.Label();
@@ -44,8 +48,11 @@
             this.numUpD_seaLevel = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.numUpD_freq = new System.Windows.Forms.NumericUpDown();
+            this.lbl_offset = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_maps)).BeginInit();
             this.grp_GenOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_offset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_tilt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpD_Threads)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_elevation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpD_roughness)).BeginInit();
@@ -103,6 +110,11 @@
             // 
             // grp_GenOptions
             // 
+            this.grp_GenOptions.Controls.Add(this.lbl_offset);
+            this.grp_GenOptions.Controls.Add(this.label2);
+            this.grp_GenOptions.Controls.Add(this.numupdown_offset);
+            this.grp_GenOptions.Controls.Add(this.lbl_tilt);
+            this.grp_GenOptions.Controls.Add(this.numupdown_tilt);
             this.grp_GenOptions.Controls.Add(this.lbl_threads);
             this.grp_GenOptions.Controls.Add(this.numUpD_Threads);
             this.grp_GenOptions.Controls.Add(this.lbl_elevation);
@@ -120,10 +132,72 @@
             this.grp_GenOptions.TabStop = false;
             this.grp_GenOptions.Text = "Generation Options";
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 0;
+            // 
+            // numupdown_offset
+            // 
+            this.numupdown_offset.DecimalPlaces = 2;
+            this.numupdown_offset.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numupdown_offset.Location = new System.Drawing.Point(7, 165);
+            this.numupdown_offset.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numupdown_offset.Name = "numupdown_offset";
+            this.numupdown_offset.Size = new System.Drawing.Size(48, 20);
+            this.numupdown_offset.TabIndex = 12;
+            this.numupdown_offset.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // lbl_tilt
+            // 
+            this.lbl_tilt.AutoSize = true;
+            this.lbl_tilt.Location = new System.Drawing.Point(61, 138);
+            this.lbl_tilt.Name = "lbl_tilt";
+            this.lbl_tilt.Size = new System.Drawing.Size(64, 13);
+            this.lbl_tilt.TabIndex = 11;
+            this.lbl_tilt.Text = "Tilt Degrees";
+            // 
+            // numupdown_tilt
+            // 
+            this.numupdown_tilt.DecimalPlaces = 2;
+            this.numupdown_tilt.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numupdown_tilt.Location = new System.Drawing.Point(7, 136);
+            this.numupdown_tilt.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numupdown_tilt.Name = "numupdown_tilt";
+            this.numupdown_tilt.Size = new System.Drawing.Size(48, 20);
+            this.numupdown_tilt.TabIndex = 10;
+            this.numupdown_tilt.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
             // lbl_threads
             // 
             this.lbl_threads.AutoSize = true;
-            this.lbl_threads.Location = new System.Drawing.Point(61, 138);
+            this.lbl_threads.Location = new System.Drawing.Point(57, 216);
             this.lbl_threads.Name = "lbl_threads";
             this.lbl_threads.Size = new System.Drawing.Size(46, 13);
             this.lbl_threads.TabIndex = 9;
@@ -131,7 +205,7 @@
             // 
             // numUpD_Threads
             // 
-            this.numUpD_Threads.Location = new System.Drawing.Point(7, 136);
+            this.numUpD_Threads.Location = new System.Drawing.Point(3, 214);
             this.numUpD_Threads.Maximum = new decimal(new int[] {
             16,
             0,
@@ -146,7 +220,7 @@
             this.numUpD_Threads.Size = new System.Drawing.Size(48, 20);
             this.numUpD_Threads.TabIndex = 8;
             this.numUpD_Threads.Value = new decimal(new int[] {
-            1,
+            4,
             0,
             0,
             0});
@@ -209,7 +283,7 @@
             this.numUpD_roughness.Size = new System.Drawing.Size(48, 20);
             this.numUpD_roughness.TabIndex = 4;
             this.numUpD_roughness.Value = new decimal(new int[] {
-            1,
+            20,
             0,
             0,
             0});
@@ -234,15 +308,20 @@
             this.numUpD_seaLevel.Name = "numUpD_seaLevel";
             this.numUpD_seaLevel.Size = new System.Drawing.Size(48, 20);
             this.numUpD_seaLevel.TabIndex = 2;
+            this.numUpD_seaLevel.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(61, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Frequency";
+            this.label1.Text = "Border fuzz";
             // 
             // numUpD_freq
             // 
@@ -256,10 +335,19 @@
             this.numUpD_freq.Size = new System.Drawing.Size(48, 20);
             this.numUpD_freq.TabIndex = 0;
             this.numUpD_freq.Value = new decimal(new int[] {
-            500,
+            1000,
             0,
             0,
             0});
+            // 
+            // lbl_offset
+            // 
+            this.lbl_offset.AutoSize = true;
+            this.lbl_offset.Location = new System.Drawing.Point(65, 167);
+            this.lbl_offset.Name = "lbl_offset";
+            this.lbl_offset.Size = new System.Drawing.Size(35, 13);
+            this.lbl_offset.TabIndex = 13;
+            this.lbl_offset.Text = "Offset";
             // 
             // MapGeneratorForm
             // 
@@ -278,6 +366,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picbox_maps)).EndInit();
             this.grp_GenOptions.ResumeLayout(false);
             this.grp_GenOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_offset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numupdown_tilt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpD_Threads)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_elevation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpD_roughness)).EndInit();
@@ -306,5 +396,10 @@
         private System.Windows.Forms.NumericUpDown numUpDown_elevation;
         private System.Windows.Forms.Label lbl_threads;
         private System.Windows.Forms.NumericUpDown numUpD_Threads;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numupdown_offset;
+        private System.Windows.Forms.Label lbl_tilt;
+        private System.Windows.Forms.NumericUpDown numupdown_tilt;
+        private System.Windows.Forms.Label lbl_offset;
     }
 }

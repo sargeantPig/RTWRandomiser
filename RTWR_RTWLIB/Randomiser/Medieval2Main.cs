@@ -26,7 +26,7 @@ namespace RTWR_RTWLIB
             {
                 //start loading data
                 files = new Dictionary<FileNames, IFile>(){
-                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) },
+                {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, FileDest.M2TWpaths[FileNames.descr_regions]["load"][1], FileDest.M2TWpaths[FileNames.descr_regions]["load"][0]) },
                 {FileNames.descr_strat, new M2DS()},
                 {FileNames.export_descr_buildings, new M2EDB(chk_LogAll.Checked)},
                 {FileNames.export_descr_unit, new M2EDU(chk_LogAll.Checked)},
@@ -43,7 +43,7 @@ namespace RTWR_RTWLIB
                     lbl_progress.Text = "Loading: " + file.Value.Name.ToString();
                     ss.Refresh();
                     file.Value.Log("Loading " + file.Value.Name);
-                    file.Value.Parse(FileDestinations.M2TWpaths[file.Value.Name]["load"], out lineNumber, out lineText);
+                    file.Value.Parse(FileDest.M2TWpaths[file.Value.Name]["load"], out lineNumber, out lineText);
                     pb.Increment((int)increment);
                 }
 
@@ -78,7 +78,7 @@ namespace RTWR_RTWLIB
                 else if (fileName == FileNames.descr_strat)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new M2DS() } };
                 else if (fileName == FileNames.descr_regions)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(false, FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][1], FileDestinations.M2TWpaths[FileNames.descr_regions]["load"][0]) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(false, FileDest.M2TWpaths[FileNames.descr_regions]["load"][1], FileDest.M2TWpaths[FileNames.descr_regions]["load"][0]) } };
                 else if (fileName == FileNames.descr_sm_faction)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new SMFactions() } };
                 else if (fileName == FileNames.names)
@@ -87,7 +87,7 @@ namespace RTWR_RTWLIB
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
                 files[fileName].Log("Loading " + files[fileName].Name);
-                files[fileName].Parse(FileDestinations.M2TWpaths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
+                files[fileName].Parse(FileDest.M2TWpaths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
                 ss.Refresh();
@@ -110,7 +110,7 @@ namespace RTWR_RTWLIB
             ss.Refresh();
 
             Misc_Data.RefreshRegionWater();
-            SelectMaps sm = new SelectMaps(FileDestinations.M2TWselectMapPaths[0], FileDestinations.M2TWselectMapPaths[1]);
+            SelectMaps sm = new SelectMaps(FileDest.M2TWselectMapPaths[0], FileDest.M2TWselectMapPaths[1]);
             //((Descr_Strat)files[FileNames.descr_strat]).RemoveSPQR();
             ((M2EDU)files[FileNames.export_descr_unit]).RandomiseFile<RandomEDU, M2EDU>(units_group, lbl_progress, ss, pb, new object[] { unit_attr, num_ownership });
             RandomEDU.SetFactionUnitList(((EDU)files[FileNames.export_descr_unit]));
@@ -138,10 +138,10 @@ namespace RTWR_RTWLIB
 
             Thread.Sleep(250);
 
-            files[FileNames.export_descr_unit].ToFile(FileDestinations.M2TWpaths[FileNames.export_descr_unit]["save"][0]);
-            files[FileNames.export_descr_buildings].ToFile(FileDestinations.M2TWpaths[FileNames.export_descr_buildings]["save"][0]);
-            files[FileNames.descr_strat].ToFile(FileDestinations.M2TWpaths[FileNames.descr_strat]["save"][0]);
-            files[FileNames.battle_models].ToFile(FileDestinations.M2TWpaths[FileNames.battle_models]["save"][0]);
+            files[FileNames.export_descr_unit].ToFile(FileDest.M2TWpaths[FileNames.export_descr_unit]["save"][0]);
+            files[FileNames.export_descr_buildings].ToFile(FileDest.M2TWpaths[FileNames.export_descr_buildings]["save"][0]);
+            files[FileNames.descr_strat].ToFile(FileDest.M2TWpaths[FileNames.descr_strat]["save"][0]);
+            files[FileNames.battle_models].ToFile(FileDest.M2TWpaths[FileNames.battle_models]["save"][0]);
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");
             sw.Write(seed);

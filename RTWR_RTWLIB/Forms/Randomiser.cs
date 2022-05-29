@@ -19,6 +19,8 @@ using System.Text;
 using Microsoft.VisualBasic.Devices;
 using RTWLib.Extensions;
 using System.Security.Cryptography.X509Certificates;
+using RTWLib.Functions.Remaster;
+using System.Collections.Generic;
 
 namespace RTWR_RTWLIB
 {
@@ -61,9 +63,9 @@ namespace RTWR_RTWLIB
 
 			else if (game == Game.REMASTER)
 			{
-				if (FileHelper.FolderExists(FileDestinations.RemasterBiData))
+				if (FileHelper.FolderExists(FileDest.RemasterBiData))
 					subGame = SubGame.Rome;
-				if (FileHelper.FolderExists(FileDestinations.RemasterRomeData))
+				if (FileHelper.FolderExists(FileDest.RemasterRomeData))
 					subGame = SubGame.Bi;
 
 				ConstructGameLbl(subGame.ToString());
@@ -193,7 +195,7 @@ namespace RTWR_RTWLIB
 				case Game.REMASTER:
 					if (subGame == SubGame.Rome)
 					{
-						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDestinations.RemasterPaths, FileDestinations.RemasterOverrides))
+						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDest.RemasterPaths, FileDest.RemasterOverrides))
 						{
 							main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
 							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue, subGame);
@@ -201,7 +203,7 @@ namespace RTWR_RTWLIB
 					}
 					else if(subGame == SubGame.Bi)
 					{
-						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDestinations.RemasterBIPaths, FileDestinations.RemasterBIOverrides, subGame))
+						if (main.RemasterLoad(chk_LogAll, lbl_progress, FileDest.RemasterBIPaths, FileDest.RemasterBIOverrides, subGame))
 						{
 							main.RemasterRandomise(grp_settings_units, numUpDown_unit_attributes, numUpDown_unit_ownership, grp_settings_factions, numUpDown_faction_cities,
 							lbl_progress, picBox_map, chk_misc_unitInfo.Checked, chk_preferences.Checked, chk_removeSPQR.Checked, chk_startWith.Checked, chk_rndFationStart.Checked, (string)cmb_factionSelect.SelectedValue, subGame);
@@ -220,17 +222,17 @@ namespace RTWR_RTWLIB
 			switch (sub)
 			{
 				case SubGame.Bi:
-					if (FileHelper.FolderExists(FileDestinations.RemasterBiData))
+					if (FileHelper.FolderExists(FileDest.RemasterBiData))
 					{
-						FileHelper.RenameDirectory(FileDestinations.RemasterData, FileDestinations.RemasterRomeData);
-						FileHelper.RenameDirectory(FileDestinations.RemasterBiData, FileDestinations.RemasterData);
+						FileHelper.RenameDirectory(FileDest.RemasterData, FileDest.RemasterRomeData);
+						FileHelper.RenameDirectory(FileDest.RemasterBiData, FileDest.RemasterData);
 					}
 					break;
 				case SubGame.Rome:
-					if (FileHelper.FolderExists(FileDestinations.RemasterRomeData))
+					if (FileHelper.FolderExists(FileDest.RemasterRomeData))
 					{
-						FileHelper.RenameDirectory(FileDestinations.RemasterData, FileDestinations.RemasterBiData);
-						FileHelper.RenameDirectory(FileDestinations.RemasterRomeData, FileDestinations.RemasterData);
+						FileHelper.RenameDirectory(FileDest.RemasterData, FileDest.RemasterBiData);
+						FileHelper.RenameDirectory(FileDest.RemasterRomeData, FileDest.RemasterData);
 					}
 					break;
 			}
@@ -245,17 +247,21 @@ namespace RTWR_RTWLIB
 			switch (main.ActiveGame)
 			{
 				case Game.REMASTER:
-					file = GenericFile.CreateSMF(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["save"][0]);
+					file = FileWrapper.CreateSMF(FileDest.RemasterPaths[FileNames.descr_sm_faction]["save"]);
+					var factions = ((FileWrapper)file).objects[0];
+					cmb_factionSelect.DataSource = ((Group<string>)factions).objects.Select(x => x.tag).ToList();
 					break;
 				case Game.MED2:
-					file = GenericFile.CreateSMF(FileDestinations.M2TWpaths[FileNames.descr_sm_faction]["save"][0]);
+					file = GenericFile.CreateSMF(FileDest.M2TWpaths[FileNames.descr_sm_faction]["save"][0]);
+					cmb_factionSelect.DataSource = file.data.attributes.Keys.ToArray();
 					break;
 				case Game.OGRome:
-					file = GenericFile.CreateSMF(FileDestinations.paths[FileNames.descr_sm_faction]["save"][0]);
+					file = GenericFile.CreateSMF(FileDest.paths[FileNames.descr_sm_faction]["save"][0]);
+					cmb_factionSelect.DataSource = file.data.attributes.Keys.ToArray();
 					break;
 
 			}
-			cmb_factionSelect.DataSource = file.data.attributes.Keys.ToArray();
+			
 		}
 
 		private void chk_misc_selectA_CheckedChanged(object sender, EventArgs e)
@@ -279,7 +285,7 @@ namespace RTWR_RTWLIB
 
 		private void FileWrite(IFile file)
 		{
-			StreamWriter sw = new StreamWriter(FileDestinations.paths[file.Name]["save"][0], false);
+			StreamWriter sw = new StreamWriter(FileDest.paths[file.Name]["save"][0], false);
 
 			sw.WriteLine(file.Output());
 
@@ -353,17 +359,17 @@ namespace RTWR_RTWLIB
 			{
 				case Game.MED2:
 					ds = new M2DS();
-					path = FileDestinations.M2TWpaths[FileNames.descr_strat]["save"];
+					path = FileDest.M2TWpaths[FileNames.descr_strat]["save"];
 					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
 					break;
 				case Game.OGRome:
 					ds = new Descr_Strat();
-					path = FileDestinations.paths[FileNames.descr_strat]["save"];
+					path = FileDest.paths[FileNames.descr_strat]["save"];
 					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
 					break;
 				case Game.REMASTER:
 					ds = new RemasterDescr_Strat();
-					path = FileDestinations.RemasterPaths[FileNames.descr_strat]["save"];
+					path = FileDest.RemasterPaths[FileNames.descr_strat]["save"];
 					ds.Parse(path, out Logger.lineNumber, out Logger.lineText);
 					break;
 			}
@@ -586,12 +592,34 @@ namespace RTWR_RTWLIB
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string name = lbl_seed.Text;
-			if (Directory.Exists(FileDestinations.RemasterCustom + @"\" + name))
+
+			main.options.Export(grp_box_settings);
+			main.advancedOptions.Export();
+
+			switch (main.ActiveGame)
+			{
+				case Game.MED2:
+					RandomiseLoadSave.Save(EStr.Array(FileDest.M2TWRoot + FileDest.optionsLoc, FileDest.M2TWRoot + FileDest.advancedOptionsLoc),
+						name, main.ActiveGame, FileDest.SeedSaveLoc + name + ".txt");
+					break;
+				case Game.OGRome:
+					RandomiseLoadSave.Save(EStr.Array(FileDest.optionsLoc, FileDest.advancedOptionsLoc),
+						name, main.ActiveGame, FileDest.SeedSaveLoc + name + ".txt");
+					break;
+				case Game.REMASTER:
+					RandomiseLoadSave.Save(EStr.Array(FileDest.RemasterRoot + FileDest.optionsLoc, FileDest.RemasterRoot + FileDest.advancedOptionsLoc),
+						name, main.ActiveGame, FileDest.SeedSaveLoc + name + ".txt", subGame);
+					break;
+			} 
+
+			
+
+			/*if (Directory.Exists(FileDestinations.RemasterCustom + @"\" + name))
 			{
 				main.PLog("Cant save, randomisation with that seed already exists.");
 				main.DisplayLog();
 				return;
-			}
+			}*/
 			/*new Computer().FileSystem.CopyDirectory(FileDestinations.RemasterCampaign, FileDestinations.RemasterCustom + @"\" + name);
 			FileBase file = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
 			FileBase descr = new FileBase(RTWLib.Data.FileNames.campaign_descr, string.Empty, string.Empty);
@@ -622,8 +650,12 @@ namespace RTWR_RTWLIB
 
 		private void ConstructGameLbl(string game)
 		{
-			lbl_game.Text = string.Format("Using{0}{1}{2}Data Folder", EString.CRL(), game, EString.CRL());
+			lbl_game.Text = string.Format("Using{0}{1}{2}Data Folder", EStr.CRL(), game, EStr.CRL());
 		}
 
+		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

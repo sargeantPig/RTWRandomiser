@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ImageMagick;
 using RTWLib.Extensions;
 using RTWLib.MapGen;
 using RTWLib.Memory;
@@ -30,7 +31,7 @@ namespace RTWR_RTWLIB.Forms
         {//511 313
             threads.ClearThreads();
 
-            mapGen = new MapGenerator(511, 313, (float)numUpD_freq.Value, (int)numUpD_seaLevel.Value, (int)numUpD_roughness.Value,
+            mapGen = new MapGenerator(255, 156, (float)numUpD_freq.Value, (int)numUpD_seaLevel.Value, (int)numUpD_roughness.Value,
                 "randomiser\\van_data\\world\\maps\\base\\descr_regions.txt", "randomiser\\van_data\\world\\maps\\base\\map_regions.tga", 
                 (int)numUpDown_elevation.Value, threads, TWRandom.rnd, (int)numUpD_Threads.Value, picbox_maps);
 

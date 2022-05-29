@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RTWLib.Functions;
 using RTWLib.Data;
 using RTWLib;
+using System.Collections.ObjectModel;
 
 namespace RTWR_RTWLIB.Data
 {
@@ -22,17 +23,22 @@ namespace RTWR_RTWLIB.Data
         numUpDown_ragingRebelsVal,
     }
 
-    static class FileDestinations
+    static class FileDest
     {
         public static string MOD_FOLDER = @"randomiser";
         public static string ROOT = @"randomiser\van_data";
         readonly public static string ASSETS = @"randomiser\data\ui\unit_info\merc\";
         readonly public static string RemasterRoot = @"Mods\My Mods\";
         readonly public static string RemasterCustom = @"Mods\My Mods\randomiser\data\world\maps\campaign\custom\";
+        readonly public static string RemasterSaveLoc = @"Mods\My Mods\randomiser\seed_saves";
         readonly public static string RemasterCampaign = @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\";
         readonly public static string RemasterRomeData= @"Mods\My Mods\randomiser\r_data";
         readonly public static string RemasterBiData = @"Mods\My Mods\randomiser\bi_data";
         readonly public static string RemasterData = @"Mods\My Mods\randomiser\data";
+        readonly public static string M2TWRoot = @"mods\";
+        readonly public static string optionsLoc = @"randomiser\options.txt";
+        readonly public static string advancedOptionsLoc = @"randomiser\advancedoptions.txt";
+        readonly public static string SeedSaveLoc = @"seed_saves\";
         readonly public static string[] selectMapPaths = new string[] { @"randomiser\data\world\maps\campaign\imperial_campaign\", @"randomiser\van_data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         readonly public static string[] remasterSelectMaps = new string[] { @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\", @"Mods\My Mods\randomiser\data\world\maps\campaign\imperial_campaign\radar_map1.tga" };
         readonly public static string[] remasterBISelectMaps = new string[] { @"Mods\My Mods\randomiser\data\world\maps\campaign\barbarian_invasion\", @"Mods\My Mods\randomiser\data\world\maps\campaign\barbarian_invasion\radar_map1.tga" };

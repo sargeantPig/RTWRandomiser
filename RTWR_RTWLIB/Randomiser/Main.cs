@@ -12,6 +12,7 @@ using RTWRandLib.Data;
 using System.IO;
 using RTWLib;
 using RTWLib.Extensions;
+using RTWLib.Functions.Remaster;
 
 namespace RTWR_RTWLIB
 {
@@ -23,7 +24,7 @@ namespace RTWR_RTWLIB
         public Options options;
         ToolStripProgressBar pb;
         StatusStrip ss;
-
+        Form parent;
         public Game ActiveGame { get; }
 
         public Main(ToolStripProgressBar pb, StatusStrip ss, GroupBox settingsBox, Form parent, Game game)
@@ -34,26 +35,35 @@ namespace RTWR_RTWLIB
             this.pb = pb;
             this.ss = ss;
             this.ActiveGame = game;
-
+            this.parent = parent;
             if (game == Game.MED2)
             {
                 options = new Options(settingsBox, @"mods/randomiser/options.txt", "options.txt");
                 advancedOptions = new AdvancedOptionsViewer(@"mods/randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
-                FileDestinations.ROOT = @"mods\randomiser\van_data";
-                FileDestinations.MOD_FOLDER = @"mods\randomiser";
+                FileDest.ROOT = @"mods\randomiser\van_data";
+                FileDest.MOD_FOLDER = @"mods\randomiser";
             }
 
             else if (game == Game.REMASTER)
             {
                 options = new Options(settingsBox, RTWLIB.Folders.ConstructPath(Game.REMASTER,  "options.txt"), "options.txt");
-                advancedOptions = new AdvancedOptionsViewer(FileDestinations.RemasterRoot + @"randomiser/advancedOptions.txt", "advancedOptions.txt");
+                advancedOptions = new AdvancedOptionsViewer(FileDest.RemasterRoot + @"randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
-                FileDestinations.ROOT = @"mods\randomiser\van_data";
-                FileDestinations.MOD_FOLDER = @"mods\randomiser";
+                FileDest.ROOT = @"mods\randomiser\van_data";
+                FileDest.MOD_FOLDER = @"mods\randomiser";
 
-                FileBase file = GenericFile.CreateSMF(FileDestinations.RemasterPaths[FileNames.descr_sm_faction]["save"][0]);
-                ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = file.data.attributes.Keys.ToArray();
+                FileWrapper smf = new FileWrapper(true, false, ':', '[','[', ']', FileNames.descr_sm_faction);
+                int line;
+                string str;
+                smf.Parse(new string[] { FileDest.RemasterPaths[FileNames.descr_sm_faction]["save"][0] }, out line, out str);
+
+                var factions = ((Group<string>)smf.objects[0]);
+
+
+                var f = factions.objects.Select(x => x.tag);
+
+                ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = f.ToList();
             }
 
             else
@@ -62,7 +72,7 @@ namespace RTWR_RTWLIB
                 advancedOptions = new AdvancedOptionsViewer(@"randomiser/advancedOptions.txt", "advancedOptions.txt");
                 TWRandom.advancedOptions = advancedOptions.Options;
                 SMFactions factionFile = new SMFactions();
-                factionFile.Parse(FileDestinations.paths[FileNames.descr_sm_faction]["load"], out Logger.lineNumber, out Logger.lineText);
+                factionFile.Parse(FileDest.paths[FileNames.descr_sm_faction]["load"], out Logger.lineNumber, out Logger.lineText);
                 ((ComboBox)parent.Controls["panel1"].Controls["cmb_factionSelect"]).DataSource = factionFile.facDetails.Keys.ToArray();
             }
         }
@@ -96,7 +106,6 @@ namespace RTWR_RTWLIB
 
         }
 
-
         private void UnitInfo_dialog(CheckBox chk_misc_unitInfo)
         {
             /*if (chk_misc_unitInfo.Checked)
@@ -114,7 +123,7 @@ namespace RTWR_RTWLIB
 
         private void FileWrite(IFile file)
 		{
-			StreamWriter sw = new StreamWriter(FileDestinations.paths[file.Name]["save"][0], false);
+			StreamWriter sw = new StreamWriter(FileDest.paths[file.Name]["save"][0], false);
 
 			sw.WriteLine(file.Output());
 

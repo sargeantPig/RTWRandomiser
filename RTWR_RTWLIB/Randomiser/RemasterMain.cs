@@ -13,7 +13,7 @@ using System.Drawing;
 using System.Threading;
 using RTWLib.Extensions;
 using RTWR_RTWLIB.Forms;
-
+using RTWLib.Functions.Remaster;
 namespace RTWR_RTWLIB
 {
     partial class Main
@@ -22,7 +22,7 @@ namespace RTWR_RTWLIB
         {
             advancedOptions.SetUpOptions(advancedOptions.Options.filePath, advancedOptions.Options.fileName);
             TWRandom.advancedOptions = advancedOptions.Options;
-            FileData fd = new FileData(null, EString.Array("faction"), '\t', ',', EString.Array(' '), ';', 1, "", ',');
+            FileData fd = new FileData(null, EStr.Array("faction"), '\t', ',', EStr.Array(' '), ';', 1, "", ',');
             fd.Format = "{0}";
             try
             {
@@ -91,7 +91,7 @@ namespace RTWR_RTWLIB
                 else if (fileName == FileNames.descr_strat)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new RemasterDescr_Strat() } };
                 else if (fileName == FileNames.descr_regions)
-                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDestinations.paths[FileNames.descr_regions]["load"][1], FileDestinations.paths[FileNames.descr_regions]["load"][0]) } };
+                    files = new Dictionary<FileNames, IFile>() { { fileName, new Descr_Region(true, FileDest.paths[FileNames.descr_regions]["load"][1], FileDest.paths[FileNames.descr_regions]["load"][0]) } };
                 else if (fileName == FileNames.descr_sm_faction)
                     files = new Dictionary<FileNames, IFile>() { { fileName, new SMFactions() } };
                 else if (fileName == FileNames.names)
@@ -100,7 +100,7 @@ namespace RTWR_RTWLIB
                 lbl_progress.Text = "Loading: " + files[fileName].Name.ToString();
                 ss.Refresh();
                 files[fileName].Log("Loading " + files[fileName].Name);
-                files[fileName].Parse(FileDestinations.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
+                files[fileName].Parse(FileDest.paths[files[fileName].Name][loadsave], out lineNumber, out currentLine);
                 pb.Value = 100;
                 lbl_progress.Text = "Load Complete";
                 ss.Refresh();
@@ -128,14 +128,15 @@ namespace RTWR_RTWLIB
             ss.Refresh();
             Misc_Data.RefreshRegionWater();
 
-            SelectMaps sm = new SelectMaps(FileDestinations.remasterSelectMaps[0], FileDestinations.RemasterPaths[FileNames.radar_map1]["load"][0]);
+            SelectMaps sm = new SelectMaps(FileDest.remasterSelectMaps[0], FileDest.RemasterPaths[FileNames.radar_map1]["load"][0]);
             if(sub == SubGame.Bi)
-                 sm = new SelectMaps(FileDestinations.remasterBISelectMaps[0], FileDestinations.RemasterBIPaths[FileNames.radar_map1]["load"][0]);
+                 sm = new SelectMaps(FileDest.remasterBISelectMaps[0], FileDest.RemasterBIPaths[FileNames.radar_map1]["load"][0]);
             Descr_Strat ds = null;
             Descr_Strat ods = null;
             var dr = files[FileNames.descr_regions];
-            SMFactions smf = null;
-            FileBase bismf = null;
+            FileWrapper smf = FileWrapper.CreateSMF(FileDest.RemasterPaths[FileNames.descr_sm_faction]["save"]);
+      
+            FileWrapper bismf = null;
 
 
 
@@ -146,12 +147,10 @@ namespace RTWR_RTWLIB
             if (sub == SubGame.Rome)
             {
                 ods = (Descr_Strat)files[FileNames.override_descr_strat];
-                smf = (SMFactions)files[FileNames.descr_sm_faction];
             }
             if (sub == SubGame.Bi)
             {
-                bismf = (FileBase)files[FileNames.descr_sm_faction];
-                bismf.data.FormulateAttributes(true, false);
+                bismf = FileWrapper.CreateSMF(FileDest.RemasterBIPaths[FileNames.descr_sm_faction]["load"]);
             } 
             foreach (Control control in chkBoxes)
             {
@@ -232,13 +231,13 @@ namespace RTWR_RTWLIB
             Thread.Sleep(250);
             if (sub == SubGame.Rome)
             {
-                ds.ToFile(FileDestinations.RemasterPaths[FileNames.descr_strat]["save"][0]);
-                ods.ToFile(FileDestinations.RemasterOverrides[FileNames.descr_strat]["save"][0]);
+                ds.ToFile(FileDest.RemasterPaths[FileNames.descr_strat]["save"][0]);
+                ods.ToFile(FileDest.RemasterOverrides[FileNames.descr_strat]["save"][0]);
             }
 
             else
             {
-                ds.ToFile(FileDestinations.RemasterBIPaths[FileNames.descr_strat]["save"][0]);
+                ds.ToFile(FileDest.RemasterBIPaths[FileNames.descr_strat]["save"][0]);
             }
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");

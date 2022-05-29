@@ -30,7 +30,7 @@ namespace RTWR_RTWLIB
         public StratViewer(EDU_viewer edu)
         {
             this.Icon = RTWR_RTWLIB.Properties.Resources.julii_icon;
-            map = new SelectMaps(FileDestinations.selectMapPaths[0], FileDestinations.selectMapPaths[1]);
+            map = new SelectMaps(FileDest.selectMapPaths[0], FileDest.selectMapPaths[1]);
             eduViewer = edu;
             InitializeComponent();
         }

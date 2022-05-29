@@ -237,6 +237,7 @@ custom_battle_availability	yes
 can_sap						no
 prefers_naval_invasions		no
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 faction						britons
 culture						barbarian
 symbol						models_strat/symbol_briton.CAS
@@ -301,9 +302,6 @@ faction						greek_cities
 culture						greek
 symbol						models_strat/symbol_greek_cities.CAS
 rebel_symbol				models_strat/symbol_greek_rebel.CAS
-;artificially made darker to show up on sm banner
-;actual colour is:
-;primary_colour		red 237, green 234, blue 179
 primary_colour				red 197, green 194, blue 129
 secondary_colour			red 165, green 20, blue 20
 loading_logo				loading_screen/symbols/symbol128_greek_cities.tga
@@ -419,3 +417,4 @@ custom_battle_availability	no
 can_sap						yes
 prefers_naval_invasions		no
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+

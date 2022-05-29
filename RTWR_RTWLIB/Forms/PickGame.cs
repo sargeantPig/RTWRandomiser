@@ -12,6 +12,7 @@ namespace RTWR_RTWLIB.Forms
 {
     public enum SubGame
     {
+        None,
         Rome,
         Bi
     }
