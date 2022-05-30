@@ -36,8 +36,8 @@ namespace RTWR_RTWLIB.Randomiser
 					}
 				}
 			}
-
 		}
+
 		public static void SetTieredRecruitment(this EDB edb, EDU edu)
 		{
 			TWRandom.RefreshRndSeed();

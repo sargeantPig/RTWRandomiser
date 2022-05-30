@@ -70,7 +70,7 @@ namespace RTWR_RTWLIB
 
 				ConstructGameLbl(subGame.ToString());
 
-				foreach (Control ctrl in grp_settings_units.Controls)
+				/*foreach (Control ctrl in grp_settings_units.Controls)
 				{
 					ctrl.Enabled = false;
 
@@ -79,7 +79,7 @@ namespace RTWR_RTWLIB
 						((CheckBox)ctrl).Checked = false;
 					}
 
-				}
+				}*/
 
 				foreach (Control ctrl in grp_settings_misc.Controls)
 				{

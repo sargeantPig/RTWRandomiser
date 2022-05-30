@@ -34,7 +34,9 @@ namespace RTWR_RTWLIB
                         {FileNames.descr_regions, new Descr_Region(chk_LogAll.Checked, fileDest[FileNames.descr_regions]["load"][1], fileDest[FileNames.descr_regions]["load"][0]) },
                         {FileNames.descr_strat, new RemasterDescr_Strat()},
                         {FileNames.descr_sm_faction, new SMFactions()},
-                        {FileNames.override_descr_strat, new RemasterDescr_Strat()}
+                        {FileNames.override_descr_strat, new RemasterDescr_Strat()},
+                        {FileNames.export_descr_buildings, new RemasterEDB(true)},
+                        
                     };
                 }
 
@@ -45,6 +47,7 @@ namespace RTWR_RTWLIB
                         {FileNames.descr_regions, new BIDescr_Region(chk_LogAll.Checked, fileDest[FileNames.descr_regions]["load"][1], fileDest[FileNames.descr_regions]["load"][0]) },
                         {FileNames.descr_strat, new RemasterDescr_Strat(true)},
                         {FileNames.descr_sm_faction, new FileBase(FileNames.descr_sm_faction, "","", fd)},
+                        {FileNames.export_descr_buildings, new RemasterEDB(true) }
                     };
                 }
 
@@ -113,82 +116,80 @@ namespace RTWR_RTWLIB
         }
 
 
-
-
-
         public void RemasterRandomise(GroupBox units_group, NumericUpDown unit_attr, NumericUpDown num_ownership,
             GroupBox faction_group, NumericUpDown num_cities, ToolStripLabel lbl_progress,
             PictureBox pic_map, bool chk_unitinfo, bool chk_prefs, bool chk_removeSenate,
             bool chk_factionSelect, bool chk_randomStart, string factionSelected, SubGame sub)
         {
-            //UnitInfo_dialog(chk_unitinfo);
-
             pb.Value = 0;
             lbl_progress.Text = "Starting...";
             ss.Refresh();
-            Misc_Data.RefreshRegionWater();
 
+
+            List<Control> ctrls = faction_group.Controls.ToList();
+            ctrls.AddRange(units_group.Controls.ToList());
+            List<CheckBox>  chkBoxes = ctrls.Where(x=> x is CheckBox).OfType<CheckBox>().ToList();
+            chkBoxes.Sort(new Comparison<Control>(Comparisons.CompareNameEnd));
+
+            Misc_Data.RefreshRegionWater();
             SelectMaps sm = new SelectMaps(FileDest.remasterSelectMaps[0], FileDest.RemasterPaths[FileNames.radar_map1]["load"][0]);
             if(sub == SubGame.Bi)
                  sm = new SelectMaps(FileDest.remasterBISelectMaps[0], FileDest.RemasterBIPaths[FileNames.radar_map1]["load"][0]);
             Descr_Strat ds = null;
             Descr_Strat ods = null;
             var dr = files[FileNames.descr_regions];
-            FileWrapper smf = FileWrapper.CreateSMF(FileDest.RemasterPaths[FileNames.descr_sm_faction]["save"]);
-      
+            FileWrapper smf = null;
+            FileWrapper edu = null;
             FileWrapper bismf = null;
 
-
-
             //((RemasterDescr_Strat)files[FileNames.descr_strat]).RandomiseFile<RandomDS, Descr_Strat>(faction_group, lbl_progress, ss, pb, new object[] { files[FileNames.descr_regions], num_cities, files[FileNames.export_descr_unit], files[FileNames.names], files[FileNames.export_descr_buildings] });
-            var chkBoxes = faction_group.Controls.ToList();
-            chkBoxes.Sort(new Comparison<Control>(Comparisons.CompareNameEnd));
+            
+            
             ds = (Descr_Strat)files[FileNames.descr_strat];
-            if (sub == SubGame.Rome)
-            {
+            if (sub == SubGame.Rome) {
                 ods = (Descr_Strat)files[FileNames.override_descr_strat];
+                smf = FileWrapper.CreateSMF(FileDest.RemasterPaths[FileNames.descr_sm_faction]["save"]);
+                edu = FileWrapper.CreateEDU(FileDest.RemasterPaths[FileNames.export_descr_unit]["load"]);
+                var fac = ((FileWrapper)smf).objects[0];
+                TWRandom.factionList = ((Group<string>)fac).objects.Select(x => x.tag).ToArray();
             }
-            if (sub == SubGame.Bi)
-            {
+            if (sub == SubGame.Bi) {
                 bismf = FileWrapper.CreateSMF(FileDest.RemasterBIPaths[FileNames.descr_sm_faction]["load"]);
+                edu = FileWrapper.CreateEDU(FileDest.RemasterBIPaths[FileNames.export_descr_unit]["load"]);
+                var fac = ((FileWrapper)bismf).objects[0];
+                TWRandom.factionList = ((Group<string>)fac).objects.Select(x => x.tag).ToArray();
             } 
-            foreach (Control control in chkBoxes)
-            {
-                switch (control.Name)
-                {
+
+            
+
+
+            foreach (CheckBox ctrl in chkBoxes) {
+                switch (ctrl.Name) {
                     case "chk_faction_voronoi_4":
-                        if (((CheckBox)control).Checked)
-                        {
-                            if (sub == SubGame.Rome)
-                            {
+                        if (ctrl.Checked) {
+                            if (sub == SubGame.Rome) {
                                 RandomDS.VoronoiSettlements(ds, (Descr_Region)dr);
                                 RandomDS.VoronoiSettlements(ods, (Descr_Region)dr);
                             }
-                            else
-                            {
+                            else {
                                 RandomDS.VoronoiSettlements(ds, (BIDescr_Region)dr);
                             }
                         }
                         break;
                     case "chk_faction_settlements_4":
-                        if (((CheckBox)control).Checked)
-                        {
-                            if (sub == SubGame.Rome)
-                            {
+                        if (ctrl.Checked) {
+                            if (sub == SubGame.Rome) {
                                 RandomDS.RandomSettlements(ds, (Descr_Region)dr, num_cities);
                                 RandomDS.RandomSettlements(ods, (Descr_Region)dr, num_cities);
                             }
-                            else
-                            {
+                            else {
                                 RandomDS.RandomSettlements(ds, (BIDescr_Region)dr, num_cities);;
                             }
                         }
                         break;
                     case "chk_faction_coreA_7":
-                        if (((CheckBox)control).Checked)
-                        {
-                            if (sub == SubGame.Rome)
-                            {
+                        if (ctrl.Checked) {
+                            if (sub == SubGame.Rome) {
                                 RandomDS.RandCoreAttitudes(ds, (Descr_Region)dr);
                                 RandomDS.RandCoreAttitudes(ods, (Descr_Region)dr);
                             }
@@ -198,45 +199,47 @@ namespace RTWR_RTWLIB
                         }
                         break;
                     case "chk_total_war_8":
-                        if (((CheckBox)control).Checked)
-                        {
+                        if (ctrl.Checked) {
                             RandomDS.TotalWar(ds);
                             if (sub == SubGame.Rome)
                                 RandomDS.TotalWar(ods);
                         }
                         break;
-                        
+                    case "chk_faction_rosters_7":
+                        if(ctrl.Checked) {
+                            RandomEDU.RandomOwnership(edu, (Descr_Region)dr, num_ownership);
+                        }
+                        break;
+
+
                 }
             }
 
             if (chk_removeSenate && sub == SubGame.Rome)
                 ds.RemoveSPQR();
             
-           TWRandom.UnitByFaction.Clear();
+            TWRandom.UnitByFaction.Clear();
             lbl_progress.Text = "Creating preview map...";
             ss.Refresh();
 
+            //map preview
             pic_map.Image.Dispose();
-
             pic_map.Image = null;
-
             if (sub == SubGame.Rome)
                 pic_map.Image = sm.CreateCompleteMap(ds, (Descr_Region)dr, smf);
             else if (sub == SubGame.Bi)
                 pic_map.Image = sm.CreateCompleteMap(ds, (BIDescr_Region)dr, bismf);
             pic_map.Refresh();
-
             sm.Save(@"Mods\My Mods\randomiser\previewimage.png");
 
+            //write files
             Thread.Sleep(250);
-            if (sub == SubGame.Rome)
-            {
+            if (sub == SubGame.Rome) {
                 ds.ToFile(FileDest.RemasterPaths[FileNames.descr_strat]["save"][0]);
                 ods.ToFile(FileDest.RemasterOverrides[FileNames.descr_strat]["save"][0]);
+                edu.ToFileSimple(FileDest.RemasterPaths[FileNames.export_descr_unit]["save"][0]);
             }
-
-            else
-            {
+            else {
                 ds.ToFile(FileDest.RemasterBIPaths[FileNames.descr_strat]["save"][0]);
             }
 

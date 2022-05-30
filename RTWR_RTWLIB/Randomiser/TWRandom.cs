@@ -35,6 +35,26 @@ namespace RTWR_RTWLIB.Randomiser
 		{
 			TWRandom.rnd = new Random(TWRandom.seed);
 		}
+
+		public static List<string> GetRandomFactions(string[] list, int max, out List<string> modifiedList)
+        {
+			List<string> f = new List<string>();
+			List<string> remaining = list.ToList();
+			modifiedList = new List<string>();
+ 			for(int i = 0; i < max; i++)
+            {
+				if (remaining.Count() == 0)
+					return f;
+
+				var rnd = TWRandom.rnd.Next(0, remaining.Count());
+				f.Add(remaining[rnd]);
+				remaining.RemoveAt(rnd);
+            }
+
+			modifiedList = remaining;
+			return f;
+        }
+
 		public static string GetRandomAIEconomy()
 		{
 			return AIEconomy[rnd.Next(0, AIEconomy.Count())];

@@ -179,6 +179,7 @@
     <Compile Include="Forms\Randomiser.Designer.cs">
       <DependentUpon>Randomiser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Randomiser\EDU_Rand\Methods\GenericRandom.cs" />
     <Compile Include="Randomiser\Main.cs" />
     <Compile Include="Forms\MapViewer.cs">
       <SubType>Form</SubType>
