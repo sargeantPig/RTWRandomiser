@@ -16,6 +16,8 @@ using RTWR_RTWLIB.Data;
 using RTWLib.Functions.EDU;
 using RTWRandLib.Data;
 using RTWLib.Extensions;
+using RTWLib.Functions.Remaster;
+
 namespace RTWR_RTWLIB.Randomiser
 {
 	public static class TWRandom
@@ -26,14 +28,43 @@ namespace RTWR_RTWLIB.Randomiser
 		public static string[] AIEconomy = { "comfortable", "balanced", "bureacrat", "fortified", "religous", "trade", "sailor" };
 		public static string[] VoiceTypes = { "Light_1", "Medium_1", "Heavy_1", "General_1", "Female_1" };
 		public static string[] M2TWVoiceTypes = { "Light", "Heavy", "General" };
-		public static object[] SoundTypes = { SoundType.axe, SoundType.knife, SoundType.mace, SoundType.spear, SoundType.sword};
+		public static object[] SoundTypes = { SoundType.axe, SoundType.knife, SoundType.mace, SoundType.spear, SoundType.sword };
 		public static Dictionary<string, List<string>> UnitByFaction = new Dictionary<string, List<string>>();
+
+		public static string[] Attributes;
+
+		public static void LoadAttributes()
+		{
+			int no;
+			string line;
+			FileWrapper fw = new FileWrapper(false, true, ' ', '#', '#', '#', FileNames.none);
+			fw.Parse(EStr.Array(FileDest.RemasterRoot + FileDest.MOD_FOLDER + "\\attributes.txt"), out no, out line );
+			var attributes = fw.objects.Select(x => x.tag + x.value);
+			
+			Attributes = fw.CombineAttributes(x => x.tag + " " + x.value).ToArray();
+			Attributes[10] += " \"marian_reforms\"";
+			int i = 0;
+		}
+
+
 		public static Options advancedOptions { get; set; }
 		public static string[] factionList { get; set; }
-
 		public static void RefreshRndSeed()
 		{
 			TWRandom.rnd = new Random(TWRandom.seed);
+		}
+
+		public static List<string> GetRandomAttributes(int max)
+		{
+			List<string> f = new List<string>();
+			List<string> temp = Attributes.ToList();
+			for (int i = 0; i < max; i++)
+			{
+				var rnd = TWRandom.rnd.Next(0, temp.Count());
+				f.Add(temp[rnd]);
+				temp.RemoveAt(rnd);
+			}
+			return f;
 		}
 
 		public static List<string> GetRandomFactions(string[] list, int max, out List<string> modifiedList)
@@ -54,7 +85,6 @@ namespace RTWR_RTWLIB.Randomiser
 			modifiedList = remaining;
 			return f;
         }
-
 		public static string GetRandomAIEconomy()
 		{
 			return AIEconomy[rnd.Next(0, AIEconomy.Count())];

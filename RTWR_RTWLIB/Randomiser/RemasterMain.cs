@@ -47,7 +47,7 @@ namespace RTWR_RTWLIB
                         {FileNames.descr_regions, new BIDescr_Region(chk_LogAll.Checked, fileDest[FileNames.descr_regions]["load"][1], fileDest[FileNames.descr_regions]["load"][0]) },
                         {FileNames.descr_strat, new RemasterDescr_Strat(true)},
                         {FileNames.descr_sm_faction, new FileBase(FileNames.descr_sm_faction, "","", fd)},
-                        {FileNames.export_descr_buildings, new RemasterEDB(true) }
+                        
                     };
                 }
 
@@ -210,7 +210,11 @@ namespace RTWR_RTWLIB
                             RandomEDU.RandomOwnership(edu, (Descr_Region)dr, num_ownership);
                         }
                         break;
-
+                    case "chk_unit_attributes_9":
+                        if (ctrl.Checked) {
+                            RandomEDU.RandomAttributes(edu, unit_attr);
+                        }
+                        break;
 
                 }
             }
@@ -241,6 +245,7 @@ namespace RTWR_RTWLIB
             }
             else {
                 ds.ToFile(FileDest.RemasterBIPaths[FileNames.descr_strat]["save"][0]);
+                edu.ToFileSimple(FileDest.RemasterBIPaths[FileNames.export_descr_unit]["save"][0]);
             }
 
             StreamWriter sw = new StreamWriter("randomiser_.txt");

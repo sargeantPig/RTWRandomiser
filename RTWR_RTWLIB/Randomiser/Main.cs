@@ -32,6 +32,7 @@ namespace RTWR_RTWLIB
             Logger.AssemblyPrefix = "RTWR";
             Logger.AssemblyWatchList = new string[] { "RTWR_RTWLIB", "RTWLib" };
             RTWLib.RTWLIB.Folders.MODFOLDER = "randomiser";
+            TWRandom.LoadAttributes();
             this.pb = pb;
             this.ss = ss;
             this.ActiveGame = game;
